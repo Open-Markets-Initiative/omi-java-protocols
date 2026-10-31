@@ -1,0 +1,347 @@
+package omi.nasdaq.nsmequities.orders.ouch.v5_0.messages.session;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import omi.nasdaq.nsmequities.orders.ouch.v5_0.fields.PasswordField;
+import omi.nasdaq.nsmequities.orders.ouch.v5_0.fields.RequestedSequenceNumberField;
+import omi.nasdaq.nsmequities.orders.ouch.v5_0.fields.RequestedSessionField;
+import omi.nasdaq.nsmequities.orders.ouch.v5_0.fields.UsernameField;
+import omi.nasdaq.nsmequities.orders.ouch.v5_0.types.Field;
+import omi.nasdaq.nsmequities.orders.ouch.v5_0.types.Message;
+import omi.nasdaq.nsmequities.orders.ouch.v5_0.types.PrintOptions;
+
+/**
+ * Represents the LoginRequestPacket message from the Orders protocol.
+ *
+ * <p>The SoupBinTCP client must send a Login Request Packet immediately upon establishing a new TCP/IP socket connection to the server</p>
+ */
+public final class LoginRequestPacket implements Message {
+
+    /**
+     * The character identifying this message on the wire.
+     */
+    public static final char MESSAGE_TYPE = 'L';
+
+    /**
+     * This message's fixed width on the wire.
+     */
+    public static final int BYTE_LENGTH = 46;
+
+    /**
+     * This message's declared name.
+     */
+    public static final String NAME = "Login Request Packet";
+
+    /**
+     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
+     *
+     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
+     */
+    private static final int[] PADDING = {};
+
+    /**
+     * Session username
+     */
+    private final UsernameField username = new UsernameField();
+
+    /**
+     * Login password
+     */
+    private final PasswordField password = new PasswordField();
+
+    /**
+     * Specifies the session the client would like to log into, or all blanks to log into the currently active session.
+     */
+    private final RequestedSessionField requestedSession = new RequestedSessionField();
+
+    /**
+     * Specifies the next sequence number in ASCII the client wants to receive upon connection, or 0 to start receiving the most recently generated message.
+     */
+    private final RequestedSequenceNumberField requestedSequenceNumber = new RequestedSequenceNumberField();
+
+    /**
+     * This message's fields, in wire order.
+     */
+    private final List<Field> fields = List.of(username, password, requestedSession, requestedSequenceNumber);
+
+    private byte[] buffer;
+
+    private int bufferOffset;
+
+    private boolean decoded;
+
+    /**
+     * Session username
+     *
+     * @return the Username field
+     */
+    public UsernameField username() {
+        return username;
+    }
+
+    /**
+     * Login password
+     *
+     * @return the Password field
+     */
+    public PasswordField password() {
+        return password;
+    }
+
+    /**
+     * Specifies the session the client would like to log into, or all blanks to log into the currently active session.
+     *
+     * @return the RequestedSession field
+     */
+    public RequestedSessionField requestedSession() {
+        return requestedSession;
+    }
+
+    /**
+     * Specifies the next sequence number in ASCII the client wants to receive upon connection, or 0 to start receiving the most recently generated message.
+     *
+     * @return the RequestedSequenceNumber field
+     */
+    public RequestedSequenceNumberField requestedSequenceNumber() {
+        return requestedSequenceNumber;
+    }
+
+    @Override
+    public Optional<Character> type() {
+        return Optional.of(MESSAGE_TYPE);
+    }
+
+    @Override
+    public int byteLength() {
+        return BYTE_LENGTH;
+    }
+
+    /**
+     * Returns this message's declared padding runs, as consecutive offset and length pairs relative to the start of the message.
+     *
+     * <p>Padding carries no value: decode advances over it and encode writes it as zero. Use this to check that a received message's padding is zero where the specification requires it, or to render a byte map of the layout.</p>
+     *
+     * @return the padding runs, empty when the layout has none
+     */
+    public static int[] padding() {
+        return PADDING.clone();
+    }
+
+    @Override
+    public Optional<Instant> timestamp() {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset) {
+        clear();
+        this.buffer = data;
+        this.bufferOffset = offset;
+
+        if (offset < 0 || offset + BYTE_LENGTH > data.length) {
+            return false;
+        }
+
+        int cursor = offset;
+        if (!username.parse(data, cursor)) {
+            return false;
+        }
+        cursor += UsernameField.BYTE_LENGTH;
+        if (!password.parse(data, cursor)) {
+            return false;
+        }
+        cursor += PasswordField.BYTE_LENGTH;
+        if (!requestedSession.parse(data, cursor)) {
+            return false;
+        }
+        cursor += RequestedSessionField.BYTE_LENGTH;
+        if (!requestedSequenceNumber.parse(data, cursor)) {
+            return false;
+        }
+        cursor += RequestedSequenceNumberField.BYTE_LENGTH;
+
+        this.decoded = true;
+        return true;
+    }
+
+    @Override
+    public int encode(byte[] data, int offset) {
+        Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
+        int cursor = offset;
+        cursor = username.encode(data, cursor);
+        cursor = password.encode(data, cursor);
+        cursor = requestedSession.encode(data, cursor);
+        cursor = requestedSequenceNumber.encode(data, cursor);
+        return cursor;
+    }
+
+    @Override
+    public byte[] toBytes() {
+        byte[] data = new byte[BYTE_LENGTH];
+        encode(data, 0);
+        return data;
+    }
+
+    @Override
+    public void clear() {
+        for (Field field : fields) {
+            field.reset();
+        }
+        this.buffer = null;
+        this.bufferOffset = 0;
+        this.decoded = false;
+    }
+
+    @Override
+    public boolean isDecoded() {
+        return decoded;
+    }
+
+    @Override
+    public boolean isRecognized() {
+        for (Field field : fields) {
+            if (!field.isRecognized()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isValid() {
+        for (Field field : fields) {
+            if (!field.isValid()) {
+                return false;
+            }
+        }
+        return isRecognized();
+    }
+
+    /**
+     * Returns a copy of the bytes this message was decoded from.
+     *
+     * <p>A failed decode leaves behind the partial range that was available, which is what a diagnostic needs to see.</p>
+     *
+     * @return the message bytes, or empty when no decode has been attempted
+     */
+    @Override
+    public Optional<byte[]> raw() {
+        if (buffer == null) {
+            return Optional.empty();
+        }
+        int end = Math.min(buffer.length, bufferOffset + BYTE_LENGTH);
+        int start = Math.min(Math.max(bufferOffset, 0), end);
+        return Optional.of(Arrays.copyOfRange(buffer, start, end));
+    }
+
+    @Override
+    public Optional<Field> failedAt() {
+        if (buffer == null || decoded) {
+            return Optional.empty();
+        }
+        for (Field field : fields) {
+            if (!field.isDecoded()) {
+                return Optional.of(field);
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Field> fields() {
+        return fields;
+    }
+
+    @Override
+    public Optional<Field> field(String name) {
+        return switch (name) {
+            case "Username" -> Optional.of(username);
+            case "Password" -> Optional.of(password);
+            case "RequestedSession" -> Optional.of(requestedSession);
+            case "RequestedSequenceNumber" -> Optional.of(requestedSequenceNumber);
+            default -> Optional.empty();
+        };
+    }
+
+    @Override
+    public List<Field> diffFields(Message other) {
+        if (!(other instanceof LoginRequestPacket message)) {
+            return List.of();
+        }
+        List<Field> changed = new ArrayList<>();
+        for (int index = 0; index < fields.size(); index++) {
+            if (!fields.get(index).equals(message.fields.get(index))) {
+                changed.add(fields.get(index));
+            }
+        }
+        return changed;
+    }
+
+    @Override
+    public String toFormattedString(PrintOptions options) {
+        StringBuilder builder = new StringBuilder();
+        toFormattedString(builder, options);
+        return builder.toString();
+    }
+
+    /**
+     * Appends this message's formatted representation.
+     *
+     * <p>The identifier form renders the message name alone, which is what a debugger label or a log line tracking message flow needs. The compact form adds every field on the same line, and the default form indents one field per line.</p>
+     *
+     * @param builder the destination
+     * @param options the display options
+     */
+    @Override
+    public void toFormattedString(StringBuilder builder, PrintOptions options) {
+        if (options.identifier()) {
+            builder.append(NAME);
+            return;
+        }
+
+        if (options.compact()) {
+            builder.append(NAME).append(" { ");
+            for (int index = 0; index < fields.size(); index++) {
+                if (index > 0) {
+                    builder.append(", ");
+                }
+                fields.get(index).toFormattedString(builder, options);
+            }
+            builder.append(" }");
+            return;
+        }
+
+        builder.append(options.prefix()).append(NAME).append(System.lineSeparator());
+        PrintOptions nested = options.nested();
+        for (Field field : fields) {
+            builder.append(nested.prefix());
+            field.toFormattedString(builder, nested);
+            builder.append(System.lineSeparator());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return toFormattedString(PrintOptions.DEFAULT);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof LoginRequestPacket message)) {
+            return false;
+        }
+        return fields.equals(message.fields);
+    }
+
+    @Override
+    public int hashCode() {
+        return fields.hashCode();
+    }
+}
