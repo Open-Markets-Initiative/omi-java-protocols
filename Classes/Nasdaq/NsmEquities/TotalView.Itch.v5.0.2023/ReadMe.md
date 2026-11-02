@@ -55,16 +55,6 @@ Each message class carries its wire length as `BYTE_LENGTH`, and its type as `ME
 | `StockTradingActionMessage` | `messages.application` | `'H'` | 24 |
 | `SystemEventMessage` | `messages.application` | `'S'` | 11 |
 
-## Not Generated
-
-A message whose wire length depends on values read at parse time is left out rather than published with a fixed length that would desynchronise the caller's stream.
-
-| Message | Reason |
-| --- | --- |
-| `DebugPacket` | contains the runtime-sized element 'Debug Text' |
-| `SequencedDataPacket` | dispatches at runtime on 'Sequenced Message' |
-| `UnsequencedDataPacket` | contains the runtime-sized element 'Unsequenced Message' |
-
 ## Verification
 
 | Task | Reads | Description |

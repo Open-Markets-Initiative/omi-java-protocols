@@ -33,40 +33,6 @@ Each message class carries its wire length as `BYTE_LENGTH`, and its type as `ME
 | `LoginRequestPacket` | `messages.session` | `'L'` | 46 |
 | `SystemEventMessage` | `messages.application` | `'S'` | 9 |
 
-## Not Generated
-
-A message whose wire length depends on values read at parse time is left out rather than published with a fixed length that would desynchronise the caller's stream.
-
-| Message | Reason |
-| --- | --- |
-| `AccountQueryMessage` | contains the runtime-sized element 'Account Query Appendage' |
-| `AccountQueryResponseMessage` | contains the runtime-sized element 'Account Query Response Appendage' |
-| `AiqCanceledMessage` | contains the runtime-sized element 'Aiq Canceled Appendage' |
-| `BrokenTradeMessage` | contains the runtime-sized element 'Broken Trade Appendage' |
-| `CancelOrderMessage` | contains the runtime-sized element 'Cancel Order Appendage' |
-| `CancelPendingMessage` | contains the runtime-sized element 'Cancel Pending Appendage' |
-| `CancelRejectMessage` | contains the runtime-sized element 'Cancel Reject Appendage' |
-| `CanceledMessage` | contains the runtime-sized element 'Canceled Message Appendage' |
-| `DebugPacket` | contains the runtime-sized element 'Debug Text' |
-| `DisableOrderEntryRequestMessage` | contains the runtime-sized element 'Disable Order Entry Request Appendage' |
-| `DisableOrderEntryResponseMessage` | contains the runtime-sized element 'Disable Order Entry Response Appendage' |
-| `EnableOrderEntryRequestMessage` | contains the runtime-sized element 'Enable Order Entry Request Appendage' |
-| `EnableOrderEntryResponseMessage` | contains the runtime-sized element 'Enable Order Entry Response Appendage' |
-| `EnterOrderMessage` | contains the runtime-sized element 'Enter Order Appendage' |
-| `MassCancelRequestMessage` | contains the runtime-sized element 'Mass Cancel Request Appendage' |
-| `MassCancelResponseMessage` | contains the runtime-sized element 'Mass Cancel Response Appendage' |
-| `ModifyOrderMessage` | contains the runtime-sized element 'Modify Order Appendage' |
-| `OrderAcceptedMessage` | contains the runtime-sized element 'Order Accepted Appendage' |
-| `OrderExecutedMessage` | contains the runtime-sized element 'Order Executed Appendage' |
-| `OrderModifiedMessage` | contains the runtime-sized element 'Order Modified Appendage' |
-| `OrderPriorityUpdateMessage` | contains the runtime-sized element 'Order Priority Update Appendage' |
-| `OrderRestatedMessage` | contains the runtime-sized element 'Order Restated Appendage' |
-| `RejectedOrderMessage` | contains the runtime-sized element 'Rejected Order Appendage' |
-| `ReplaceOrderMessage` | contains the runtime-sized element 'Replace Order Appendage' |
-| `ReplacedMessage` | contains the runtime-sized element 'Replaced Message Appendage' |
-| `SequencedDataPacket` | dispatches at runtime on 'Sequenced Message' |
-| `UnsequencedDataPacket` | dispatches at runtime on 'Unsequenced Message' |
-
 ## Verification
 
 | Task | Reads | Description |

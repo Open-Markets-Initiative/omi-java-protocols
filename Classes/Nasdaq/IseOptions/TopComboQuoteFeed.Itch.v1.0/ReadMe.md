@@ -50,14 +50,6 @@ Each message class carries its wire length as `BYTE_LENGTH`, and its type as `ME
 | `StrategyTradingActionMessage` | `messages.application` | `'H'` | 11 |
 | `SystemEventMessage` | `messages.application` | `'S'` | 13 |
 
-## Not Generated
-
-A message whose wire length depends on values read at parse time is left out rather than published with a fixed length that would desynchronise the caller's stream.
-
-| Message | Reason |
-| --- | --- |
-| `ComplexStrategyDirectoryMessage` | contains the repeating group 'Leg Information' |
-
 ## Verification
 
 | Task | Reads | Description |

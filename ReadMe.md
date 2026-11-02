@@ -88,49 +88,6 @@ Other generated code can be found at [Omi Repositories](https://github.com/Open-
 | [Classes/Nasdaq/NtxEquities/TotalView.Itch.v5.0](Classes/Nasdaq/NtxEquities/TotalView.Itch.v5.0) | `omi.nasdaq.ntxequities.totalview.itch.v5_0` | 21 | 60 | 26 |
 | [Classes/Nasdaq/PsxEquities/TotalView.Itch.v5.0](Classes/Nasdaq/PsxEquities/TotalView.Itch.v5.0) | `omi.nasdaq.psxequities.totalview.itch.v5_0` | 20 | 59 | 24 |
 
-## Not Generated
-
-A message whose wire length depends on values read at parse time needs repeating-group and dispatch generation, which this target does not yet emit. Such a message is left out rather than published with a fixed length that would desynchronise the caller's stream.
-
-| Protocol | Message | Reason |
-| --- | --- | --- |
-| Classes/Nasdaq/IseOptions/OrderComboFeed.Itch.v1.1 | ComplexStrategyAuctionMessage | contains the repeating group 'Auction Response' |
-| Classes/Nasdaq/IseOptions/OrderComboFeed.Itch.v1.1 | ComplexStrategyDirectoryMessage | contains the repeating group 'Leg Information' |
-| Classes/Nasdaq/IseOptions/TopComboQuoteFeed.Itch.v1.0 | ComplexStrategyDirectoryMessage | contains the repeating group 'Leg Information' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | AccountQueryMessage | contains the runtime-sized element 'Account Query Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | AccountQueryResponseMessage | contains the runtime-sized element 'Account Query Response Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | AiqCanceledMessage | contains the runtime-sized element 'Aiq Canceled Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | BrokenTradeMessage | contains the runtime-sized element 'Broken Trade Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | CancelOrderMessage | contains the runtime-sized element 'Cancel Order Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | CancelPendingMessage | contains the runtime-sized element 'Cancel Pending Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | CancelRejectMessage | contains the runtime-sized element 'Cancel Reject Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | CanceledMessage | contains the runtime-sized element 'Canceled Message Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | DebugPacket | contains the runtime-sized element 'Debug Text' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | DisableOrderEntryRequestMessage | contains the runtime-sized element 'Disable Order Entry Request Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | DisableOrderEntryResponseMessage | contains the runtime-sized element 'Disable Order Entry Response Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | EnableOrderEntryRequestMessage | contains the runtime-sized element 'Enable Order Entry Request Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | EnableOrderEntryResponseMessage | contains the runtime-sized element 'Enable Order Entry Response Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | EnterOrderMessage | contains the runtime-sized element 'Enter Order Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | MassCancelRequestMessage | contains the runtime-sized element 'Mass Cancel Request Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | MassCancelResponseMessage | contains the runtime-sized element 'Mass Cancel Response Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | ModifyOrderMessage | contains the runtime-sized element 'Modify Order Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | OrderAcceptedMessage | contains the runtime-sized element 'Order Accepted Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | OrderExecutedMessage | contains the runtime-sized element 'Order Executed Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | OrderModifiedMessage | contains the runtime-sized element 'Order Modified Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | OrderPriorityUpdateMessage | contains the runtime-sized element 'Order Priority Update Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | OrderRestatedMessage | contains the runtime-sized element 'Order Restated Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | RejectedOrderMessage | contains the runtime-sized element 'Rejected Order Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | ReplaceOrderMessage | contains the runtime-sized element 'Replace Order Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | ReplacedMessage | contains the runtime-sized element 'Replaced Message Appendage' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | SequencedDataPacket | dispatches at runtime on 'Sequenced Message' |
-| Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 | UnsequencedDataPacket | dispatches at runtime on 'Unsequenced Message' |
-| Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2023 | DebugPacket | contains the runtime-sized element 'Debug Text' |
-| Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2023 | SequencedDataPacket | dispatches at runtime on 'Sequenced Message' |
-| Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2023 | UnsequencedDataPacket | contains the runtime-sized element 'Unsequenced Message' |
-| Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2026 | DebugPacket | contains the runtime-sized element 'Debug Text' |
-| Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2026 | SequencedDataPacket | dispatches at runtime on 'Sequenced Message' |
-| Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2026 | UnsequencedDataPacket | contains the runtime-sized element 'Unsequenced Message' |
-
 ## Organizations
 
 > [Iex][Iex.Directory] · [Nasdaq][Nasdaq.Directory]
