@@ -64,7 +64,7 @@ Production packet captures are required for protocol verification.  If your orga
 
 ## Protocols
 
-### [Investors Exchange](Classes/Iex)
+### [Iex](Classes/Iex)
 
 | Protocol | Package | Messages | Fields | Enums |
 | --- | --- | --- | --- | --- |
@@ -76,7 +76,7 @@ Production packet captures are required for protocol verification.  If your orga
 | [IexEquities/Tops.IexTp.v1.64](Classes/Iex/IexEquities/Tops.IexTp.v1.64) | `omi.iex.iexequities.tops.iextp.v1_64` | 11 | 36 | 11 |
 | [IexEquities/Tops.IexTp.v1.66](Classes/Iex/IexEquities/Tops.IexTp.v1.66) | `omi.iex.iexequities.tops.iextp.v1_66` | 11 | 36 | 11 |
 
-### [National Association of Securities Dealers Automated Quotations (Nasdaq)](Classes/Nasdaq)
+### [Nasdaq](Classes/Nasdaq)
 
 | Protocol | Package | Messages | Fields | Enums |
 | --- | --- | --- | --- | --- |
