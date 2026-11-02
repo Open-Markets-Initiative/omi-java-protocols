@@ -70,23 +70,30 @@ Other generated code can be found at [Omi Repositories](https://github.com/Open-
 
 ## Protocols
 
+### [Investors Exchange](Classes/Iex)
+
 | Protocol | Package | Messages | Fields | Enums |
 | --- | --- | --- | --- | --- |
-| [Classes/Iex/IexEquities/Deep.IexTp.v1.06](Classes/Iex/IexEquities/Deep.IexTp.v1.06) | `omi.iex.iexequities.deep.iextp.v1_06` | 12 | 32 | 12 |
-| [Classes/Iex/IexEquities/Deep.IexTp.v1.08](Classes/Iex/IexEquities/Deep.IexTp.v1.08) | `omi.iex.iexequities.deep.iextp.v1_08` | 13 | 33 | 13 |
-| [Classes/Iex/IexEquities/DeepPlus.IexTp.v1.01](Classes/Iex/IexEquities/DeepPlus.IexTp.v1.01) | `omi.iex.iexequities.deepplus.iextp.v1_01` | 14 | 23 | 10 |
-| [Classes/Iex/IexEquities/DeepPlus.IexTp.v1.05](Classes/Iex/IexEquities/DeepPlus.IexTp.v1.05) | `omi.iex.iexequities.deepplus.iextp.v1_05` | 14 | 23 | 10 |
-| [Classes/Iex/IexEquities/Tops.IexTp.v1.56](Classes/Iex/IexEquities/Tops.IexTp.v1.56) | `omi.iex.iexequities.tops.iextp.v1_56` | 3 | 12 | 1 |
-| [Classes/Iex/IexEquities/Tops.IexTp.v1.64](Classes/Iex/IexEquities/Tops.IexTp.v1.64) | `omi.iex.iexequities.tops.iextp.v1_64` | 11 | 36 | 11 |
-| [Classes/Iex/IexEquities/Tops.IexTp.v1.66](Classes/Iex/IexEquities/Tops.IexTp.v1.66) | `omi.iex.iexequities.tops.iextp.v1_66` | 11 | 36 | 11 |
-| [Classes/Nasdaq/IseOptions/OrderComboFeed.Itch.v1.1](Classes/Nasdaq/IseOptions/OrderComboFeed.Itch.v1.1) | `omi.nasdaq.iseoptions.ordercombofeed.itch.v1_1` | 4 | 20 | 14 |
-| [Classes/Nasdaq/IseOptions/TopComboQuoteFeed.Itch.v1.0](Classes/Nasdaq/IseOptions/TopComboQuoteFeed.Itch.v1.0) | `omi.nasdaq.iseoptions.topcomboquotefeed.itch.v1_0` | 7 | 38 | 8 |
-| [Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0](Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0) | `omi.nasdaq.nsmequities.orders.ouch.v5_0` | 4 | 9 | 51 |
-| [Classes/Nasdaq/NsmEquities/Qbbo.Itch.v2.1](Classes/Nasdaq/NsmEquities/Qbbo.Itch.v2.1) | `omi.nasdaq.nsmequities.qbbo.itch.v2_1` | 10 | 36 | 20 |
-| [Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2023](Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2023) | `omi.nasdaq.nsmequities.totalview.itch.v5_0_2023` | 26 | 77 | 31 |
-| [Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2026](Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2026) | `omi.nasdaq.nsmequities.totalview.itch.v5_0_2026` | 26 | 77 | 32 |
-| [Classes/Nasdaq/NtxEquities/TotalView.Itch.v5.0](Classes/Nasdaq/NtxEquities/TotalView.Itch.v5.0) | `omi.nasdaq.ntxequities.totalview.itch.v5_0` | 21 | 60 | 26 |
-| [Classes/Nasdaq/PsxEquities/TotalView.Itch.v5.0](Classes/Nasdaq/PsxEquities/TotalView.Itch.v5.0) | `omi.nasdaq.psxequities.totalview.itch.v5_0` | 20 | 59 | 24 |
+| [IexEquities/Deep.IexTp.v1.06](Classes/Iex/IexEquities/Deep.IexTp.v1.06) | `omi.iex.iexequities.deep.iextp.v1_06` | 12 | 32 | 12 |
+| [IexEquities/Deep.IexTp.v1.08](Classes/Iex/IexEquities/Deep.IexTp.v1.08) | `omi.iex.iexequities.deep.iextp.v1_08` | 13 | 33 | 13 |
+| [IexEquities/DeepPlus.IexTp.v1.01](Classes/Iex/IexEquities/DeepPlus.IexTp.v1.01) | `omi.iex.iexequities.deepplus.iextp.v1_01` | 14 | 23 | 10 |
+| [IexEquities/DeepPlus.IexTp.v1.05](Classes/Iex/IexEquities/DeepPlus.IexTp.v1.05) | `omi.iex.iexequities.deepplus.iextp.v1_05` | 14 | 23 | 10 |
+| [IexEquities/Tops.IexTp.v1.56](Classes/Iex/IexEquities/Tops.IexTp.v1.56) | `omi.iex.iexequities.tops.iextp.v1_56` | 3 | 12 | 1 |
+| [IexEquities/Tops.IexTp.v1.64](Classes/Iex/IexEquities/Tops.IexTp.v1.64) | `omi.iex.iexequities.tops.iextp.v1_64` | 11 | 36 | 11 |
+| [IexEquities/Tops.IexTp.v1.66](Classes/Iex/IexEquities/Tops.IexTp.v1.66) | `omi.iex.iexequities.tops.iextp.v1_66` | 11 | 36 | 11 |
+
+### [National Association of Securities Dealers Automated Quotations (Nasdaq)](Classes/Nasdaq)
+
+| Protocol | Package | Messages | Fields | Enums |
+| --- | --- | --- | --- | --- |
+| [IseOptions/OrderComboFeed.Itch.v1.1](Classes/Nasdaq/IseOptions/OrderComboFeed.Itch.v1.1) | `omi.nasdaq.iseoptions.ordercombofeed.itch.v1_1` | 4 | 20 | 14 |
+| [IseOptions/TopComboQuoteFeed.Itch.v1.0](Classes/Nasdaq/IseOptions/TopComboQuoteFeed.Itch.v1.0) | `omi.nasdaq.iseoptions.topcomboquotefeed.itch.v1_0` | 7 | 38 | 8 |
+| [NsmEquities/Orders.Ouch.v5.0](Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0) | `omi.nasdaq.nsmequities.orders.ouch.v5_0` | 4 | 9 | 51 |
+| [NsmEquities/Qbbo.Itch.v2.1](Classes/Nasdaq/NsmEquities/Qbbo.Itch.v2.1) | `omi.nasdaq.nsmequities.qbbo.itch.v2_1` | 10 | 36 | 20 |
+| [NsmEquities/TotalView.Itch.v5.0.2023](Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2023) | `omi.nasdaq.nsmequities.totalview.itch.v5_0_2023` | 26 | 77 | 31 |
+| [NsmEquities/TotalView.Itch.v5.0.2026](Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2026) | `omi.nasdaq.nsmequities.totalview.itch.v5_0_2026` | 26 | 77 | 32 |
+| [NtxEquities/TotalView.Itch.v5.0](Classes/Nasdaq/NtxEquities/TotalView.Itch.v5.0) | `omi.nasdaq.ntxequities.totalview.itch.v5_0` | 21 | 60 | 26 |
+| [PsxEquities/TotalView.Itch.v5.0](Classes/Nasdaq/PsxEquities/TotalView.Itch.v5.0) | `omi.nasdaq.psxequities.totalview.itch.v5_0` | 20 | 59 | 24 |
 
 ## Organizations
 
