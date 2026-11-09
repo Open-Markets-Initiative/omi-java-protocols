@@ -170,8 +170,9 @@ jobs:
       - name: Test Classes/Siac/Opra/Output.Obi.v6.2
         run: gradle --quiet :siac-opra-output-obi-v6-2:captureTest -Pcapture=omi-data-packets/Siac/Opra.Output.Obi.v6.2 -Pstrict
 
+      # HACK: hand patched until Omi.Java.Repository emits the v1.14.1 capture path; the next regeneration overwrites this.
       - name: Test Classes/Tmx/Mx/SolaMulticast.Hsvf.v1.14.1
-        run: gradle --quiet :tmx-mx-solamulticast-hsvf-v1-14-1:captureTest -Pcapture=omi-data-packets/Tmx/Mx.SolaMulticast.Hsvf.v1.14 -Pstrict
+        run: gradle --quiet :tmx-mx-solamulticast-hsvf-v1-14-1:captureTest -Pcapture=omi-data-packets/Tmx/Mx.SolaMulticast.Hsvf.v1.14.1 -Pstrict
 
       - name: Test Classes/Txse/TxseEquities/Seed.Rake.v1.0
         run: gradle --quiet :txse-txseequities-seed-rake-v1-0:captureTest -Pcapture=omi-data-packets/Txse/TxseEquities.Seed.Rake.v1.0 -Pstrict
