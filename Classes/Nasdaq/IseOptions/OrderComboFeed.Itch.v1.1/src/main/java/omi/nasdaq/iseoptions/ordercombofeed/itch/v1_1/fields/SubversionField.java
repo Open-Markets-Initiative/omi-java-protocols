@@ -9,7 +9,7 @@ import omi.nasdaq.iseoptions.ordercombofeed.itch.v1_1.types.PrintOptions;
 /**
  * Sub-version of this interface. Currently set to 0.
  */
-public final class SubversionField extends Field {
+public final class SubVersionField extends Field {
 
     /**
      * This field's fixed width on the wire.
@@ -19,7 +19,7 @@ public final class SubversionField extends Field {
     /**
      * This field's declared name.
      */
-    public static final String NAME = "Subversion";
+    public static final String NAME = "SubVersion";
 
     private short value;
 
@@ -97,7 +97,7 @@ public final class SubversionField extends Field {
         if (this == other) {
             return true;
         }
-        if (!(other instanceof SubversionField field)) {
+        if (!(other instanceof SubVersionField field)) {
             return false;
         }
         return hasValue() == field.hasValue() && value == field.value;

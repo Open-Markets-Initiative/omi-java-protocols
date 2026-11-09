@@ -59,9 +59,9 @@ Each message class carries its wire length as `BYTE_LENGTH`, and its type as `ME
 | Task | Reads | Description |
 | --- | --- | --- |
 | `roundTrip` |  | Program that decodes deterministic bytes into each message at a non-zero offset and requires it to encode back to the same bytes, decode again to an equal message, clear, and refuse a buffer too short to hold it. Runs as part of `check`. |
-| `test` | UDP pcap | JUnit test of 7 captures, each walking every packet, requiring every message to encode back to its own bytes and the captured message to appear. Skips unless `OMI_PACKETS_DIR` names a packet corpus checkout. |
+| `captureTest` | pcap or pcap-ng | Program that walks every UDP datagram of a capture through the `PacketDecoder`, and the records of every TCP connection through the stream of the side sending them, and requires every message to encode back to its own bytes. Not part of `check`, since it needs a capture: `-Pcapture` names it, and `-Pstrict` makes a datagram or record the decoder cannot walk, or a message of a type it does not decode, an error. A TCP connection missing bytes, or ending in bytes that make no whole record, is always an error. |
 
-These messages have no capture test: `SecurityDirectoryMessage`, `OperationalHaltStatusMessage`, `OfficialPriceMessage`, `TradeBreakMessage`. Captures are not included in this repository; please post captures of these messages if you can.
+The build workflow runs the capture test, strict, on the captures in `Iex/IexEquities.Tops.IexTp.v1.66` from [omi-data-packets](https://github.com/Open-Markets-Initiative/omi-data-packets).
 
 ## Build
 
@@ -77,9 +77,9 @@ Run the round trip alone:
 gradle :iex-iexequities-tops-iextp-v1-66:roundTrip
 ```
 
-Run the capture tests against a packet corpus checkout:
+Run the capture test on a capture or a directory of captures, its path relative to the directory gradle runs in:
 
 ```
-OMI_PACKETS_DIR=/path/to/packets gradle :iex-iexequities-tops-iextp-v1-66:test
+gradle :iex-iexequities-tops-iextp-v1-66:captureTest -Pcapture=/path/to/capture.pcap
 ```
 

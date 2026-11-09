@@ -1,0 +1,346 @@
+package omi.cme.globex.ilink3.sbe.v8_5.messages.application;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import omi.cme.globex.ilink3.sbe.v8_5.fields.FromSeqNoField;
+import omi.cme.globex.ilink3.sbe.v8_5.fields.MsgCountField;
+import omi.cme.globex.ilink3.sbe.v8_5.fields.SplitMsgField;
+import omi.cme.globex.ilink3.sbe.v8_5.fields.UuidField;
+import omi.cme.globex.ilink3.sbe.v8_5.types.Field;
+import omi.cme.globex.ilink3.sbe.v8_5.types.Message;
+import omi.cme.globex.ilink3.sbe.v8_5.types.PrintOptions;
+
+/**
+ * Represents the NotApplied message from the iLink3 protocol.
+ *
+ * <p>The Not Applied message is sent when CME detects a sequence gap from the customer.</p>
+ */
+public final class NotApplied implements Message {
+
+    /**
+     * This message's fixed width on the wire.
+     */
+    public static final int BYTE_LENGTH = 17;
+
+    /**
+     * This message's declared name.
+     */
+    public static final String NAME = "Not Applied";
+
+    /**
+     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
+     *
+     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
+     */
+    private static final int[] PADDING = {};
+
+    /**
+     * Session Identifier defined as type long (uInt64); recommended to use timestamp as number of microseconds since epoch (Jan 1, 1970)
+     */
+    private final UuidField uuid = new UuidField();
+
+    /**
+     * Sequence number of the first business message requested. This should not be greater than the latest sequence number from CME
+     */
+    private final FromSeqNoField fromSeqNo = new FromSeqNoField();
+
+    /**
+     * Count of how many messages have not been applied
+     */
+    private final MsgCountField msgCount = new MsgCountField();
+
+    /**
+     * Indicates whether a message was delayed as a result of being split among multiple packets (0) or if a message was delayed as a result of TCP re-transmission (1) or if a complete message was delayed due to a previously submitted split or out of order message (2). If absent then the message was not delayed and was neither split nor received out of order
+     */
+    private final SplitMsgField splitMsg = new SplitMsgField();
+
+    /**
+     * This message's fields, in wire order.
+     */
+    private final List<Field> fields = List.of(uuid, fromSeqNo, msgCount, splitMsg);
+
+    private byte[] buffer;
+
+    private boolean decoded;
+
+    /**
+     * Session Identifier defined as type long (uInt64); recommended to use timestamp as number of microseconds since epoch (Jan 1, 1970)
+     *
+     * @return the Uuid field
+     */
+    public UuidField uuid() {
+        return uuid;
+    }
+
+    /**
+     * Sequence number of the first business message requested. This should not be greater than the latest sequence number from CME
+     *
+     * @return the FromSeqNo field
+     */
+    public FromSeqNoField fromSeqNo() {
+        return fromSeqNo;
+    }
+
+    /**
+     * Count of how many messages have not been applied
+     *
+     * @return the MsgCount field
+     */
+    public MsgCountField msgCount() {
+        return msgCount;
+    }
+
+    /**
+     * Indicates whether a message was delayed as a result of being split among multiple packets (0) or if a message was delayed as a result of TCP re-transmission (1) or if a complete message was delayed due to a previously submitted split or out of order message (2). If absent then the message was not delayed and was neither split nor received out of order
+     *
+     * @return the SplitMsg field
+     */
+    public SplitMsgField splitMsg() {
+        return splitMsg;
+    }
+
+    @Override
+    public Optional<Character> type() {
+        return Optional.empty();
+    }
+
+    @Override
+    public int byteLength() {
+        return BYTE_LENGTH;
+    }
+
+    /**
+     * Returns this message's declared padding runs, as consecutive offset and length pairs relative to the start of the message.
+     *
+     * <p>Padding carries no value: decode advances over it, and encode writes back what decode received, or zero for a message assembled from values. Use this to check a received message's padding where the specification constrains it, or to render a byte map of the layout.</p>
+     *
+     * @return the padding runs, empty when the layout has none
+     */
+    public static int[] padding() {
+        return PADDING.clone();
+    }
+
+    @Override
+    public Optional<Instant> timestamp() {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset) {
+        return parseFrom(data, offset, data.length);
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset, int end) {
+        clear();
+        this.decoded = read(data, offset, end);
+
+        int stop = Math.max(0, Math.min(data.length, offset + BYTE_LENGTH));
+        this.buffer = Arrays.copyOfRange(data, Math.min(Math.max(offset, 0), stop), stop);
+        return decoded;
+    }
+
+    private boolean read(byte[] data, int offset, int end) {
+        if (offset < 0 || end > data.length || end - offset < BYTE_LENGTH) {
+            return false;
+        }
+
+        int cursor = offset;
+        if (!uuid.parse(data, cursor)) {
+            return false;
+        }
+        cursor += UuidField.BYTE_LENGTH;
+        if (!fromSeqNo.parse(data, cursor)) {
+            return false;
+        }
+        cursor += FromSeqNoField.BYTE_LENGTH;
+        if (!msgCount.parse(data, cursor)) {
+            return false;
+        }
+        cursor += MsgCountField.BYTE_LENGTH;
+        if (!splitMsg.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SplitMsgField.BYTE_LENGTH;
+
+        return true;
+    }
+
+    @Override
+    public int encode(byte[] data, int offset) {
+        Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
+        int cursor = offset;
+        cursor = uuid.encode(data, cursor);
+        cursor = fromSeqNo.encode(data, cursor);
+        cursor = msgCount.encode(data, cursor);
+        cursor = splitMsg.encode(data, cursor);
+        return cursor;
+    }
+
+    @Override
+    public byte[] toBytes() {
+        byte[] data = new byte[BYTE_LENGTH];
+        encode(data, 0);
+        return data;
+    }
+
+    @Override
+    public void clear() {
+        for (Field field : fields) {
+            field.reset();
+        }
+        this.buffer = null;
+        this.decoded = false;
+    }
+
+    @Override
+    public boolean isDecoded() {
+        return decoded;
+    }
+
+    @Override
+    public boolean isRecognized() {
+        for (Field field : fields) {
+            if (!field.isRecognized()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isValid() {
+        for (Field field : fields) {
+            if (!field.isValid()) {
+                return false;
+            }
+        }
+        return isRecognized();
+    }
+
+    /**
+     * Returns a copy of the bytes this message was decoded from.
+     *
+     * <p>A failed decode leaves behind the partial range that was available, which is what a diagnostic needs to see.</p>
+     *
+     * @return the message bytes, or empty when no decode has been attempted
+     */
+    @Override
+    public Optional<byte[]> raw() {
+        if (buffer == null) {
+            return Optional.empty();
+        }
+        return Optional.of(buffer.clone());
+    }
+
+    @Override
+    public Optional<Field> failedAt() {
+        if (buffer == null || decoded) {
+            return Optional.empty();
+        }
+        for (Field field : fields) {
+            if (!field.isDecoded()) {
+                return Optional.of(field);
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Field> fields() {
+        return fields;
+    }
+
+    @Override
+    public Optional<Field> field(String name) {
+        return switch (name) {
+            case "Uuid" -> Optional.of(uuid);
+            case "FromSeqNo" -> Optional.of(fromSeqNo);
+            case "MsgCount" -> Optional.of(msgCount);
+            case "SplitMsg" -> Optional.of(splitMsg);
+            default -> Optional.empty();
+        };
+    }
+
+    @Override
+    public List<Field> diffFields(Message other) {
+        if (!(other instanceof NotApplied message)) {
+            return List.of();
+        }
+        List<Field> changed = new ArrayList<>();
+        for (int index = 0; index < fields.size(); index++) {
+            if (!fields.get(index).equals(message.fields.get(index))) {
+                changed.add(fields.get(index));
+            }
+        }
+        return changed;
+    }
+
+    @Override
+    public String toFormattedString(PrintOptions options) {
+        StringBuilder builder = new StringBuilder();
+        toFormattedString(builder, options);
+        return builder.toString();
+    }
+
+    /**
+     * Appends this message's formatted representation.
+     *
+     * <p>The identifier form renders the message name alone, which is what a debugger label or a log line tracking message flow needs. The compact form adds every field on the same line, and the default form indents one field per line.</p>
+     *
+     * @param builder the destination
+     * @param options the display options
+     */
+    @Override
+    public void toFormattedString(StringBuilder builder, PrintOptions options) {
+        if (options.identifier()) {
+            builder.append(NAME);
+            return;
+        }
+
+        if (options.compact()) {
+            builder.append(NAME).append(" { ");
+            for (int index = 0; index < fields.size(); index++) {
+                if (index > 0) {
+                    builder.append(", ");
+                }
+                fields.get(index).toFormattedString(builder, options);
+            }
+            builder.append(" }");
+            return;
+        }
+
+        builder.append(options.prefix()).append(NAME).append(System.lineSeparator());
+        PrintOptions nested = options.nested();
+        for (Field field : fields) {
+            builder.append(nested.prefix());
+            field.toFormattedString(builder, nested);
+            builder.append(System.lineSeparator());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return toFormattedString(PrintOptions.DEFAULT);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof NotApplied message)) {
+            return false;
+        }
+        return fields.equals(message.fields);
+    }
+
+    @Override
+    public int hashCode() {
+        return fields.hashCode();
+    }
+}

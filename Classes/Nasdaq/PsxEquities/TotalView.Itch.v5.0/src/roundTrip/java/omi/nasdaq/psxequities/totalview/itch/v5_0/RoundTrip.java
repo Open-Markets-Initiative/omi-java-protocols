@@ -35,26 +35,26 @@ public final class RoundTrip {
     }
 
     public static void main(String[] args) {
-        check(AddOrderNoMpidAttributionMessage::new, AddOrderNoMpidAttributionMessage.padding());
-        check(AddOrderWithMpidAttributionMessage::new, AddOrderWithMpidAttributionMessage.padding());
-        check(BrokenTradeMessage::new, BrokenTradeMessage.padding());
-        check(CrossTradeMessage::new, CrossTradeMessage.padding());
-        check(LuldAuctionCollarMessage::new, LuldAuctionCollarMessage.padding());
-        check(MarketParticipantPositionMessage::new, MarketParticipantPositionMessage.padding());
-        check(MwcbDeclineLevelMessage::new, MwcbDeclineLevelMessage.padding());
-        check(MwcbStatusLevelMessage::new, MwcbStatusLevelMessage.padding());
-        check(NetOrderImbalanceIndicatorMessage::new, NetOrderImbalanceIndicatorMessage.padding());
-        check(OperationalHaltMessage::new, OperationalHaltMessage.padding());
-        check(OrderCancelMessage::new, OrderCancelMessage.padding());
-        check(OrderDeleteMessage::new, OrderDeleteMessage.padding());
-        check(OrderExecutedMessage::new, OrderExecutedMessage.padding());
-        check(OrderExecutedWithPriceMessage::new, OrderExecutedWithPriceMessage.padding());
-        check(OrderReplaceMessage::new, OrderReplaceMessage.padding());
-        check(RegShoShortSalePriceTestRestrictedIndicatorMessage::new, RegShoShortSalePriceTestRestrictedIndicatorMessage.padding());
-        check(StockDirectoryMessage::new, StockDirectoryMessage.padding());
-        check(StockTradingActionMessage::new, StockTradingActionMessage.padding());
-        check(SystemEventMessage::new, SystemEventMessage.padding());
-        check(TradeMessageNonCross::new, TradeMessageNonCross.padding());
+        check(AddOrderNoMpidAttributionMessage::new);
+        check(AddOrderWithMpidAttributionMessage::new);
+        check(BrokenTradeMessage::new);
+        check(CrossTradeMessage::new);
+        check(LuldAuctionCollarMessage::new);
+        check(MarketParticipantPositionMessage::new);
+        check(MwcbDeclineLevelMessage::new);
+        check(MwcbStatusLevelMessage::new);
+        check(NetOrderImbalanceIndicatorMessage::new);
+        check(OperationalHaltMessage::new);
+        check(OrderCancelMessage::new);
+        check(OrderDeleteMessage::new);
+        check(OrderExecutedMessage::new);
+        check(OrderExecutedWithPriceMessage::new);
+        check(OrderReplaceMessage::new);
+        check(RegShoShortSalePriceTestRestrictedIndicatorMessage::new);
+        check(StockDirectoryMessage::new);
+        check(StockTradingActionMessage::new);
+        check(SystemEventMessage::new);
+        check(TradeMessageNonCross::new);
 
         if (failures > 0) {
             System.out.println(failures + " FAILED");
@@ -63,7 +63,7 @@ public final class RoundTrip {
         System.out.println("PASS");
     }
 
-    private static void check(Supplier<Message> create, int[] padding) {
+    private static void check(Supplier<Message> create) {
         Message message = create.get();
         String name = message.getClass().getSimpleName();
         int length = message.byteLength();
@@ -71,14 +71,13 @@ public final class RoundTrip {
         int offset = 1 + random.nextInt(7);
         byte[] wire = new byte[offset + length + 3];
         random.nextBytes(wire);
-        for (int run = 0; run < padding.length; run += 2) {
-            Arrays.fill(wire, offset + padding[run], offset + padding[run] + padding[run + 1], (byte) 0);
-        }
         byte[] bytes = Arrays.copyOfRange(wire, offset, offset + length);
 
         expect(name + " decodes", message.parseFrom(wire, offset) && message.isDecoded());
         expect(name + " keeps its bytes", message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
         expect(name + " encodes to its bytes", Arrays.equals(message.toBytes(), bytes));
+        Arrays.fill(wire, (byte) 0x5A);
+        expect(name + " keeps its bytes when the buffer is reused", Arrays.equals(message.toBytes(), bytes) && message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
 
         Message again = create.get();
         again.parseFrom(bytes, 0);

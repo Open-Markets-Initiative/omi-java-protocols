@@ -11,7 +11,7 @@ import omi.nasdaq.nsmequities.qbbo.itch.v2_1.types.PrintOptions;
  *
  * <p>A 2-byte ASCII field padded with spaces. Trailing padding is stripped on decode.</p>
  */
-public final class IssueSubtypeField extends Field {
+public final class IssueSubTypeField extends Field {
 
     /**
      * This field's fixed width on the wire.
@@ -21,7 +21,7 @@ public final class IssueSubtypeField extends Field {
     /**
      * This field's declared name.
      */
-    public static final String NAME = "IssueSubtype";
+    public static final String NAME = "IssueSubType";
 
     /**
      * The byte this field is right-padded with (spaces).
@@ -104,7 +104,7 @@ public final class IssueSubtypeField extends Field {
         if (this == other) {
             return true;
         }
-        if (!(other instanceof IssueSubtypeField field)) {
+        if (!(other instanceof IssueSubTypeField field)) {
             return false;
         }
         return hasValue() == field.hasValue() && Objects.equals(value, field.value);

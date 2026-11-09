@@ -1,15 +1,75 @@
-# Nasdaq Stock Market — Java
+[![Nasdaq](https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/Organizations/Nasdaq/Images/Logo.png)](https://www.nasdaq.com)
 
-[![Nasdaq](https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Nasdaq/Images/Logo.png)](https://www.nasdaq.com)
+
+## Nasdaq Stock Market
 
 A division of [National Association of Securities Dealers Automated Quotations (Nasdaq)](..).
 
-| Protocol | Encoding | Version | Date | Status | Testing |
-| --- | --- | --- | ---: | --- | --- |
-| Best Bid And Offer | [Itch][Omi.Encoding.Itch] | [v2.1](Qbbo.Itch.v2.1) | 2/19/2026 | Deprecated | Untested |
-| Orders | [Ouch][Omi.Encoding.Ouch] | [v5.0](Orders.Ouch.v5.0) | 4/1/2023 | Active | Verified |
-| TotalView Itch | [Itch][Omi.Encoding.Itch] | [v5.0.2023](TotalView.Itch.v5.0.2023) | 4/28/2023 | Deprecated | Verified |
-| TotalView Itch | [Itch][Omi.Encoding.Itch] | [v5.0.2026](TotalView.Itch.v5.0.2026) | 6/11/2026 | Active | Verified |
+| [Protocol][Omi.Nasdaq.Protocol.Definitions] | [Encoding][Omi.Encoding.Definitions] | Version | Date | Size | [Deployment][Omi.Glossary.Deployment] | [Testing][Omi.Glossary.Testing] | [Documentation][Omi.Nasdaq.Specifications] |
+| --- | --- | --- | ---: | ---: | --- | --- | --- |
+| [Qbbo][Nasdaq.NsmEquities.Qbbo] | [Itch][Omi.Encoding.Itch] | [2.1][Nasdaq.NsmEquities.Qbbo.Itch.v2.1.Parser] | 2/19/2026 | 11,892 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Verified][Omi.Glossary.Testing.Verified] | [url][Nasdaq.NsmEquities.Qbbo.Itch.v2.1.Url] - [pdf][Nasdaq.NsmEquities.Qbbo.Itch.v2.1.Pdf] |
+| [NlsPlus][Nasdaq.NsmEquities.NlsPlus] | [Itch][Omi.Encoding.Itch] | [3.0][Nasdaq.NsmEquities.NlsPlus.Itch.v3.0.Parser] | 5/6/2025 | 26,211 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Nasdaq.NsmEquities.NlsPlus.Itch.v3.0.Url] - [pdf][Nasdaq.NsmEquities.NlsPlus.Itch.v3.0.Pdf] |
+| [Orders][Nasdaq.NsmEquities.Orders] | [Ouch][Omi.Encoding.Ouch] | [5.0][Nasdaq.NsmEquities.Orders.Ouch.v5.0.Parser] | 4/1/2023 | 64,133 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Nasdaq.NsmEquities.Orders.Ouch.v5.0.Url] - [pdf][Nasdaq.NsmEquities.Orders.Ouch.v5.0.Pdf] |
+| [TotalView][Nasdaq.NsmEquities.TotalView] | [AsciiItch][Omi.Encoding.AsciiItch] | [2.0][Nasdaq.NsmEquities.TotalView.AsciiItch.v2.0.Parser] | 8/9/2006 | 7,215 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Verified][Omi.Glossary.Testing.Verified] | [url][Nasdaq.NsmEquities.TotalView.AsciiItch.v2.0.Url] - [pdf][Nasdaq.NsmEquities.TotalView.AsciiItch.v2.0.Pdf] |
+| [TotalView][Nasdaq.NsmEquities.TotalView] | [AsciiItch][Omi.Encoding.AsciiItch] | [3.0][Nasdaq.NsmEquities.TotalView.AsciiItch.v3.0.Parser] | 9/16/2008 | 15,285 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Verified][Omi.Glossary.Testing.Verified] | [url][Nasdaq.NsmEquities.TotalView.AsciiItch.v3.0.Url] - [pdf][Nasdaq.NsmEquities.TotalView.AsciiItch.v3.0.Pdf] |
+| [TotalView][Nasdaq.NsmEquities.TotalView] | [Itch][Omi.Encoding.Itch] | [4.0][Nasdaq.NsmEquities.TotalView.Itch.v4.0.Parser] | 10/6/2010 | 19,632 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Verified][Omi.Glossary.Testing.Verified] | [url][Nasdaq.NsmEquities.TotalView.Itch.v4.0.Url] - [pdf][Nasdaq.NsmEquities.TotalView.Itch.v4.0.Pdf] |
+| [TotalView][Nasdaq.NsmEquities.TotalView] | [Itch][Omi.Encoding.Itch] | [5.0.2017][Nasdaq.NsmEquities.TotalView.Itch.v5.0.2017.Parser] | 9/12/2017 | 26,798 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Verified][Omi.Glossary.Testing.Verified] | [url][Nasdaq.NsmEquities.TotalView.Itch.v5.0.2017.Url] - [pdf][Nasdaq.NsmEquities.TotalView.Itch.v5.0.2017.Pdf] |
+| [TotalView][Nasdaq.NsmEquities.TotalView] | [Itch][Omi.Encoding.Itch] | [5.0.2023][Nasdaq.NsmEquities.TotalView.Itch.v5.0.2023.Parser] | 4/28/2023 | 29,187 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Verified][Omi.Glossary.Testing.Verified] | [url][Nasdaq.NsmEquities.TotalView.Itch.v5.0.2023.Url] - [pdf][Nasdaq.NsmEquities.TotalView.Itch.v5.0.2023.Pdf] |
+| [TotalView][Nasdaq.NsmEquities.TotalView] | [Itch][Omi.Encoding.Itch] | [5.0.2026][Nasdaq.NsmEquities.TotalView.Itch.v5.0.2026.Parser] | 6/11/2026 | 29,427 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Nasdaq.NsmEquities.TotalView.Itch.v5.0.2026.Url] - [pdf][Nasdaq.NsmEquities.TotalView.Itch.v5.0.2026.Pdf] |
 
+
+<p align="center"><a href="https://www.nasdaq.com" title="National Association of Securities Dealers Automated Quotations (Nasdaq) Website"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Website.png" alt="Website" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://www.linkedin.com/company/nasdaq" title="National Association of Securities Dealers Automated Quotations (Nasdaq) on LinkedIn"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/LinkedIn.png" alt="LinkedIn" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://en.wikipedia.org/wiki/Nasdaq" title="National Association of Securities Dealers Automated Quotations (Nasdaq) on Wikipedia"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Wikipedia.png" alt="Wikipedia" width="32" height="32"></a></p>
+
+
+[Omi.Glossary.Deployment]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Deployment.md "Protocol Deployment"
+[Omi.Glossary.Deployment.Active]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Deployment.md "Deployment: Protocol is in active production"
+[Omi.Glossary.Deployment.Deprecated]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Deployment.md "Deployment: Protocol is no longer in active use"
+[Omi.Glossary.Deployment.Pending]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Deployment.md "Deployment: Protocol is not yet deployed to an active production environment"
+[Omi.Glossary.Deployment.Observability]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Deployment.md "Deployment: Protocol is carried for observability rather than trading"
+[Omi.Glossary.Deployment.Header]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Deployment.md "Deployment: Header only protocol provided for debugging"
+[Omi.Glossary.Deployment.Unknown]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Deployment.md "Deployment: Protocol deployment is unknown"
+[Omi.Glossary.Testing]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Testing.md "Protocol Testing Status"
+[Omi.Glossary.Testing.Verified]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Testing.md "Testing Status: Protocol has been tested on live data"
+[Omi.Glossary.Testing.Incomplete]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Testing.md "Testing Status: Protocol has been tested on live data but contains known issues"
+[Omi.Glossary.Testing.Beta]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Testing.md "Testing Status: Protocol has not been tested and structure is speculative"
+[Omi.Glossary.Testing.Untested]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Testing.md "Testing Status: Protocol has not been tested on live data"
+[Omi.Glossary.Testing.Unavailable]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Testing.md "Testing Status: Protocol does not state a testing status"
+[Omi.Encoding.Definitions]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Protocols/ReadMe.md "Encoding Directory"
+[Omi.Nasdaq.Protocol.Definitions]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/tree/main/Organizations/Nasdaq/Protocols "Nasdaq Protocol Directory"
+[Omi.Nasdaq.Specifications]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/tree/main/Organizations/Nasdaq/Specifications "Nasdaq Specifications Directory"
 [Omi.Encoding.Itch]: https://github.com/Open-Markets-Initiative/Directory/blob/main/Protocols/Itch.md "Itch Encoding"
 [Omi.Encoding.Ouch]: https://github.com/Open-Markets-Initiative/Directory/blob/main/Protocols/Ouch.md "Ouch Encoding"
+[Omi.Encoding.AsciiItch]: https://github.com/Open-Markets-Initiative/Directory/blob/main/Protocols/AsciiItch.md "AsciiItch Encoding"
+[NsmEquities.Exchange]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Nasdaq/NsmEquities "Nasdaq Stock Market"
+[Nasdaq.NsmEquities.NlsPlus]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Nasdaq/Protocols/NsmEquities/NlsPlus.md "Last Sale Plus"
+[Nasdaq.NsmEquities.Orders]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Nasdaq/Protocols/NsmEquities/Orders.md "Orders"
+[Nasdaq.NsmEquities.Qbbo]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Nasdaq/Protocols/NsmEquities/Qbbo.md "Best Bid And Offer"
+[Nasdaq.NsmEquities.TotalView]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Nasdaq/Protocols/NsmEquities/TotalView.md "TotalView Itch"
+
+[Nasdaq.NsmEquities.NlsPlus.Itch.v3.0.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Nasdaq/NsmEquities/NlsPlus.Itch.v3.0 "Nasdaq NsmEquities NlsPlus Itch v3.0 Java Parser"
+[Nasdaq.NsmEquities.NlsPlus.Itch.v3.0.Url]: http://www.nasdaqtrader.com/Trader.aspx?id=dpspecs "National Association of Securities Dealers Automated Quotations (Nasdaq) 3.0 Url"
+[Nasdaq.NsmEquities.NlsPlus.Itch.v3.0.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Nasdaq/Specifications/NsmEquities/NlsPlus/Nasdaq.NsmEquities.NlsPlus.Itch.v3.0.pdf "National Association of Securities Dealers Automated Quotations (Nasdaq) 3.0 Pdf"
+[Nasdaq.NsmEquities.Orders.Ouch.v5.0.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0 "Nasdaq NsmEquities Orders Ouch v5.0 Java Parser"
+[Nasdaq.NsmEquities.Orders.Ouch.v5.0.Url]: https://nasdaqtrader.com/Trader.aspx?id=TradingSpecs "National Association of Securities Dealers Automated Quotations (Nasdaq) 5.0 Url"
+[Nasdaq.NsmEquities.Orders.Ouch.v5.0.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Nasdaq/Specifications/NsmEquities/Orders/Nasdaq.NsmEquities.Orders.Ouch.v5.0.pdf "National Association of Securities Dealers Automated Quotations (Nasdaq) 5.0 Pdf"
+[Nasdaq.NsmEquities.Qbbo.Itch.v2.1.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Nasdaq/NsmEquities/Qbbo.Itch.v2.1 "Nasdaq NsmEquities Qbbo Itch v2.1 Java Parser"
+[Nasdaq.NsmEquities.Qbbo.Itch.v2.1.Url]: http://www.nasdaqtrader.com/Trader.aspx?id=dpspecs "National Association of Securities Dealers Automated Quotations (Nasdaq) 2.1 Url"
+[Nasdaq.NsmEquities.Qbbo.Itch.v2.1.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Nasdaq/Specifications/NsmEquities/Qbbo/Nasdaq.NsmEquities.Qbbo.Itch.v2.1.pdf "National Association of Securities Dealers Automated Quotations (Nasdaq) 2.1 Pdf"
+[Nasdaq.NsmEquities.TotalView.AsciiItch.v2.0.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Nasdaq/NsmEquities/TotalView.AsciiItch.v2.0 "Nasdaq NsmEquities TotalView AsciiItch v2.0 Java Parser"
+[Nasdaq.NsmEquities.TotalView.AsciiItch.v2.0.Url]: https://www.nasdaqtrader.com/Trader.aspx?id=dpspecs "National Association of Securities Dealers Automated Quotations (Nasdaq) 2.0 Url"
+[Nasdaq.NsmEquities.TotalView.AsciiItch.v2.0.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Nasdaq/Specifications/NsmEquities/TotalView/Nasdaq.NsmEquities.TotalView.AsciiItch.v2.0.pdf "National Association of Securities Dealers Automated Quotations (Nasdaq) 2.0 Pdf"
+[Nasdaq.NsmEquities.TotalView.AsciiItch.v3.0.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Nasdaq/NsmEquities/TotalView.AsciiItch.v3.0 "Nasdaq NsmEquities TotalView AsciiItch v3.0 Java Parser"
+[Nasdaq.NsmEquities.TotalView.AsciiItch.v3.0.Url]: https://www.nasdaqtrader.com/Trader.aspx?id=dpspecs "National Association of Securities Dealers Automated Quotations (Nasdaq) 3.0 Url"
+[Nasdaq.NsmEquities.TotalView.AsciiItch.v3.0.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Nasdaq/Specifications/NsmEquities/TotalView/Nasdaq.NsmEquities.TotalView.AsciiItch.v3.0.pdf "National Association of Securities Dealers Automated Quotations (Nasdaq) 3.0 Pdf"
+[Nasdaq.NsmEquities.TotalView.Itch.v4.0.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Nasdaq/NsmEquities/TotalView.Itch.v4.0 "Nasdaq NsmEquities TotalView Itch v4.0 Java Parser"
+[Nasdaq.NsmEquities.TotalView.Itch.v4.0.Url]: https://www.nasdaqtrader.com/content/technicalsupport/specifications/dataproducts/tvitch-v4.pdf "National Association of Securities Dealers Automated Quotations (Nasdaq) 4.0 Url"
+[Nasdaq.NsmEquities.TotalView.Itch.v4.0.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Nasdaq/Specifications/NsmEquities/TotalView/Nasdaq.NsmEquities.TotalView.Itch.v4.0.pdf "National Association of Securities Dealers Automated Quotations (Nasdaq) 4.0 Pdf"
+[Nasdaq.NsmEquities.TotalView.Itch.v5.0.2017.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2017 "Nasdaq NsmEquities TotalView Itch v5.0.2017 Java Parser"
+[Nasdaq.NsmEquities.TotalView.Itch.v5.0.2017.Url]: http://www.nasdaqtrader.com/Trader.aspx?id=dpspecs "National Association of Securities Dealers Automated Quotations (Nasdaq) 5.0.2017 Url"
+[Nasdaq.NsmEquities.TotalView.Itch.v5.0.2017.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Nasdaq/Specifications/NsmEquities/TotalView/Nasdaq.NsmEquities.TotalView.Itch.v5.0.2017.pdf "National Association of Securities Dealers Automated Quotations (Nasdaq) 5.0.2017 Pdf"
+[Nasdaq.NsmEquities.TotalView.Itch.v5.0.2023.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2023 "Nasdaq NsmEquities TotalView Itch v5.0.2023 Java Parser"
+[Nasdaq.NsmEquities.TotalView.Itch.v5.0.2023.Url]: http://www.nasdaqtrader.com/Trader.aspx?id=dpspecs "National Association of Securities Dealers Automated Quotations (Nasdaq) 5.0.2023 Url"
+[Nasdaq.NsmEquities.TotalView.Itch.v5.0.2023.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Nasdaq/Specifications/NsmEquities/TotalView/Nasdaq.NsmEquities.TotalView.Itch.v5.0.2023.pdf "National Association of Securities Dealers Automated Quotations (Nasdaq) 5.0.2023 Pdf"
+[Nasdaq.NsmEquities.TotalView.Itch.v5.0.2026.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2026 "Nasdaq NsmEquities TotalView Itch v5.0.2026 Java Parser"
+[Nasdaq.NsmEquities.TotalView.Itch.v5.0.2026.Url]: http://www.nasdaqtrader.com/Trader.aspx?id=dpspecs "National Association of Securities Dealers Automated Quotations (Nasdaq) 5.0.2026 Url"
+[Nasdaq.NsmEquities.TotalView.Itch.v5.0.2026.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Nasdaq/Specifications/NsmEquities/TotalView/Nasdaq.NsmEquities.TotalView.Itch.v5.0.2026.pdf "National Association of Securities Dealers Automated Quotations (Nasdaq) 5.0.2026 Pdf"

@@ -76,8 +76,6 @@ public final class OrderCancelMessage implements Message {
 
     private byte[] buffer;
 
-    private int bufferOffset;
-
     private boolean decoded;
 
     /**
@@ -138,7 +136,7 @@ public final class OrderCancelMessage implements Message {
     /**
      * Returns this message's declared padding runs, as consecutive offset and length pairs relative to the start of the message.
      *
-     * <p>Padding carries no value: decode advances over it and encode writes it as zero. Use this to check that a received message's padding is zero where the specification requires it, or to render a byte map of the layout.</p>
+     * <p>Padding carries no value: decode advances over it, and encode writes back what decode received, or zero for a message assembled from values. Use this to check a received message's padding where the specification constrains it, or to render a byte map of the layout.</p>
      *
      * @return the padding runs, empty when the layout has none
      */
@@ -153,11 +151,21 @@ public final class OrderCancelMessage implements Message {
 
     @Override
     public boolean parseFrom(byte[] data, int offset) {
-        clear();
-        this.buffer = data;
-        this.bufferOffset = offset;
+        return parseFrom(data, offset, data.length);
+    }
 
-        if (offset < 0 || offset + BYTE_LENGTH > data.length) {
+    @Override
+    public boolean parseFrom(byte[] data, int offset, int end) {
+        clear();
+        this.decoded = read(data, offset, end);
+
+        int stop = Math.max(0, Math.min(data.length, offset + BYTE_LENGTH));
+        this.buffer = Arrays.copyOfRange(data, Math.min(Math.max(offset, 0), stop), stop);
+        return decoded;
+    }
+
+    private boolean read(byte[] data, int offset, int end) {
+        if (offset < 0 || end > data.length || end - offset < BYTE_LENGTH) {
             return false;
         }
 
@@ -183,7 +191,6 @@ public final class OrderCancelMessage implements Message {
         }
         cursor += CanceledSharesField.BYTE_LENGTH;
 
-        this.decoded = true;
         return true;
     }
 
@@ -212,7 +219,6 @@ public final class OrderCancelMessage implements Message {
             field.reset();
         }
         this.buffer = null;
-        this.bufferOffset = 0;
         this.decoded = false;
     }
 
@@ -253,9 +259,7 @@ public final class OrderCancelMessage implements Message {
         if (buffer == null) {
             return Optional.empty();
         }
-        int end = Math.min(buffer.length, bufferOffset + BYTE_LENGTH);
-        int start = Math.min(Math.max(bufferOffset, 0), end);
-        return Optional.of(Arrays.copyOfRange(buffer, start, end));
+        return Optional.of(buffer.clone());
     }
 
     @Override

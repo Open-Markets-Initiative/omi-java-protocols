@@ -1,6 +1,7 @@
 package omi.nasdaq.iseoptions.topcomboquotefeed.itch.v1_0.dispatch;
 
 import java.util.Optional;
+import omi.nasdaq.iseoptions.topcomboquotefeed.itch.v1_0.messages.application.ComplexStrategyDirectoryMessage;
 import omi.nasdaq.iseoptions.topcomboquotefeed.itch.v1_0.messages.application.ComplexStrategyTickerMessage;
 import omi.nasdaq.iseoptions.topcomboquotefeed.itch.v1_0.messages.application.StrategyBestAskUpdate;
 import omi.nasdaq.iseoptions.topcomboquotefeed.itch.v1_0.messages.application.StrategyBestBidAndAskUpdate;
@@ -12,8 +13,6 @@ import omi.nasdaq.iseoptions.topcomboquotefeed.itch.v1_0.types.Message;
 
 /**
  * Selects the message a Payload branch holds by its Message Type.
- *
- * <p>Messages it may select that this library does not decode: ComplexStrategyDirectoryMessage.</p>
  */
 public final class PayloadDispatch {
 
@@ -26,12 +25,15 @@ public final class PayloadDispatch {
      * @param messageType the value read ahead of the message
      * @param data the bytes holding the message
      * @param offset where the message starts
+     * @param end the index just past the last byte the message may read
      * @return the selected message, decoded where its bytes allow, or empty when the value selects no message this library decodes
      */
-    public static Optional<Message> decode(char messageType, byte[] data, int offset) {
+    public static Optional<Message> decode(char messageType, byte[] data, int offset, int end) {
         Message message;
         if (messageType == 'S') {
             message = new SystemEventMessage();
+        } else if (messageType == 'R') {
+            message = new ComplexStrategyDirectoryMessage();
         } else if (messageType == 'O') {
             message = new StrategyOpenClosedMessage();
         } else if (messageType == 'H') {
@@ -48,7 +50,7 @@ public final class PayloadDispatch {
             return Optional.empty();
         }
 
-        message.parseFrom(data, offset);
+        message.parseFrom(data, offset, end);
         return Optional.of(message);
     }
 }

@@ -25,16 +25,16 @@ public final class RoundTrip {
     }
 
     public static void main(String[] args) {
-        check(BboQuotationMessage::new, BboQuotationMessage.padding());
-        check(IpoQuotingPeriodUpdateMessage::new, IpoQuotingPeriodUpdateMessage.padding());
-        check(MwcbBreachMessage::new, MwcbBreachMessage.padding());
-        check(MwcbDeclineLevelMessage::new, MwcbDeclineLevelMessage.padding());
-        check(OperationalHaltMessage::new, OperationalHaltMessage.padding());
-        check(PriceImprovementMessage::new, PriceImprovementMessage.padding());
-        check(RegShoRestrictionMessage::new, RegShoRestrictionMessage.padding());
-        check(StockDirectoryMessage::new, StockDirectoryMessage.padding());
-        check(StockTradingActionMessage::new, StockTradingActionMessage.padding());
-        check(SystemEventMessage::new, SystemEventMessage.padding());
+        check(BboQuotationMessage::new);
+        check(IpoQuotingPeriodUpdateMessage::new);
+        check(MwcbBreachMessage::new);
+        check(MwcbDeclineLevelMessage::new);
+        check(OperationalHaltMessage::new);
+        check(PriceImprovementMessage::new);
+        check(RegShoRestrictionMessage::new);
+        check(StockDirectoryMessage::new);
+        check(StockTradingActionMessage::new);
+        check(SystemEventMessage::new);
 
         if (failures > 0) {
             System.out.println(failures + " FAILED");
@@ -43,7 +43,7 @@ public final class RoundTrip {
         System.out.println("PASS");
     }
 
-    private static void check(Supplier<Message> create, int[] padding) {
+    private static void check(Supplier<Message> create) {
         Message message = create.get();
         String name = message.getClass().getSimpleName();
         int length = message.byteLength();
@@ -51,14 +51,13 @@ public final class RoundTrip {
         int offset = 1 + random.nextInt(7);
         byte[] wire = new byte[offset + length + 3];
         random.nextBytes(wire);
-        for (int run = 0; run < padding.length; run += 2) {
-            Arrays.fill(wire, offset + padding[run], offset + padding[run] + padding[run + 1], (byte) 0);
-        }
         byte[] bytes = Arrays.copyOfRange(wire, offset, offset + length);
 
         expect(name + " decodes", message.parseFrom(wire, offset) && message.isDecoded());
         expect(name + " keeps its bytes", message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
         expect(name + " encodes to its bytes", Arrays.equals(message.toBytes(), bytes));
+        Arrays.fill(wire, (byte) 0x5A);
+        expect(name + " keeps its bytes when the buffer is reused", Arrays.equals(message.toBytes(), bytes) && message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
 
         Message again = create.get();
         again.parseFrom(bytes, 0);

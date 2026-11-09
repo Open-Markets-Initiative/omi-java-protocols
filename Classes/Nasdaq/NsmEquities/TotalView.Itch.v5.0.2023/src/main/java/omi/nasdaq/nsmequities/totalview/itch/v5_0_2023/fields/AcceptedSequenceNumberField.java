@@ -1,7 +1,9 @@
 package omi.nasdaq.nsmequities.totalview.itch.v5_0_2023.fields;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Objects;
-import omi.nasdaq.nsmequities.totalview.itch.v5_0_2023.types.ByteOps;
 import omi.nasdaq.nsmequities.totalview.itch.v5_0_2023.types.Field;
 import omi.nasdaq.nsmequities.totalview.itch.v5_0_2023.types.FieldKind;
 import omi.nasdaq.nsmequities.totalview.itch.v5_0_2023.types.PrintOptions;
@@ -9,7 +11,7 @@ import omi.nasdaq.nsmequities.totalview.itch.v5_0_2023.types.PrintOptions;
 /**
  * The sequence number in ASCII of the next Sequenced Message to be sent. Left padded with spaces.
  *
- * <p>A 20-byte ASCII field padded with spaces. Trailing padding is stripped on decode.</p>
+ * <p>A 20-digit whole number spelled in right-justified ASCII digits. The bytes re-encode as they arrived.</p>
  */
 public final class AcceptedSequenceNumberField extends Field {
 
@@ -24,28 +26,45 @@ public final class AcceptedSequenceNumberField extends Field {
     public static final String NAME = "AcceptedSequenceNumber";
 
     /**
-     * The byte this field is right-padded with (spaces).
+     * The character the digits are right-justified behind.
      */
-    public static final byte PADDING = (byte) ' ';
+    public static final byte FILL = (byte) ' ';
 
-    private String value = "";
+    private BigInteger value;
 
     /**
-     * Returns the decoded value.
-     *
-     * @return the decoded value, empty when the field has not decoded
+     * The characters on the wire, retained so the field re-encodes exactly as it arrived.
      */
-    public String value() {
+    private final byte[] text = " ".repeat(BYTE_LENGTH).getBytes(StandardCharsets.US_ASCII);
+
+    /**
+     * Returns the number the digits spell.
+     *
+     * @return the decoded value, or null when the field has not decoded or its bytes are not digits
+     */
+    public BigInteger value() {
         return value;
     }
 
     /**
-     * Sets the value to encode.
+     * Sets the value, spelling its digits right-justified behind the fill.
      *
      * @param value the value to encode, or null to clear the field
+     * @throws IllegalArgumentException when the value is negative, as digits are unsigned
+     * @throws ArithmeticException when the value has more digits than the field's width
      */
-    public void value(String value) {
-        this.value = value == null ? "" : value;
+    public void value(BigInteger value) {
+        if (value != null && value.signum() < 0) {
+            throw new IllegalArgumentException(NAME + " holds digits only, not " + value);
+        }
+        String digits = value == null ? "" : value.toString();
+        if (digits.length() > BYTE_LENGTH) {
+            throw new ArithmeticException(NAME + " holds " + BYTE_LENGTH + " digits, not " + digits.length());
+        }
+        Arrays.fill(text, value == null ? (byte) ' ' : FILL);
+        byte[] spelled = digits.getBytes(StandardCharsets.US_ASCII);
+        System.arraycopy(spelled, 0, text, BYTE_LENGTH - spelled.length, spelled.length);
+        this.value = value;
         markSet(value != null);
     }
 
@@ -56,7 +75,7 @@ public final class AcceptedSequenceNumberField extends Field {
 
     @Override
     public FieldKind kind() {
-        return FieldKind.STRING;
+        return FieldKind.UNSIGNED_INTEGER;
     }
 
     @Override
@@ -70,7 +89,9 @@ public final class AcceptedSequenceNumberField extends Field {
             return false;
         }
 
-        this.value = ByteOps.ascii(data, offset, BYTE_LENGTH, PADDING);
+        System.arraycopy(data, offset, text, 0, BYTE_LENGTH);
+        String digits = new String(text, StandardCharsets.US_ASCII).strip();
+        this.value = digits.matches("[0-9]+") ? new BigInteger(digits) : null;
         markDecoded(data, offset);
         return true;
     }
@@ -78,14 +99,15 @@ public final class AcceptedSequenceNumberField extends Field {
     @Override
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
-        ByteOps.putAscii(data, offset, BYTE_LENGTH, value, PADDING);
+        System.arraycopy(text, 0, data, offset, BYTE_LENGTH);
         return offset + BYTE_LENGTH;
     }
 
     @Override
     public void reset() {
         super.reset();
-        this.value = "";
+        this.value = null;
+        Arrays.fill(text, (byte) ' ');
     }
 
     @Override
@@ -96,7 +118,7 @@ public final class AcceptedSequenceNumberField extends Field {
             return;
         }
 
-        builder.append('\'').append(value).append('\'');
+        builder.append(value == null ? "'" + new String(text, StandardCharsets.US_ASCII) + "'" : value.toString());
     }
 
     @Override
@@ -107,11 +129,11 @@ public final class AcceptedSequenceNumberField extends Field {
         if (!(other instanceof AcceptedSequenceNumberField field)) {
             return false;
         }
-        return hasValue() == field.hasValue() && Objects.equals(value, field.value);
+        return hasValue() == field.hasValue() && Arrays.equals(text, field.text);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hasValue(), value);
+        return Objects.hash(hasValue(), Arrays.hashCode(text));
     }
 }

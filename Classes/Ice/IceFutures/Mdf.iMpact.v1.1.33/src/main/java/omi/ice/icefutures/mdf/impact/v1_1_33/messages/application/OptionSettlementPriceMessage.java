@@ -1,0 +1,435 @@
+package omi.ice.icefutures.mdf.impact.v1_1_33.messages.application;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import omi.ice.icefutures.mdf.impact.v1_1_33.fields.DeltaField;
+import omi.ice.icefutures.mdf.impact.v1_1_33.fields.IsOfficialField;
+import omi.ice.icefutures.mdf.impact.v1_1_33.fields.MarketIdField;
+import omi.ice.icefutures.mdf.impact.v1_1_33.fields.MessageDateTimeField;
+import omi.ice.icefutures.mdf.impact.v1_1_33.fields.SettlementPriceField;
+import omi.ice.icefutures.mdf.impact.v1_1_33.fields.SettlementPriceWithDealPricePrecisionField;
+import omi.ice.icefutures.mdf.impact.v1_1_33.fields.ValuationDateTimeField;
+import omi.ice.icefutures.mdf.impact.v1_1_33.fields.VolatilityField;
+import omi.ice.icefutures.mdf.impact.v1_1_33.types.Field;
+import omi.ice.icefutures.mdf.impact.v1_1_33.types.Message;
+import omi.ice.icefutures.mdf.impact.v1_1_33.types.PrintOptions;
+
+/**
+ * Represents the OptionSettlementPriceMessage message from the Mdf protocol.
+ *
+ * <p>Option settlement prices could be official or unofficial. For a given market, the exchange usually sends out unofficial price before the official one.</p>
+ */
+public final class OptionSettlementPriceMessage implements Message {
+
+    /**
+     * The character identifying this message on the wire.
+     */
+    public static final char MESSAGE_TYPE = 'w';
+
+    /**
+     * This message's fixed width on the wire.
+     */
+    public static final int BYTE_LENGTH = 53;
+
+    /**
+     * This message's declared name.
+     */
+    public static final String NAME = "Option Settlement Price Message";
+
+    /**
+     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
+     *
+     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
+     */
+    private static final int[] PADDING = {};
+
+    /**
+     * Market Id
+     */
+    private final MarketIdField marketId = new MarketIdField();
+
+    /**
+     * DealPriceDenominator for the market should be applied to get this price.
+     */
+    private final SettlementPriceWithDealPricePrecisionField settlementPriceWithDealPricePrecision = new SettlementPriceWithDealPricePrecisionField();
+
+    /**
+     * Date time the trade was investigated
+     */
+    private final MessageDateTimeField messageDateTime = new MessageDateTimeField();
+
+    /**
+     * Flag to indicate this is official settlement price or not
+     */
+    private final IsOfficialField isOfficial = new IsOfficialField();
+
+    /**
+     * Date time the settlement price is for
+     */
+    private final ValuationDateTimeField valuationDateTime = new ValuationDateTimeField();
+
+    /**
+     * Apply 2 as the denominator to get the real value. For example, volatility of 3.00 will be sent as 300.
+     */
+    private final VolatilityField volatility = new VolatilityField();
+
+    /**
+     * SettlePriceDenominator for the market should be applied to get the real settlement price.
+     */
+    private final SettlementPriceField settlementPrice = new SettlementPriceField();
+
+    /**
+     * Apply 2 as the denominator to get the real value. For example, delta of 3.00 will be sent as 300.
+     */
+    private final DeltaField delta = new DeltaField();
+
+    /**
+     * This message's fields, in wire order.
+     */
+    private final List<Field> fields = List.of(marketId, settlementPriceWithDealPricePrecision, messageDateTime, isOfficial, valuationDateTime, volatility, settlementPrice, delta);
+
+    private byte[] buffer;
+
+    private boolean decoded;
+
+    /**
+     * Market Id
+     *
+     * @return the MarketId field
+     */
+    public MarketIdField marketId() {
+        return marketId;
+    }
+
+    /**
+     * DealPriceDenominator for the market should be applied to get this price.
+     *
+     * @return the SettlementPriceWithDealPricePrecision field
+     */
+    public SettlementPriceWithDealPricePrecisionField settlementPriceWithDealPricePrecision() {
+        return settlementPriceWithDealPricePrecision;
+    }
+
+    /**
+     * Date time the trade was investigated
+     *
+     * @return the MessageDateTime field
+     */
+    public MessageDateTimeField messageDateTime() {
+        return messageDateTime;
+    }
+
+    /**
+     * Flag to indicate this is official settlement price or not
+     *
+     * @return the IsOfficial field
+     */
+    public IsOfficialField isOfficial() {
+        return isOfficial;
+    }
+
+    /**
+     * Date time the settlement price is for
+     *
+     * @return the ValuationDateTime field
+     */
+    public ValuationDateTimeField valuationDateTime() {
+        return valuationDateTime;
+    }
+
+    /**
+     * Apply 2 as the denominator to get the real value. For example, volatility of 3.00 will be sent as 300.
+     *
+     * @return the Volatility field
+     */
+    public VolatilityField volatility() {
+        return volatility;
+    }
+
+    /**
+     * SettlePriceDenominator for the market should be applied to get the real settlement price.
+     *
+     * @return the SettlementPrice field
+     */
+    public SettlementPriceField settlementPrice() {
+        return settlementPrice;
+    }
+
+    /**
+     * Apply 2 as the denominator to get the real value. For example, delta of 3.00 will be sent as 300.
+     *
+     * @return the Delta field
+     */
+    public DeltaField delta() {
+        return delta;
+    }
+
+    @Override
+    public Optional<Character> type() {
+        return Optional.of(MESSAGE_TYPE);
+    }
+
+    @Override
+    public int byteLength() {
+        return BYTE_LENGTH;
+    }
+
+    /**
+     * Returns this message's declared padding runs, as consecutive offset and length pairs relative to the start of the message.
+     *
+     * <p>Padding carries no value: decode advances over it, and encode writes back what decode received, or zero for a message assembled from values. Use this to check a received message's padding where the specification constrains it, or to render a byte map of the layout.</p>
+     *
+     * @return the padding runs, empty when the layout has none
+     */
+    public static int[] padding() {
+        return PADDING.clone();
+    }
+
+    @Override
+    public Optional<Instant> timestamp() {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset) {
+        return parseFrom(data, offset, data.length);
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset, int end) {
+        clear();
+        this.decoded = read(data, offset, end);
+
+        int stop = Math.max(0, Math.min(data.length, offset + BYTE_LENGTH));
+        this.buffer = Arrays.copyOfRange(data, Math.min(Math.max(offset, 0), stop), stop);
+        return decoded;
+    }
+
+    private boolean read(byte[] data, int offset, int end) {
+        if (offset < 0 || end > data.length || end - offset < BYTE_LENGTH) {
+            return false;
+        }
+
+        int cursor = offset;
+        if (!marketId.parse(data, cursor)) {
+            return false;
+        }
+        cursor += MarketIdField.BYTE_LENGTH;
+        if (!settlementPriceWithDealPricePrecision.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SettlementPriceWithDealPricePrecisionField.BYTE_LENGTH;
+        if (!messageDateTime.parse(data, cursor)) {
+            return false;
+        }
+        cursor += MessageDateTimeField.BYTE_LENGTH;
+        if (!isOfficial.parse(data, cursor)) {
+            return false;
+        }
+        cursor += IsOfficialField.BYTE_LENGTH;
+        if (!valuationDateTime.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ValuationDateTimeField.BYTE_LENGTH;
+        if (!volatility.parse(data, cursor)) {
+            return false;
+        }
+        cursor += VolatilityField.BYTE_LENGTH;
+        if (!settlementPrice.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SettlementPriceField.BYTE_LENGTH;
+        if (!delta.parse(data, cursor)) {
+            return false;
+        }
+        cursor += DeltaField.BYTE_LENGTH;
+
+        return true;
+    }
+
+    @Override
+    public int encode(byte[] data, int offset) {
+        Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
+        int cursor = offset;
+        cursor = marketId.encode(data, cursor);
+        cursor = settlementPriceWithDealPricePrecision.encode(data, cursor);
+        cursor = messageDateTime.encode(data, cursor);
+        cursor = isOfficial.encode(data, cursor);
+        cursor = valuationDateTime.encode(data, cursor);
+        cursor = volatility.encode(data, cursor);
+        cursor = settlementPrice.encode(data, cursor);
+        cursor = delta.encode(data, cursor);
+        return cursor;
+    }
+
+    @Override
+    public byte[] toBytes() {
+        byte[] data = new byte[BYTE_LENGTH];
+        encode(data, 0);
+        return data;
+    }
+
+    @Override
+    public void clear() {
+        for (Field field : fields) {
+            field.reset();
+        }
+        this.buffer = null;
+        this.decoded = false;
+    }
+
+    @Override
+    public boolean isDecoded() {
+        return decoded;
+    }
+
+    @Override
+    public boolean isRecognized() {
+        for (Field field : fields) {
+            if (!field.isRecognized()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isValid() {
+        for (Field field : fields) {
+            if (!field.isValid()) {
+                return false;
+            }
+        }
+        return isRecognized();
+    }
+
+    /**
+     * Returns a copy of the bytes this message was decoded from.
+     *
+     * <p>A failed decode leaves behind the partial range that was available, which is what a diagnostic needs to see.</p>
+     *
+     * @return the message bytes, or empty when no decode has been attempted
+     */
+    @Override
+    public Optional<byte[]> raw() {
+        if (buffer == null) {
+            return Optional.empty();
+        }
+        return Optional.of(buffer.clone());
+    }
+
+    @Override
+    public Optional<Field> failedAt() {
+        if (buffer == null || decoded) {
+            return Optional.empty();
+        }
+        for (Field field : fields) {
+            if (!field.isDecoded()) {
+                return Optional.of(field);
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Field> fields() {
+        return fields;
+    }
+
+    @Override
+    public Optional<Field> field(String name) {
+        return switch (name) {
+            case "MarketId" -> Optional.of(marketId);
+            case "SettlementPriceWithDealPricePrecision" -> Optional.of(settlementPriceWithDealPricePrecision);
+            case "MessageDateTime" -> Optional.of(messageDateTime);
+            case "IsOfficial" -> Optional.of(isOfficial);
+            case "ValuationDateTime" -> Optional.of(valuationDateTime);
+            case "Volatility" -> Optional.of(volatility);
+            case "SettlementPrice" -> Optional.of(settlementPrice);
+            case "Delta" -> Optional.of(delta);
+            default -> Optional.empty();
+        };
+    }
+
+    @Override
+    public List<Field> diffFields(Message other) {
+        if (!(other instanceof OptionSettlementPriceMessage message)) {
+            return List.of();
+        }
+        List<Field> changed = new ArrayList<>();
+        for (int index = 0; index < fields.size(); index++) {
+            if (!fields.get(index).equals(message.fields.get(index))) {
+                changed.add(fields.get(index));
+            }
+        }
+        return changed;
+    }
+
+    @Override
+    public String toFormattedString(PrintOptions options) {
+        StringBuilder builder = new StringBuilder();
+        toFormattedString(builder, options);
+        return builder.toString();
+    }
+
+    /**
+     * Appends this message's formatted representation.
+     *
+     * <p>The identifier form renders the message name alone, which is what a debugger label or a log line tracking message flow needs. The compact form adds every field on the same line, and the default form indents one field per line.</p>
+     *
+     * @param builder the destination
+     * @param options the display options
+     */
+    @Override
+    public void toFormattedString(StringBuilder builder, PrintOptions options) {
+        if (options.identifier()) {
+            builder.append(NAME);
+            return;
+        }
+
+        if (options.compact()) {
+            builder.append(NAME).append(" { ");
+            for (int index = 0; index < fields.size(); index++) {
+                if (index > 0) {
+                    builder.append(", ");
+                }
+                fields.get(index).toFormattedString(builder, options);
+            }
+            builder.append(" }");
+            return;
+        }
+
+        builder.append(options.prefix()).append(NAME).append(System.lineSeparator());
+        PrintOptions nested = options.nested();
+        for (Field field : fields) {
+            builder.append(nested.prefix());
+            field.toFormattedString(builder, nested);
+            builder.append(System.lineSeparator());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return toFormattedString(PrintOptions.DEFAULT);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof OptionSettlementPriceMessage message)) {
+            return false;
+        }
+        return fields.equals(message.fields);
+    }
+
+    @Override
+    public int hashCode() {
+        return fields.hashCode();
+    }
+}

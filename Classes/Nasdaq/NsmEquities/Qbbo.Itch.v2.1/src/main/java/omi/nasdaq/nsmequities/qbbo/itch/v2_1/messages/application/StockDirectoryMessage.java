@@ -13,7 +13,7 @@ import omi.nasdaq.nsmequities.qbbo.itch.v2_1.fields.FinancialStatusIndicatorFiel
 import omi.nasdaq.nsmequities.qbbo.itch.v2_1.fields.InverseIndicatorField;
 import omi.nasdaq.nsmequities.qbbo.itch.v2_1.fields.IpoFlagField;
 import omi.nasdaq.nsmequities.qbbo.itch.v2_1.fields.IssueClassificationField;
-import omi.nasdaq.nsmequities.qbbo.itch.v2_1.fields.IssueSubtypeField;
+import omi.nasdaq.nsmequities.qbbo.itch.v2_1.fields.IssueSubTypeField;
 import omi.nasdaq.nsmequities.qbbo.itch.v2_1.fields.LuldReferencePriceTierField;
 import omi.nasdaq.nsmequities.qbbo.itch.v2_1.fields.MarketCategoryField;
 import omi.nasdaq.nsmequities.qbbo.itch.v2_1.fields.RoundLotSizeField;
@@ -98,7 +98,7 @@ public final class StockDirectoryMessage implements Message {
     /**
      * Identifies the security sub-type for the issue as assigned by Nasdaq. See Appendix for allowable values.
      */
-    private final IssueSubtypeField issueSubtype = new IssueSubtypeField();
+    private final IssueSubTypeField issueSubType = new IssueSubTypeField();
 
     /**
      * Denotes if an issue or quoting participant record is set-up in Nasdaq systems in a live/production, test, or demo state.
@@ -138,11 +138,9 @@ public final class StockDirectoryMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(trackingNumber, timeStamp, stock, marketCategory, financialStatusIndicator, roundLotSize, roundLotsOnly, issueClassification, issueSubtype, authenticity, shortSaleThresholdIndicator, ipoFlag, luldReferencePriceTier, etpFlag, etpLeverageFactor, inverseIndicator);
+    private final List<Field> fields = List.of(trackingNumber, timeStamp, stock, marketCategory, financialStatusIndicator, roundLotSize, roundLotsOnly, issueClassification, issueSubType, authenticity, shortSaleThresholdIndicator, ipoFlag, luldReferencePriceTier, etpFlag, etpLeverageFactor, inverseIndicator);
 
     private byte[] buffer;
-
-    private int bufferOffset;
 
     private boolean decoded;
 
@@ -221,10 +219,10 @@ public final class StockDirectoryMessage implements Message {
     /**
      * Identifies the security sub-type for the issue as assigned by Nasdaq. See Appendix for allowable values.
      *
-     * @return the IssueSubtype field
+     * @return the IssueSubType field
      */
-    public IssueSubtypeField issueSubtype() {
-        return issueSubtype;
+    public IssueSubTypeField issueSubType() {
+        return issueSubType;
     }
 
     /**
@@ -303,7 +301,7 @@ public final class StockDirectoryMessage implements Message {
     /**
      * Returns this message's declared padding runs, as consecutive offset and length pairs relative to the start of the message.
      *
-     * <p>Padding carries no value: decode advances over it and encode writes it as zero. Use this to check that a received message's padding is zero where the specification requires it, or to render a byte map of the layout.</p>
+     * <p>Padding carries no value: decode advances over it, and encode writes back what decode received, or zero for a message assembled from values. Use this to check a received message's padding where the specification constrains it, or to render a byte map of the layout.</p>
      *
      * @return the padding runs, empty when the layout has none
      */
@@ -318,11 +316,21 @@ public final class StockDirectoryMessage implements Message {
 
     @Override
     public boolean parseFrom(byte[] data, int offset) {
-        clear();
-        this.buffer = data;
-        this.bufferOffset = offset;
+        return parseFrom(data, offset, data.length);
+    }
 
-        if (offset < 0 || offset + BYTE_LENGTH > data.length) {
+    @Override
+    public boolean parseFrom(byte[] data, int offset, int end) {
+        clear();
+        this.decoded = read(data, offset, end);
+
+        int stop = Math.max(0, Math.min(data.length, offset + BYTE_LENGTH));
+        this.buffer = Arrays.copyOfRange(data, Math.min(Math.max(offset, 0), stop), stop);
+        return decoded;
+    }
+
+    private boolean read(byte[] data, int offset, int end) {
+        if (offset < 0 || end > data.length || end - offset < BYTE_LENGTH) {
             return false;
         }
 
@@ -359,10 +367,10 @@ public final class StockDirectoryMessage implements Message {
             return false;
         }
         cursor += IssueClassificationField.BYTE_LENGTH;
-        if (!issueSubtype.parse(data, cursor)) {
+        if (!issueSubType.parse(data, cursor)) {
             return false;
         }
-        cursor += IssueSubtypeField.BYTE_LENGTH;
+        cursor += IssueSubTypeField.BYTE_LENGTH;
         if (!authenticity.parse(data, cursor)) {
             return false;
         }
@@ -392,7 +400,6 @@ public final class StockDirectoryMessage implements Message {
         }
         cursor += InverseIndicatorField.BYTE_LENGTH;
 
-        this.decoded = true;
         return true;
     }
 
@@ -408,7 +415,7 @@ public final class StockDirectoryMessage implements Message {
         cursor = roundLotSize.encode(data, cursor);
         cursor = roundLotsOnly.encode(data, cursor);
         cursor = issueClassification.encode(data, cursor);
-        cursor = issueSubtype.encode(data, cursor);
+        cursor = issueSubType.encode(data, cursor);
         cursor = authenticity.encode(data, cursor);
         cursor = shortSaleThresholdIndicator.encode(data, cursor);
         cursor = ipoFlag.encode(data, cursor);
@@ -432,7 +439,6 @@ public final class StockDirectoryMessage implements Message {
             field.reset();
         }
         this.buffer = null;
-        this.bufferOffset = 0;
         this.decoded = false;
     }
 
@@ -473,9 +479,7 @@ public final class StockDirectoryMessage implements Message {
         if (buffer == null) {
             return Optional.empty();
         }
-        int end = Math.min(buffer.length, bufferOffset + BYTE_LENGTH);
-        int start = Math.min(Math.max(bufferOffset, 0), end);
-        return Optional.of(Arrays.copyOfRange(buffer, start, end));
+        return Optional.of(buffer.clone());
     }
 
     @Override
@@ -507,7 +511,7 @@ public final class StockDirectoryMessage implements Message {
             case "RoundLotSize" -> Optional.of(roundLotSize);
             case "RoundLotsOnly" -> Optional.of(roundLotsOnly);
             case "IssueClassification" -> Optional.of(issueClassification);
-            case "IssueSubtype" -> Optional.of(issueSubtype);
+            case "IssueSubType" -> Optional.of(issueSubType);
             case "Authenticity" -> Optional.of(authenticity);
             case "ShortSaleThresholdIndicator" -> Optional.of(shortSaleThresholdIndicator);
             case "IpoFlag" -> Optional.of(ipoFlag);

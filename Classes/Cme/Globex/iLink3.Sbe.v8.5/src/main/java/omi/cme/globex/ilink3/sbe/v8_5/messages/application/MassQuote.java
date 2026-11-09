@@ -1,0 +1,634 @@
+package omi.cme.globex.ilink3.sbe.v8_5.messages.application;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.IntStream;
+import omi.cme.globex.ilink3.sbe.v8_5.fields.LiquidityFlagField;
+import omi.cme.globex.ilink3.sbe.v8_5.fields.LocationField;
+import omi.cme.globex.ilink3.sbe.v8_5.fields.ManualOrderIndicatorField;
+import omi.cme.globex.ilink3.sbe.v8_5.fields.MmProtectionResetField;
+import omi.cme.globex.ilink3.sbe.v8_5.fields.PartyDetailsListReqIdField;
+import omi.cme.globex.ilink3.sbe.v8_5.fields.QuoteIdField;
+import omi.cme.globex.ilink3.sbe.v8_5.fields.QuoteReqIdOptionalField;
+import omi.cme.globex.ilink3.sbe.v8_5.fields.ReservedField;
+import omi.cme.globex.ilink3.sbe.v8_5.fields.SenderIdField;
+import omi.cme.globex.ilink3.sbe.v8_5.fields.SendingTimeEpochField;
+import omi.cme.globex.ilink3.sbe.v8_5.fields.SeqNumField;
+import omi.cme.globex.ilink3.sbe.v8_5.fields.ShortSaleTypeField;
+import omi.cme.globex.ilink3.sbe.v8_5.fields.TotNoQuoteEntriesField;
+import omi.cme.globex.ilink3.sbe.v8_5.structs.QuoteEntriesGroups;
+import omi.cme.globex.ilink3.sbe.v8_5.types.Field;
+import omi.cme.globex.ilink3.sbe.v8_5.types.Message;
+import omi.cme.globex.ilink3.sbe.v8_5.types.PrintOptions;
+
+/**
+ * Represents the MassQuote message from the iLink3 protocol.
+ *
+ * <p>Authorized market makers use the Mass Quote message to submit bid/ask pairs and generate two-sided markets for multiple instruments for options.</p>
+ */
+public final class MassQuote implements Message {
+
+    /**
+     * This message's width on the wire with every counted repeating group empty.
+     */
+    public static final int MINIMUM_BYTE_LENGTH = 95;
+
+    /**
+     * This message's declared name.
+     */
+    public static final String NAME = "Mass Quote";
+
+    /**
+     * Refers to the ID of the related PartyDetailsDefinitionRequest message which will logically be tied to this message
+     */
+    private final PartyDetailsListReqIdField partyDetailsListReqId = new PartyDetailsListReqIdField();
+
+    /**
+     * Time when the message is sent. 64-bit integer expressing the number of nano seconds since midnight January 1, 1970.
+     */
+    private final SendingTimeEpochField sendingTimeEpoch = new SendingTimeEpochField();
+
+    /**
+     * Indicates if the order was initially received manually (as opposed to electronically)
+     */
+    private final ManualOrderIndicatorField manualOrderIndicator = new ManualOrderIndicatorField();
+
+    /**
+     * Sequence number as assigned to message
+     */
+    private final SeqNumField seqNum = new SeqNumField();
+
+    /**
+     * Operator ID. Should be unique per Firm ID. Assigned value used to identify specific message originator. Represents last individual or team in charge of the system which modifies the order before submission to the Globex platform, or if not modified from initiator (party role=118), last individual or team in charge of the system, which submit the order to the Globex platform
+     */
+    private final SenderIdField senderId = new SenderIdField();
+
+    /**
+     * Unique identifier for quote request being responded to
+     */
+    private final QuoteReqIdOptionalField quoteReqIdOptional = new QuoteReqIdOptionalField();
+
+    /**
+     * Text describing sender's location (i.e. geopraphic location and/or desk)
+     */
+    private final LocationField location = new LocationField();
+
+    /**
+     * Unique identifier for mass quote populated by the client system
+     */
+    private final QuoteIdField quoteId = new QuoteIdField();
+
+    /**
+     * Total number of quotes for the quote set across all messages. Should be the sum of all NoQuoteEntries in each message that has repeating quotes that are part of the same quote set. Required if NoQuoteEntries &gt; 0. Since fragmentation is not supported in practice this will always be equal to the value of NoQuoteEntries
+     */
+    private final TotNoQuoteEntriesField totNoQuoteEntries = new TotNoQuoteEntriesField();
+
+    /**
+     * When market maker protection is triggered CME will not accept any new quotes from the market maker for that product group until it receives a mass quote message with the MMProtectionReset flag set to true
+     */
+    private final MmProtectionResetField mmProtectionReset = new MmProtectionResetField();
+
+    /**
+     * New field added to capture if an order was submitted for market making obligation or not. Applicable only for EU fixed income markets
+     */
+    private final LiquidityFlagField liquidityFlag = new LiquidityFlagField();
+
+    /**
+     * Indicates the type of short sale. Will not be used for Buy orders but Sell orders should have this tag populated for MiFID
+     */
+    private final ShortSaleTypeField shortSaleType = new ShortSaleTypeField();
+
+    /**
+     * Reserved for future use
+     */
+    private final ReservedField reserved = new ReservedField();
+
+    /**
+     * NoQuoteEntries Block
+     */
+    private final QuoteEntriesGroups quoteEntriesGroups = new QuoteEntriesGroups();
+
+    /**
+     * This message's fields, in wire order.
+     */
+    private final List<Field> fields = List.of(partyDetailsListReqId, sendingTimeEpoch, manualOrderIndicator, seqNum, senderId, quoteReqIdOptional, location, quoteId, totNoQuoteEntries, mmProtectionReset, liquidityFlag, shortSaleType, reserved);
+
+    private byte[] buffer;
+
+    private boolean decoded;
+
+    /**
+     * Refers to the ID of the related PartyDetailsDefinitionRequest message which will logically be tied to this message
+     *
+     * @return the PartyDetailsListReqId field
+     */
+    public PartyDetailsListReqIdField partyDetailsListReqId() {
+        return partyDetailsListReqId;
+    }
+
+    /**
+     * Time when the message is sent. 64-bit integer expressing the number of nano seconds since midnight January 1, 1970.
+     *
+     * @return the SendingTimeEpoch field
+     */
+    public SendingTimeEpochField sendingTimeEpoch() {
+        return sendingTimeEpoch;
+    }
+
+    /**
+     * Indicates if the order was initially received manually (as opposed to electronically)
+     *
+     * @return the ManualOrderIndicator field
+     */
+    public ManualOrderIndicatorField manualOrderIndicator() {
+        return manualOrderIndicator;
+    }
+
+    /**
+     * Sequence number as assigned to message
+     *
+     * @return the SeqNum field
+     */
+    public SeqNumField seqNum() {
+        return seqNum;
+    }
+
+    /**
+     * Operator ID. Should be unique per Firm ID. Assigned value used to identify specific message originator. Represents last individual or team in charge of the system which modifies the order before submission to the Globex platform, or if not modified from initiator (party role=118), last individual or team in charge of the system, which submit the order to the Globex platform
+     *
+     * @return the SenderId field
+     */
+    public SenderIdField senderId() {
+        return senderId;
+    }
+
+    /**
+     * Unique identifier for quote request being responded to
+     *
+     * @return the QuoteReqIdOptional field
+     */
+    public QuoteReqIdOptionalField quoteReqIdOptional() {
+        return quoteReqIdOptional;
+    }
+
+    /**
+     * Text describing sender's location (i.e. geopraphic location and/or desk)
+     *
+     * @return the Location field
+     */
+    public LocationField location() {
+        return location;
+    }
+
+    /**
+     * Unique identifier for mass quote populated by the client system
+     *
+     * @return the QuoteId field
+     */
+    public QuoteIdField quoteId() {
+        return quoteId;
+    }
+
+    /**
+     * Total number of quotes for the quote set across all messages. Should be the sum of all NoQuoteEntries in each message that has repeating quotes that are part of the same quote set. Required if NoQuoteEntries &gt; 0. Since fragmentation is not supported in practice this will always be equal to the value of NoQuoteEntries
+     *
+     * @return the TotNoQuoteEntries field
+     */
+    public TotNoQuoteEntriesField totNoQuoteEntries() {
+        return totNoQuoteEntries;
+    }
+
+    /**
+     * When market maker protection is triggered CME will not accept any new quotes from the market maker for that product group until it receives a mass quote message with the MMProtectionReset flag set to true
+     *
+     * @return the MmProtectionReset field
+     */
+    public MmProtectionResetField mmProtectionReset() {
+        return mmProtectionReset;
+    }
+
+    /**
+     * New field added to capture if an order was submitted for market making obligation or not. Applicable only for EU fixed income markets
+     *
+     * @return the LiquidityFlag field
+     */
+    public LiquidityFlagField liquidityFlag() {
+        return liquidityFlag;
+    }
+
+    /**
+     * Indicates the type of short sale. Will not be used for Buy orders but Sell orders should have this tag populated for MiFID
+     *
+     * @return the ShortSaleType field
+     */
+    public ShortSaleTypeField shortSaleType() {
+        return shortSaleType;
+    }
+
+    /**
+     * Reserved for future use
+     *
+     * @return the Reserved field
+     */
+    public ReservedField reserved() {
+        return reserved;
+    }
+
+    /**
+     * NoQuoteEntries Block
+     *
+     * @return the QuoteEntriesGroups record
+     */
+    public QuoteEntriesGroups quoteEntriesGroups() {
+        return quoteEntriesGroups;
+    }
+
+    @Override
+    public Optional<Character> type() {
+        return Optional.empty();
+    }
+
+    @Override
+    public int byteLength() {
+        return MINIMUM_BYTE_LENGTH + quoteEntriesGroups.byteLength() - QuoteEntriesGroups.MINIMUM_BYTE_LENGTH;
+    }
+
+    /**
+     * Returns this message's declared padding runs, as consecutive offset and length pairs relative to the start of the message, for the entries it holds now.
+     *
+     * <p>Padding carries no value: decode advances over it, and encode writes back what decode received, or zero for a message assembled from values. Use this to check a received message's padding where the specification constrains it, or to render a byte map of the layout.</p>
+     *
+     * @return the padding runs, empty when the layout has none
+     */
+    public int[] padding() {
+        IntStream.Builder runs = IntStream.builder();
+        padding(runs, 0);
+        return runs.build().toArray();
+    }
+
+    /**
+     * Adds the declared padding runs, as offset and length pairs.
+     *
+     * @param runs   the destination
+     * @param offset the offset of this class's first byte, relative to the start of the message
+     * @return the offset just past this class's last byte
+     */
+    public int padding(IntStream.Builder runs, int offset) {
+        int cursor = offset;
+        cursor += 8;
+        cursor += 8;
+        cursor += 1;
+        cursor += 4;
+        cursor += 20;
+        cursor += 8;
+        cursor += 5;
+        cursor += 4;
+        cursor += 1;
+        cursor += 1;
+        cursor += 1;
+        cursor += 1;
+        cursor += 30;
+        cursor = quoteEntriesGroups.padding(runs, cursor);
+        return cursor;
+    }
+
+    @Override
+    public Optional<Instant> timestamp() {
+        return Optional.ofNullable(sendingTimeEpoch.value());
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset) {
+        return parseFrom(data, offset, data.length);
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset, int end) {
+        clear();
+        this.decoded = read(data, offset, end);
+
+        int stop = Math.max(0, Math.min(data.length, offset + byteLength()));
+        this.buffer = Arrays.copyOfRange(data, Math.min(Math.max(offset, 0), stop), stop);
+        return decoded;
+    }
+
+    private boolean read(byte[] data, int offset, int end) {
+        if (offset < 0 || end > data.length || end - offset < MINIMUM_BYTE_LENGTH) {
+            return false;
+        }
+
+        int cursor = offset;
+        if (!partyDetailsListReqId.parse(data, cursor)) {
+            return false;
+        }
+        cursor += PartyDetailsListReqIdField.BYTE_LENGTH;
+        if (!sendingTimeEpoch.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SendingTimeEpochField.BYTE_LENGTH;
+        if (!manualOrderIndicator.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ManualOrderIndicatorField.BYTE_LENGTH;
+        if (!seqNum.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SeqNumField.BYTE_LENGTH;
+        if (!senderId.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SenderIdField.BYTE_LENGTH;
+        if (!quoteReqIdOptional.parse(data, cursor)) {
+            return false;
+        }
+        cursor += QuoteReqIdOptionalField.BYTE_LENGTH;
+        if (!location.parse(data, cursor)) {
+            return false;
+        }
+        cursor += LocationField.BYTE_LENGTH;
+        if (!quoteId.parse(data, cursor)) {
+            return false;
+        }
+        cursor += QuoteIdField.BYTE_LENGTH;
+        if (!totNoQuoteEntries.parse(data, cursor)) {
+            return false;
+        }
+        cursor += TotNoQuoteEntriesField.BYTE_LENGTH;
+        if (!mmProtectionReset.parse(data, cursor)) {
+            return false;
+        }
+        cursor += MmProtectionResetField.BYTE_LENGTH;
+        if (!liquidityFlag.parse(data, cursor)) {
+            return false;
+        }
+        cursor += LiquidityFlagField.BYTE_LENGTH;
+        if (!shortSaleType.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ShortSaleTypeField.BYTE_LENGTH;
+        if (!reserved.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ReservedField.BYTE_LENGTH;
+        if (!quoteEntriesGroups.parseFrom(data, cursor, end)) {
+            return false;
+        }
+        cursor += quoteEntriesGroups.byteLength();
+        if (end - cursor < 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int encode(byte[] data, int offset) {
+        Objects.checkFromIndexSize(offset, byteLength(), data.length);
+        int cursor = offset;
+        cursor = partyDetailsListReqId.encode(data, cursor);
+        cursor = sendingTimeEpoch.encode(data, cursor);
+        cursor = manualOrderIndicator.encode(data, cursor);
+        cursor = seqNum.encode(data, cursor);
+        cursor = senderId.encode(data, cursor);
+        cursor = quoteReqIdOptional.encode(data, cursor);
+        cursor = location.encode(data, cursor);
+        cursor = quoteId.encode(data, cursor);
+        cursor = totNoQuoteEntries.encode(data, cursor);
+        cursor = mmProtectionReset.encode(data, cursor);
+        cursor = liquidityFlag.encode(data, cursor);
+        cursor = shortSaleType.encode(data, cursor);
+        cursor = reserved.encode(data, cursor);
+        cursor = quoteEntriesGroups.encode(data, cursor);
+        return cursor;
+    }
+
+    @Override
+    public byte[] toBytes() {
+        byte[] data = new byte[byteLength()];
+        encode(data, 0);
+        return data;
+    }
+
+    @Override
+    public void clear() {
+        for (Field field : fields) {
+            field.reset();
+        }
+        quoteEntriesGroups.clear();
+        this.buffer = null;
+        this.decoded = false;
+    }
+
+    @Override
+    public boolean isDecoded() {
+        return decoded;
+    }
+
+    @Override
+    public boolean isRecognized() {
+        if (buffer != null && !decoded) {
+            return false;
+        }
+        for (Field field : fields) {
+            if (!field.isRecognized()) {
+                return false;
+            }
+        }
+        if (!quoteEntriesGroups.isRecognized()) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isValid() {
+        if (buffer != null && !decoded) {
+            return false;
+        }
+        for (Field field : fields) {
+            if (!field.isValid()) {
+                return false;
+            }
+        }
+        if (!quoteEntriesGroups.isValid()) {
+            return false;
+        }
+        return isRecognized();
+    }
+
+    /**
+     * Returns a copy of the bytes this message was decoded from.
+     *
+     * <p>A failed decode leaves behind the partial range that was available, which is what a diagnostic needs to see.</p>
+     *
+     * @return the message bytes, or empty when no decode has been attempted
+     */
+    @Override
+    public Optional<byte[]> raw() {
+        if (buffer == null) {
+            return Optional.empty();
+        }
+        return Optional.of(buffer.clone());
+    }
+
+    @Override
+    public Optional<Field> failedAt() {
+        if (buffer == null || decoded) {
+            return Optional.empty();
+        }
+        if (!partyDetailsListReqId.isDecoded()) {
+            return Optional.of(partyDetailsListReqId);
+        }
+        if (!sendingTimeEpoch.isDecoded()) {
+            return Optional.of(sendingTimeEpoch);
+        }
+        if (!manualOrderIndicator.isDecoded()) {
+            return Optional.of(manualOrderIndicator);
+        }
+        if (!seqNum.isDecoded()) {
+            return Optional.of(seqNum);
+        }
+        if (!senderId.isDecoded()) {
+            return Optional.of(senderId);
+        }
+        if (!quoteReqIdOptional.isDecoded()) {
+            return Optional.of(quoteReqIdOptional);
+        }
+        if (!location.isDecoded()) {
+            return Optional.of(location);
+        }
+        if (!quoteId.isDecoded()) {
+            return Optional.of(quoteId);
+        }
+        if (!totNoQuoteEntries.isDecoded()) {
+            return Optional.of(totNoQuoteEntries);
+        }
+        if (!mmProtectionReset.isDecoded()) {
+            return Optional.of(mmProtectionReset);
+        }
+        if (!liquidityFlag.isDecoded()) {
+            return Optional.of(liquidityFlag);
+        }
+        if (!shortSaleType.isDecoded()) {
+            return Optional.of(shortSaleType);
+        }
+        if (!reserved.isDecoded()) {
+            return Optional.of(reserved);
+        }
+        if (!quoteEntriesGroups.isDecoded()) {
+            return quoteEntriesGroups.failedAt();
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Field> fields() {
+        return fields;
+    }
+
+    @Override
+    public Optional<Field> field(String name) {
+        return switch (name) {
+            case "PartyDetailsListReqId" -> Optional.of(partyDetailsListReqId);
+            case "SendingTimeEpoch" -> Optional.of(sendingTimeEpoch);
+            case "ManualOrderIndicator" -> Optional.of(manualOrderIndicator);
+            case "SeqNum" -> Optional.of(seqNum);
+            case "SenderId" -> Optional.of(senderId);
+            case "QuoteReqIdOptional" -> Optional.of(quoteReqIdOptional);
+            case "Location" -> Optional.of(location);
+            case "QuoteId" -> Optional.of(quoteId);
+            case "TotNoQuoteEntries" -> Optional.of(totNoQuoteEntries);
+            case "MmProtectionReset" -> Optional.of(mmProtectionReset);
+            case "LiquidityFlag" -> Optional.of(liquidityFlag);
+            case "ShortSaleType" -> Optional.of(shortSaleType);
+            case "Reserved" -> Optional.of(reserved);
+            default -> Optional.empty();
+        };
+    }
+
+    @Override
+    public List<Field> diffFields(Message other) {
+        if (!(other instanceof MassQuote message)) {
+            return List.of();
+        }
+        List<Field> changed = new ArrayList<>();
+        for (int index = 0; index < fields.size(); index++) {
+            if (!fields.get(index).equals(message.fields.get(index))) {
+                changed.add(fields.get(index));
+            }
+        }
+        changed.addAll(quoteEntriesGroups.diffFields(message.quoteEntriesGroups));
+        return changed;
+    }
+
+    @Override
+    public String toFormattedString(PrintOptions options) {
+        StringBuilder builder = new StringBuilder();
+        toFormattedString(builder, options);
+        return builder.toString();
+    }
+
+    /**
+     * Appends this message's formatted representation.
+     *
+     * <p>The identifier form renders the message name alone, which is what a debugger label or a log line tracking message flow needs. The compact form adds every field on the same line, and the default form indents one field per line. Repeating groups follow the fields.</p>
+     *
+     * @param builder the destination
+     * @param options the display options
+     */
+    @Override
+    public void toFormattedString(StringBuilder builder, PrintOptions options) {
+        if (options.identifier()) {
+            builder.append(NAME);
+            return;
+        }
+
+        if (options.compact()) {
+            builder.append(NAME).append(" { ");
+            for (int index = 0; index < fields.size(); index++) {
+                if (index > 0) {
+                    builder.append(", ");
+                }
+                fields.get(index).toFormattedString(builder, options);
+            }
+            builder.append(", ");
+            quoteEntriesGroups.toFormattedString(builder, options);
+            builder.append(" }");
+            return;
+        }
+
+        builder.append(options.prefix()).append(NAME).append(System.lineSeparator());
+        PrintOptions nested = options.nested();
+        for (Field field : fields) {
+            builder.append(nested.prefix());
+            field.toFormattedString(builder, nested);
+            builder.append(System.lineSeparator());
+        }
+        quoteEntriesGroups.toFormattedString(builder, nested);
+    }
+
+    @Override
+    public String toString() {
+        return toFormattedString(PrintOptions.DEFAULT);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof MassQuote message)) {
+            return false;
+        }
+        return fields.equals(message.fields) && quoteEntriesGroups.equals(message.quoteEntriesGroups);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fields, quoteEntriesGroups);
+    }
+}

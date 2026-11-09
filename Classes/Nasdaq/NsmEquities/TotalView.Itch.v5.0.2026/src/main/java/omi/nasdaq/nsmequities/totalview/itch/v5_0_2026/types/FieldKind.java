@@ -26,6 +26,9 @@ public enum FieldKind {
     /** An integer field carrying a fixed-point decimal. */
     DECIMAL,
 
+    /** A date, time of day, or both spelled in ASCII characters. */
+    CLOCK,
+
     /** An IEEE 754 binary floating-point field. */
     FLOAT,
 

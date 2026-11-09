@@ -1,13 +1,15 @@
 package omi.nasdaq.nsmequities.totalview.itch.v5_0_2026.dispatch;
 
 import java.util.Optional;
+import omi.nasdaq.nsmequities.totalview.itch.v5_0_2026.messages.session.ClientHeartbeatPacket;
+import omi.nasdaq.nsmequities.totalview.itch.v5_0_2026.messages.session.DebugPacket;
 import omi.nasdaq.nsmequities.totalview.itch.v5_0_2026.messages.session.LoginRequestPacket;
+import omi.nasdaq.nsmequities.totalview.itch.v5_0_2026.messages.session.LogoutRequestPacket;
+import omi.nasdaq.nsmequities.totalview.itch.v5_0_2026.messages.session.UnsequencedDataPacket;
 import omi.nasdaq.nsmequities.totalview.itch.v5_0_2026.types.Message;
 
 /**
  * Selects the message a Client Payload branch holds by its Client Packet Type.
- *
- * <p>Messages it may select that this library does not decode: DebugPacket, UnsequencedDataPacket.</p>
  */
 public final class ClientPayloadDispatch {
 
@@ -20,17 +22,26 @@ public final class ClientPayloadDispatch {
      * @param clientPacketType the value read ahead of the message
      * @param data the bytes holding the message
      * @param offset where the message starts
+     * @param end the index just past the last byte the message may read
      * @return the selected message, decoded where its bytes allow, or empty when the value selects no message this library decodes
      */
-    public static Optional<Message> decode(char clientPacketType, byte[] data, int offset) {
+    public static Optional<Message> decode(char clientPacketType, byte[] data, int offset, int end) {
         Message message;
-        if (clientPacketType == 'L') {
+        if (clientPacketType == '+') {
+            message = new DebugPacket();
+        } else if (clientPacketType == 'L') {
             message = new LoginRequestPacket();
+        } else if (clientPacketType == 'U') {
+            message = new UnsequencedDataPacket();
+        } else if (clientPacketType == 'R') {
+            message = new ClientHeartbeatPacket();
+        } else if (clientPacketType == 'O') {
+            message = new LogoutRequestPacket();
         } else {
             return Optional.empty();
         }
 
-        message.parseFrom(data, offset);
+        message.parseFrom(data, offset, end);
         return Optional.of(message);
     }
 }

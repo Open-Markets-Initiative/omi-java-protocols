@@ -20,7 +20,7 @@ public interface Message {
     Optional<Character> type();
 
     /**
-     * Returns this message's fixed width on the wire.
+     * Returns this message's width on the wire, which for a message with repeating groups is what it holds now.
      *
      * @return the width in bytes
      */
@@ -84,6 +84,17 @@ public interface Message {
      * @return true when every field decoded
      */
     boolean parseFrom(byte[] data, int offset);
+
+    /**
+     * Decodes this message from the bytes it is given, reusing the existing field instances. A message reads what its
+     * layout says, whether or not that reaches {@code end}.
+     *
+     * @param data   the buffer to decode from
+     * @param offset the index of this message's first byte
+     * @param end    the index just past the last byte this message may read
+     * @return true when every field decoded
+     */
+    boolean parseFrom(byte[] data, int offset, int end);
 
     /**
      * Encodes this message into a buffer, writing nothing when it does not fit.

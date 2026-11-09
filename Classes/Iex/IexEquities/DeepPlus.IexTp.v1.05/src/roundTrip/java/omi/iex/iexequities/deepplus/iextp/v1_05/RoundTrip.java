@@ -29,20 +29,20 @@ public final class RoundTrip {
     }
 
     public static void main(String[] args) {
-        check(AddOrderMessage::new, AddOrderMessage.padding());
-        check(ClearBookMessage::new, ClearBookMessage.padding());
-        check(OperationalHaltStatusMessage::new, OperationalHaltStatusMessage.padding());
-        check(OrderDeleteMessage::new, OrderDeleteMessage.padding());
-        check(OrderExecutedMessage::new, OrderExecutedMessage.padding());
-        check(OrderModifyMessage::new, OrderModifyMessage.padding());
-        check(RetailLiquidityIndicatorMessage::new, RetailLiquidityIndicatorMessage.padding());
-        check(SecurityDirectoryMessage::new, SecurityDirectoryMessage.padding());
-        check(SecurityEventMessage::new, SecurityEventMessage.padding());
-        check(ShortSalePriceTestStatusMessage::new, ShortSalePriceTestStatusMessage.padding());
-        check(SystemEventMessage::new, SystemEventMessage.padding());
-        check(TradeBreakMessage::new, TradeBreakMessage.padding());
-        check(TradeMessage::new, TradeMessage.padding());
-        check(TradingStatusMessage::new, TradingStatusMessage.padding());
+        check(AddOrderMessage::new);
+        check(ClearBookMessage::new);
+        check(OperationalHaltStatusMessage::new);
+        check(OrderDeleteMessage::new);
+        check(OrderExecutedMessage::new);
+        check(OrderModifyMessage::new);
+        check(RetailLiquidityIndicatorMessage::new);
+        check(SecurityDirectoryMessage::new);
+        check(SecurityEventMessage::new);
+        check(ShortSalePriceTestStatusMessage::new);
+        check(SystemEventMessage::new);
+        check(TradeBreakMessage::new);
+        check(TradeMessage::new);
+        check(TradingStatusMessage::new);
 
         if (failures > 0) {
             System.out.println(failures + " FAILED");
@@ -51,7 +51,7 @@ public final class RoundTrip {
         System.out.println("PASS");
     }
 
-    private static void check(Supplier<Message> create, int[] padding) {
+    private static void check(Supplier<Message> create) {
         Message message = create.get();
         String name = message.getClass().getSimpleName();
         int length = message.byteLength();
@@ -59,14 +59,13 @@ public final class RoundTrip {
         int offset = 1 + random.nextInt(7);
         byte[] wire = new byte[offset + length + 3];
         random.nextBytes(wire);
-        for (int run = 0; run < padding.length; run += 2) {
-            Arrays.fill(wire, offset + padding[run], offset + padding[run] + padding[run + 1], (byte) 0);
-        }
         byte[] bytes = Arrays.copyOfRange(wire, offset, offset + length);
 
         expect(name + " decodes", message.parseFrom(wire, offset) && message.isDecoded());
         expect(name + " keeps its bytes", message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
         expect(name + " encodes to its bytes", Arrays.equals(message.toBytes(), bytes));
+        Arrays.fill(wire, (byte) 0x5A);
+        expect(name + " keeps its bytes when the buffer is reused", Arrays.equals(message.toBytes(), bytes) && message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
 
         Message again = create.get();
         again.parseFrom(bytes, 0);

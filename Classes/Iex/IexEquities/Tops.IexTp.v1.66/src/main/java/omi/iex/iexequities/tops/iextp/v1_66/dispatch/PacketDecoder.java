@@ -1,6 +1,7 @@
 package omi.iex.iexequities.tops.iextp.v1_66.dispatch;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import omi.iex.iexequities.tops.iextp.v1_66.types.ByteOps;
@@ -17,6 +18,11 @@ public final class PacketDecoder {
     public static final int HEADER_LENGTH = 40;
 
     /**
+     * The fixed length of what follows the last message.
+     */
+    public static final int TRAILER_LENGTH = 0;
+
+    /**
      * The fixed length of each message's own header.
      */
     public static final int MESSAGE_HEADER_LENGTH = 3;
@@ -25,23 +31,38 @@ public final class PacketDecoder {
     }
 
     /**
+     * A decoded message and the bytes of its frame after it.
+     *
+     * @param message the message
+     * @param bytes the bytes of its frame that followed it
+     */
+    public record Trailing(Message message, byte[] bytes) {
+    }
+
+    /**
      * What a packet decoded to.
      *
      * @param messages the messages decoded, in wire order
      * @param undecoded how many messages were passed over because this library does not decode their type
-     * @param complete whether every counted message lay inside the packet and they ended where it ends
+     * @param complete whether every message lay inside the packet and they ended where it ends
+     * @param trailing the decoded messages that ended before their frame did
+     * @param padding the decoded messages followed by their frame's padding
      */
-    public record Decoded(List<Message> messages, int undecoded, boolean complete) {
+    public record Decoded(List<Message> messages, int undecoded, boolean complete, List<Trailing> trailing, List<Trailing> padding) {
 
         /**
-         * Holds an unmodifiable copy of the decoded messages.
+         * Holds unmodifiable copies of its lists.
          *
          * @param messages the messages decoded, in wire order
          * @param undecoded how many messages were passed over because this library does not decode their type
-         * @param complete whether every counted message lay inside the packet and they ended where it ends
+         * @param complete whether every message lay inside the packet and they ended where it ends
+         * @param trailing the decoded messages that ended before their frame did
+         * @param padding the decoded messages followed by their frame's padding
          */
         public Decoded {
             messages = List.copyOf(messages);
+            trailing = List.copyOf(trailing);
+            padding = List.copyOf(padding);
         }
     }
 
@@ -55,40 +76,48 @@ public final class PacketDecoder {
      */
     public static Decoded decode(byte[] data, int offset, int length) {
         List<Message> messages = new ArrayList<>();
-        if (offset < 0 || length < HEADER_LENGTH || offset + length > data.length) {
-            return new Decoded(messages, 0, false);
+        List<Trailing> trailing = new ArrayList<>();
+        List<Trailing> padding = new ArrayList<>();
+        if (offset < 0 || length < HEADER_LENGTH + TRAILER_LENGTH || offset + length > data.length) {
+            return new Decoded(messages, 0, false, trailing, padding);
         }
 
-        int end = offset + length;
-        long count = ByteOps.unsigned(data, offset + 14, 2, true);
+        int limit = offset + length - TRAILER_LENGTH;
         int position = offset + HEADER_LENGTH;
         int undecoded = 0;
 
+        long count = ByteOps.unsigned(data, offset + 14, 2, true);
+
         for (long index = 0; index < count; index++) {
-            if (position + MESSAGE_HEADER_LENGTH > end) {
-                return new Decoded(messages, undecoded, false);
+            if (position + MESSAGE_HEADER_LENGTH > limit) {
+                return new Decoded(messages, undecoded, false, trailing, padding);
             }
 
             long size = ByteOps.unsigned(data, position + 0, 2, true) + 2;
-            if (size < MESSAGE_HEADER_LENGTH || size > end - position) {
-                return new Decoded(messages, undecoded, false);
+            if (size < MESSAGE_HEADER_LENGTH || size > limit - position) {
+                return new Decoded(messages, undecoded, false, trailing, padding);
             }
 
+            int frameEnd = position + (int) size;
+
             char messageType = (char) (data[position + 2] & 0xFF);
-            Optional<Message> selected = MessageDataDispatch.decode(messageType, data, position + MESSAGE_HEADER_LENGTH);
+            Optional<Message> selected = MessageDataDispatch.decode(messageType, data, position + MESSAGE_HEADER_LENGTH, frameEnd);
             if (selected.isPresent()) {
                 Message message = selected.get();
-                if (!message.isDecoded() || MESSAGE_HEADER_LENGTH + message.byteLength() > size) {
-                    return new Decoded(messages, undecoded, false);
+                if (!message.isDecoded()) {
+                    return new Decoded(messages, undecoded, false, trailing, padding);
                 }
                 messages.add(message);
+                int consumed = position + MESSAGE_HEADER_LENGTH + message.byteLength();
+                if (consumed < frameEnd) {
+                    trailing.add(new Trailing(message, Arrays.copyOfRange(data, consumed, frameEnd)));
+                }
             } else {
                 undecoded++;
             }
-
-            position += (int) size;
+            position = frameEnd;
         }
 
-        return new Decoded(messages, undecoded, position == end);
+        return new Decoded(messages, undecoded, position == limit, trailing, padding);
     }
 }

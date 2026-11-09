@@ -22,6 +22,36 @@ if (message.parseFrom(data, offset)) {
 }
 ```
 
+Read one side of a TCP connection. Append its bytes in order, as they arrive; `ClientPacketStream` holds a record split across appends until the rest arrives, and gives each whole one decoded:
+
+```java
+import omi.nasdaq.nsmequities.totalview.itch.v5_0_2026.dispatch.ClientPacketStream;
+import omi.nasdaq.nsmequities.totalview.itch.v5_0_2026.types.Message;
+
+ClientPacketStream stream = new ClientPacketStream();
+for (ClientPacketStream.Record record : stream.append(bytes, 0, bytes.length)) {
+    for (Message message : record.decoded().messages()) {
+        System.out.println(message);
+    }
+}
+```
+
+Each side of the connection has its own stream: `ClientPacketStream`, `ServerPacketStream`. A record stating a length that is not valid fails the stream, which then reads nothing more.
+
+Decode one packet. The payload is the UDP datagram body, without the Ethernet, IP, and UDP headers:
+
+```java
+import omi.nasdaq.nsmequities.totalview.itch.v5_0_2026.dispatch.PacketDecoder;
+import omi.nasdaq.nsmequities.totalview.itch.v5_0_2026.types.Message;
+
+PacketDecoder.Decoded decoded = PacketDecoder.decode(payload, 0, payload.length);
+for (Message message : decoded.messages()) {
+    System.out.println(message);
+}
+```
+
+`decoded.complete()` says whether every counted message lay inside the packet, and `decoded.undecoded()` counts the messages of a type this package does not decode.
+
 ## Messages
 
 Each message class carries its wire length as `BYTE_LENGTH`, and its type as `MESSAGE_TYPE` where the protocol selects messages by a type code.
@@ -32,6 +62,7 @@ Each message class carries its wire length as `BYTE_LENGTH`, and its type as `ME
 | `AddOrderWithMpidAttributionMessage` | `messages.application` | `'F'` | 39 |
 | `BrokenTradeMessage` | `messages.application` | `'B'` | 18 |
 | `CrossTradeMessage` | `messages.application` | `'Q'` | 39 |
+| `DebugPacket` | `messages.session` | `'+'` | 0 |
 | `DirectListingWithCapitalRaisePriceDiscoveryMessage` | `messages.application` | `'O'` | 47 |
 | `IpoQuotingPeriodUpdate` | `messages.application` | `'K'` | 27 |
 | `LoginAcceptedPacket` | `messages.session` | `'A'` | 30 |
@@ -51,15 +82,24 @@ Each message class carries its wire length as `BYTE_LENGTH`, and its type as `ME
 | `OrderReplaceMessage` | `messages.application` | `'U'` | 34 |
 | `RegShoShortSalePriceTestRestrictedIndicatorMessage` | `messages.application` | `'Y'` | 19 |
 | `RetailPriceImprovementIndicatorMessage` | `messages.application` | `'N'` | 19 |
+| `SequencedDataPacket` | `messages.session` | `'S'` | 1 |
 | `StockDirectoryMessage` | `messages.application` | `'R'` | 38 |
 | `StockTradingActionMessage` | `messages.application` | `'H'` | 24 |
 | `SystemEventMessage` | `messages.application` | `'S'` | 11 |
+| `UnsequencedDataPacket` | `messages.session` | `'U'` | 1 |
+| `ClientHeartbeatPacket` | `messages.session` | `'R'` | 0 |
+| `LogoutRequestPacket` | `messages.session` | `'O'` | 0 |
+| `ServerHeartbeatPacket` | `messages.session` | `'H'` | 0 |
+| `EndOfSessionPacket` | `messages.session` | `'Z'` | 0 |
 
 ## Verification
 
 | Task | Reads | Description |
 | --- | --- | --- |
 | `roundTrip` |  | Program that decodes deterministic bytes into each message at a non-zero offset and requires it to encode back to the same bytes, decode again to an equal message, clear, and refuse a buffer too short to hold it. Runs as part of `check`. |
+| `captureTest` | pcap or pcap-ng | Program that walks every UDP datagram of a capture through the `PacketDecoder`, and the records of every TCP connection through the stream of the side sending them, and requires every message to encode back to its own bytes. Not part of `check`, since it needs a capture: `-Pcapture` names it, and `-Pstrict` makes a datagram or record the decoder cannot walk, or a message of a type it does not decode, an error. A TCP connection missing bytes, or ending in bytes that make no whole record, is always an error. |
+
+The build workflow runs the capture test, strict, on the captures in `Nasdaq/NsmEquities.TotalView.Itch.v5.0.2026` from [omi-data-packets](https://github.com/Open-Markets-Initiative/omi-data-packets).
 
 ## Build
 
@@ -73,5 +113,11 @@ Run the round trip alone:
 
 ```
 gradle :nasdaq-nsmequities-totalview-itch-v5-0-2026:roundTrip
+```
+
+Run the capture test on a capture or a directory of captures, its path relative to the directory gradle runs in:
+
+```
+gradle :nasdaq-nsmequities-totalview-itch-v5-0-2026:captureTest -Pcapture=/path/to/capture.pcap
 ```
 

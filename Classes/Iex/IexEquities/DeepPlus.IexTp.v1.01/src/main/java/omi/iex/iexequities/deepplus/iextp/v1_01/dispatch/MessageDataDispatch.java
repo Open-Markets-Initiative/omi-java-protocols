@@ -31,9 +31,10 @@ public final class MessageDataDispatch {
      * @param messageType the value read ahead of the message
      * @param data the bytes holding the message
      * @param offset where the message starts
+     * @param end the index just past the last byte the message may read
      * @return the selected message, decoded where its bytes allow, or empty when the value selects no message this library decodes
      */
-    public static Optional<Message> decode(char messageType, byte[] data, int offset) {
+    public static Optional<Message> decode(char messageType, byte[] data, int offset, int end) {
         Message message;
         if (messageType == 'S') {
             message = new SystemEventMessage();
@@ -67,7 +68,7 @@ public final class MessageDataDispatch {
             return Optional.empty();
         }
 
-        message.parseFrom(data, offset);
+        message.parseFrom(data, offset, end);
         return Optional.of(message);
     }
 }

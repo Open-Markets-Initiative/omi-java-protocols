@@ -1,0 +1,104 @@
+package omi.nyse.nyseequities.bbo.pillar.v2_5_b.enums;
+
+import java.util.Optional;
+
+/**
+ * For listed equity markets, the market where this symbol is listed
+ *
+ * <p>Each value corresponds to the ASCII character used as the wire discriminator.</p>
+ */
+public enum ExchangeCode {
+
+    /**
+     * NYSE American
+     */
+    NYSE_AMERICAN('A', "NYSE American"),
+
+    /**
+     * NYSE National
+     */
+    NYSE_NATIONAL('C', "NYSE National"),
+
+    /**
+     * NYSE
+     */
+    NYSE('N', "NYSE"),
+
+    /**
+     * NYSE Arca
+     */
+    NYSE_ARCA('P', "NYSE Arca"),
+
+    /**
+     * NASDAQ
+     */
+    NASDAQ('Q', "NASDAQ"),
+
+    /**
+     * IEX
+     */
+    IEX('V', "IEX"),
+
+    /**
+     * BATS
+     */
+    BATS('Z', "BATS"),
+
+    /**
+     * Global OTC primary symbols
+     */
+    GLOBAL_OTC('B', "Global OTC primary symbols"),
+
+    /**
+     * OTCBB symbols
+     */
+    OTCBB('U', "OTCBB symbols");
+
+    private final char wire;
+
+    private final String description;
+
+    ExchangeCode(char wire, String description) {
+        this.wire = wire;
+        this.description = description;
+    }
+
+    /**
+     * Returns this value's encoding on the wire.
+     *
+     * @return the wire value
+     */
+    public char wire() {
+        return wire;
+    }
+
+    /**
+     * Returns the description the protocol specification gives this value.
+     *
+     * @return the description
+     */
+    public String description() {
+        return description;
+    }
+
+    /**
+     * Returns the value with the given wire encoding.
+     *
+     * @param wire the encoding read from the wire
+     * @return the matching value, or empty when the protocol declares no value for it
+     */
+    public static Optional<ExchangeCode> fromWire(char wire) {
+        return switch (wire) {
+            case 'A' -> Optional.of(NYSE_AMERICAN);
+            case 'C' -> Optional.of(NYSE_NATIONAL);
+            case 'N' -> Optional.of(NYSE);
+            case 'P' -> Optional.of(NYSE_ARCA);
+            case 'Q' -> Optional.of(NASDAQ);
+            case 'V' -> Optional.of(IEX);
+            case 'Z' -> Optional.of(BATS);
+            case 'B' -> Optional.of(GLOBAL_OTC);
+            case 'U' -> Optional.of(OTCBB);
+            default -> Optional.empty();
+        };
+    }
+}

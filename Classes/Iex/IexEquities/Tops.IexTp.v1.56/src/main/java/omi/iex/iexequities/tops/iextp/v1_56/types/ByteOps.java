@@ -112,6 +112,35 @@ public final class ByteOps {
     }
 
     /**
+     * Reads a fixed-length ASCII field whole, as a zero-filled field is, whose zeros may be part of its text.
+     *
+     * @param data    the buffer to read from
+     * @param offset  the index of the first byte of the field
+     * @param length  the field width in bytes
+     * @return the decoded text
+     */
+    public static String ascii(byte[] data, int offset, int length) {
+        return new String(data, offset, length, StandardCharsets.ISO_8859_1);
+    }
+
+    /**
+     * Reads a fixed-length right-justified ASCII field, stripping leading padding.
+     *
+     * @param data    the buffer to read from
+     * @param offset  the index of the first byte of the field
+     * @param length  the field width in bytes
+     * @param padding the byte the field is left-padded with
+     * @return the decoded text, empty when the field is entirely padding
+     */
+    public static String asciiRightJustified(byte[] data, int offset, int length, byte padding) {
+        int start = offset;
+        while (start < offset + length && data[start] == padding) {
+            start++;
+        }
+        return new String(data, start, offset + length - start, StandardCharsets.ISO_8859_1);
+    }
+
+    /**
      * Writes a fixed-length ASCII field, right-padding the remainder.
      *
      * <p>Text longer than the field is truncated to the field width, because the wire
@@ -131,6 +160,29 @@ public final class ByteOps {
         }
         for (int index = written; index < length; index++) {
             data[offset + index] = padding;
+        }
+    }
+
+    /**
+     * Writes a fixed-length right-justified ASCII field, left-padding the remainder.
+     *
+     * <p>Text longer than the field is truncated to the field width, as {@link #putAscii} truncates it.</p>
+     *
+     * @param data    the buffer to write into
+     * @param offset  the index of the first byte of the field
+     * @param length  the field width in bytes
+     * @param value   the text to write; null is treated as empty
+     * @param padding the byte to left-pad with
+     */
+    public static void putAsciiRightJustified(byte[] data, int offset, int length, String value, byte padding) {
+        String text = value == null ? "" : value;
+        int written = Math.min(text.length(), length);
+        int start = offset + length - written;
+        for (int index = offset; index < start; index++) {
+            data[index] = padding;
+        }
+        for (int index = 0; index < written; index++) {
+            data[start + index] = (byte) text.charAt(index);
         }
     }
 

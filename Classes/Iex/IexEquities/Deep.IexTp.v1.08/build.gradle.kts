@@ -3,21 +3,8 @@
 group = "omi.iex.iexequities.deep.iextp.v1_08"
 version = "1.08"
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    "testImplementation"(platform("org.junit:junit-bom:5.11.4"))
-    "testImplementation"("org.junit.jupiter:junit-jupiter")
-    "testRuntimeOnly"("org.junit.platform:junit-platform-launcher")
-}
-
-tasks.named<Test>("test") {
-    useJUnitPlatform()
-}
-
 val javaSources = the<SourceSetContainer>()
+
 val roundTripSources = javaSources.create("roundTrip") {
     compileClasspath += javaSources["main"].output
     runtimeClasspath += javaSources["main"].output
@@ -32,4 +19,20 @@ val roundTrip = tasks.register<JavaExec>("roundTrip") {
 
 tasks.named("check") {
     dependsOn(roundTrip)
+}
+
+val captureTestSources = javaSources.create("captureTest") {
+    compileClasspath += javaSources["main"].output
+    runtimeClasspath += javaSources["main"].output
+}
+
+tasks.register<JavaExec>("captureTest") {
+    description = "Decodes every packet of the capture, or directory of captures, named by -Pcapture and re-encodes every message; -Pstrict fails on anything it does not decode."
+    group = "verification"
+    classpath = captureTestSources.runtimeClasspath
+    mainClass = "omi.iex.iexequities.deep.iextp.v1_08.CaptureTest"
+    args(providers.gradleProperty("capture").map { listOf(gradle.startParameter.currentDir.toPath().resolve(it).toString()) }.getOrElse(emptyList()))
+    if (providers.gradleProperty("strict").isPresent) {
+        args("--strict")
+    }
 }

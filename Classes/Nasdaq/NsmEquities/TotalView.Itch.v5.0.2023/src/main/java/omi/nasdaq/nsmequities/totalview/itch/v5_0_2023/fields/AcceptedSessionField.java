@@ -9,7 +9,7 @@ import omi.nasdaq.nsmequities.totalview.itch.v5_0_2023.types.PrintOptions;
 /**
  * The session ID of the session that is now logged into. Left padded with spaces.
  *
- * <p>A 10-byte ASCII field padded with spaces. Trailing padding is stripped on decode.</p>
+ * <p>A 10-byte ASCII field, right-justified and padded with spaces. Leading padding is stripped on decode.</p>
  */
 public final class AcceptedSessionField extends Field {
 
@@ -24,7 +24,7 @@ public final class AcceptedSessionField extends Field {
     public static final String NAME = "AcceptedSession";
 
     /**
-     * The byte this field is right-padded with (spaces).
+     * The byte this field is left-padded with (spaces).
      */
     public static final byte PADDING = (byte) ' ';
 
@@ -70,7 +70,7 @@ public final class AcceptedSessionField extends Field {
             return false;
         }
 
-        this.value = ByteOps.ascii(data, offset, BYTE_LENGTH, PADDING);
+        this.value = ByteOps.asciiRightJustified(data, offset, BYTE_LENGTH, PADDING);
         markDecoded(data, offset);
         return true;
     }
@@ -78,7 +78,7 @@ public final class AcceptedSessionField extends Field {
     @Override
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
-        ByteOps.putAscii(data, offset, BYTE_LENGTH, value, PADDING);
+        ByteOps.putAsciiRightJustified(data, offset, BYTE_LENGTH, value, PADDING);
         return offset + BYTE_LENGTH;
     }
 

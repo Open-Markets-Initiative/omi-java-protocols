@@ -20,8 +20,158 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: 9.7.1
+          gradle-version: 9.8.2
 
-      # Runs each protocol's round-trip. Capture tests skip unless OMI_PACKETS_DIR names a packet corpus checkout.
+      # Compiles every protocol and runs each one's round trip.
       - name: Build
         run: gradle build
+
+      - name: Clone Omi Data
+        run: git clone --depth=1 https://github.com/Open-Markets-Initiative/omi-data-packets.git
+
+      - name: Test Classes/B3/B3Derivatives/BinaryEntryPoint.Sbe.v8.0
+        run: gradle --quiet :b3-b3derivatives-binaryentrypoint-sbe-v8-0:captureTest -Pcapture=omi-data-packets/B3/B3Derivatives.BinaryEntryPoint.Sbe.v8.0 -Pstrict
+
+      - name: Test Classes/B3/B3Derivatives/BinaryEntryPoint.Sbe.v8.1
+        run: gradle --quiet :b3-b3derivatives-binaryentrypoint-sbe-v8-1:captureTest -Pcapture=omi-data-packets/B3/B3Derivatives.BinaryEntryPoint.Sbe.v8.1 -Pstrict
+
+      - name: Test Classes/B3/B3Derivatives/BinaryEntryPoint.Sbe.v8.3
+        run: gradle --quiet :b3-b3derivatives-binaryentrypoint-sbe-v8-3:captureTest -Pcapture=omi-data-packets/B3/B3Derivatives.BinaryEntryPoint.Sbe.v8.3 -Pstrict
+
+      - name: Test Classes/BlueOceanAts/BlueEquities/MemoirDepthFeed.Sbe.v1.3
+        run: gradle --quiet :blueoceanats-blueequities-memoirdepthfeed-sbe-v1-3:captureTest -Pcapture=omi-data-packets/BlueOceanAts/BlueEquities.MemoirDepthFeed.Sbe.v1.3 -Pstrict
+
+      - name: Test Classes/BlueOceanAts/BlueEquities/MemoirLastSale.Sbe.v1.3
+        run: gradle --quiet :blueoceanats-blueequities-memoirlastsale-sbe-v1-3:captureTest -Pcapture=omi-data-packets/BlueOceanAts/BlueEquities.MemoirLastSale.Sbe.v1.3 -Pstrict
+
+      - name: Test Classes/Box/BoxOptions/SolaMulticast.Hsvf.v1.8
+        run: gradle --quiet :box-boxoptions-solamulticast-hsvf-v1-8:captureTest -Pcapture=omi-data-packets/Box/BoxOptions.SolaMulticast.Hsvf.v1.8 -Pstrict
+
+      - name: Test Classes/Cboe/BzxEquities/BinaryOrderEntry.Boe.v2.3
+        run: gradle --quiet :cboe-bzxequities-binaryorderentry-boe-v2-3:captureTest -Pcapture=omi-data-packets/Cboe/BzxEquities.BinaryOrderEntry.Boe.v2.3 -Pstrict
+
+      - name: Test Classes/Cboe/BzxEquities/MulticastDepthOfBook.Spin.v2.20.4
+        run: gradle --quiet :cboe-bzxequities-multicastdepthofbook-spin-v2-20-4:captureTest -Pcapture=omi-data-packets/Cboe/BzxEquities.MulticastDepthOfBook.Spin.v2.20.4 -Pstrict
+
+      - name: Test Classes/Cboe/BzxOptions/BinaryOrderEntry.Boe.v2.10
+        run: gradle --quiet :cboe-bzxoptions-binaryorderentry-boe-v2-10:captureTest -Pcapture=omi-data-packets/Cboe/BzxOptions.BinaryOrderEntry.Boe.v2.10 -Pstrict
+
+      - name: Test Classes/Cboe/CfeFutures/BinaryOrderEntry.Boe3.v1.1.20
+        run: gradle --quiet :cboe-cfefutures-binaryorderentry-boe3-v1-1-20:captureTest -Pcapture=omi-data-packets/Cboe/CfeFutures.BinaryOrderEntry.Boe3.v1.1.20 -Pstrict
+
+      - name: Test Classes/Cboe/GapRequestProxy.Pitch.v1
+        run: gradle --quiet :cboe-gaprequestproxy-pitch-v1:captureTest -Pcapture=omi-data-packets/Cboe/GapRequestProxy.Pitch.v1 -Pstrict
+
+      - name: Test Classes/Cme/Globex/Mdp3.Sbe.v1.12
+        run: gradle --quiet :cme-globex-mdp3-sbe-v1-12:captureTest -Pcapture=omi-data-packets/Cme/Globex.Mdp3.Sbe.v1.12 -Pstrict
+
+      - name: Test Classes/Cme/Globex/Mdp3.Sbe.v1.5
+        run: gradle --quiet :cme-globex-mdp3-sbe-v1-5:captureTest -Pcapture=omi-data-packets/Cme/Globex.Mdp3.Sbe.v1.5 -Pstrict
+
+      - name: Test Classes/Cme/Globex/Mdp3.Sbe.v1.8
+        run: gradle --quiet :cme-globex-mdp3-sbe-v1-8:captureTest -Pcapture=omi-data-packets/Cme/Globex.Mdp3.Sbe.v1.8 -Pstrict
+
+      - name: Test Classes/Cme/Globex/Mdp3.Sbe.v1.9
+        run: gradle --quiet :cme-globex-mdp3-sbe-v1-9:captureTest -Pcapture=omi-data-packets/Cme/Globex.Mdp3.Sbe.v1.9 -Pstrict
+
+      - name: Test Classes/Cme/Globex/iLink3.Sbe.v8.5
+        run: gradle --quiet :cme-globex-ilink3-sbe-v8-5:captureTest -Pcapture=omi-data-packets/Cme/Globex.iLink3.Sbe.v8.5 -Pstrict
+
+      - name: Test Classes/Coinbase/CoinbaseDerivatives/OrdersApi.Sbe.v1.3
+        run: gradle --quiet :coinbase-coinbasederivatives-ordersapi-sbe-v1-3:captureTest -Pcapture=omi-data-packets/Coinbase/CoinbaseDerivatives.OrdersApi.Sbe.v1.3 -Pstrict
+
+      - name: Test Classes/Coinbase/CoinbaseDerivatives/OrdersApi.Sbe.v1.4
+        run: gradle --quiet :coinbase-coinbasederivatives-ordersapi-sbe-v1-4:captureTest -Pcapture=omi-data-packets/Coinbase/CoinbaseDerivatives.OrdersApi.Sbe.v1.4 -Pstrict
+
+      - name: Test Classes/Coinbase/CoinbaseDerivatives/OrdersApi.Sbe.v1.8
+        run: gradle --quiet :coinbase-coinbasederivatives-ordersapi-sbe-v1-8:captureTest -Pcapture=omi-data-packets/Coinbase/CoinbaseDerivatives.OrdersApi.Sbe.v1.8 -Pstrict
+
+      - name: Test Classes/Coinbase/Deribit/OrdersApi.Sbe.v0.1
+        run: gradle --quiet :coinbase-deribit-ordersapi-sbe-v0-1:captureTest -Pcapture=omi-data-packets/Coinbase/Deribit.OrdersApi.Sbe.v0.1 -Pstrict
+
+      - name: Test Classes/Eurex/T7/Eti.Fbe.v10.0
+        run: gradle --quiet :eurex-t7-eti-fbe-v10-0:captureTest -Pcapture=omi-data-packets/Eurex/T7.Eti.Fbe.v10.0 -Pstrict
+
+      - name: Test Classes/Eurex/T7/Eti.Fbe.v6.1
+        run: gradle --quiet :eurex-t7-eti-fbe-v6-1:captureTest -Pcapture=omi-data-packets/Eurex/T7.Eti.Fbe.v6.1 -Pstrict
+
+      - name: Test Classes/Iex/IexEquities/Deep.IexTp.v1.08
+        run: gradle --quiet :iex-iexequities-deep-iextp-v1-08:captureTest -Pcapture=omi-data-packets/Iex/IexEquities.Deep.IexTp.v1.08 -Pstrict
+
+      - name: Test Classes/Iex/IexEquities/DeepPlus.IexTp.v1.05
+        run: gradle --quiet :iex-iexequities-deepplus-iextp-v1-05:captureTest -Pcapture=omi-data-packets/Iex/IexEquities.DeepPlus.IexTp.v1.05 -Pstrict
+
+      - name: Test Classes/Iex/IexEquities/Tops.IexTp.v1.66
+        run: gradle --quiet :iex-iexequities-tops-iextp-v1-66:captureTest -Pcapture=omi-data-packets/Iex/IexEquities.Tops.IexTp.v1.66 -Pstrict
+
+      - name: Test Classes/Jnx/JnxEquities/Pts.Glimpse.v1.3
+        run: gradle --quiet :jnx-jnxequities-pts-glimpse-v1-3:captureTest -Pcapture=omi-data-packets/Jnx/JnxEquities.Pts.Glimpse.v1.3 -Pstrict
+
+      - name: Test Classes/Jnx/JnxEquities/Pts.Ouch.v1.11
+        run: gradle --quiet :jnx-jnxequities-pts-ouch-v1-11:captureTest -Pcapture=omi-data-packets/Jnx/JnxEquities.Pts.Ouch.v1.11 -Pstrict
+
+      - name: Test Classes/Memx/MemxEquities/MemoirDepthFeed.Sbe.v1.3
+        run: gradle --quiet :memx-memxequities-memoirdepthfeed-sbe-v1-3:captureTest -Pcapture=omi-data-packets/Memx/MemxEquities.MemoirDepthFeed.Sbe.v1.3 -Pstrict
+
+      - name: Test Classes/Miax/MiaxOptions/ComplexTopOfMarket.Mach.v1.1
+        run: gradle --quiet :miax-miaxoptions-complextopofmarket-mach-v1-1:captureTest -Pcapture=omi-data-packets/Miax/MiaxOptions.ComplexTopOfMarket.Mach.v1.1 -Pstrict
+
+      - name: Test Classes/Miax/OnyxFutures/TopOfMarket.Mach.v1.0.b
+        run: gradle --quiet :miax-onyxfutures-topofmarket-mach-v1-0-b:captureTest -Pcapture=omi-data-packets/Miax/OnyxFutures.TopOfMarket.Mach.v1.0.b -Pstrict
+
+      - name: Test Classes/Miax/PearlEquities/DepthOfMarket.Mach.v1.3.d
+        run: gradle --quiet :miax-pearlequities-depthofmarket-mach-v1-3-d:captureTest -Pcapture=omi-data-packets/Miax/PearlEquities.DepthOfMarket.Mach.v1.3.d -Pstrict
+
+      - name: Test Classes/Miax/PearlEquities/ExpressOrders.Meo.v2.6
+        run: gradle --quiet :miax-pearlequities-expressorders-meo-v2-6:captureTest -Pcapture=omi-data-packets/Miax/PearlEquities.ExpressOrders.Meo.v2.6 -Pstrict
+
+      - name: Test Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0
+        run: gradle --quiet :nasdaq-nsmequities-orders-ouch-v5-0:captureTest -Pcapture=omi-data-packets/Nasdaq/NsmEquities.Orders.Ouch.v5.0 -Pstrict
+
+      - name: Test Classes/Nasdaq/NsmEquities/TotalView.AsciiItch.v2.0
+        run: gradle --quiet :nasdaq-nsmequities-totalview-asciiitch-v2-0:captureTest -Pcapture=omi-data-packets/Nasdaq/NsmEquities.TotalView.AsciiItch.v2.0 -Pstrict
+
+      - name: Test Classes/Nasdaq/NsmEquities/TotalView.AsciiItch.v3.0
+        run: gradle --quiet :nasdaq-nsmequities-totalview-asciiitch-v3-0:captureTest -Pcapture=omi-data-packets/Nasdaq/NsmEquities.TotalView.AsciiItch.v3.0 -Pstrict
+
+      - name: Test Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2026
+        run: gradle --quiet :nasdaq-nsmequities-totalview-itch-v5-0-2026:captureTest -Pcapture=omi-data-packets/Nasdaq/NsmEquities.TotalView.Itch.v5.0.2026 -Pstrict
+
+      - name: Test Classes/Nasdaq/Uqdf/Output.Utp.v1.5
+        run: gradle --quiet :nasdaq-uqdf-output-utp-v1-5:captureTest -Pcapture=omi-data-packets/Nasdaq/Uqdf.Output.Utp.v1.5 -Pstrict
+
+      - name: Test Classes/Nyse/NyseBonds/DepthOfBook.Abp.v4.01.b
+        run: gradle --quiet :nyse-nysebonds-depthofbook-abp-v4-01-b:captureTest -Pcapture=omi-data-packets/Nyse/NyseBonds.DepthOfBook.Abp.v4.01.b -Pstrict
+
+      - name: Test Classes/Nyse/NyseEquities/BinaryGateway.PillarStream.v5.17
+        run: gradle --quiet :nyse-nyseequities-binarygateway-pillarstream-v5-17:captureTest -Pcapture=omi-data-packets/Nyse/NyseEquities.BinaryGateway.PillarStream.v5.17 -Pstrict
+
+      - name: Test Classes/Nyse/NyseEquities/BinaryGateway.PillarStream.v6.0
+        run: gradle --quiet :nyse-nyseequities-binarygateway-pillarstream-v6-0:captureTest -Pcapture=omi-data-packets/Nyse/NyseEquities.BinaryGateway.PillarStream.v6.0 -Pstrict
+
+      - name: Test Classes/Siac/Cqs/Output.Cta.v1.91
+        run: gradle --quiet :siac-cqs-output-cta-v1-91:captureTest -Pcapture=omi-data-packets/Siac/Cqs.Output.Cta.v1.91 -Pstrict
+
+      - name: Test Classes/Siac/Cqs/Output.Cta.v2.10.a
+        run: gradle --quiet :siac-cqs-output-cta-v2-10-a:captureTest -Pcapture=omi-data-packets/Siac/Cqs.Output.Cta.v2.10.a -Pstrict
+
+      - name: Test Classes/Siac/Cts/Output.Cta.v1.91
+        run: gradle --quiet :siac-cts-output-cta-v1-91:captureTest -Pcapture=omi-data-packets/Siac/Cts.Output.Cta.v1.91 -Pstrict
+
+      - name: Test Classes/Siac/Cts/Output.Cta.v2.10
+        run: gradle --quiet :siac-cts-output-cta-v2-10:captureTest -Pcapture=omi-data-packets/Siac/Cts.Output.Cta.v2.10 -Pstrict
+
+      - name: Test Classes/Siac/Cts/Output.Cta.v2.11.b
+        run: gradle --quiet :siac-cts-output-cta-v2-11-b:captureTest -Pcapture=omi-data-packets/Siac/Cts.Output.Cta.v2.11.b -Pstrict
+
+      - name: Test Classes/Siac/Cts/Output.Cta.v2.9
+        run: gradle --quiet :siac-cts-output-cta-v2-9:captureTest -Pcapture=omi-data-packets/Siac/Cts.Output.Cta.v2.9 -Pstrict
+
+      - name: Test Classes/Siac/Opra/Output.Obi.v6.2
+        run: gradle --quiet :siac-opra-output-obi-v6-2:captureTest -Pcapture=omi-data-packets/Siac/Opra.Output.Obi.v6.2 -Pstrict
+
+      - name: Test Classes/Tmx/Mx/SolaMulticast.Hsvf.v1.14.1
+        run: gradle --quiet :tmx-mx-solamulticast-hsvf-v1-14-1:captureTest -Pcapture=omi-data-packets/Tmx/Mx.SolaMulticast.Hsvf.v1.14 -Pstrict
+
+      - name: Test Classes/Txse/TxseEquities/Seed.Rake.v1.0
+        run: gradle --quiet :txse-txseequities-seed-rake-v1-0:captureTest -Pcapture=omi-data-packets/Txse/TxseEquities.Seed.Rake.v1.0 -Pstrict

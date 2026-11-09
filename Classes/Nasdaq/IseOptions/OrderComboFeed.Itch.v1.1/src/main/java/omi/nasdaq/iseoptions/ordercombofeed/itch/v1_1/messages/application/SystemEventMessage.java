@@ -10,7 +10,7 @@ import omi.nasdaq.iseoptions.ordercombofeed.itch.v1_1.fields.CurrentDayField;
 import omi.nasdaq.iseoptions.ordercombofeed.itch.v1_1.fields.CurrentMonthField;
 import omi.nasdaq.iseoptions.ordercombofeed.itch.v1_1.fields.CurrentYearField;
 import omi.nasdaq.iseoptions.ordercombofeed.itch.v1_1.fields.EventCodeField;
-import omi.nasdaq.iseoptions.ordercombofeed.itch.v1_1.fields.SubversionField;
+import omi.nasdaq.iseoptions.ordercombofeed.itch.v1_1.fields.SubVersionField;
 import omi.nasdaq.iseoptions.ordercombofeed.itch.v1_1.fields.TimestampField;
 import omi.nasdaq.iseoptions.ordercombofeed.itch.v1_1.fields.VersionField;
 import omi.nasdaq.iseoptions.ordercombofeed.itch.v1_1.types.Field;
@@ -79,16 +79,14 @@ public final class SystemEventMessage implements Message {
     /**
      * Sub-version of this interface. Currently set to 0.
      */
-    private final SubversionField subversion = new SubversionField();
+    private final SubVersionField subVersion = new SubVersionField();
 
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(timestampField, eventCode, currentYear, currentMonth, currentDay, version, subversion);
+    private final List<Field> fields = List.of(timestampField, eventCode, currentYear, currentMonth, currentDay, version, subVersion);
 
     private byte[] buffer;
-
-    private int bufferOffset;
 
     private boolean decoded;
 
@@ -149,10 +147,10 @@ public final class SystemEventMessage implements Message {
     /**
      * Sub-version of this interface. Currently set to 0.
      *
-     * @return the Subversion field
+     * @return the SubVersion field
      */
-    public SubversionField subversion() {
-        return subversion;
+    public SubVersionField subVersion() {
+        return subVersion;
     }
 
     @Override
@@ -168,7 +166,7 @@ public final class SystemEventMessage implements Message {
     /**
      * Returns this message's declared padding runs, as consecutive offset and length pairs relative to the start of the message.
      *
-     * <p>Padding carries no value: decode advances over it and encode writes it as zero. Use this to check that a received message's padding is zero where the specification requires it, or to render a byte map of the layout.</p>
+     * <p>Padding carries no value: decode advances over it, and encode writes back what decode received, or zero for a message assembled from values. Use this to check a received message's padding where the specification constrains it, or to render a byte map of the layout.</p>
      *
      * @return the padding runs, empty when the layout has none
      */
@@ -183,11 +181,21 @@ public final class SystemEventMessage implements Message {
 
     @Override
     public boolean parseFrom(byte[] data, int offset) {
-        clear();
-        this.buffer = data;
-        this.bufferOffset = offset;
+        return parseFrom(data, offset, data.length);
+    }
 
-        if (offset < 0 || offset + BYTE_LENGTH > data.length) {
+    @Override
+    public boolean parseFrom(byte[] data, int offset, int end) {
+        clear();
+        this.decoded = read(data, offset, end);
+
+        int stop = Math.max(0, Math.min(data.length, offset + BYTE_LENGTH));
+        this.buffer = Arrays.copyOfRange(data, Math.min(Math.max(offset, 0), stop), stop);
+        return decoded;
+    }
+
+    private boolean read(byte[] data, int offset, int end) {
+        if (offset < 0 || end > data.length || end - offset < BYTE_LENGTH) {
             return false;
         }
 
@@ -216,12 +224,11 @@ public final class SystemEventMessage implements Message {
             return false;
         }
         cursor += VersionField.BYTE_LENGTH;
-        if (!subversion.parse(data, cursor)) {
+        if (!subVersion.parse(data, cursor)) {
             return false;
         }
-        cursor += SubversionField.BYTE_LENGTH;
+        cursor += SubVersionField.BYTE_LENGTH;
 
-        this.decoded = true;
         return true;
     }
 
@@ -235,7 +242,7 @@ public final class SystemEventMessage implements Message {
         cursor = currentMonth.encode(data, cursor);
         cursor = currentDay.encode(data, cursor);
         cursor = version.encode(data, cursor);
-        cursor = subversion.encode(data, cursor);
+        cursor = subVersion.encode(data, cursor);
         return cursor;
     }
 
@@ -252,7 +259,6 @@ public final class SystemEventMessage implements Message {
             field.reset();
         }
         this.buffer = null;
-        this.bufferOffset = 0;
         this.decoded = false;
     }
 
@@ -293,9 +299,7 @@ public final class SystemEventMessage implements Message {
         if (buffer == null) {
             return Optional.empty();
         }
-        int end = Math.min(buffer.length, bufferOffset + BYTE_LENGTH);
-        int start = Math.min(Math.max(bufferOffset, 0), end);
-        return Optional.of(Arrays.copyOfRange(buffer, start, end));
+        return Optional.of(buffer.clone());
     }
 
     @Override
@@ -325,7 +329,7 @@ public final class SystemEventMessage implements Message {
             case "CurrentMonth" -> Optional.of(currentMonth);
             case "CurrentDay" -> Optional.of(currentDay);
             case "Version" -> Optional.of(version);
-            case "Subversion" -> Optional.of(subversion);
+            case "SubVersion" -> Optional.of(subVersion);
             default -> Optional.empty();
         };
     }

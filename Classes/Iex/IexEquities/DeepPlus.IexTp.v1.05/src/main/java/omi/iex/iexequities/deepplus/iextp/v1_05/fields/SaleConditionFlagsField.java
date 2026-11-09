@@ -58,7 +58,7 @@ public final class SaleConditionFlagsField extends Field {
      *
      * @return bit 3 of the container
      */
-    public boolean singlepriceCrossTrade() {
+    public boolean singlePriceCrossTrade() {
         return ((value >>> 3) & 1L) != 0L;
     }
 

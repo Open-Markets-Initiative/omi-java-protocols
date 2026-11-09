@@ -27,6 +27,11 @@ bin/
 # Visual Studio Code
 .vscode/
 
+# Captures, as the build workflow fetches them
+omi-data-packets/
+*.pcap
+*.pcapng
+
 # Operating systems
 .DS_Store
 Thumbs.db
