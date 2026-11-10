@@ -63,12 +63,12 @@ public final class RoundTrip {
         check(AuctionPriceDataMessage::new);
         check(AuctionRequestMessage::new);
         check(BulkCancelRequestMessage::new);
-        checkGrouped(ClientSeqMsg::new, RoundTrip::wire0, true, false, false, 8);
+        checkGrouped(ClientSeqMsg::new, RoundTrip::wire0, true, false, false, 8, 0);
         check(Close::new);
         check(CloseResponse::new);
         check(DmmSymbolReferenceDataMessage::new);
         check(EquitiesSymbolReferenceDataMessage::new);
-        checkGrouped(ExecutionReportMessage::new, RoundTrip::wire1, true, true, false, 1);
+        checkGrouped(ExecutionReportMessage::new, RoundTrip::wire1, true, true, false, 1, 0);
         check(GtBeginMessage::new);
         check(GtEndMessage::new);
         check(Heartbeat::new);
@@ -77,13 +77,13 @@ public final class RoundTrip {
         check(ManualActionRequestMessage::new);
         check(ManualActionResponseMessage::new);
         check(MinimumPriceVariantClassReferenceDataMessage::new);
-        checkGrouped(MinimumPriceVariantLevelReferenceDataMessage::new, RoundTrip::wire2, true, false, false, 1);
+        checkGrouped(MinimumPriceVariantLevelReferenceDataMessage::new, RoundTrip::wire2, true, false, false, 1, 0);
         check(MmidConfigurationMessage::new);
         check(MpidConfigurationMessage::new);
-        checkGrouped(NewOrderSingleAndCancelReplaceRequestMessage::new, RoundTrip::wire3, true, true, false, 1);
+        checkGrouped(NewOrderSingleAndCancelReplaceRequestMessage::new, RoundTrip::wire3, true, true, false, 1, 0);
         check(Open::new);
         check(OpenResponse::new);
-        checkGrouped(OrderAndCancelReplaceAcknowledgementMessage::new, RoundTrip::wire4, true, true, false, 1);
+        checkGrouped(OrderAndCancelReplaceAcknowledgementMessage::new, RoundTrip::wire4, true, true, false, 1, 0);
         check(OrderCancelRequestMessage::new);
         check(OrderModifyCancelRequestAcknowledgmentAndUroutMessage::new);
         check(OrderModifyRequestMessage::new);
@@ -92,7 +92,7 @@ public final class RoundTrip {
         check(RiskControlAcknowledgementMessage::new);
         check(RiskControlAlertMessage::new);
         check(RiskLimitUpdateRequestMessage::new);
-        checkGrouped(ServerSeqMsg::new, RoundTrip::wire5, true, false, false, 8);
+        checkGrouped(ServerSeqMsg::new, RoundTrip::wire5, true, false, false, 8, 0);
         check(SessionConfigurationAcknowledgementMessage::new);
         check(SessionConfigurationRequestMessage::new);
         check(StreamAvail::new);
@@ -148,7 +148,7 @@ public final class RoundTrip {
         byte[] build(Random random, int entries, long count);
     }
 
-    private static void checkGrouped(Supplier<Message> create, Wire wire, boolean variable, boolean bounded, boolean counted, int builds) {
+    private static void checkGrouped(Supplier<Message> create, Wire wire, boolean variable, boolean bounded, boolean counted, int builds, int leaves) {
         Message message = create.get();
         String name = message.getClass().getSimpleName();
         Random random = new Random(name.hashCode());
@@ -159,11 +159,11 @@ public final class RoundTrip {
                 String label = name + " with " + entries + " entries, block " + blockDelta;
                 byte[] bytes = wire.build(random, entries, entries);
                 int offset = 1 + random.nextInt(7);
-                byte[] shifted = new byte[offset + bytes.length + 3];
+                byte[] shifted = new byte[offset + bytes.length + leaves + 3];
                 random.nextBytes(shifted);
                 System.arraycopy(bytes, 0, shifted, offset, bytes.length);
 
-                expect(label + " decodes", message.parseFrom(shifted, offset, offset + bytes.length) && message.isDecoded());
+                expect(label + " decodes", message.parseFrom(shifted, offset, offset + bytes.length + leaves) && message.isDecoded());
                 expect(label + " has its length", message.byteLength() == bytes.length);
                 expect(label + " keeps its bytes", message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
                 expect(label + " encodes to its bytes", Arrays.equals(message.toBytes(), bytes));
@@ -171,7 +171,7 @@ public final class RoundTrip {
                 expect(label + " keeps its bytes when the buffer is reused", Arrays.equals(message.toBytes(), bytes) && message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
 
                 Message again = create.get();
-                again.parseFrom(bytes, 0);
+                again.parseFrom(Arrays.copyOf(bytes, bytes.length + leaves), 0);
                 expect(label + " equals a second decode", message.equals(again) && message.hashCode() == again.hashCode());
 
                 expect(label + " refuses a short buffer", !bounded || bytes.length == 0 || !message.parseFrom(bytes, 0, bytes.length - 1));

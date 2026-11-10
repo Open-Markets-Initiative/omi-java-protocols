@@ -9,8 +9,13 @@ import java.util.HexFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
+import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.dispatch.ClientPacketDecoder;
+import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.dispatch.ClientPacketStream;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.dispatch.PacketDecoder;
+import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.dispatch.ServerPacketDecoder;
+import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.dispatch.ServerPacketStream;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.Message;
 
 // Decodes every UDP datagram of a capture, or of each capture in a directory, through the packet decoder, and the
@@ -94,9 +99,18 @@ public final class CaptureTest {
 
     private void walk(Path path, boolean strict) throws IOException {
         long before = packets + records;
+        Tcp tcp = new Tcp();
         try (Pcap pcap = Pcap.open(path)) {
             for (Pcap.Packet packet = pcap.next(); packet != null; packet = pcap.next()) {
                 String where = path.getFileName() + " packet " + pcap.records();
+                if (packet.tcp()) {
+                    Tcp.Flow flow = tcp.add(packet);
+                    if (flow != null && flow.bytes().length > 0) {
+                        read(where, flow, strict);
+                    }
+                    continue;
+                }
+
                 if (packet.tcp()) {
                     continue;
                 }
@@ -107,6 +121,8 @@ public final class CaptureTest {
                 }
             }
         }
+
+        end(path, tcp, strict);
 
         // One capture among many could otherwise hold nothing and pass unnoticed.
         if (strict && packets + records == before) {
@@ -169,13 +185,316 @@ public final class CaptureTest {
         return true;
     }
 
+    // A TCP tree's stream, offered the flows of the side its origin names, or of either side where it names none.
+    private interface Reader {
+        List<Walked> append(byte[] data);
+
+        int pendingBytes();
+
+        boolean isFailed();
+    }
+
+    private record Feed(String name, Tcp.Side side, Supplier<Reader> open) {
+    }
+
+    private static final List<Feed> FEEDS = List.of(
+        new Feed("ClientPacketStream", Tcp.Side.CLIENT, CaptureTest::clientPacketStream),
+        new Feed("ServerPacketStream", Tcp.Side.SERVER, CaptureTest::serverPacketStream));
+
+    private static Reader clientPacketStream() {
+        ClientPacketStream stream = new ClientPacketStream();
+        return new Reader() {
+            @Override
+            public List<Walked> append(byte[] data) {
+                List<Walked> walked = new ArrayList<>();
+                for (ClientPacketStream.Record record : stream.append(data, 0, data.length)) {
+                    walked.add(walked(record.decoded()));
+                }
+                return walked;
+            }
+
+            @Override
+            public int pendingBytes() {
+                return stream.pendingBytes();
+            }
+
+            @Override
+            public boolean isFailed() {
+                return stream.isFailed();
+            }
+        };
+    }
+
+    private static Walked walked(ClientPacketDecoder.Decoded decoded) {
+        return new Walked(decoded.messages(), decoded.undecoded(), decoded.complete(),
+            decoded.trailing().stream().map(ended -> new Ended(ended.message(), ended.bytes())).toList(),
+            decoded.padding().stream().map(padded -> new Ended(padded.message(), padded.bytes())).toList());
+    }
+
+    private static Reader serverPacketStream() {
+        ServerPacketStream stream = new ServerPacketStream();
+        return new Reader() {
+            @Override
+            public List<Walked> append(byte[] data) {
+                List<Walked> walked = new ArrayList<>();
+                for (ServerPacketStream.Record record : stream.append(data, 0, data.length)) {
+                    walked.add(walked(record.decoded()));
+                }
+                return walked;
+            }
+
+            @Override
+            public int pendingBytes() {
+                return stream.pendingBytes();
+            }
+
+            @Override
+            public boolean isFailed() {
+                return stream.isFailed();
+            }
+        };
+    }
+
+    private static Walked walked(ServerPacketDecoder.Decoded decoded) {
+        return new Walked(decoded.messages(), decoded.undecoded(), decoded.complete(),
+            decoded.trailing().stream().map(ended -> new Ended(ended.message(), ended.bytes())).toList(),
+            decoded.padding().stream().map(padded -> new Ended(padded.message(), padded.bytes())).toList());
+    }
+
+    // A feed still deciding whether it reads a flow, and the records it walked meanwhile.
+    private static final class Trial {
+        private final Feed feed;
+        private final Reader reader;
+        private final List<Walked> walked = new ArrayList<>();
+        private boolean rejected;
+
+        private Trial(Feed feed) {
+            this.feed = feed;
+            this.reader = feed.open().get();
+        }
+    }
+
+    // Which feed reads a flow: its owner once chosen, the trials still deciding, or the several feeds that walk its first
+    // record, which must then read every record alike; unread when no feed walks it.
+    private static final class Reading {
+        private Reader owner;
+        private List<Trial> trials = new ArrayList<>();
+        private List<Trial> agreeing;
+        private int compared;
+        private boolean disagreed;
+        private String unread;
+    }
+
+    // A flow sent by a known side goes to the one feed of that side; otherwise every feed offered it tries its first
+    // record, and the one walking it reads the flow. A flow no feed is offered is passed over.
+    private static Reading start(Tcp.Flow flow) {
+        List<Feed> offered = FEEDS.stream().filter(feed -> flow.side() == Tcp.Side.UNKNOWN || feed.side() == flow.side()).toList();
+        if (offered.isEmpty()) {
+            offered = FEEDS.stream().filter(feed -> feed.side() == Tcp.Side.UNKNOWN).toList();
+        }
+
+        Reading reading = new Reading();
+        List<Feed> sided = offered.stream().filter(feed -> feed.side() != Tcp.Side.UNKNOWN && feed.side() == flow.side()).toList();
+        if (sided.size() == 1) {
+            reading.owner = sided.get(0).open().get();
+            reading.trials = null;
+            return reading;
+        }
+
+        for (Feed feed : offered) {
+            reading.trials.add(new Trial(feed));
+        }
+        return reading;
+    }
+
+    private void read(String where, Tcp.Flow flow, boolean strict) {
+        Reading reading = (Reading) flow.state;
+        if (reading == null) {
+            reading = start(flow);
+            flow.state = reading;
+        }
+
+        where = where + " TCP " + flow.name();
+        if (reading.agreeing != null) {
+            for (Trial trial : reading.agreeing) {
+                if (!trial.reader.isFailed()) {
+                    trial.walked.addAll(trial.reader.append(flow.bytes()));
+                }
+            }
+            agree(where, reading, strict);
+            return;
+        }
+
+        if (reading.owner != null) {
+            if (!reading.owner.isFailed()) {
+                for (Walked walked : reading.owner.append(flow.bytes())) {
+                    record(where, walked, strict);
+                }
+            }
+            return;
+        }
+
+        if (reading.trials == null || reading.trials.isEmpty()) {
+            return;
+        }
+
+        boolean deciding = false;
+        for (Trial trial : reading.trials) {
+            if (trial.rejected) {
+                continue;
+            }
+
+            // a trial goes on reading the flow, as the one chosen reads it from its start
+            try {
+                if (!trial.reader.isFailed()) {
+                    trial.walked.addAll(trial.reader.append(flow.bytes()));
+                }
+            } catch (RuntimeException failure) {
+                trial.rejected = true;
+                continue;
+            }
+
+            if (trial.walked.isEmpty()) {
+                trial.rejected = trial.reader.isFailed();
+                deciding |= !trial.rejected;
+            } else {
+                Walked first = trial.walked.get(0);
+                trial.rejected = !first.complete() || first.undecoded() > 0 || first.messages().stream().anyMatch(CaptureTest::holdsUnknown);
+            }
+        }
+
+        if (deciding) {
+            return;
+        }
+
+        List<Trial> accepted = reading.trials.stream().filter(trial -> !trial.rejected).toList();
+        reading.trials = null;
+        if (accepted.isEmpty()) {
+            reading.unread = "no stream walks its first record";
+            return;
+        }
+
+        // several streams walking it go on reading it, as a datagram several feeds decode alike passes: a flow whose
+        // SYN was not captured may hold a message both sides send
+        if (accepted.size() > 1) {
+            reading.agreeing = accepted;
+            agree(where, reading, strict);
+            return;
+        }
+
+        reading.owner = accepted.get(0).reader;
+        for (Walked walked : accepted.get(0).walked) {
+            record(where, walked, strict);
+        }
+    }
+
+    // Checks each record every agreeing stream has walked, once they all decode it alike.
+    private void agree(String where, Reading reading, boolean strict) {
+        List<Trial> trials = reading.agreeing;
+        while (!reading.disagreed && trials.stream().allMatch(trial -> trial.walked.size() > reading.compared)) {
+            Walked first = trials.get(0).walked.get(reading.compared);
+            for (Trial other : trials.subList(1, trials.size())) {
+                if (!alike(first, other.walked.get(reading.compared))) {
+                    errors++;
+                    reading.disagreed = true;
+                    System.out.println(where + ": " + trials.get(0).feed.name() + " and " + other.feed.name() + " read record " + reading.compared + " differently");
+                    return;
+                }
+            }
+
+            record(where, first, strict);
+            reading.compared++;
+        }
+    }
+
+    // The same messages, of the same classes and bytes, walked alike.
+    private static boolean alike(Walked one, Walked other) {
+        if (one.complete() != other.complete() || one.undecoded() != other.undecoded() || one.messages().size() != other.messages().size()) {
+            return false;
+        }
+
+        for (int index = 0; index < one.messages().size(); index++) {
+            Message left = one.messages().get(index);
+            Message right = other.messages().get(index);
+            if (!left.getClass().getSimpleName().equals(right.getClass().getSimpleName()) || !Arrays.equals(left.raw().orElseThrow(), right.raw().orElseThrow())) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void record(String where, Walked walked, boolean strict) {
+        if (check(where, walked, strict)) {
+            records++;
+        }
+    }
+
+    // Every flow at the end of a capture: one missing bytes, or holding bytes that make no whole record, is an error, as
+    // is a flow no stream reads when strict.
+    private void end(Path path, Tcp tcp, boolean strict) {
+        for (Tcp.Flow flow : tcp.flows()) {
+            if (!(flow.state instanceof Reading reading) || reading.disagreed) {
+                continue;
+            }
+
+            String where = path.getFileName() + " TCP " + flow.name();
+            if (reading.agreeing != null) {
+                Trial first = reading.agreeing.get(0);
+                if (reading.agreeing.stream().anyMatch(trial -> trial.walked.size() != first.walked.size() || trial.reader.pendingBytes() != first.reader.pendingBytes())) {
+                    errors++;
+                    System.out.println(where + ": the streams walking it end it differently");
+                    continue;
+                }
+
+                reading.owner = first.reader;
+            }
+
+            // a flow no feed is offered is passed over, as is one whose first record never arrived whole
+            if (reading.owner == null && reading.unread == null && (reading.trials == null || reading.trials.isEmpty())) {
+                continue;
+            }
+
+            if (reading.owner == null) {
+                String unread = reading.unread != null ? reading.unread : "no stream reads a whole first record";
+                if (strict) {
+                    errors++;
+                    System.out.println(where + ": " + unread);
+                } else {
+                    otherFlows++;
+                }
+                continue;
+            }
+
+            if (flow.lost() || flow.waiting()) {
+                errors++;
+                System.out.println(where + ": the capture misses bytes of the flow");
+            }
+
+            if (reading.owner.isFailed()) {
+                errors++;
+                System.out.println(where + ": a record states a length that is not valid, so the stream stops");
+            } else if (reading.owner.pendingBytes() > 0) {
+                errors++;
+                System.out.println(where + ": " + reading.owner.pendingBytes() + " byte(s) at the end do not make a whole record");
+            }
+        }
+    }
+
+    // Whether a message holds one its dispatch does not decode, as the holder of the other side's sequenced message does.
+    private static boolean holdsUnknown(Message message) {
+        return false;
+    }
+
     private void summary() {
         System.out.println();
         System.out.println("=== Summary ===");
         System.out.println("Packets:  " + packets);
+        System.out.println("TCP records: " + records);
         System.out.println("Messages: " + messages);
         System.out.println("Errors:   " + errors);
         System.out.println("Other traffic: " + otherPackets + " capture packets");
+        System.out.println("TCP flows not read: " + otherFlows);
         System.out.println("Messages of a type not decoded: " + undecoded);
         System.out.println("Messages ending before their frame: " + trailing);
         System.out.println();

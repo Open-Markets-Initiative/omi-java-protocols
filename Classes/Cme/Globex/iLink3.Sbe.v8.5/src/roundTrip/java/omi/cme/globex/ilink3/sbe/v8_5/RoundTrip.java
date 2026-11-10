@@ -65,7 +65,7 @@ public final class RoundTrip {
 
     public static void main(String[] args) {
         check(BusinessReject::new);
-        checkGrouped(Establish::new, RoundTrip::wire0, true, true, true, 1);
+        checkGrouped(Establish::new, RoundTrip::wire0, true, true, true, 1, 0);
         check(EstablishmentAck::new);
         check(EstablishmentReject::new);
         check(ExecutionAck::new);
@@ -75,41 +75,41 @@ public final class RoundTrip {
         check(ExecutionReportNew::new);
         check(ExecutionReportReject::new);
         check(ExecutionReportStatus::new);
-        checkGrouped(ExecutionReportTradeAddendumOutright::new, RoundTrip::wire1, true, true, true, 1);
-        checkGrouped(ExecutionReportTradeAddendumSpread::new, RoundTrip::wire2, true, true, true, 1);
-        checkGrouped(ExecutionReportTradeAddendumSpreadLeg::new, RoundTrip::wire3, true, true, true, 1);
-        checkGrouped(ExecutionReportTradeOutright::new, RoundTrip::wire4, true, true, true, 1);
-        checkGrouped(ExecutionReportTradeSpread::new, RoundTrip::wire5, true, true, true, 1);
-        checkGrouped(ExecutionReportTradeSpreadLeg::new, RoundTrip::wire6, true, true, true, 1);
-        checkGrouped(MassQuote::new, RoundTrip::wire7, true, true, true, 1);
-        checkGrouped(MassQuoteAck::new, RoundTrip::wire8, true, true, true, 1);
-        checkGrouped(Negotiate::new, RoundTrip::wire9, true, true, true, 1);
+        checkGrouped(ExecutionReportTradeAddendumOutright::new, RoundTrip::wire1, true, true, true, 1, 0);
+        checkGrouped(ExecutionReportTradeAddendumSpread::new, RoundTrip::wire2, true, true, true, 1, 0);
+        checkGrouped(ExecutionReportTradeAddendumSpreadLeg::new, RoundTrip::wire3, true, true, true, 1, 0);
+        checkGrouped(ExecutionReportTradeOutright::new, RoundTrip::wire4, true, true, true, 1, 0);
+        checkGrouped(ExecutionReportTradeSpread::new, RoundTrip::wire5, true, true, true, 1, 0);
+        checkGrouped(ExecutionReportTradeSpreadLeg::new, RoundTrip::wire6, true, true, true, 1, 0);
+        checkGrouped(MassQuote::new, RoundTrip::wire7, true, true, true, 1, 0);
+        checkGrouped(MassQuoteAck::new, RoundTrip::wire8, true, true, true, 1, 0);
+        checkGrouped(Negotiate::new, RoundTrip::wire9, true, true, true, 1, 0);
         check(NegotiationReject::new);
-        checkGrouped(NegotiationResponse::new, RoundTrip::wire10, true, true, true, 1);
-        checkGrouped(NewOrderCross::new, RoundTrip::wire11, true, true, true, 1);
+        checkGrouped(NegotiationResponse::new, RoundTrip::wire10, true, true, true, 1, 0);
+        checkGrouped(NewOrderCross::new, RoundTrip::wire11, true, true, true, 1, 0);
         check(NewOrderSingle::new);
         check(NotApplied::new);
         check(OrderCancelReject::new);
         check(OrderCancelReplaceReject::new);
         check(OrderCancelReplaceRequest::new);
         check(OrderCancelRequest::new);
-        checkGrouped(OrderMassActionReport::new, RoundTrip::wire12, true, true, true, 1);
+        checkGrouped(OrderMassActionReport::new, RoundTrip::wire12, true, true, true, 1, 0);
         check(OrderMassActionRequest::new);
         check(OrderMassStatusRequest::new);
         check(OrderStatusRequest::new);
-        checkGrouped(PartyDetailsDefinitionRequest::new, RoundTrip::wire13, true, true, true, 1);
-        checkGrouped(PartyDetailsDefinitionRequestAck::new, RoundTrip::wire14, true, true, true, 1);
-        checkGrouped(PartyDetailsListReport::new, RoundTrip::wire15, true, true, true, 1);
-        checkGrouped(PartyDetailsListRequest::new, RoundTrip::wire16, true, true, true, 1);
-        checkGrouped(QuoteCancel::new, RoundTrip::wire17, true, true, true, 1);
-        checkGrouped(QuoteCancelAck::new, RoundTrip::wire18, true, true, true, 1);
-        checkGrouped(RequestForQuote::new, RoundTrip::wire19, true, true, true, 1);
+        checkGrouped(PartyDetailsDefinitionRequest::new, RoundTrip::wire13, true, true, true, 1, 0);
+        checkGrouped(PartyDetailsDefinitionRequestAck::new, RoundTrip::wire14, true, true, true, 1, 0);
+        checkGrouped(PartyDetailsListReport::new, RoundTrip::wire15, true, true, true, 1, 0);
+        checkGrouped(PartyDetailsListRequest::new, RoundTrip::wire16, true, true, true, 1, 0);
+        checkGrouped(QuoteCancel::new, RoundTrip::wire17, true, true, true, 1, 0);
+        checkGrouped(QuoteCancelAck::new, RoundTrip::wire18, true, true, true, 1, 0);
+        checkGrouped(RequestForQuote::new, RoundTrip::wire19, true, true, true, 1, 0);
         check(RequestForQuoteAck::new);
         check(Retransmission::new);
         check(RetransmitReject::new);
         check(RetransmitRequest::new);
-        checkGrouped(SecurityDefinitionRequest::new, RoundTrip::wire20, true, true, true, 1);
-        checkGrouped(SecurityDefinitionResponse::new, RoundTrip::wire21, true, true, true, 1);
+        checkGrouped(SecurityDefinitionRequest::new, RoundTrip::wire20, true, true, true, 1, 0);
+        checkGrouped(SecurityDefinitionResponse::new, RoundTrip::wire21, true, true, true, 1, 0);
         check(Sequence::new);
         check(Terminate::new);
 
@@ -155,7 +155,7 @@ public final class RoundTrip {
         byte[] build(Random random, int entries, long count);
     }
 
-    private static void checkGrouped(Supplier<Message> create, Wire wire, boolean variable, boolean bounded, boolean counted, int builds) {
+    private static void checkGrouped(Supplier<Message> create, Wire wire, boolean variable, boolean bounded, boolean counted, int builds, int leaves) {
         Message message = create.get();
         String name = message.getClass().getSimpleName();
         Random random = new Random(name.hashCode());
@@ -166,11 +166,11 @@ public final class RoundTrip {
                 String label = name + " with " + entries + " entries, block " + blockDelta;
                 byte[] bytes = wire.build(random, entries, entries);
                 int offset = 1 + random.nextInt(7);
-                byte[] shifted = new byte[offset + bytes.length + 3];
+                byte[] shifted = new byte[offset + bytes.length + leaves + 3];
                 random.nextBytes(shifted);
                 System.arraycopy(bytes, 0, shifted, offset, bytes.length);
 
-                expect(label + " decodes", message.parseFrom(shifted, offset, offset + bytes.length) && message.isDecoded());
+                expect(label + " decodes", message.parseFrom(shifted, offset, offset + bytes.length + leaves) && message.isDecoded());
                 expect(label + " has its length", message.byteLength() == bytes.length);
                 expect(label + " keeps its bytes", message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
                 expect(label + " encodes to its bytes", Arrays.equals(message.toBytes(), bytes));
@@ -178,7 +178,7 @@ public final class RoundTrip {
                 expect(label + " keeps its bytes when the buffer is reused", Arrays.equals(message.toBytes(), bytes) && message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
 
                 Message again = create.get();
-                again.parseFrom(bytes, 0);
+                again.parseFrom(Arrays.copyOf(bytes, bytes.length + leaves), 0);
                 expect(label + " equals a second decode", message.equals(again) && message.hashCode() == again.hashCode());
 
                 expect(label + " refuses a short buffer", !bounded || bytes.length == 0 || !message.parseFrom(bytes, 0, bytes.length - 1));

@@ -49,37 +49,37 @@ public final class RoundTrip {
     }
 
     public static void main(String[] args) {
-        checkGrouped(AmendOrderRejectMessage::new, RoundTrip::wire0, true, true, true, 1);
+        checkGrouped(AmendOrderRejectMessage::new, RoundTrip::wire0, true, true, true, 1, 0);
         check(AmendOrderRequestMessage::new);
-        checkGrouped(AmendOrderResponseMessage::new, RoundTrip::wire1, true, true, true, 1);
-        checkGrouped(CancelOrderRejectMessage::new, RoundTrip::wire2, true, true, true, 1);
+        checkGrouped(AmendOrderResponseMessage::new, RoundTrip::wire1, true, true, true, 1, 0);
+        checkGrouped(CancelOrderRejectMessage::new, RoundTrip::wire2, true, true, true, 1, 0);
         check(CancelOrderRequestMessage::new);
         check(CancelOrderResponseMessage::new);
         check(GapFillMessage::new);
         check(HeartbeatMessage::new);
-        checkGrouped(LoggedOutMessage::new, RoundTrip::wire3, true, true, true, 1);
+        checkGrouped(LoggedOutMessage::new, RoundTrip::wire3, true, true, true, 1, 0);
         check(LogonConfMessage::new);
         check(LogonMessage::new);
-        checkGrouped(LogoutMessage::new, RoundTrip::wire4, true, true, true, 1);
-        checkGrouped(MassCancelRejectMessage::new, RoundTrip::wire5, true, true, true, 1);
+        checkGrouped(LogoutMessage::new, RoundTrip::wire4, true, true, true, 1, 0);
+        checkGrouped(MassCancelRejectMessage::new, RoundTrip::wire5, true, true, true, 1, 0);
         check(MassCancelRequestMessage::new);
         check(MassCancelResponseMessage::new);
         check(MassQuoteCancelRequestMessage::new);
         check(MassQuoteMmpTriggeredMessage::new);
         check(MassQuoteMmpUnfrozenMessage::new);
-        checkGrouped(MassQuoteOrdersPlacedMessage::new, RoundTrip::wire6, true, true, true, 1);
-        checkGrouped(MassQuoteRejectMessage::new, RoundTrip::wire7, true, true, true, 1);
-        checkGrouped(MassQuoteRequestMessage::new, RoundTrip::wire8, true, true, true, 1);
-        checkGrouped(MassQuoteResponseMessage::new, RoundTrip::wire9, true, true, true, 1);
-        checkGrouped(NewOrderRejectMessage::new, RoundTrip::wire10, true, true, true, 1);
+        checkGrouped(MassQuoteOrdersPlacedMessage::new, RoundTrip::wire6, true, true, true, 1, 0);
+        checkGrouped(MassQuoteRejectMessage::new, RoundTrip::wire7, true, true, true, 1, 0);
+        checkGrouped(MassQuoteRequestMessage::new, RoundTrip::wire8, true, true, true, 1, 0);
+        checkGrouped(MassQuoteResponseMessage::new, RoundTrip::wire9, true, true, true, 1, 0);
+        checkGrouped(NewOrderRejectMessage::new, RoundTrip::wire10, true, true, true, 1, 0);
         check(NewOrderRequestMessage::new);
-        checkGrouped(NewOrderResponseMessage::new, RoundTrip::wire11, true, true, true, 1);
-        checkGrouped(OrderFilledMessage::new, RoundTrip::wire12, true, true, true, 1);
-        checkGrouped(OrderPlacedMessage::new, RoundTrip::wire13, true, true, true, 1);
-        checkGrouped(OrdersCanceledMessage::new, RoundTrip::wire14, true, true, true, 1);
+        checkGrouped(NewOrderResponseMessage::new, RoundTrip::wire11, true, true, true, 1, 0);
+        checkGrouped(OrderFilledMessage::new, RoundTrip::wire12, true, true, true, 1, 0);
+        checkGrouped(OrderPlacedMessage::new, RoundTrip::wire13, true, true, true, 1, 0);
+        checkGrouped(OrdersCanceledMessage::new, RoundTrip::wire14, true, true, true, 1, 0);
         check(OrdersMmpTriggeredMessage::new);
         check(OrdersMmpUnfrozenMessage::new);
-        checkGrouped(RejectMessage::new, RoundTrip::wire15, true, true, true, 1);
+        checkGrouped(RejectMessage::new, RoundTrip::wire15, true, true, true, 1, 0);
         check(ResendRequestMessage::new);
         check(TestRequestMessage::new);
 
@@ -125,7 +125,7 @@ public final class RoundTrip {
         byte[] build(Random random, int entries, long count);
     }
 
-    private static void checkGrouped(Supplier<Message> create, Wire wire, boolean variable, boolean bounded, boolean counted, int builds) {
+    private static void checkGrouped(Supplier<Message> create, Wire wire, boolean variable, boolean bounded, boolean counted, int builds, int leaves) {
         Message message = create.get();
         String name = message.getClass().getSimpleName();
         Random random = new Random(name.hashCode());
@@ -136,11 +136,11 @@ public final class RoundTrip {
                 String label = name + " with " + entries + " entries, block " + blockDelta;
                 byte[] bytes = wire.build(random, entries, entries);
                 int offset = 1 + random.nextInt(7);
-                byte[] shifted = new byte[offset + bytes.length + 3];
+                byte[] shifted = new byte[offset + bytes.length + leaves + 3];
                 random.nextBytes(shifted);
                 System.arraycopy(bytes, 0, shifted, offset, bytes.length);
 
-                expect(label + " decodes", message.parseFrom(shifted, offset, offset + bytes.length) && message.isDecoded());
+                expect(label + " decodes", message.parseFrom(shifted, offset, offset + bytes.length + leaves) && message.isDecoded());
                 expect(label + " has its length", message.byteLength() == bytes.length);
                 expect(label + " keeps its bytes", message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
                 expect(label + " encodes to its bytes", Arrays.equals(message.toBytes(), bytes));
@@ -148,7 +148,7 @@ public final class RoundTrip {
                 expect(label + " keeps its bytes when the buffer is reused", Arrays.equals(message.toBytes(), bytes) && message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
 
                 Message again = create.get();
-                again.parseFrom(bytes, 0);
+                again.parseFrom(Arrays.copyOf(bytes, bytes.length + leaves), 0);
                 expect(label + " equals a second decode", message.equals(again) && message.hashCode() == again.hashCode());
 
                 expect(label + " refuses a short buffer", !bounded || bytes.length == 0 || !message.parseFrom(bytes, 0, bytes.length - 1));

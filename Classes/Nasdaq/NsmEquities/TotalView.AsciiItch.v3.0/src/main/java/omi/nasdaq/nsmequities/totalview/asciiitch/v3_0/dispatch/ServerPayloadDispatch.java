@@ -1,6 +1,7 @@
 package omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.dispatch;
 
 import java.util.Optional;
+import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.messages.session.DebugPacket;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.messages.session.LoginAcceptedPacket;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.messages.session.LoginRejectedPacket;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.Message;
@@ -8,7 +9,7 @@ import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.Message;
 /**
  * Selects the message a Server Payload branch holds by its Server Packet Type.
  *
- * <p>Messages it may select that this library does not decode: DebugPacket, SequencedDataPacket.</p>
+ * <p>Messages it may select that this library does not decode: SequencedDataPacket.</p>
  */
 public final class ServerPayloadDispatch {
 
@@ -26,7 +27,9 @@ public final class ServerPayloadDispatch {
      */
     public static Optional<Message> decode(char serverPacketType, byte[] data, int offset, int end) {
         Message message;
-        if (serverPacketType == 'A') {
+        if (serverPacketType == '+') {
+            message = new DebugPacket();
+        } else if (serverPacketType == 'A') {
             message = new LoginAcceptedPacket();
         } else if (serverPacketType == 'J') {
             message = new LoginRejectedPacket();

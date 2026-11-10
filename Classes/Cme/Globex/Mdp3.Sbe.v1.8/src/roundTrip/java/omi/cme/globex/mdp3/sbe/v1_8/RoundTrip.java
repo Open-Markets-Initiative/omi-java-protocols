@@ -47,30 +47,30 @@ public final class RoundTrip {
     public static void main(String[] args) {
         check(AdminLogin::new);
         check(AdminLogout::new);
-        checkGrouped(ChannelReset::new, RoundTrip::wire0, true, true, true, 1);
-        checkGrouped(MarketDataRequest::new, RoundTrip::wire1, true, true, true, 1);
-        checkGrouped(MdIncrementalRefreshBook::new, RoundTrip::wire2, true, true, true, 1);
-        checkGrouped(MdIncrementalRefreshDailyStatistics::new, RoundTrip::wire3, true, true, true, 1);
-        checkGrouped(MdIncrementalRefreshLimitsBanding::new, RoundTrip::wire4, true, true, true, 1);
-        checkGrouped(MdIncrementalRefreshOrderBook::new, RoundTrip::wire5, true, true, true, 1);
-        checkGrouped(MdIncrementalRefreshSessionStatistics::new, RoundTrip::wire6, true, true, true, 1);
-        checkGrouped(MdIncrementalRefreshTrade::new, RoundTrip::wire7, true, true, true, 1);
-        checkGrouped(MdIncrementalRefreshTradeSummary::new, RoundTrip::wire8, true, true, true, 1);
-        checkGrouped(MdIncrementalRefreshVolume::new, RoundTrip::wire9, true, true, true, 1);
-        checkGrouped(MdInstrumentDefinitionFuture::new, RoundTrip::wire10, true, true, true, 1);
-        checkGrouped(MdInstrumentDefinitionOption::new, RoundTrip::wire11, true, true, true, 1);
-        checkGrouped(MdInstrumentDefinitionSpread::new, RoundTrip::wire12, true, true, true, 1);
+        checkGrouped(ChannelReset::new, RoundTrip::wire0, true, true, true, 1, 0);
+        checkGrouped(MarketDataRequest::new, RoundTrip::wire1, true, true, true, 1, 0);
+        checkGrouped(MdIncrementalRefreshBook::new, RoundTrip::wire2, true, true, true, 1, 0);
+        checkGrouped(MdIncrementalRefreshDailyStatistics::new, RoundTrip::wire3, true, true, true, 1, 0);
+        checkGrouped(MdIncrementalRefreshLimitsBanding::new, RoundTrip::wire4, true, true, true, 1, 0);
+        checkGrouped(MdIncrementalRefreshOrderBook::new, RoundTrip::wire5, true, true, true, 1, 0);
+        checkGrouped(MdIncrementalRefreshSessionStatistics::new, RoundTrip::wire6, true, true, true, 1, 0);
+        checkGrouped(MdIncrementalRefreshTrade::new, RoundTrip::wire7, true, true, true, 1, 0);
+        checkGrouped(MdIncrementalRefreshTradeSummary::new, RoundTrip::wire8, true, true, true, 1, 0);
+        checkGrouped(MdIncrementalRefreshVolume::new, RoundTrip::wire9, true, true, true, 1, 0);
+        checkGrouped(MdInstrumentDefinitionFuture::new, RoundTrip::wire10, true, true, true, 1, 0);
+        checkGrouped(MdInstrumentDefinitionOption::new, RoundTrip::wire11, true, true, true, 1, 0);
+        checkGrouped(MdInstrumentDefinitionSpread::new, RoundTrip::wire12, true, true, true, 1, 0);
         check(Negotiate::new);
         check(NegotiationReject::new);
         check(NegotiationResponse::new);
-        checkGrouped(QuoteRequest::new, RoundTrip::wire13, true, true, true, 1);
-        checkGrouped(RequestAck::new, RoundTrip::wire14, true, true, true, 1);
+        checkGrouped(QuoteRequest::new, RoundTrip::wire13, true, true, true, 1, 0);
+        checkGrouped(RequestAck::new, RoundTrip::wire14, true, true, true, 1, 0);
         check(RequestReject::new);
-        checkGrouped(SecurityListRequest::new, RoundTrip::wire15, true, true, true, 1);
+        checkGrouped(SecurityListRequest::new, RoundTrip::wire15, true, true, true, 1, 0);
         check(SecurityStatus::new);
-        checkGrouped(SecurityStatusRequest::new, RoundTrip::wire16, true, true, true, 1);
-        checkGrouped(SnapshotFullRefresh::new, RoundTrip::wire17, true, true, true, 1);
-        checkGrouped(SnapshotFullRefreshOrderBook::new, RoundTrip::wire18, true, true, true, 1);
+        checkGrouped(SecurityStatusRequest::new, RoundTrip::wire16, true, true, true, 1, 0);
+        checkGrouped(SnapshotFullRefresh::new, RoundTrip::wire17, true, true, true, 1, 0);
+        checkGrouped(SnapshotFullRefreshOrderBook::new, RoundTrip::wire18, true, true, true, 1, 0);
         check(Terminate::new);
         check(AdminHeartbeat::new);
         check(SubscriberHeartbeat::new);
@@ -117,7 +117,7 @@ public final class RoundTrip {
         byte[] build(Random random, int entries, long count);
     }
 
-    private static void checkGrouped(Supplier<Message> create, Wire wire, boolean variable, boolean bounded, boolean counted, int builds) {
+    private static void checkGrouped(Supplier<Message> create, Wire wire, boolean variable, boolean bounded, boolean counted, int builds, int leaves) {
         Message message = create.get();
         String name = message.getClass().getSimpleName();
         Random random = new Random(name.hashCode());
@@ -128,11 +128,11 @@ public final class RoundTrip {
                 String label = name + " with " + entries + " entries, block " + blockDelta;
                 byte[] bytes = wire.build(random, entries, entries);
                 int offset = 1 + random.nextInt(7);
-                byte[] shifted = new byte[offset + bytes.length + 3];
+                byte[] shifted = new byte[offset + bytes.length + leaves + 3];
                 random.nextBytes(shifted);
                 System.arraycopy(bytes, 0, shifted, offset, bytes.length);
 
-                expect(label + " decodes", message.parseFrom(shifted, offset, offset + bytes.length) && message.isDecoded());
+                expect(label + " decodes", message.parseFrom(shifted, offset, offset + bytes.length + leaves) && message.isDecoded());
                 expect(label + " has its length", message.byteLength() == bytes.length);
                 expect(label + " keeps its bytes", message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
                 expect(label + " encodes to its bytes", Arrays.equals(message.toBytes(), bytes));
@@ -140,7 +140,7 @@ public final class RoundTrip {
                 expect(label + " keeps its bytes when the buffer is reused", Arrays.equals(message.toBytes(), bytes) && message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
 
                 Message again = create.get();
-                again.parseFrom(bytes, 0);
+                again.parseFrom(Arrays.copyOf(bytes, bytes.length + leaves), 0);
                 expect(label + " equals a second decode", message.equals(again) && message.hashCode() == again.hashCode());
 
                 expect(label + " refuses a short buffer", !bounded || bytes.length == 0 || !message.parseFrom(bytes, 0, bytes.length - 1));

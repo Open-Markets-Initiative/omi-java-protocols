@@ -25,7 +25,7 @@ public final class RoundTrip {
     public static void main(String[] args) {
         check(AddOrderRefreshMessage::new);
         check(ImbalanceMessage::new);
-        checkGrouped(RefreshHeaderMessage::new, RoundTrip::wire0, true, true, false, 1);
+        checkGrouped(RefreshHeaderMessage::new, RoundTrip::wire0, true, true, false, 1, 0);
         check(SecurityStatusMessage::new);
         check(SequenceNumberResetMessage::new);
         check(SourceTimeReferenceMessage::new);
@@ -73,7 +73,7 @@ public final class RoundTrip {
         byte[] build(Random random, int entries, long count);
     }
 
-    private static void checkGrouped(Supplier<Message> create, Wire wire, boolean variable, boolean bounded, boolean counted, int builds) {
+    private static void checkGrouped(Supplier<Message> create, Wire wire, boolean variable, boolean bounded, boolean counted, int builds, int leaves) {
         Message message = create.get();
         String name = message.getClass().getSimpleName();
         Random random = new Random(name.hashCode());
@@ -84,11 +84,11 @@ public final class RoundTrip {
                 String label = name + " with " + entries + " entries, block " + blockDelta;
                 byte[] bytes = wire.build(random, entries, entries);
                 int offset = 1 + random.nextInt(7);
-                byte[] shifted = new byte[offset + bytes.length + 3];
+                byte[] shifted = new byte[offset + bytes.length + leaves + 3];
                 random.nextBytes(shifted);
                 System.arraycopy(bytes, 0, shifted, offset, bytes.length);
 
-                expect(label + " decodes", message.parseFrom(shifted, offset, offset + bytes.length) && message.isDecoded());
+                expect(label + " decodes", message.parseFrom(shifted, offset, offset + bytes.length + leaves) && message.isDecoded());
                 expect(label + " has its length", message.byteLength() == bytes.length);
                 expect(label + " keeps its bytes", message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
                 expect(label + " encodes to its bytes", Arrays.equals(message.toBytes(), bytes));
@@ -96,7 +96,7 @@ public final class RoundTrip {
                 expect(label + " keeps its bytes when the buffer is reused", Arrays.equals(message.toBytes(), bytes) && message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
 
                 Message again = create.get();
-                again.parseFrom(bytes, 0);
+                again.parseFrom(Arrays.copyOf(bytes, bytes.length + leaves), 0);
                 expect(label + " equals a second decode", message.equals(again) && message.hashCode() == again.hashCode());
 
                 expect(label + " refuses a short buffer", !bounded || bytes.length == 0 || !message.parseFrom(bytes, 0, bytes.length - 1));

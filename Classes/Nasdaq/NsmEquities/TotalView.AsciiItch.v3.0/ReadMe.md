@@ -22,6 +22,22 @@ if (message.parseFrom(data, offset)) {
 }
 ```
 
+Read one side of a TCP connection. Append its bytes in order, as they arrive; `ClientPacketStream` holds a record split across appends until the rest arrives, and gives each whole one decoded:
+
+```java
+import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.dispatch.ClientPacketStream;
+import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.Message;
+
+ClientPacketStream stream = new ClientPacketStream();
+for (ClientPacketStream.Record record : stream.append(bytes, 0, bytes.length)) {
+    for (Message message : record.decoded().messages()) {
+        System.out.println(message);
+    }
+}
+```
+
+Each side of the connection has its own stream: `ClientPacketStream`, `ServerPacketStream`. A record stating a length that is not valid fails the stream, which then reads nothing more.
+
 Decode one packet. The payload is the UDP datagram body, without the Ethernet, IP, and UDP headers:
 
 ```java
@@ -46,6 +62,7 @@ Each message class carries its wire length as `BYTE_LENGTH`, and its type as `ME
 | `AddOrderWithMpidMessage` | `messages.application` | `'F'` | 36 |
 | `BrokenTradeMessage` | `messages.application` | `'B'` | 9 |
 | `CrossTradeMessage` | `messages.application` | `'Q'` | 35 |
+| `DebugPacket` | `messages.session` | `'+'` | 0 |
 | `LoginAcceptedPacket` | `messages.session` | `'A'` | 20 |
 | `LoginRejectedPacket` | `messages.session` | `'J'` | 1 |
 | `LoginRequestPacket` | `messages.session` | `'L'` | 36 |
@@ -61,6 +78,7 @@ Each message class carries its wire length as `BYTE_LENGTH`, and its type as `ME
 | `StockTradingActionMessage` | `messages.application` | `'H'` | 12 |
 | `SystemEventMessage` | `messages.application` | `'S'` | 1 |
 | `TradeMessage` | `messages.application` | `'P'` | 41 |
+| `UnsequencedDataPacket` | `messages.session` | `'U'` | 0 |
 
 ## Verification
 

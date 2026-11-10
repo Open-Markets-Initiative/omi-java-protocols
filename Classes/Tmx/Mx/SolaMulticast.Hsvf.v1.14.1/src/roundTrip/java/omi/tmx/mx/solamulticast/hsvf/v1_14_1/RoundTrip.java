@@ -76,13 +76,13 @@ public final class RoundTrip {
         check(BeginningOfFuturesSummaryMessage::new);
         check(BeginningOfOptionsSummaryMessage::new);
         check(BeginningOfStrategySummaryMessage::new);
-        checkGrouped(BulletinsMessage::new, RoundTrip::wire0, false, true, false, 8);
+        checkGrouped(BulletinsMessage::new, RoundTrip::wire0, false, true, false, 8, 0);
         check(CircuitAssuranceMessage::new);
         check(EndOfSalesMessage::new);
         check(EndOfTransmissionMessage::new);
-        checkGrouped(FutureDeliverablesMessage::new, RoundTrip::wire1, true, true, true, 1);
+        checkGrouped(FutureDeliverablesMessage::new, RoundTrip::wire1, true, true, true, 1, 0);
         check(FutureOptionsInstrumentKeysMessage::new);
-        checkGrouped(FutureOptionsMarketDepthMessage::new, RoundTrip::wire2, true, true, true, 1);
+        checkGrouped(FutureOptionsMarketDepthMessage::new, RoundTrip::wire2, true, true, true, 1, 0);
         check(FutureOptionsQuoteMessage::new);
         check(FutureOptionsRequestForQuoteMessage::new);
         check(FutureOptionsSummaryMessage::new);
@@ -91,7 +91,7 @@ public final class RoundTrip {
         check(FutureRequestForQuoteMessage::new);
         check(FutureTradeCancellationMessage::new);
         check(FuturesInstrumentKeysMessage::new);
-        checkGrouped(FuturesMarketDepthMessage::new, RoundTrip::wire3, true, true, true, 1);
+        checkGrouped(FuturesMarketDepthMessage::new, RoundTrip::wire3, true, true, true, 1, 0);
         check(FuturesQuoteMessage::new);
         check(FuturesSummaryMessage::new);
         check(FuturesTradeCorrectionMessage::new);
@@ -106,7 +106,7 @@ public final class RoundTrip {
         check(OptionAuctionEndingMessage::new);
         check(OptionInitialAndImprovementOrderMessage::new);
         check(OptionInstrumentKeysMessage::new);
-        checkGrouped(OptionMarketDepthMessage::new, RoundTrip::wire4, true, true, true, 1);
+        checkGrouped(OptionMarketDepthMessage::new, RoundTrip::wire4, true, true, true, 1, 0);
         check(OptionQuoteMessage::new);
         check(OptionRequestForQuoteMessage::new);
         check(OptionSummaryMessage::new);
@@ -116,14 +116,14 @@ public final class RoundTrip {
         check(StrategyAuctionBeginningMessage::new);
         check(StrategyAuctionEndingMessage::new);
         check(StrategyInitialAndImprovementOrderMessage::new);
-        checkGrouped(StrategyInstrumentKeysMessage::new, RoundTrip::wire5, true, true, true, 1);
-        checkGrouped(StrategyMarketDepthMessage::new, RoundTrip::wire6, true, true, true, 1);
+        checkGrouped(StrategyInstrumentKeysMessage::new, RoundTrip::wire5, true, true, true, 1, 0);
+        checkGrouped(StrategyMarketDepthMessage::new, RoundTrip::wire6, true, true, true, 1, 0);
         check(StrategyQuoteMessage::new);
         check(StrategyRequestForQuoteMessage::new);
         check(StrategySummaryMessage::new);
         check(StrategyTradeCancellationMessage::new);
         check(StrategyTradeMessage::new);
-        checkGrouped(TickTableMessage::new, RoundTrip::wire7, true, true, true, 1);
+        checkGrouped(TickTableMessage::new, RoundTrip::wire7, true, true, true, 1, 0);
         check(UnderlyingInstrumentKeysMessage::new);
         checkCase(FutureOptionsInstrumentKeysMessage::new, message -> message.futureOptionSymbol().strikePriceFractionPair().selected(), message -> message.futureOptionSymbol().strikePriceFractionPair().select(omi.tmx.mx.solamulticast.hsvf.v1_14_1.branches.StrikePriceFractionPair.Case.STRIKE_PRICE_NEGATIVE_WHOLE_PAIR), new int[] { 20 }, new String[] { "A" }, omi.tmx.mx.solamulticast.hsvf.v1_14_1.branches.StrikePriceFractionPair.Case.STRIKE_PRICE_NEGATIVE_WHOLE_PAIR);
         checkCase(FutureOptionsInstrumentKeysMessage::new, message -> message.futureOptionSymbol().strikePriceFractionPair().selected(), message -> message.futureOptionSymbol().strikePriceFractionPair().select(omi.tmx.mx.solamulticast.hsvf.v1_14_1.branches.StrikePriceFractionPair.Case.STRIKE_PRICE_NEGATIVE_TEN_PAIR), new int[] { 20 }, new String[] { "B" }, omi.tmx.mx.solamulticast.hsvf.v1_14_1.branches.StrikePriceFractionPair.Case.STRIKE_PRICE_NEGATIVE_TEN_PAIR);
@@ -899,7 +899,7 @@ public final class RoundTrip {
         byte[] build(Random random, int entries, long count);
     }
 
-    private static void checkGrouped(Supplier<Message> create, Wire wire, boolean variable, boolean bounded, boolean counted, int builds) {
+    private static void checkGrouped(Supplier<Message> create, Wire wire, boolean variable, boolean bounded, boolean counted, int builds, int leaves) {
         Message message = create.get();
         String name = message.getClass().getSimpleName();
         Random random = new Random(name.hashCode());
@@ -910,11 +910,11 @@ public final class RoundTrip {
                 String label = name + " with " + entries + " entries, block " + blockDelta;
                 byte[] bytes = wire.build(random, entries, entries);
                 int offset = 1 + random.nextInt(7);
-                byte[] shifted = new byte[offset + bytes.length + 3];
+                byte[] shifted = new byte[offset + bytes.length + leaves + 3];
                 random.nextBytes(shifted);
                 System.arraycopy(bytes, 0, shifted, offset, bytes.length);
 
-                expect(label + " decodes", message.parseFrom(shifted, offset, offset + bytes.length) && message.isDecoded());
+                expect(label + " decodes", message.parseFrom(shifted, offset, offset + bytes.length + leaves) && message.isDecoded());
                 expect(label + " has its length", message.byteLength() == bytes.length);
                 expect(label + " keeps its bytes", message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
                 expect(label + " encodes to its bytes", Arrays.equals(message.toBytes(), bytes));
@@ -922,7 +922,7 @@ public final class RoundTrip {
                 expect(label + " keeps its bytes when the buffer is reused", Arrays.equals(message.toBytes(), bytes) && message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
 
                 Message again = create.get();
-                again.parseFrom(bytes, 0);
+                again.parseFrom(Arrays.copyOf(bytes, bytes.length + leaves), 0);
                 expect(label + " equals a second decode", message.equals(again) && message.hashCode() == again.hashCode());
 
                 expect(label + " refuses a short buffer", !bounded || bytes.length == 0 || !message.parseFrom(bytes, 0, bytes.length - 1));

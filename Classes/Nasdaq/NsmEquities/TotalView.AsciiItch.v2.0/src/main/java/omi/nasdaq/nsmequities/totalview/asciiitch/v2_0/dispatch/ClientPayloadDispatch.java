@@ -1,13 +1,13 @@
 package omi.nasdaq.nsmequities.totalview.asciiitch.v2_0.dispatch;
 
 import java.util.Optional;
+import omi.nasdaq.nsmequities.totalview.asciiitch.v2_0.messages.session.DebugPacket;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v2_0.messages.session.LoginRequestPacket;
+import omi.nasdaq.nsmequities.totalview.asciiitch.v2_0.messages.session.UnsequencedDataPacket;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v2_0.types.Message;
 
 /**
  * Selects the message a Client Payload branch holds by its Client Packet Type.
- *
- * <p>Messages it may select that this library does not decode: DebugPacket, UnsequencedDataPacket.</p>
  */
 public final class ClientPayloadDispatch {
 
@@ -25,8 +25,12 @@ public final class ClientPayloadDispatch {
      */
     public static Optional<Message> decode(char clientPacketType, byte[] data, int offset, int end) {
         Message message;
-        if (clientPacketType == 'L') {
+        if (clientPacketType == '+') {
+            message = new DebugPacket();
+        } else if (clientPacketType == 'L') {
             message = new LoginRequestPacket();
+        } else if (clientPacketType == 'U') {
+            message = new UnsequencedDataPacket();
         } else {
             return Optional.empty();
         }
