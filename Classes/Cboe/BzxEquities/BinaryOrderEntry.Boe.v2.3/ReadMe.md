@@ -74,6 +74,8 @@ Each message class carries its wire length as `BYTE_LENGTH`, and its type as `ME
 | `roundTrip` |  | Program that decodes deterministic bytes into each message at a non-zero offset and requires it to encode back to the same bytes, decode again to an equal message, clear, and refuse a buffer too short to hold it. Runs as part of `check`. |
 | `captureTest` | pcap or pcap-ng | Program that walks every UDP datagram of a capture through the `PacketDecoder`, and the records of every TCP connection through the stream of the side sending them, and requires every message to encode back to its own bytes. Not part of `check`, since it needs a capture: `-Pcapture` names it, and `-Pstrict` makes a datagram or record the decoder cannot walk, or a message of a type it does not decode, an error. A TCP connection missing bytes, or ending in bytes that make no whole record, is always an error. |
 
+The build workflow runs the capture test, strict, on the captures in `Cboe/BzxEquities.BinaryOrderEntry.Boe.v2.3` from [omi-data-packets](https://github.com/Open-Markets-Initiative/omi-data-packets).
+
 ## Build
 
 Requires JDK 17 and Gradle. Run from the repository root, since every protocol is a subproject of one build:
