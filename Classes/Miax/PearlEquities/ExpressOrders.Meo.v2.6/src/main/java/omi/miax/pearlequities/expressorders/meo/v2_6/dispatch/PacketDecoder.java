@@ -1,5 +1,6 @@
 package omi.miax.pearlequities.expressorders.meo.v2_6.dispatch;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +9,7 @@ import omi.miax.pearlequities.expressorders.meo.v2_6.types.ByteOps;
 import omi.miax.pearlequities.expressorders.meo.v2_6.types.Message;
 
 /**
- * Walks a Esesm Tcp Packet: its headers, then the message it holds, selected through {@link EsesmPayloadDispatch}.
+ * Walks a Esesm Tcp Packet: its headers, then the message it holds, selected through the envelope its Esesm Packet Type names: {@link EsesmPayloadDispatch}, {@link EsesmPayloadDispatch}, {@link EsesmPayloadDispatch}, {@link EsesmPayloadDispatch}, {@link EsesmPayloadDispatch}, {@link EsesmPayloadDispatch}, {@link EsesmPayloadDispatch}, {@link EsesmPayloadDispatch}, {@link SequencedMessageDispatch}, {@link UnsequencedMessageDispatch}.
  */
 public final class PacketDecoder {
 
@@ -87,26 +88,60 @@ public final class PacketDecoder {
         int undecoded = 0;
 
         if (position <= limit) {
+            if (position + 3 > limit) {
+                return new Decoded(messages, undecoded, false, trailing, padding);
+            }
+
+            char esesmPacketType = (char) (data[position + 2] & 0xFF);
+            if (esesmPacketType == '0' || esesmPacketType == '1') {
+                return new Decoded(messages, 0, position + 3 == limit, trailing, padding);
+            }
+
             if (position + MESSAGE_HEADER_LENGTH > limit) {
                 return new Decoded(messages, undecoded, false, trailing, padding);
             }
 
-            int frameEnd = limit;
+            long size = ByteOps.unsigned(data, position + 0, 2, true) - 1 + MESSAGE_HEADER_LENGTH;
+            if (size < MESSAGE_HEADER_LENGTH || size > limit - position) {
+                return new Decoded(messages, undecoded, false, trailing, padding);
+            }
 
-            char esesmPacketType = (char) (data[position + 2] & 0xFF);
-            Optional<Message> selected = EsesmPayloadDispatch.decode(esesmPacketType, data, position + MESSAGE_HEADER_LENGTH, frameEnd);
+            int frameEnd = position + (int) size;
+
+            Optional<Message> selected;
+            int envelope = 0;
+            if (esesmPacketType == 'l' || esesmPacketType == 'r' || esesmPacketType == 'c' || esesmPacketType == 'a' || esesmPacketType == 'X' || esesmPacketType == 'G' || esesmPacketType == 'u' || esesmPacketType == 'T') {
+                envelope = 0;
+                selected = EsesmPayloadDispatch.decode(esesmPacketType, data, position + MESSAGE_HEADER_LENGTH + envelope, frameEnd);
+            } else if (esesmPacketType == 's') {
+                envelope = 11;
+                if (position + MESSAGE_HEADER_LENGTH + envelope > frameEnd) {
+                    return new Decoded(messages, undecoded, false, trailing, padding);
+                }
+                selected = SequencedMessageDispatch.decode(new String(data, position + 12, 2, StandardCharsets.US_ASCII), data, position + MESSAGE_HEADER_LENGTH + envelope, frameEnd);
+            } else if (esesmPacketType == 'U') {
+                envelope = 2;
+                if (position + MESSAGE_HEADER_LENGTH + envelope > frameEnd) {
+                    return new Decoded(messages, undecoded, false, trailing, padding);
+                }
+                selected = UnsequencedMessageDispatch.decode(new String(data, position + 3, 2, StandardCharsets.US_ASCII), data, position + MESSAGE_HEADER_LENGTH + envelope, frameEnd);
+            } else {
+                selected = Optional.empty();
+            }
             if (selected.isPresent()) {
                 Message message = selected.get();
                 if (!message.isDecoded()) {
                     return new Decoded(messages, undecoded, false, trailing, padding);
                 }
                 messages.add(message);
-                int consumed = MESSAGE_HEADER_LENGTH + message.byteLength();
-                position += consumed;
+                int consumed = position + MESSAGE_HEADER_LENGTH + envelope + message.byteLength();
+                if (consumed < frameEnd) {
+                    trailing.add(new Trailing(message, Arrays.copyOfRange(data, consumed, frameEnd)));
+                }
             } else {
                 undecoded++;
-                position = limit;
             }
+            position = frameEnd;
         }
 
         return new Decoded(messages, undecoded, position == limit, trailing, padding);
