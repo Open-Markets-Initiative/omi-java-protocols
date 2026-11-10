@@ -47,9 +47,6 @@ jobs:
       - name: Test Classes/Box/BoxOptions/SolaMulticast.Hsvf.v1.8
         run: gradle --quiet :box-boxoptions-solamulticast-hsvf-v1-8:captureTest -Pcapture=omi-data-packets/Box/BoxOptions.SolaMulticast.Hsvf.v1.8 -Pstrict
 
-      - name: Test Classes/Cboe/BzxEquities/BinaryOrderEntry.Boe.v2.3
-        run: gradle --quiet :cboe-bzxequities-binaryorderentry-boe-v2-3:captureTest -Pcapture=omi-data-packets/Cboe/BzxEquities.BinaryOrderEntry.Boe.v2.3 -Pstrict
-
       - name: Test Classes/Cboe/BzxEquities/MulticastDepthOfBook.Spin.v2.20.4
         run: gradle --quiet :cboe-bzxequities-multicastdepthofbook-spin-v2-20-4:captureTest -Pcapture=omi-data-packets/Cboe/BzxEquities.MulticastDepthOfBook.Spin.v2.20.4 -Pstrict
 
@@ -170,9 +167,8 @@ jobs:
       - name: Test Classes/Siac/Opra/Output.Obi.v6.2
         run: gradle --quiet :siac-opra-output-obi-v6-2:captureTest -Pcapture=omi-data-packets/Siac/Opra.Output.Obi.v6.2 -Pstrict
 
-      # HACK: hand patched until Omi.Java.Repository emits the v1.14.1 capture path; the next regeneration overwrites this.
       - name: Test Classes/Tmx/Mx/SolaMulticast.Hsvf.v1.14.1
-        run: gradle --quiet :tmx-mx-solamulticast-hsvf-v1-14-1:captureTest -Pcapture=omi-data-packets/Tmx/Mx.SolaMulticast.Hsvf.v1.14.1 -Pstrict
+        run: gradle --quiet :tmx-mx-solamulticast-hsvf-v1-14-1:captureTest -Pcapture=omi-data-packets/Tmx/Mx.SolaMulticast.Hsvf.v1.14 -Pstrict
 
       - name: Test Classes/Txse/TxseEquities/Seed.Rake.v1.0
         run: gradle --quiet :txse-txseequities-seed-rake-v1-0:captureTest -Pcapture=omi-data-packets/Txse/TxseEquities.Seed.Rake.v1.0 -Pstrict

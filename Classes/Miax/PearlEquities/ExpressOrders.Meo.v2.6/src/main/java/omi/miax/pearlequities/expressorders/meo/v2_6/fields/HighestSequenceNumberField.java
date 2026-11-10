@@ -7,7 +7,7 @@ import omi.miax.pearlequities.expressorders.meo.v2_6.types.FieldKind;
 import omi.miax.pearlequities.expressorders.meo.v2_6.types.PrintOptions;
 
 /**
- * the highest sequence number that the server currently has for the client
+ * The highest sequence number the server currently has for the client from the Matching Engine
  *
  * <p>An unsigned 64-bit integer. The long holds the raw bits: compare with Long.compareUnsigned and format with Long.toUnsignedString.</p>
  */

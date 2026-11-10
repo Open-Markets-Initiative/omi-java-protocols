@@ -5,7 +5,7 @@
 
 | Division | [Protocol][Omi.Siac.Protocol.Definitions] | [Encoding][Omi.Encoding.Definitions] | Version | Date | Size | [Deployment][Omi.Glossary.Deployment] | [Testing][Omi.Glossary.Testing] | [Documentation][Omi.Siac.Specifications] |
 | --- | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| [Cqs][Cqs.Consolidator] | [Output][Siac.Cqs.Output] | [Cta][Omi.Encoding.Cta] | [2.10.a][Siac.Cqs.Output.Cta.v2.10.a.Parser] | 6/6/2025 | 25,403 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [pdf][Siac.Cqs.Output.Cta.v2.10.a.Pdf] - [url][Siac.Cqs.Output.Cta.v2.10.a.Url] |
+| [Cqs][Cqs.Consolidator] | [Output][Siac.Cqs.Output] | [Cta][Omi.Encoding.Cta] | [2.10.a][Siac.Cqs.Output.Cta.v2.10.a.Parser] | 6/6/2025 | 25,403 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Siac.Cqs.Output.Cta.v2.10.a.Url] - [pdf][Siac.Cqs.Output.Cta.v2.10.a.Pdf] |
 | [Cqs][Cqs.Consolidator] | [Output][Siac.Cqs.Output] | [Cta][Omi.Encoding.Cta] | [1.91][Siac.Cqs.Output.Cta.v1.91.Parser] | 1/2/2020 | 23,103 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Verified][Omi.Glossary.Testing.Verified] | [url][Siac.Cqs.Output.Cta.v1.91.Url] - [pdf][Siac.Cqs.Output.Cta.v1.91.Pdf] |
 | [Cts][Cts.Consolidator] | [Output][Siac.Cts.Output] | [Cta][Omi.Encoding.Cta] | [2.11.b][Siac.Cts.Output.Cta.v2.11.b.Parser] | 1/29/2026 | 46,726 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Siac.Cts.Output.Cta.v2.11.b.Url] - [pdf][Siac.Cts.Output.Cta.v2.11.b.Pdf] |
 | [Cts][Cts.Consolidator] | [Output][Siac.Cts.Output] | [Cta][Omi.Encoding.Cta] | [1.91][Siac.Cts.Output.Cta.v1.91.Parser] | 1/2/2020 | 33,764 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Verified][Omi.Glossary.Testing.Verified] | [url][Siac.Cts.Output.Cta.v1.91.Url] - [pdf][Siac.Cts.Output.Cta.v1.91.Pdf] |
@@ -46,8 +46,8 @@
 [Siac.Cqs.Output.Cta.v1.91.Url]: https://www.ctaplan.com/tech-specs "The Securities Industry Automation Corporation 1.91 Url"
 [Siac.Cqs.Output.Cta.v1.91.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Siac/Specifications/Cqs/Output/Siac.Cqs.Output.Cta.v1.91.pdf "The Securities Industry Automation Corporation 1.91 Pdf"
 [Siac.Cqs.Output.Cta.v2.10.a.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Siac/Cqs/Output.Cta.v2.10.a "Siac Cqs Output Cta v2.10.a Java Parser"
-[Siac.Cqs.Output.Cta.v2.10.a.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Siac/Specifications/Cqs/Output/Siac.Cqs.Output.Cta.v2.10.a.pdf "The Securities Industry Automation Corporation 2.10.a Pdf"
 [Siac.Cqs.Output.Cta.v2.10.a.Url]: https://www.ctaplan.com/tech-specs "The Securities Industry Automation Corporation 2.10.a Url"
+[Siac.Cqs.Output.Cta.v2.10.a.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Siac/Specifications/Documentation/Siac.Cqs.Output.Cta.v2.10.a.pdf "The Securities Industry Automation Corporation 2.10.a Pdf"
 [Siac.Cts.Output.Cta.v1.91.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Siac/Cts/Output.Cta.v1.91 "Siac Cts Output Cta v1.91 Java Parser"
 [Siac.Cts.Output.Cta.v1.91.Url]: https://www.ctaplan.com/tech-specs "The Securities Industry Automation Corporation 1.91 Url"
 [Siac.Cts.Output.Cta.v1.91.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Siac/Specifications/Cts/Output/Siac.Cts.Output.Cta.v1.91.pdf "The Securities Industry Automation Corporation 1.91 Pdf"

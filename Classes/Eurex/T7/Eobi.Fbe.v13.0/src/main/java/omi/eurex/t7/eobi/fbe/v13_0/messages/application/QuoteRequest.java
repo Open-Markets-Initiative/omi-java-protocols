@@ -37,12 +37,12 @@ public final class QuoteRequest implements Message {
     private static final int[] PADDING = { 17, 7 };
 
     /**
-     * Security Id
+     * Unique instrument identifier
      */
     private final SecurityIdField securityId = new SecurityIdField();
 
     /**
-     * Last Qty
+     * Total executed matched quantity of this match event
      */
     private final LastQtyField lastQty = new LastQtyField();
 
@@ -66,7 +66,7 @@ public final class QuoteRequest implements Message {
     private boolean decoded;
 
     /**
-     * Security Id
+     * Unique instrument identifier
      *
      * @return the SecurityId field
      */
@@ -75,7 +75,7 @@ public final class QuoteRequest implements Message {
     }
 
     /**
-     * Last Qty
+     * Total executed matched quantity of this match event
      *
      * @return the LastQty field
      */

@@ -8,7 +8,7 @@ import omi.siac.cts.output.cta.v2_9.types.ByteOps;
 import omi.siac.cts.output.cta.v2_9.types.Message;
 
 /**
- * Walks a Packet: its headers, then each Message it counts, selected through the envelope its Message Category names: {@link AdministrativeMessagePayloadDispatch}, {@link ControlMessagePayloadDispatch}, {@link IndicesMessagePayloadDispatch}, {@link MarketStatusMessagePayloadDispatch}, {@link PriorDayMessagePayloadDispatch}, {@link SummaryMessagePayloadDispatch}, {@link TradeMessagePayloadDispatch}.
+ * Walks a Packet: its headers, then each Message it counts, selected through the envelope its Message Category names: {@link AdministrativeMessagePayloadDispatch}, {@link ControlMessagePayloadDispatch}, {@link IndexMessagePayloadDispatch}, {@link MarketStatusMessagePayloadDispatch}, {@link PriorDayMessagePayloadDispatch}, {@link SummaryMessagePayloadDispatch}, {@link TradeMessagePayloadDispatch}.
  */
 public final class PacketDecoder {
 
@@ -120,7 +120,7 @@ public final class PacketDecoder {
                 if (position + MESSAGE_HEADER_LENGTH + envelope > frameEnd) {
                     return new Decoded(messages, undecoded, false, trailing, padding);
                 }
-                selected = IndicesMessagePayloadDispatch.decode((char) (data[position + 3] & 0xFF), data, position + MESSAGE_HEADER_LENGTH + envelope, frameEnd);
+                selected = IndexMessagePayloadDispatch.decode((char) (data[position + 3] & 0xFF), data, position + MESSAGE_HEADER_LENGTH + envelope, frameEnd);
             } else if (messageCategory == 'M') {
                 envelope = 1;
                 if (position + MESSAGE_HEADER_LENGTH + envelope > frameEnd) {

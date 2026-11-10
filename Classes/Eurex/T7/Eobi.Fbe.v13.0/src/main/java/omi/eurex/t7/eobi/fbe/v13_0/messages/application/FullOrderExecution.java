@@ -78,12 +78,12 @@ public final class FullOrderExecution implements Message {
     private final TrdRegTsTimePriorityField trdRegTsTimePriority = new TrdRegTsTimePriorityField();
 
     /**
-     * Security Id
+     * Unique instrument identifier
      */
     private final SecurityIdField securityId = new SecurityIdField();
 
     /**
-     * Last Qty
+     * Total executed matched quantity of this match event
      */
     private final LastQtyField lastQty = new LastQtyField();
 
@@ -165,7 +165,7 @@ public final class FullOrderExecution implements Message {
     }
 
     /**
-     * Security Id
+     * Unique instrument identifier
      *
      * @return the SecurityId field
      */
@@ -174,7 +174,7 @@ public final class FullOrderExecution implements Message {
     }
 
     /**
-     * Last Qty
+     * Total executed matched quantity of this match event
      *
      * @return the LastQty field
      */

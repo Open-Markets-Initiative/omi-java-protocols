@@ -50,7 +50,7 @@ public final class AddComplexInstrument implements Message {
     private static final int[] PADDING = { 69, 2, 76, 4, 102, 2, 108, 4, 134, 2, 140, 4, 166, 2, 172, 4, 198, 2, 204, 4, 230, 2, 236, 4, 262, 2, 268, 4, 294, 2, 300, 4, 326, 2, 332, 4, 358, 2, 364, 4, 390, 2, 396, 4, 422, 2, 428, 4, 454, 2, 460, 4, 486, 2, 492, 4, 518, 2, 524, 4, 550, 2, 556, 4, 582, 2, 588, 4, 614, 2, 620, 4, 646, 2, 652, 4, 678, 2, 684, 4, 710, 2 };
 
     /**
-     * Security Id
+     * Unique instrument identifier
      */
     private final SecurityIdField securityId = new SecurityIdField();
 
@@ -114,7 +114,7 @@ public final class AddComplexInstrument implements Message {
     private boolean decoded;
 
     /**
-     * Security Id
+     * Unique instrument identifier
      *
      * @return the SecurityId field
      */

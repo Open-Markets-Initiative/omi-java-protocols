@@ -36,12 +36,12 @@ public final class RequestedMatchingEngineEntry implements GroupEntry {
     private static final int[] PADDING = {};
 
     /**
-     * Specifies the session the client would like to log into, or zero to log into the currently active session
+     * Specifies the Matching Engine trading session the client would like to log into, or zero to log into the currently active trading session
      */
     private final RequestedTradingSessionIdField requestedTradingSessionId = new RequestedTradingSessionIdField();
 
     /**
-     * Specifies client requested sequence number
+     * Specifies client requested sequence number for the Matching Engine
      */
     private final RequestedSequenceNumberField requestedSequenceNumber = new RequestedSequenceNumberField();
 
@@ -55,7 +55,7 @@ public final class RequestedMatchingEngineEntry implements GroupEntry {
     private boolean decoded;
 
     /**
-     * Specifies the session the client would like to log into, or zero to log into the currently active session
+     * Specifies the Matching Engine trading session the client would like to log into, or zero to log into the currently active trading session
      *
      * @return the RequestedTradingSessionId field
      */
@@ -64,7 +64,7 @@ public final class RequestedMatchingEngineEntry implements GroupEntry {
     }
 
     /**
-     * Specifies client requested sequence number
+     * Specifies client requested sequence number for the Matching Engine
      *
      * @return the RequestedSequenceNumber field
      */

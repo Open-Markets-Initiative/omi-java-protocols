@@ -1,10 +1,10 @@
 package omi.siac.cts.output.cta.v2_10.dispatch;
 
 import java.util.Optional;
-import omi.siac.cts.output.cta.v2_10.messages.application.EndOfEndOfDayMessage;
-import omi.siac.cts.output.cta.v2_10.messages.application.EndOfStartOfDayMessage;
-import omi.siac.cts.output.cta.v2_10.messages.application.StartOfEndOfDayMessage;
-import omi.siac.cts.output.cta.v2_10.messages.application.StartOfStartOfDayMessage;
+import omi.siac.cts.output.cta.v2_10.messages.application.EndOfEndOfDaySummaryMessage;
+import omi.siac.cts.output.cta.v2_10.messages.application.EndOfStartOfDaySummaryMessage;
+import omi.siac.cts.output.cta.v2_10.messages.application.StartOfEndOfDaySummaryMessage;
+import omi.siac.cts.output.cta.v2_10.messages.application.StartOfStartOfDaySummaryMessage;
 import omi.siac.cts.output.cta.v2_10.types.Message;
 
 /**
@@ -27,13 +27,13 @@ public final class AdministrativeMessagePayloadDispatch {
     public static Optional<Message> decode(char administrativeMessageType, byte[] data, int offset, int end) {
         Message message;
         if (administrativeMessageType == 'A') {
-            message = new StartOfEndOfDayMessage();
+            message = new StartOfEndOfDaySummaryMessage();
         } else if (administrativeMessageType == 'B') {
-            message = new EndOfEndOfDayMessage();
+            message = new EndOfEndOfDaySummaryMessage();
         } else if (administrativeMessageType == 'C') {
-            message = new StartOfStartOfDayMessage();
+            message = new StartOfStartOfDaySummaryMessage();
         } else if (administrativeMessageType == 'D') {
-            message = new EndOfStartOfDayMessage();
+            message = new EndOfStartOfDaySummaryMessage();
         } else {
             return Optional.empty();
         }

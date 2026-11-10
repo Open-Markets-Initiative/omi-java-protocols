@@ -52,10 +52,10 @@ Each message class carries its wire length as `BYTE_LENGTH`, and its type as `ME
 | `CrossingSessionSummaryMessage` | `messages.application` | `'P'` | 46 |
 | `DisasterRecoveryDataCenterActivationMessage` | `messages.application` | `'P'` | 22 |
 | `EndOfDayMessage` | `messages.application` | `'Z'` | 22 |
-| `EndOfEndOfDayMessage` | `messages.application` | `'B'` | 22 |
-| `EndOfStartOfDayMessage` | `messages.application` | `'D'` | 22 |
+| `EndOfEndOfDaySummaryMessage` | `messages.application` | `'B'` | 22 |
+| `EndOfStartOfDaySummaryMessage` | `messages.application` | `'D'` | 22 |
 | `EndOfTestCycleMessage` | `messages.application` | `'N'` | 22 |
-| `IndexMessage` | `messages.application` | `'I'` | 41 |
+| `Index` | `messages.application` | `'I'` | 41 |
 | `LineIntegrityMessage` | `messages.application` | `'T'` | 22 |
 | `LongTradeMessage` | `messages.application` | `'L'` | 68 |
 | `MarketWideCircuitBreakerDeclineLevelStatusMessage` | `messages.application` | `'K'` | 47 |
@@ -68,8 +68,8 @@ Each message class carries its wire length as `BYTE_LENGTH`, and its type as `ME
 | `ResetBlockSequenceNumberMessage` | `messages.application` | `'L'` | 22 |
 | `ShortTradeMessage` | `messages.application` | `'T'` | 36 |
 | `StartOfDayMessage` | `messages.application` | `'A'` | 22 |
-| `StartOfEndOfDayMessage` | `messages.application` | `'A'` | 22 |
-| `StartOfStartOfDayMessage` | `messages.application` | `'C'` | 22 |
+| `StartOfEndOfDaySummaryMessage` | `messages.application` | `'A'` | 22 |
+| `StartOfStartOfDaySummaryMessage` | `messages.application` | `'C'` | 22 |
 | `StartOfTestCycleMessage` | `messages.application` | `'M'` | 22 |
 | `TradeCancelErrorMessage` | `messages.application` | `'X'` | 150 |
 | `TradeCorrectionMessage` | `messages.application` | `'C'` | 185 |

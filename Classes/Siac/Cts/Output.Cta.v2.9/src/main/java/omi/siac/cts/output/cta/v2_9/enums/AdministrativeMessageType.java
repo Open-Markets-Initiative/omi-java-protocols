@@ -10,24 +10,24 @@ import java.util.Optional;
 public enum AdministrativeMessageType {
 
     /**
-     * Start Of End Of Day Message
+     * Start Of End Of Day Summary Message
      */
-    START_OF_END_OF_DAY_MESSAGE('A', "Start Of End Of Day Message"),
+    START_OF_END_OF_DAY_SUMMARY_MESSAGE('A', "Start Of End Of Day Summary Message"),
 
     /**
-     * End Of End Of Day Message
+     * End Of End Of Day Summary Message
      */
-    END_OF_END_OF_DAY_MESSAGE('B', "End Of End Of Day Message"),
+    END_OF_END_OF_DAY_SUMMARY_MESSAGE('B', "End Of End Of Day Summary Message"),
 
     /**
-     * Start Of Start Of Day Message
+     * Start Of Start Of Day Summary Message
      */
-    START_OF_START_OF_DAY_MESSAGE('C', "Start Of Start Of Day Message"),
+    START_OF_START_OF_DAY_SUMMARY_MESSAGE('C', "Start Of Start Of Day Summary Message"),
 
     /**
-     * End Of Start Of Day Message
+     * End Of Start Of Day Summary Message
      */
-    END_OF_START_OF_DAY_MESSAGE('D', "End Of Start Of Day Message");
+    END_OF_START_OF_DAY_SUMMARY_MESSAGE('D', "End Of Start Of Day Summary Message");
 
     private final char wire;
 
@@ -64,10 +64,10 @@ public enum AdministrativeMessageType {
      */
     public static Optional<AdministrativeMessageType> fromWire(char wire) {
         return switch (wire) {
-            case 'A' -> Optional.of(START_OF_END_OF_DAY_MESSAGE);
-            case 'B' -> Optional.of(END_OF_END_OF_DAY_MESSAGE);
-            case 'C' -> Optional.of(START_OF_START_OF_DAY_MESSAGE);
-            case 'D' -> Optional.of(END_OF_START_OF_DAY_MESSAGE);
+            case 'A' -> Optional.of(START_OF_END_OF_DAY_SUMMARY_MESSAGE);
+            case 'B' -> Optional.of(END_OF_END_OF_DAY_SUMMARY_MESSAGE);
+            case 'C' -> Optional.of(START_OF_START_OF_DAY_SUMMARY_MESSAGE);
+            case 'D' -> Optional.of(END_OF_START_OF_DAY_SUMMARY_MESSAGE);
             default -> Optional.empty();
         };
     }

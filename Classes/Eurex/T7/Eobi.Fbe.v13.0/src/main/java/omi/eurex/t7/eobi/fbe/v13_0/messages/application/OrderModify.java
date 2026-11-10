@@ -61,7 +61,7 @@ public final class OrderModify implements Message {
     private final PrevDisplayQtyField prevDisplayQty = new PrevDisplayQtyField();
 
     /**
-     * Security Id
+     * Unique instrument identifier
      */
     private final SecurityIdField securityId = new SecurityIdField();
 
@@ -121,7 +121,7 @@ public final class OrderModify implements Message {
     }
 
     /**
-     * Security Id
+     * Unique instrument identifier
      *
      * @return the SecurityId field
      */

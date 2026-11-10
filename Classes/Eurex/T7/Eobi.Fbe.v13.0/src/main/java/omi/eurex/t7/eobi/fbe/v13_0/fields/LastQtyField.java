@@ -8,7 +8,7 @@ import omi.eurex.t7.eobi.fbe.v13_0.types.FieldKind;
 import omi.eurex.t7.eobi.fbe.v13_0.types.PrintOptions;
 
 /**
- * Last Qty
+ * Total executed matched quantity of this match event
  *
  * <p>Fixed-point decimal: a raw 8-byte little-endian signed integer scaled by 10^-4.</p>
  */

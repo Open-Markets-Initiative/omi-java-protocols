@@ -40,7 +40,7 @@ public final class CrossRequest implements Message {
     private static final int[] PADDING = { 27, 5 };
 
     /**
-     * Security Id
+     * Unique instrument identifier
      */
     private final SecurityIdField securityId = new SecurityIdField();
 
@@ -50,7 +50,7 @@ public final class CrossRequest implements Message {
     private final LastPxField lastPx = new LastPxField();
 
     /**
-     * Last Qty
+     * Total executed matched quantity of this match event
      */
     private final LastQtyField lastQty = new LastQtyField();
 
@@ -84,7 +84,7 @@ public final class CrossRequest implements Message {
     private boolean decoded;
 
     /**
-     * Security Id
+     * Unique instrument identifier
      *
      * @return the SecurityId field
      */
@@ -102,7 +102,7 @@ public final class CrossRequest implements Message {
     }
 
     /**
-     * Last Qty
+     * Total executed matched quantity of this match event
      *
      * @return the LastQty field
      */

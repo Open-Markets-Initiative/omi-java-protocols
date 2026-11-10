@@ -45,7 +45,7 @@ public final class AddFlexibleInstrument implements Message {
     private static final int[] PADDING = { 84, 4 };
 
     /**
-     * Security Id
+     * Unique instrument identifier
      */
     private final SecurityIdField securityId = new SecurityIdField();
 
@@ -114,7 +114,7 @@ public final class AddFlexibleInstrument implements Message {
     private boolean decoded;
 
     /**
-     * Security Id
+     * Unique instrument identifier
      *
      * @return the SecurityId field
      */

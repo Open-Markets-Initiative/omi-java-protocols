@@ -7,7 +7,7 @@ import omi.miax.pearlequities.expressorders.meo.v2_6.types.FieldKind;
 import omi.miax.pearlequities.expressorders.meo.v2_6.types.PrintOptions;
 
 /**
- * issued by MIAX Futures Exchange during initial setup
+ * ID issued by MIAX during initial setup
  *
  * <p>A 8-byte ASCII field padded with spaces. Trailing padding is stripped on decode.</p>
  */

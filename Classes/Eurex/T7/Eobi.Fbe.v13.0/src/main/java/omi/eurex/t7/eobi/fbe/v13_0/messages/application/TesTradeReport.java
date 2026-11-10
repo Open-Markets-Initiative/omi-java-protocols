@@ -46,7 +46,7 @@ public final class TesTradeReport implements Message {
     private static final int[] PADDING = { 42, 6, 68, 4 };
 
     /**
-     * Security Id
+     * Unique instrument identifier
      */
     private final SecurityIdField securityId = new SecurityIdField();
 
@@ -56,7 +56,7 @@ public final class TesTradeReport implements Message {
     private final TransactTimeField transactTime = new TransactTimeField();
 
     /**
-     * Last Qty
+     * Total executed matched quantity of this match event
      */
     private final LastQtyField lastQty = new LastQtyField();
 
@@ -120,7 +120,7 @@ public final class TesTradeReport implements Message {
     private boolean decoded;
 
     /**
-     * Security Id
+     * Unique instrument identifier
      *
      * @return the SecurityId field
      */
@@ -138,7 +138,7 @@ public final class TesTradeReport implements Message {
     }
 
     /**
-     * Last Qty
+     * Total executed matched quantity of this match event
      *
      * @return the LastQty field
      */

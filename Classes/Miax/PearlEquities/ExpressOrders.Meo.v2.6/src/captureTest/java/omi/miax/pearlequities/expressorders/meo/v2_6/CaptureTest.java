@@ -13,7 +13,6 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 import omi.miax.pearlequities.expressorders.meo.v2_6.dispatch.PacketDecoder;
 import omi.miax.pearlequities.expressorders.meo.v2_6.dispatch.PacketStream;
-import omi.miax.pearlequities.expressorders.meo.v2_6.types.GroupEntry;
 import omi.miax.pearlequities.expressorders.meo.v2_6.types.Message;
 
 // Decodes every UDP datagram of a capture, or of each capture in a directory, through the packet decoder, and the
@@ -29,7 +28,7 @@ public final class CaptureTest {
     private static final String USAGE = "Usage: CaptureTest <capture or directory> [--strict]";
 
     // What a datagram or record decoded to, from whichever decoder walked it.
-    private record Walked(List<Message> messages, int undecoded, boolean complete, List<Ended> trailing, List<Ended> padding, List<GroupEntry> sessions) {
+    private record Walked(List<Message> messages, int undecoded, boolean complete, List<Ended> trailing, List<Ended> padding) {
     }
 
     // A decoded message and the bytes of its frame after it.
@@ -41,12 +40,10 @@ public final class CaptureTest {
     private long records;
     private long otherFlows;
     private long messages;
-    private long sessions;
     private long undecoded;
     private long trailing;
     private long errors;
     private final Map<String, Long> counts = new TreeMap<>();
-    private final Map<String, Long> sessionCounts = new TreeMap<>();
 
     private CaptureTest() {
     }
@@ -172,19 +169,6 @@ public final class CaptureTest {
             }
         }
 
-        for (GroupEntry session : walked.sessions()) {
-            sessions++;
-            String name = session.getClass().getSimpleName();
-            sessionCounts.merge(name, 1L, Long::sum);
-
-            byte[] captured = session.raw().orElseThrow();
-            byte[] encoded = session.toBytes();
-            if (!Arrays.equals(encoded, captured)) {
-                errors++;
-                System.out.println(where + ": " + name + " " + difference(encoded, captured));
-            }
-        }
-
         return true;
     }
 
@@ -230,8 +214,7 @@ public final class CaptureTest {
     private static Walked walked(PacketDecoder.Decoded decoded) {
         return new Walked(decoded.messages(), decoded.undecoded(), decoded.complete(),
             decoded.trailing().stream().map(ended -> new Ended(ended.message(), ended.bytes())).toList(),
-            decoded.padding().stream().map(padded -> new Ended(padded.message(), padded.bytes())).toList(),
-            decoded.sessions());
+            decoded.padding().stream().map(padded -> new Ended(padded.message(), padded.bytes())).toList());
     }
 
     // A feed still deciding whether it reads a flow, and the records it walked meanwhile.
@@ -380,7 +363,7 @@ public final class CaptureTest {
         }
     }
 
-    // The same messages and session packets, of the same classes and bytes, walked alike.
+    // The same messages, of the same classes and bytes, walked alike.
     private static boolean alike(Walked one, Walked other) {
         if (one.complete() != other.complete() || one.undecoded() != other.undecoded() || one.messages().size() != other.messages().size()) {
             return false;
@@ -389,18 +372,6 @@ public final class CaptureTest {
         for (int index = 0; index < one.messages().size(); index++) {
             Message left = one.messages().get(index);
             Message right = other.messages().get(index);
-            if (!left.getClass().getSimpleName().equals(right.getClass().getSimpleName()) || !Arrays.equals(left.raw().orElseThrow(), right.raw().orElseThrow())) {
-                return false;
-            }
-        }
-
-        if (one.sessions().size() != other.sessions().size()) {
-            return false;
-        }
-
-        for (int index = 0; index < one.sessions().size(); index++) {
-            GroupEntry left = one.sessions().get(index);
-            GroupEntry right = other.sessions().get(index);
             if (!left.getClass().getSimpleName().equals(right.getClass().getSimpleName()) || !Arrays.equals(left.raw().orElseThrow(), right.raw().orElseThrow())) {
                 return false;
             }
@@ -477,7 +448,6 @@ public final class CaptureTest {
         System.out.println("Packets:  " + packets);
         System.out.println("TCP records: " + records);
         System.out.println("Messages: " + messages);
-        System.out.println("Session packets: " + sessions);
         System.out.println("Errors:   " + errors);
         System.out.println("Other traffic: " + otherPackets + " capture packets");
         System.out.println("TCP flows not read: " + otherFlows);
@@ -486,11 +456,6 @@ public final class CaptureTest {
         System.out.println();
         System.out.println("Messages by type:");
         counts.entrySet().stream()
-            .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
-            .forEach(entry -> System.out.println("  " + entry.getKey() + ": " + entry.getValue()));
-        System.out.println();
-        System.out.println("Session packets by type:");
-        sessionCounts.entrySet().stream()
             .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
             .forEach(entry -> System.out.println("  " + entry.getKey() + ": " + entry.getValue()));
     }

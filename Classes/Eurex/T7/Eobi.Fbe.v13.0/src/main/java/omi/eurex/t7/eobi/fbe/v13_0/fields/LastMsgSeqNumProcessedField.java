@@ -7,7 +7,7 @@ import omi.eurex.t7.eobi.fbe.v13_0.types.FieldKind;
 import omi.eurex.t7.eobi.fbe.v13_0.types.PrintOptions;
 
 /**
- * Last Msg Seq Num Processed
+ * Last message sequence number that was processed, regardless of message type
  *
  * <p>An unsigned 32-bit little-endian integer, widened to long.</p>
  */

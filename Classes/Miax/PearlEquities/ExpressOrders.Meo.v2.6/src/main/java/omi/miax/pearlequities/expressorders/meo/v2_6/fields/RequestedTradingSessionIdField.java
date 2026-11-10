@@ -7,7 +7,7 @@ import omi.miax.pearlequities.expressorders.meo.v2_6.types.FieldKind;
 import omi.miax.pearlequities.expressorders.meo.v2_6.types.PrintOptions;
 
 /**
- * Specifies the session the client would like to log into, or zero to log into the currently active session
+ * Specifies the Matching Engine trading session the client would like to log into, or zero to log into the currently active trading session
  */
 public final class RequestedTradingSessionIdField extends Field {
 

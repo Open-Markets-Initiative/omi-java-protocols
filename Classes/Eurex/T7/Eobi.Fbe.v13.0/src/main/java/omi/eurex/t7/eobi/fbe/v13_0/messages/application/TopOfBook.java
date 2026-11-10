@@ -46,7 +46,7 @@ public final class TopOfBook implements Message {
     private final TransactTimeField transactTime = new TransactTimeField();
 
     /**
-     * Security Id
+     * Unique instrument identifier
      */
     private final SecurityIdField securityId = new SecurityIdField();
 
@@ -99,7 +99,7 @@ public final class TopOfBook implements Message {
     }
 
     /**
-     * Security Id
+     * Unique instrument identifier
      *
      * @return the SecurityId field
      */

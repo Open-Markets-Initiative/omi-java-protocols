@@ -7,7 +7,7 @@ import omi.eurex.t7.eobi.fbe.v13_0.types.FieldKind;
 import omi.eurex.t7.eobi.fbe.v13_0.types.PrintOptions;
 
 /**
- * Security Id
+ * Unique instrument identifier
  */
 public final class SecurityIdField extends Field {
 

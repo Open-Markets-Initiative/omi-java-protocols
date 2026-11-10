@@ -22,6 +22,22 @@ if (message.parseFrom(data, offset)) {
 }
 ```
 
+Read one side of a TCP connection. Append its bytes in order, as they arrive; `TcpPacketStream` holds a record split across appends until the rest arrives, and gives each whole one decoded:
+
+```java
+import omi.miax.pearlequities.depthofmarket.mach.v1_3_d.dispatch.TcpPacketStream;
+import omi.miax.pearlequities.depthofmarket.mach.v1_3_d.types.Message;
+
+TcpPacketStream stream = new TcpPacketStream();
+for (TcpPacketStream.Record record : stream.append(bytes, 0, bytes.length)) {
+    for (Message message : record.decoded().messages()) {
+        System.out.println(message);
+    }
+}
+```
+
+A record stating a length that is not valid fails the stream, which then reads nothing more.
+
 Decode one packet. The payload is the UDP datagram body, without the Ethernet, IP, and UDP headers:
 
 ```java
@@ -45,17 +61,27 @@ Each message class carries its wire length as `BYTE_LENGTH`, and its type as `ME
 | `AddOrderMessage` | `messages.application` | `'\u0014'` | 33 |
 | `DeleteOrderMessage` | `messages.application` | `'\u0017'` | 16 |
 | `EndOfRefreshNotificationMessage` | `messages.application` | `'E'` | 1 |
+| `GoodbyePacket` | `messages.session` | `'G'` | 1 |
+| `LoginRequest` | `messages.session` | `'l'` | 27 |
+| `LoginResponse` | `messages.session` | `'r'` | 1 |
+| `LogoutRequest` | `messages.session` | `'X'` | 1 |
 | `ModifyOrderMessage` | `messages.application` | `'\u0015'` | 29 |
 | `OrderExecutionMessage` | `messages.application` | `'\u0018'` | 37 |
 | `RefreshRequestMessage` | `messages.application` | `'R'` | 1 |
 | `RefreshResponseMessage` | `messages.application` | `'r'` | 8 |
+| `RetransmissionRequest` | `messages.session` | `'a'` | 16 |
 | `SecurityTradingStatusNotificationMessage` | `messages.application` | `'\u0004'` | 11 |
 | `SymbolClearMessage` | `messages.application` | `'\u0005'` | 8 |
 | `SymbolUpdateMessage` | `messages.application` | `'\u0001'` | 41 |
+| `SynchronizationComplete` | `messages.session` | `'c'` | 1 |
 | `SystemStateMessage` | `messages.application` | `'S'` | 14 |
 | `SystemTimeMessage` | `messages.application` | `'1'` | 4 |
+| `TestPacket` | `messages.session` | `'T'` | 0 |
 | `TradeCancelMessage` | `messages.application` | `'\u000B'` | 29 |
 | `TradeMessage` | `messages.application` | `'\n'` | 30 |
+| `TradingSessionUpdate` | `messages.session` | `'u'` | 2 |
+| `ServerHeartbeat` | `messages.session` | `'0'` | 0 |
+| `ClientHeartbeat` | `messages.session` | `'1'` | 0 |
 
 ## Verification
 

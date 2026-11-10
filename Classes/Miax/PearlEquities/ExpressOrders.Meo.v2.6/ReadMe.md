@@ -50,6 +50,10 @@ Each message class carries its wire length as `BYTE_LENGTH`, and its type as `ME
 | `CancelOrderResponse` | `messages.application` |  | 79 |
 | `CancelReduceSizeOrderNotification` | `messages.application` |  | 71 |
 | `ExecutionNotification` | `messages.application` |  | 102 |
+| `GoodbyePacket` | `messages.session` | `'G'` | 1 |
+| `LoginRequest` | `messages.session` | `'l'` | 27 |
+| `LoginResponse` | `messages.session` | `'r'` | 1 |
+| `LogoutRequest` | `messages.session` | `'X'` | 1 |
 | `MassCancelRequest` | `messages.application` |  | 44 |
 | `MassCancelResponse` | `messages.application` |  | 43 |
 | `ModifyOrderNotification` | `messages.application` |  | 121 |
@@ -60,8 +64,14 @@ Each message class carries its wire length as `BYTE_LENGTH`, and its type as `ME
 | `NewOrderResponseMessage` | `messages.application` |  | 76 |
 | `OrderPriceUpdateNotification` | `messages.application` |  | 38 |
 | `ReserveOrderReplenishmentNotification` | `messages.application` |  | 42 |
+| `RetransmissionRequest` | `messages.session` | `'a'` | 16 |
 | `SymbolUpdate` | `messages.application` |  | 59 |
+| `SynchronizationComplete` | `messages.session` | `'c'` | 1 |
 | `SystemStateNotification` | `messages.application` |  | 26 |
+| `TestPacket` | `messages.session` | `'T'` | 0 |
+| `TradingSessionUpdate` | `messages.session` | `'u'` | 2 |
+| `ServerHeartbeat` | `messages.session` | `'0'` | 0 |
+| `ClientHeartbeat` | `messages.session` | `'1'` | 0 |
 
 ## Verification
 

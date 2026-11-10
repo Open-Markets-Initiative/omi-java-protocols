@@ -45,9 +45,9 @@ public enum EsesmPacketType {
     LOGOUT_REQUEST('X', "ESesM Logout Request"),
 
     /**
-     * ESesM Logout Request
+     * ESesM GoodBye Packet
      */
-    GOODBYE_PACKET('G', "ESesM Logout Request"),
+    GOODBYE_PACKET('G', "ESesM GoodBye Packet"),
 
     /**
      * ESesM Trading Session Update

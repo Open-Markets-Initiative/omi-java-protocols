@@ -42,7 +42,7 @@ public final class OrderAdd implements Message {
     private final RequestTimeField requestTime = new RequestTimeField();
 
     /**
-     * Security Id
+     * Unique instrument identifier
      */
     private final SecurityIdField securityId = new SecurityIdField();
 
@@ -70,7 +70,7 @@ public final class OrderAdd implements Message {
     }
 
     /**
-     * Security Id
+     * Unique instrument identifier
      *
      * @return the SecurityId field
      */

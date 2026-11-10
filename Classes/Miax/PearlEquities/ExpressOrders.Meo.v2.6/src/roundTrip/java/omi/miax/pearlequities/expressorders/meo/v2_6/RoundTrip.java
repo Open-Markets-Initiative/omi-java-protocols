@@ -22,6 +22,16 @@ import omi.miax.pearlequities.expressorders.meo.v2_6.messages.application.OrderP
 import omi.miax.pearlequities.expressorders.meo.v2_6.messages.application.ReserveOrderReplenishmentNotification;
 import omi.miax.pearlequities.expressorders.meo.v2_6.messages.application.SymbolUpdate;
 import omi.miax.pearlequities.expressorders.meo.v2_6.messages.application.SystemStateNotification;
+import omi.miax.pearlequities.expressorders.meo.v2_6.messages.session.ClientHeartbeat;
+import omi.miax.pearlequities.expressorders.meo.v2_6.messages.session.GoodbyePacket;
+import omi.miax.pearlequities.expressorders.meo.v2_6.messages.session.LoginRequest;
+import omi.miax.pearlequities.expressorders.meo.v2_6.messages.session.LoginResponse;
+import omi.miax.pearlequities.expressorders.meo.v2_6.messages.session.LogoutRequest;
+import omi.miax.pearlequities.expressorders.meo.v2_6.messages.session.RetransmissionRequest;
+import omi.miax.pearlequities.expressorders.meo.v2_6.messages.session.ServerHeartbeat;
+import omi.miax.pearlequities.expressorders.meo.v2_6.messages.session.SynchronizationComplete;
+import omi.miax.pearlequities.expressorders.meo.v2_6.messages.session.TestPacket;
+import omi.miax.pearlequities.expressorders.meo.v2_6.messages.session.TradingSessionUpdate;
 import omi.miax.pearlequities.expressorders.meo.v2_6.types.Message;
 
 // Decodes deterministic bytes into every message at a non-zero offset and requires each to
@@ -40,8 +50,12 @@ public final class RoundTrip {
         check(CancelOrderResponse::new);
         check(CancelReduceSizeOrderNotification::new);
         check(ExecutionNotification::new);
+        checkGrouped(GoodbyePacket::new, RoundTrip::wire0, true, false, false, 1);
+        checkGrouped(LoginRequest::new, RoundTrip::wire1, true, true, true, 1);
+        checkGrouped(LoginResponse::new, RoundTrip::wire2, true, true, true, 1);
+        checkGrouped(LogoutRequest::new, RoundTrip::wire3, true, false, false, 1);
         check(MassCancelRequest::new);
-        checkGrouped(MassCancelResponse::new, RoundTrip::wire0, true, true, true, 1);
+        checkGrouped(MassCancelResponse::new, RoundTrip::wire4, true, true, true, 1);
         check(ModifyOrderNotification::new);
         check(ModifyOrderRequestMessage::new);
         check(ModifyOrderResponse::new);
@@ -50,8 +64,14 @@ public final class RoundTrip {
         check(NewOrderResponseMessage::new);
         check(OrderPriceUpdateNotification::new);
         check(ReserveOrderReplenishmentNotification::new);
+        check(RetransmissionRequest::new);
         check(SymbolUpdate::new);
+        check(SynchronizationComplete::new);
         check(SystemStateNotification::new);
+        checkGrouped(TestPacket::new, RoundTrip::wire5, true, false, false, 1);
+        check(TradingSessionUpdate::new);
+        check(ServerHeartbeat::new);
+        check(ClientHeartbeat::new);
 
         if (failures > 0) {
             System.out.println(failures + " FAILED");
@@ -152,6 +172,45 @@ public final class RoundTrip {
 
     private static byte[] wire0(Random random, int entries, long count) {
         ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 1);
+        random(wire, random, entries);
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire1(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 5);
+        random(wire, random, 5);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        count(wire, count, 1, true);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 1);
+            random(wire, random, 8);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire2(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        count(wire, count, 1, true);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 1);
+            random(wire, random, 1);
+            random(wire, random, 8);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire3(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 1);
+        random(wire, random, entries);
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire4(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
         random(wire, random, 8);
         random(wire, random, 4);
         random(wire, random, 20);
@@ -160,6 +219,12 @@ public final class RoundTrip {
             random(wire, random, 1);
         }
         random(wire, random, 10);
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire5(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, entries);
         return wire.toByteArray();
     }
 

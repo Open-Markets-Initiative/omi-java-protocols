@@ -47,7 +47,7 @@ public final class LoginMatchingEngineEntry implements GroupEntry {
     private final TradingSessionIdField tradingSessionId = new TradingSessionIdField();
 
     /**
-     * the highest sequence number that the server currently has for the client
+     * The highest sequence number the server currently has for the client from the Matching Engine
      */
     private final HighestSequenceNumberField highestSequenceNumber = new HighestSequenceNumberField();
 
@@ -79,7 +79,7 @@ public final class LoginMatchingEngineEntry implements GroupEntry {
     }
 
     /**
-     * the highest sequence number that the server currently has for the client
+     * The highest sequence number the server currently has for the client from the Matching Engine
      *
      * @return the HighestSequenceNumber field
      */

@@ -20,6 +20,11 @@ public enum LoginStatus {
     INVALID_TRADING_SESSION_REQUESTED('S', "Invalid trading session requested for the Matching Engine"),
 
     /**
+     * Invalid start sequence number requested for the Matching Engine
+     */
+    INVALID_START_SEQUENCE_NUMBER_REQUESTED('N', "Invalid start sequence number requested for the Matching Engine"),
+
+    /**
      * No active trading session exists for the Matching Engine, Matching Engine unavailable
      */
     NO_ACTIVE_TRADING_SESSION_EXISTS('U', "No active trading session exists for the Matching Engine, Matching Engine unavailable"),
@@ -30,19 +35,19 @@ public enum LoginStatus {
     REJECTED('X', "Invalid Username/Computer ID combination"),
 
     /**
-     * Invalid start sequence number requested
-     */
-    INVALID_START_SEQUENCE_NUMBER_REQUESTED('N', "Invalid start sequence number requested"),
-
-    /**
      * Incompatible Session protocol version
      */
     INCOMPATIBLE_SESSION_PROTOCOL_VERSION('I', "Incompatible Session protocol version"),
 
     /**
-     * Incompatible application protocol version
+     * Incompatible Application protocol version
      */
-    INCOMPATIBLE_APPLICATION_PROTOCOL_VERSION('A', "Incompatible application protocol version"),
+    INCOMPATIBLE_APPLICATION_PROTOCOL_VERSION('A', "Incompatible Application protocol version"),
+
+    /**
+     * Invalid Number of Matching Engines specified in Login Request
+     */
+    INVALID_NUMBER_OF_MATCHING_ENGINES_SPECIFIED_IN_LOGIN_REQUEST('C', "Invalid Number of Matching Engines specified in Login Request"),
 
     /**
      * Request rejected because client already logged in
@@ -86,11 +91,12 @@ public enum LoginStatus {
         return switch (wire) {
             case ' ' -> Optional.of(SUCCESSFUL);
             case 'S' -> Optional.of(INVALID_TRADING_SESSION_REQUESTED);
+            case 'N' -> Optional.of(INVALID_START_SEQUENCE_NUMBER_REQUESTED);
             case 'U' -> Optional.of(NO_ACTIVE_TRADING_SESSION_EXISTS);
             case 'X' -> Optional.of(REJECTED);
-            case 'N' -> Optional.of(INVALID_START_SEQUENCE_NUMBER_REQUESTED);
             case 'I' -> Optional.of(INCOMPATIBLE_SESSION_PROTOCOL_VERSION);
             case 'A' -> Optional.of(INCOMPATIBLE_APPLICATION_PROTOCOL_VERSION);
+            case 'C' -> Optional.of(INVALID_NUMBER_OF_MATCHING_ENGINES_SPECIFIED_IN_LOGIN_REQUEST);
             case 'L' -> Optional.of(REQUEST_REJECTED_BECAUSE_CLIENT_ALREADY_LOGGED_IN);
             default -> Optional.empty();
         };

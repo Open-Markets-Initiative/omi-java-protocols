@@ -25,7 +25,7 @@ import omi.siac.cts.output.cta.v2_11_b.messages.application.FractionalPriorDayTr
 import omi.siac.cts.output.cta.v2_11_b.messages.application.FractionalShortTradeMessage;
 import omi.siac.cts.output.cta.v2_11_b.messages.application.FractionalTradeCancelErrorMessage;
 import omi.siac.cts.output.cta.v2_11_b.messages.application.FractionalTradeCorrectionMessage;
-import omi.siac.cts.output.cta.v2_11_b.messages.application.IndexMessage;
+import omi.siac.cts.output.cta.v2_11_b.messages.application.Index;
 import omi.siac.cts.output.cta.v2_11_b.messages.application.LineIntegrityMessage;
 import omi.siac.cts.output.cta.v2_11_b.messages.application.LongTradeMessage;
 import omi.siac.cts.output.cta.v2_11_b.messages.application.MarketWideCircuitBreakerDeclineLevelStatusMessage;
@@ -77,7 +77,7 @@ public final class RoundTrip {
         check(FractionalShortTradeMessage::new);
         check(FractionalTradeCancelErrorMessage::new);
         check(FractionalTradeCorrectionMessage::new);
-        check(IndexMessage::new);
+        check(Index::new);
         check(LineIntegrityMessage::new);
         check(LongTradeMessage::new);
         check(MarketWideCircuitBreakerDeclineLevelStatusMessage::new);

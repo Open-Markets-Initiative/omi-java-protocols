@@ -10,14 +10,14 @@ import java.util.Optional;
 public enum LogoutReason {
 
     /**
-     * Graceful Logout
+     * Graceful Logout (Done for now)
      */
-    GRACEFUL_LOGOUT(' ', "Graceful Logout"),
+    GRACEFUL_LOGOUT(' ', "Graceful Logout (Done for now)"),
 
     /**
-     * Bad SesM packet
+     * Bad ESesM Packet
      */
-    BAD_PACKET('B', "Bad SesM packet"),
+    BAD_PACKET('B', "Bad ESesM Packet"),
 
     /**
      * Timed out waiting for Login Packet

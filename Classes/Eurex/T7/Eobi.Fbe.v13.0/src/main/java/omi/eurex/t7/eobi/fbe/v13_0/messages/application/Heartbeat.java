@@ -34,7 +34,7 @@ public final class Heartbeat implements Message {
     private static final int[] PADDING = { 4, 4 };
 
     /**
-     * Last Msg Seq Num Processed
+     * Last message sequence number that was processed, regardless of message type
      */
     private final LastMsgSeqNumProcessedField lastMsgSeqNumProcessed = new LastMsgSeqNumProcessedField();
 
@@ -48,7 +48,7 @@ public final class Heartbeat implements Message {
     private boolean decoded;
 
     /**
-     * Last Msg Seq Num Processed
+     * Last message sequence number that was processed, regardless of message type
      *
      * @return the LastMsgSeqNumProcessed field
      */

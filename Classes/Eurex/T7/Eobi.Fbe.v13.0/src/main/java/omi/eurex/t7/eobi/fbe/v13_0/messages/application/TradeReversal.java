@@ -49,7 +49,7 @@ public final class TradeReversal implements Message {
     private static final int[] PADDING = { 65, 7, 89, 7, 113, 7, 137, 7, 161, 7, 185, 7, 209, 7, 233, 7, 257, 7, 281, 7, 305, 7, 329, 7, 353, 7, 377, 7, 401, 7 };
 
     /**
-     * Security Id
+     * Unique instrument identifier
      */
     private final SecurityIdField securityId = new SecurityIdField();
 
@@ -59,7 +59,7 @@ public final class TradeReversal implements Message {
     private final TransactTimeField transactTime = new TransactTimeField();
 
     /**
-     * Last Qty
+     * Total executed matched quantity of this match event
      */
     private final LastQtyField lastQty = new LastQtyField();
 
@@ -108,7 +108,7 @@ public final class TradeReversal implements Message {
     private boolean decoded;
 
     /**
-     * Security Id
+     * Unique instrument identifier
      *
      * @return the SecurityId field
      */
@@ -126,7 +126,7 @@ public final class TradeReversal implements Message {
     }
 
     /**
-     * Last Qty
+     * Total executed matched quantity of this match event
      *
      * @return the LastQty field
      */

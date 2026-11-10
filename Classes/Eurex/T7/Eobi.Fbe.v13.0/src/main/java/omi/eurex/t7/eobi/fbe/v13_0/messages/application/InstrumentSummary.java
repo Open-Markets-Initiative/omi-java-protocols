@@ -55,7 +55,7 @@ public final class InstrumentSummary implements Message {
     private static final int[] PADDING = { 51, 5 };
 
     /**
-     * Security Id
+     * Unique instrument identifier
      */
     private final SecurityIdField securityId = new SecurityIdField();
 
@@ -144,7 +144,7 @@ public final class InstrumentSummary implements Message {
     private boolean decoded;
 
     /**
-     * Security Id
+     * Unique instrument identifier
      *
      * @return the SecurityId field
      */

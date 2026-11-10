@@ -40,7 +40,7 @@ public final class AddScaledSimpleInstrument implements Message {
     private static final int[] PADDING = { 57, 1, 60, 4 };
 
     /**
-     * Security Id
+     * Unique instrument identifier
      */
     private final SecurityIdField securityId = new SecurityIdField();
 
@@ -79,7 +79,7 @@ public final class AddScaledSimpleInstrument implements Message {
     private boolean decoded;
 
     /**
-     * Security Id
+     * Unique instrument identifier
      *
      * @return the SecurityId field
      */
