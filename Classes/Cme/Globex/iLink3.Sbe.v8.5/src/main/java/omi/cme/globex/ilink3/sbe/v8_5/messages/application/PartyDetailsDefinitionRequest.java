@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import omi.cme.globex.ilink3.sbe.v8_5.fields.AvgPxGroupIdField;
 import omi.cme.globex.ilink3.sbe.v8_5.fields.AvgPxIndicatorField;
 import omi.cme.globex.ilink3.sbe.v8_5.fields.ClearingAccountTypeField;
@@ -325,39 +324,7 @@ public final class PartyDetailsDefinitionRequest implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor += 8;
-        cursor += 8;
-        cursor += 1;
-        cursor += 4;
-        cursor += 75;
-        cursor += 20;
-        cursor += 8;
-        cursor += 1;
-        cursor += 1;
-        cursor += 1;
-        cursor += 1;
-        cursor += 1;
-        cursor += 1;
-        cursor += 1;
-        cursor += 8;
-        cursor += 8;
-        cursor = partyDetailsGroups.padding(runs, cursor);
-        cursor = trdRegPublicationsGroups.padding(runs, cursor);
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -461,11 +428,8 @@ public final class PartyDetailsDefinitionRequest implements Message {
             return false;
         }
         cursor += trdRegPublicationsGroups.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -529,10 +493,7 @@ public final class PartyDetailsDefinitionRequest implements Message {
         if (!partyDetailsGroups.isRecognized()) {
             return false;
         }
-        if (!trdRegPublicationsGroups.isRecognized()) {
-            return false;
-        }
-        return true;
+        return trdRegPublicationsGroups.isRecognized();
     }
 
     @Override

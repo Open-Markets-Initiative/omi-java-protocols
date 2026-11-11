@@ -222,7 +222,6 @@ public final class OrderModify implements Message {
             return false;
         }
         cursor += PrevPriceHhiIndicatorField.BYTE_LENGTH;
-        cursor += 7; // padding
 
         return true;
     }
@@ -238,7 +237,7 @@ public final class OrderModify implements Message {
         cursor = securityId.encode(data, cursor);
         cursor = orderDetailsComp.encode(data, cursor);
         cursor = prevPriceHhiIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 73 + 7) {
+        if (buffer != null && buffer.length >= 80) {
             System.arraycopy(buffer, 73, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

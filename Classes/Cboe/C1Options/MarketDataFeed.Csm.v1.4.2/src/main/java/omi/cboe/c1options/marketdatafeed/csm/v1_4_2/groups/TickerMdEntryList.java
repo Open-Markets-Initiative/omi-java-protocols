@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import omi.cboe.c1options.marketdatafeed.csm.v1_4_2.types.Field;
 import omi.cboe.c1options.marketdatafeed.csm.v1_4_2.types.PrintOptions;
 
@@ -127,21 +126,6 @@ public final class TickerMdEntryList extends AbstractList<TickerMdEntryEntry> {
             length += entry.byteLength();
         }
         return length;
-    }
-
-    /**
-     * Adds the declared padding of every entry, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of the first entry, relative to the start of the message
-     * @return the offset just past the last entry
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        for (TickerMdEntryEntry entry : entries) {
-            cursor = entry.padding(runs, cursor);
-        }
-        return cursor;
     }
 
     /**

@@ -155,7 +155,6 @@ public final class MdInstrumentEntryGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += TradeConditionField.BYTE_LENGTH;
-        cursor += 2; // padding
 
         return true;
     }
@@ -168,7 +167,7 @@ public final class MdInstrumentEntryGrpCompEntry implements GroupEntry {
         cursor = mdEntrySize.encode(data, cursor);
         cursor = mdEntryType.encode(data, cursor);
         cursor = tradeCondition.encode(data, cursor);
-        if (buffer != null && buffer.length >= 14 + 2) {
+        if (buffer != null && buffer.length >= 16) {
             System.arraycopy(buffer, 14, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

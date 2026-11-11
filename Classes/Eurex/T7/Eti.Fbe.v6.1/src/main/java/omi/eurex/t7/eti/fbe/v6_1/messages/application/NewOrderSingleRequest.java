@@ -827,12 +827,7 @@ public final class NewOrderSingleRequest implements Message {
             return false;
         }
         cursor += FreeText3Field.BYTE_LENGTH;
-        if (!fixClOrdId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += FixClOrdIdField.BYTE_LENGTH;
-
-        return true;
+        return fixClOrdId.parse(data, cursor);
     }
 
     @Override
@@ -840,7 +835,7 @@ public final class NewOrderSingleRequest implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

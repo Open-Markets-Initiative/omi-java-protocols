@@ -34,13 +34,6 @@ public final class CancelOrderRejectMessage implements Message {
     public static final String NAME = "Cancel Order Reject Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Nanoseconds since epoch
      */
     private final TimestampField timestampField = new TimestampField();
@@ -151,7 +144,7 @@ public final class CancelOrderRejectMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -200,12 +193,7 @@ public final class CancelOrderRejectMessage implements Message {
             return false;
         }
         cursor += CancelOrderRejectReasonField.BYTE_LENGTH;
-        if (!cancelOrderRejectDetails.parse(data, cursor)) {
-            return false;
-        }
-        cursor += CancelOrderRejectDetailsField.BYTE_LENGTH;
-
-        return true;
+        return cancelOrderRejectDetails.parse(data, cursor);
     }
 
     @Override

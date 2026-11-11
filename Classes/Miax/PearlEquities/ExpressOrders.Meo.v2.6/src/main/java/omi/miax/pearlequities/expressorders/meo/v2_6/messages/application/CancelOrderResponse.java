@@ -242,7 +242,6 @@ public final class CancelOrderResponse implements Message {
             return false;
         }
         cursor += CancelStatusField.BYTE_LENGTH;
-        cursor += 10; // padding
 
         return true;
     }
@@ -259,7 +258,7 @@ public final class CancelOrderResponse implements Message {
         cursor = orderId.encode(data, cursor);
         cursor = leavesQty.encode(data, cursor);
         cursor = cancelStatus.encode(data, cursor);
-        if (buffer != null && buffer.length >= 69 + 10) {
+        if (buffer != null && buffer.length >= 79) {
             System.arraycopy(buffer, 69, data, cursor, 10); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 10, (byte) 0); // padding

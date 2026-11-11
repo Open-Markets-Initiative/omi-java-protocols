@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import omi.nasdaq.nsmequities.orders.ouch.v5_0.fields.AppendageLengthField;
 import omi.nasdaq.nsmequities.orders.ouch.v5_0.fields.CapacityField;
 import omi.nasdaq.nsmequities.orders.ouch.v5_0.fields.ClordidField;
@@ -303,37 +302,7 @@ public final class OrderAcceptedMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor += 8;
-        cursor += 4;
-        cursor += 1;
-        cursor += 4;
-        cursor += 8;
-        cursor += 8;
-        cursor += 1;
-        cursor += 1;
-        cursor += 8;
-        cursor += 1;
-        cursor += 1;
-        cursor += 1;
-        cursor += 1;
-        cursor += 14;
-        cursor += 2;
-        cursor = orderAcceptedAppendage.padding(runs, cursor);
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -430,11 +399,8 @@ public final class OrderAcceptedMessage implements Message {
             return false;
         }
         cursor += orderAcceptedAppendage.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -496,10 +462,7 @@ public final class OrderAcceptedMessage implements Message {
                 return false;
             }
         }
-        if (!orderAcceptedAppendage.isRecognized()) {
-            return false;
-        }
-        return true;
+        return orderAcceptedAppendage.isRecognized();
     }
 
     @Override

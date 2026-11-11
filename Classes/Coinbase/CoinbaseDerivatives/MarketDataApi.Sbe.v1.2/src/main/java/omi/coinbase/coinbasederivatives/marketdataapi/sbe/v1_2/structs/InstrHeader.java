@@ -34,13 +34,6 @@ public final class InstrHeader implements GroupEntry {
     public static final String NAME = "InstrHeader";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Bitset marking where the transaction begins and ends: 0x01 start of transaction, 0x02 end of transaction, 0x04 clear book
      */
     private final InstrumentFlagsField instrumentFlags = new InstrumentFlagsField();
@@ -160,7 +153,7 @@ public final class InstrHeader implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -208,12 +201,7 @@ public final class InstrHeader implements GroupEntry {
             return false;
         }
         cursor += ReservedField.BYTE_LENGTH;
-        if (!transactTime.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TransactTimeField.BYTE_LENGTH;
-
-        return true;
+        return transactTime.parse(data, cursor);
     }
 
     @Override

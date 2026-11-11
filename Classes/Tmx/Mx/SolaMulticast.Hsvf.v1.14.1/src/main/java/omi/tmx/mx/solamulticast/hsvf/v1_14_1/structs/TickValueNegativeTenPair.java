@@ -29,13 +29,6 @@ public final class TickValueNegativeTenPair implements GroupEntry {
     public static final String NAME = "TickValueNegativeTenPair";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Exchange premium multiplier for derivatives with a contract size equal to 1. All derivatives with a contract size &gt; 1 will have a tick value defaulted to 1.
      */
     private final RawTickValueField rawTickValue = new RawTickValueField();
@@ -85,7 +78,7 @@ public final class TickValueNegativeTenPair implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class TickValueNegativeTenPair implements GroupEntry {
             return false;
         }
         cursor += RawTickValueField.BYTE_LENGTH;
-        if (!tickValueFractionIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TickValueFractionIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return tickValueFractionIndicator.parse(data, cursor);
     }
 
     @Override

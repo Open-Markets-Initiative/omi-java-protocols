@@ -339,7 +339,7 @@ public final class PurgeOrdersMessage implements Message {
             cursor += 1;
         }
         cursor += 1;
-        cursor = riskGroupIDs.padding(runs, cursor);
+        cursor += riskGroupIDs.byteLength();
         if (clearingFirmPresent()) {
             cursor += 4;
         }
@@ -472,11 +472,8 @@ public final class PurgeOrdersMessage implements Message {
             }
             cursor += MatchingUnitField.BYTE_LENGTH;
         }
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -511,7 +508,7 @@ public final class PurgeOrdersMessage implements Message {
             throw new IllegalStateException(matchingUnit.hasValue() ? "matchingUnit holds a value the fields before it leave off the wire" : "matchingUnit holds no value, though the fields before it put it on the wire");
         }
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 1) {
+        if (buffer != null && buffer.length >= 1) {
             System.arraycopy(buffer, 0, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
@@ -579,10 +576,7 @@ public final class PurgeOrdersMessage implements Message {
                 return false;
             }
         }
-        if (!riskGroupIDs.isRecognized()) {
-            return false;
-        }
-        return true;
+        return riskGroupIDs.isRecognized();
     }
 
     @Override

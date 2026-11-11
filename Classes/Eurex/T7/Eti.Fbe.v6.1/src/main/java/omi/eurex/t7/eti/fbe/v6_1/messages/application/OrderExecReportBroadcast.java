@@ -1201,11 +1201,8 @@ public final class OrderExecReportBroadcast implements Message {
             return false;
         }
         cursor += instrmntLegExecGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -1224,7 +1221,7 @@ public final class OrderExecReportBroadcast implements Message {
         noFills.value((short) fillsGrpComp.size());
         noLegExecs.value(instrmntLegExecGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -1281,7 +1278,7 @@ public final class OrderExecReportBroadcast implements Message {
         cursor = noLegs.encode(data, cursor);
         cursor = triggered.encode(data, cursor);
         cursor = crossedIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 328 + 2) {
+        if (buffer != null && buffer.length >= 330) {
             System.arraycopy(buffer, 328, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -1334,10 +1331,7 @@ public final class OrderExecReportBroadcast implements Message {
         if (!fillsGrpComp.isRecognized()) {
             return false;
         }
-        if (!instrmntLegExecGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return instrmntLegExecGrpComp.isRecognized();
     }
 
     @Override

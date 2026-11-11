@@ -717,7 +717,6 @@ public final class SrqsEnterQuoteRequest implements Message {
             return false;
         }
         cursor += PartyIdTakeUpTradingFirmField.BYTE_LENGTH;
-        cursor += 2; // padding
 
         return true;
     }
@@ -727,7 +726,7 @@ public final class SrqsEnterQuoteRequest implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -765,7 +764,7 @@ public final class SrqsEnterQuoteRequest implements Message {
         cursor = partyIdLocationId.encode(data, cursor);
         cursor = complianceText.encode(data, cursor);
         cursor = partyIdTakeUpTradingFirm.encode(data, cursor);
-        if (buffer != null && buffer.length >= 368 + 2) {
+        if (buffer != null && buffer.length >= 370) {
             System.arraycopy(buffer, 368, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

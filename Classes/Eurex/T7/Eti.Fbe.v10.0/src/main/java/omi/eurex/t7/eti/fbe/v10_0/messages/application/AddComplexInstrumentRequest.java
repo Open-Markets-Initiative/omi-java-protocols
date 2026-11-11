@@ -269,11 +269,8 @@ public final class AddComplexInstrumentRequest implements Message {
             return false;
         }
         cursor += instrmtLegGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -285,7 +282,7 @@ public final class AddComplexInstrumentRequest implements Message {
         noLegs.value((short) instrmtLegGrpComp.size());
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -297,7 +294,7 @@ public final class AddComplexInstrumentRequest implements Message {
         cursor = productComplex.encode(data, cursor);
         cursor = noLegs.encode(data, cursor);
         cursor = complianceText.encode(data, cursor);
-        if (buffer != null && buffer.length >= 48 + 2) {
+        if (buffer != null && buffer.length >= 50) {
             System.arraycopy(buffer, 48, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -340,10 +337,7 @@ public final class AddComplexInstrumentRequest implements Message {
                 return false;
             }
         }
-        if (!instrmtLegGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return instrmtLegGrpComp.isRecognized();
     }
 
     @Override

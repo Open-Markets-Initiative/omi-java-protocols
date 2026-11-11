@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import omi.nasdaq.uqdf.output.utp.v1_5.fields.AskPriceShortField;
 import omi.nasdaq.uqdf.output.utp.v1_5.fields.AskSizeShortField;
@@ -293,48 +292,7 @@ public final class QuoteShortFormMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        for (int[] run = MessageInfo.padding(), index = { 0 }; index[0] < run.length; index[0] += 2) {
-            runs.add(cursor + run[index[0]]).add(run[index[0] + 1]);
-        }
-        cursor += MessageInfo.BYTE_LENGTH;
-        cursor += 5;
-        cursor += 2;
-        cursor += 2;
-        cursor += 2;
-        cursor += 2;
-        cursor += 1;
-        cursor += 1;
-        cursor += 1;
-        cursor += 1;
-        cursor += 1;
-        cursor += 1;
-        if (shortFormNationalBboAppendagePresent()) {
-            for (int[] run = ShortFormNationalBboAppendage.padding(), index = { 0 }; index[0] < run.length; index[0] += 2) {
-                runs.add(cursor + run[index[0]]).add(run[index[0] + 1]);
-            }
-            cursor += ShortFormNationalBboAppendage.BYTE_LENGTH;
-        }
-        if (longFormNationalBboAppendagePresent()) {
-            for (int[] run = LongFormNationalBboAppendage.padding(), index = { 0 }; index[0] < run.length; index[0] += 2) {
-                runs.add(cursor + run[index[0]]).add(run[index[0] + 1]);
-            }
-            cursor += LongFormNationalBboAppendage.BYTE_LENGTH;
-        }
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -426,11 +384,8 @@ public final class QuoteShortFormMessage implements Message {
             }
             cursor += longFormNationalBboAppendage.byteLength();
         }
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -492,10 +447,7 @@ public final class QuoteShortFormMessage implements Message {
         if (shortFormNationalBboAppendagePresent() && !shortFormNationalBboAppendage.isRecognized()) {
             return false;
         }
-        if (longFormNationalBboAppendagePresent() && !longFormNationalBboAppendage.isRecognized()) {
-            return false;
-        }
-        return true;
+        return !longFormNationalBboAppendagePresent() || longFormNationalBboAppendage.isRecognized();
     }
 
     @Override

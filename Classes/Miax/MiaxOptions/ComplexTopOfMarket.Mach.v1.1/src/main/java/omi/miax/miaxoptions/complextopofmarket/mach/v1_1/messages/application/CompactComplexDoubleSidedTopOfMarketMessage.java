@@ -168,12 +168,7 @@ public final class CompactComplexDoubleSidedTopOfMarketMessage implements Messag
             return false;
         }
         cursor += compactBid.byteLength();
-        if (!compactOffer.parseFrom(data, cursor, end)) {
-            return false;
-        }
-        cursor += compactOffer.byteLength();
-
-        return true;
+        return compactOffer.parseFrom(data, cursor, end);
     }
 
     @Override

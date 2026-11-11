@@ -221,7 +221,7 @@ public final class SrqsDealResponse implements Message {
         cursor += 20;
         runs.add(cursor).add(3);
         cursor += 3;
-        cursor = srqsQuoteGrpComp.padding(runs, cursor);
+        cursor += srqsQuoteGrpComp.byteLength();
         return cursor;
     }
 
@@ -289,11 +289,8 @@ public final class SrqsDealResponse implements Message {
             return false;
         }
         cursor += srqsQuoteGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -304,7 +301,7 @@ public final class SrqsDealResponse implements Message {
         }
         noSrqsQuoteGrps.value((short) srqsQuoteGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -318,7 +315,7 @@ public final class SrqsDealResponse implements Message {
         cursor = noSrqsQuoteGrps.encode(data, cursor);
         cursor = firmTradeId.encode(data, cursor);
         cursor = firmNegotiationId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 87 + 3) {
+        if (buffer != null && buffer.length >= 90) {
             System.arraycopy(buffer, 87, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding
@@ -361,10 +358,7 @@ public final class SrqsDealResponse implements Message {
                 return false;
             }
         }
-        if (!srqsQuoteGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return srqsQuoteGrpComp.isRecognized();
     }
 
     @Override

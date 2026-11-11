@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import omi.cboe.bzxoptions.binaryorderentry.boe.v2_10.fields.AccountField;
 import omi.cboe.bzxoptions.binaryorderentry.boe.v2_10.fields.AttributedQuoteField;
 import omi.cboe.bzxoptions.binaryorderentry.boe.v2_10.fields.CapacityField;
@@ -1289,160 +1288,7 @@ public final class NewOrderMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor += 20;
-        cursor += 1;
-        cursor += 4;
-        cursor += 1;
-        if (newOrderBitfield1Present()) {
-            cursor += 1;
-        }
-        if (newOrderBitfield2Present()) {
-            cursor += 1;
-        }
-        if (newOrderBitfield3Present()) {
-            cursor += 1;
-        }
-        if (newOrderBitfield4Present()) {
-            cursor += 1;
-        }
-        if (newOrderBitfield5Present()) {
-            cursor += 1;
-        }
-        if (newOrderBitfield6Present()) {
-            cursor += 1;
-        }
-        if (newOrderBitfield7Present()) {
-            cursor += 1;
-        }
-        if (newOrderBitfield8Present()) {
-            cursor += 1;
-        }
-        if (newOrderBitfield9Present()) {
-            cursor += 1;
-        }
-        if (clearingFirmPresent()) {
-            cursor += 4;
-        }
-        if (clearingAccountPresent()) {
-            cursor += 4;
-        }
-        if (priceLongPresent()) {
-            cursor += 8;
-        }
-        if (execInstPresent()) {
-            cursor += 1;
-        }
-        if (ordTypePresent()) {
-            cursor += 1;
-        }
-        if (timeInForcePresent()) {
-            cursor += 1;
-        }
-        if (minQtyPresent()) {
-            cursor += 4;
-        }
-        if (maxFloorPresent()) {
-            cursor += 4;
-        }
-        if (symbolLongPresent()) {
-            cursor += 8;
-        }
-        if (capacityPresent()) {
-            cursor += 1;
-        }
-        if (routingInstPresent()) {
-            cursor += 4;
-        }
-        if (accountPresent()) {
-            cursor += 16;
-        }
-        if (displayIndicatorPresent()) {
-            cursor += 1;
-        }
-        if (maxRemovePctPresent()) {
-            cursor += 1;
-        }
-        if (preventMatchPresent()) {
-            cursor += 3;
-        }
-        if (expireTimePresent()) {
-            cursor += 8;
-        }
-        if (maturityDatePresent()) {
-            cursor += 4;
-        }
-        if (strikePricePresent()) {
-            cursor += 8;
-        }
-        if (putOrCallPresent()) {
-            cursor += 1;
-        }
-        if (riskResetPresent()) {
-            cursor += 8;
-        }
-        if (openClosePresent()) {
-            cursor += 1;
-        }
-        if (cmtaNumberPresent()) {
-            cursor += 4;
-        }
-        if (sessionEligibilityPresent()) {
-            cursor += 1;
-        }
-        if (attributedQuotePresent()) {
-            cursor += 1;
-        }
-        if (extExecInstPresent()) {
-            cursor += 1;
-        }
-        if (displayRangePresent()) {
-            cursor += 4;
-        }
-        if (stopPxPresent()) {
-            cursor += 8;
-        }
-        if (routStrategyPresent()) {
-            cursor += 6;
-        }
-        if (routeDeliveryMethodPresent()) {
-            cursor += 3;
-        }
-        if (exDestinationPresent()) {
-            cursor += 1;
-        }
-        if (echoTextPresent()) {
-            cursor += 64;
-        }
-        if (customGroupIdPresent()) {
-            cursor += 2;
-        }
-        if (clearingOptionalDataPresent()) {
-            cursor += 16;
-        }
-        if (clientIdAttrPresent()) {
-            cursor += 4;
-        }
-        if (floorRoutingInstPresent()) {
-            cursor += 1;
-        }
-        if (orderOriginPresent()) {
-            cursor += 3;
-        }
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -1889,11 +1735,8 @@ public final class NewOrderMessage implements Message {
             }
             cursor += OrderOriginField.BYTE_LENGTH;
         }
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override

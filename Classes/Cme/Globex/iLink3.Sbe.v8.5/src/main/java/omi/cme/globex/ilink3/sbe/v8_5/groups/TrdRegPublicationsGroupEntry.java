@@ -34,13 +34,6 @@ public final class TrdRegPublicationsGroupEntry implements GroupEntry {
     public static final String NAME = "TrdRegPublicationsGroup";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Specifies the type of regulatory trade publication. Additional reasons for the publication type will be specified in TrdRegPublicationReason (2670). 2=Exempt from Publication. There are allowable exemptions for the post-trade publication of trade transactions
      */
     private final TrdRegPublicationTypeField trdRegPublicationType = new TrdRegPublicationTypeField();
@@ -127,7 +120,7 @@ public final class TrdRegPublicationsGroupEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override

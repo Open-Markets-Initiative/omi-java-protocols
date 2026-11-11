@@ -366,7 +366,7 @@ public final class IncrementalRefreshBookLongGroupEntry implements GroupEntry {
             cursor = mdEntryTypeBook.encode(data, cursor);
         }
         if (known >= 32) {
-            if (buffer != null && buffer.length >= 31 + 1) {
+            if (buffer != null && buffer.length >= 32) {
                 System.arraycopy(buffer, 31, data, cursor, 1); // padding
             } else {
                 Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

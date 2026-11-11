@@ -261,7 +261,6 @@ public final class UnderlyingIndexMappingMessage implements Message {
             return false;
         }
         cursor += PriceResolutionField.BYTE_LENGTH;
-        cursor += 1; // padding
 
         return true;
     }
@@ -279,7 +278,7 @@ public final class UnderlyingIndexMappingMessage implements Message {
         cursor = priceScaleCode.encode(data, cursor);
         cursor = securityType.encode(data, cursor);
         cursor = priceResolution.encode(data, cursor);
-        if (buffer != null && buffer.length >= 23 + 1) {
+        if (buffer != null && buffer.length >= 24) {
             System.arraycopy(buffer, 23, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

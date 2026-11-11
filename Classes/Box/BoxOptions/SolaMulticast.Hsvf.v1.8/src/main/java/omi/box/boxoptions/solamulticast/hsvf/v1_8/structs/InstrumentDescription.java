@@ -190,12 +190,7 @@ public final class InstrumentDescription implements GroupEntry {
             return false;
         }
         cursor += ExpiryYearField.BYTE_LENGTH;
-        if (!expiryDay.parse(data, cursor)) {
-            return false;
-        }
-        cursor += ExpiryDayField.BYTE_LENGTH;
-
-        return true;
+        return expiryDay.parse(data, cursor);
     }
 
     @Override
@@ -204,7 +199,7 @@ public final class InstrumentDescription implements GroupEntry {
         int cursor = offset;
         cursor = rootSymbol.encode(data, cursor);
         cursor = expiryMonthCode.encode(data, cursor);
-        if (buffer != null && buffer.length >= 7 + 1) {
+        if (buffer != null && buffer.length >= 8) {
             System.arraycopy(buffer, 7, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

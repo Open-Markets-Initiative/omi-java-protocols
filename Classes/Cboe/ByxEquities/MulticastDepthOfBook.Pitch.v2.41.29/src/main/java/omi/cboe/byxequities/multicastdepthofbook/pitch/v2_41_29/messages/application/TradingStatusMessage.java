@@ -166,7 +166,6 @@ public final class TradingStatusMessage implements Message {
             return false;
         }
         cursor += RegShoActionField.BYTE_LENGTH;
-        cursor += 2; // padding
 
         return true;
     }
@@ -179,7 +178,7 @@ public final class TradingStatusMessage implements Message {
         cursor = symbolLong.encode(data, cursor);
         cursor = tradingStatus.encode(data, cursor);
         cursor = regShoAction.encode(data, cursor);
-        if (buffer != null && buffer.length >= 14 + 2) {
+        if (buffer != null && buffer.length >= 16) {
             System.arraycopy(buffer, 14, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

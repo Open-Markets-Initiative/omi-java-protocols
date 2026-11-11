@@ -35,13 +35,6 @@ public final class AddOrderShortMessage implements Message {
     public static final String NAME = "Add Order Short Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Nanosecond offset from last unit timestamp
      */
     private final TimeOffsetField timeOffset = new TimeOffsetField();
@@ -166,7 +159,7 @@ public final class AddOrderShortMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -219,12 +212,7 @@ public final class AddOrderShortMessage implements Message {
             return false;
         }
         cursor += PriceShortField.BYTE_LENGTH;
-        if (!addOrderFlags.parse(data, cursor)) {
-            return false;
-        }
-        cursor += AddOrderFlagsField.BYTE_LENGTH;
-
-        return true;
+        return addOrderFlags.parse(data, cursor);
     }
 
     @Override

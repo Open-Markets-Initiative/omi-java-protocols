@@ -111,10 +111,6 @@ public final class CaptureTest {
                     continue;
                 }
 
-                if (packet.tcp()) {
-                    continue;
-                }
-
                 byte[] payload = packet.payload();
                 if (check(where, walked(PacketDecoder.decode(payload, 0, payload.length)), strict)) {
                     packets++;

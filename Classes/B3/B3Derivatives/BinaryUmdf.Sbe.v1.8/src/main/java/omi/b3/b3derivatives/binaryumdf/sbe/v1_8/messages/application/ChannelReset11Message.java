@@ -125,12 +125,7 @@ public final class ChannelReset11Message implements Message {
         }
         cursor += MatchEventIndicatorField.BYTE_LENGTH;
         cursor += 3; // padding
-        if (!mdEntryTimestamp.parse(data, cursor)) {
-            return false;
-        }
-        cursor += MdEntryTimestampField.BYTE_LENGTH;
-
-        return true;
+        return mdEntryTimestamp.parse(data, cursor);
     }
 
     @Override
@@ -138,7 +133,7 @@ public final class ChannelReset11Message implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = matchEventIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 1 + 3) {
+        if (buffer != null && buffer.length >= 4) {
             System.arraycopy(buffer, 1, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding

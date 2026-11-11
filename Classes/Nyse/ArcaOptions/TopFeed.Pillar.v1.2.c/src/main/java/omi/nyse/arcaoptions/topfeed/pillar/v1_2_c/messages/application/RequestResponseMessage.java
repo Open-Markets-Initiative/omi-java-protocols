@@ -35,13 +35,6 @@ public final class RequestResponseMessage implements Message {
     public static final String NAME = "Request Response Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * The sequence number of the request message sent by the client.
      */
     private final RequestSeqNumField requestSeqNum = new RequestSeqNumField();
@@ -166,7 +159,7 @@ public final class RequestResponseMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -219,12 +212,7 @@ public final class RequestResponseMessage implements Message {
             return false;
         }
         cursor += ChannelIdField.BYTE_LENGTH;
-        if (!status.parse(data, cursor)) {
-            return false;
-        }
-        cursor += StatusField.BYTE_LENGTH;
-
-        return true;
+        return status.parse(data, cursor);
     }
 
     @Override

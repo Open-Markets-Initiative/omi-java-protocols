@@ -104,12 +104,7 @@ public final class SnapshotOrder implements Message {
         }
 
         int cursor = offset;
-        if (!orderDetailsComp.parseFrom(data, cursor, end)) {
-            return false;
-        }
-        cursor += orderDetailsComp.byteLength();
-
-        return true;
+        return orderDetailsComp.parseFrom(data, cursor, end);
     }
 
     @Override

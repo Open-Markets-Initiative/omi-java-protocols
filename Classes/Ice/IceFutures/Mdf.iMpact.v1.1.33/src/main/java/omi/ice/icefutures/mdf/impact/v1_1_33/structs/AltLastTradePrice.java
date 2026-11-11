@@ -28,13 +28,6 @@ public final class AltLastTradePrice implements GroupEntry {
     public static final String NAME = "AltLastTradePrice";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Last Trade Eris Futures Price
      */
     private final AltLastTradePriceField altLastTradePrice = new AltLastTradePriceField();
@@ -70,7 +63,7 @@ public final class AltLastTradePrice implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -94,12 +87,7 @@ public final class AltLastTradePrice implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!altLastTradePrice.parse(data, cursor)) {
-            return false;
-        }
-        cursor += AltLastTradePriceField.BYTE_LENGTH;
-
-        return true;
+        return altLastTradePrice.parse(data, cursor);
     }
 
     @Override
@@ -186,10 +174,7 @@ public final class AltLastTradePrice implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "AltLastTradePrice" -> Optional.of(altLastTradePrice);
-            default -> Optional.empty();
-        };
+        return "AltLastTradePrice".equals(name) ? Optional.of(altLastTradePrice) : Optional.empty();
     }
 
     @Override

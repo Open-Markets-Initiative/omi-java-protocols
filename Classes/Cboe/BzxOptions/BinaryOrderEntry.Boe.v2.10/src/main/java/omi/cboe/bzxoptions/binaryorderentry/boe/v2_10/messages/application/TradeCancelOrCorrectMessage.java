@@ -1350,11 +1350,8 @@ public final class TradeCancelOrCorrectMessage implements Message {
             }
             cursor += CmtaNumberField.BYTE_LENGTH;
         }
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -1451,7 +1448,7 @@ public final class TradeCancelOrCorrectMessage implements Message {
         cursor = lastPx.encode(data, cursor);
         cursor = correctedPrice.encode(data, cursor);
         cursor = origTime.encode(data, cursor);
-        if (buffer != null && buffer.length >= 82 + 1) {
+        if (buffer != null && buffer.length >= 83) {
             System.arraycopy(buffer, 82, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

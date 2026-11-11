@@ -259,12 +259,7 @@ public final class SecurityDefinitionResponseMessage implements Message {
             return false;
         }
         cursor += SenderLocationField.BYTE_LENGTH;
-        if (!enteringTrader.parse(data, cursor)) {
-            return false;
-        }
-        cursor += EnteringTraderField.BYTE_LENGTH;
-
-        return true;
+        return enteringTrader.parse(data, cursor);
     }
 
     @Override
@@ -272,7 +267,7 @@ public final class SecurityDefinitionResponseMessage implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = outboundBusinessHeader.encode(data, cursor);
-        if (buffer != null && buffer.length >= 18 + 2) {
+        if (buffer != null && buffer.length >= 20) {
             System.arraycopy(buffer, 18, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

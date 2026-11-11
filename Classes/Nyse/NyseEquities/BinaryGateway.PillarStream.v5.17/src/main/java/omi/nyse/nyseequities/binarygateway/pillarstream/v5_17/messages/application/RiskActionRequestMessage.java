@@ -300,7 +300,6 @@ public final class RiskActionRequestMessage implements Message {
             return false;
         }
         cursor += RiskRangeIdField.BYTE_LENGTH;
-        cursor += 199; // padding
 
         return true;
     }
@@ -313,7 +312,7 @@ public final class RiskActionRequestMessage implements Message {
         cursor = mpid.encode(data, cursor);
         cursor = marketMakerNul.encode(data, cursor);
         cursor = mpsubid.encode(data, cursor);
-        if (buffer != null && buffer.length >= 22 + 4) {
+        if (buffer != null && buffer.length >= 26) {
             System.arraycopy(buffer, 22, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding
@@ -326,7 +325,7 @@ public final class RiskActionRequestMessage implements Message {
         cursor = riskControlType.encode(data, cursor);
         cursor = riskActionType.encode(data, cursor);
         cursor = riskRangeId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 47 + 199) {
+        if (buffer != null && buffer.length >= 246) {
             System.arraycopy(buffer, 47, data, cursor, 199); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 199, (byte) 0); // padding

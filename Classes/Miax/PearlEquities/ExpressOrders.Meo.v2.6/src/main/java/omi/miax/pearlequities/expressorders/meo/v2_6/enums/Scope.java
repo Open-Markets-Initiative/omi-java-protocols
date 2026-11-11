@@ -48,9 +48,6 @@ public enum Scope {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<Scope> fromWire(char wire) {
-        return switch (wire) {
-            case 'M' -> Optional.of(PURGE_ALL_ORDERS_FOR_SPECIFIED_MPID);
-            default -> Optional.empty();
-        };
+        return wire == 'M' ? Optional.of(PURGE_ALL_ORDERS_FOR_SPECIFIED_MPID) : Optional.empty();
     }
 }

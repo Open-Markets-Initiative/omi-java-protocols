@@ -255,11 +255,8 @@ public final class QuoteExecutionReport implements Message {
             return false;
         }
         cursor += quoteLegExecGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -274,7 +271,7 @@ public final class QuoteExecutionReport implements Message {
         noQuoteEvents.value((short) quoteEventGrpComp.size());
         noLegExecs.value(quoteLegExecGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -285,7 +282,7 @@ public final class QuoteExecutionReport implements Message {
         cursor = marketSegmentId.encode(data, cursor);
         cursor = noLegExecs.encode(data, cursor);
         cursor = noQuoteEvents.encode(data, cursor);
-        if (buffer != null && buffer.length >= 73 + 1) {
+        if (buffer != null && buffer.length >= 74) {
             System.arraycopy(buffer, 73, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
@@ -333,10 +330,7 @@ public final class QuoteExecutionReport implements Message {
         if (!quoteEventGrpComp.isRecognized()) {
             return false;
         }
-        if (!quoteLegExecGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return quoteLegExecGrpComp.isRecognized();
     }
 
     @Override

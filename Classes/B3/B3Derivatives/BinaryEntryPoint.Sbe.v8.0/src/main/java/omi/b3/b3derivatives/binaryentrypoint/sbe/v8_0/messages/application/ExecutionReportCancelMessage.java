@@ -505,8 +505,8 @@ public final class ExecutionReportCancelMessage implements Message {
         cursor += 8;
         cursor += 8;
         cursor += 8;
-        cursor = deskId.padding(runs, cursor);
-        cursor = memo.padding(runs, cursor);
+        cursor += deskId.byteLength();
+        cursor += memo.byteLength();
         return cursor;
     }
 
@@ -648,11 +648,8 @@ public final class ExecutionReportCancelMessage implements Message {
             return false;
         }
         cursor += memo.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -675,7 +672,7 @@ public final class ExecutionReportCancelMessage implements Message {
         cursor = tradeDate.encode(data, cursor);
         cursor = workingIndicator.encode(data, cursor);
         cursor = execRestatementReason.encode(data, cursor);
-        if (buffer != null && buffer.length >= 100 + 4) {
+        if (buffer != null && buffer.length >= 104) {
             System.arraycopy(buffer, 100, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

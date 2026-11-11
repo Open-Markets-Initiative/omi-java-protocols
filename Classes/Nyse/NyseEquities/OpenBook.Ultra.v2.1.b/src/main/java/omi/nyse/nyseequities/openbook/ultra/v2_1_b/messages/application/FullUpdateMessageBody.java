@@ -329,11 +329,8 @@ public final class FullUpdateMessageBody implements Message {
             return false;
         }
         cursor += fullPricePoint.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -349,7 +346,7 @@ public final class FullUpdateMessageBody implements Message {
         cursor = priceScaleCode.encode(data, cursor);
         cursor = quoteCondition.encode(data, cursor);
         cursor = tradingStatus.encode(data, cursor);
-        if (buffer != null && buffer.length >= 29 + 1) {
+        if (buffer != null && buffer.length >= 30) {
             System.arraycopy(buffer, 29, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
@@ -392,10 +389,7 @@ public final class FullUpdateMessageBody implements Message {
                 return false;
             }
         }
-        if (!fullPricePoint.isRecognized()) {
-            return false;
-        }
-        return true;
+        return fullPricePoint.isRecognized();
     }
 
     @Override

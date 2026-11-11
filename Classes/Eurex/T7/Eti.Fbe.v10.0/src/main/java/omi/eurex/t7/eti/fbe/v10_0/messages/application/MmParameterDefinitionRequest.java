@@ -261,7 +261,6 @@ public final class MmParameterDefinitionRequest implements Message {
             return false;
         }
         cursor += PctCountField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -271,7 +270,7 @@ public final class MmParameterDefinitionRequest implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -285,7 +284,7 @@ public final class MmParameterDefinitionRequest implements Message {
         cursor = marketSegmentId.encode(data, cursor);
         cursor = targetPartyIdSessionId.encode(data, cursor);
         cursor = pctCount.encode(data, cursor);
-        if (buffer != null && buffer.length >= 62 + 4) {
+        if (buffer != null && buffer.length >= 66) {
             System.arraycopy(buffer, 62, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

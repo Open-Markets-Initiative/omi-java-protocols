@@ -35,7 +35,6 @@ public final class CaptureTest {
     private record Ended(Message message, byte[] bytes) {
     }
 
-    private long packets;
     private long otherPackets;
     private long records;
     private long otherFlows;
@@ -68,7 +67,7 @@ public final class CaptureTest {
         }
         test.summary();
 
-        if (test.packets + test.records == 0) {
+        if (test.records == 0) {
             System.err.println("No packet was read from the capture.");
             System.exit(1);
         }
@@ -95,7 +94,7 @@ public final class CaptureTest {
     }
 
     private void walk(Path path, boolean strict) throws IOException {
-        long before = packets + records;
+        long before = records;
         Tcp tcp = new Tcp();
         try (Pcap pcap = Pcap.open(path)) {
             for (Pcap.Packet packet = pcap.next(); packet != null; packet = pcap.next()) {
@@ -109,16 +108,14 @@ public final class CaptureTest {
                 }
 
                 // this protocol has no packet decoder, so its datagrams are other traffic
-                if (!packet.tcp()) {
-                    otherPackets++;
-                }
+                otherPackets++;
             }
         }
 
         end(path, tcp, strict);
 
         // One capture among many could otherwise hold nothing and pass unnoticed.
-        if (strict && packets + records == before) {
+        if (strict && records == before) {
             errors++;
             System.out.println(path.getFileName() + ": no packet was read");
         }
@@ -445,7 +442,6 @@ public final class CaptureTest {
     private void summary() {
         System.out.println();
         System.out.println("=== Summary ===");
-        System.out.println("Packets:  " + packets);
         System.out.println("TCP records: " + records);
         System.out.println("Messages: " + messages);
         System.out.println("Errors:   " + errors);

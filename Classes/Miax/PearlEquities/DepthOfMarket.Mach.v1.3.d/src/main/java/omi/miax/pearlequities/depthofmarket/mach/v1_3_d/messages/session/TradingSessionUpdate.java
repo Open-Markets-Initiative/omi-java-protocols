@@ -35,13 +35,6 @@ public final class TradingSessionUpdate implements Message {
     public static final String NAME = "Trading Session Update";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Matching Engine that originated the packet
      */
     private final MatchingEngineIdField matchingEngineId = new MatchingEngineIdField();
@@ -96,7 +89,7 @@ public final class TradingSessionUpdate implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -129,12 +122,7 @@ public final class TradingSessionUpdate implements Message {
             return false;
         }
         cursor += MatchingEngineIdField.BYTE_LENGTH;
-        if (!tradingSessionId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TradingSessionIdField.BYTE_LENGTH;
-
-        return true;
+        return tradingSessionId.parse(data, cursor);
     }
 
     @Override

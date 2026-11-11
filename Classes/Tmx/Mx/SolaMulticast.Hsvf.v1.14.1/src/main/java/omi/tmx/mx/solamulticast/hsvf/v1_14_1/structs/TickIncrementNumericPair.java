@@ -29,13 +29,6 @@ public final class TickIncrementNumericPair implements GroupEntry {
     public static final String NAME = "TickIncrementNumericPair";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Contains the Tick Table Short Name if available. If so, field starts with TT=. Otherwise, indicates precision with which the price of an order limit can be expressed
      */
     private final TickIncrementNumericField tickIncrementNumeric = new TickIncrementNumericField();
@@ -85,7 +78,7 @@ public final class TickIncrementNumericPair implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class TickIncrementNumericPair implements GroupEntry {
             return false;
         }
         cursor += TickIncrementNumericField.BYTE_LENGTH;
-        if (!tickIncrementFractionIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TickIncrementFractionIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return tickIncrementFractionIndicator.parse(data, cursor);
     }
 
     @Override

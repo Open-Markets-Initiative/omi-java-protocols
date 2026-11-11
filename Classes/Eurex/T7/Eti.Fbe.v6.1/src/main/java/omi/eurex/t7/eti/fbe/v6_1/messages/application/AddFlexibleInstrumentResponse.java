@@ -318,7 +318,6 @@ public final class AddFlexibleInstrumentResponse implements Message {
             return false;
         }
         cursor += SymbolField.BYTE_LENGTH;
-        cursor += 7; // padding
 
         return true;
     }
@@ -327,7 +326,7 @@ public final class AddFlexibleInstrumentResponse implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -345,7 +344,7 @@ public final class AddFlexibleInstrumentResponse implements Message {
         cursor = putOrCall.encode(data, cursor);
         cursor = exerciseStyle.encode(data, cursor);
         cursor = symbol.encode(data, cursor);
-        if (buffer != null && buffer.length >= 99 + 7) {
+        if (buffer != null && buffer.length >= 106) {
             System.arraycopy(buffer, 99, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

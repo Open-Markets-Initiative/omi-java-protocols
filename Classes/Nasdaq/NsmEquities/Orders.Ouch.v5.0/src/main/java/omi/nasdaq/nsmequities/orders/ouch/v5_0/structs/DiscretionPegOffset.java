@@ -28,13 +28,6 @@ public final class DiscretionPegOffset implements GroupEntry {
     public static final String NAME = "DiscretionPegOffset";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Offset amount for the pegged value of the Discretionary Price.
      */
     private final DiscretionPegOffsetField discretionPegOffset = new DiscretionPegOffsetField();
@@ -70,7 +63,7 @@ public final class DiscretionPegOffset implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -94,12 +87,7 @@ public final class DiscretionPegOffset implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!discretionPegOffset.parse(data, cursor)) {
-            return false;
-        }
-        cursor += DiscretionPegOffsetField.BYTE_LENGTH;
-
-        return true;
+        return discretionPegOffset.parse(data, cursor);
     }
 
     @Override
@@ -186,10 +174,7 @@ public final class DiscretionPegOffset implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "DiscretionPegOffset" -> Optional.of(discretionPegOffset);
-            default -> Optional.empty();
-        };
+        return "DiscretionPegOffset".equals(name) ? Optional.of(discretionPegOffset) : Optional.empty();
     }
 
     @Override

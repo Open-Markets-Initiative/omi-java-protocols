@@ -147,7 +147,6 @@ public final class TesTradingSessionStatusBroadcast implements Message {
             return false;
         }
         cursor += TradSesEventField.BYTE_LENGTH;
-        cursor += 3; // padding
 
         return true;
     }
@@ -156,7 +155,7 @@ public final class TesTradingSessionStatusBroadcast implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -165,7 +164,7 @@ public final class TesTradingSessionStatusBroadcast implements Message {
         cursor = rbcHeaderComp.encode(data, cursor);
         cursor = tradeDate.encode(data, cursor);
         cursor = tradSesEvent.encode(data, cursor);
-        if (buffer != null && buffer.length >= 39 + 3) {
+        if (buffer != null && buffer.length >= 42) {
             System.arraycopy(buffer, 39, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding

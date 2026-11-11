@@ -28,13 +28,6 @@ public final class OrderMassDelete implements Message {
     public static final String NAME = "Order Mass Delete";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Unique instrument identifier
      */
     private final SecurityIdField securityId = new SecurityIdField();
@@ -89,7 +82,7 @@ public final class OrderMassDelete implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -122,12 +115,7 @@ public final class OrderMassDelete implements Message {
             return false;
         }
         cursor += SecurityIdField.BYTE_LENGTH;
-        if (!transactTime.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TransactTimeField.BYTE_LENGTH;
-
-        return true;
+        return transactTime.parse(data, cursor);
     }
 
     @Override

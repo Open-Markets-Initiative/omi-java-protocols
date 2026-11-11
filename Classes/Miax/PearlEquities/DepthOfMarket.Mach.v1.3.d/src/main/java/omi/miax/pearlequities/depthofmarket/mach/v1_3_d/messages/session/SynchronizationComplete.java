@@ -34,13 +34,6 @@ public final class SynchronizationComplete implements Message {
     public static final String NAME = "Synchronization Complete";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Matching Engine that originated the packet
      */
     private final MatchingEngineIdField matchingEngineId = new MatchingEngineIdField();
@@ -81,7 +74,7 @@ public final class SynchronizationComplete implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -110,12 +103,7 @@ public final class SynchronizationComplete implements Message {
         }
 
         int cursor = offset;
-        if (!matchingEngineId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += MatchingEngineIdField.BYTE_LENGTH;
-
-        return true;
+        return matchingEngineId.parse(data, cursor);
     }
 
     @Override
@@ -202,10 +190,7 @@ public final class SynchronizationComplete implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "MatchingEngineId" -> Optional.of(matchingEngineId);
-            default -> Optional.empty();
-        };
+        return "MatchingEngineId".equals(name) ? Optional.of(matchingEngineId) : Optional.empty();
     }
 
     @Override

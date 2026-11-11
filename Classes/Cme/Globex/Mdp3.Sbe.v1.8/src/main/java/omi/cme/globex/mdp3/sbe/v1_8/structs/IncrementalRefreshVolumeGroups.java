@@ -134,11 +134,8 @@ public final class IncrementalRefreshVolumeGroups implements GroupEntry {
             return false;
         }
         cursor += incrementalRefreshVolumeGroup.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -188,10 +185,7 @@ public final class IncrementalRefreshVolumeGroups implements GroupEntry {
                 return false;
             }
         }
-        if (!incrementalRefreshVolumeGroup.isRecognized()) {
-            return false;
-        }
-        return true;
+        return incrementalRefreshVolumeGroup.isRecognized();
     }
 
     @Override

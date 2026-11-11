@@ -529,11 +529,8 @@ public final class ComplexInstrumentDefinitionMessage implements Message {
             return false;
         }
         cursor += instrumentLeg.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -563,7 +560,7 @@ public final class ComplexInstrumentDefinitionMessage implements Message {
         cursor = unitOfMeasureQuantity.encode(data, cursor);
         cursor = tradingCollarVariationType.encode(data, cursor);
         cursor = tradingCollarVariation.encode(data, cursor);
-        if (buffer != null && buffer.length >= 67 + 16) {
+        if (buffer != null && buffer.length >= 83) {
             System.arraycopy(buffer, 67, data, cursor, 16); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 16, (byte) 0); // padding
@@ -606,10 +603,7 @@ public final class ComplexInstrumentDefinitionMessage implements Message {
                 return false;
             }
         }
-        if (!instrumentLeg.isRecognized()) {
-            return false;
-        }
-        return true;
+        return instrumentLeg.isRecognized();
     }
 
     @Override

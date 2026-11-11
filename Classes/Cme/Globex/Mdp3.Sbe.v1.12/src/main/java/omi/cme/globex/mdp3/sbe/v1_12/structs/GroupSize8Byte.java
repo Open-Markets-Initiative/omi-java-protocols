@@ -114,12 +114,7 @@ public final class GroupSize8Byte implements GroupEntry {
         }
         cursor += BlockLengthField.BYTE_LENGTH;
         cursor += 5; // padding
-        if (!numInGroup.parse(data, cursor)) {
-            return false;
-        }
-        cursor += NumInGroupField.BYTE_LENGTH;
-
-        return true;
+        return numInGroup.parse(data, cursor);
     }
 
     @Override
@@ -127,7 +122,7 @@ public final class GroupSize8Byte implements GroupEntry {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = blockLength.encode(data, cursor);
-        if (buffer != null && buffer.length >= 2 + 5) {
+        if (buffer != null && buffer.length >= 7) {
             System.arraycopy(buffer, 2, data, cursor, 5); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 5, (byte) 0); // padding

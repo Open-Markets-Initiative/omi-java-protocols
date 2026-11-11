@@ -36,13 +36,6 @@ public final class CorrectedTrade implements GroupEntry {
     public static final String NAME = "CorrectedTrade";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * The Trade Price is the monetary value of an individual share of security at the time of the trade
      */
     private final TradePriceLongField tradePriceLong = new TradePriceLongField();
@@ -176,7 +169,7 @@ public final class CorrectedTrade implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -228,12 +221,7 @@ public final class CorrectedTrade implements GroupEntry {
             return false;
         }
         cursor += ShortSaleRestrictionIndicatorField.BYTE_LENGTH;
-        if (!priorDayTradeDateAndTime.parseFrom(data, cursor, end)) {
-            return false;
-        }
-        cursor += priorDayTradeDateAndTime.byteLength();
-
-        return true;
+        return priorDayTradeDateAndTime.parseFrom(data, cursor, end);
     }
 
     @Override

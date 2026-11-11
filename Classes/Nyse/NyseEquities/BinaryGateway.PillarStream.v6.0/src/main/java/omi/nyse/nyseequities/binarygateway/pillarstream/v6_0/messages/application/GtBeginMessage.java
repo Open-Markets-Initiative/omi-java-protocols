@@ -29,13 +29,6 @@ public final class GtBeginMessage implements Message {
     public static final String NAME = "Gt Begin Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Exchange application time.
      */
     private final TransactTimeField transactTime = new TransactTimeField();
@@ -76,7 +69,7 @@ public final class GtBeginMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -105,12 +98,7 @@ public final class GtBeginMessage implements Message {
         }
 
         int cursor = offset;
-        if (!transactTime.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TransactTimeField.BYTE_LENGTH;
-
-        return true;
+        return transactTime.parse(data, cursor);
     }
 
     @Override
@@ -197,10 +185,7 @@ public final class GtBeginMessage implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "TransactTime" -> Optional.of(transactTime);
-            default -> Optional.empty();
-        };
+        return "TransactTime".equals(name) ? Optional.of(transactTime) : Optional.empty();
     }
 
     @Override

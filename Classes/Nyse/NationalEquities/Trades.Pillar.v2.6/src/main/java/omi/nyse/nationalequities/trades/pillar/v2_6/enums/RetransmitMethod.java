@@ -48,9 +48,6 @@ public enum RetransmitMethod {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<RetransmitMethod> fromWire(short wire) {
-        return switch (wire) {
-            case 0 -> Optional.of(DELIVER_VIA_UDP);
-            default -> Optional.empty();
-        };
+        return wire == 0 ? Optional.of(DELIVER_VIA_UDP) : Optional.empty();
     }
 }

@@ -231,7 +231,7 @@ public final class LegsGroupEntry implements GroupEntry {
             cursor = legSide.encode(data, cursor);
         }
         if (known >= 30) {
-            if (buffer != null && buffer.length >= 29 + 1) {
+            if (buffer != null && buffer.length >= 30) {
                 System.arraycopy(buffer, 29, data, cursor, 1); // padding
             } else {
                 Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

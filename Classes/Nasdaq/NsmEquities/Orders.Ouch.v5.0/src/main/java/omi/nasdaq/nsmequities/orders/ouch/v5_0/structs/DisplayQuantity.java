@@ -28,13 +28,6 @@ public final class DisplayQuantity implements GroupEntry {
     public static final String NAME = "DisplayQuantity";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Used in the Order Restated Message only. Represents an update of an order's displayed quantity (i.e. an order with reserves).
      */
     private final DisplayQuantityField displayQuantity = new DisplayQuantityField();
@@ -70,7 +63,7 @@ public final class DisplayQuantity implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -94,12 +87,7 @@ public final class DisplayQuantity implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!displayQuantity.parse(data, cursor)) {
-            return false;
-        }
-        cursor += DisplayQuantityField.BYTE_LENGTH;
-
-        return true;
+        return displayQuantity.parse(data, cursor);
     }
 
     @Override
@@ -186,10 +174,7 @@ public final class DisplayQuantity implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "DisplayQuantity" -> Optional.of(displayQuantity);
-            default -> Optional.empty();
-        };
+        return "DisplayQuantity".equals(name) ? Optional.of(displayQuantity) : Optional.empty();
     }
 
     @Override

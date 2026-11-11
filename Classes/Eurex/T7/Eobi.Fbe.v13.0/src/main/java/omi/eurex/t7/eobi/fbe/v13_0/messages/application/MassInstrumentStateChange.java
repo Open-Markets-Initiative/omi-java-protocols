@@ -351,7 +351,7 @@ public final class MassInstrumentStateChange implements Message {
         cursor = transactTime.encode(data, cursor);
         cursor = lastFragment.encode(data, cursor);
         cursor = noRelatedSym.encode(data, cursor);
-        if (buffer != null && buffer.length >= 18 + 6) {
+        if (buffer != null && buffer.length >= 24) {
             System.arraycopy(buffer, 18, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding
@@ -393,10 +393,7 @@ public final class MassInstrumentStateChange implements Message {
                 return false;
             }
         }
-        if (!secMassStatGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return secMassStatGrpComp.isRecognized();
     }
 
     @Override

@@ -136,7 +136,6 @@ public final class QuoteResultGroupEntry implements GroupEntry {
             return false;
         }
         cursor += QuoteLiquidityIndicatorField.BYTE_LENGTH;
-        cursor += 6; // padding
 
         return true;
     }
@@ -148,7 +147,7 @@ public final class QuoteResultGroupEntry implements GroupEntry {
         cursor = orderId.encode(data, cursor);
         cursor = quoteResult.encode(data, cursor);
         cursor = quoteLiquidityIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 10 + 6) {
+        if (buffer != null && buffer.length >= 16) {
             System.arraycopy(buffer, 10, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding

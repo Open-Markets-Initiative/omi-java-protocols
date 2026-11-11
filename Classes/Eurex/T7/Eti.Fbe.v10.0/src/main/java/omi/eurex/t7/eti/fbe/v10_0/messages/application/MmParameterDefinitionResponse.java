@@ -124,19 +124,14 @@ public final class MmParameterDefinitionResponse implements Message {
             return false;
         }
         cursor += nrResponseHeaderMeComp.byteLength();
-        if (!execId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += ExecIdField.BYTE_LENGTH;
-
-        return true;
+        return execId.parse(data, cursor);
     }
 
     @Override
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -224,10 +219,7 @@ public final class MmParameterDefinitionResponse implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "ExecId" -> Optional.of(execId);
-            default -> Optional.empty();
-        };
+        return "ExecId".equals(name) ? Optional.of(execId) : Optional.empty();
     }
 
     @Override

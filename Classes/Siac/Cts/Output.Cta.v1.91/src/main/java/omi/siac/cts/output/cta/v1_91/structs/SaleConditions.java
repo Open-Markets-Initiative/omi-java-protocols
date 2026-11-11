@@ -31,13 +31,6 @@ public final class SaleConditions implements GroupEntry {
     public static final String NAME = "SaleConditions";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Denotes the Settlement Type sale condition
      */
     private final Category1Field category1 = new Category1Field();
@@ -115,7 +108,7 @@ public final class SaleConditions implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -151,12 +144,7 @@ public final class SaleConditions implements GroupEntry {
             return false;
         }
         cursor += Category3Field.BYTE_LENGTH;
-        if (!category4.parse(data, cursor)) {
-            return false;
-        }
-        cursor += Category4Field.BYTE_LENGTH;
-
-        return true;
+        return category4.parse(data, cursor);
     }
 
     @Override

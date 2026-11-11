@@ -2,6 +2,7 @@ package omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Objects;
@@ -54,7 +55,7 @@ public final class ExecutionPriceField extends Field {
      * @throws ArithmeticException when the value has more decimal places than the field's scale, or more digits than its width
      */
     public void value(BigDecimal value) {
-        String digits = value == null ? "" : value.setScale(SCALE).unscaledValue().toString();
+        String digits = value == null ? "" : value.setScale(SCALE, RoundingMode.UNNECESSARY).unscaledValue().toString();
         if (digits.length() > BYTE_LENGTH) {
             throw new ArithmeticException(NAME + " holds " + BYTE_LENGTH + " characters, not " + digits.length());
         }

@@ -42,13 +42,6 @@ public final class OrderModified implements Message {
     public static final String NAME = "Order Modified";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * The time the event occurred in the CFE Matching Engine (not the time the message was sent)
      */
     private final TransactionTimeField transactionTime = new TransactionTimeField();
@@ -271,7 +264,7 @@ public final class OrderModified implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -352,12 +345,7 @@ public final class OrderModified implements Message {
             return false;
         }
         cursor += CustOrderHandlingInstField.BYTE_LENGTH;
-        if (!requestReceivedTime.parse(data, cursor)) {
-            return false;
-        }
-        cursor += RequestReceivedTimeField.BYTE_LENGTH;
-
-        return true;
+        return requestReceivedTime.parse(data, cursor);
     }
 
     @Override

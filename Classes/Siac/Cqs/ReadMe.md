@@ -7,8 +7,8 @@ A division of [The Securities Industry Automation Corporation](..).
 
 | [Protocol][Omi.Siac.Protocol.Definitions] | [Encoding][Omi.Encoding.Definitions] | Version | Date | Size | [Deployment][Omi.Glossary.Deployment] | [Testing][Omi.Glossary.Testing] | [Documentation][Omi.Siac.Specifications] |
 | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| [Output][Siac.Cqs.Output] | [Cta][Omi.Encoding.Cta] | [2.10.a][Siac.Cqs.Output.Cta.v2.10.a.Parser] | 6/6/2025 | 25,403 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Siac.Cqs.Output.Cta.v2.10.a.Url] - [pdf][Siac.Cqs.Output.Cta.v2.10.a.Pdf] |
-| [Output][Siac.Cqs.Output] | [Cta][Omi.Encoding.Cta] | [1.91][Siac.Cqs.Output.Cta.v1.91.Parser] | 1/2/2020 | 23,103 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Verified][Omi.Glossary.Testing.Verified] | [url][Siac.Cqs.Output.Cta.v1.91.Url] - [pdf][Siac.Cqs.Output.Cta.v1.91.Pdf] |
+| [Output][Siac.Cqs.Output] | [Cta][Omi.Encoding.Cta] | [2.10.a][Siac.Cqs.Output.Cta.v2.10.a.Parser] | 6/6/2025 | 24,921 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Siac.Cqs.Output.Cta.v2.10.a.Url] - [pdf][Siac.Cqs.Output.Cta.v2.10.a.Pdf] |
+| [Output][Siac.Cqs.Output] | [Cta][Omi.Encoding.Cta] | [1.91][Siac.Cqs.Output.Cta.v1.91.Parser] | 1/2/2020 | 22,666 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Verified][Omi.Glossary.Testing.Verified] | [url][Siac.Cqs.Output.Cta.v1.91.Url] - [pdf][Siac.Cqs.Output.Cta.v1.91.Pdf] |
 
 
 <p align="center"><a href="https://en.wikipedia.org/wiki/Securities_Industry_Automation_Corporation" title="The Securities Industry Automation Corporation Website"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Website.png" alt="Website" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://en.wikipedia.org/wiki/Securities_Industry_Automation_Corporation" title="The Securities Industry Automation Corporation on Wikipedia"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Wikipedia.png" alt="Wikipedia" width="32" height="32"></a></p>

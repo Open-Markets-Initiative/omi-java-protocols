@@ -565,7 +565,6 @@ public final class NewOrderNotification implements Message {
             return false;
         }
         cursor += OriginalOrderCapacityField.BYTE_LENGTH;
-        cursor += 18; // padding
 
         return true;
     }
@@ -599,7 +598,7 @@ public final class NewOrderNotification implements Message {
         cursor = locateAccount.encode(data, cursor);
         cursor = purgeGroup.encode(data, cursor);
         cursor = originalOrderCapacity.encode(data, cursor);
-        if (buffer != null && buffer.length >= 119 + 18) {
+        if (buffer != null && buffer.length >= 137) {
             System.arraycopy(buffer, 119, data, cursor, 18); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 18, (byte) 0); // padding

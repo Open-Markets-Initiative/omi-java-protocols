@@ -134,11 +134,8 @@ public final class IncrementalRefreshSessionStatisticsGroups implements GroupEnt
             return false;
         }
         cursor += incrementalRefreshSessionStatisticsGroup.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -188,10 +185,7 @@ public final class IncrementalRefreshSessionStatisticsGroups implements GroupEnt
                 return false;
             }
         }
-        if (!incrementalRefreshSessionStatisticsGroup.isRecognized()) {
-            return false;
-        }
-        return true;
+        return incrementalRefreshSessionStatisticsGroup.isRecognized();
     }
 
     @Override

@@ -354,12 +354,7 @@ public final class SeriesIndexMappingMessage implements Message {
             return false;
         }
         cursor += OptionSymbolRootField.BYTE_LENGTH;
-        if (!groupId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += GroupIdField.BYTE_LENGTH;
-
-        return true;
+        return groupId.parse(data, cursor);
     }
 
     @Override
@@ -368,7 +363,7 @@ public final class SeriesIndexMappingMessage implements Message {
         int cursor = offset;
         cursor = seriesIndex.encode(data, cursor);
         cursor = channelId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 5 + 1) {
+        if (buffer != null && buffer.length >= 6) {
             System.arraycopy(buffer, 5, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
@@ -376,7 +371,7 @@ public final class SeriesIndexMappingMessage implements Message {
         cursor += 1;
         cursor = marketId.encode(data, cursor);
         cursor = systemId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 9 + 1) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 9, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

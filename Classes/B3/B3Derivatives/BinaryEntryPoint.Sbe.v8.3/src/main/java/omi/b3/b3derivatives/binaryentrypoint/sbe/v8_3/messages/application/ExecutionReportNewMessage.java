@@ -622,8 +622,8 @@ public final class ExecutionReportNewMessage implements Message {
         cursor += 1;
         cursor += 4;
         cursor += 4;
-        cursor = deskId.padding(runs, cursor);
-        cursor = memo.padding(runs, cursor);
+        cursor += deskId.byteLength();
+        cursor += memo.byteLength();
         return cursor;
     }
 
@@ -794,11 +794,8 @@ public final class ExecutionReportNewMessage implements Message {
             return false;
         }
         cursor += memo.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -830,7 +827,7 @@ public final class ExecutionReportNewMessage implements Message {
         cursor = maxFloor.encode(data, cursor);
         cursor = crossidOptional.encode(data, cursor);
         cursor = receivedTime.encode(data, cursor);
-        if (buffer != null && buffer.length >= 152 + 3) {
+        if (buffer != null && buffer.length >= 155) {
             System.arraycopy(buffer, 152, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding
@@ -841,7 +838,7 @@ public final class ExecutionReportNewMessage implements Message {
         cursor = crossType.encode(data, cursor);
         cursor = crossPrioritization.encode(data, cursor);
         cursor = mmProtectionResetOptional.encode(data, cursor);
-        if (buffer != null && buffer.length >= 167 + 1) {
+        if (buffer != null && buffer.length >= 168) {
             System.arraycopy(buffer, 167, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

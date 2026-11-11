@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import omi.cboe.c1options.openingauction.csm.v1_0.fields.ApplSeqNumField;
 import omi.cboe.c1options.openingauction.csm.v1_0.fields.ClassKeyField;
@@ -199,33 +198,7 @@ public final class MarketDataRefreshMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor += 4;
-        cursor += 4;
-        cursor += 1;
-        cursor += 1;
-        cursor += 4;
-        for (int[] run = PrevClosePx.padding(), index = { 0 }; index[0] < run.length; index[0] += 2) {
-            runs.add(cursor + run[index[0]]).add(run[index[0] + 1]);
-        }
-        cursor += PrevClosePx.BYTE_LENGTH;
-        cursor += 4;
-        cursor += 1;
-        cursor = mdEntry.padding(runs, cursor);
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -290,11 +263,8 @@ public final class MarketDataRefreshMessage implements Message {
             return false;
         }
         cursor += mdEntry.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -350,10 +320,7 @@ public final class MarketDataRefreshMessage implements Message {
                 return false;
             }
         }
-        if (!mdEntry.isRecognized()) {
-            return false;
-        }
-        return true;
+        return mdEntry.isRecognized();
     }
 
     @Override

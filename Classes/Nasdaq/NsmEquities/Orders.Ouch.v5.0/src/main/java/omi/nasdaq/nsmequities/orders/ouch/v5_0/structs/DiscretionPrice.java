@@ -28,13 +28,6 @@ public final class DiscretionPrice implements GroupEntry {
     public static final String NAME = "DiscretionPrice";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Discretion price for Discretionary Order.
      */
     private final DiscretionPriceField discretionPrice = new DiscretionPriceField();
@@ -70,7 +63,7 @@ public final class DiscretionPrice implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -94,12 +87,7 @@ public final class DiscretionPrice implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!discretionPrice.parse(data, cursor)) {
-            return false;
-        }
-        cursor += DiscretionPriceField.BYTE_LENGTH;
-
-        return true;
+        return discretionPrice.parse(data, cursor);
     }
 
     @Override
@@ -186,10 +174,7 @@ public final class DiscretionPrice implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "DiscretionPrice" -> Optional.of(discretionPrice);
-            default -> Optional.empty();
-        };
+        return "DiscretionPrice".equals(name) ? Optional.of(discretionPrice) : Optional.empty();
     }
 
     @Override

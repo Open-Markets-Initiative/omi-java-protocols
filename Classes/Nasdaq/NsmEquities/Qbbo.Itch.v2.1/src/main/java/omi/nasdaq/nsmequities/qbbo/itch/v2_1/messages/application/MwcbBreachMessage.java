@@ -36,13 +36,6 @@ public final class MwcbBreachMessage implements Message {
     public static final String NAME = "Mwcb Breach Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Nasdaq internal tracking number
      */
     private final TrackingNumberField trackingNumber = new TrackingNumberField();
@@ -111,7 +104,7 @@ public final class MwcbBreachMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -148,12 +141,7 @@ public final class MwcbBreachMessage implements Message {
             return false;
         }
         cursor += TimeStampField.BYTE_LENGTH;
-        if (!breachedLevel.parse(data, cursor)) {
-            return false;
-        }
-        cursor += BreachedLevelField.BYTE_LENGTH;
-
-        return true;
+        return breachedLevel.parse(data, cursor);
     }
 
     @Override

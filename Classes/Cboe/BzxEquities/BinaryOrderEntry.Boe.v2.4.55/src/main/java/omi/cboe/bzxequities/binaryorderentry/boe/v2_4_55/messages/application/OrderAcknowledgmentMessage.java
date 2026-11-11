@@ -2424,11 +2424,8 @@ public final class OrderAcknowledgmentMessage implements Message {
             }
             cursor += StepUpAmountField.BYTE_LENGTH;
         }
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -2615,7 +2612,7 @@ public final class OrderAcknowledgmentMessage implements Message {
         cursor = transactionTime.encode(data, cursor);
         cursor = clOrdId.encode(data, cursor);
         cursor = orderId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 36 + 1) {
+        if (buffer != null && buffer.length >= 37) {
             System.arraycopy(buffer, 36, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

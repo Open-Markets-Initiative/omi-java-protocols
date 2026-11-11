@@ -28,13 +28,6 @@ public final class AltVwap implements GroupEntry {
     public static final String NAME = "AltVwap";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Volume-weighted Average Eris Futures Price
      */
     private final AltVwapField altVwap = new AltVwapField();
@@ -70,7 +63,7 @@ public final class AltVwap implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -94,12 +87,7 @@ public final class AltVwap implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!altVwap.parse(data, cursor)) {
-            return false;
-        }
-        cursor += AltVwapField.BYTE_LENGTH;
-
-        return true;
+        return altVwap.parse(data, cursor);
     }
 
     @Override
@@ -186,10 +174,7 @@ public final class AltVwap implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "AltVwap" -> Optional.of(altVwap);
-            default -> Optional.empty();
-        };
+        return "AltVwap".equals(name) ? Optional.of(altVwap) : Optional.empty();
     }
 
     @Override

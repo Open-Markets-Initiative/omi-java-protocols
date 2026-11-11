@@ -47,13 +47,6 @@ public final class OrderCancelReplaceReject implements Message {
     public static final String NAME = "Order Cancel Replace Reject";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Sequence number as assigned to message
      */
     private final SeqNumField seqNum = new SeqNumField();
@@ -346,7 +339,7 @@ public final class OrderCancelReplaceReject implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -447,12 +440,7 @@ public final class OrderCancelReplaceReject implements Message {
             return false;
         }
         cursor += LiquidityFlagField.BYTE_LENGTH;
-        if (!delayToTime.parse(data, cursor)) {
-            return false;
-        }
-        cursor += DelayToTimeField.BYTE_LENGTH;
-
-        return true;
+        return delayToTime.parse(data, cursor);
     }
 
     @Override

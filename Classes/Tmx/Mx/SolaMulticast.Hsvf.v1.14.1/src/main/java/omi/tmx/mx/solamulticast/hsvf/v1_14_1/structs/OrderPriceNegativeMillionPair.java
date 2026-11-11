@@ -29,13 +29,6 @@ public final class OrderPriceNegativeMillionPair implements GroupEntry {
     public static final String NAME = "OrderPriceNegativeMillionPair";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * For a buy order, represents the highest price that the order issuer is willing to pay or for a sell order, represents the lowest price at which the order issuer is willing to sell
      */
     private final RawOrderPriceField rawOrderPrice = new RawOrderPriceField();
@@ -85,7 +78,7 @@ public final class OrderPriceNegativeMillionPair implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class OrderPriceNegativeMillionPair implements GroupEntry {
             return false;
         }
         cursor += RawOrderPriceField.BYTE_LENGTH;
-        if (!orderPriceFractionIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += OrderPriceFractionIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return orderPriceFractionIndicator.parse(data, cursor);
     }
 
     @Override

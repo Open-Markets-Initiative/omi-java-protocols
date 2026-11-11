@@ -128,7 +128,6 @@ public final class SubscribeResponse implements Message {
             return false;
         }
         cursor += ApplSubIdField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -137,7 +136,7 @@ public final class SubscribeResponse implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -145,7 +144,7 @@ public final class SubscribeResponse implements Message {
         cursor += 2;
         cursor = responseHeaderComp.encode(data, cursor);
         cursor = applSubId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 30 + 4) {
+        if (buffer != null && buffer.length >= 34) {
             System.arraycopy(buffer, 30, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding
@@ -231,10 +230,7 @@ public final class SubscribeResponse implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "ApplSubId" -> Optional.of(applSubId);
-            default -> Optional.empty();
-        };
+        return "ApplSubId".equals(name) ? Optional.of(applSubId) : Optional.empty();
     }
 
     @Override

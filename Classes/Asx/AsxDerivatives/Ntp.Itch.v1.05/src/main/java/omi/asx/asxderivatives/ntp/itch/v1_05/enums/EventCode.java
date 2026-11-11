@@ -48,9 +48,6 @@ public enum EventCode {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<EventCode> fromWire(char wire) {
-        return switch (wire) {
-            case 'C' -> Optional.of(BUSINESS_TRADE_DATE_HAS_ENDED);
-            default -> Optional.empty();
-        };
+        return wire == 'C' ? Optional.of(BUSINESS_TRADE_DATE_HAS_ENDED) : Optional.empty();
     }
 }

@@ -38,13 +38,6 @@ public final class CompactComplexTopOfMarketBidMessage implements Message {
     public static final String NAME = "Compact Complex Top Of Market Bid Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Time at which this product is added/updated on MIAX system today.
      */
     private final NanosecondsField nanoseconds = new NanosecondsField();
@@ -141,7 +134,7 @@ public final class CompactComplexTopOfMarketBidMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -186,12 +179,7 @@ public final class CompactComplexTopOfMarketBidMessage implements Message {
             return false;
         }
         cursor += CompactSizeField.BYTE_LENGTH;
-        if (!topOfMarketQuoteCondition.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TopOfMarketQuoteConditionField.BYTE_LENGTH;
-
-        return true;
+        return topOfMarketQuoteCondition.parse(data, cursor);
     }
 
     @Override

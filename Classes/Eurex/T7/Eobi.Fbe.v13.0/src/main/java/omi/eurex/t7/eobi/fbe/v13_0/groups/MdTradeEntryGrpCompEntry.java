@@ -136,7 +136,6 @@ public final class MdTradeEntryGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += MdEntryTypeField.BYTE_LENGTH;
-        cursor += 7; // padding
 
         return true;
     }
@@ -148,7 +147,7 @@ public final class MdTradeEntryGrpCompEntry implements GroupEntry {
         cursor = mdEntryPx.encode(data, cursor);
         cursor = mdEntrySize.encode(data, cursor);
         cursor = mdEntryType.encode(data, cursor);
-        if (buffer != null && buffer.length >= 17 + 7) {
+        if (buffer != null && buffer.length >= 24) {
             System.arraycopy(buffer, 17, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

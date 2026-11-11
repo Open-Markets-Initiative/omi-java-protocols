@@ -33,13 +33,6 @@ public final class SecurityStatusRequestRelatedSymbolGroupEntry implements Group
     public static final String NAME = "SecurityStatusRequestRelatedSymbolGroup";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Security ID
      */
     private final SecurityIdField securityId = new SecurityIdField();
@@ -109,7 +102,7 @@ public final class SecurityStatusRequestRelatedSymbolGroupEntry implements Group
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -254,10 +247,7 @@ public final class SecurityStatusRequestRelatedSymbolGroupEntry implements Group
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "SecurityId" -> Optional.of(securityId);
-            default -> Optional.empty();
-        };
+        return "SecurityId".equals(name) ? Optional.of(securityId) : Optional.empty();
     }
 
     @Override

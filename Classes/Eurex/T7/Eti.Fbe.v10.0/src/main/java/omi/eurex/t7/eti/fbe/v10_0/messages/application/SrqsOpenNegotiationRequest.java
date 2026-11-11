@@ -775,11 +775,8 @@ public final class SrqsOpenNegotiationRequest implements Message {
             return false;
         }
         cursor += targetPartiesComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -795,7 +792,7 @@ public final class SrqsOpenNegotiationRequest implements Message {
         noTargetPartyIDs.value((short) targetPartiesComp.size());
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -831,7 +828,7 @@ public final class SrqsOpenNegotiationRequest implements Message {
         cursor = freeText.encode(data, cursor);
         cursor = quoteReqId.encode(data, cursor);
         cursor = partyOrderOriginationTrader.encode(data, cursor);
-        if (buffer != null && buffer.length >= 392 + 2) {
+        if (buffer != null && buffer.length >= 394) {
             System.arraycopy(buffer, 392, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -879,10 +876,7 @@ public final class SrqsOpenNegotiationRequest implements Message {
         if (!quotReqLegsGrpComp.isRecognized()) {
             return false;
         }
-        if (!targetPartiesComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return targetPartiesComp.isRecognized();
     }
 
     @Override

@@ -118,7 +118,6 @@ public final class OptionalRoutingStrategyAddOn implements GroupEntry {
             return false;
         }
         cursor += RoutingStrategyField.BYTE_LENGTH;
-        cursor += 27; // padding
 
         return true;
     }
@@ -129,7 +128,7 @@ public final class OptionalRoutingStrategyAddOn implements GroupEntry {
         int cursor = offset;
         cursor = subMsgHeader.encode(data, cursor);
         cursor = routingStrategy.encode(data, cursor);
-        if (buffer != null && buffer.length >= 5 + 27) {
+        if (buffer != null && buffer.length >= 32) {
             System.arraycopy(buffer, 5, data, cursor, 27); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 27, (byte) 0); // padding
@@ -215,10 +214,7 @@ public final class OptionalRoutingStrategyAddOn implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "RoutingStrategy" -> Optional.of(routingStrategy);
-            default -> Optional.empty();
-        };
+        return "RoutingStrategy".equals(name) ? Optional.of(routingStrategy) : Optional.empty();
     }
 
     @Override

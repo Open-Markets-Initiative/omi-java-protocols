@@ -29,13 +29,6 @@ public final class LegRatioOrDeltaNegativeMillionPair implements GroupEntry {
     public static final String NAME = "LegRatioOrDeltaNegativeMillionPair";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Quantity (bought or sold) on underlying in the strategy
      */
     private final RawLegRatioOrDeltaField rawLegRatioOrDelta = new RawLegRatioOrDeltaField();
@@ -85,7 +78,7 @@ public final class LegRatioOrDeltaNegativeMillionPair implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class LegRatioOrDeltaNegativeMillionPair implements GroupEntry {
             return false;
         }
         cursor += RawLegRatioOrDeltaField.BYTE_LENGTH;
-        if (!legRatioOrDeltaFractionIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LegRatioOrDeltaFractionIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return legRatioOrDeltaFractionIndicator.parse(data, cursor);
     }
 
     @Override

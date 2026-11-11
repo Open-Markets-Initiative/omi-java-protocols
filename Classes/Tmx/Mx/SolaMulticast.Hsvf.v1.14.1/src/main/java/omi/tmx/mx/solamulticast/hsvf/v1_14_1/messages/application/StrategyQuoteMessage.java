@@ -37,13 +37,6 @@ public final class StrategyQuoteMessage implements Message {
     public static final String NAME = "Strategy Quote Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Exchange on which the trade occurred
      */
     private final ExchangeIdField exchangeId = new ExchangeIdField();
@@ -196,7 +189,7 @@ public final class StrategyQuoteMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -257,12 +250,7 @@ public final class StrategyQuoteMessage implements Message {
             return false;
         }
         cursor += AskSizeField.BYTE_LENGTH;
-        if (!instrumentStatusMarker.parse(data, cursor)) {
-            return false;
-        }
-        cursor += InstrumentStatusMarkerField.BYTE_LENGTH;
-
-        return true;
+        return instrumentStatusMarker.parse(data, cursor);
     }
 
     @Override
@@ -314,10 +302,7 @@ public final class StrategyQuoteMessage implements Message {
         if (!bidPriceQuote.isRecognized()) {
             return false;
         }
-        if (!askPriceQuote.isRecognized()) {
-            return false;
-        }
-        return true;
+        return askPriceQuote.isRecognized();
     }
 
     @Override

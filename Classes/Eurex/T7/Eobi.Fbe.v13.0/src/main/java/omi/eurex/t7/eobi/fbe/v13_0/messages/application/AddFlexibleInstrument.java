@@ -316,7 +316,6 @@ public final class AddFlexibleInstrument implements Message {
             return false;
         }
         cursor += SecurityReferenceDataSupplementField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -337,7 +336,7 @@ public final class AddFlexibleInstrument implements Message {
         cursor = optAttribute.encode(data, cursor);
         cursor = contractDate.encode(data, cursor);
         cursor = securityReferenceDataSupplement.encode(data, cursor);
-        if (buffer != null && buffer.length >= 84 + 4) {
+        if (buffer != null && buffer.length >= 88) {
             System.arraycopy(buffer, 84, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

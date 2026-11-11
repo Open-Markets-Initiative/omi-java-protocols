@@ -346,10 +346,7 @@ public final class TradeReversal implements Message {
                 return false;
             }
         }
-        if (!mdTradeEntryGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return mdTradeEntryGrpComp.isRecognized();
     }
 
     @Override

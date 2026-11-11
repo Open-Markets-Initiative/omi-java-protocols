@@ -204,7 +204,6 @@ public final class TesCompressionRunStatusRequest implements Message {
             return false;
         }
         cursor += TradePublishIndicatorField.BYTE_LENGTH;
-        cursor += 2; // padding
 
         return true;
     }
@@ -214,7 +213,7 @@ public final class TesCompressionRunStatusRequest implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -225,7 +224,7 @@ public final class TesCompressionRunStatusRequest implements Message {
         cursor = marketSegmentId.encode(data, cursor);
         cursor = compressionAction.encode(data, cursor);
         cursor = tradePublishIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 32 + 2) {
+        if (buffer != null && buffer.length >= 34) {
             System.arraycopy(buffer, 32, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

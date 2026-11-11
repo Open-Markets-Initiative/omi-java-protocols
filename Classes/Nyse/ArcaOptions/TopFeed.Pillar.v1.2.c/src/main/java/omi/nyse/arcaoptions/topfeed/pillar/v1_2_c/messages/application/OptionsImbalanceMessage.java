@@ -374,12 +374,7 @@ public final class OptionsImbalanceMessage implements Message {
             return false;
         }
         cursor += LowerCollarField.BYTE_LENGTH;
-        if (!auctionStatus.parse(data, cursor)) {
-            return false;
-        }
-        cursor += AuctionStatusField.BYTE_LENGTH;
-
-        return true;
+        return auctionStatus.parse(data, cursor);
     }
 
     @Override
@@ -390,7 +385,7 @@ public final class OptionsImbalanceMessage implements Message {
         cursor = sourceTimeNs.encode(data, cursor);
         cursor = seriesIndex.encode(data, cursor);
         cursor = seriesSeqNum.encode(data, cursor);
-        if (buffer != null && buffer.length >= 16 + 4) {
+        if (buffer != null && buffer.length >= 20) {
             System.arraycopy(buffer, 16, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding
@@ -399,7 +394,7 @@ public final class OptionsImbalanceMessage implements Message {
         cursor = pairedQty.encode(data, cursor);
         cursor = totalImbalanceQty.encode(data, cursor);
         cursor = marketImbalanceQty.encode(data, cursor);
-        if (buffer != null && buffer.length >= 32 + 2) {
+        if (buffer != null && buffer.length >= 34) {
             System.arraycopy(buffer, 32, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -409,7 +404,7 @@ public final class OptionsImbalanceMessage implements Message {
         cursor = imbalanceSide.encode(data, cursor);
         cursor = continuousBookClearingPrice.encode(data, cursor);
         cursor = auctionInterestClearingPrice.encode(data, cursor);
-        if (buffer != null && buffer.length >= 44 + 4) {
+        if (buffer != null && buffer.length >= 48) {
             System.arraycopy(buffer, 44, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

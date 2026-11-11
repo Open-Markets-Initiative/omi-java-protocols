@@ -203,7 +203,7 @@ public final class ComplexSymbolDefinitionMessage implements Message {
         cursor += 2;
         runs.add(cursor).add(2);
         cursor += 2;
-        cursor = legDefinition.padding(runs, cursor);
+        cursor += legDefinition.byteLength();
         return cursor;
     }
 
@@ -267,11 +267,8 @@ public final class ComplexSymbolDefinitionMessage implements Message {
             return false;
         }
         cursor += legDefinition.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -287,7 +284,7 @@ public final class ComplexSymbolDefinitionMessage implements Message {
         cursor = channelId.encode(data, cursor);
         cursor = marketId.encode(data, cursor);
         cursor = systemId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 29 + 1) {
+        if (buffer != null && buffer.length >= 30) {
             System.arraycopy(buffer, 29, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
@@ -295,7 +292,7 @@ public final class ComplexSymbolDefinitionMessage implements Message {
         cursor += 1;
         cursor = streamId.encode(data, cursor);
         cursor = noOfLegs.encode(data, cursor);
-        if (buffer != null && buffer.length >= 34 + 2) {
+        if (buffer != null && buffer.length >= 36) {
             System.arraycopy(buffer, 34, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -337,10 +334,7 @@ public final class ComplexSymbolDefinitionMessage implements Message {
                 return false;
             }
         }
-        if (!legDefinition.isRecognized()) {
-            return false;
-        }
-        return true;
+        return legDefinition.isRecognized();
     }
 
     @Override

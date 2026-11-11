@@ -290,7 +290,7 @@ public final class TradeReversal implements Message {
         cursor = lastPx.encode(data, cursor);
         cursor = trdRegTsExecutionTime.encode(data, cursor);
         cursor = tradeCondition.encode(data, cursor);
-        if (buffer != null && buffer.length >= 41 + 6) {
+        if (buffer != null && buffer.length >= 47) {
             System.arraycopy(buffer, 41, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding
@@ -333,10 +333,7 @@ public final class TradeReversal implements Message {
                 return false;
             }
         }
-        if (!mdTradeEntryGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return mdTradeEntryGrpComp.isRecognized();
     }
 
     @Override

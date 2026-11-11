@@ -269,7 +269,6 @@ public final class QuoteEventGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += QuoteEventReasonField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -288,7 +287,7 @@ public final class QuoteEventGrpCompEntry implements GroupEntry {
         cursor = quoteEventSide.encode(data, cursor);
         cursor = quoteEventLiquidityInd.encode(data, cursor);
         cursor = quoteEventReason.encode(data, cursor);
-        if (buffer != null && buffer.length >= 44 + 4) {
+        if (buffer != null && buffer.length >= 48) {
             System.arraycopy(buffer, 44, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

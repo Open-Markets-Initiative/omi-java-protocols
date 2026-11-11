@@ -261,7 +261,6 @@ public final class DeleteTesTradeRequest implements Message {
             return false;
         }
         cursor += TradeReportIdField.BYTE_LENGTH;
-        cursor += 1; // padding
 
         return true;
     }
@@ -271,7 +270,7 @@ public final class DeleteTesTradeRequest implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -285,7 +284,7 @@ public final class DeleteTesTradeRequest implements Message {
         cursor = trdType.encode(data, cursor);
         cursor = tradeReportType.encode(data, cursor);
         cursor = tradeReportId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 57 + 1) {
+        if (buffer != null && buffer.length >= 58) {
             System.arraycopy(buffer, 57, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

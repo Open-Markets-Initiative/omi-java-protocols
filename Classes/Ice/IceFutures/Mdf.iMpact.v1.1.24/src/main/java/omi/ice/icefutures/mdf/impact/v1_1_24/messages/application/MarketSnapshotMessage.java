@@ -548,12 +548,7 @@ public final class MarketSnapshotMessage implements Message {
             return false;
         }
         cursor += HasPreviousDaySettlementPriceField.BYTE_LENGTH;
-        if (!previousDaySettlementPrice.parse(data, cursor)) {
-            return false;
-        }
-        cursor += PreviousDaySettlementPriceField.BYTE_LENGTH;
-
-        return true;
+        return previousDaySettlementPrice.parse(data, cursor);
     }
 
     @Override
@@ -579,7 +574,7 @@ public final class MarketSnapshotMessage implements Message {
         cursor = lastTradeDateTime.encode(data, cursor);
         cursor = settlePriceDateTime.encode(data, cursor);
         cursor = lastMessageSequenceId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 103 + 2) {
+        if (buffer != null && buffer.length >= 105) {
             System.arraycopy(buffer, 103, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

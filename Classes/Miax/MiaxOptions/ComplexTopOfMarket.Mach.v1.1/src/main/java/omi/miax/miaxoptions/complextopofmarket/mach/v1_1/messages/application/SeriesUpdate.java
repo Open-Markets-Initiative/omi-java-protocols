@@ -399,7 +399,6 @@ public final class SeriesUpdate implements Message {
             return false;
         }
         cursor += PriorityQuoteWidthField.BYTE_LENGTH;
-        cursor += 8; // padding
 
         return true;
     }
@@ -424,7 +423,7 @@ public final class SeriesUpdate implements Message {
         cursor = liquidityAcceptanceIncrementIndicator.encode(data, cursor);
         cursor = openingUnderlyingMarketCode.encode(data, cursor);
         cursor = priorityQuoteWidth.encode(data, cursor);
-        if (buffer != null && buffer.length >= 64 + 8) {
+        if (buffer != null && buffer.length >= 72) {
             System.arraycopy(buffer, 64, data, cursor, 8); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 8, (byte) 0); // padding

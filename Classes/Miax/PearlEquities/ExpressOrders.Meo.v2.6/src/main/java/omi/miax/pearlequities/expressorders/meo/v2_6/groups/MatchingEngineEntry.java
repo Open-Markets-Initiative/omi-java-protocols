@@ -28,13 +28,6 @@ public final class MatchingEngineEntry implements GroupEntry {
     public static final String NAME = "MatchingEngine";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Status response for the Mass Cancel Request from the Matching Engine
      */
     private final MatchingEngineStatusField matchingEngineStatus = new MatchingEngineStatusField();
@@ -70,7 +63,7 @@ public final class MatchingEngineEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -94,12 +87,7 @@ public final class MatchingEngineEntry implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!matchingEngineStatus.parse(data, cursor)) {
-            return false;
-        }
-        cursor += MatchingEngineStatusField.BYTE_LENGTH;
-
-        return true;
+        return matchingEngineStatus.parse(data, cursor);
     }
 
     @Override
@@ -186,10 +174,7 @@ public final class MatchingEngineEntry implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "MatchingEngineStatus" -> Optional.of(matchingEngineStatus);
-            default -> Optional.empty();
-        };
+        return "MatchingEngineStatus".equals(name) ? Optional.of(matchingEngineStatus) : Optional.empty();
     }
 
     @Override

@@ -637,19 +637,14 @@ public final class SrqsNegotiationNotification implements Message {
             return false;
         }
         cursor += FreeTextField.BYTE_LENGTH;
-        if (!partyOrderOriginationTrader.parse(data, cursor)) {
-            return false;
-        }
-        cursor += PartyOrderOriginationTraderField.BYTE_LENGTH;
-
-        return true;
+        return partyOrderOriginationTrader.parse(data, cursor);
     }
 
     @Override
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

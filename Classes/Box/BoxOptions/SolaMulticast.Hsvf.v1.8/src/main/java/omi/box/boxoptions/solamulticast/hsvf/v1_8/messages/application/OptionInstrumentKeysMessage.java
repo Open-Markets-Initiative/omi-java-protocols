@@ -429,12 +429,7 @@ public final class OptionInstrumentKeysMessage implements Message {
             return false;
         }
         cursor += optionMarker.byteLength();
-        if (!underlyingSymbolRoot.parse(data, cursor)) {
-            return false;
-        }
-        cursor += UnderlyingSymbolRootField.BYTE_LENGTH;
-
-        return true;
+        return underlyingSymbolRoot.parse(data, cursor);
     }
 
     @Override

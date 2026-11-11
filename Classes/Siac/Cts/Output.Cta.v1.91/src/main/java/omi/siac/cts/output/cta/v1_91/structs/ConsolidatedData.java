@@ -34,13 +34,6 @@ public final class ConsolidatedData implements GroupEntry {
     public static final String NAME = "ConsolidatedData";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Represents the date the security last traded
      */
     private final PreviousClosePriceDateField previousClosePriceDate = new PreviousClosePriceDateField();
@@ -160,7 +153,7 @@ public final class ConsolidatedData implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -208,12 +201,7 @@ public final class ConsolidatedData implements GroupEntry {
             return false;
         }
         cursor += TotalVolumeField.BYTE_LENGTH;
-        if (!tick.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TickField.BYTE_LENGTH;
-
-        return true;
+        return tick.parse(data, cursor);
     }
 
     @Override

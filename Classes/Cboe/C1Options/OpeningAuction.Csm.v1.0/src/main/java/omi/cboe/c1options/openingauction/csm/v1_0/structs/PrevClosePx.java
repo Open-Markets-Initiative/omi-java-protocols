@@ -29,13 +29,6 @@ public final class PrevClosePx implements GroupEntry {
     public static final String NAME = "PrevClosePx";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Previous day’s close price for security.
      */
     private final PrevClosePxExponentField prevClosePxExponent = new PrevClosePxExponentField();
@@ -85,7 +78,7 @@ public final class PrevClosePx implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class PrevClosePx implements GroupEntry {
             return false;
         }
         cursor += PrevClosePxExponentField.BYTE_LENGTH;
-        if (!prevClosePxMantissa.parse(data, cursor)) {
-            return false;
-        }
-        cursor += PrevClosePxMantissaField.BYTE_LENGTH;
-
-        return true;
+        return prevClosePxMantissa.parse(data, cursor);
     }
 
     @Override

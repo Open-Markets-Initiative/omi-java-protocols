@@ -570,7 +570,6 @@ public final class SimpleInstrumentDefinitionMessage implements Message {
             return false;
         }
         cursor += TradingCollarVariationField.BYTE_LENGTH;
-        cursor += 16; // padding
 
         return true;
     }
@@ -604,7 +603,7 @@ public final class SimpleInstrumentDefinitionMessage implements Message {
         cursor = lowLimitPrice.encode(data, cursor);
         cursor = tradingCollarVariationType.encode(data, cursor);
         cursor = tradingCollarVariation.encode(data, cursor);
-        if (buffer != null && buffer.length >= 103 + 16) {
+        if (buffer != null && buffer.length >= 119) {
             System.arraycopy(buffer, 103, data, cursor, 16); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 16, (byte) 0); // padding

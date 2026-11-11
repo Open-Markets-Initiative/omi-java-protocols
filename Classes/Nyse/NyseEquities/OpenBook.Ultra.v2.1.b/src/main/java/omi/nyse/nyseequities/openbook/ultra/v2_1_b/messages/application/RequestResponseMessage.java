@@ -166,7 +166,6 @@ public final class RequestResponseMessage implements Message {
             return false;
         }
         cursor += RejectReasonField.BYTE_LENGTH;
-        cursor += 2; // padding
 
         return true;
     }
@@ -179,7 +178,7 @@ public final class RequestResponseMessage implements Message {
         cursor = sourceId.encode(data, cursor);
         cursor = status.encode(data, cursor);
         cursor = rejectReason.encode(data, cursor);
-        if (buffer != null && buffer.length >= 26 + 2) {
+        if (buffer != null && buffer.length >= 28) {
             System.arraycopy(buffer, 26, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

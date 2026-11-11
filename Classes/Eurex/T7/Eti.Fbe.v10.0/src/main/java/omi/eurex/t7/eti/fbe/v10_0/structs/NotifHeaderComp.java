@@ -28,13 +28,6 @@ public final class NotifHeaderComp implements GroupEntry {
     public static final String NAME = "NotifHeaderComp";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Sending Time
      */
     private final SendingTimeField sendingTime = new SendingTimeField();
@@ -70,7 +63,7 @@ public final class NotifHeaderComp implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -94,12 +87,7 @@ public final class NotifHeaderComp implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!sendingTime.parse(data, cursor)) {
-            return false;
-        }
-        cursor += SendingTimeField.BYTE_LENGTH;
-
-        return true;
+        return sendingTime.parse(data, cursor);
     }
 
     @Override
@@ -186,10 +174,7 @@ public final class NotifHeaderComp implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "SendingTime" -> Optional.of(sendingTime);
-            default -> Optional.empty();
-        };
+        return "SendingTime".equals(name) ? Optional.of(sendingTime) : Optional.empty();
     }
 
     @Override

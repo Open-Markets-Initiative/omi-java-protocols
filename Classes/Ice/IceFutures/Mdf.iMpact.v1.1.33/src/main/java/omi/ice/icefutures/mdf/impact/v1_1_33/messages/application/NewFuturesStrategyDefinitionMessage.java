@@ -762,7 +762,7 @@ public final class NewFuturesStrategyDefinitionMessage implements Message {
         cursor += 4;
         cursor += 4;
         cursor += 1;
-        cursor = legDefinition.padding(runs, cursor);
+        cursor += legDefinition.byteLength();
         cursor += 2;
         cursor += 1;
         cursor += 18;
@@ -1011,12 +1011,7 @@ public final class NewFuturesStrategyDefinitionMessage implements Message {
             return false;
         }
         cursor += TestMarketIndicatorField.BYTE_LENGTH;
-        if (!legDealSuppressed.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LegDealSuppressedField.BYTE_LENGTH;
-
-        return true;
+        return legDealSuppressed.parse(data, cursor);
     }
 
     @Override
@@ -1114,10 +1109,7 @@ public final class NewFuturesStrategyDefinitionMessage implements Message {
                 return false;
             }
         }
-        if (!legDefinition.isRecognized()) {
-            return false;
-        }
-        return true;
+        return legDefinition.isRecognized();
     }
 
     @Override

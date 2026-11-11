@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import omi.cme.globex.mdp3.sbe.v1_8.fields.ApplIdField;
 import omi.cme.globex.mdp3.sbe.v1_8.fields.AssetField;
@@ -701,67 +700,7 @@ public final class MdInstrumentDefinitionSpread implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor += 1;
-        cursor += 4;
-        cursor += 1;
-        cursor += 8;
-        cursor += 1;
-        cursor += 2;
-        cursor += 1;
-        cursor += 1;
-        cursor += 4;
-        cursor += 6;
-        cursor += 6;
-        cursor += 20;
-        cursor += 4;
-        cursor += 6;
-        cursor += 6;
-        for (int[] run = MaturityMonthYear.padding(), index = { 0 }; index[0] < run.length; index[0] += 2) {
-            runs.add(cursor + run[index[0]]).add(run[index[0] + 1]);
-        }
-        cursor += MaturityMonthYear.BYTE_LENGTH;
-        cursor += 3;
-        cursor += 5;
-        cursor += 1;
-        cursor += 1;
-        cursor += 4;
-        cursor += 4;
-        cursor += 8;
-        cursor += 8;
-        cursor += 1;
-        cursor += 8;
-        cursor += 1;
-        cursor += 30;
-        cursor += 8;
-        cursor += 1;
-        cursor += 4;
-        cursor += 4;
-        cursor += 8;
-        cursor += 8;
-        cursor += 8;
-        cursor += 1;
-        cursor += 1;
-        cursor += 2;
-        cursor = eventsGroups.padding(runs, cursor);
-        cursor = feedTypesGroups.padding(runs, cursor);
-        cursor = instAttribGroups.padding(runs, cursor);
-        cursor = lotTypeRulesGroups.padding(runs, cursor);
-        cursor = legacyLegsGroups.padding(runs, cursor);
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -974,11 +913,8 @@ public final class MdInstrumentDefinitionSpread implements Message {
             return false;
         }
         cursor += legacyLegsGroups.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -1080,10 +1016,7 @@ public final class MdInstrumentDefinitionSpread implements Message {
         if (!lotTypeRulesGroups.isRecognized()) {
             return false;
         }
-        if (!legacyLegsGroups.isRecognized()) {
-            return false;
-        }
-        return true;
+        return legacyLegsGroups.isRecognized();
     }
 
     @Override

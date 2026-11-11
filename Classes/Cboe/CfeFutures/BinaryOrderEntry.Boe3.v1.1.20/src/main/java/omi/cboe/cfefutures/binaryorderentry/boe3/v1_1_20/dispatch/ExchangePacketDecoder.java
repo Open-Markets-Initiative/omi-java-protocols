@@ -1,7 +1,6 @@
 package omi.cboe.cfefutures.binaryorderentry.boe3.v1_1_20.dispatch;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import omi.cboe.cfefutures.binaryorderentry.boe3.v1_1_20.types.ByteOps;
@@ -91,10 +90,8 @@ public final class ExchangePacketDecoder {
                 return new Decoded(messages, undecoded, false, trailing, padding);
             }
 
-            int frameEnd = limit;
-
             long exchangeMessageType = ByteOps.unsigned(data, position + 4, 2, true);
-            Optional<Message> selected = ExchangeMessageDispatch.decode(exchangeMessageType, data, position + MESSAGE_HEADER_LENGTH, frameEnd);
+            Optional<Message> selected = ExchangeMessageDispatch.decode(exchangeMessageType, data, position + MESSAGE_HEADER_LENGTH, limit);
             if (selected.isPresent()) {
                 Message message = selected.get();
                 if (!message.isDecoded()) {

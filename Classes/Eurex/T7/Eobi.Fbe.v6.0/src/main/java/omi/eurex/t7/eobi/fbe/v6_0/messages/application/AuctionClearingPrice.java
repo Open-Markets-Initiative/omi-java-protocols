@@ -221,7 +221,6 @@ public final class AuctionClearingPrice implements Message {
             return false;
         }
         cursor += PotentialSecurityTradingEventField.BYTE_LENGTH;
-        cursor += 6; // padding
 
         return true;
     }
@@ -237,7 +236,7 @@ public final class AuctionClearingPrice implements Message {
         cursor = imbalanceQty.encode(data, cursor);
         cursor = securityTradingStatus.encode(data, cursor);
         cursor = potentialSecurityTradingEvent.encode(data, cursor);
-        if (buffer != null && buffer.length >= 34 + 6) {
+        if (buffer != null && buffer.length >= 40) {
             System.arraycopy(buffer, 34, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding

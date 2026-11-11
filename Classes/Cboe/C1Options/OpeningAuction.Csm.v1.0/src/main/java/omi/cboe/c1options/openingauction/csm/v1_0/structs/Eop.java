@@ -29,13 +29,6 @@ public final class Eop implements GroupEntry {
     public static final String NAME = "Eop";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * The expected opening price
      */
     private final EopExponentField eopExponent = new EopExponentField();
@@ -85,7 +78,7 @@ public final class Eop implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class Eop implements GroupEntry {
             return false;
         }
         cursor += EopExponentField.BYTE_LENGTH;
-        if (!eopMantissa.parse(data, cursor)) {
-            return false;
-        }
-        cursor += EopMantissaField.BYTE_LENGTH;
-
-        return true;
+        return eopMantissa.parse(data, cursor);
     }
 
     @Override

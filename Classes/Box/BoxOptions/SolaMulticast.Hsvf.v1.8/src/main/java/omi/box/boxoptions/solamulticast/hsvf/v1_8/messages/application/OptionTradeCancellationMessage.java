@@ -241,12 +241,7 @@ public final class OptionTradeCancellationMessage implements Message {
         }
         cursor += OpenInterestField.BYTE_LENGTH;
         cursor += 1; // padding
-        if (!priceIndicatorMarker.parse(data, cursor)) {
-            return false;
-        }
-        cursor += PriceIndicatorMarkerField.BYTE_LENGTH;
-
-        return true;
+        return priceIndicatorMarker.parse(data, cursor);
     }
 
     @Override
@@ -258,7 +253,7 @@ public final class OptionTradeCancellationMessage implements Message {
         cursor = volume.encode(data, cursor);
         cursor = tradePrice.encode(data, cursor);
         cursor = tradePriceFractionIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 36 + 6) {
+        if (buffer != null && buffer.length >= 42) {
             System.arraycopy(buffer, 36, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding
@@ -266,7 +261,7 @@ public final class OptionTradeCancellationMessage implements Message {
         cursor += 6;
         cursor = timestampField.encode(data, cursor);
         cursor = openInterest.encode(data, cursor);
-        if (buffer != null && buffer.length >= 55 + 1) {
+        if (buffer != null && buffer.length >= 56) {
             System.arraycopy(buffer, 55, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

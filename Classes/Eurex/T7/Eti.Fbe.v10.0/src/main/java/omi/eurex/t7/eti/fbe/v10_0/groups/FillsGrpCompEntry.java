@@ -174,7 +174,6 @@ public final class FillsGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += FillLiquidityIndField.BYTE_LENGTH;
-        cursor += 7; // padding
 
         return true;
     }
@@ -188,7 +187,7 @@ public final class FillsGrpCompEntry implements GroupEntry {
         cursor = fillMatchId.encode(data, cursor);
         cursor = fillExecId.encode(data, cursor);
         cursor = fillLiquidityInd.encode(data, cursor);
-        if (buffer != null && buffer.length >= 25 + 7) {
+        if (buffer != null && buffer.length >= 32) {
             System.arraycopy(buffer, 25, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

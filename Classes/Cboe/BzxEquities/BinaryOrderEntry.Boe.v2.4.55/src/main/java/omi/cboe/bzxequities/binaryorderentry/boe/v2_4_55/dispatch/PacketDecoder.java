@@ -1,7 +1,6 @@
 package omi.cboe.bzxequities.binaryorderentry.boe.v2_4_55.dispatch;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import omi.cboe.bzxequities.binaryorderentry.boe.v2_4_55.types.ByteOps;
@@ -91,10 +90,8 @@ public final class PacketDecoder {
                 return new Decoded(messages, undecoded, false, trailing, padding);
             }
 
-            int frameEnd = limit;
-
             long messageType = ByteOps.unsigned(data, position + 4, 1, false);
-            Optional<Message> selected = MessageDispatch.decode(messageType, data, position + MESSAGE_HEADER_LENGTH, frameEnd);
+            Optional<Message> selected = MessageDispatch.decode(messageType, data, position + MESSAGE_HEADER_LENGTH, limit);
             if (selected.isPresent()) {
                 Message message = selected.get();
                 if (!message.isDecoded()) {

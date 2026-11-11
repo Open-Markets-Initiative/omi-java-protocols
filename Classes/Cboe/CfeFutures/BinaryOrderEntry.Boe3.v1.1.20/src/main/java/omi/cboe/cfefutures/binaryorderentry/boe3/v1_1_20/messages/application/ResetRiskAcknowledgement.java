@@ -31,13 +31,6 @@ public final class ResetRiskAcknowledgement implements Message {
     public static final String NAME = "Reset Risk Acknowledgement";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Unique identifier for this Reset Risk request
      */
     private final RiskStatusIdField riskStatusId = new RiskStatusIdField();
@@ -106,7 +99,7 @@ public final class ResetRiskAcknowledgement implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -143,12 +136,7 @@ public final class ResetRiskAcknowledgement implements Message {
             return false;
         }
         cursor += RiskResetResultField.BYTE_LENGTH;
-        if (!requestReceivedTime.parse(data, cursor)) {
-            return false;
-        }
-        cursor += RequestReceivedTimeField.BYTE_LENGTH;
-
-        return true;
+        return requestReceivedTime.parse(data, cursor);
     }
 
     @Override

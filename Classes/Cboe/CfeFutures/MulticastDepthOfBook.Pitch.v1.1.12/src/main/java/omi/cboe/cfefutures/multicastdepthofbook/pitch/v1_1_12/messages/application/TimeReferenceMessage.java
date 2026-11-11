@@ -32,13 +32,6 @@ public final class TimeReferenceMessage implements Message {
     public static final String NAME = "Time Reference Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Midnight Central Time reference time for subsequent Time messages, expressed as number of whole seconds since the Epoch (Midnight January 1, 1970 UTC).
      */
     private final MidnightReferenceField midnightReference = new MidnightReferenceField();
@@ -121,7 +114,7 @@ public final class TimeReferenceMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -162,12 +155,7 @@ public final class TimeReferenceMessage implements Message {
             return false;
         }
         cursor += TimeOffsetField.BYTE_LENGTH;
-        if (!tradeDate.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TradeDateField.BYTE_LENGTH;
-
-        return true;
+        return tradeDate.parse(data, cursor);
     }
 
     @Override

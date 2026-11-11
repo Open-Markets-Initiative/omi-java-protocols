@@ -336,7 +336,6 @@ public final class TesTradeReport implements Message {
             return false;
         }
         cursor += NumberOfSellSidesField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -354,7 +353,7 @@ public final class TesTradeReport implements Message {
         cursor = tradeCondition.encode(data, cursor);
         cursor = multiLegReportingType.encode(data, cursor);
         cursor = multiLegPriceModel.encode(data, cursor);
-        if (buffer != null && buffer.length >= 42 + 6) {
+        if (buffer != null && buffer.length >= 48) {
             System.arraycopy(buffer, 42, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding
@@ -364,7 +363,7 @@ public final class TesTradeReport implements Message {
         cursor = transBkdTime.encode(data, cursor);
         cursor = numberOfBuySides.encode(data, cursor);
         cursor = numberOfSellSides.encode(data, cursor);
-        if (buffer != null && buffer.length >= 68 + 4) {
+        if (buffer != null && buffer.length >= 72) {
             System.arraycopy(buffer, 68, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

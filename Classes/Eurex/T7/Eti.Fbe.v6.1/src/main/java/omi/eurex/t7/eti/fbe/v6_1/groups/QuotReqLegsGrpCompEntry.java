@@ -174,7 +174,6 @@ public final class QuotReqLegsGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += LegSideField.BYTE_LENGTH;
-        cursor += 6; // padding
 
         return true;
     }
@@ -188,7 +187,7 @@ public final class QuotReqLegsGrpCompEntry implements GroupEntry {
         cursor = legSymbol.encode(data, cursor);
         cursor = legSecurityType.encode(data, cursor);
         cursor = legSide.encode(data, cursor);
-        if (buffer != null && buffer.length >= 18 + 6) {
+        if (buffer != null && buffer.length >= 24) {
             System.arraycopy(buffer, 18, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding

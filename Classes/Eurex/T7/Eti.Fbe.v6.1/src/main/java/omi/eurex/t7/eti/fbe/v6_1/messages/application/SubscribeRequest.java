@@ -166,7 +166,6 @@ public final class SubscribeRequest implements Message {
             return false;
         }
         cursor += RefApplIdField.BYTE_LENGTH;
-        cursor += 3; // padding
 
         return true;
     }
@@ -176,7 +175,7 @@ public final class SubscribeRequest implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -185,7 +184,7 @@ public final class SubscribeRequest implements Message {
         cursor = requestHeaderComp.encode(data, cursor);
         cursor = subscriptionScope.encode(data, cursor);
         cursor = refApplId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 23 + 3) {
+        if (buffer != null && buffer.length >= 26) {
             System.arraycopy(buffer, 23, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding

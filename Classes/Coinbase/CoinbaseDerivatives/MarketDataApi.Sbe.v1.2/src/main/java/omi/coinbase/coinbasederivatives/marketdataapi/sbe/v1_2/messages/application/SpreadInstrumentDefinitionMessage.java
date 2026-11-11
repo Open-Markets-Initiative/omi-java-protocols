@@ -50,13 +50,6 @@ public final class SpreadInstrumentDefinitionMessage implements Message {
     public static final String NAME = "Spread Instrument Definition Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Instrument name or symbol
      */
     private final SymbolField symbol = new SymbolField();
@@ -377,7 +370,7 @@ public final class SpreadInstrumentDefinitionMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -486,12 +479,7 @@ public final class SpreadInstrumentDefinitionMessage implements Message {
             return false;
         }
         cursor += SpreadBuyConventionField.BYTE_LENGTH;
-        if (!definitionFlags.parse(data, cursor)) {
-            return false;
-        }
-        cursor += DefinitionFlagsField.BYTE_LENGTH;
-
-        return true;
+        return definitionFlags.parse(data, cursor);
     }
 
     @Override

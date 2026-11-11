@@ -48,9 +48,6 @@ public enum AllocType {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<AllocType> fromWire(char wire) {
-        return switch (wire) {
-            case '8' -> Optional.of(REQUEST_TO_INTERMEDIARY);
-            default -> Optional.empty();
-        };
+        return wire == '8' ? Optional.of(REQUEST_TO_INTERMEDIARY) : Optional.empty();
     }
 }

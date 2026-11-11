@@ -204,7 +204,6 @@ public final class ComplexStatusMessage implements Message {
             return false;
         }
         cursor += HaltConditionField.BYTE_LENGTH;
-        cursor += 2; // padding
 
         return true;
     }
@@ -219,7 +218,7 @@ public final class ComplexStatusMessage implements Message {
         cursor = symbolSeqNum.encode(data, cursor);
         cursor = securityStatus.encode(data, cursor);
         cursor = haltCondition.encode(data, cursor);
-        if (buffer != null && buffer.length >= 18 + 2) {
+        if (buffer != null && buffer.length >= 20) {
             System.arraycopy(buffer, 18, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

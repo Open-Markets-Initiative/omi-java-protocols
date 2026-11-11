@@ -239,12 +239,7 @@ public final class ComplexOrderTradeCancellationMessage implements Message {
             return false;
         }
         cursor += TimestampField.BYTE_LENGTH;
-        if (!priceIndicatorMarker.parse(data, cursor)) {
-            return false;
-        }
-        cursor += PriceIndicatorMarkerField.BYTE_LENGTH;
-
-        return true;
+        return priceIndicatorMarker.parse(data, cursor);
     }
 
     @Override
@@ -257,7 +252,7 @@ public final class ComplexOrderTradeCancellationMessage implements Message {
         cursor = tradePriceSign.encode(data, cursor);
         cursor = tradePrice.encode(data, cursor);
         cursor = tradePriceFractionIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 47 + 6) {
+        if (buffer != null && buffer.length >= 53) {
             System.arraycopy(buffer, 47, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding

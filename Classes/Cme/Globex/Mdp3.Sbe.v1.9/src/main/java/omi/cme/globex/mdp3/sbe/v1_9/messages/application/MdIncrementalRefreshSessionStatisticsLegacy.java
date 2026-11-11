@@ -161,11 +161,8 @@ public final class MdIncrementalRefreshSessionStatisticsLegacy implements Messag
             return false;
         }
         cursor += incrementalRefreshSessionStatisticsGroups.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -174,7 +171,7 @@ public final class MdIncrementalRefreshSessionStatisticsLegacy implements Messag
         int cursor = offset;
         cursor = transactTime.encode(data, cursor);
         cursor = matchEventIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 9 + 2) {
+        if (buffer != null && buffer.length >= 11) {
             System.arraycopy(buffer, 9, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -216,10 +213,7 @@ public final class MdIncrementalRefreshSessionStatisticsLegacy implements Messag
                 return false;
             }
         }
-        if (!incrementalRefreshSessionStatisticsGroups.isRecognized()) {
-            return false;
-        }
-        return true;
+        return incrementalRefreshSessionStatisticsGroups.isRecognized();
     }
 
     @Override

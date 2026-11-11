@@ -153,7 +153,7 @@ public final class MassCancelResponse implements Message {
         cursor += 4;
         cursor += 20;
         cursor += 1;
-        cursor = matchingEngine.padding(runs, cursor);
+        cursor += matchingEngine.byteLength();
         runs.add(cursor).add(10);
         cursor += 10;
         return cursor;
@@ -209,7 +209,6 @@ public final class MassCancelResponse implements Message {
             return false;
         }
         this.gapOffset0 = cursor - offset;
-        cursor += 10; // padding
 
         return true;
     }
@@ -269,10 +268,7 @@ public final class MassCancelResponse implements Message {
                 return false;
             }
         }
-        if (!matchingEngine.isRecognized()) {
-            return false;
-        }
-        return true;
+        return matchingEngine.isRecognized();
     }
 
     @Override

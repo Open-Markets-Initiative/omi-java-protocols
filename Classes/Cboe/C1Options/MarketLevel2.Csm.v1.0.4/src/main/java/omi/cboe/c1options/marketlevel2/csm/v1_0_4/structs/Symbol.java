@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import omi.cboe.c1options.marketlevel2.csm.v1_0_4.fields.SymbolLengthField;
 import omi.cboe.c1options.marketlevel2.csm.v1_0_4.types.Field;
 import omi.cboe.c1options.marketlevel2.csm.v1_0_4.types.GroupEntry;
@@ -79,23 +78,7 @@ public final class Symbol implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor += 1;
-        cursor += symbolText.byteLength();
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -127,11 +110,8 @@ public final class Symbol implements GroupEntry {
             return false;
         }
         cursor += symbolText.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override

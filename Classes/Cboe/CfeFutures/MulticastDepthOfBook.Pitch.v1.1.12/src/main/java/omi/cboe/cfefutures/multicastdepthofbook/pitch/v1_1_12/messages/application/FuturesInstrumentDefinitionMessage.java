@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.OptionalLong;
-import java.util.stream.IntStream;
 import omi.cboe.cfefutures.multicastdepthofbook.pitch.v1_1_12.branches.FutureBlock;
 import omi.cboe.cfefutures.multicastdepthofbook.pitch.v1_1_12.fields.ContractDateField;
 import omi.cboe.cfefutures.multicastdepthofbook.pitch.v1_1_12.fields.ContractSizeField;
@@ -266,35 +265,7 @@ public final class FuturesInstrumentDefinitionMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor += 4;
-        cursor += 6;
-        cursor += 4;
-        cursor += 6;
-        cursor += 1;
-        cursor += 4;
-        cursor += 2;
-        cursor += 1;
-        cursor += 8;
-        cursor += 1;
-        cursor += 1;
-        cursor += 1;
-        cursor += 4;
-        cursor += futureBlock.byteLength();
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -379,11 +350,8 @@ public final class FuturesInstrumentDefinitionMessage implements Message {
             return false;
         }
         cursor += futureBlock.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -441,10 +409,7 @@ public final class FuturesInstrumentDefinitionMessage implements Message {
                 return false;
             }
         }
-        if (!futureBlock.isRecognized()) {
-            return false;
-        }
-        return true;
+        return futureBlock.isRecognized();
     }
 
     @Override

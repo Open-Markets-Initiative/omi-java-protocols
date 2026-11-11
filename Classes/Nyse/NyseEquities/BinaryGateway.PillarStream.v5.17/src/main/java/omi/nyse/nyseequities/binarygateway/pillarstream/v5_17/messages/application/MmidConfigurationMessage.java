@@ -166,7 +166,6 @@ public final class MmidConfigurationMessage implements Message {
             return false;
         }
         cursor += UsernameField.BYTE_LENGTH;
-        cursor += 100; // padding
 
         return true;
     }
@@ -179,7 +178,7 @@ public final class MmidConfigurationMessage implements Message {
         cursor = marketMaker.encode(data, cursor);
         cursor = mmid.encode(data, cursor);
         cursor = username.encode(data, cursor);
-        if (buffer != null && buffer.length >= 38 + 100) {
+        if (buffer != null && buffer.length >= 138) {
             System.arraycopy(buffer, 38, data, cursor, 100); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 100, (byte) 0); // padding

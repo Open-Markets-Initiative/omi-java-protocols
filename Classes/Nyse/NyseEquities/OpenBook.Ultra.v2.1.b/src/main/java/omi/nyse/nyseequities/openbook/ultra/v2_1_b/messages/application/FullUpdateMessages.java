@@ -155,11 +155,8 @@ public final class FullUpdateMessages implements Message {
             return false;
         }
         cursor += fullUpdateMessage.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -206,10 +203,7 @@ public final class FullUpdateMessages implements Message {
                 return false;
             }
         }
-        if (!fullUpdateMessage.isRecognized()) {
-            return false;
-        }
-        return true;
+        return fullUpdateMessage.isRecognized();
     }
 
     @Override

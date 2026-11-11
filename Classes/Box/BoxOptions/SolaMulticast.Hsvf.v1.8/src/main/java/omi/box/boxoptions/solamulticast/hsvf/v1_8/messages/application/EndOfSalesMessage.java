@@ -106,19 +106,14 @@ public final class EndOfSalesMessage implements Message {
 
         int cursor = offset;
         cursor += 1; // padding
-        if (!time.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TimeField.BYTE_LENGTH;
-
-        return true;
+        return time.parse(data, cursor);
     }
 
     @Override
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 1) {
+        if (buffer != null && buffer.length >= 1) {
             System.arraycopy(buffer, 0, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
@@ -204,10 +199,7 @@ public final class EndOfSalesMessage implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "Time" -> Optional.of(time);
-            default -> Optional.empty();
-        };
+        return "Time".equals(name) ? Optional.of(time) : Optional.empty();
     }
 
     @Override

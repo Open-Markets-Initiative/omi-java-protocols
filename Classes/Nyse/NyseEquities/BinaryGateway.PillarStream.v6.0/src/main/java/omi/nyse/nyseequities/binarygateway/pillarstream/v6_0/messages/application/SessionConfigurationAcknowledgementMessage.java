@@ -375,7 +375,6 @@ public final class SessionConfigurationAcknowledgementMessage implements Message
             return false;
         }
         cursor += BoldDesignationField.BYTE_LENGTH;
-        cursor += 49; // padding
 
         return true;
     }
@@ -399,7 +398,7 @@ public final class SessionConfigurationAcknowledgementMessage implements Message
         cursor = orderPriorityUpdateAckSubscription.encode(data, cursor);
         cursor = ackStatus.encode(data, cursor);
         cursor = boldDesignation.encode(data, cursor);
-        if (buffer != null && buffer.length >= 45 + 49) {
+        if (buffer != null && buffer.length >= 94) {
             System.arraycopy(buffer, 45, data, cursor, 49); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 49, (byte) 0); // padding

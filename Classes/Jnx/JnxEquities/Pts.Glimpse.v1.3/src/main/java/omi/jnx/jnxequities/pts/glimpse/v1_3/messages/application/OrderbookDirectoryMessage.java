@@ -42,13 +42,6 @@ public final class OrderbookDirectoryMessage implements Message {
     public static final String NAME = "Orderbook Directory Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Number of nanoseconds since last Timestamp Seconds Message.
      */
     private final NanosecondsField nanoseconds = new NanosecondsField();
@@ -201,7 +194,7 @@ public final class OrderbookDirectoryMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -262,12 +255,7 @@ public final class OrderbookDirectoryMessage implements Message {
             return false;
         }
         cursor += UpperPriceLimitField.BYTE_LENGTH;
-        if (!lowerPriceLimit.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LowerPriceLimitField.BYTE_LENGTH;
-
-        return true;
+        return lowerPriceLimit.parse(data, cursor);
     }
 
     @Override

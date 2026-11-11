@@ -386,11 +386,8 @@ public final class AddComplexInstrumentResponse implements Message {
             return false;
         }
         cursor += instrmtLegGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -401,7 +398,7 @@ public final class AddComplexInstrumentResponse implements Message {
         }
         noLegs.value((short) instrmtLegGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -457,10 +454,7 @@ public final class AddComplexInstrumentResponse implements Message {
                 return false;
             }
         }
-        if (!instrmtLegGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return instrmtLegGrpComp.isRecognized();
     }
 
     @Override

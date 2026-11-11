@@ -339,7 +339,7 @@ public final class IncrementalRefreshSessionStatisticsGroupEntry implements Grou
             cursor = mdEntrySizeShortOptional.encode(data, cursor);
         }
         if (known >= 24) {
-            if (buffer != null && buffer.length >= 23 + 1) {
+            if (buffer != null && buffer.length >= 24) {
                 System.arraycopy(buffer, 23, data, cursor, 1); // padding
             } else {
                 Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

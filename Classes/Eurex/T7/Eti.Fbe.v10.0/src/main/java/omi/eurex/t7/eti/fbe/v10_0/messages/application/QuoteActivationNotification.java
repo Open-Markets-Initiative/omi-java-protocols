@@ -237,7 +237,7 @@ public final class QuoteActivationNotification implements Message {
         cursor += 1;
         runs.add(cursor).add(2);
         cursor += 2;
-        cursor = notAffectedSecuritiesGrpComp.padding(runs, cursor);
+        cursor += notAffectedSecuritiesGrpComp.byteLength();
         return cursor;
     }
 
@@ -309,11 +309,8 @@ public final class QuoteActivationNotification implements Message {
             return false;
         }
         cursor += notAffectedSecuritiesGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -324,7 +321,7 @@ public final class QuoteActivationNotification implements Message {
         }
         noNotAffectedSecurities.value(notAffectedSecuritiesGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -339,7 +336,7 @@ public final class QuoteActivationNotification implements Message {
         cursor = massActionType.encode(data, cursor);
         cursor = massActionSubType.encode(data, cursor);
         cursor = massActionReason.encode(data, cursor);
-        if (buffer != null && buffer.length >= 80 + 2) {
+        if (buffer != null && buffer.length >= 82) {
             System.arraycopy(buffer, 80, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -382,10 +379,7 @@ public final class QuoteActivationNotification implements Message {
                 return false;
             }
         }
-        if (!notAffectedSecuritiesGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return notAffectedSecuritiesGrpComp.isRecognized();
     }
 
     @Override

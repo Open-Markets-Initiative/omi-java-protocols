@@ -117,7 +117,6 @@ public final class RiskLimitQtyGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += RiskLimitTypeField.BYTE_LENGTH;
-        cursor += 7; // padding
 
         return true;
     }
@@ -128,7 +127,7 @@ public final class RiskLimitQtyGrpCompEntry implements GroupEntry {
         int cursor = offset;
         cursor = riskLimitQty.encode(data, cursor);
         cursor = riskLimitType.encode(data, cursor);
-        if (buffer != null && buffer.length >= 9 + 7) {
+        if (buffer != null && buffer.length >= 16) {
             System.arraycopy(buffer, 9, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

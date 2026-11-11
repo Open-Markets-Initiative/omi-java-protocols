@@ -38,13 +38,6 @@ public final class AuctionPriceDataMessage implements Message {
     public static final String NAME = "Auction Price Data Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Exchange application time.
      */
     private final TransactTimeField transactTime = new TransactTimeField();
@@ -211,7 +204,7 @@ public final class AuctionPriceDataMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -276,12 +269,7 @@ public final class AuctionPriceDataMessage implements Message {
             return false;
         }
         cursor += BuyDmmAvailableQtyField.BYTE_LENGTH;
-        if (!sellDmmAvailableQty.parse(data, cursor)) {
-            return false;
-        }
-        cursor += SellDmmAvailableQtyField.BYTE_LENGTH;
-
-        return true;
+        return sellDmmAvailableQty.parse(data, cursor);
     }
 
     @Override

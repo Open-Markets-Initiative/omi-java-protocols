@@ -431,7 +431,7 @@ public final class InstrumentSummary implements Message {
         cursor = productComplex.encode(data, cursor);
         cursor = noMdEntries.encode(data, cursor);
         cursor = tesSecurityStatus.encode(data, cursor);
-        if (buffer != null && buffer.length >= 51 + 5) {
+        if (buffer != null && buffer.length >= 56) {
             System.arraycopy(buffer, 51, data, cursor, 5); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 5, (byte) 0); // padding
@@ -473,10 +473,7 @@ public final class InstrumentSummary implements Message {
                 return false;
             }
         }
-        if (!mdInstrumentEntryGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return mdInstrumentEntryGrpComp.isRecognized();
     }
 
     @Override

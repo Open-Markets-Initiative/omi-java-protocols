@@ -221,7 +221,6 @@ public final class ProductSummary implements Message {
             return false;
         }
         cursor += TesTradSesStatusField.BYTE_LENGTH;
-        cursor += 6; // padding
 
         return true;
     }
@@ -237,7 +236,7 @@ public final class ProductSummary implements Message {
         cursor = marketCondition.encode(data, cursor);
         cursor = fastMarketIndicator.encode(data, cursor);
         cursor = tesTradSesStatus.encode(data, cursor);
-        if (buffer != null && buffer.length >= 10 + 6) {
+        if (buffer != null && buffer.length >= 16) {
             System.arraycopy(buffer, 10, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding

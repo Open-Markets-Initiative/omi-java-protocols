@@ -5,7 +5,7 @@
 
 | Division | [Protocol][Omi.Txse.Protocol.Definitions] | [Encoding][Omi.Encoding.Definitions] | Version | Date | Size | [Deployment][Omi.Glossary.Deployment] | [Testing][Omi.Glossary.Testing] | [Documentation][Omi.Txse.Specifications] |
 | --- | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| [TxseEquities][TxseEquities.Exchange] | [Seed][Txse.TxseEquities.Seed] | [Rake][Omi.Encoding.Rake] | [1.0][Txse.TxseEquities.Seed.Rake.v1.0.Parser] | 6/12/2026 | 49,747 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Txse.TxseEquities.Seed.Rake.v1.0.Url] - [pdf][Txse.TxseEquities.Seed.Rake.v1.0.Pdf] |
+| [TxseEquities][TxseEquities.Exchange] | [Seed][Txse.TxseEquities.Seed] | [Rake][Omi.Encoding.Rake] | [1.0][Txse.TxseEquities.Seed.Rake.v1.0.Parser] | 6/12/2026 | 48,801 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Txse.TxseEquities.Seed.Rake.v1.0.Url] - [pdf][Txse.TxseEquities.Seed.Rake.v1.0.Pdf] |
 
 
 <p align="center"><a href="https://www.txse.com" title="Texas Stock Exchange Website"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Website.png" alt="Website" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://www.linkedin.com/company/txse" title="Texas Stock Exchange on LinkedIn"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/LinkedIn.png" alt="LinkedIn" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://en.wikipedia.org/wiki/Texas_Stock_Exchange" title="Texas Stock Exchange on Wikipedia"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Wikipedia.png" alt="Wikipedia" width="32" height="32"></a></p>

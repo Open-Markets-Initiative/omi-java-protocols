@@ -258,12 +258,7 @@ public final class OptionsTradeCorrectionMessage implements Message {
             return false;
         }
         cursor += VolumeField.BYTE_LENGTH;
-        if (!correctionCondition.parseFrom(data, cursor, end)) {
-            return false;
-        }
-        cursor += correctionCondition.byteLength();
-
-        return true;
+        return correctionCondition.parseFrom(data, cursor, end);
     }
 
     @Override

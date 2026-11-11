@@ -134,11 +134,8 @@ public final class IncrementalRefreshBookLongGroups implements GroupEntry {
             return false;
         }
         cursor += incrementalRefreshBookLongGroup.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -188,10 +185,7 @@ public final class IncrementalRefreshBookLongGroups implements GroupEntry {
                 return false;
             }
         }
-        if (!incrementalRefreshBookLongGroup.isRecognized()) {
-            return false;
-        }
-        return true;
+        return incrementalRefreshBookLongGroup.isRecognized();
     }
 
     @Override

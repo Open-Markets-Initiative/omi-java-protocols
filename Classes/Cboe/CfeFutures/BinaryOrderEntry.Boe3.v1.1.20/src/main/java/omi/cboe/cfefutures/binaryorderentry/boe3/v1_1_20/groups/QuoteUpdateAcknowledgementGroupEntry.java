@@ -30,13 +30,6 @@ public final class QuoteUpdateAcknowledgementGroupEntry implements GroupEntry {
     public static final String NAME = "QuoteUpdateAcknowledgementGroup";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Order identifier supplied by CFE
      */
     private final OrderIdField orderId = new OrderIdField();
@@ -100,7 +93,7 @@ public final class QuoteUpdateAcknowledgementGroupEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -132,12 +125,7 @@ public final class QuoteUpdateAcknowledgementGroupEntry implements GroupEntry {
             return false;
         }
         cursor += QuoteResultField.BYTE_LENGTH;
-        if (!subLiquidityIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += SubLiquidityIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return subLiquidityIndicator.parse(data, cursor);
     }
 
     @Override

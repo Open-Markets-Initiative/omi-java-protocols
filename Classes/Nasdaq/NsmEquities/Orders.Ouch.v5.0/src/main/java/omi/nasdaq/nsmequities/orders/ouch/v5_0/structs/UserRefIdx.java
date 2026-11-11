@@ -28,13 +28,6 @@ public final class UserRefIdx implements GroupEntry {
     public static final String NAME = "UserRefIdx";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * User Reference Index – identifies the channel within the given port
      */
     private final UserRefIdxField userRefIdx = new UserRefIdxField();
@@ -70,7 +63,7 @@ public final class UserRefIdx implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -94,12 +87,7 @@ public final class UserRefIdx implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!userRefIdx.parse(data, cursor)) {
-            return false;
-        }
-        cursor += UserRefIdxField.BYTE_LENGTH;
-
-        return true;
+        return userRefIdx.parse(data, cursor);
     }
 
     @Override
@@ -186,10 +174,7 @@ public final class UserRefIdx implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "UserRefIdx" -> Optional.of(userRefIdx);
-            default -> Optional.empty();
-        };
+        return "UserRefIdx".equals(name) ? Optional.of(userRefIdx) : Optional.empty();
     }
 
     @Override

@@ -48,9 +48,6 @@ public enum DataFeedIndicator {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<DataFeedIndicator> fromWire(char wire) {
-        return switch (wire) {
-            case 'O' -> Optional.of(OPRA);
-            default -> Optional.empty();
-        };
+        return wire == 'O' ? Optional.of(OPRA) : Optional.empty();
     }
 }

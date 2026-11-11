@@ -454,12 +454,7 @@ public final class EquityAndIndexEndOfDaySummaryMessage implements Message {
             return false;
         }
         cursor += BidPriceField.BYTE_LENGTH;
-        if (!offerPrice.parse(data, cursor)) {
-            return false;
-        }
-        cursor += OfferPriceField.BYTE_LENGTH;
-
-        return true;
+        return offerPrice.parse(data, cursor);
     }
 
     @Override
@@ -470,7 +465,7 @@ public final class EquityAndIndexEndOfDaySummaryMessage implements Message {
         cursor = transactionId.encode(data, cursor);
         cursor = participantReferenceNumber.encode(data, cursor);
         cursor = securitySymbol.encode(data, cursor);
-        if (buffer != null && buffer.length >= 14 + 1) {
+        if (buffer != null && buffer.length >= 15) {
             System.arraycopy(buffer, 14, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

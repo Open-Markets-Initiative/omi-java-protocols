@@ -37,13 +37,6 @@ public final class LegInformationEntry implements GroupEntry {
     public static final String NAME = "LegInformation";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * ISE’s Option ID for this leg, valid for the trading day. The same ID as the corresponding Option in the Options Directory Message. Zero (0) for Stock Leg.
      */
     private final OptionIdField optionId = new OptionIdField();
@@ -205,7 +198,7 @@ public final class LegInformationEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -265,12 +258,7 @@ public final class LegInformationEntry implements GroupEntry {
             return false;
         }
         cursor += SideField.BYTE_LENGTH;
-        if (!legRatio.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LegRatioField.BYTE_LENGTH;
-
-        return true;
+        return legRatio.parse(data, cursor);
     }
 
     @Override

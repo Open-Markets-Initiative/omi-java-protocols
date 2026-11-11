@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.ContraBrokerField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.DaysToSettlementField;
@@ -341,43 +340,7 @@ public final class QuoteRequestMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        for (int[] run = BidirectionalBusinessHeader.padding(), index = { 0 }; index[0] < run.length; index[0] += 2) {
-            runs.add(cursor + run[index[0]]).add(run[index[0] + 1]);
-        }
-        cursor += BidirectionalBusinessHeader.BYTE_LENGTH;
-        cursor += 8;
-        cursor += 8;
-        cursor += 8;
-        cursor += 4;
-        cursor += 4;
-        cursor += 8;
-        cursor += 8;
-        cursor += 1;
-        cursor += 1;
-        cursor += 8;
-        cursor += 10;
-        cursor += 5;
-        cursor += 5;
-        cursor += 8;
-        cursor += 2;
-        cursor = sidesGroups.padding(runs, cursor);
-        cursor = deskId.padding(runs, cursor);
-        cursor = memo.padding(runs, cursor);
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -488,11 +451,8 @@ public final class QuoteRequestMessage implements Message {
             return false;
         }
         cursor += memo.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -556,10 +516,7 @@ public final class QuoteRequestMessage implements Message {
                 return false;
             }
         }
-        if (!sidesGroups.isRecognized()) {
-            return false;
-        }
-        return true;
+        return sidesGroups.isRecognized();
     }
 
     @Override

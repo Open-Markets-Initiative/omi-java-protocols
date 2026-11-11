@@ -120,7 +120,7 @@ public final class ActiveOnMiaxField extends Field {
         }
 
         if (value == null) {
-            builder.append("<undeclared ").append(String.valueOf(rawValue)).append('>');
+            builder.append("<undeclared ").append(rawValue).append('>');
         } else {
             builder.append(value.name());
         }

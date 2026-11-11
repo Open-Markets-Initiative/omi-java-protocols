@@ -375,7 +375,6 @@ public final class ForwardTrade54Message implements Message {
             return false;
         }
         cursor += TrdSubTypeField.BYTE_LENGTH;
-        cursor += 3; // padding
 
         return true;
     }
@@ -399,7 +398,7 @@ public final class ForwardTrade54Message implements Message {
         cursor = sellerDays.encode(data, cursor);
         cursor = mdEntryInterestRate.encode(data, cursor);
         cursor = trdSubType.encode(data, cursor);
-        if (buffer != null && buffer.length >= 65 + 3) {
+        if (buffer != null && buffer.length >= 68) {
             System.arraycopy(buffer, 65, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding

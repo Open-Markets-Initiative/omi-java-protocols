@@ -28,13 +28,6 @@ public final class SecondaryOrdRefNum implements GroupEntry {
     public static final String NAME = "SecondaryOrdRefNum";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * An alternative order reference number used when publishing the order on the Nasdaq market data feeds (identifying, for example, the displayed portion of a reserve order)
      */
     private final SecondaryOrdRefNumField secondaryOrdRefNum = new SecondaryOrdRefNumField();
@@ -70,7 +63,7 @@ public final class SecondaryOrdRefNum implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -94,12 +87,7 @@ public final class SecondaryOrdRefNum implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!secondaryOrdRefNum.parse(data, cursor)) {
-            return false;
-        }
-        cursor += SecondaryOrdRefNumField.BYTE_LENGTH;
-
-        return true;
+        return secondaryOrdRefNum.parse(data, cursor);
     }
 
     @Override
@@ -186,10 +174,7 @@ public final class SecondaryOrdRefNum implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "SecondaryOrdRefNum" -> Optional.of(secondaryOrdRefNum);
-            default -> Optional.empty();
-        };
+        return "SecondaryOrdRefNum".equals(name) ? Optional.of(secondaryOrdRefNum) : Optional.empty();
     }
 
     @Override

@@ -259,12 +259,7 @@ public final class ExecutionSummary55Message implements Message {
             return false;
         }
         cursor += RptSeqField.BYTE_LENGTH;
-        if (!mdEntryTimestamp.parse(data, cursor)) {
-            return false;
-        }
-        cursor += MdEntryTimestampField.BYTE_LENGTH;
-
-        return true;
+        return mdEntryTimestamp.parse(data, cursor);
     }
 
     @Override
@@ -272,14 +267,14 @@ public final class ExecutionSummary55Message implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = securityId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
         }
         cursor += 2;
         cursor = aggressorSide.encode(data, cursor);
-        if (buffer != null && buffer.length >= 11 + 1) {
+        if (buffer != null && buffer.length >= 12) {
             System.arraycopy(buffer, 11, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

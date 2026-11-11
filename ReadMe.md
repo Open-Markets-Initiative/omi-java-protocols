@@ -44,7 +44,7 @@ Updates are greatly appreciated; however, this entire repository is source gener
 
 | Protocol Count | Generated Lines |
 | --- | --- |
-| 113 | 3437110 |
+| 114 | 3477265 |
 
 ## Testing
 
@@ -52,7 +52,7 @@ Updates are greatly appreciated; however, this entire repository is source gener
 
 Every build runs each protocol's round trip, which decodes every message from deterministic bytes at a non-zero offset and requires it to encode back to the same bytes, decode again to an equal message, clear, and refuse a buffer too short to hold it.
 
-A protocol with a `PacketDecoder` or a TCP stream also has a capture test, which walks every UDP datagram of a pcap or pcap-ng capture, or of each capture in a directory, and the records of every TCP connection, and requires every message to encode back to its own bytes. The build workflow runs it on 48 protocols, each against its captures from [omi-data-packets](https://github.com/Open-Markets-Initiative/omi-data-packets). The same run, locally:
+A protocol with a `PacketDecoder` or a TCP stream also has a capture test, which walks every UDP datagram of a pcap or pcap-ng capture, or of each capture in a directory, and the records of every TCP connection, and requires every message to encode back to its own bytes. The build workflow runs it on 49 protocols, each against its captures from [omi-data-packets](https://github.com/Open-Markets-Initiative/omi-data-packets). The same run, locally:
 
 ```
 git clone --depth=1 https://github.com/Open-Markets-Initiative/omi-data-packets.git

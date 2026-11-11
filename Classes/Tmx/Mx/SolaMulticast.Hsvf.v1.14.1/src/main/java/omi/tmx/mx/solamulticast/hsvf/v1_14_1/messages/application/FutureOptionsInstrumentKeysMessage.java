@@ -49,13 +49,6 @@ public final class FutureOptionsInstrumentKeysMessage implements Message {
     public static final String NAME = "Future Options Instrument Keys Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Exchange on which the trade occurred
      */
     private final ExchangeIdField exchangeId = new ExchangeIdField();
@@ -376,7 +369,7 @@ public final class FutureOptionsInstrumentKeysMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -485,12 +478,7 @@ public final class FutureOptionsInstrumentKeysMessage implements Message {
             return false;
         }
         cursor += UnderlyingSymbolYearField.BYTE_LENGTH;
-        if (!lastTradingDatetime.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LastTradingDatetimeField.BYTE_LENGTH;
-
-        return true;
+        return lastTradingDatetime.parse(data, cursor);
     }
 
     @Override
@@ -566,10 +554,7 @@ public final class FutureOptionsInstrumentKeysMessage implements Message {
         if (!tickIncrement.isRecognized()) {
             return false;
         }
-        if (!tickValueFractionPair.isRecognized()) {
-            return false;
-        }
-        return true;
+        return tickValueFractionPair.isRecognized();
     }
 
     @Override

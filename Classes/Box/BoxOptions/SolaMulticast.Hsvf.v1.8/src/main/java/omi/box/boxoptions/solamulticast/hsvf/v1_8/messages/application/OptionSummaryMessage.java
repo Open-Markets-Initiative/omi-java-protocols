@@ -581,12 +581,7 @@ public final class OptionSummaryMessage implements Message {
             return false;
         }
         cursor += ReferencePriceField.BYTE_LENGTH;
-        if (!referencePriceFractionIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += ReferencePriceFractionIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return referencePriceFractionIndicator.parse(data, cursor);
     }
 
     @Override

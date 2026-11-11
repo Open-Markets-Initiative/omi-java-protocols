@@ -475,11 +475,8 @@ public final class ClipExecutionNotification implements Message {
             return false;
         }
         cursor += instrmntLegExecGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -494,7 +491,7 @@ public final class ClipExecutionNotification implements Message {
         noFills.value((short) fillsGrpComp.size());
         noLegExecs.value(instrmntLegExecGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -516,7 +513,7 @@ public final class ClipExecutionNotification implements Message {
         cursor = execType.encode(data, cursor);
         cursor = matchType.encode(data, cursor);
         cursor = noFills.encode(data, cursor);
-        if (buffer != null && buffer.length >= 120 + 2) {
+        if (buffer != null && buffer.length >= 122) {
             System.arraycopy(buffer, 120, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -564,10 +561,7 @@ public final class ClipExecutionNotification implements Message {
         if (!fillsGrpComp.isRecognized()) {
             return false;
         }
-        if (!instrmntLegExecGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return instrmntLegExecGrpComp.isRecognized();
     }
 
     @Override

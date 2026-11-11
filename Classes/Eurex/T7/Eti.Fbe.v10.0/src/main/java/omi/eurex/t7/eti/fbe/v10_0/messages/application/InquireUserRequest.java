@@ -143,12 +143,7 @@ public final class InquireUserRequest implements Message {
             return false;
         }
         cursor += requestHeaderComp.byteLength();
-        if (!lastEntityProcessed.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LastEntityProcessedField.BYTE_LENGTH;
-
-        return true;
+        return lastEntityProcessed.parse(data, cursor);
     }
 
     @Override
@@ -156,7 +151,7 @@ public final class InquireUserRequest implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

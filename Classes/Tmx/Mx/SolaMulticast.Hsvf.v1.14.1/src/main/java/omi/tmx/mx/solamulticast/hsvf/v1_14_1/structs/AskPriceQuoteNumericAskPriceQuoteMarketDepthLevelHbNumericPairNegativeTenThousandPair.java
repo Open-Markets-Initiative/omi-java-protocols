@@ -29,13 +29,6 @@ public final class AskPriceQuoteNumericAskPriceQuoteMarketDepthLevelHbNumericPai
     public static final String NAME = "AskPriceQuoteNumericAskPriceQuoteMarketDepthLevelHbNumericPairNegativeTenThousandPair";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Ask price for the series For Implied, it represents the best (1st limit) indicative implied ask price
      */
     private final RawAskPriceQuoteNumericAskPriceQuoteMarketDepthLevelHbNumericPairField rawAskPriceQuoteNumericAskPriceQuoteMarketDepthLevelHbNumericPair = new RawAskPriceQuoteNumericAskPriceQuoteMarketDepthLevelHbNumericPairField();
@@ -85,7 +78,7 @@ public final class AskPriceQuoteNumericAskPriceQuoteMarketDepthLevelHbNumericPai
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class AskPriceQuoteNumericAskPriceQuoteMarketDepthLevelHbNumericPai
             return false;
         }
         cursor += RawAskPriceQuoteNumericAskPriceQuoteMarketDepthLevelHbNumericPairField.BYTE_LENGTH;
-        if (!askPriceFractionIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += AskPriceFractionIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return askPriceFractionIndicator.parse(data, cursor);
     }
 
     @Override

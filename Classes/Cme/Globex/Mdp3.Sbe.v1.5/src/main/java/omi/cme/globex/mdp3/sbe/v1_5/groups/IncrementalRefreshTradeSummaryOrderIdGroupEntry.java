@@ -204,7 +204,7 @@ public final class IncrementalRefreshTradeSummaryOrderIdGroupEntry implements Gr
             cursor = lastQty.encode(data, cursor);
         }
         if (known >= 16) {
-            if (buffer != null && buffer.length >= 12 + 4) {
+            if (buffer != null && buffer.length >= 16) {
                 System.arraycopy(buffer, 12, data, cursor, 4); // padding
             } else {
                 Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

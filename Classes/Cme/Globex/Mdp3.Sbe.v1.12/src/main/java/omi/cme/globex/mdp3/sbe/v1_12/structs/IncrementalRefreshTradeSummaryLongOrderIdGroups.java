@@ -134,11 +134,8 @@ public final class IncrementalRefreshTradeSummaryLongOrderIdGroups implements Gr
             return false;
         }
         cursor += incrementalRefreshTradeSummaryLongOrderIdGroup.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -188,10 +185,7 @@ public final class IncrementalRefreshTradeSummaryLongOrderIdGroups implements Gr
                 return false;
             }
         }
-        if (!incrementalRefreshTradeSummaryLongOrderIdGroup.isRecognized()) {
-            return false;
-        }
-        return true;
+        return incrementalRefreshTradeSummaryLongOrderIdGroup.isRecognized();
     }
 
     @Override

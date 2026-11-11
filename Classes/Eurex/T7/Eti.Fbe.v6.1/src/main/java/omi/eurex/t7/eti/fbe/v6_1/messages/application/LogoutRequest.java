@@ -124,12 +124,7 @@ public final class LogoutRequest implements Message {
         }
         cursor += NetworkMsgIdField.BYTE_LENGTH;
         cursor += 2; // padding
-        if (!requestHeaderComp.parseFrom(data, cursor, end)) {
-            return false;
-        }
-        cursor += requestHeaderComp.byteLength();
-
-        return true;
+        return requestHeaderComp.parseFrom(data, cursor, end);
     }
 
     @Override
@@ -137,7 +132,7 @@ public final class LogoutRequest implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -224,10 +219,7 @@ public final class LogoutRequest implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "NetworkMsgId" -> Optional.of(networkMsgId);
-            default -> Optional.empty();
-        };
+        return "NetworkMsgId".equals(name) ? Optional.of(networkMsgId) : Optional.empty();
     }
 
     @Override

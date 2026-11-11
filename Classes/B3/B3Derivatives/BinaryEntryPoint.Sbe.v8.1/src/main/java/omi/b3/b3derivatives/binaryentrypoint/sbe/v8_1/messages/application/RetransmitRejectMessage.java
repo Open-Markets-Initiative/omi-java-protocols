@@ -31,13 +31,6 @@ public final class RetransmitRejectMessage implements Message {
     public static final String NAME = "Retransmit Reject Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * sessionID
      */
     private final SessionIdField sessionId = new SessionIdField();
@@ -106,7 +99,7 @@ public final class RetransmitRejectMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -143,12 +136,7 @@ public final class RetransmitRejectMessage implements Message {
             return false;
         }
         cursor += RequestTimestampField.BYTE_LENGTH;
-        if (!retransmitRejectCode.parse(data, cursor)) {
-            return false;
-        }
-        cursor += RetransmitRejectCodeField.BYTE_LENGTH;
-
-        return true;
+        return retransmitRejectCode.parse(data, cursor);
     }
 
     @Override

@@ -611,7 +611,6 @@ public final class BasketSideAllocExtGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += ComplianceTextField.BYTE_LENGTH;
-        cursor += 7; // padding
 
         return true;
     }
@@ -648,7 +647,7 @@ public final class BasketSideAllocExtGrpCompEntry implements GroupEntry {
         cursor = partyIdLocationId.encode(data, cursor);
         cursor = custOrderHandlingInst.encode(data, cursor);
         cursor = complianceText.encode(data, cursor);
-        if (buffer != null && buffer.length >= 177 + 7) {
+        if (buffer != null && buffer.length >= 184) {
             System.arraycopy(buffer, 177, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

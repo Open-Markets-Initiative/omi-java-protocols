@@ -35,13 +35,6 @@ public final class FractionalCorrectedTrade implements GroupEntry {
     public static final String NAME = "FractionalCorrectedTrade";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * The Trade Price is the monetary value of an individual share of security at the time of the trade
      */
     private final TradePriceField tradePrice = new TradePriceField();
@@ -161,7 +154,7 @@ public final class FractionalCorrectedTrade implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -209,12 +202,7 @@ public final class FractionalCorrectedTrade implements GroupEntry {
             return false;
         }
         cursor += TradeThroughExemptIndicatorField.BYTE_LENGTH;
-        if (!shortSaleRestrictionIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += ShortSaleRestrictionIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return shortSaleRestrictionIndicator.parse(data, cursor);
     }
 
     @Override

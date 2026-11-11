@@ -147,7 +147,6 @@ public final class MassCancelAcknowledgmentMessage implements Message {
             return false;
         }
         cursor += CancelledOrderCountField.BYTE_LENGTH;
-        cursor += 1; // padding
 
         return true;
     }
@@ -159,7 +158,7 @@ public final class MassCancelAcknowledgmentMessage implements Message {
         cursor = transactionTime.encode(data, cursor);
         cursor = massCancelId.encode(data, cursor);
         cursor = cancelledOrderCount.encode(data, cursor);
-        if (buffer != null && buffer.length >= 32 + 1) {
+        if (buffer != null && buffer.length >= 33) {
             System.arraycopy(buffer, 32, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

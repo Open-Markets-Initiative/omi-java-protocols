@@ -256,12 +256,7 @@ public final class FullOrderExecution implements Message {
             return false;
         }
         cursor += LastQtyField.BYTE_LENGTH;
-        if (!lastPx.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LastPxField.BYTE_LENGTH;
-
-        return true;
+        return lastPx.parse(data, cursor);
     }
 
     @Override
@@ -271,7 +266,7 @@ public final class FullOrderExecution implements Message {
         cursor = side.encode(data, cursor);
         cursor = ordType.encode(data, cursor);
         cursor = algorithmicTradeIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 3 + 5) {
+        if (buffer != null && buffer.length >= 8) {
             System.arraycopy(buffer, 3, data, cursor, 5); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 5, (byte) 0); // padding

@@ -39,13 +39,6 @@ public final class SpreadTradeAmendMessage implements Message {
     public static final String NAME = "Spread Trade Amend Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * matchId
      */
     private final MatchIdField matchId = new MatchIdField();
@@ -212,7 +205,7 @@ public final class SpreadTradeAmendMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -277,12 +270,7 @@ public final class SpreadTradeAmendMessage implements Message {
             return false;
         }
         cursor += OldLeg2PriceField.BYTE_LENGTH;
-        if (!newLeg2Price.parse(data, cursor)) {
-            return false;
-        }
-        cursor += NewLeg2PriceField.BYTE_LENGTH;
-
-        return true;
+        return newLeg2Price.parse(data, cursor);
     }
 
     @Override

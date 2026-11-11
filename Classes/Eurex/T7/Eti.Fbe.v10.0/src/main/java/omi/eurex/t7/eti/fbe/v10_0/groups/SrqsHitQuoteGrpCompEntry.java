@@ -136,7 +136,6 @@ public final class SrqsHitQuoteGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += SideField.BYTE_LENGTH;
-        cursor += 7; // padding
 
         return true;
     }
@@ -148,7 +147,7 @@ public final class SrqsHitQuoteGrpCompEntry implements GroupEntry {
         cursor = orderQty.encode(data, cursor);
         cursor = quoteId.encode(data, cursor);
         cursor = side.encode(data, cursor);
-        if (buffer != null && buffer.length >= 17 + 7) {
+        if (buffer != null && buffer.length >= 24) {
             System.arraycopy(buffer, 17, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

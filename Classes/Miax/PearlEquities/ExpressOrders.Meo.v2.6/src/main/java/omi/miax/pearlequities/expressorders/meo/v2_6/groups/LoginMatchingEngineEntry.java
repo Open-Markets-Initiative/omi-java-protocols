@@ -30,13 +30,6 @@ public final class LoginMatchingEngineEntry implements GroupEntry {
     public static final String NAME = "LoginMatchingEngine";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Login Status
      */
     private final LoginStatusField loginStatus = new LoginStatusField();
@@ -100,7 +93,7 @@ public final class LoginMatchingEngineEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -132,12 +125,7 @@ public final class LoginMatchingEngineEntry implements GroupEntry {
             return false;
         }
         cursor += TradingSessionIdField.BYTE_LENGTH;
-        if (!highestSequenceNumber.parse(data, cursor)) {
-            return false;
-        }
-        cursor += HighestSequenceNumberField.BYTE_LENGTH;
-
-        return true;
+        return highestSequenceNumber.parse(data, cursor);
     }
 
     @Override

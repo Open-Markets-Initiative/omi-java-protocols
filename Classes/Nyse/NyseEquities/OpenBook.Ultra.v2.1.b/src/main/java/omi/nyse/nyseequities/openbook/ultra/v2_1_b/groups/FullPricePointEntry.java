@@ -155,7 +155,6 @@ public final class FullPricePointEntry implements GroupEntry {
             return false;
         }
         cursor += SideField.BYTE_LENGTH;
-        cursor += 1; // padding
 
         return true;
     }
@@ -168,7 +167,7 @@ public final class FullPricePointEntry implements GroupEntry {
         cursor = volume.encode(data, cursor);
         cursor = numOrders.encode(data, cursor);
         cursor = side.encode(data, cursor);
-        if (buffer != null && buffer.length >= 11 + 1) {
+        if (buffer != null && buffer.length >= 12) {
             System.arraycopy(buffer, 11, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

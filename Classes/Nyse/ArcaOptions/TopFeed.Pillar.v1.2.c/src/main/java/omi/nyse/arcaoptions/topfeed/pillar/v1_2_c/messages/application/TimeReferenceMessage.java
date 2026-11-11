@@ -125,12 +125,7 @@ public final class TimeReferenceMessage implements Message {
         }
         cursor += IdField.BYTE_LENGTH;
         cursor += 4; // padding
-        if (!sourceTime.parse(data, cursor)) {
-            return false;
-        }
-        cursor += SourceTimeField.BYTE_LENGTH;
-
-        return true;
+        return sourceTime.parse(data, cursor);
     }
 
     @Override
@@ -138,7 +133,7 @@ public final class TimeReferenceMessage implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = id.encode(data, cursor);
-        if (buffer != null && buffer.length >= 4 + 4) {
+        if (buffer != null && buffer.length >= 8) {
             System.arraycopy(buffer, 4, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

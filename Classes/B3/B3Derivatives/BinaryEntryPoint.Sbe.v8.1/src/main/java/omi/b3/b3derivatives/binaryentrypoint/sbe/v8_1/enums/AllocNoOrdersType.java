@@ -48,9 +48,6 @@ public enum AllocNoOrdersType {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<AllocNoOrdersType> fromWire(char wire) {
-        return switch (wire) {
-            case '0' -> Optional.of(NOT_SPECIFIED);
-            default -> Optional.empty();
-        };
+        return wire == '0' ? Optional.of(NOT_SPECIFIED) : Optional.empty();
     }
 }

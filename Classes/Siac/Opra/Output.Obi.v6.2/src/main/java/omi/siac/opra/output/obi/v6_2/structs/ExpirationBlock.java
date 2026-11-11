@@ -30,13 +30,6 @@ public final class ExpirationBlock implements GroupEntry {
     public static final String NAME = "ExpirationBlock";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Indicates the expiration month and identifies the option as a Call or a Put.
      */
     private final ExpirationMonthField expirationMonth = new ExpirationMonthField();
@@ -100,7 +93,7 @@ public final class ExpirationBlock implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -132,12 +125,7 @@ public final class ExpirationBlock implements GroupEntry {
             return false;
         }
         cursor += ExpirationDayField.BYTE_LENGTH;
-        if (!expirationYear.parse(data, cursor)) {
-            return false;
-        }
-        cursor += ExpirationYearField.BYTE_LENGTH;
-
-        return true;
+        return expirationYear.parse(data, cursor);
     }
 
     @Override

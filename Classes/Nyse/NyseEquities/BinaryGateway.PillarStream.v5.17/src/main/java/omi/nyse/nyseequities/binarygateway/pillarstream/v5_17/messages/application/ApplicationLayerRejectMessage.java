@@ -223,7 +223,6 @@ public final class ApplicationLayerRejectMessage implements Message {
             return false;
         }
         cursor += UserDataField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -239,7 +238,7 @@ public final class ApplicationLayerRejectMessage implements Message {
         cursor = reasonCode.encode(data, cursor);
         cursor = rejectType.encode(data, cursor);
         cursor = userData.encode(data, cursor);
-        if (buffer != null && buffer.length >= 35 + 4) {
+        if (buffer != null && buffer.length >= 39) {
             System.arraycopy(buffer, 35, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

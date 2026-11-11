@@ -33,13 +33,6 @@ public final class MinimumPriceVariantClassReferenceDataMessage implements Messa
     public static final String NAME = "Minimum Price Variant Class Reference Data Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Exchange application time.
      */
     private final TransactTimeField transactTime = new TransactTimeField();
@@ -136,7 +129,7 @@ public final class MinimumPriceVariantClassReferenceDataMessage implements Messa
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -181,12 +174,7 @@ public final class MinimumPriceVariantClassReferenceDataMessage implements Messa
             return false;
         }
         cursor += RpimpvField.BYTE_LENGTH;
-        if (!luldmpv.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LuldmpvField.BYTE_LENGTH;
-
-        return true;
+        return luldmpv.parse(data, cursor);
     }
 
     @Override

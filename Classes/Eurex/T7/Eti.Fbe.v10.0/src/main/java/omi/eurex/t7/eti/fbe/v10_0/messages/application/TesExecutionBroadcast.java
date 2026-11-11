@@ -318,7 +318,6 @@ public final class TesExecutionBroadcast implements Message {
             return false;
         }
         cursor += MessageEventSourceField.BYTE_LENGTH;
-        cursor += 2; // padding
 
         return true;
     }
@@ -327,7 +326,7 @@ public final class TesExecutionBroadcast implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -345,7 +344,7 @@ public final class TesExecutionBroadcast implements Message {
         cursor = side.encode(data, cursor);
         cursor = trdRptStatus.encode(data, cursor);
         cursor = messageEventSource.encode(data, cursor);
-        if (buffer != null && buffer.length >= 72 + 2) {
+        if (buffer != null && buffer.length >= 74) {
             System.arraycopy(buffer, 72, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

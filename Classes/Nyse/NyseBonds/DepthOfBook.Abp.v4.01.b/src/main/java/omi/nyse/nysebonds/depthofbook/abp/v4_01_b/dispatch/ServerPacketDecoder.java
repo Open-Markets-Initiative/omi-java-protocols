@@ -1,10 +1,8 @@
 package omi.nyse.nysebonds.depthofbook.abp.v4_01_b.dispatch;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import omi.nyse.nysebonds.depthofbook.abp.v4_01_b.types.ByteOps;
 import omi.nyse.nysebonds.depthofbook.abp.v4_01_b.types.Message;
 
 /**
@@ -91,10 +89,8 @@ public final class ServerPacketDecoder {
                 return new Decoded(messages, undecoded, false, trailing, padding);
             }
 
-            int frameEnd = limit;
-
             char messageType = (char) (data[position + 2] & 0xFF);
-            Optional<Message> selected = PayloadDispatch.decode(messageType, data, position + MESSAGE_HEADER_LENGTH, frameEnd);
+            Optional<Message> selected = PayloadDispatch.decode(messageType, data, position + MESSAGE_HEADER_LENGTH, limit);
             if (selected.isPresent()) {
                 Message message = selected.get();
                 if (!message.isDecoded()) {

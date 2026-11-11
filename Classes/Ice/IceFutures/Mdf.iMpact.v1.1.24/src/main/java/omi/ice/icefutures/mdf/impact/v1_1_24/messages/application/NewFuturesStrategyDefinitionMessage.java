@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import omi.ice.icefutures.mdf.impact.v1_1_24.fields.FuturesContractSymbolField;
 import omi.ice.icefutures.mdf.impact.v1_1_24.fields.GtAllowedField;
 import omi.ice.icefutures.mdf.impact.v1_1_24.fields.IncrementPriceField;
@@ -258,34 +257,7 @@ public final class NewFuturesStrategyDefinitionMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor += 4;
-        cursor += 70;
-        cursor += 1;
-        cursor += 1;
-        cursor += 4;
-        cursor += 4;
-        cursor += 4;
-        cursor += 1;
-        cursor = legDefinition.padding(runs, cursor);
-        cursor += 2;
-        cursor += 1;
-        cursor += 18;
-        cursor += 1;
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -365,12 +337,7 @@ public final class NewFuturesStrategyDefinitionMessage implements Message {
             return false;
         }
         cursor += StrategySymbolField.BYTE_LENGTH;
-        if (!gtAllowed.parse(data, cursor)) {
-            return false;
-        }
-        cursor += GtAllowedField.BYTE_LENGTH;
-
-        return true;
+        return gtAllowed.parse(data, cursor);
     }
 
     @Override
@@ -429,10 +396,7 @@ public final class NewFuturesStrategyDefinitionMessage implements Message {
                 return false;
             }
         }
-        if (!legDefinition.isRecognized()) {
-            return false;
-        }
-        return true;
+        return legDefinition.isRecognized();
     }
 
     @Override

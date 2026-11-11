@@ -134,11 +134,8 @@ public final class IncrementalRefreshTradeSummaryGroups implements GroupEntry {
             return false;
         }
         cursor += incrementalRefreshTradeSummaryGroup.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -188,10 +185,7 @@ public final class IncrementalRefreshTradeSummaryGroups implements GroupEntry {
                 return false;
             }
         }
-        if (!incrementalRefreshTradeSummaryGroup.isRecognized()) {
-            return false;
-        }
-        return true;
+        return incrementalRefreshTradeSummaryGroup.isRecognized();
     }
 
     @Override

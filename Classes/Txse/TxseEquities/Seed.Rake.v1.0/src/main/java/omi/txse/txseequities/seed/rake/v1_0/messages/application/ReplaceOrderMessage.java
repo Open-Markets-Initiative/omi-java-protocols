@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import omi.txse.txseequities.seed.rake.v1_0.fields.ClOrdIdField;
 import omi.txse.txseequities.seed.rake.v1_0.fields.OrigClOrdIdField;
 import omi.txse.txseequities.seed.rake.v1_0.fields.ReplaceOrderBitFieldsField;
@@ -332,49 +331,7 @@ public final class ReplaceOrderMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor += 2;
-        cursor += 8;
-        cursor += 8;
-        cursor += 2;
-        if (replaceOrderPricePresent()) {
-            cursor += 8;
-        }
-        if (replaceOrderOrderQtyPresent()) {
-            cursor += 4;
-        }
-        if (replaceOrderMaxFloorQtyPresent()) {
-            cursor += 4;
-        }
-        if (replaceOrderSelfMatchScopePresent()) {
-            cursor += 1;
-        }
-        if (replaceOrderSelfMatchInstructionPresent()) {
-            cursor += 1;
-        }
-        if (replaceOrderPriceSlideInstructionPresent()) {
-            cursor += 1;
-        }
-        if (replaceOrderReferencePriceTargetPresent()) {
-            cursor += 2;
-        }
-        if (replaceOrderLocateBrokerPresent()) {
-            cursor += 4;
-        }
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -488,11 +445,8 @@ public final class ReplaceOrderMessage implements Message {
             }
             cursor += ReplaceOrderLocateBrokerField.BYTE_LENGTH;
         }
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override

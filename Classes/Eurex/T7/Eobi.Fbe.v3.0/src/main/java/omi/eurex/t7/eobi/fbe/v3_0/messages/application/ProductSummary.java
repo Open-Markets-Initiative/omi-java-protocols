@@ -31,13 +31,6 @@ public final class ProductSummary implements Message {
     public static final String NAME = "Product Summary";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Last Msg Seq Num Processed
      */
     private final LastMsgSeqNumProcessedField lastMsgSeqNumProcessed = new LastMsgSeqNumProcessedField();
@@ -134,7 +127,7 @@ public final class ProductSummary implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -179,12 +172,7 @@ public final class ProductSummary implements Message {
             return false;
         }
         cursor += TradSesStatusField.BYTE_LENGTH;
-        if (!fastMarketIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += FastMarketIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return fastMarketIndicator.parse(data, cursor);
     }
 
     @Override

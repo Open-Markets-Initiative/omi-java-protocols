@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import omi.nasdaq.nsmequities.orders.ouch.v5_0.branches.RejectedOrderOptionalValue;
 import omi.nasdaq.nsmequities.orders.ouch.v5_0.fields.OptionalFieldLengthField;
 import omi.nasdaq.nsmequities.orders.ouch.v5_0.fields.RejectedOrderOptionalFieldField;
@@ -94,24 +93,7 @@ public final class RejectedOrderAppendageEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor += 1;
-        cursor += 1;
-        cursor += rejectedOrderOptionalValue.byteLength();
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -203,10 +185,7 @@ public final class RejectedOrderAppendageEntry implements GroupEntry {
                 return false;
             }
         }
-        if (!rejectedOrderOptionalValue.isRecognized()) {
-            return false;
-        }
-        return true;
+        return rejectedOrderOptionalValue.isRecognized();
     }
 
     @Override

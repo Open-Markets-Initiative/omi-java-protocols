@@ -168,12 +168,7 @@ public final class WideComplexDoubleSidedTopOfMarketMessage implements Message {
             return false;
         }
         cursor += wideBid.byteLength();
-        if (!wideOffer.parseFrom(data, cursor, end)) {
-            return false;
-        }
-        cursor += wideOffer.byteLength();
-
-        return true;
+        return wideOffer.parseFrom(data, cursor, end);
     }
 
     @Override

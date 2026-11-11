@@ -124,19 +124,14 @@ public final class DeleteAllOrderNrResponse implements Message {
             return false;
         }
         cursor += nrResponseHeaderMeComp.byteLength();
-        if (!massActionReportId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += MassActionReportIdField.BYTE_LENGTH;
-
-        return true;
+        return massActionReportId.parse(data, cursor);
     }
 
     @Override
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -224,10 +219,7 @@ public final class DeleteAllOrderNrResponse implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "MassActionReportId" -> Optional.of(massActionReportId);
-            default -> Optional.empty();
-        };
+        return "MassActionReportId".equals(name) ? Optional.of(massActionReportId) : Optional.empty();
     }
 
     @Override

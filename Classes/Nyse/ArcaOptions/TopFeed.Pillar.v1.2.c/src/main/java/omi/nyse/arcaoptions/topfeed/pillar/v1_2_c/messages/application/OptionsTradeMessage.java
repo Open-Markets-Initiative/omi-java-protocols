@@ -239,12 +239,7 @@ public final class OptionsTradeMessage implements Message {
             return false;
         }
         cursor += VolumeField.BYTE_LENGTH;
-        if (!tradeCondition.parseFrom(data, cursor, end)) {
-            return false;
-        }
-        cursor += tradeCondition.byteLength();
-
-        return true;
+        return tradeCondition.parseFrom(data, cursor, end);
     }
 
     @Override

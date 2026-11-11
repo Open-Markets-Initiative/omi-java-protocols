@@ -508,7 +508,6 @@ public final class ImbalanceMessage implements Message {
             return false;
         }
         cursor += UnpairedSideField.BYTE_LENGTH;
-        cursor += 1; // padding
 
         return true;
     }
@@ -539,7 +538,7 @@ public final class ImbalanceMessage implements Message {
         cursor = numExtensions.encode(data, cursor);
         cursor = unpairedQty.encode(data, cursor);
         cursor = unpairedSide.encode(data, cursor);
-        if (buffer != null && buffer.length >= 68 + 1) {
+        if (buffer != null && buffer.length >= 69) {
             System.arraycopy(buffer, 68, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

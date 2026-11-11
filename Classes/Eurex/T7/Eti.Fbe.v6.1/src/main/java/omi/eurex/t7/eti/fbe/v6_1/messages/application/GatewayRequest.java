@@ -204,7 +204,6 @@ public final class GatewayRequest implements Message {
             return false;
         }
         cursor += PasswordField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -214,7 +213,7 @@ public final class GatewayRequest implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -225,7 +224,7 @@ public final class GatewayRequest implements Message {
         cursor = partitionId.encode(data, cursor);
         cursor = defaultCstmApplVerId.encode(data, cursor);
         cursor = password.encode(data, cursor);
-        if (buffer != null && buffer.length >= 86 + 4) {
+        if (buffer != null && buffer.length >= 90) {
             System.arraycopy(buffer, 86, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

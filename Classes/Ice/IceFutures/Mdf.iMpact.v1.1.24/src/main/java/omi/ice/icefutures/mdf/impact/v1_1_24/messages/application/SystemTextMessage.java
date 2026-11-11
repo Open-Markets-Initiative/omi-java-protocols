@@ -36,13 +36,6 @@ public final class SystemTextMessage implements Message {
     public static final String NAME = "System Text Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Text Message
      */
     private final TextMessageField textMessage = new TextMessageField();
@@ -111,7 +104,7 @@ public final class SystemTextMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -148,12 +141,7 @@ public final class SystemTextMessage implements Message {
             return false;
         }
         cursor += MessageDateTimeField.BYTE_LENGTH;
-        if (!textMessageExtraFld.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TextMessageExtraFldField.BYTE_LENGTH;
-
-        return true;
+        return textMessageExtraFld.parse(data, cursor);
     }
 
     @Override

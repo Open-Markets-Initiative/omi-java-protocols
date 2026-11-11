@@ -259,12 +259,7 @@ public final class TradeBust57Message implements Message {
             return false;
         }
         cursor += MdEntryTimestampField.BYTE_LENGTH;
-        if (!rptSeq.parse(data, cursor)) {
-            return false;
-        }
-        cursor += RptSeqField.BYTE_LENGTH;
-
-        return true;
+        return rptSeq.parse(data, cursor);
     }
 
     @Override
@@ -274,7 +269,7 @@ public final class TradeBust57Message implements Message {
         cursor = securityId.encode(data, cursor);
         cursor = matchEventIndicator.encode(data, cursor);
         cursor = tradingSessionId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 10 + 2) {
+        if (buffer != null && buffer.length >= 12) {
             System.arraycopy(buffer, 10, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -284,7 +279,7 @@ public final class TradeBust57Message implements Message {
         cursor = mdEntrySizeQuantity.encode(data, cursor);
         cursor = tradeId.encode(data, cursor);
         cursor = tradeDate.encode(data, cursor);
-        if (buffer != null && buffer.length >= 34 + 2) {
+        if (buffer != null && buffer.length >= 36) {
             System.arraycopy(buffer, 34, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

@@ -1,7 +1,6 @@
 package omi.siac.opra.output.obi.v6_2.dispatch;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import omi.siac.opra.output.obi.v6_2.types.ByteOps;
@@ -93,59 +92,57 @@ public final class PacketDecoder {
                 return new Decoded(messages, undecoded, false, trailing, padding);
             }
 
-            int frameEnd = limit;
-
             char messageCategory = (char) (data[position + 1] & 0xFF);
             Optional<Message> selected;
             int envelope = 0;
             if (messageCategory == 'C') {
                 envelope = 1;
-                if (position + MESSAGE_HEADER_LENGTH + envelope > frameEnd) {
+                if (position + MESSAGE_HEADER_LENGTH + envelope > limit) {
                     return new Decoded(messages, undecoded, false, trailing, padding);
                 }
-                selected = AdministrativeMessagePayloadDispatch.decode((char) (data[position + 2] & 0xFF), data, position + MESSAGE_HEADER_LENGTH + envelope, frameEnd);
+                selected = AdministrativeMessagePayloadDispatch.decode((char) (data[position + 2] & 0xFF), data, position + MESSAGE_HEADER_LENGTH + envelope, limit);
             } else if (messageCategory == 'H') {
                 envelope = 1;
-                if (position + MESSAGE_HEADER_LENGTH + envelope > frameEnd) {
+                if (position + MESSAGE_HEADER_LENGTH + envelope > limit) {
                     return new Decoded(messages, undecoded, false, trailing, padding);
                 }
-                selected = ControlMessagePayloadDispatch.decode((char) (data[position + 2] & 0xFF), data, position + MESSAGE_HEADER_LENGTH + envelope, frameEnd);
+                selected = ControlMessagePayloadDispatch.decode((char) (data[position + 2] & 0xFF), data, position + MESSAGE_HEADER_LENGTH + envelope, limit);
             } else if (messageCategory == 'a') {
                 envelope = 1;
-                if (position + MESSAGE_HEADER_LENGTH + envelope > frameEnd) {
+                if (position + MESSAGE_HEADER_LENGTH + envelope > limit) {
                     return new Decoded(messages, undecoded, false, trailing, padding);
                 }
-                selected = EquityAndIndexLastSaleMessagePayloadDispatch.decode((char) (data[position + 2] & 0xFF), data, position + MESSAGE_HEADER_LENGTH + envelope, frameEnd);
+                selected = EquityAndIndexLastSaleMessagePayloadDispatch.decode((char) (data[position + 2] & 0xFF), data, position + MESSAGE_HEADER_LENGTH + envelope, limit);
             } else if (messageCategory == 'd') {
                 envelope = 1;
-                if (position + MESSAGE_HEADER_LENGTH + envelope > frameEnd) {
+                if (position + MESSAGE_HEADER_LENGTH + envelope > limit) {
                     return new Decoded(messages, undecoded, false, trailing, padding);
                 }
-                selected = OpenInterestMessagePayloadDispatch.decode((char) (data[position + 2] & 0xFF), data, position + MESSAGE_HEADER_LENGTH + envelope, frameEnd);
+                selected = OpenInterestMessagePayloadDispatch.decode((char) (data[position + 2] & 0xFF), data, position + MESSAGE_HEADER_LENGTH + envelope, limit);
             } else if (messageCategory == 'f') {
                 envelope = 1;
-                if (position + MESSAGE_HEADER_LENGTH + envelope > frameEnd) {
+                if (position + MESSAGE_HEADER_LENGTH + envelope > limit) {
                     return new Decoded(messages, undecoded, false, trailing, padding);
                 }
-                selected = EquityAndIndexEndOfDaySummaryMessagePayloadDispatch.decode((char) (data[position + 2] & 0xFF), data, position + MESSAGE_HEADER_LENGTH + envelope, frameEnd);
+                selected = EquityAndIndexEndOfDaySummaryMessagePayloadDispatch.decode((char) (data[position + 2] & 0xFF), data, position + MESSAGE_HEADER_LENGTH + envelope, limit);
             } else if (messageCategory == 'k') {
                 envelope = 1;
-                if (position + MESSAGE_HEADER_LENGTH + envelope > frameEnd) {
+                if (position + MESSAGE_HEADER_LENGTH + envelope > limit) {
                     return new Decoded(messages, undecoded, false, trailing, padding);
                 }
-                selected = LongEquityAndIndexQuoteMessagePayloadDispatch.decode((char) (data[position + 2] & 0xFF), data, position + MESSAGE_HEADER_LENGTH + envelope, frameEnd);
+                selected = LongEquityAndIndexQuoteMessagePayloadDispatch.decode((char) (data[position + 2] & 0xFF), data, position + MESSAGE_HEADER_LENGTH + envelope, limit);
             } else if (messageCategory == 'q') {
                 envelope = 1;
-                if (position + MESSAGE_HEADER_LENGTH + envelope > frameEnd) {
+                if (position + MESSAGE_HEADER_LENGTH + envelope > limit) {
                     return new Decoded(messages, undecoded, false, trailing, padding);
                 }
-                selected = ShortEquityAndIndexQuoteMessagePayloadDispatch.decode((char) (data[position + 2] & 0xFF), data, position + MESSAGE_HEADER_LENGTH + envelope, frameEnd);
+                selected = ShortEquityAndIndexQuoteMessagePayloadDispatch.decode((char) (data[position + 2] & 0xFF), data, position + MESSAGE_HEADER_LENGTH + envelope, limit);
             } else if (messageCategory == 'Y') {
                 envelope = 1;
-                if (position + MESSAGE_HEADER_LENGTH + envelope > frameEnd) {
+                if (position + MESSAGE_HEADER_LENGTH + envelope > limit) {
                     return new Decoded(messages, undecoded, false, trailing, padding);
                 }
-                selected = UnderlyingValueMessagePayloadDispatch.decode((char) (data[position + 2] & 0xFF), data, position + MESSAGE_HEADER_LENGTH + envelope, frameEnd);
+                selected = UnderlyingValueMessagePayloadDispatch.decode((char) (data[position + 2] & 0xFF), data, position + MESSAGE_HEADER_LENGTH + envelope, limit);
             } else {
                 selected = Optional.empty();
             }

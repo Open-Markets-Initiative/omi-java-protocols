@@ -366,7 +366,7 @@ public final class IncrementalRefreshDailyStatisticsGroupEntry implements GroupE
             cursor = mdEntryTypeDailyStatistics.encode(data, cursor);
         }
         if (known >= 32) {
-            if (buffer != null && buffer.length >= 25 + 7) {
+            if (buffer != null && buffer.length >= 32) {
                 System.arraycopy(buffer, 25, data, cursor, 7); // padding
             } else {
                 Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

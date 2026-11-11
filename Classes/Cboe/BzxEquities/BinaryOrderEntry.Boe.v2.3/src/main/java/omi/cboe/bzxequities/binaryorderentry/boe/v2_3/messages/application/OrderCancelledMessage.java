@@ -2196,11 +2196,8 @@ public final class OrderCancelledMessage implements Message {
             }
             cursor += ExDestinationField.BYTE_LENGTH;
         }
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -2369,7 +2366,7 @@ public final class OrderCancelledMessage implements Message {
         cursor = transactTime.encode(data, cursor);
         cursor = clOrdId.encode(data, cursor);
         cursor = cancelReason.encode(data, cursor);
-        if (buffer != null && buffer.length >= 29 + 1) {
+        if (buffer != null && buffer.length >= 30) {
             System.arraycopy(buffer, 29, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

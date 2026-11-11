@@ -204,7 +204,6 @@ public final class CrossRequest implements Message {
             return false;
         }
         cursor += ComplianceTextField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -214,7 +213,7 @@ public final class CrossRequest implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -225,7 +224,7 @@ public final class CrossRequest implements Message {
         cursor = marketSegmentId.encode(data, cursor);
         cursor = orderQty.encode(data, cursor);
         cursor = complianceText.encode(data, cursor);
-        if (buffer != null && buffer.length >= 54 + 4) {
+        if (buffer != null && buffer.length >= 58) {
             System.arraycopy(buffer, 54, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

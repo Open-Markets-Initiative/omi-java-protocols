@@ -31,13 +31,6 @@ public final class RecapUpdateMdEntryEntry implements GroupEntry {
     public static final String NAME = "RecapUpdateMdEntry";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Side of book for this entry.
      */
     private final MdEntryTypeField mdEntryType = new MdEntryTypeField();
@@ -101,7 +94,7 @@ public final class RecapUpdateMdEntryEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -133,12 +126,7 @@ public final class RecapUpdateMdEntryEntry implements GroupEntry {
             return false;
         }
         cursor += mdEntryPx.byteLength();
-        if (!mdEntrySize.parse(data, cursor)) {
-            return false;
-        }
-        cursor += MdEntrySizeField.BYTE_LENGTH;
-
-        return true;
+        return mdEntrySize.parse(data, cursor);
     }
 
     @Override

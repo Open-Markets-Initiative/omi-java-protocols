@@ -30,13 +30,6 @@ public final class IndexValueMdEntryEntry implements GroupEntry {
     public static final String NAME = "IndexValueMdEntry";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Side of book for this entry.
      */
     private final MdEntryTypeField mdEntryType = new MdEntryTypeField();
@@ -86,7 +79,7 @@ public final class IndexValueMdEntryEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -114,12 +107,7 @@ public final class IndexValueMdEntryEntry implements GroupEntry {
             return false;
         }
         cursor += MdEntryTypeField.BYTE_LENGTH;
-        if (!mdEntryPx.parseFrom(data, cursor, end)) {
-            return false;
-        }
-        cursor += mdEntryPx.byteLength();
-
-        return true;
+        return mdEntryPx.parseFrom(data, cursor, end);
     }
 
     @Override
@@ -208,10 +196,7 @@ public final class IndexValueMdEntryEntry implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "MdEntryType" -> Optional.of(mdEntryType);
-            default -> Optional.empty();
-        };
+        return "MdEntryType".equals(name) ? Optional.of(mdEntryType) : Optional.empty();
     }
 
     @Override

@@ -258,12 +258,7 @@ public final class SecurityStatus3Message implements Message {
             return false;
         }
         cursor += TransactTimeField.BYTE_LENGTH;
-        if (!rptSeq.parse(data, cursor)) {
-            return false;
-        }
-        cursor += RptSeqField.BYTE_LENGTH;
-
-        return true;
+        return rptSeq.parse(data, cursor);
     }
 
     @Override
@@ -276,7 +271,7 @@ public final class SecurityStatus3Message implements Message {
         cursor = securityTradingStatus.encode(data, cursor);
         cursor = securityTradingEvent.encode(data, cursor);
         cursor = tradeDate.encode(data, cursor);
-        if (buffer != null && buffer.length >= 14 + 2) {
+        if (buffer != null && buffer.length >= 16) {
             System.arraycopy(buffer, 14, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

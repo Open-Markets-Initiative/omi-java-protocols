@@ -34,13 +34,6 @@ public final class LogoffMessage implements Message {
     public static final String NAME = "Logoff Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Message terminating character, 0x03
      */
     private final EtxField etx = new EtxField();
@@ -81,7 +74,7 @@ public final class LogoffMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -110,12 +103,7 @@ public final class LogoffMessage implements Message {
         }
 
         int cursor = offset;
-        if (!etx.parse(data, cursor)) {
-            return false;
-        }
-        cursor += EtxField.BYTE_LENGTH;
-
-        return true;
+        return etx.parse(data, cursor);
     }
 
     @Override
@@ -202,10 +190,7 @@ public final class LogoffMessage implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "Etx" -> Optional.of(etx);
-            default -> Optional.empty();
-        };
+        return "Etx".equals(name) ? Optional.of(etx) : Optional.empty();
     }
 
     @Override

@@ -48,9 +48,6 @@ public enum TradeAction {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<TradeAction> fromWire(short wire) {
-        return switch (wire) {
-            case 2 -> Optional.of(ADD);
-            default -> Optional.empty();
-        };
+        return wire == 2 ? Optional.of(ADD) : Optional.empty();
     }
 }

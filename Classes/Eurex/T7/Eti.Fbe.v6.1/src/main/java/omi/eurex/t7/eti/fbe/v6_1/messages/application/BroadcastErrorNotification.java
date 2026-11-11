@@ -246,11 +246,8 @@ public final class BroadcastErrorNotification implements Message {
             return false;
         }
         cursor += varText.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -261,7 +258,7 @@ public final class BroadcastErrorNotification implements Message {
         }
         varTextLen.value((varText.byteLength()));
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -273,7 +270,7 @@ public final class BroadcastErrorNotification implements Message {
         cursor = varTextLen.encode(data, cursor);
         cursor = refApplId.encode(data, cursor);
         cursor = sessionStatus.encode(data, cursor);
-        if (buffer != null && buffer.length >= 22 + 4) {
+        if (buffer != null && buffer.length >= 26) {
             System.arraycopy(buffer, 22, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

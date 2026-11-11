@@ -193,7 +193,6 @@ public final class InstrmntLegExecGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += FillRefIdField.BYTE_LENGTH;
-        cursor += 6; // padding
 
         return true;
     }
@@ -208,7 +207,7 @@ public final class InstrmntLegExecGrpCompEntry implements GroupEntry {
         cursor = legExecId.encode(data, cursor);
         cursor = legSide.encode(data, cursor);
         cursor = fillRefId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 26 + 6) {
+        if (buffer != null && buffer.length >= 32) {
             System.arraycopy(buffer, 26, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding

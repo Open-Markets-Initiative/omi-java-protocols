@@ -40,13 +40,6 @@ public final class SeriesRfqMessage implements Message {
     public static final String NAME = "Series Rfq Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * The time when this msg was generated in the order book, in seconds since Jan 1, 1970 00:00:00 UTC.
      */
     private final SourceTimeField sourceTime = new SourceTimeField();
@@ -241,7 +234,7 @@ public final class SeriesRfqMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -314,12 +307,7 @@ public final class SeriesRfqMessage implements Message {
             return false;
         }
         cursor += AuctionIdField.BYTE_LENGTH;
-        if (!rfqStatus.parse(data, cursor)) {
-            return false;
-        }
-        cursor += RfqStatusField.BYTE_LENGTH;
-
-        return true;
+        return rfqStatus.parse(data, cursor);
     }
 
     @Override

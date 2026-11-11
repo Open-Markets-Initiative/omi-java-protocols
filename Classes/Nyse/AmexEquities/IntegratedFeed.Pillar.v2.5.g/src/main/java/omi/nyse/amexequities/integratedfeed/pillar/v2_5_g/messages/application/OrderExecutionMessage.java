@@ -315,12 +315,7 @@ public final class OrderExecutionMessage implements Message {
             return false;
         }
         cursor += TradeCond3Field.BYTE_LENGTH;
-        if (!tradeCond4.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TradeCond4Field.BYTE_LENGTH;
-
-        return true;
+        return tradeCond4.parse(data, cursor);
     }
 
     @Override
@@ -335,7 +330,7 @@ public final class OrderExecutionMessage implements Message {
         cursor = price.encode(data, cursor);
         cursor = volume.encode(data, cursor);
         cursor = printableFlag.encode(data, cursor);
-        if (buffer != null && buffer.length >= 33 + 1) {
+        if (buffer != null && buffer.length >= 34) {
             System.arraycopy(buffer, 33, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

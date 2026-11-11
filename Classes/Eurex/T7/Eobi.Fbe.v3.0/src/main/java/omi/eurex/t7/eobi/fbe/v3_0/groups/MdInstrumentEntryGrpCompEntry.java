@@ -136,7 +136,6 @@ public final class MdInstrumentEntryGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += MdEntryTypeField.BYTE_LENGTH;
-        cursor += 3; // padding
 
         return true;
     }
@@ -148,7 +147,7 @@ public final class MdInstrumentEntryGrpCompEntry implements GroupEntry {
         cursor = mdEntryPx.encode(data, cursor);
         cursor = mdEntrySize.encode(data, cursor);
         cursor = mdEntryType.encode(data, cursor);
-        if (buffer != null && buffer.length >= 13 + 3) {
+        if (buffer != null && buffer.length >= 16) {
             System.arraycopy(buffer, 13, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding

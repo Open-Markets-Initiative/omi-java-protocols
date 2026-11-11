@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import omi.ice.icefutures.mdf.impact.v1_1_33.fields.ContractSymbolExtraField;
 import omi.ice.icefutures.mdf.impact.v1_1_33.fields.ContractSymbolField;
 import omi.ice.icefutures.mdf.impact.v1_1_33.fields.DealPriceDenominatorField;
@@ -411,44 +410,7 @@ public final class NewOptionsStrategyDefinitionMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor += 4;
-        cursor += 4;
-        cursor += 35;
-        cursor += 1;
-        cursor += 1;
-        cursor += 4;
-        cursor += 4;
-        cursor += 4;
-        cursor += 1;
-        cursor = strategyLegDefinition.padding(runs, cursor);
-        cursor += 1;
-        cursor = hedgeDefinition.padding(runs, cursor);
-        cursor += 2;
-        cursor += 1;
-        cursor += 18;
-        cursor += 1;
-        cursor += 1;
-        cursor += 1;
-        cursor += 1;
-        cursor += 1;
-        cursor += 1;
-        cursor += 35;
-        cursor += 1;
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -571,12 +533,7 @@ public final class NewOptionsStrategyDefinitionMessage implements Message {
             return false;
         }
         cursor += ContractSymbolExtraField.BYTE_LENGTH;
-        if (!legDealSuppressed.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LegDealSuppressedField.BYTE_LENGTH;
-
-        return true;
+        return legDealSuppressed.parse(data, cursor);
     }
 
     @Override
@@ -653,10 +610,7 @@ public final class NewOptionsStrategyDefinitionMessage implements Message {
         if (!strategyLegDefinition.isRecognized()) {
             return false;
         }
-        if (!hedgeDefinition.isRecognized()) {
-            return false;
-        }
-        return true;
+        return hedgeDefinition.isRecognized();
     }
 
     @Override

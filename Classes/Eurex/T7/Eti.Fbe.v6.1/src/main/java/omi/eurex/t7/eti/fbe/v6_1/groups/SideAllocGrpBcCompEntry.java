@@ -193,7 +193,6 @@ public final class SideAllocGrpBcCompEntry implements GroupEntry {
             return false;
         }
         cursor += TradeAllocStatusField.BYTE_LENGTH;
-        cursor += 3; // padding
 
         return true;
     }
@@ -208,7 +207,7 @@ public final class SideAllocGrpBcCompEntry implements GroupEntry {
         cursor = partyExecutingTrader.encode(data, cursor);
         cursor = side.encode(data, cursor);
         cursor = tradeAllocStatus.encode(data, cursor);
-        if (buffer != null && buffer.length >= 21 + 3) {
+        if (buffer != null && buffer.length >= 24) {
             System.arraycopy(buffer, 21, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding

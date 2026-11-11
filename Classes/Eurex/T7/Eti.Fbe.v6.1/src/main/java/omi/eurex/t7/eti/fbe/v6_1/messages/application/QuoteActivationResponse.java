@@ -141,7 +141,7 @@ public final class QuoteActivationResponse implements Message {
         cursor += 2;
         runs.add(cursor).add(6);
         cursor += 6;
-        cursor = notAffectedSecuritiesGrpComp.padding(runs, cursor);
+        cursor += notAffectedSecuritiesGrpComp.byteLength();
         return cursor;
     }
 
@@ -189,11 +189,8 @@ public final class QuoteActivationResponse implements Message {
             return false;
         }
         cursor += notAffectedSecuritiesGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -204,7 +201,7 @@ public final class QuoteActivationResponse implements Message {
         }
         noNotAffectedSecurities.value(notAffectedSecuritiesGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -213,7 +210,7 @@ public final class QuoteActivationResponse implements Message {
         cursor = nrResponseHeaderMeComp.encode(data, cursor);
         cursor = massActionReportId.encode(data, cursor);
         cursor = noNotAffectedSecurities.encode(data, cursor);
-        if (buffer != null && buffer.length >= 68 + 6) {
+        if (buffer != null && buffer.length >= 74) {
             System.arraycopy(buffer, 68, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding
@@ -256,10 +253,7 @@ public final class QuoteActivationResponse implements Message {
                 return false;
             }
         }
-        if (!notAffectedSecuritiesGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return notAffectedSecuritiesGrpComp.isRecognized();
     }
 
     @Override

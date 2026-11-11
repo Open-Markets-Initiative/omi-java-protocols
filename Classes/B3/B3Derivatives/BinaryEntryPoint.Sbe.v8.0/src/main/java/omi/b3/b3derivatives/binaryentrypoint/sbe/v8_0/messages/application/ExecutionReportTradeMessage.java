@@ -537,8 +537,8 @@ public final class ExecutionReportTradeMessage implements Message {
         cursor += 8;
         cursor += 2;
         cursor += 8;
-        cursor = deskId.padding(runs, cursor);
-        cursor = memo.padding(runs, cursor);
+        cursor += deskId.byteLength();
+        cursor += memo.byteLength();
         return cursor;
     }
 
@@ -688,11 +688,8 @@ public final class ExecutionReportTradeMessage implements Message {
             return false;
         }
         cursor += memo.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -721,7 +718,7 @@ public final class ExecutionReportTradeMessage implements Message {
         cursor = orderId.encode(data, cursor);
         cursor = tradeDate.encode(data, cursor);
         cursor = totNoRelatedSym.encode(data, cursor);
-        if (buffer != null && buffer.length >= 119 + 1) {
+        if (buffer != null && buffer.length >= 120) {
             System.arraycopy(buffer, 119, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

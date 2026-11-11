@@ -250,7 +250,6 @@ public final class RbcHeaderMeComp implements GroupEntry {
             return false;
         }
         cursor += LastFragmentField.BYTE_LENGTH;
-        cursor += 7; // padding
 
         return true;
     }
@@ -268,7 +267,7 @@ public final class RbcHeaderMeComp implements GroupEntry {
         cursor = applId.encode(data, cursor);
         cursor = applResendFlag.encode(data, cursor);
         cursor = lastFragment.encode(data, cursor);
-        if (buffer != null && buffer.length >= 49 + 7) {
+        if (buffer != null && buffer.length >= 56) {
             System.arraycopy(buffer, 49, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

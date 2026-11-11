@@ -37,13 +37,6 @@ public final class RegShoRestrictionMessage implements Message {
     public static final String NAME = "Reg Sho Restriction Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Nasdaq internal tracking number
      */
     private final TrackingNumberField trackingNumber = new TrackingNumberField();
@@ -126,7 +119,7 @@ public final class RegShoRestrictionMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -167,12 +160,7 @@ public final class RegShoRestrictionMessage implements Message {
             return false;
         }
         cursor += StockField.BYTE_LENGTH;
-        if (!regShoAction.parse(data, cursor)) {
-            return false;
-        }
-        cursor += RegShoActionField.BYTE_LENGTH;
-
-        return true;
+        return regShoAction.parse(data, cursor);
     }
 
     @Override

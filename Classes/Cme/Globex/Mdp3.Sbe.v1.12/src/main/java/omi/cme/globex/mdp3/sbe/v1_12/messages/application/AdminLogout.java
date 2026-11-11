@@ -29,13 +29,6 @@ public final class AdminLogout implements Message {
     public static final String NAME = "Admin Logout";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Free format text string. May include logout confirmation or reason for logout
      */
     private final LogoutTextField logoutText = new LogoutTextField();
@@ -76,7 +69,7 @@ public final class AdminLogout implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -105,12 +98,7 @@ public final class AdminLogout implements Message {
         }
 
         int cursor = offset;
-        if (!logoutText.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LogoutTextField.BYTE_LENGTH;
-
-        return true;
+        return logoutText.parse(data, cursor);
     }
 
     @Override
@@ -197,10 +185,7 @@ public final class AdminLogout implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "LogoutText" -> Optional.of(logoutText);
-            default -> Optional.empty();
-        };
+        return "LogoutText".equals(name) ? Optional.of(logoutText) : Optional.empty();
     }
 
     @Override

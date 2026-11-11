@@ -299,7 +299,6 @@ public final class CancelReduceSizeOrderNotification implements Message {
             return false;
         }
         cursor += PendingRejectReasonField.BYTE_LENGTH;
-        cursor += 8; // padding
 
         return true;
     }
@@ -319,7 +318,7 @@ public final class CancelReduceSizeOrderNotification implements Message {
         cursor = lastSize.encode(data, cursor);
         cursor = pendingCancelStatus.encode(data, cursor);
         cursor = pendingRejectReason.encode(data, cursor);
-        if (buffer != null && buffer.length >= 63 + 8) {
+        if (buffer != null && buffer.length >= 71) {
             System.arraycopy(buffer, 63, data, cursor, 8); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 8, (byte) 0); // padding

@@ -29,13 +29,6 @@ public final class MinimumThresholdPriceFuturesNumericPair implements GroupEntry
     public static final String NAME = "MinimumThresholdPriceFuturesNumericPair";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Minimum threshold price authorized for an option contract
      */
     private final MinimumThresholdPriceFuturesField minimumThresholdPriceFutures = new MinimumThresholdPriceFuturesField();
@@ -85,7 +78,7 @@ public final class MinimumThresholdPriceFuturesNumericPair implements GroupEntry
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class MinimumThresholdPriceFuturesNumericPair implements GroupEntry
             return false;
         }
         cursor += MinimumThresholdPriceFuturesField.BYTE_LENGTH;
-        if (!minimumThresholdPriceFractionIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += MinimumThresholdPriceFractionIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return minimumThresholdPriceFractionIndicator.parse(data, cursor);
     }
 
     @Override

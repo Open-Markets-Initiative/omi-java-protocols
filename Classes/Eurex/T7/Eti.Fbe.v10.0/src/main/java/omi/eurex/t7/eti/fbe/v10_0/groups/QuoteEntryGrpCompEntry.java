@@ -32,13 +32,6 @@ public final class QuoteEntryGrpCompEntry implements GroupEntry {
     public static final String NAME = "QuoteEntryGrpComp";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Security Id
      */
     private final SecurityIdField securityId = new SecurityIdField();
@@ -130,7 +123,7 @@ public final class QuoteEntryGrpCompEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -170,12 +163,7 @@ public final class QuoteEntryGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += OfferPxField.BYTE_LENGTH;
-        if (!offerSize.parse(data, cursor)) {
-            return false;
-        }
-        cursor += OfferSizeField.BYTE_LENGTH;
-
-        return true;
+        return offerSize.parse(data, cursor);
     }
 
     @Override

@@ -166,7 +166,6 @@ public final class MpidConfigurationMessage implements Message {
             return false;
         }
         cursor += UsernameField.BYTE_LENGTH;
-        cursor += 50; // padding
 
         return true;
     }
@@ -179,7 +178,7 @@ public final class MpidConfigurationMessage implements Message {
         cursor = mpidStatus.encode(data, cursor);
         cursor = mpid.encode(data, cursor);
         cursor = username.encode(data, cursor);
-        if (buffer != null && buffer.length >= 29 + 50) {
+        if (buffer != null && buffer.length >= 79) {
             System.arraycopy(buffer, 29, data, cursor, 50); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 50, (byte) 0); // padding

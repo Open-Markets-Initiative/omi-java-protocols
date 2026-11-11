@@ -280,7 +280,6 @@ public final class LogonResponse implements Message {
             return false;
         }
         cursor += DefaultCstmApplVerSubIdField.BYTE_LENGTH;
-        cursor += 2; // padding
 
         return true;
     }
@@ -289,7 +288,7 @@ public final class LogonResponse implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -305,7 +304,7 @@ public final class LogonResponse implements Message {
         cursor = tradSesMode.encode(data, cursor);
         cursor = defaultCstmApplVerId.encode(data, cursor);
         cursor = defaultCstmApplVerSubId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 88 + 2) {
+        if (buffer != null && buffer.length >= 90) {
             System.arraycopy(buffer, 88, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

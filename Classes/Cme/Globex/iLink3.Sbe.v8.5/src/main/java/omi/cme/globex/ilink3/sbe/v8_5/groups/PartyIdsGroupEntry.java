@@ -35,13 +35,6 @@ public final class PartyIdsGroupEntry implements GroupEntry {
     public static final String NAME = "PartyIdsGroup";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Required if NoPartyIDs(453) &gt; 0. Identification of the PartyDetailsListRequestID of PartyDetailsDefinitionRequestAck
      */
     private final PartyIdField partyId = new PartyIdField();
@@ -145,7 +138,7 @@ public final class PartyIdsGroupEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override

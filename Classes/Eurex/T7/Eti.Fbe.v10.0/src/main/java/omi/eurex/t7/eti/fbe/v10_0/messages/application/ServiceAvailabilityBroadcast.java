@@ -318,7 +318,6 @@ public final class ServiceAvailabilityBroadcast implements Message {
             return false;
         }
         cursor += T7EntryServiceRtmStatusField.BYTE_LENGTH;
-        cursor += 5; // padding
 
         return true;
     }
@@ -327,7 +326,7 @@ public final class ServiceAvailabilityBroadcast implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -345,7 +344,7 @@ public final class ServiceAvailabilityBroadcast implements Message {
         cursor = applSeqStatus.encode(data, cursor);
         cursor = t7EntryServiceStatus.encode(data, cursor);
         cursor = t7EntryServiceRtmStatus.encode(data, cursor);
-        if (buffer != null && buffer.length >= 45 + 5) {
+        if (buffer != null && buffer.length >= 50) {
             System.arraycopy(buffer, 45, data, cursor, 5); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 5, (byte) 0); // padding

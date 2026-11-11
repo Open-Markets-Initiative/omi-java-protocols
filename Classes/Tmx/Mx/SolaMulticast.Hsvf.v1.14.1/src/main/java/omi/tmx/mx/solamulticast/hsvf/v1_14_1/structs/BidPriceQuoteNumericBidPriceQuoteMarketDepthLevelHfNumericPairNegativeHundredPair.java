@@ -29,13 +29,6 @@ public final class BidPriceQuoteNumericBidPriceQuoteMarketDepthLevelHfNumericPai
     public static final String NAME = "BidPriceQuoteNumericBidPriceQuoteMarketDepthLevelHfNumericPairNegativeHundredPair";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Bid price for the future contract For Implied, it represents the best (1st limit) indicative implied bid price
      */
     private final RawBidPriceQuoteNumericBidPriceQuoteMarketDepthLevelHfNumericPairField rawBidPriceQuoteNumericBidPriceQuoteMarketDepthLevelHfNumericPair = new RawBidPriceQuoteNumericBidPriceQuoteMarketDepthLevelHfNumericPairField();
@@ -85,7 +78,7 @@ public final class BidPriceQuoteNumericBidPriceQuoteMarketDepthLevelHfNumericPai
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class BidPriceQuoteNumericBidPriceQuoteMarketDepthLevelHfNumericPai
             return false;
         }
         cursor += RawBidPriceQuoteNumericBidPriceQuoteMarketDepthLevelHfNumericPairField.BYTE_LENGTH;
-        if (!bidPriceFractionIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += BidPriceFractionIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return bidPriceFractionIndicator.parse(data, cursor);
     }
 
     @Override

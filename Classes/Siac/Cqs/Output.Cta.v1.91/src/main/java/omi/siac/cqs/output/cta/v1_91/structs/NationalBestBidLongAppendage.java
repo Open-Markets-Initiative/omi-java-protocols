@@ -32,13 +32,6 @@ public final class NationalBestBidLongAppendage implements GroupEntry {
     public static final String NAME = "NationalBestBidLongAppendage";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Identifies the Participant that submitted the Best Bid on a consolidated basis.
      */
     private final BestBidParticipantIdField bestBidParticipantId = new BestBidParticipantIdField();
@@ -130,7 +123,7 @@ public final class NationalBestBidLongAppendage implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -170,12 +163,7 @@ public final class NationalBestBidLongAppendage implements GroupEntry {
             return false;
         }
         cursor += BestBidSizeLongField.BYTE_LENGTH;
-        if (!finraBestBidMarketMakerId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += FinraBestBidMarketMakerIdField.BYTE_LENGTH;
-
-        return true;
+        return finraBestBidMarketMakerId.parse(data, cursor);
     }
 
     @Override

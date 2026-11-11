@@ -35,13 +35,6 @@ public final class CrossTradeMessage implements Message {
     public static final String NAME = "Cross Trade Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * The nanosecond offset from the Time Reference second.
      */
     private final SourceTimeNsField sourceTimeNs = new SourceTimeNsField();
@@ -166,7 +159,7 @@ public final class CrossTradeMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -219,12 +212,7 @@ public final class CrossTradeMessage implements Message {
             return false;
         }
         cursor += VolumeField.BYTE_LENGTH;
-        if (!crossType.parse(data, cursor)) {
-            return false;
-        }
-        cursor += CrossTypeField.BYTE_LENGTH;
-
-        return true;
+        return crossType.parse(data, cursor);
     }
 
     @Override

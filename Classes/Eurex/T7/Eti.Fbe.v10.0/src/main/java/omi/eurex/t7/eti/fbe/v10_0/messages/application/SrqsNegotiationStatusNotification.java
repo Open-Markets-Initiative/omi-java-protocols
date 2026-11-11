@@ -204,7 +204,6 @@ public final class SrqsNegotiationStatusNotification implements Message {
             return false;
         }
         cursor += FirmNegotiationIdField.BYTE_LENGTH;
-        cursor += 7; // padding
 
         return true;
     }
@@ -213,7 +212,7 @@ public final class SrqsNegotiationStatusNotification implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -225,7 +224,7 @@ public final class SrqsNegotiationStatusNotification implements Message {
         cursor = negotiationId.encode(data, cursor);
         cursor = quoteCondition.encode(data, cursor);
         cursor = firmNegotiationId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 75 + 7) {
+        if (buffer != null && buffer.length >= 82) {
             System.arraycopy(buffer, 75, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

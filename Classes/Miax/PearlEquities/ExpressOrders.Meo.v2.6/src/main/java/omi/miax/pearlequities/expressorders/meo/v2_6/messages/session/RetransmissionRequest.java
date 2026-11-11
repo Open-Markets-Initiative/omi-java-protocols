@@ -35,13 +35,6 @@ public final class RetransmissionRequest implements Message {
     public static final String NAME = "Retransmission Request";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Sequence number of the first packet to be retransmitted
      */
     private final StartSequenceNumberField startSequenceNumber = new StartSequenceNumberField();
@@ -96,7 +89,7 @@ public final class RetransmissionRequest implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -129,12 +122,7 @@ public final class RetransmissionRequest implements Message {
             return false;
         }
         cursor += StartSequenceNumberField.BYTE_LENGTH;
-        if (!endSequenceNumber.parse(data, cursor)) {
-            return false;
-        }
-        cursor += EndSequenceNumberField.BYTE_LENGTH;
-
-        return true;
+        return endSequenceNumber.parse(data, cursor);
     }
 
     @Override

@@ -38,13 +38,6 @@ public final class ResponseHeaderMeComp implements GroupEntry {
     public static final String NAME = "ResponseHeaderMeComp";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Request Time
      */
     private final RequestTimeField requestTime = new RequestTimeField();
@@ -220,7 +213,7 @@ public final class ResponseHeaderMeComp implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -284,12 +277,7 @@ public final class ResponseHeaderMeComp implements GroupEntry {
             return false;
         }
         cursor += ApplMsgIdField.BYTE_LENGTH;
-        if (!lastFragment.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LastFragmentField.BYTE_LENGTH;
-
-        return true;
+        return lastFragment.parse(data, cursor);
     }
 
     @Override

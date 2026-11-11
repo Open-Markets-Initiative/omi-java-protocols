@@ -509,7 +509,6 @@ public final class NewOrderRequestMessage implements Message {
             return false;
         }
         cursor += PurgeGroupField.BYTE_LENGTH;
-        cursor += 19; // padding
 
         return true;
     }
@@ -518,7 +517,7 @@ public final class NewOrderRequestMessage implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 8) {
+        if (buffer != null && buffer.length >= 8) {
             System.arraycopy(buffer, 0, data, cursor, 8); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 8, (byte) 0); // padding
@@ -546,7 +545,7 @@ public final class NewOrderRequestMessage implements Message {
         cursor = pegOffset.encode(data, cursor);
         cursor = locateAccount.encode(data, cursor);
         cursor = purgeGroup.encode(data, cursor);
-        if (buffer != null && buffer.length >= 110 + 19) {
+        if (buffer != null && buffer.length >= 129) {
             System.arraycopy(buffer, 110, data, cursor, 19); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 19, (byte) 0); // padding

@@ -168,7 +168,6 @@ public final class TradingStatusMessage implements Message {
             return false;
         }
         cursor += GthTradingStatusField.BYTE_LENGTH;
-        cursor += 1; // padding
 
         return true;
     }
@@ -179,21 +178,21 @@ public final class TradingStatusMessage implements Message {
         int cursor = offset;
         cursor = timeOffset.encode(data, cursor);
         cursor = complexSymbolId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 10 + 2) {
+        if (buffer != null && buffer.length >= 12) {
             System.arraycopy(buffer, 10, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
         }
         cursor += 2;
         cursor = tradingStatus.encode(data, cursor);
-        if (buffer != null && buffer.length >= 13 + 1) {
+        if (buffer != null && buffer.length >= 14) {
             System.arraycopy(buffer, 13, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
         }
         cursor += 1;
         cursor = gthTradingStatus.encode(data, cursor);
-        if (buffer != null && buffer.length >= 15 + 1) {
+        if (buffer != null && buffer.length >= 16) {
             System.arraycopy(buffer, 15, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

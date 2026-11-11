@@ -190,7 +190,6 @@ public final class EquilibriumPriceUpdate implements Message {
             return false;
         }
         cursor += EquilibriumPriceField.BYTE_LENGTH;
-        cursor += 24; // padding
 
         return true;
     }
@@ -204,7 +203,7 @@ public final class EquilibriumPriceUpdate implements Message {
         cursor = availableBidQuantityAtEquilibriumPrice.encode(data, cursor);
         cursor = availableAskQuantityAtEquilibriumPrice.encode(data, cursor);
         cursor = equilibriumPrice.encode(data, cursor);
-        if (buffer != null && buffer.length >= 28 + 24) {
+        if (buffer != null && buffer.length >= 52) {
             System.arraycopy(buffer, 28, data, cursor, 24); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 24, (byte) 0); // padding

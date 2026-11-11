@@ -36,13 +36,6 @@ public final class OrderStatusRequest implements Message {
     public static final String NAME = "Order Status Request";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Refers to the ID of the related PartyDetailsDefinitionRequest message which will logically be tied to this message
      */
     private final PartyDetailsListReqIdField partyDetailsListReqId = new PartyDetailsListReqIdField();
@@ -181,7 +174,7 @@ public final class OrderStatusRequest implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -238,12 +231,7 @@ public final class OrderStatusRequest implements Message {
             return false;
         }
         cursor += SendingTimeEpochField.BYTE_LENGTH;
-        if (!location.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LocationField.BYTE_LENGTH;
-
-        return true;
+        return location.parse(data, cursor);
     }
 
     @Override

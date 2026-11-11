@@ -366,10 +366,7 @@ public final class InstrumentSummary implements Message {
                 return false;
             }
         }
-        if (!mdInstrumentEntryGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return mdInstrumentEntryGrpComp.isRecognized();
     }
 
     @Override

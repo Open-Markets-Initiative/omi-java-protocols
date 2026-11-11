@@ -714,19 +714,14 @@ public final class SrqsQuoteNotification implements Message {
             return false;
         }
         cursor += ComplianceTextField.BYTE_LENGTH;
-        if (!partyIdTakeUpTradingFirm.parse(data, cursor)) {
-            return false;
-        }
-        cursor += PartyIdTakeUpTradingFirmField.BYTE_LENGTH;
-
-        return true;
+        return partyIdTakeUpTradingFirm.parse(data, cursor);
     }
 
     @Override
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -747,7 +742,7 @@ public final class SrqsQuoteNotification implements Message {
         cursor = quotingStatus.encode(data, cursor);
         cursor = tradingCapacity.encode(data, cursor);
         cursor = quoteCancelReason.encode(data, cursor);
-        if (buffer != null && buffer.length >= 121 + 1) {
+        if (buffer != null && buffer.length >= 122) {
             System.arraycopy(buffer, 121, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

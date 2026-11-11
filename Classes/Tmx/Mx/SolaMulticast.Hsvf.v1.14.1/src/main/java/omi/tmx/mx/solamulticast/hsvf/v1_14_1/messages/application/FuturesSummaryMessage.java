@@ -48,13 +48,6 @@ public final class FuturesSummaryMessage implements Message {
     public static final String NAME = "Futures Summary Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Exchange on which the trade occurred
      */
     private final ExchangeIdField exchangeId = new ExchangeIdField();
@@ -347,7 +340,7 @@ public final class FuturesSummaryMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -448,12 +441,7 @@ public final class FuturesSummaryMessage implements Message {
             return false;
         }
         cursor += ReasonField.BYTE_LENGTH;
-        if (!externalPriceAtSourceFractionPair.parseFrom(data, cursor, end)) {
-            return false;
-        }
-        cursor += externalPriceAtSourceFractionPair.byteLength();
-
-        return true;
+        return externalPriceAtSourceFractionPair.parseFrom(data, cursor, end);
     }
 
     @Override
@@ -548,10 +536,7 @@ public final class FuturesSummaryMessage implements Message {
         if (!previousSettlementFractionPair.isRecognized()) {
             return false;
         }
-        if (!externalPriceAtSourceFractionPair.isRecognized()) {
-            return false;
-        }
-        return true;
+        return externalPriceAtSourceFractionPair.isRecognized();
     }
 
     @Override

@@ -142,12 +142,7 @@ public final class CrossRequest implements Message {
         }
         cursor += LastQtyField.BYTE_LENGTH;
         cursor += 4; // padding
-        if (!transactTime.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TransactTimeField.BYTE_LENGTH;
-
-        return true;
+        return transactTime.parse(data, cursor);
     }
 
     @Override
@@ -156,7 +151,7 @@ public final class CrossRequest implements Message {
         int cursor = offset;
         cursor = securityId.encode(data, cursor);
         cursor = lastQty.encode(data, cursor);
-        if (buffer != null && buffer.length >= 12 + 4) {
+        if (buffer != null && buffer.length >= 16) {
             System.arraycopy(buffer, 12, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

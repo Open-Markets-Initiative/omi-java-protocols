@@ -201,12 +201,7 @@ public final class NegotiateRejectMessage implements Message {
         }
         cursor += NegotiationRejectCodeField.BYTE_LENGTH;
         cursor += 3; // padding
-        if (!currentSessionVerId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += CurrentSessionVerIdField.BYTE_LENGTH;
-
-        return true;
+        return currentSessionVerId.parse(data, cursor);
     }
 
     @Override
@@ -218,7 +213,7 @@ public final class NegotiateRejectMessage implements Message {
         cursor = requestTimestamp.encode(data, cursor);
         cursor = enteringFirmOptional.encode(data, cursor);
         cursor = negotiationRejectCode.encode(data, cursor);
-        if (buffer != null && buffer.length >= 25 + 3) {
+        if (buffer != null && buffer.length >= 28) {
             System.arraycopy(buffer, 25, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding

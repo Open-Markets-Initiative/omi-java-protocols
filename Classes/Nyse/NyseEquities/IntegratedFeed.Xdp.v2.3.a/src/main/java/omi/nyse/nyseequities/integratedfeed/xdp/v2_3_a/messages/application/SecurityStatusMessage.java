@@ -353,12 +353,7 @@ public final class SecurityStatusMessage implements Message {
             return false;
         }
         cursor += MarketStateField.BYTE_LENGTH;
-        if (!sessionState.parse(data, cursor)) {
-            return false;
-        }
-        cursor += SessionStateField.BYTE_LENGTH;
-
-        return true;
+        return sessionState.parse(data, cursor);
     }
 
     @Override
@@ -371,7 +366,7 @@ public final class SecurityStatusMessage implements Message {
         cursor = symbolSeqNum.encode(data, cursor);
         cursor = securityStatus.encode(data, cursor);
         cursor = haltCondition.encode(data, cursor);
-        if (buffer != null && buffer.length >= 18 + 4) {
+        if (buffer != null && buffer.length >= 22) {
             System.arraycopy(buffer, 18, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

@@ -174,7 +174,6 @@ public final class QuoteEntryAckGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += SideField.BYTE_LENGTH;
-        cursor += 2; // padding
 
         return true;
     }
@@ -188,7 +187,7 @@ public final class QuoteEntryAckGrpCompEntry implements GroupEntry {
         cursor = quoteEntryRejectReason.encode(data, cursor);
         cursor = quoteEntryStatus.encode(data, cursor);
         cursor = side.encode(data, cursor);
-        if (buffer != null && buffer.length >= 22 + 2) {
+        if (buffer != null && buffer.length >= 24) {
             System.arraycopy(buffer, 22, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

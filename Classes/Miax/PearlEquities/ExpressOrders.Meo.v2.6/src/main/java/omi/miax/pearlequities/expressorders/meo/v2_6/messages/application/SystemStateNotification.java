@@ -166,7 +166,6 @@ public final class SystemStateNotification implements Message {
             return false;
         }
         cursor += SystemStatusField.BYTE_LENGTH;
-        cursor += 8; // padding
 
         return true;
     }
@@ -179,7 +178,7 @@ public final class SystemStateNotification implements Message {
         cursor = meoVersion.encode(data, cursor);
         cursor = sessionId.encode(data, cursor);
         cursor = systemStatus.encode(data, cursor);
-        if (buffer != null && buffer.length >= 18 + 8) {
+        if (buffer != null && buffer.length >= 26) {
             System.arraycopy(buffer, 18, data, cursor, 8); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 8, (byte) 0); // padding

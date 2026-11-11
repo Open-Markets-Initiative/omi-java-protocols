@@ -2,10 +2,8 @@ package omi.box.boxoptions.solamulticast.hsvf.v1_8.dispatch;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import omi.box.boxoptions.solamulticast.hsvf.v1_8.types.ByteOps;
 import omi.box.boxoptions.solamulticast.hsvf.v1_8.types.Message;
 
 /**

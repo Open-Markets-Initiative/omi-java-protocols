@@ -44,13 +44,6 @@ public final class AddOrModifyOrderMessage implements Message {
     public static final String NAME = "Add Or Modify Order Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Market Id
      */
     private final MarketIdField marketId = new MarketIdField();
@@ -231,7 +224,7 @@ public final class AddOrModifyOrderMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -300,12 +293,7 @@ public final class AddOrModifyOrderMessage implements Message {
             return false;
         }
         cursor += ExtraFlagsField.BYTE_LENGTH;
-        if (!sequenceWithinMillis.parse(data, cursor)) {
-            return false;
-        }
-        cursor += SequenceWithinMillisField.BYTE_LENGTH;
-
-        return true;
+        return sequenceWithinMillis.parse(data, cursor);
     }
 
     @Override

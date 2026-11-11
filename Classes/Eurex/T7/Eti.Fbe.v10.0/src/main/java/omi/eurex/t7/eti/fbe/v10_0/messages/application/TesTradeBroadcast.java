@@ -1452,11 +1452,8 @@ public final class TesTradeBroadcast implements Message {
             return false;
         }
         cursor += srqsRelatedTradeIdGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -1467,7 +1464,7 @@ public final class TesTradeBroadcast implements Message {
         }
         noSrqsRelatedTradeIDs.value((short) srqsRelatedTradeIdGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -1503,7 +1500,7 @@ public final class TesTradeBroadcast implements Message {
         cursor = totNumTradeReports.encode(data, cursor);
         cursor = negotiationId.encode(data, cursor);
         cursor = noSrqsRelatedTradeIDs.encode(data, cursor);
-        if (buffer != null && buffer.length >= 203 + 3) {
+        if (buffer != null && buffer.length >= 206) {
             System.arraycopy(buffer, 203, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding
@@ -1545,7 +1542,7 @@ public final class TesTradeBroadcast implements Message {
         cursor = regulatoryTradeId.encode(data, cursor);
         cursor = basketPartyContraFirm.encode(data, cursor);
         cursor = basketSideTradeReportId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 422 + 4) {
+        if (buffer != null && buffer.length >= 426) {
             System.arraycopy(buffer, 422, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding
@@ -1588,10 +1585,7 @@ public final class TesTradeBroadcast implements Message {
                 return false;
             }
         }
-        if (!srqsRelatedTradeIdGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return srqsRelatedTradeIdGrpComp.isRecognized();
     }
 
     @Override

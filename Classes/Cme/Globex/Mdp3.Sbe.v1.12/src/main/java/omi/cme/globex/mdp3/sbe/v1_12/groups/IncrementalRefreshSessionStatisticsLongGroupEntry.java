@@ -339,7 +339,7 @@ public final class IncrementalRefreshSessionStatisticsLongGroupEntry implements 
             cursor = mdEntryTypeStatistics.encode(data, cursor);
         }
         if (known >= 32) {
-            if (buffer != null && buffer.length >= 27 + 5) {
+            if (buffer != null && buffer.length >= 32) {
                 System.arraycopy(buffer, 27, data, cursor, 5); // padding
             } else {
                 Arrays.fill(data, cursor, cursor + 5, (byte) 0); // padding

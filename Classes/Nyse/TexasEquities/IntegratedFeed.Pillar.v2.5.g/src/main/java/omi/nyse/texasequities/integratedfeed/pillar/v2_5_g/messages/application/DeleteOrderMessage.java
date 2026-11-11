@@ -166,7 +166,6 @@ public final class DeleteOrderMessage implements Message {
             return false;
         }
         cursor += OrderIdField.BYTE_LENGTH;
-        cursor += 1; // padding
 
         return true;
     }
@@ -179,7 +178,7 @@ public final class DeleteOrderMessage implements Message {
         cursor = symbolIndex.encode(data, cursor);
         cursor = symbolSeqNum.encode(data, cursor);
         cursor = orderId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 20 + 1) {
+        if (buffer != null && buffer.length >= 21) {
             System.arraycopy(buffer, 20, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

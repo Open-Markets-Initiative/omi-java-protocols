@@ -262,7 +262,6 @@ public final class SymbolUpdate implements Message {
             return false;
         }
         cursor += PrimaryMarketCodeField.BYTE_LENGTH;
-        cursor += 12; // padding
 
         return true;
     }
@@ -274,7 +273,7 @@ public final class SymbolUpdate implements Message {
         cursor = matchingEngineTime.encode(data, cursor);
         cursor = symbolId.encode(data, cursor);
         cursor = tickerSymbol.encode(data, cursor);
-        if (buffer != null && buffer.length >= 23 + 1) {
+        if (buffer != null && buffer.length >= 24) {
             System.arraycopy(buffer, 23, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
@@ -286,7 +285,7 @@ public final class SymbolUpdate implements Message {
         cursor = openingTime.encode(data, cursor);
         cursor = closingTime.encode(data, cursor);
         cursor = primaryMarketCode.encode(data, cursor);
-        if (buffer != null && buffer.length >= 47 + 12) {
+        if (buffer != null && buffer.length >= 59) {
             System.arraycopy(buffer, 47, data, cursor, 12); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 12, (byte) 0); // padding

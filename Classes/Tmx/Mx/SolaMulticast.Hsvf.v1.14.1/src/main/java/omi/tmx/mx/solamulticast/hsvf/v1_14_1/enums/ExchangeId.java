@@ -48,9 +48,6 @@ public enum ExchangeId {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<ExchangeId> fromWire(char wire) {
-        return switch (wire) {
-            case 'Q' -> Optional.of(MONTREAL);
-            default -> Optional.empty();
-        };
+        return wire == 'Q' ? Optional.of(MONTREAL) : Optional.empty();
     }
 }

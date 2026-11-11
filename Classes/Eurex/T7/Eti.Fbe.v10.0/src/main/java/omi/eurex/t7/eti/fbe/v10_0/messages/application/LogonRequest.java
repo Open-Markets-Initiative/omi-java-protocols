@@ -375,7 +375,6 @@ public final class LogonRequest implements Message {
             return false;
         }
         cursor += ApplicationSystemVendorField.BYTE_LENGTH;
-        cursor += 3; // padding
 
         return true;
     }
@@ -385,7 +384,7 @@ public final class LogonRequest implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -405,7 +404,7 @@ public final class LogonRequest implements Message {
         cursor = applicationSystemName.encode(data, cursor);
         cursor = applicationSystemVersion.encode(data, cursor);
         cursor = applicationSystemVendor.encode(data, cursor);
-        if (buffer != null && buffer.length >= 271 + 3) {
+        if (buffer != null && buffer.length >= 274) {
             System.arraycopy(buffer, 271, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding

@@ -375,7 +375,6 @@ public final class ModifyOrderNotification implements Message {
             return false;
         }
         cursor += LocateAccountField.BYTE_LENGTH;
-        cursor += 26; // padding
 
         return true;
     }
@@ -399,7 +398,7 @@ public final class ModifyOrderNotification implements Message {
         cursor = pendingModifyStatus.encode(data, cursor);
         cursor = pendingRejectReason.encode(data, cursor);
         cursor = locateAccount.encode(data, cursor);
-        if (buffer != null && buffer.length >= 95 + 26) {
+        if (buffer != null && buffer.length >= 121) {
             System.arraycopy(buffer, 95, data, cursor, 26); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 26, (byte) 0); // padding

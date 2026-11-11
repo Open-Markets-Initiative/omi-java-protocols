@@ -258,7 +258,7 @@ public final class IncrementalRefreshVolumeLongGroupEntry implements GroupEntry 
             cursor = mdUpdateAction.encode(data, cursor);
         }
         if (known >= 24) {
-            if (buffer != null && buffer.length >= 17 + 7) {
+            if (buffer != null && buffer.length >= 24) {
                 System.arraycopy(buffer, 17, data, cursor, 7); // padding
             } else {
                 Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

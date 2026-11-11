@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.ExecIdField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.MmpGroupIdField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.TimestampField;
@@ -145,27 +144,7 @@ public final class MassQuoteOrdersPlacedMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor += 8;
-        cursor += 8;
-        cursor += 8;
-        cursor = massQuoteOrdersPlacedMessageOrdersGroups.padding(runs, cursor);
-        cursor = massQuoteOrdersPlacedMessageFillsGroups.padding(runs, cursor);
-        cursor = massQuoteOrdersPlacedMessageLegsGroups.padding(runs, cursor);
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -224,11 +203,8 @@ public final class MassQuoteOrdersPlacedMessage implements Message {
             return false;
         }
         cursor += massQuoteOrdersPlacedMessageLegsGroups.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -284,10 +260,7 @@ public final class MassQuoteOrdersPlacedMessage implements Message {
         if (!massQuoteOrdersPlacedMessageFillsGroups.isRecognized()) {
             return false;
         }
-        if (!massQuoteOrdersPlacedMessageLegsGroups.isRecognized()) {
-            return false;
-        }
-        return true;
+        return massQuoteOrdersPlacedMessageLegsGroups.isRecognized();
     }
 
     @Override

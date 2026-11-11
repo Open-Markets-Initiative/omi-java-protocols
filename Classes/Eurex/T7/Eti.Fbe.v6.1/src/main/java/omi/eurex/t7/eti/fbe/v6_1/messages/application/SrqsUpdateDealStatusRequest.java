@@ -238,12 +238,7 @@ public final class SrqsUpdateDealStatusRequest implements Message {
             return false;
         }
         cursor += PartyExecutingFirmField.BYTE_LENGTH;
-        if (!partyExecutingTrader.parse(data, cursor)) {
-            return false;
-        }
-        cursor += PartyExecutingTraderField.BYTE_LENGTH;
-
-        return true;
+        return partyExecutingTrader.parse(data, cursor);
     }
 
     @Override
@@ -251,7 +246,7 @@ public final class SrqsUpdateDealStatusRequest implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

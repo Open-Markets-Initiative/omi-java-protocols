@@ -48,13 +48,6 @@ public final class ConsolidatedStartOfDaySummaryMessage implements Message {
     public static final String NAME = "Consolidated Start Of Day Summary Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Identifies the Participant or Processor that initiated the message
      */
     private final ParticipantIdField participantId = new ParticipantIdField();
@@ -277,7 +270,7 @@ public final class ConsolidatedStartOfDaySummaryMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -358,12 +351,7 @@ public final class ConsolidatedStartOfDaySummaryMessage implements Message {
             return false;
         }
         cursor += FinancialStatusIndicatorField.BYTE_LENGTH;
-        if (!numberOfParticipants.parse(data, cursor)) {
-            return false;
-        }
-        cursor += NumberOfParticipantsField.BYTE_LENGTH;
-
-        return true;
+        return numberOfParticipants.parse(data, cursor);
     }
 
     @Override

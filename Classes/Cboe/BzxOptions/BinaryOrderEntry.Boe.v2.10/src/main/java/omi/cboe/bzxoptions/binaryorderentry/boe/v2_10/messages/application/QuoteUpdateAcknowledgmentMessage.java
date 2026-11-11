@@ -204,11 +204,8 @@ public final class QuoteUpdateAcknowledgmentMessage implements Message {
             return false;
         }
         cursor += quoteResultGroup.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -222,7 +219,7 @@ public final class QuoteUpdateAcknowledgmentMessage implements Message {
         cursor = transactionTime.encode(data, cursor);
         cursor = quoteUpdateId.encode(data, cursor);
         cursor = quoteRejectReason.encode(data, cursor);
-        if (buffer != null && buffer.length >= 25 + 17) {
+        if (buffer != null && buffer.length >= 42) {
             System.arraycopy(buffer, 25, data, cursor, 17); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 17, (byte) 0); // padding
@@ -265,10 +262,7 @@ public final class QuoteUpdateAcknowledgmentMessage implements Message {
                 return false;
             }
         }
-        if (!quoteResultGroup.isRecognized()) {
-            return false;
-        }
-        return true;
+        return quoteResultGroup.isRecognized();
     }
 
     @Override

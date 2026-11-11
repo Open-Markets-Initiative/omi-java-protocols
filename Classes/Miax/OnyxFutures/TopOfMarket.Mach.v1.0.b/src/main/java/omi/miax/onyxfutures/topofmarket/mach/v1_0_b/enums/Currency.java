@@ -48,9 +48,6 @@ public enum Currency {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<Currency> fromWire(char wire) {
-        return switch (wire) {
-            case 'U' -> Optional.of(USD);
-            default -> Optional.empty();
-        };
+        return wire == 'U' ? Optional.of(USD) : Optional.empty();
     }
 }

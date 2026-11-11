@@ -185,7 +185,6 @@ public final class OrderPriceUpdateNotification implements Message {
             return false;
         }
         cursor += NbboIndicatorField.BYTE_LENGTH;
-        cursor += 9; // padding
 
         return true;
     }
@@ -199,7 +198,7 @@ public final class OrderPriceUpdateNotification implements Message {
         cursor = orderId.encode(data, cursor);
         cursor = workingPrice.encode(data, cursor);
         cursor = nbboIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 29 + 9) {
+        if (buffer != null && buffer.length >= 38) {
             System.arraycopy(buffer, 29, data, cursor, 9); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 9, (byte) 0); // padding

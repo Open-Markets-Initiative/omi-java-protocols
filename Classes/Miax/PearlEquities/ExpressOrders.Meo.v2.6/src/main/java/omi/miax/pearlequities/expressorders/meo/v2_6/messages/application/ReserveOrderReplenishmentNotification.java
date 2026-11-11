@@ -185,7 +185,6 @@ public final class ReserveOrderReplenishmentNotification implements Message {
             return false;
         }
         cursor += DisplayQtyField.BYTE_LENGTH;
-        cursor += 10; // padding
 
         return true;
     }
@@ -199,7 +198,7 @@ public final class ReserveOrderReplenishmentNotification implements Message {
         cursor = orderId.encode(data, cursor);
         cursor = secondaryOrderId.encode(data, cursor);
         cursor = displayQty.encode(data, cursor);
-        if (buffer != null && buffer.length >= 32 + 10) {
+        if (buffer != null && buffer.length >= 42) {
             System.arraycopy(buffer, 32, data, cursor, 10); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 10, (byte) 0); // padding

@@ -242,7 +242,6 @@ public final class DeleteAllQuoteRequest implements Message {
             return false;
         }
         cursor += ExecutingTraderQualifierField.BYTE_LENGTH;
-        cursor += 6; // padding
 
         return true;
     }
@@ -252,7 +251,7 @@ public final class DeleteAllQuoteRequest implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -265,7 +264,7 @@ public final class DeleteAllQuoteRequest implements Message {
         cursor = targetPartyIdSessionId.encode(data, cursor);
         cursor = partyIdInvestmentDecisionMakerQualifier.encode(data, cursor);
         cursor = executingTraderQualifier.encode(data, cursor);
-        if (buffer != null && buffer.length >= 44 + 6) {
+        if (buffer != null && buffer.length >= 50) {
             System.arraycopy(buffer, 44, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding

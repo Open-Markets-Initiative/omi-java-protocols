@@ -28,13 +28,6 @@ public final class AiqGroupId implements GroupEntry {
     public static final String NAME = "AiqGroupId";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Specified to enable self match prevention at a more granular level within a given matching level
      */
     private final AiqGroupIdField aiqGroupId = new AiqGroupIdField();
@@ -70,7 +63,7 @@ public final class AiqGroupId implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -94,12 +87,7 @@ public final class AiqGroupId implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!aiqGroupId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += AiqGroupIdField.BYTE_LENGTH;
-
-        return true;
+        return aiqGroupId.parse(data, cursor);
     }
 
     @Override
@@ -186,10 +174,7 @@ public final class AiqGroupId implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "AiqGroupId" -> Optional.of(aiqGroupId);
-            default -> Optional.empty();
-        };
+        return "AiqGroupId".equals(name) ? Optional.of(aiqGroupId) : Optional.empty();
     }
 
     @Override

@@ -33,13 +33,6 @@ public final class ChannelResetGroupEntry implements GroupEntry {
     public static final String NAME = "ChannelResetGroup";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * The channel ID as defined in the XML Configuration file
      */
     private final ApplIdField applId = new ApplIdField();
@@ -109,7 +102,7 @@ public final class ChannelResetGroupEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -254,10 +247,7 @@ public final class ChannelResetGroupEntry implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "ApplId" -> Optional.of(applId);
-            default -> Optional.empty();
-        };
+        return "ApplId".equals(name) ? Optional.of(applId) : Optional.empty();
     }
 
     @Override

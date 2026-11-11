@@ -34,13 +34,6 @@ public final class MwcbStatusMessage implements Message {
     public static final String NAME = "Mwcb Status Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Denotes the Mwcb level that was breached
      */
     private final BreachedLevelField breachedLevel = new BreachedLevelField();
@@ -81,7 +74,7 @@ public final class MwcbStatusMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -110,12 +103,7 @@ public final class MwcbStatusMessage implements Message {
         }
 
         int cursor = offset;
-        if (!breachedLevel.parse(data, cursor)) {
-            return false;
-        }
-        cursor += BreachedLevelField.BYTE_LENGTH;
-
-        return true;
+        return breachedLevel.parse(data, cursor);
     }
 
     @Override
@@ -202,10 +190,7 @@ public final class MwcbStatusMessage implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "BreachedLevel" -> Optional.of(breachedLevel);
-            default -> Optional.empty();
-        };
+        return "BreachedLevel".equals(name) ? Optional.of(breachedLevel) : Optional.empty();
     }
 
     @Override

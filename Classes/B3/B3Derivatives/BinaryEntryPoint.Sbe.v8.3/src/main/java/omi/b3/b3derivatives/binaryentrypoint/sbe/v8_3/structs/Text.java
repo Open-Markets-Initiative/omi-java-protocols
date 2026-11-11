@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.TextLengthField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.types.Field;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.types.GroupEntry;
@@ -79,23 +78,7 @@ public final class Text implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor += 1;
-        cursor += textData.byteLength();
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -127,11 +110,8 @@ public final class Text implements GroupEntry {
             return false;
         }
         cursor += textData.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override

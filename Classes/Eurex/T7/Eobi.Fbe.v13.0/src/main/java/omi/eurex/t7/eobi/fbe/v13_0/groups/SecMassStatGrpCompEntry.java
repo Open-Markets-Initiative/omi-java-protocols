@@ -250,7 +250,6 @@ public final class SecMassStatGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += TesSecurityStatusField.BYTE_LENGTH;
-        cursor += 2; // padding
 
         return true;
     }
@@ -268,7 +267,7 @@ public final class SecMassStatGrpCompEntry implements GroupEntry {
         cursor = securityTradingEvent.encode(data, cursor);
         cursor = soldOutIndicator.encode(data, cursor);
         cursor = tesSecurityStatus.encode(data, cursor);
-        if (buffer != null && buffer.length >= 30 + 2) {
+        if (buffer != null && buffer.length >= 32) {
             System.arraycopy(buffer, 30, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

@@ -107,7 +107,6 @@ public final class Heartbeat implements Message {
             return false;
         }
         cursor += LastMsgSeqNumProcessedField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -117,7 +116,7 @@ public final class Heartbeat implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = lastMsgSeqNumProcessed.encode(data, cursor);
-        if (buffer != null && buffer.length >= 4 + 4) {
+        if (buffer != null && buffer.length >= 8) {
             System.arraycopy(buffer, 4, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding
@@ -202,10 +201,7 @@ public final class Heartbeat implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "LastMsgSeqNumProcessed" -> Optional.of(lastMsgSeqNumProcessed);
-            default -> Optional.empty();
-        };
+        return "LastMsgSeqNumProcessed".equals(name) ? Optional.of(lastMsgSeqNumProcessed) : Optional.empty();
     }
 
     @Override

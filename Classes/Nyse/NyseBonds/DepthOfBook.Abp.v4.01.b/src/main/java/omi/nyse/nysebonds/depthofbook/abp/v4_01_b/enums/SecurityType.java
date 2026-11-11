@@ -48,9 +48,6 @@ public enum SecurityType {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<SecurityType> fromWire(short wire) {
-        return switch (wire) {
-            case 1 -> Optional.of(CORPORATE_BONDS);
-            default -> Optional.empty();
-        };
+        return wire == 1 ? Optional.of(CORPORATE_BONDS) : Optional.empty();
     }
 }

@@ -161,12 +161,7 @@ public final class QuoteRequest implements Message {
         }
         cursor += SideField.BYTE_LENGTH;
         cursor += 7; // padding
-        if (!transactTime.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TransactTimeField.BYTE_LENGTH;
-
-        return true;
+        return transactTime.parse(data, cursor);
     }
 
     @Override
@@ -176,7 +171,7 @@ public final class QuoteRequest implements Message {
         cursor = securityId.encode(data, cursor);
         cursor = lastQty.encode(data, cursor);
         cursor = side.encode(data, cursor);
-        if (buffer != null && buffer.length >= 17 + 7) {
+        if (buffer != null && buffer.length >= 24) {
             System.arraycopy(buffer, 17, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

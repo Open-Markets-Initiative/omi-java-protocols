@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import omi.cme.globex.ilink3.sbe.v8_5.fields.LiquidityFlagField;
 import omi.cme.globex.ilink3.sbe.v8_5.fields.LocationField;
 import omi.cme.globex.ilink3.sbe.v8_5.fields.ManualOrderIndicatorField;
@@ -265,35 +264,7 @@ public final class MassQuote implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor += 8;
-        cursor += 8;
-        cursor += 1;
-        cursor += 4;
-        cursor += 20;
-        cursor += 8;
-        cursor += 5;
-        cursor += 4;
-        cursor += 1;
-        cursor += 1;
-        cursor += 1;
-        cursor += 1;
-        cursor += 30;
-        cursor = quoteEntriesGroups.padding(runs, cursor);
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -378,11 +349,8 @@ public final class MassQuote implements Message {
             return false;
         }
         cursor += quoteEntriesGroups.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -438,10 +406,7 @@ public final class MassQuote implements Message {
                 return false;
             }
         }
-        if (!quoteEntriesGroups.isRecognized()) {
-            return false;
-        }
-        return true;
+        return quoteEntriesGroups.isRecognized();
     }
 
     @Override

@@ -34,13 +34,6 @@ public final class RefreshRequestMessage implements Message {
     public static final String NAME = "Refresh Request Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Identifies the data set the firm is requesting a refresh of.
      */
     private final RefreshMessageTypeField refreshMessageType = new RefreshMessageTypeField();
@@ -81,7 +74,7 @@ public final class RefreshRequestMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -110,12 +103,7 @@ public final class RefreshRequestMessage implements Message {
         }
 
         int cursor = offset;
-        if (!refreshMessageType.parse(data, cursor)) {
-            return false;
-        }
-        cursor += RefreshMessageTypeField.BYTE_LENGTH;
-
-        return true;
+        return refreshMessageType.parse(data, cursor);
     }
 
     @Override
@@ -202,10 +190,7 @@ public final class RefreshRequestMessage implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "RefreshMessageType" -> Optional.of(refreshMessageType);
-            default -> Optional.empty();
-        };
+        return "RefreshMessageType".equals(name) ? Optional.of(refreshMessageType) : Optional.empty();
     }
 
     @Override

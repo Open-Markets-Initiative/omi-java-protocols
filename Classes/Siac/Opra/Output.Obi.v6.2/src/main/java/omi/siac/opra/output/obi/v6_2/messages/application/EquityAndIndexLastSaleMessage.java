@@ -301,7 +301,6 @@ public final class EquityAndIndexLastSaleMessage implements Message {
             return false;
         }
         cursor += TradeIdentifierField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -314,7 +313,7 @@ public final class EquityAndIndexLastSaleMessage implements Message {
         cursor = transactionId.encode(data, cursor);
         cursor = participantReferenceNumber.encode(data, cursor);
         cursor = securitySymbol.encode(data, cursor);
-        if (buffer != null && buffer.length >= 14 + 1) {
+        if (buffer != null && buffer.length >= 15) {
             System.arraycopy(buffer, 14, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
@@ -327,7 +326,7 @@ public final class EquityAndIndexLastSaleMessage implements Message {
         cursor = premiumPriceDenominatorCode.encode(data, cursor);
         cursor = premiumPrice.encode(data, cursor);
         cursor = tradeIdentifier.encode(data, cursor);
-        if (buffer != null && buffer.length >= 36 + 4) {
+        if (buffer != null && buffer.length >= 40) {
             System.arraycopy(buffer, 36, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

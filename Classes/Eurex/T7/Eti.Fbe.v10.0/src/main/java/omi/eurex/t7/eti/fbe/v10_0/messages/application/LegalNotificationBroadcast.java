@@ -206,11 +206,8 @@ public final class LegalNotificationBroadcast implements Message {
             return false;
         }
         cursor += varText.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -221,7 +218,7 @@ public final class LegalNotificationBroadcast implements Message {
         }
         varTextLen.value((varText.byteLength()));
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -231,7 +228,7 @@ public final class LegalNotificationBroadcast implements Message {
         cursor = transactTime.encode(data, cursor);
         cursor = varTextLen.encode(data, cursor);
         cursor = userStatus.encode(data, cursor);
-        if (buffer != null && buffer.length >= 45 + 5) {
+        if (buffer != null && buffer.length >= 50) {
             System.arraycopy(buffer, 45, data, cursor, 5); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 5, (byte) 0); // padding

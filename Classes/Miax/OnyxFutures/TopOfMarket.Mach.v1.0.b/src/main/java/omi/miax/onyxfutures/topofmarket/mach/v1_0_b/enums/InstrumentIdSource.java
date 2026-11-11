@@ -48,9 +48,6 @@ public enum InstrumentIdSource {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<InstrumentIdSource> fromWire(char wire) {
-        return switch (wire) {
-            case 'E' -> Optional.of(EXCHANGE);
-            default -> Optional.empty();
-        };
+        return wire == 'E' ? Optional.of(EXCHANGE) : Optional.empty();
     }
 }

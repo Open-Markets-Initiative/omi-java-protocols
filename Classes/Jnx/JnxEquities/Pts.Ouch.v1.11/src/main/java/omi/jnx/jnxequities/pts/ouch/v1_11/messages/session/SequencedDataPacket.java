@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import omi.jnx.jnxequities.pts.ouch.v1_11.dispatch.SequencedMessageDispatch;
 import omi.jnx.jnxequities.pts.ouch.v1_11.enums.SequencedMessageType;
 import omi.jnx.jnxequities.pts.ouch.v1_11.fields.SequencedMessageTypeField;
@@ -115,23 +114,7 @@ public final class SequencedDataPacket implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor += 1;
-        cursor += sequencedMessage.byteLength();
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -178,11 +161,8 @@ public final class SequencedDataPacket implements Message {
             sequencedMessage = sequencedMessageUnknown;
         }
         cursor += sequencedMessage.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -238,10 +218,7 @@ public final class SequencedDataPacket implements Message {
                 return false;
             }
         }
-        if (!sequencedMessage.isRecognized()) {
-            return false;
-        }
-        return true;
+        return sequencedMessage.isRecognized();
     }
 
     @Override
@@ -292,10 +269,7 @@ public final class SequencedDataPacket implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "SequencedMessageType" -> Optional.of(sequencedMessageType);
-            default -> Optional.empty();
-        };
+        return "SequencedMessageType".equals(name) ? Optional.of(sequencedMessageType) : Optional.empty();
     }
 
     @Override

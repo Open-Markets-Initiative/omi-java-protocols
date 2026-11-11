@@ -29,13 +29,6 @@ public final class CouponNumericPair implements GroupEntry {
     public static final String NAME = "CouponNumericPair";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Bond Coupon rate
      */
     private final CouponField coupon = new CouponField();
@@ -85,7 +78,7 @@ public final class CouponNumericPair implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class CouponNumericPair implements GroupEntry {
             return false;
         }
         cursor += CouponField.BYTE_LENGTH;
-        if (!couponFractionIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += CouponFractionIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return couponFractionIndicator.parse(data, cursor);
     }
 
     @Override

@@ -30,13 +30,6 @@ public final class NationalBestOfferShortAppendage implements GroupEntry {
     public static final String NAME = "NationalBestOfferShortAppendage";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Identifies the Participant that submitted the Best Offer on a consolidated basis
      */
     private final BestOfferParticipantIdField bestOfferParticipantId = new BestOfferParticipantIdField();
@@ -100,7 +93,7 @@ public final class NationalBestOfferShortAppendage implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -132,12 +125,7 @@ public final class NationalBestOfferShortAppendage implements GroupEntry {
             return false;
         }
         cursor += BestOfferPriceShortField.BYTE_LENGTH;
-        if (!bestOfferSizeShort.parse(data, cursor)) {
-            return false;
-        }
-        cursor += BestOfferSizeShortField.BYTE_LENGTH;
-
-        return true;
+        return bestOfferSizeShort.parse(data, cursor);
     }
 
     @Override

@@ -497,7 +497,6 @@ public final class CrossRequestSideGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += PartyIdLocationIdField.BYTE_LENGTH;
-        cursor += 7; // padding
 
         return true;
     }
@@ -528,7 +527,7 @@ public final class CrossRequestSideGrpCompEntry implements GroupEntry {
         cursor = partyIdTakeUpTradingFirm.encode(data, cursor);
         cursor = sideComplianceText.encode(data, cursor);
         cursor = partyIdLocationId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 153 + 7) {
+        if (buffer != null && buffer.length >= 160) {
             System.arraycopy(buffer, 153, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

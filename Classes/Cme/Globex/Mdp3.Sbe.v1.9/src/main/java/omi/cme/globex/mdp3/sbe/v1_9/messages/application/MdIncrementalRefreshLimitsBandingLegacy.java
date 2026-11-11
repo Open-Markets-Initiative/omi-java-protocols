@@ -118,7 +118,7 @@ public final class MdIncrementalRefreshLimitsBandingLegacy implements Message {
         cursor += 1;
         runs.add(cursor).add(2);
         cursor += 2;
-        cursor = incrementalRefreshLimitsBandingGroups.padding(runs, cursor);
+        cursor += incrementalRefreshLimitsBandingGroups.byteLength();
         return cursor;
     }
 
@@ -161,11 +161,8 @@ public final class MdIncrementalRefreshLimitsBandingLegacy implements Message {
             return false;
         }
         cursor += incrementalRefreshLimitsBandingGroups.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -174,7 +171,7 @@ public final class MdIncrementalRefreshLimitsBandingLegacy implements Message {
         int cursor = offset;
         cursor = transactTime.encode(data, cursor);
         cursor = matchEventIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 9 + 2) {
+        if (buffer != null && buffer.length >= 11) {
             System.arraycopy(buffer, 9, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -216,10 +213,7 @@ public final class MdIncrementalRefreshLimitsBandingLegacy implements Message {
                 return false;
             }
         }
-        if (!incrementalRefreshLimitsBandingGroups.isRecognized()) {
-            return false;
-        }
-        return true;
+        return incrementalRefreshLimitsBandingGroups.isRecognized();
     }
 
     @Override

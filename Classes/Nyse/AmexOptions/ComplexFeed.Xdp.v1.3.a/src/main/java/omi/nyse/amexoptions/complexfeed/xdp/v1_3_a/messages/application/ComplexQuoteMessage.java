@@ -299,7 +299,6 @@ public final class ComplexQuoteMessage implements Message {
             return false;
         }
         cursor += QuoteConditionField.BYTE_LENGTH;
-        cursor += 3; // padding
 
         return true;
     }
@@ -319,7 +318,7 @@ public final class ComplexQuoteMessage implements Message {
         cursor = askCustomerVolume.encode(data, cursor);
         cursor = bidCustomerVolume.encode(data, cursor);
         cursor = quoteCondition.encode(data, cursor);
-        if (buffer != null && buffer.length >= 33 + 3) {
+        if (buffer != null && buffer.length >= 36) {
             System.arraycopy(buffer, 33, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding

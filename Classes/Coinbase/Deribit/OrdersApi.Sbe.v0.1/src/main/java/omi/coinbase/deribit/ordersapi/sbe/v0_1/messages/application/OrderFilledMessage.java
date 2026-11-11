@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.ExecIdField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.TimestampField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.structs.OrderFilledMessageFillsGroups;
@@ -115,25 +114,7 @@ public final class OrderFilledMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor += 8;
-        cursor += 8;
-        cursor = orderFilledMessageFillsGroups.padding(runs, cursor);
-        cursor = orderFilledMessageLegsGroups.padding(runs, cursor);
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -181,11 +162,8 @@ public final class OrderFilledMessage implements Message {
             return false;
         }
         cursor += orderFilledMessageLegsGroups.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -235,10 +213,7 @@ public final class OrderFilledMessage implements Message {
         if (!orderFilledMessageFillsGroups.isRecognized()) {
             return false;
         }
-        if (!orderFilledMessageLegsGroups.isRecognized()) {
-            return false;
-        }
-        return true;
+        return orderFilledMessageLegsGroups.isRecognized();
     }
 
     @Override

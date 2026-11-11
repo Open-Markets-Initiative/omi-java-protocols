@@ -774,7 +774,7 @@ public final class TesBroadcast implements Message {
         runs.add(cursor).add(5);
         cursor += 5;
         cursor = sideAllocGrpBcComp.padding(runs, cursor);
-        cursor = trdInstrmntLegGrpComp.padding(runs, cursor);
+        cursor += trdInstrmntLegGrpComp.byteLength();
         cursor = instrumentEventGrpComp.padding(runs, cursor);
         cursor = instrumentAttributeGrpComp.padding(runs, cursor);
         cursor = underlyingStipGrpComp.padding(runs, cursor);
@@ -993,11 +993,8 @@ public final class TesBroadcast implements Message {
             return false;
         }
         cursor += underlyingStipGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -1024,7 +1021,7 @@ public final class TesBroadcast implements Message {
         noInstrAttrib.value((short) instrumentAttributeGrpComp.size());
         noUnderlyingStips.value((short) underlyingStipGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -1068,7 +1065,7 @@ public final class TesBroadcast implements Message {
         cursor = underlyingSecurityDesc.encode(data, cursor);
         cursor = underlyingCurrency.encode(data, cursor);
         cursor = underlyingIssuer.encode(data, cursor);
-        if (buffer != null && buffer.length >= 269 + 5) {
+        if (buffer != null && buffer.length >= 274) {
             System.arraycopy(buffer, 269, data, cursor, 5); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 5, (byte) 0); // padding
@@ -1131,10 +1128,7 @@ public final class TesBroadcast implements Message {
         if (!instrumentAttributeGrpComp.isRecognized()) {
             return false;
         }
-        if (!underlyingStipGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return underlyingStipGrpComp.isRecognized();
     }
 
     @Override

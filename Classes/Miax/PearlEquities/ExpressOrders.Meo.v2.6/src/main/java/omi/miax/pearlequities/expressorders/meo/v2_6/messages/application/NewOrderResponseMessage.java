@@ -242,7 +242,6 @@ public final class NewOrderResponseMessage implements Message {
             return false;
         }
         cursor += OrderStatusField.BYTE_LENGTH;
-        cursor += 19; // padding
 
         return true;
     }
@@ -259,7 +258,7 @@ public final class NewOrderResponseMessage implements Message {
         cursor = price.encode(data, cursor);
         cursor = size.encode(data, cursor);
         cursor = orderStatus.encode(data, cursor);
-        if (buffer != null && buffer.length >= 57 + 19) {
+        if (buffer != null && buffer.length >= 76) {
             System.arraycopy(buffer, 57, data, cursor, 19); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 19, (byte) 0); // padding

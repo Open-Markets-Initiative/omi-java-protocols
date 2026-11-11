@@ -34,13 +34,6 @@ public final class QuoteCancelEntriesGroupEntry implements GroupEntry {
     public static final String NAME = "QuoteCancelEntriesGroup";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Specifies the Product Group for which working orders should be cancelled. Conditionally required if MassActionScope="Product Group" (Tag1374=10). Will be ignored if present for any other criteria specified in MassActionScope besides Product Group
      */
     private final SecurityGroupField securityGroup = new SecurityGroupField();
@@ -127,7 +120,7 @@ public final class QuoteCancelEntriesGroupEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override

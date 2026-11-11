@@ -29,13 +29,6 @@ public final class NetChangeFuturesTradeMessageNegativeHundredThousandPair imple
     public static final String NAME = "NetChangeFuturesTradeMessageNegativeHundredThousandPair";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Net change = last trade price - previous settlement price
      */
     private final RawNetChangeFuturesTradeMessageField rawNetChangeFuturesTradeMessage = new RawNetChangeFuturesTradeMessageField();
@@ -85,7 +78,7 @@ public final class NetChangeFuturesTradeMessageNegativeHundredThousandPair imple
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class NetChangeFuturesTradeMessageNegativeHundredThousandPair imple
             return false;
         }
         cursor += RawNetChangeFuturesTradeMessageField.BYTE_LENGTH;
-        if (!netChangeFractionIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += NetChangeFractionIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return netChangeFractionIndicator.parse(data, cursor);
     }
 
     @Override

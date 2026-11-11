@@ -242,7 +242,6 @@ public final class ModifyOrderMessage implements Message {
             return false;
         }
         cursor += SideField.BYTE_LENGTH;
-        cursor += 1; // padding
 
         return true;
     }
@@ -259,7 +258,7 @@ public final class ModifyOrderMessage implements Message {
         cursor = volume.encode(data, cursor);
         cursor = positionChange.encode(data, cursor);
         cursor = side.encode(data, cursor);
-        if (buffer != null && buffer.length >= 30 + 1) {
+        if (buffer != null && buffer.length >= 31) {
             System.arraycopy(buffer, 30, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

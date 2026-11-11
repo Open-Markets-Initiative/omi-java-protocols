@@ -193,7 +193,6 @@ public final class SrqsTargetPartyTrdGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += TargetPartyEnteringTraderField.BYTE_LENGTH;
-        cursor += 3; // padding
 
         return true;
     }
@@ -208,7 +207,7 @@ public final class SrqsTargetPartyTrdGrpCompEntry implements GroupEntry {
         cursor = targetPartyExecutingFirm.encode(data, cursor);
         cursor = targetPartyExecutingTrader.encode(data, cursor);
         cursor = targetPartyEnteringTrader.encode(data, cursor);
-        if (buffer != null && buffer.length >= 37 + 3) {
+        if (buffer != null && buffer.length >= 40) {
             System.arraycopy(buffer, 37, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding

@@ -29,13 +29,6 @@ public final class SettlementPriceNegativeThousandPair implements GroupEntry {
     public static final String NAME = "SettlementPriceNegativeThousandPair";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Settlement Price
      */
     private final RawSettlementPriceField rawSettlementPrice = new RawSettlementPriceField();
@@ -85,7 +78,7 @@ public final class SettlementPriceNegativeThousandPair implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class SettlementPriceNegativeThousandPair implements GroupEntry {
             return false;
         }
         cursor += RawSettlementPriceField.BYTE_LENGTH;
-        if (!settlementPriceFractionIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += SettlementPriceFractionIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return settlementPriceFractionIndicator.parse(data, cursor);
     }
 
     @Override

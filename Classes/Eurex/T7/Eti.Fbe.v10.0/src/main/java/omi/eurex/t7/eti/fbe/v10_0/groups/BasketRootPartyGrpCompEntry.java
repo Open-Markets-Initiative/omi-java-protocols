@@ -155,7 +155,6 @@ public final class BasketRootPartyGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += BasketSideTradeReportIdField.BYTE_LENGTH;
-        cursor += 7; // padding
 
         return true;
     }
@@ -168,7 +167,7 @@ public final class BasketRootPartyGrpCompEntry implements GroupEntry {
         cursor = rootPartyContraFirm.encode(data, cursor);
         cursor = rootPartyContraTrader.encode(data, cursor);
         cursor = basketSideTradeReportId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 33 + 7) {
+        if (buffer != null && buffer.length >= 40) {
             System.arraycopy(buffer, 33, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

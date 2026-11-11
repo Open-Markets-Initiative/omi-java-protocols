@@ -7,7 +7,7 @@ A division of [The Securities Industry Automation Corporation](..).
 
 | [Protocol][Omi.Siac.Protocol.Definitions] | [Encoding][Omi.Encoding.Definitions] | Version | Date | Size | [Deployment][Omi.Glossary.Deployment] | [Testing][Omi.Glossary.Testing] | [Documentation][Omi.Siac.Specifications] |
 | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| [Output][Siac.Opra.Output] | [Obi][Omi.Encoding.Obi] | [6.2][Siac.Opra.Output.Obi.v6.2.Parser] | 12/6/2024 | 16,331 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Verified][Omi.Glossary.Testing.Verified] | [url][Siac.Opra.Output.Obi.v6.2.Url] - [pdf][Siac.Opra.Output.Obi.v6.2.Pdf] |
+| [Output][Siac.Opra.Output] | [Obi][Omi.Encoding.Obi] | [6.2][Siac.Opra.Output.Obi.v6.2.Parser] | 12/6/2024 | 16,158 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Verified][Omi.Glossary.Testing.Verified] | [url][Siac.Opra.Output.Obi.v6.2.Url] - [pdf][Siac.Opra.Output.Obi.v6.2.Pdf] |
 
 
 <p align="center"><a href="https://en.wikipedia.org/wiki/Securities_Industry_Automation_Corporation" title="The Securities Industry Automation Corporation Website"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Website.png" alt="Website" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://en.wikipedia.org/wiki/Securities_Industry_Automation_Corporation" title="The Securities Industry Automation Corporation on Wikipedia"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Wikipedia.png" alt="Wikipedia" width="32" height="32"></a></p>

@@ -384,7 +384,7 @@ public final class ModifyTesTradeRequest implements Message {
         runs.add(cursor).add(1);
         cursor += 1;
         cursor = sideAllocGrpComp.padding(runs, cursor);
-        cursor = trdInstrmntLegGrpComp.padding(runs, cursor);
+        cursor += trdInstrmntLegGrpComp.byteLength();
         return cursor;
     }
 
@@ -495,11 +495,8 @@ public final class ModifyTesTradeRequest implements Message {
             return false;
         }
         cursor += trdInstrmntLegGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -515,7 +512,7 @@ public final class ModifyTesTradeRequest implements Message {
         noLegs.value((short) trdInstrmntLegGrpComp.size());
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -537,7 +534,7 @@ public final class ModifyTesTradeRequest implements Message {
         cursor = swapClearer.encode(data, cursor);
         cursor = tradeReportText.encode(data, cursor);
         cursor = tradeReportId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 105 + 1) {
+        if (buffer != null && buffer.length >= 106) {
             System.arraycopy(buffer, 105, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
@@ -585,10 +582,7 @@ public final class ModifyTesTradeRequest implements Message {
         if (!sideAllocGrpComp.isRecognized()) {
             return false;
         }
-        if (!trdInstrmntLegGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return trdInstrmntLegGrpComp.isRecognized();
     }
 
     @Override

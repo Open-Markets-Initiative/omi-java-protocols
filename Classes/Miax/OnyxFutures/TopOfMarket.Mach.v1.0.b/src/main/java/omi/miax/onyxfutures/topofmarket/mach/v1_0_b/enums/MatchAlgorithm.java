@@ -48,9 +48,6 @@ public enum MatchAlgorithm {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<MatchAlgorithm> fromWire(char wire) {
-        return switch (wire) {
-            case 'P' -> Optional.of(PRICE_THEN_TIME);
-            default -> Optional.empty();
-        };
+        return wire == 'P' ? Optional.of(PRICE_THEN_TIME) : Optional.empty();
     }
 }

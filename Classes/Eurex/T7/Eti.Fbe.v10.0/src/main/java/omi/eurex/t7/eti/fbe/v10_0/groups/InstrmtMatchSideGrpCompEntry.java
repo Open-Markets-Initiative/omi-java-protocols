@@ -307,7 +307,6 @@ public final class InstrmtMatchSideGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += TradeReportTextField.BYTE_LENGTH;
-        cursor += 6; // padding
 
         return true;
     }
@@ -328,7 +327,7 @@ public final class InstrmtMatchSideGrpCompEntry implements GroupEntry {
         cursor = instrmtMatchSideId.encode(data, cursor);
         cursor = effectOnBasket.encode(data, cursor);
         cursor = tradeReportText.encode(data, cursor);
-        if (buffer != null && buffer.length >= 66 + 6) {
+        if (buffer != null && buffer.length >= 72) {
             System.arraycopy(buffer, 66, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding

@@ -2,7 +2,6 @@ package omi.miax.pearlequities.expressorders.meo.v2_6.messages.session;
 
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -33,13 +32,6 @@ public final class ClientHeartbeat implements Message {
     public static final String NAME = "Client Heartbeat";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * This message's fields, in wire order.
      */
     private final List<Field> fields = List.of();
@@ -66,7 +58,7 @@ public final class ClientHeartbeat implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -84,24 +76,18 @@ public final class ClientHeartbeat implements Message {
         clear();
         this.decoded = read(data, offset, end);
 
-        int stop = Math.max(0, Math.min(data.length, offset + BYTE_LENGTH));
-        this.buffer = Arrays.copyOfRange(data, Math.min(Math.max(offset, 0), stop), stop);
+        this.buffer = new byte[0];
         return decoded;
     }
 
     private boolean read(byte[] data, int offset, int end) {
-        if (offset < 0 || end > data.length || end - offset < BYTE_LENGTH) {
-            return false;
-        }
-
-        return true;
+        return offset >= 0 && end <= data.length && end - offset >= BYTE_LENGTH;
     }
 
     @Override
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
-        int cursor = offset;
-        return cursor;
+        return offset;
     }
 
     @Override

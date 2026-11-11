@@ -269,7 +269,6 @@ public final class EnrichmentRulesGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += FreeText3Field.BYTE_LENGTH;
-        cursor += 1; // padding
 
         return true;
     }
@@ -288,7 +287,7 @@ public final class EnrichmentRulesGrpCompEntry implements GroupEntry {
         cursor = freeText1.encode(data, cursor);
         cursor = freeText2.encode(data, cursor);
         cursor = freeText3.encode(data, cursor);
-        if (buffer != null && buffer.length >= 63 + 1) {
+        if (buffer != null && buffer.length >= 64) {
             System.arraycopy(buffer, 63, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

@@ -261,7 +261,6 @@ public final class RefreshComplexTradeMessage implements Message {
             return false;
         }
         cursor += TradeCond2Field.BYTE_LENGTH;
-        cursor += 2; // padding
 
         return true;
     }
@@ -279,7 +278,7 @@ public final class RefreshComplexTradeMessage implements Message {
         cursor = volume.encode(data, cursor);
         cursor = tradeCond1.encode(data, cursor);
         cursor = tradeCond2.encode(data, cursor);
-        if (buffer != null && buffer.length >= 30 + 2) {
+        if (buffer != null && buffer.length >= 32) {
             System.arraycopy(buffer, 30, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

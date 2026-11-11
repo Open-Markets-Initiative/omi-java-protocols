@@ -354,12 +354,7 @@ public final class MarketSheetInitialAndImprovementOrderMessage implements Messa
             return false;
         }
         cursor += FirmIdField.BYTE_LENGTH;
-        if (!cmta.parse(data, cursor)) {
-            return false;
-        }
-        cursor += CmtaField.BYTE_LENGTH;
-
-        return true;
+        return cmta.parse(data, cursor);
     }
 
     @Override
@@ -376,7 +371,7 @@ public final class MarketSheetInitialAndImprovementOrderMessage implements Messa
         cursor = orderSequenceNumber.encode(data, cursor);
         cursor = improvementPhaseSequentialNumber.encode(data, cursor);
         cursor = typeOfClearingAccount.encode(data, cursor);
-        if (buffer != null && buffer.length >= 51 + 1) {
+        if (buffer != null && buffer.length >= 52) {
             System.arraycopy(buffer, 51, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

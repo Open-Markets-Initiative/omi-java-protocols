@@ -29,13 +29,6 @@ public final class PremiumBreakPoint implements GroupEntry {
     public static final String NAME = "PremiumBreakPoint";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * The premium price where above and below fractions take effect.
      */
     private final PremiumBreakPointExponentField premiumBreakPointExponent = new PremiumBreakPointExponentField();
@@ -85,7 +78,7 @@ public final class PremiumBreakPoint implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class PremiumBreakPoint implements GroupEntry {
             return false;
         }
         cursor += PremiumBreakPointExponentField.BYTE_LENGTH;
-        if (!premiumBreakPointMantissa.parse(data, cursor)) {
-            return false;
-        }
-        cursor += PremiumBreakPointMantissaField.BYTE_LENGTH;
-
-        return true;
+        return premiumBreakPointMantissa.parse(data, cursor);
     }
 
     @Override

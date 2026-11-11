@@ -133,12 +133,7 @@ public final class TradeCondition implements GroupEntry {
         }
         cursor += OpeningField.BYTE_LENGTH;
         cursor += 1; // padding
-        if (!offical.parse(data, cursor)) {
-            return false;
-        }
-        cursor += OfficalField.BYTE_LENGTH;
-
-        return true;
+        return offical.parse(data, cursor);
     }
 
     @Override
@@ -147,7 +142,7 @@ public final class TradeCondition implements GroupEntry {
         int cursor = offset;
         cursor = series.encode(data, cursor);
         cursor = opening.encode(data, cursor);
-        if (buffer != null && buffer.length >= 2 + 1) {
+        if (buffer != null && buffer.length >= 3) {
             System.arraycopy(buffer, 2, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

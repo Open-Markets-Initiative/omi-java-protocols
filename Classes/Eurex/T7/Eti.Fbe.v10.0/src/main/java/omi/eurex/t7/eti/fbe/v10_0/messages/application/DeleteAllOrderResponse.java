@@ -175,7 +175,7 @@ public final class DeleteAllOrderResponse implements Message {
         cursor += 2;
         runs.add(cursor).add(4);
         cursor += 4;
-        cursor = notAffectedOrdersGrpComp.padding(runs, cursor);
+        cursor += notAffectedOrdersGrpComp.byteLength();
         cursor = affectedOrderRequestsGrpComp.padding(runs, cursor);
         return cursor;
     }
@@ -235,11 +235,8 @@ public final class DeleteAllOrderResponse implements Message {
             return false;
         }
         cursor += affectedOrderRequestsGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -254,7 +251,7 @@ public final class DeleteAllOrderResponse implements Message {
         noNotAffectedOrders.value(notAffectedOrdersGrpComp.size());
         noAffectedOrderRequests.value(affectedOrderRequestsGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -264,7 +261,7 @@ public final class DeleteAllOrderResponse implements Message {
         cursor = massActionReportId.encode(data, cursor);
         cursor = noNotAffectedOrders.encode(data, cursor);
         cursor = noAffectedOrderRequests.encode(data, cursor);
-        if (buffer != null && buffer.length >= 78 + 4) {
+        if (buffer != null && buffer.length >= 82) {
             System.arraycopy(buffer, 78, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding
@@ -312,10 +309,7 @@ public final class DeleteAllOrderResponse implements Message {
         if (!notAffectedOrdersGrpComp.isRecognized()) {
             return false;
         }
-        if (!affectedOrderRequestsGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return affectedOrderRequestsGrpComp.isRecognized();
     }
 
     @Override

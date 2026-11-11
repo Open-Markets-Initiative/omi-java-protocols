@@ -31,13 +31,6 @@ public final class BondDefinitionEntry implements GroupEntry {
     public static final String NAME = "BondDefinition";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Bond expiration
      */
     private final MaturityDateField maturityDate = new MaturityDateField();
@@ -115,7 +108,7 @@ public final class BondDefinitionEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -151,12 +144,7 @@ public final class BondDefinitionEntry implements GroupEntry {
             return false;
         }
         cursor += OutstandingBondValueField.BYTE_LENGTH;
-        if (!conversionFactorFractionPair.parseFrom(data, cursor, end)) {
-            return false;
-        }
-        cursor += conversionFactorFractionPair.byteLength();
-
-        return true;
+        return conversionFactorFractionPair.parseFrom(data, cursor, end);
     }
 
     @Override
@@ -203,10 +191,7 @@ public final class BondDefinitionEntry implements GroupEntry {
         if (!couponFractionPair.isRecognized()) {
             return false;
         }
-        if (!conversionFactorFractionPair.isRecognized()) {
-            return false;
-        }
-        return true;
+        return conversionFactorFractionPair.isRecognized();
     }
 
     @Override

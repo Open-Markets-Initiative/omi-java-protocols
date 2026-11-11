@@ -48,9 +48,6 @@ public enum ExecInst {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<ExecInst> fromWire(char wire) {
-        return switch (wire) {
-            case 'f' -> Optional.of(INTERMARKET_SWEEP);
-            default -> Optional.empty();
-        };
+        return wire == 'f' ? Optional.of(INTERMARKET_SWEEP) : Optional.empty();
     }
 }

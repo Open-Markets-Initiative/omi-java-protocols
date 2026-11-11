@@ -409,7 +409,7 @@ public final class ComplexOrderInstrumentKeysMessage implements Message {
         cursor += 30;
         cursor += 1;
         cursor += 2;
-        cursor = instrumentLeg.padding(runs, cursor);
+        cursor += instrumentLeg.byteLength();
         return cursor;
     }
 
@@ -527,11 +527,8 @@ public final class ComplexOrderInstrumentKeysMessage implements Message {
             return false;
         }
         cursor += instrumentLeg.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -557,7 +554,7 @@ public final class ComplexOrderInstrumentKeysMessage implements Message {
         cursor = minThresholdPriceFractionIndicator.encode(data, cursor);
         cursor = tickIncrement.encode(data, cursor);
         cursor = tickIncrementFractionIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 71 + 2) {
+        if (buffer != null && buffer.length >= 73) {
             System.arraycopy(buffer, 71, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -604,10 +601,7 @@ public final class ComplexOrderInstrumentKeysMessage implements Message {
                 return false;
             }
         }
-        if (!instrumentLeg.isRecognized()) {
-            return false;
-        }
-        return true;
+        return instrumentLeg.isRecognized();
     }
 
     @Override

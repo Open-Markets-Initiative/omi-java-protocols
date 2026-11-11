@@ -202,11 +202,8 @@ public final class SecurityDefinitionRequestMessage implements Message {
             return false;
         }
         cursor += legsGroups.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -254,10 +251,7 @@ public final class SecurityDefinitionRequestMessage implements Message {
                 return false;
             }
         }
-        if (!legsGroups.isRecognized()) {
-            return false;
-        }
-        return true;
+        return legsGroups.isRecognized();
     }
 
     @Override

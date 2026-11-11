@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import omi.cboe.bzxequities.binaryorderentry.boe.v2_3.fields.AccountField;
 import omi.cboe.bzxequities.binaryorderentry.boe.v2_3.fields.AttributedQuoteField;
 import omi.cboe.bzxequities.binaryorderentry.boe.v2_3.fields.CapacityField;
@@ -1081,136 +1080,7 @@ public final class NewOrderMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor += 20;
-        cursor += 1;
-        cursor += 4;
-        cursor += 1;
-        if (newOrderBitfield1Present()) {
-            cursor += 1;
-        }
-        if (newOrderBitfield2Present()) {
-            cursor += 1;
-        }
-        if (newOrderBitfield3Present()) {
-            cursor += 1;
-        }
-        if (newOrderBitfield4Present()) {
-            cursor += 1;
-        }
-        if (newOrderBitfield5Present()) {
-            cursor += 1;
-        }
-        if (newOrderBitfield6Present()) {
-            cursor += 1;
-        }
-        if (newOrderBitfield7Present()) {
-            cursor += 1;
-        }
-        if (clearingFirmPresent()) {
-            cursor += 4;
-        }
-        if (clearingAccountPresent()) {
-            cursor += 4;
-        }
-        if (pricePresent()) {
-            cursor += 8;
-        }
-        if (execInstPresent()) {
-            cursor += 1;
-        }
-        if (ordTypePresent()) {
-            cursor += 1;
-        }
-        if (timeInForcePresent()) {
-            cursor += 1;
-        }
-        if (minQtyPresent()) {
-            cursor += 4;
-        }
-        if (maxFloorPresent()) {
-            cursor += 4;
-        }
-        if (symbolPresent()) {
-            cursor += 8;
-        }
-        if (symbolSfxPresent()) {
-            cursor += 8;
-        }
-        if (capacityPresent()) {
-            cursor += 1;
-        }
-        if (routingInstPresent()) {
-            cursor += 4;
-        }
-        if (accountPresent()) {
-            cursor += 16;
-        }
-        if (displayIndicatorPresent()) {
-            cursor += 1;
-        }
-        if (maxRemovePctPresent()) {
-            cursor += 1;
-        }
-        if (discretionAmountPresent()) {
-            cursor += 2;
-        }
-        if (pegDifferencePresent()) {
-            cursor += 8;
-        }
-        if (preventMatchPresent()) {
-            cursor += 3;
-        }
-        if (locateReqdPresent()) {
-            cursor += 1;
-        }
-        if (expireTimePresent()) {
-            cursor += 8;
-        }
-        if (riskResetPresent()) {
-            cursor += 8;
-        }
-        if (attributedQuotePresent()) {
-            cursor += 1;
-        }
-        if (extExecInstPresent()) {
-            cursor += 1;
-        }
-        if (displayRangePresent()) {
-            cursor += 4;
-        }
-        if (stopPxPresent()) {
-            cursor += 8;
-        }
-        if (routStrategyPresent()) {
-            cursor += 6;
-        }
-        if (routeDeliveryMethodPresent()) {
-            cursor += 3;
-        }
-        if (exDestinationPresent()) {
-            cursor += 1;
-        }
-        if (echoTextPresent()) {
-            cursor += 64;
-        }
-        if (customGroupIdPresent()) {
-            cursor += 2;
-        }
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -1585,11 +1455,8 @@ public final class NewOrderMessage implements Message {
             }
             cursor += CustomGroupIdField.BYTE_LENGTH;
         }
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override

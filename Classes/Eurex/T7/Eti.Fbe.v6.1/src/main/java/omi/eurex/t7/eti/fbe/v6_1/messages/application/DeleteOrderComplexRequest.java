@@ -337,7 +337,6 @@ public final class DeleteOrderComplexRequest implements Message {
             return false;
         }
         cursor += FixClOrdIdField.BYTE_LENGTH;
-        cursor += 2; // padding
 
         return true;
     }
@@ -347,7 +346,7 @@ public final class DeleteOrderComplexRequest implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -365,7 +364,7 @@ public final class DeleteOrderComplexRequest implements Message {
         cursor = partyIdInvestmentDecisionMakerQualifier.encode(data, cursor);
         cursor = executingTraderQualifier.encode(data, cursor);
         cursor = fixClOrdId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 96 + 2) {
+        if (buffer != null && buffer.length >= 98) {
             System.arraycopy(buffer, 96, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

@@ -661,7 +661,6 @@ public final class RiskControlAcknowledgementMessage implements Message {
             return false;
         }
         cursor += PriceScaleField.BYTE_LENGTH;
-        cursor += 190; // padding
 
         return true;
     }
@@ -674,7 +673,7 @@ public final class RiskControlAcknowledgementMessage implements Message {
         cursor = mpid.encode(data, cursor);
         cursor = marketMakerNul.encode(data, cursor);
         cursor = mpsubid.encode(data, cursor);
-        if (buffer != null && buffer.length >= 22 + 4) {
+        if (buffer != null && buffer.length >= 26) {
             System.arraycopy(buffer, 22, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding
@@ -706,7 +705,7 @@ public final class RiskControlAcknowledgementMessage implements Message {
         cursor = riskRangeId.encode(data, cursor);
         cursor = riskMinimumValue.encode(data, cursor);
         cursor = priceScale.encode(data, cursor);
-        if (buffer != null && buffer.length >= 120 + 190) {
+        if (buffer != null && buffer.length >= 310) {
             System.arraycopy(buffer, 120, data, cursor, 190); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 190, (byte) 0); // padding

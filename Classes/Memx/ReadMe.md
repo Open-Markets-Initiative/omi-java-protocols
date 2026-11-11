@@ -5,7 +5,7 @@
 
 | Division | [Protocol][Omi.Memx.Protocol.Definitions] | [Encoding][Omi.Encoding.Definitions] | Version | Date | Size | [Deployment][Omi.Glossary.Deployment] | [Testing][Omi.Glossary.Testing] | [Documentation][Omi.Memx.Specifications] |
 | --- | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| [MemxEquities][MemxEquities.Exchange] | [MemoirDepthFeed][Memx.MemxEquities.MemoirDepthFeed] | [Sbe][Omi.Encoding.Sbe] | [1.3][Memx.MemxEquities.MemoirDepthFeed.Sbe.v1.3.Parser] | 4/5/2021 | 9,632 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Memx.MemxEquities.MemoirDepthFeed.Sbe.v1.3.Url] |
+| [MemxEquities][MemxEquities.Exchange] | [MemoirDepthFeed][Memx.MemxEquities.MemoirDepthFeed] | [Sbe][Omi.Encoding.Sbe] | [1.3][Memx.MemxEquities.MemoirDepthFeed.Sbe.v1.3.Parser] | 4/5/2021 | 9,477 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Memx.MemxEquities.MemoirDepthFeed.Sbe.v1.3.Url] |
 
 
 <p align="center"><a href="https://www.memx.com" title="The Members Exchange Website"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Website.png" alt="Website" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://www.linkedin.com/company/memxtrading" title="The Members Exchange on LinkedIn"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/LinkedIn.png" alt="LinkedIn" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://en.wikipedia.org/wiki/Members_Exchange" title="The Members Exchange on Wikipedia"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Wikipedia.png" alt="Wikipedia" width="32" height="32"></a></p>

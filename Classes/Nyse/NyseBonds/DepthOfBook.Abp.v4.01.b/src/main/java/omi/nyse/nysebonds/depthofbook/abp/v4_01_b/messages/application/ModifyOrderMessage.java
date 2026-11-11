@@ -51,13 +51,6 @@ public final class ModifyOrderMessage implements Message {
     public static final String NAME = "Modify Order Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Message creation timestamp in milliseconds since midnight.
      */
     private final TimeField time = new TimeField();
@@ -336,7 +329,7 @@ public final class ModifyOrderMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -433,12 +426,7 @@ public final class ModifyOrderMessage implements Message {
             return false;
         }
         cursor += PaddingAsciiField.BYTE_LENGTH;
-        if (!minimumQuantity.parse(data, cursor)) {
-            return false;
-        }
-        cursor += MinimumQuantityField.BYTE_LENGTH;
-
-        return true;
+        return minimumQuantity.parse(data, cursor);
     }
 
     @Override

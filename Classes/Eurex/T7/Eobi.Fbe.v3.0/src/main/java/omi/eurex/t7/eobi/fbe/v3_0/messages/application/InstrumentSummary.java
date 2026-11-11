@@ -291,7 +291,7 @@ public final class InstrumentSummary implements Message {
         cursor = securityTradingStatus.encode(data, cursor);
         cursor = fastMarketIndicator.encode(data, cursor);
         cursor = noMdEntries.encode(data, cursor);
-        if (buffer != null && buffer.length >= 30 + 2) {
+        if (buffer != null && buffer.length >= 32) {
             System.arraycopy(buffer, 30, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -333,10 +333,7 @@ public final class InstrumentSummary implements Message {
                 return false;
             }
         }
-        if (!mdInstrumentEntryGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return mdInstrumentEntryGrpComp.isRecognized();
     }
 
     @Override

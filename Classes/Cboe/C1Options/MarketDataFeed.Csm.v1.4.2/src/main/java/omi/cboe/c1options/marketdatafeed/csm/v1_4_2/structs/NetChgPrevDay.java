@@ -29,13 +29,6 @@ public final class NetChgPrevDay implements GroupEntry {
     public static final String NAME = "NetChgPrevDay";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Net change of last sale price relative to previous close price. Sign of this value implies direction of change.
      */
     private final NetChgPrevDayExponentField netChgPrevDayExponent = new NetChgPrevDayExponentField();
@@ -85,7 +78,7 @@ public final class NetChgPrevDay implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class NetChgPrevDay implements GroupEntry {
             return false;
         }
         cursor += NetChgPrevDayExponentField.BYTE_LENGTH;
-        if (!netChgPrevDayMantissa.parse(data, cursor)) {
-            return false;
-        }
-        cursor += NetChgPrevDayMantissaField.BYTE_LENGTH;
-
-        return true;
+        return netChgPrevDayMantissa.parse(data, cursor);
     }
 
     @Override

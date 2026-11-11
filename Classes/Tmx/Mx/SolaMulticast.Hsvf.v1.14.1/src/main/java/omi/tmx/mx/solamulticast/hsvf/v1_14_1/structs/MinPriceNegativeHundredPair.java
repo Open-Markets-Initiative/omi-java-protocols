@@ -29,13 +29,6 @@ public final class MinPriceNegativeHundredPair implements GroupEntry {
     public static final String NAME = "MinPriceNegativeHundredPair";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Starting price for this tick entry
      */
     private final RawMinPriceField rawMinPrice = new RawMinPriceField();
@@ -85,7 +78,7 @@ public final class MinPriceNegativeHundredPair implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class MinPriceNegativeHundredPair implements GroupEntry {
             return false;
         }
         cursor += RawMinPriceField.BYTE_LENGTH;
-        if (!minPriceFractionIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += MinPriceFractionIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return minPriceFractionIndicator.parse(data, cursor);
     }
 
     @Override

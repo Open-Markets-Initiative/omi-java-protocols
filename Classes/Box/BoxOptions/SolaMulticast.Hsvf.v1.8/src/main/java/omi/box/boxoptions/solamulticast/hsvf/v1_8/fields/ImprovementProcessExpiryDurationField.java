@@ -2,6 +2,7 @@ package omi.box.boxoptions.solamulticast.hsvf.v1_8.fields;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Objects;
@@ -54,7 +55,7 @@ public final class ImprovementProcessExpiryDurationField extends Field {
      * @throws ArithmeticException when the value has more decimal places than the field's scale, or more characters than its width
      */
     public void value(BigDecimal value) {
-        BigInteger unscaled = value == null ? BigInteger.ZERO : value.setScale(SCALE).unscaledValue();
+        BigInteger unscaled = value == null ? BigInteger.ZERO : value.setScale(SCALE, RoundingMode.UNNECESSARY).unscaledValue();
         String digits = value == null ? "" : unscaled.abs().toString();
         int sign = unscaled.signum() < 0 ? 1 : 0;
         if (sign + digits.length() > BYTE_LENGTH) {

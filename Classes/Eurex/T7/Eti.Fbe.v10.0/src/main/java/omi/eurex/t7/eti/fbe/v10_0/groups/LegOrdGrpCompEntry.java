@@ -117,7 +117,6 @@ public final class LegOrdGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += LegPositionEffectField.BYTE_LENGTH;
-        cursor += 5; // padding
 
         return true;
     }
@@ -128,7 +127,7 @@ public final class LegOrdGrpCompEntry implements GroupEntry {
         int cursor = offset;
         cursor = legAccount.encode(data, cursor);
         cursor = legPositionEffect.encode(data, cursor);
-        if (buffer != null && buffer.length >= 3 + 5) {
+        if (buffer != null && buffer.length >= 8) {
             System.arraycopy(buffer, 3, data, cursor, 5); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 5, (byte) 0); // padding

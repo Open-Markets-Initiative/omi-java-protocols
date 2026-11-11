@@ -455,11 +455,8 @@ public final class EnterClipRequest implements Message {
             return false;
         }
         cursor += sideCrossLegGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -475,7 +472,7 @@ public final class EnterClipRequest implements Message {
         noCrossLegs.value((short) sideCrossLegGrpComp.size());
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -495,7 +492,7 @@ public final class EnterClipRequest implements Message {
         cursor = orderQtyDisclosureInstruction.encode(data, cursor);
         cursor = rootPartyContraFirm.encode(data, cursor);
         cursor = rootPartyContraTrader.encode(data, cursor);
-        if (buffer != null && buffer.length >= 70 + 4) {
+        if (buffer != null && buffer.length >= 74) {
             System.arraycopy(buffer, 70, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding
@@ -543,10 +540,7 @@ public final class EnterClipRequest implements Message {
         if (!crossRequestSideGrpComp.isRecognized()) {
             return false;
         }
-        if (!sideCrossLegGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return sideCrossLegGrpComp.isRecognized();
     }
 
     @Override

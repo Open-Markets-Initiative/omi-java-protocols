@@ -136,7 +136,6 @@ public final class InstrumentLegEntry implements GroupEntry {
             return false;
         }
         cursor += MaturityMonthYearField.BYTE_LENGTH;
-        cursor += 8; // padding
 
         return true;
     }
@@ -148,7 +147,7 @@ public final class InstrumentLegEntry implements GroupEntry {
         cursor = instrumentId.encode(data, cursor);
         cursor = legRatioAndSide.encode(data, cursor);
         cursor = maturityMonthYear.encode(data, cursor);
-        if (buffer != null && buffer.length >= 12 + 8) {
+        if (buffer != null && buffer.length >= 20) {
             System.arraycopy(buffer, 12, data, cursor, 8); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 8, (byte) 0); // padding

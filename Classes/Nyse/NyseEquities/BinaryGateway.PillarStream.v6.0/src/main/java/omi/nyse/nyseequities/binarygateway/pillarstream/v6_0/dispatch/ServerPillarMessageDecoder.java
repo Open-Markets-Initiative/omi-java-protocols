@@ -1,7 +1,6 @@
 package omi.nyse.nyseequities.binarygateway.pillarstream.v6_0.dispatch;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import omi.nyse.nyseequities.binarygateway.pillarstream.v6_0.types.ByteOps;
@@ -91,10 +90,8 @@ public final class ServerPillarMessageDecoder {
                 return new Decoded(messages, undecoded, false, trailing, padding);
             }
 
-            int frameEnd = limit;
-
             long msgType = ByteOps.unsigned(data, position + 0, 2, true);
-            Optional<Message> selected = ServerMessageDispatch.decode(msgType, data, position + MESSAGE_HEADER_LENGTH, frameEnd);
+            Optional<Message> selected = ServerMessageDispatch.decode(msgType, data, position + MESSAGE_HEADER_LENGTH, limit);
             if (selected.isPresent()) {
                 Message message = selected.get();
                 if (!message.isDecoded()) {

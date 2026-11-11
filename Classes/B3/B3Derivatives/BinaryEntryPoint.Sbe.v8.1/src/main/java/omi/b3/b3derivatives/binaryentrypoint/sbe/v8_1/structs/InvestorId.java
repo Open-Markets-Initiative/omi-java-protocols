@@ -114,12 +114,7 @@ public final class InvestorId implements GroupEntry {
         }
         cursor += PrefixField.BYTE_LENGTH;
         cursor += 2; // padding
-        if (!document.parse(data, cursor)) {
-            return false;
-        }
-        cursor += DocumentField.BYTE_LENGTH;
-
-        return true;
+        return document.parse(data, cursor);
     }
 
     @Override
@@ -127,7 +122,7 @@ public final class InvestorId implements GroupEntry {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = prefix.encode(data, cursor);
-        if (buffer != null && buffer.length >= 2 + 2) {
+        if (buffer != null && buffer.length >= 4) {
             System.arraycopy(buffer, 2, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

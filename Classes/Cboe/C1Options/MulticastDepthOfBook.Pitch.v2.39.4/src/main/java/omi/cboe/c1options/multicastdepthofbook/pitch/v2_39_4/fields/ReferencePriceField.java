@@ -2,6 +2,7 @@ package omi.cboe.c1options.multicastdepthofbook.pitch.v2_39_4.fields;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.Objects;
 import omi.cboe.c1options.multicastdepthofbook.pitch.v2_39_4.types.ByteOps;
 import omi.cboe.c1options.multicastdepthofbook.pitch.v2_39_4.types.Field;
@@ -59,7 +60,7 @@ public final class ReferencePriceField extends Field {
      */
     public void value(BigDecimal value) {
         this.value = value;
-        this.rawValue = value == null ? 0L : value.setScale(SCALE).unscaledValue().longValueExact();
+        this.rawValue = value == null ? 0L : value.setScale(SCALE, RoundingMode.UNNECESSARY).unscaledValue().longValueExact();
         markSet(value != null);
     }
 

@@ -31,13 +31,6 @@ public final class TerminateMessage implements Message {
     public static final String NAME = "Terminate Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * sessionID
      */
     private final SessionIdField sessionId = new SessionIdField();
@@ -106,7 +99,7 @@ public final class TerminateMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -143,12 +136,7 @@ public final class TerminateMessage implements Message {
             return false;
         }
         cursor += SessionVerIdField.BYTE_LENGTH;
-        if (!terminationCode.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TerminationCodeField.BYTE_LENGTH;
-
-        return true;
+        return terminationCode.parse(data, cursor);
     }
 
     @Override

@@ -269,11 +269,8 @@ public final class PreTradeRiskLimitResponse implements Message {
             return false;
         }
         cursor += riskLimitsRptGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -284,7 +281,7 @@ public final class PreTradeRiskLimitResponse implements Message {
         }
         noRiskLimits.value((short) riskLimitsRptGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -297,7 +294,7 @@ public final class PreTradeRiskLimitResponse implements Message {
         cursor = partyDetailStatus.encode(data, cursor);
         cursor = riskLimitPlatform.encode(data, cursor);
         cursor = partyDetailExecutingUnit.encode(data, cursor);
-        if (buffer != null && buffer.length >= 70 + 4) {
+        if (buffer != null && buffer.length >= 74) {
             System.arraycopy(buffer, 70, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding
@@ -340,10 +337,7 @@ public final class PreTradeRiskLimitResponse implements Message {
                 return false;
             }
         }
-        if (!riskLimitsRptGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return riskLimitsRptGrpComp.isRecognized();
     }
 
     @Override

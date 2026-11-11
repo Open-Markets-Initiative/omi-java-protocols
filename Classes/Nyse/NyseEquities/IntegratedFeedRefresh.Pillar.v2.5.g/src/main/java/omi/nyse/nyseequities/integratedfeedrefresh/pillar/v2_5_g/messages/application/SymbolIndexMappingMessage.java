@@ -357,7 +357,6 @@ public final class SymbolIndexMappingMessage implements Message {
             return false;
         }
         cursor += UnitOfTradeField.BYTE_LENGTH;
-        cursor += 2; // padding
 
         return true;
     }
@@ -368,7 +367,7 @@ public final class SymbolIndexMappingMessage implements Message {
         int cursor = offset;
         cursor = symbolIndex.encode(data, cursor);
         cursor = symbol.encode(data, cursor);
-        if (buffer != null && buffer.length >= 15 + 1) {
+        if (buffer != null && buffer.length >= 16) {
             System.arraycopy(buffer, 15, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
@@ -386,7 +385,7 @@ public final class SymbolIndexMappingMessage implements Message {
         cursor = roundLot.encode(data, cursor);
         cursor = mpv.encode(data, cursor);
         cursor = unitOfTrade.encode(data, cursor);
-        if (buffer != null && buffer.length >= 38 + 2) {
+        if (buffer != null && buffer.length >= 40) {
             System.arraycopy(buffer, 38, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

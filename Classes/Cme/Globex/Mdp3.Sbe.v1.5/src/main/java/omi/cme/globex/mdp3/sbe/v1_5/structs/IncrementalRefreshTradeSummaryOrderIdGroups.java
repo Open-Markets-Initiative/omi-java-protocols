@@ -134,11 +134,8 @@ public final class IncrementalRefreshTradeSummaryOrderIdGroups implements GroupE
             return false;
         }
         cursor += incrementalRefreshTradeSummaryOrderIdGroup.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -188,10 +185,7 @@ public final class IncrementalRefreshTradeSummaryOrderIdGroups implements GroupE
                 return false;
             }
         }
-        if (!incrementalRefreshTradeSummaryOrderIdGroup.isRecognized()) {
-            return false;
-        }
-        return true;
+        return incrementalRefreshTradeSummaryOrderIdGroup.isRecognized();
     }
 
     @Override

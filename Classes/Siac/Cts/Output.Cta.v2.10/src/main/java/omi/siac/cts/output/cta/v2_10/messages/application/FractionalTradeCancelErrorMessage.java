@@ -56,13 +56,6 @@ public final class FractionalTradeCancelErrorMessage implements Message {
     public static final String NAME = "Fractional Trade Cancel Error Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Participant or Processor that generated the message
      */
     private final ParticipantIdField participantId = new ParticipantIdField();
@@ -397,7 +390,7 @@ public final class FractionalTradeCancelErrorMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -510,12 +503,7 @@ public final class FractionalTradeCancelErrorMessage implements Message {
             return false;
         }
         cursor += fractionalConsolidatedData.byteLength();
-        if (!fractionalParticipantData.parseFrom(data, cursor, end)) {
-            return false;
-        }
-        cursor += fractionalParticipantData.byteLength();
-
-        return true;
+        return fractionalParticipantData.parseFrom(data, cursor, end);
     }
 
     @Override

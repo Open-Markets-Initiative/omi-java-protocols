@@ -32,13 +32,6 @@ public final class CancelOrder implements Message {
     public static final String NAME = "Cancel Order";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * The ClOrdId of the original order
      */
     private final OrigClOrdIdField origClOrdId = new OrigClOrdIdField();
@@ -121,7 +114,7 @@ public final class CancelOrder implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -162,12 +155,7 @@ public final class CancelOrder implements Message {
             return false;
         }
         cursor += ManualOrderIndicatorField.BYTE_LENGTH;
-        if (!oeoId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += OeoIdField.BYTE_LENGTH;
-
-        return true;
+        return oeoId.parse(data, cursor);
     }
 
     @Override

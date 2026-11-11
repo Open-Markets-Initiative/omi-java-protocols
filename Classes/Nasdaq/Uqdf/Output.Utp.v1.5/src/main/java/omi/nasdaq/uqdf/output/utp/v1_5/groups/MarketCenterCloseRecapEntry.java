@@ -32,13 +32,6 @@ public final class MarketCenterCloseRecapEntry implements GroupEntry {
     public static final String NAME = "MarketCenterCloseRecap";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Market Center Identifier
      */
     private final MarketCenterIdentifierField marketCenterIdentifier = new MarketCenterIdentifierField();
@@ -130,7 +123,7 @@ public final class MarketCenterCloseRecapEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -170,12 +163,7 @@ public final class MarketCenterCloseRecapEntry implements GroupEntry {
             return false;
         }
         cursor += MarketCenterAskPriceField.BYTE_LENGTH;
-        if (!marketCenterAskSize.parse(data, cursor)) {
-            return false;
-        }
-        cursor += MarketCenterAskSizeField.BYTE_LENGTH;
-
-        return true;
+        return marketCenterAskSize.parse(data, cursor);
     }
 
     @Override

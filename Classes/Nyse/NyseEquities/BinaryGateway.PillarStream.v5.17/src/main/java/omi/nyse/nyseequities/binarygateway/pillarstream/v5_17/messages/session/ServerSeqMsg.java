@@ -326,7 +326,7 @@ public final class ServerSeqMsg implements Message {
         int cursor = offset;
         cursor = msgHeader.encode(data, cursor);
         cursor = seqMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 20 + 4) {
+        if (buffer != null && buffer.length >= 24) {
             System.arraycopy(buffer, 20, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding
@@ -370,10 +370,7 @@ public final class ServerSeqMsg implements Message {
                 return false;
             }
         }
-        if (!serverSequencedMessage.isRecognized()) {
-            return false;
-        }
-        return true;
+        return serverSequencedMessage.isRecognized();
     }
 
     @Override
@@ -424,10 +421,7 @@ public final class ServerSeqMsg implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "Timestamp" -> Optional.of(timestampField);
-            default -> Optional.empty();
-        };
+        return "Timestamp".equals(name) ? Optional.of(timestampField) : Optional.empty();
     }
 
     @Override

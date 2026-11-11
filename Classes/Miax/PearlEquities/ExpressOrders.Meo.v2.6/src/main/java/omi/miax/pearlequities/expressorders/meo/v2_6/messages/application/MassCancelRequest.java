@@ -186,7 +186,6 @@ public final class MassCancelRequest implements Message {
             return false;
         }
         cursor += PurgeGroupField.BYTE_LENGTH;
-        cursor += 9; // padding
 
         return true;
     }
@@ -195,7 +194,7 @@ public final class MassCancelRequest implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 8) {
+        if (buffer != null && buffer.length >= 8) {
             System.arraycopy(buffer, 0, data, cursor, 8); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 8, (byte) 0); // padding
@@ -206,7 +205,7 @@ public final class MassCancelRequest implements Message {
         cursor = scope.encode(data, cursor);
         cursor = action.encode(data, cursor);
         cursor = purgeGroup.encode(data, cursor);
-        if (buffer != null && buffer.length >= 35 + 9) {
+        if (buffer != null && buffer.length >= 44) {
             System.arraycopy(buffer, 35, data, cursor, 9); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 9, (byte) 0); // padding

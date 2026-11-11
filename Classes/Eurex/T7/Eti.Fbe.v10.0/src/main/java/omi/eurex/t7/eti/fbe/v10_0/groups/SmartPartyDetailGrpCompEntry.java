@@ -117,7 +117,6 @@ public final class SmartPartyDetailGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += PartyDetailExecutingTraderField.BYTE_LENGTH;
-        cursor += 5; // padding
 
         return true;
     }
@@ -128,7 +127,7 @@ public final class SmartPartyDetailGrpCompEntry implements GroupEntry {
         int cursor = offset;
         cursor = partyDetailExecutingUnit.encode(data, cursor);
         cursor = partyDetailExecutingTrader.encode(data, cursor);
-        if (buffer != null && buffer.length >= 11 + 5) {
+        if (buffer != null && buffer.length >= 16) {
             System.arraycopy(buffer, 11, data, cursor, 5); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 5, (byte) 0); // padding

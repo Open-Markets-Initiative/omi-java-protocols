@@ -220,12 +220,7 @@ public final class InitialAndImprovementOrderMessage implements Message {
             return false;
         }
         cursor += ImprovementPhaseSequentialNumberField.BYTE_LENGTH;
-        if (!auctionType.parse(data, cursor)) {
-            return false;
-        }
-        cursor += AuctionTypeField.BYTE_LENGTH;
-
-        return true;
+        return auctionType.parse(data, cursor);
     }
 
     @Override

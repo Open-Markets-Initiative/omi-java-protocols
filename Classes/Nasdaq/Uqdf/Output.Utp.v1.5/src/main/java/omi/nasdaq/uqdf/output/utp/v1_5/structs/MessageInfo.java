@@ -32,13 +32,6 @@ public final class MessageInfo implements GroupEntry {
     public static final String NAME = "MessageInfo";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Market Center Originator ID
      */
     private final MarketCenterOriginatorIdField marketCenterOriginatorId = new MarketCenterOriginatorIdField();
@@ -130,7 +123,7 @@ public final class MessageInfo implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -170,12 +163,7 @@ public final class MessageInfo implements GroupEntry {
             return false;
         }
         cursor += ParticipantTimestampField.BYTE_LENGTH;
-        if (!participantToken.parse(data, cursor)) {
-            return false;
-        }
-        cursor += ParticipantTokenField.BYTE_LENGTH;
-
-        return true;
+        return participantToken.parse(data, cursor);
     }
 
     @Override

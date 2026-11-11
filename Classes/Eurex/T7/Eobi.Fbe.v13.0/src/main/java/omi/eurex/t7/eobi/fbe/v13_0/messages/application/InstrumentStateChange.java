@@ -298,7 +298,6 @@ public final class InstrumentStateChange implements Message {
             return false;
         }
         cursor += TesSecurityStatusField.BYTE_LENGTH;
-        cursor += 7; // padding
 
         return true;
     }
@@ -314,7 +313,7 @@ public final class InstrumentStateChange implements Message {
         cursor = fastMarketIndicator.encode(data, cursor);
         cursor = securityTradingEvent.encode(data, cursor);
         cursor = soldOutIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 14 + 2) {
+        if (buffer != null && buffer.length >= 16) {
             System.arraycopy(buffer, 14, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -324,7 +323,7 @@ public final class InstrumentStateChange implements Message {
         cursor = lowPx.encode(data, cursor);
         cursor = transactTime.encode(data, cursor);
         cursor = tesSecurityStatus.encode(data, cursor);
-        if (buffer != null && buffer.length >= 41 + 7) {
+        if (buffer != null && buffer.length >= 48) {
             System.arraycopy(buffer, 41, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

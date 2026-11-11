@@ -182,12 +182,7 @@ public final class RiskResetMessage implements Message {
             return false;
         }
         cursor += RiskRootField.BYTE_LENGTH;
-        if (!customGroupId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += CustomGroupIdField.BYTE_LENGTH;
-
-        return true;
+        return customGroupId.parse(data, cursor);
     }
 
     @Override
@@ -196,7 +191,7 @@ public final class RiskResetMessage implements Message {
         int cursor = offset;
         cursor = riskStatusId.encode(data, cursor);
         cursor = riskReset.encode(data, cursor);
-        if (buffer != null && buffer.length >= 24 + 4) {
+        if (buffer != null && buffer.length >= 28) {
             System.arraycopy(buffer, 24, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

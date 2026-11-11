@@ -2012,11 +2012,8 @@ public final class OrderExecutionMessage implements Message {
             }
             cursor += ExDestinationField.BYTE_LENGTH;
         }
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -2167,7 +2164,7 @@ public final class OrderExecutionMessage implements Message {
         cursor = baseLiquidityIndicator.encode(data, cursor);
         cursor = subLiquidityIndicator.encode(data, cursor);
         cursor = contraBroker.encode(data, cursor);
-        if (buffer != null && buffer.length >= 58 + 1) {
+        if (buffer != null && buffer.length >= 59) {
             System.arraycopy(buffer, 58, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

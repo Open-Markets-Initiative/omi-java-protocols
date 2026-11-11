@@ -204,7 +204,6 @@ public final class SessionConfigurationRequestMessage implements Message {
             return false;
         }
         cursor += BoldDesignationField.BYTE_LENGTH;
-        cursor += 49; // padding
 
         return true;
     }
@@ -219,7 +218,7 @@ public final class SessionConfigurationRequestMessage implements Message {
         cursor = selfTradePrevention.encode(data, cursor);
         cursor = orderPriorityUpdateAckSubscription.encode(data, cursor);
         cursor = boldDesignation.encode(data, cursor);
-        if (buffer != null && buffer.length >= 21 + 49) {
+        if (buffer != null && buffer.length >= 70) {
             System.arraycopy(buffer, 21, data, cursor, 49); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 49, (byte) 0); // padding

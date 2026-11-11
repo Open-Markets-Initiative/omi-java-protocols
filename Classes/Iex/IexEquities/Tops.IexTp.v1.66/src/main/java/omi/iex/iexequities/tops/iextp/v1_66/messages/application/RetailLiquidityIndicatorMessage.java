@@ -36,13 +36,6 @@ public final class RetailLiquidityIndicatorMessage implements Message {
     public static final String NAME = "Retail Liquidity Indicator Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Retail Liquidity Indicator identifier
      */
     private final RetailLiquidityIndicatorField retailLiquidityIndicator = new RetailLiquidityIndicatorField();
@@ -111,7 +104,7 @@ public final class RetailLiquidityIndicatorMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -148,12 +141,7 @@ public final class RetailLiquidityIndicatorMessage implements Message {
             return false;
         }
         cursor += TimestampField.BYTE_LENGTH;
-        if (!symbol.parse(data, cursor)) {
-            return false;
-        }
-        cursor += SymbolField.BYTE_LENGTH;
-
-        return true;
+        return symbol.parse(data, cursor);
     }
 
     @Override

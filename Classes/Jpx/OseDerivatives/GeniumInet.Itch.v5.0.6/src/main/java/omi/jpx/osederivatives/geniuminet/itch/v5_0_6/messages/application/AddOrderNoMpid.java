@@ -42,13 +42,6 @@ public final class AddOrderNoMpid implements Message {
     public static final String NAME = "Add Order No Mpid";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Nanoseconds portion
      */
     private final NanosecondsField nanoseconds = new NanosecondsField();
@@ -201,7 +194,7 @@ public final class AddOrderNoMpid implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -262,12 +255,7 @@ public final class AddOrderNoMpid implements Message {
             return false;
         }
         cursor += OrderAttributesField.BYTE_LENGTH;
-        if (!lotType.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LotTypeField.BYTE_LENGTH;
-
-        return true;
+        return lotType.parse(data, cursor);
     }
 
     @Override

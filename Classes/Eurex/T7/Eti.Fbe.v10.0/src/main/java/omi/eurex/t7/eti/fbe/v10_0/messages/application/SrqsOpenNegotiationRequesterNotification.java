@@ -895,11 +895,8 @@ public final class SrqsOpenNegotiationRequesterNotification implements Message {
             return false;
         }
         cursor += targetPartiesComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -914,7 +911,7 @@ public final class SrqsOpenNegotiationRequesterNotification implements Message {
         noLegs.value((short) quotReqLegsGrpComp.size());
         noTargetPartyIDs.value((short) targetPartiesComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -957,7 +954,7 @@ public final class SrqsOpenNegotiationRequesterNotification implements Message {
         cursor = firmNegotiationId.encode(data, cursor);
         cursor = freeText.encode(data, cursor);
         cursor = partyOrderOriginationTrader.encode(data, cursor);
-        if (buffer != null && buffer.length >= 454 + 4) {
+        if (buffer != null && buffer.length >= 458) {
             System.arraycopy(buffer, 454, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding
@@ -1005,10 +1002,7 @@ public final class SrqsOpenNegotiationRequesterNotification implements Message {
         if (!quotReqLegsGrpComp.isRecognized()) {
             return false;
         }
-        if (!targetPartiesComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return targetPartiesComp.isRecognized();
     }
 
     @Override

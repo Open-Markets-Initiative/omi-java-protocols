@@ -46,13 +46,6 @@ public final class InsideMessage implements Message {
     public static final String NAME = "Inside Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Monotonically increasing message sequence number at the channel level.
      */
     private final ChannelSeqNumField channelSeqNum = new ChannelSeqNumField();
@@ -261,7 +254,7 @@ public final class InsideMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -338,12 +331,7 @@ public final class InsideMessage implements Message {
             return false;
         }
         cursor += AskNumPricedMpField.BYTE_LENGTH;
-        if (!bidNumPricedMp.parse(data, cursor)) {
-            return false;
-        }
-        cursor += BidNumPricedMpField.BYTE_LENGTH;
-
-        return true;
+        return bidNumPricedMp.parse(data, cursor);
     }
 
     @Override

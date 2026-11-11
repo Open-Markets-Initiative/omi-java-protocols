@@ -134,11 +134,8 @@ public final class RelatedSymGroups implements GroupEntry {
             return false;
         }
         cursor += relatedSymGroup.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -188,10 +185,7 @@ public final class RelatedSymGroups implements GroupEntry {
                 return false;
             }
         }
-        if (!relatedSymGroup.isRecognized()) {
-            return false;
-        }
-        return true;
+        return relatedSymGroup.isRecognized();
     }
 
     @Override

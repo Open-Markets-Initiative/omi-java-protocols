@@ -30,13 +30,6 @@ public final class TimeMessage implements Message {
     public static final String NAME = "Time Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Number of whole seconds from midnight Central Time.
      */
     private final TimeReferenceField timeReference = new TimeReferenceField();
@@ -91,7 +84,7 @@ public final class TimeMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -124,12 +117,7 @@ public final class TimeMessage implements Message {
             return false;
         }
         cursor += TimeReferenceField.BYTE_LENGTH;
-        if (!epoch.parse(data, cursor)) {
-            return false;
-        }
-        cursor += EpochField.BYTE_LENGTH;
-
-        return true;
+        return epoch.parse(data, cursor);
     }
 
     @Override

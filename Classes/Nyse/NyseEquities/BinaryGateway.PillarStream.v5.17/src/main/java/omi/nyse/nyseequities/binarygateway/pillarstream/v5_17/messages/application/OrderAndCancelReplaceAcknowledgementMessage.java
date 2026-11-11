@@ -732,10 +732,7 @@ public final class OrderAndCancelReplaceAcknowledgementMessage implements Messag
         if (optionalRoutingStrategyAddOnPresent() && !optionalRoutingStrategyAddOn.isRecognized()) {
             return false;
         }
-        if (optionalSettlementTypeAddOnPresent() && !optionalSettlementTypeAddOn.isRecognized()) {
-            return false;
-        }
-        return true;
+        return !optionalSettlementTypeAddOnPresent() || optionalSettlementTypeAddOn.isRecognized();
     }
 
     @Override

@@ -251,7 +251,7 @@ public final class AddComplexInstrument implements Message {
         cursor = productComplex.encode(data, cursor);
         cursor = impliedMarketIndicator.encode(data, cursor);
         cursor = noLegs.encode(data, cursor);
-        if (buffer != null && buffer.length >= 23 + 1) {
+        if (buffer != null && buffer.length >= 24) {
             System.arraycopy(buffer, 23, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
@@ -293,10 +293,7 @@ public final class AddComplexInstrument implements Message {
                 return false;
             }
         }
-        if (!instrmtLegGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return instrmtLegGrpComp.isRecognized();
     }
 
     @Override

@@ -48,9 +48,6 @@ public enum ExchangeCode {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<ExchangeCode> fromWire(char wire) {
-        return switch (wire) {
-            case 'N' -> Optional.of(NYSE_LISTED_BOND);
-            default -> Optional.empty();
-        };
+        return wire == 'N' ? Optional.of(NYSE_LISTED_BOND) : Optional.empty();
     }
 }

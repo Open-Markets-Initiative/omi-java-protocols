@@ -182,12 +182,7 @@ public final class EstablishRejectMessage implements Message {
         }
         cursor += EstablishmentRejectCodeField.BYTE_LENGTH;
         cursor += 1; // padding
-        if (!lastIncomingSeqNoOptional.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LastIncomingSeqNoOptionalField.BYTE_LENGTH;
-
-        return true;
+        return lastIncomingSeqNoOptional.parse(data, cursor);
     }
 
     @Override
@@ -198,7 +193,7 @@ public final class EstablishRejectMessage implements Message {
         cursor = sessionVerId.encode(data, cursor);
         cursor = requestTimestamp.encode(data, cursor);
         cursor = establishmentRejectCode.encode(data, cursor);
-        if (buffer != null && buffer.length >= 21 + 1) {
+        if (buffer != null && buffer.length >= 22) {
             System.arraycopy(buffer, 21, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

@@ -441,11 +441,8 @@ public final class EnterBasketTradeRequest implements Message {
             return false;
         }
         cursor += basketSideAllocGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -465,7 +462,7 @@ public final class EnterBasketTradeRequest implements Message {
         noBasketSideAlloc.value(basketSideAllocGrpComp.size());
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -483,7 +480,7 @@ public final class EnterBasketTradeRequest implements Message {
         cursor = noInstrmtMatchSides.encode(data, cursor);
         cursor = basketTradeReportText.encode(data, cursor);
         cursor = tradeReportId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 78 + 4) {
+        if (buffer != null && buffer.length >= 82) {
             System.arraycopy(buffer, 78, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding
@@ -536,10 +533,7 @@ public final class EnterBasketTradeRequest implements Message {
         if (!instrmtMatchSideGrpComp.isRecognized()) {
             return false;
         }
-        if (!basketSideAllocGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return basketSideAllocGrpComp.isRecognized();
     }
 
     @Override

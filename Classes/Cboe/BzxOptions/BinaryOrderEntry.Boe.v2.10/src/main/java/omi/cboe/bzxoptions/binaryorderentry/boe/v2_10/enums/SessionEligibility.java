@@ -48,9 +48,6 @@ public enum SessionEligibility {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<SessionEligibility> fromWire(char wire) {
-        return switch (wire) {
-            case 'R' -> Optional.of(RTH);
-            default -> Optional.empty();
-        };
+        return wire == 'R' ? Optional.of(RTH) : Optional.empty();
     }
 }

@@ -299,7 +299,6 @@ public final class ClipDeletionNotification implements Message {
             return false;
         }
         cursor += ExecTypeField.BYTE_LENGTH;
-        cursor += 6; // padding
 
         return true;
     }
@@ -308,7 +307,7 @@ public final class ClipDeletionNotification implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -325,7 +324,7 @@ public final class ClipDeletionNotification implements Message {
         cursor = side.encode(data, cursor);
         cursor = ordStatus.encode(data, cursor);
         cursor = execType.encode(data, cursor);
-        if (buffer != null && buffer.length >= 100 + 6) {
+        if (buffer != null && buffer.length >= 106) {
             System.arraycopy(buffer, 100, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding

@@ -261,7 +261,6 @@ public final class ModifyOrderResponse implements Message {
             return false;
         }
         cursor += ModifyStatusField.BYTE_LENGTH;
-        cursor += 10; // padding
 
         return true;
     }
@@ -279,7 +278,7 @@ public final class ModifyOrderResponse implements Message {
         cursor = leavesQty.encode(data, cursor);
         cursor = price.encode(data, cursor);
         cursor = modifyStatus.encode(data, cursor);
-        if (buffer != null && buffer.length >= 77 + 10) {
+        if (buffer != null && buffer.length >= 87) {
             System.arraycopy(buffer, 77, data, cursor, 10); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 10, (byte) 0); // padding

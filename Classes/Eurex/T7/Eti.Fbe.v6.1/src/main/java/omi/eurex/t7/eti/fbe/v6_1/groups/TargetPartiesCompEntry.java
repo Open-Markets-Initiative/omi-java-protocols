@@ -231,7 +231,6 @@ public final class TargetPartiesCompEntry implements GroupEntry {
             return false;
         }
         cursor += TargetPartyExecutingTraderField.BYTE_LENGTH;
-        cursor += 7; // padding
 
         return true;
     }
@@ -248,7 +247,7 @@ public final class TargetPartiesCompEntry implements GroupEntry {
         cursor = quoteInstruction.encode(data, cursor);
         cursor = targetPartyExecutingFirm.encode(data, cursor);
         cursor = targetPartyExecutingTrader.encode(data, cursor);
-        if (buffer != null && buffer.length >= 17 + 7) {
+        if (buffer != null && buffer.length >= 24) {
             System.arraycopy(buffer, 17, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

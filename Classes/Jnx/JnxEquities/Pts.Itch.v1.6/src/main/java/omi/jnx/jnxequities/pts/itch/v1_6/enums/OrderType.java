@@ -48,9 +48,6 @@ public enum OrderType {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<OrderType> fromWire(char wire) {
-        return switch (wire) {
-            case 'Q' -> Optional.of(DLP_ORDER);
-            default -> Optional.empty();
-        };
+        return wire == 'Q' ? Optional.of(DLP_ORDER) : Optional.empty();
     }
 }

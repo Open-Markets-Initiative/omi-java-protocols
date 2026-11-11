@@ -229,11 +229,8 @@ public final class MassQuoteResponse implements Message {
             return false;
         }
         cursor += quoteEntryAckGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -244,7 +241,7 @@ public final class MassQuoteResponse implements Message {
         }
         noQuoteSideEntries.value((short) quoteEntryAckGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -255,7 +252,7 @@ public final class MassQuoteResponse implements Message {
         cursor = quoteResponseId.encode(data, cursor);
         cursor = marketSegmentId.encode(data, cursor);
         cursor = noQuoteSideEntries.encode(data, cursor);
-        if (buffer != null && buffer.length >= 71 + 3) {
+        if (buffer != null && buffer.length >= 74) {
             System.arraycopy(buffer, 71, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding
@@ -298,10 +295,7 @@ public final class MassQuoteResponse implements Message {
                 return false;
             }
         }
-        if (!quoteEntryAckGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return quoteEntryAckGrpComp.isRecognized();
     }
 
     @Override

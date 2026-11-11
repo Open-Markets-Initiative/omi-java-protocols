@@ -1,10 +1,8 @@
 package omi.nasdaq.nsmequities.totalview.itch.v4_0.dispatch;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import omi.nasdaq.nsmequities.totalview.itch.v4_0.types.ByteOps;
 import omi.nasdaq.nsmequities.totalview.itch.v4_0.types.Message;
 
 /**
@@ -91,10 +89,8 @@ public final class ClientPacketDecoder {
                 return new Decoded(messages, undecoded, false, trailing, padding);
             }
 
-            int frameEnd = limit;
-
             char clientPacketType = (char) (data[position + 2] & 0xFF);
-            Optional<Message> selected = ClientPayloadDispatch.decode(clientPacketType, data, position + MESSAGE_HEADER_LENGTH, frameEnd);
+            Optional<Message> selected = ClientPayloadDispatch.decode(clientPacketType, data, position + MESSAGE_HEADER_LENGTH, limit);
             if (selected.isPresent()) {
                 Message message = selected.get();
                 if (!message.isDecoded()) {

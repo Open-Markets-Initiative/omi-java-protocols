@@ -337,7 +337,6 @@ public final class SrqsUpdateDealStatusRequest implements Message {
             return false;
         }
         cursor += FreeTextField.BYTE_LENGTH;
-        cursor += 3; // padding
 
         return true;
     }
@@ -347,7 +346,7 @@ public final class SrqsUpdateDealStatusRequest implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -365,7 +364,7 @@ public final class SrqsUpdateDealStatusRequest implements Message {
         cursor = partyExecutingFirm.encode(data, cursor);
         cursor = partyExecutingTrader.encode(data, cursor);
         cursor = freeText.encode(data, cursor);
-        if (buffer != null && buffer.length >= 199 + 3) {
+        if (buffer != null && buffer.length >= 202) {
             System.arraycopy(buffer, 199, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding

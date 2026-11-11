@@ -125,12 +125,7 @@ public final class SymbolIndexMappingResponseMessage implements Message {
         }
         cursor += SymbolField2.BYTE_LENGTH;
         cursor += 1; // padding
-        if (!symbolIndex.parse(data, cursor)) {
-            return false;
-        }
-        cursor += SymbolIndexField.BYTE_LENGTH;
-
-        return true;
+        return symbolIndex.parse(data, cursor);
     }
 
     @Override
@@ -138,7 +133,7 @@ public final class SymbolIndexMappingResponseMessage implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = symbol.encode(data, cursor);
-        if (buffer != null && buffer.length >= 11 + 1) {
+        if (buffer != null && buffer.length >= 12) {
             System.arraycopy(buffer, 11, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

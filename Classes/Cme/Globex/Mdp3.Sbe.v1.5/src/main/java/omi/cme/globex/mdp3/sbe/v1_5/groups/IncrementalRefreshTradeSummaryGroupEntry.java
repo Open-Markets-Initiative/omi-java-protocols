@@ -339,7 +339,7 @@ public final class IncrementalRefreshTradeSummaryGroupEntry implements GroupEntr
             cursor = mdUpdateAction.encode(data, cursor);
         }
         if (known >= 32) {
-            if (buffer != null && buffer.length >= 26 + 6) {
+            if (buffer != null && buffer.length >= 32) {
                 System.arraycopy(buffer, 26, data, cursor, 6); // padding
             } else {
                 Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding

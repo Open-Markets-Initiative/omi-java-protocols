@@ -1,10 +1,8 @@
 package omi.miax.pearlequities.depthofmarket.mach.v1_3_d.dispatch;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import omi.miax.pearlequities.depthofmarket.mach.v1_3_d.types.ByteOps;
 import omi.miax.pearlequities.depthofmarket.mach.v1_3_d.types.Message;
 
 /**
@@ -91,10 +89,8 @@ public final class TcpPacketDecoder {
                 return new Decoded(messages, undecoded, false, trailing, padding);
             }
 
-            int frameEnd = limit;
-
             char esesmPacketType = (char) (data[position + 2] & 0xFF);
-            Optional<Message> selected = EsesmPayloadDispatch.decode(esesmPacketType, data, position + MESSAGE_HEADER_LENGTH, frameEnd);
+            Optional<Message> selected = EsesmPayloadDispatch.decode(esesmPacketType, data, position + MESSAGE_HEADER_LENGTH, limit);
             if (selected.isPresent()) {
                 Message message = selected.get();
                 if (!message.isDecoded()) {

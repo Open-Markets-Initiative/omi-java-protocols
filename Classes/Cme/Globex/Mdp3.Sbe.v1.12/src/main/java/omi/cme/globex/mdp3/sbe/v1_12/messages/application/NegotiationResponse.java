@@ -147,7 +147,6 @@ public final class NegotiationResponse implements Message {
             return false;
         }
         cursor += SecretKeySecureIdExpirationField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -159,7 +158,7 @@ public final class NegotiationResponse implements Message {
         cursor = uuid.encode(data, cursor);
         cursor = requestTimestamp.encode(data, cursor);
         cursor = secretKeySecureIdExpiration.encode(data, cursor);
-        if (buffer != null && buffer.length >= 18 + 4) {
+        if (buffer != null && buffer.length >= 22) {
             System.arraycopy(buffer, 18, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

@@ -28,13 +28,6 @@ public final class RiskGroupIDsEntry implements GroupEntry {
     public static final String NAME = "RiskGroupIDs";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Risk Group Id
      */
     private final RiskGroupIdField riskGroupId = new RiskGroupIdField();
@@ -70,7 +63,7 @@ public final class RiskGroupIDsEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -94,12 +87,7 @@ public final class RiskGroupIDsEntry implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!riskGroupId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += RiskGroupIdField.BYTE_LENGTH;
-
-        return true;
+        return riskGroupId.parse(data, cursor);
     }
 
     @Override
@@ -186,10 +174,7 @@ public final class RiskGroupIDsEntry implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "RiskGroupId" -> Optional.of(riskGroupId);
-            default -> Optional.empty();
-        };
+        return "RiskGroupId".equals(name) ? Optional.of(riskGroupId) : Optional.empty();
     }
 
     @Override

@@ -47,13 +47,6 @@ public final class EnterOrderMessage implements Message {
     public static final String NAME = "Enter Order Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Must be unique per Ouch account within a trading day and increase on each subsequent transaction
      */
     private final OrderTokenField orderToken = new OrderTokenField();
@@ -276,7 +269,7 @@ public final class EnterOrderMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -357,12 +350,7 @@ public final class EnterOrderMessage implements Message {
             return false;
         }
         cursor += OrderClassificationField.BYTE_LENGTH;
-        if (!cashMarginType.parse(data, cursor)) {
-            return false;
-        }
-        cursor += CashMarginTypeField.BYTE_LENGTH;
-
-        return true;
+        return cashMarginType.parse(data, cursor);
     }
 
     @Override

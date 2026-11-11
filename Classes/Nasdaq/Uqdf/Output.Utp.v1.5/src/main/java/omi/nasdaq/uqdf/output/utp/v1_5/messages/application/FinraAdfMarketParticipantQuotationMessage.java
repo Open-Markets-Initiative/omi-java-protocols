@@ -43,13 +43,6 @@ public final class FinraAdfMarketParticipantQuotationMessage implements Message 
     public static final String NAME = "Finra Adf Market Participant Quotation Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * FINRA Timestamp
      */
     private final FinraTimestampField finraTimestamp = new FinraTimestampField();
@@ -202,7 +195,7 @@ public final class FinraAdfMarketParticipantQuotationMessage implements Message 
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -263,12 +256,7 @@ public final class FinraAdfMarketParticipantQuotationMessage implements Message 
             return false;
         }
         cursor += QuoteConditionField.BYTE_LENGTH;
-        if (!finraMarketParticipant.parse(data, cursor)) {
-            return false;
-        }
-        cursor += FinraMarketParticipantField.BYTE_LENGTH;
-
-        return true;
+        return finraMarketParticipant.parse(data, cursor);
     }
 
     @Override

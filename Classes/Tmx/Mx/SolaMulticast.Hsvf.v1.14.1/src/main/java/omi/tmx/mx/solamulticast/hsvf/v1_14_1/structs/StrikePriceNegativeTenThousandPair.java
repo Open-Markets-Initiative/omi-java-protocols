@@ -29,13 +29,6 @@ public final class StrikePriceNegativeTenThousandPair implements GroupEntry {
     public static final String NAME = "StrikePriceNegativeTenThousandPair";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Strike price of the option in full
      */
     private final RawStrikePriceField rawStrikePrice = new RawStrikePriceField();
@@ -85,7 +78,7 @@ public final class StrikePriceNegativeTenThousandPair implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class StrikePriceNegativeTenThousandPair implements GroupEntry {
             return false;
         }
         cursor += RawStrikePriceField.BYTE_LENGTH;
-        if (!strikePriceFractionIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += StrikePriceFractionIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return strikePriceFractionIndicator.parse(data, cursor);
     }
 
     @Override

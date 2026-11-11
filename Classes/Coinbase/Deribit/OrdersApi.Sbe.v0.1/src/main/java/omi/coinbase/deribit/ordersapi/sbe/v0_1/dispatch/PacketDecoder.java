@@ -91,10 +91,8 @@ public final class PacketDecoder {
                 return new Decoded(messages, undecoded, false, trailing, padding);
             }
 
-            int frameEnd = limit;
-
             long templateId = ByteOps.unsigned(data, position + 4, 2, true);
-            Optional<Message> selected = PayloadDispatch.decode(templateId, data, position + MESSAGE_HEADER_LENGTH, frameEnd);
+            Optional<Message> selected = PayloadDispatch.decode(templateId, data, position + MESSAGE_HEADER_LENGTH, limit);
             if (selected.isPresent()) {
                 Message message = selected.get();
                 if (!message.isDecoded()) {
@@ -102,13 +100,13 @@ public final class PacketDecoder {
                 }
                 messages.add(message);
                 int consumed = position + MESSAGE_HEADER_LENGTH + message.byteLength();
-                if (consumed < frameEnd) {
-                    padding.add(new Trailing(message, Arrays.copyOfRange(data, consumed, frameEnd)));
+                if (consumed < limit) {
+                    padding.add(new Trailing(message, Arrays.copyOfRange(data, consumed, limit)));
                 }
             } else {
                 undecoded++;
             }
-            position = frameEnd;
+            position = limit;
         }
 
         return new Decoded(messages, undecoded, position == limit, trailing, padding);

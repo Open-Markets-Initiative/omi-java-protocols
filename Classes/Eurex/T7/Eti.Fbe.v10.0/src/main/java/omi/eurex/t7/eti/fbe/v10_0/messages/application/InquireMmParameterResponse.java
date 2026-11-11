@@ -157,7 +157,7 @@ public final class InquireMmParameterResponse implements Message {
         cursor += 1;
         runs.add(cursor).add(3);
         cursor += 3;
-        cursor = mmParameterGrpComp.padding(runs, cursor);
+        cursor += mmParameterGrpComp.byteLength();
         return cursor;
     }
 
@@ -209,11 +209,8 @@ public final class InquireMmParameterResponse implements Message {
             return false;
         }
         cursor += mmParameterGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -224,7 +221,7 @@ public final class InquireMmParameterResponse implements Message {
         }
         noMmParameters.value((short) mmParameterGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -234,7 +231,7 @@ public final class InquireMmParameterResponse implements Message {
         cursor = mmParameterReportId.encode(data, cursor);
         cursor = marketSegmentId.encode(data, cursor);
         cursor = noMmParameters.encode(data, cursor);
-        if (buffer != null && buffer.length >= 63 + 3) {
+        if (buffer != null && buffer.length >= 66) {
             System.arraycopy(buffer, 63, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding
@@ -277,10 +274,7 @@ public final class InquireMmParameterResponse implements Message {
                 return false;
             }
         }
-        if (!mmParameterGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return mmParameterGrpComp.isRecognized();
     }
 
     @Override

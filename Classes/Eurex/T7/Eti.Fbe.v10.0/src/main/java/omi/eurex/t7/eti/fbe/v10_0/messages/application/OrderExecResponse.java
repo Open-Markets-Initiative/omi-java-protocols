@@ -641,11 +641,8 @@ public final class OrderExecResponse implements Message {
             return false;
         }
         cursor += orderEventGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -664,7 +661,7 @@ public final class OrderExecResponse implements Message {
         noLegExecs.value(instrmntLegExecGrpComp.size());
         noOrderEvents.value((short) orderEventGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -693,7 +690,7 @@ public final class OrderExecResponse implements Message {
         cursor = transactionDelayIndicator.encode(data, cursor);
         cursor = noFills.encode(data, cursor);
         cursor = noOrderEvents.encode(data, cursor);
-        if (buffer != null && buffer.length >= 163 + 7) {
+        if (buffer != null && buffer.length >= 170) {
             System.arraycopy(buffer, 163, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding
@@ -746,10 +743,7 @@ public final class OrderExecResponse implements Message {
         if (!instrmntLegExecGrpComp.isRecognized()) {
             return false;
         }
-        if (!orderEventGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return orderEventGrpComp.isRecognized();
     }
 
     @Override

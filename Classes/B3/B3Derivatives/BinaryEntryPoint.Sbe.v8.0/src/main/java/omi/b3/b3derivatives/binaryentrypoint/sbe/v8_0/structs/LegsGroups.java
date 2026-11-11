@@ -134,11 +134,8 @@ public final class LegsGroups implements GroupEntry {
             return false;
         }
         cursor += legsGroup.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -188,10 +185,7 @@ public final class LegsGroups implements GroupEntry {
                 return false;
             }
         }
-        if (!legsGroup.isRecognized()) {
-            return false;
-        }
-        return true;
+        return legsGroup.isRecognized();
     }
 
     @Override

@@ -44,13 +44,6 @@ public final class AllocationReportMessage implements Message {
     public static final String NAME = "Allocation Report Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * allocID
      */
     private final AllocIdField allocId = new AllocIdField();
@@ -287,7 +280,7 @@ public final class AllocationReportMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -372,12 +365,7 @@ public final class AllocationReportMessage implements Message {
             return false;
         }
         cursor += SenderLocationField.BYTE_LENGTH;
-        if (!enteringTrader.parse(data, cursor)) {
-            return false;
-        }
-        cursor += EnteringTraderField.BYTE_LENGTH;
-
-        return true;
+        return enteringTrader.parse(data, cursor);
     }
 
     @Override

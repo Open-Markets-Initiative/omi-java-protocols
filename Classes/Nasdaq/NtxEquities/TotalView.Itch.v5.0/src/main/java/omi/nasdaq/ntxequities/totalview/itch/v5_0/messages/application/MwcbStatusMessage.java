@@ -37,13 +37,6 @@ public final class MwcbStatusMessage implements Message {
     public static final String NAME = "Mwcb Status Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Always 0
      */
     private final StockLocateField stockLocate = new StockLocateField();
@@ -126,7 +119,7 @@ public final class MwcbStatusMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -167,12 +160,7 @@ public final class MwcbStatusMessage implements Message {
             return false;
         }
         cursor += TimestampField.BYTE_LENGTH;
-        if (!breachedLevel.parse(data, cursor)) {
-            return false;
-        }
-        cursor += BreachedLevelField.BYTE_LENGTH;
-
-        return true;
+        return breachedLevel.parse(data, cursor);
     }
 
     @Override

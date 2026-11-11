@@ -156,7 +156,6 @@ public final class InstrmtLegGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += LegSideField.BYTE_LENGTH;
-        cursor += 3; // padding
 
         return true;
     }
@@ -166,7 +165,7 @@ public final class InstrmtLegGrpCompEntry implements GroupEntry {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = legSymbol.encode(data, cursor);
-        if (buffer != null && buffer.length >= 4 + 4) {
+        if (buffer != null && buffer.length >= 8) {
             System.arraycopy(buffer, 4, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding
@@ -175,7 +174,7 @@ public final class InstrmtLegGrpCompEntry implements GroupEntry {
         cursor = legSecurityId.encode(data, cursor);
         cursor = legRatioQty.encode(data, cursor);
         cursor = legSide.encode(data, cursor);
-        if (buffer != null && buffer.length >= 21 + 3) {
+        if (buffer != null && buffer.length >= 24) {
             System.arraycopy(buffer, 21, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding

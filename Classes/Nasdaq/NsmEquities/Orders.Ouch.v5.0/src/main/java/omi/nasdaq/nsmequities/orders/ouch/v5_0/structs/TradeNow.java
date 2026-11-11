@@ -28,13 +28,6 @@ public final class TradeNow implements GroupEntry {
     public static final String NAME = "TradeNow";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * TradeNow
      */
     private final TradeNowField tradeNow = new TradeNowField();
@@ -70,7 +63,7 @@ public final class TradeNow implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -94,12 +87,7 @@ public final class TradeNow implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!tradeNow.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TradeNowField.BYTE_LENGTH;
-
-        return true;
+        return tradeNow.parse(data, cursor);
     }
 
     @Override
@@ -186,10 +174,7 @@ public final class TradeNow implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "TradeNow" -> Optional.of(tradeNow);
-            default -> Optional.empty();
-        };
+        return "TradeNow".equals(name) ? Optional.of(tradeNow) : Optional.empty();
     }
 
     @Override

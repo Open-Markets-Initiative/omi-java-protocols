@@ -245,12 +245,7 @@ public final class SymbolUpdateMessage implements Message {
             return false;
         }
         cursor += ClosingTimeField.BYTE_LENGTH;
-        if (!primaryMarketCode.parse(data, cursor)) {
-            return false;
-        }
-        cursor += PrimaryMarketCodeField.BYTE_LENGTH;
-
-        return true;
+        return primaryMarketCode.parse(data, cursor);
     }
 
     @Override
@@ -260,14 +255,14 @@ public final class SymbolUpdateMessage implements Message {
         cursor = nanoseconds.encode(data, cursor);
         cursor = symbolId.encode(data, cursor);
         cursor = tickerSymbol.encode(data, cursor);
-        if (buffer != null && buffer.length >= 19 + 1) {
+        if (buffer != null && buffer.length >= 20) {
             System.arraycopy(buffer, 19, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
         }
         cursor += 1;
         cursor = testSecurityIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 21 + 1) {
+        if (buffer != null && buffer.length >= 22) {
             System.arraycopy(buffer, 21, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

@@ -231,7 +231,6 @@ public final class NrResponseHeaderMeComp implements GroupEntry {
             return false;
         }
         cursor += LastFragmentField.BYTE_LENGTH;
-        cursor += 3; // padding
 
         return true;
     }
@@ -248,7 +247,7 @@ public final class NrResponseHeaderMeComp implements GroupEntry {
         cursor = sendingTime.encode(data, cursor);
         cursor = msgSeqNum.encode(data, cursor);
         cursor = lastFragment.encode(data, cursor);
-        if (buffer != null && buffer.length >= 53 + 3) {
+        if (buffer != null && buffer.length >= 56) {
             System.arraycopy(buffer, 53, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding

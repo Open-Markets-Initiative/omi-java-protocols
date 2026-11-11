@@ -1,6 +1,7 @@
 package omi.asx.asxderivatives.ntp.itch.v1_05.fields;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 import omi.asx.asxderivatives.ntp.itch.v1_05.types.ByteOps;
 import omi.asx.asxderivatives.ntp.itch.v1_05.types.Field;
@@ -58,7 +59,7 @@ public final class EtrUpperPriceField extends Field {
      */
     public void value(BigDecimal value) {
         this.value = value;
-        this.rawValue = value == null ? 0L : value.setScale(SCALE).unscaledValue().longValueExact();
+        this.rawValue = value == null ? 0L : value.setScale(SCALE, RoundingMode.UNNECESSARY).unscaledValue().longValueExact();
         markSet(value != null);
     }
 

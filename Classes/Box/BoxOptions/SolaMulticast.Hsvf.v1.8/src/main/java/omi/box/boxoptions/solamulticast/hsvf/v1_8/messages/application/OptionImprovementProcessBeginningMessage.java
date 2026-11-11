@@ -319,7 +319,6 @@ public final class OptionImprovementProcessBeginningMessage implements Message {
             return false;
         }
         cursor += AuctionTypeField.BYTE_LENGTH;
-        cursor += 1; // padding
 
         return true;
     }
@@ -340,7 +339,7 @@ public final class OptionImprovementProcessBeginningMessage implements Message {
         cursor = minimumQuantityForImprovementOrder.encode(data, cursor);
         cursor = percentageAssuredToInitialOrder.encode(data, cursor);
         cursor = auctionType.encode(data, cursor);
-        if (buffer != null && buffer.length >= 72 + 1) {
+        if (buffer != null && buffer.length >= 73) {
             System.arraycopy(buffer, 72, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

@@ -133,12 +133,7 @@ public final class WideOffer implements GroupEntry {
         }
         cursor += WideOfferSizeField.BYTE_LENGTH;
         cursor += 4; // padding
-        if (!offerCondition.parse(data, cursor)) {
-            return false;
-        }
-        cursor += OfferConditionField.BYTE_LENGTH;
-
-        return true;
+        return offerCondition.parse(data, cursor);
     }
 
     @Override
@@ -147,7 +142,7 @@ public final class WideOffer implements GroupEntry {
         int cursor = offset;
         cursor = wideOfferPrice.encode(data, cursor);
         cursor = wideOfferSize.encode(data, cursor);
-        if (buffer != null && buffer.length >= 12 + 4) {
+        if (buffer != null && buffer.length >= 16) {
             System.arraycopy(buffer, 12, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

@@ -34,13 +34,6 @@ public final class OrderDeleteMessage implements Message {
     public static final String NAME = "Order Delete Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * The unique reference number assigned to the new order. The order reference number is increasing, but not necessarily sequential.
      */
     private final OrderReferenceNumberField orderReferenceNumber = new OrderReferenceNumberField();
@@ -81,7 +74,7 @@ public final class OrderDeleteMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -110,12 +103,7 @@ public final class OrderDeleteMessage implements Message {
         }
 
         int cursor = offset;
-        if (!orderReferenceNumber.parse(data, cursor)) {
-            return false;
-        }
-        cursor += OrderReferenceNumberField.BYTE_LENGTH;
-
-        return true;
+        return orderReferenceNumber.parse(data, cursor);
     }
 
     @Override
@@ -202,10 +190,7 @@ public final class OrderDeleteMessage implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "OrderReferenceNumber" -> Optional.of(orderReferenceNumber);
-            default -> Optional.empty();
-        };
+        return "OrderReferenceNumber".equals(name) ? Optional.of(orderReferenceNumber) : Optional.empty();
     }
 
     @Override

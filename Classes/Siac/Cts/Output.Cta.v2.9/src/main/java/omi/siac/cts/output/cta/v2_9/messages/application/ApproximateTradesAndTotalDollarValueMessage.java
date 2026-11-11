@@ -41,13 +41,6 @@ public final class ApproximateTradesAndTotalDollarValueMessage implements Messag
     public static final String NAME = "Approximate Trades And Total Dollar Value Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Participant or Processor that generated the message
      */
     private final ParticipantIdField participantId = new ParticipantIdField();
@@ -172,7 +165,7 @@ public final class ApproximateTradesAndTotalDollarValueMessage implements Messag
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -225,12 +218,7 @@ public final class ApproximateTradesAndTotalDollarValueMessage implements Messag
             return false;
         }
         cursor += TotalTradesField.BYTE_LENGTH;
-        if (!dollarValue.parse(data, cursor)) {
-            return false;
-        }
-        cursor += DollarValueField.BYTE_LENGTH;
-
-        return true;
+        return dollarValue.parse(data, cursor);
     }
 
     @Override

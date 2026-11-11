@@ -35,13 +35,6 @@ public final class QuoteCancelAckEntriesGroupEntry implements GroupEntry {
     public static final String NAME = "QuoteCancelAckEntriesGroup";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Unique identifier for a quote. The QuoteEntryID stays with the quote as a static identifier even if the quote is updated. For fills this value is transposed into client order ID (tag 11)
      */
     private final QuoteEntryIdField quoteEntryId = new QuoteEntryIdField();
@@ -145,7 +138,7 @@ public final class QuoteCancelAckEntriesGroupEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override

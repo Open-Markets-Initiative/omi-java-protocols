@@ -48,9 +48,6 @@ public enum EquityAndIndexEndOfDaySummaryMessageType {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<EquityAndIndexEndOfDaySummaryMessageType> fromWire(char wire) {
-        return switch (wire) {
-            case ' ' -> Optional.of(EQUITY_AND_INDEX_END_OF_DAY_SUMMARY);
-            default -> Optional.empty();
-        };
+        return wire == ' ' ? Optional.of(EQUITY_AND_INDEX_END_OF_DAY_SUMMARY) : Optional.empty();
     }
 }

@@ -48,9 +48,6 @@ public enum EnableOrderEntryRequestOptionalField {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<EnableOrderEntryRequestOptionalField> fromWire(short wire) {
-        return switch (wire) {
-            case 28 -> Optional.of(USERREFIDX);
-            default -> Optional.empty();
-        };
+        return wire == 28 ? Optional.of(USERREFIDX) : Optional.empty();
     }
 }

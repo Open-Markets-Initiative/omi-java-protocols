@@ -28,13 +28,6 @@ public final class AiqStrategy implements GroupEntry {
     public static final String NAME = "AiqStrategy";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * AIQ strategy used on the cancelled order.
      */
     private final AiqStrategyField aiqStrategy = new AiqStrategyField();
@@ -70,7 +63,7 @@ public final class AiqStrategy implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -94,12 +87,7 @@ public final class AiqStrategy implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!aiqStrategy.parse(data, cursor)) {
-            return false;
-        }
-        cursor += AiqStrategyField.BYTE_LENGTH;
-
-        return true;
+        return aiqStrategy.parse(data, cursor);
     }
 
     @Override
@@ -186,10 +174,7 @@ public final class AiqStrategy implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "AiqStrategy" -> Optional.of(aiqStrategy);
-            default -> Optional.empty();
-        };
+        return "AiqStrategy".equals(name) ? Optional.of(aiqStrategy) : Optional.empty();
     }
 
     @Override

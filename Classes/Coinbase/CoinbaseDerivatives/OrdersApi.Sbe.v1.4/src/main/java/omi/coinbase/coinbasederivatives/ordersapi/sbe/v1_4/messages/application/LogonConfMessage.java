@@ -29,13 +29,6 @@ public final class LogonConfMessage implements Message {
     public static final String NAME = "Logon Conf Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * heartbeatIntervalSeconds
      */
     private final HeartbeatIntervalSecondsField heartbeatIntervalSeconds = new HeartbeatIntervalSecondsField();
@@ -76,7 +69,7 @@ public final class LogonConfMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -105,12 +98,7 @@ public final class LogonConfMessage implements Message {
         }
 
         int cursor = offset;
-        if (!heartbeatIntervalSeconds.parse(data, cursor)) {
-            return false;
-        }
-        cursor += HeartbeatIntervalSecondsField.BYTE_LENGTH;
-
-        return true;
+        return heartbeatIntervalSeconds.parse(data, cursor);
     }
 
     @Override
@@ -197,10 +185,7 @@ public final class LogonConfMessage implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "HeartbeatIntervalSeconds" -> Optional.of(heartbeatIntervalSeconds);
-            default -> Optional.empty();
-        };
+        return "HeartbeatIntervalSeconds".equals(name) ? Optional.of(heartbeatIntervalSeconds) : Optional.empty();
     }
 
     @Override

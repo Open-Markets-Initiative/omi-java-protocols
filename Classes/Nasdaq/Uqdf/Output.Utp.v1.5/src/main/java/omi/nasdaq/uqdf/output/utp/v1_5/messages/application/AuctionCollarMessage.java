@@ -41,13 +41,6 @@ public final class AuctionCollarMessage implements Message {
     public static final String NAME = "Auction Collar Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Security Identifier
      */
     private final SymbolLongField symbolLong = new SymbolLongField();
@@ -172,7 +165,7 @@ public final class AuctionCollarMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -225,12 +218,7 @@ public final class AuctionCollarMessage implements Message {
             return false;
         }
         cursor += CollarDownPriceField.BYTE_LENGTH;
-        if (!collarExtensionIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += CollarExtensionIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return collarExtensionIndicator.parse(data, cursor);
     }
 
     @Override

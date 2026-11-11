@@ -166,11 +166,8 @@ public final class ForcedLogoutNotification implements Message {
             return false;
         }
         cursor += varText.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -181,7 +178,7 @@ public final class ForcedLogoutNotification implements Message {
         }
         varTextLen.value((varText.byteLength()));
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -189,7 +186,7 @@ public final class ForcedLogoutNotification implements Message {
         cursor += 2;
         cursor = notifHeaderComp.encode(data, cursor);
         cursor = varTextLen.encode(data, cursor);
-        if (buffer != null && buffer.length >= 12 + 6) {
+        if (buffer != null && buffer.length >= 18) {
             System.arraycopy(buffer, 12, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding

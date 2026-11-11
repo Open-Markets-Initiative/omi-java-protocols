@@ -152,12 +152,7 @@ public final class OrderDetailsComp implements GroupEntry {
         }
         cursor += SideField.BYTE_LENGTH;
         cursor += 3; // padding
-        if (!price.parse(data, cursor)) {
-            return false;
-        }
-        cursor += PriceField.BYTE_LENGTH;
-
-        return true;
+        return price.parse(data, cursor);
     }
 
     @Override
@@ -167,7 +162,7 @@ public final class OrderDetailsComp implements GroupEntry {
         cursor = trdRegTsTimePriority.encode(data, cursor);
         cursor = displayQty.encode(data, cursor);
         cursor = side.encode(data, cursor);
-        if (buffer != null && buffer.length >= 13 + 3) {
+        if (buffer != null && buffer.length >= 16) {
             System.arraycopy(buffer, 13, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding

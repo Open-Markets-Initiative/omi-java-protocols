@@ -261,7 +261,6 @@ public final class QuoteMessage implements Message {
             return false;
         }
         cursor += RpiIndicatorField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -279,7 +278,7 @@ public final class QuoteMessage implements Message {
         cursor = bidVolume.encode(data, cursor);
         cursor = quoteCondition.encode(data, cursor);
         cursor = rpiIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 30 + 4) {
+        if (buffer != null && buffer.length >= 34) {
             System.arraycopy(buffer, 30, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

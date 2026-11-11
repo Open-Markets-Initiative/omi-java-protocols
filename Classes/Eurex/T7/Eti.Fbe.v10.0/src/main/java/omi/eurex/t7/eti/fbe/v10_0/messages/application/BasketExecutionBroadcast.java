@@ -349,11 +349,8 @@ public final class BasketExecutionBroadcast implements Message {
             return false;
         }
         cursor += basketExecGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -364,7 +361,7 @@ public final class BasketExecutionBroadcast implements Message {
         }
         noInstrmtMatchSides.value((short) basketExecGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -381,7 +378,7 @@ public final class BasketExecutionBroadcast implements Message {
         cursor = noInstrmtMatchSides.encode(data, cursor);
         cursor = messageEventSource.encode(data, cursor);
         cursor = basketSideTradeReportId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 87 + 3) {
+        if (buffer != null && buffer.length >= 90) {
             System.arraycopy(buffer, 87, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding
@@ -424,10 +421,7 @@ public final class BasketExecutionBroadcast implements Message {
                 return false;
             }
         }
-        if (!basketExecGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return basketExecGrpComp.isRecognized();
     }
 
     @Override

@@ -281,7 +281,6 @@ public final class ModifyOrderRequestMessage implements Message {
             return false;
         }
         cursor += LocateAccountField.BYTE_LENGTH;
-        cursor += 28; // padding
 
         return true;
     }
@@ -290,7 +289,7 @@ public final class ModifyOrderRequestMessage implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 8) {
+        if (buffer != null && buffer.length >= 8) {
             System.arraycopy(buffer, 0, data, cursor, 8); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 8, (byte) 0); // padding
@@ -306,7 +305,7 @@ public final class ModifyOrderRequestMessage implements Message {
         cursor = minQty.encode(data, cursor);
         cursor = maxFloorQty.encode(data, cursor);
         cursor = locateAccount.encode(data, cursor);
-        if (buffer != null && buffer.length >= 81 + 28) {
+        if (buffer != null && buffer.length >= 109) {
             System.arraycopy(buffer, 81, data, cursor, 28); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 28, (byte) 0); // padding

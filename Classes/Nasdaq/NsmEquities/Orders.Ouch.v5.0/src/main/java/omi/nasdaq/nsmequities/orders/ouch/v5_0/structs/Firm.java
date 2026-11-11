@@ -28,13 +28,6 @@ public final class Firm implements GroupEntry {
     public static final String NAME = "Firm";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * This field should contain all caps. Firm identifier for the order entry firm. One logical OUCH account can potentially enter orders for multiple firms in a Service Bureau configuration.
      */
     private final FirmField firm = new FirmField();
@@ -70,7 +63,7 @@ public final class Firm implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -94,12 +87,7 @@ public final class Firm implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!firm.parse(data, cursor)) {
-            return false;
-        }
-        cursor += FirmField.BYTE_LENGTH;
-
-        return true;
+        return firm.parse(data, cursor);
     }
 
     @Override
@@ -186,10 +174,7 @@ public final class Firm implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "Firm" -> Optional.of(firm);
-            default -> Optional.empty();
-        };
+        return "Firm".equals(name) ? Optional.of(firm) : Optional.empty();
     }
 
     @Override

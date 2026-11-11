@@ -1,7 +1,6 @@
 package omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.dispatch;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.types.ByteOps;
@@ -91,10 +90,8 @@ public final class PacketDecoder {
                 return new Decoded(messages, undecoded, false, trailing, padding);
             }
 
-            int frameEnd = limit;
-
             long templateId = ByteOps.unsigned(data, position + 6, 2, true);
-            Optional<Message> selected = PayloadDispatch.decode(templateId, data, position + MESSAGE_HEADER_LENGTH, frameEnd);
+            Optional<Message> selected = PayloadDispatch.decode(templateId, data, position + MESSAGE_HEADER_LENGTH, limit);
             if (selected.isPresent()) {
                 Message message = selected.get();
                 if (!message.isDecoded()) {

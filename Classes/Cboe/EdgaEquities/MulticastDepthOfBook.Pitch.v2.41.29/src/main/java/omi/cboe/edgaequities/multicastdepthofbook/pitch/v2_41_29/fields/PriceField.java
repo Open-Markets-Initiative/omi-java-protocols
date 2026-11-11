@@ -2,6 +2,7 @@ package omi.cboe.edgaequities.multicastdepthofbook.pitch.v2_41_29.fields;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.Objects;
 import omi.cboe.edgaequities.multicastdepthofbook.pitch.v2_41_29.types.ByteOps;
 import omi.cboe.edgaequities.multicastdepthofbook.pitch.v2_41_29.types.Field;
@@ -59,7 +60,7 @@ public final class PriceField extends Field {
      */
     public void value(BigDecimal value) {
         this.value = value;
-        this.rawValue = value == null ? 0L : value.setScale(SCALE).unscaledValue().longValueExact();
+        this.rawValue = value == null ? 0L : value.setScale(SCALE, RoundingMode.UNNECESSARY).unscaledValue().longValueExact();
         markSet(value != null);
     }
 

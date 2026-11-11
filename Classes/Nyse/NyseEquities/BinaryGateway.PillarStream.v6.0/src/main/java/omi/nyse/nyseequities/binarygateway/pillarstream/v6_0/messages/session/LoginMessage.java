@@ -34,13 +34,6 @@ public final class LoginMessage implements Message {
     public static final String NAME = "Login Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Unique identifier of the gateway session – SenderCompID.
      */
     private final UsernameField username = new UsernameField();
@@ -137,7 +130,7 @@ public final class LoginMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -182,12 +175,7 @@ public final class LoginMessage implements Message {
             return false;
         }
         cursor += MicField.BYTE_LENGTH;
-        if (!version.parse(data, cursor)) {
-            return false;
-        }
-        cursor += VersionField.BYTE_LENGTH;
-
-        return true;
+        return version.parse(data, cursor);
     }
 
     @Override

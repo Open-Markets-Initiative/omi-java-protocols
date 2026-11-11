@@ -98,7 +98,6 @@ public final class SrqsRelatedTradeIdGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += SrqsRelatedTradeIdField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -108,7 +107,7 @@ public final class SrqsRelatedTradeIdGrpCompEntry implements GroupEntry {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = srqsRelatedTradeId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 4 + 4) {
+        if (buffer != null && buffer.length >= 8) {
             System.arraycopy(buffer, 4, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding
@@ -193,10 +192,7 @@ public final class SrqsRelatedTradeIdGrpCompEntry implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "SrqsRelatedTradeId" -> Optional.of(srqsRelatedTradeId);
-            default -> Optional.empty();
-        };
+        return "SrqsRelatedTradeId".equals(name) ? Optional.of(srqsRelatedTradeId) : Optional.empty();
     }
 
     @Override

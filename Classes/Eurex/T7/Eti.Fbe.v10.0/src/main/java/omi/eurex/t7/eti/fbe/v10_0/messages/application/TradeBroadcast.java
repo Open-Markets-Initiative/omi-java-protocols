@@ -1306,7 +1306,6 @@ public final class TradeBroadcast implements Message {
             return false;
         }
         cursor += RootPartyIdExecutionVenueField.BYTE_LENGTH;
-        cursor += 2; // padding
 
         return true;
     }
@@ -1315,7 +1314,7 @@ public final class TradeBroadcast implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -1385,7 +1384,7 @@ public final class TradeBroadcast implements Message {
         cursor = rootPartyClearingFirm.encode(data, cursor);
         cursor = regulatoryTradeId.encode(data, cursor);
         cursor = rootPartyIdExecutionVenue.encode(data, cursor);
-        if (buffer != null && buffer.length >= 408 + 2) {
+        if (buffer != null && buffer.length >= 410) {
             System.arraycopy(buffer, 408, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

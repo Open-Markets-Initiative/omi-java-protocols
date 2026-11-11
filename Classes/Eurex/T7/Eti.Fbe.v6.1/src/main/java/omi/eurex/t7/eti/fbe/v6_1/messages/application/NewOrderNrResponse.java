@@ -299,7 +299,6 @@ public final class NewOrderNrResponse implements Message {
             return false;
         }
         cursor += TriggeredField.BYTE_LENGTH;
-        cursor += 1; // padding
 
         return true;
     }
@@ -308,7 +307,7 @@ public final class NewOrderNrResponse implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -325,7 +324,7 @@ public final class NewOrderNrResponse implements Message {
         cursor = crossedIndicator.encode(data, cursor);
         cursor = productComplex.encode(data, cursor);
         cursor = triggered.encode(data, cursor);
-        if (buffer != null && buffer.length >= 97 + 1) {
+        if (buffer != null && buffer.length >= 98) {
             System.arraycopy(buffer, 97, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

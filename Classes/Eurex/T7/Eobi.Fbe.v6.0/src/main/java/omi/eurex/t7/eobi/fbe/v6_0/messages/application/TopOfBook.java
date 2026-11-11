@@ -30,13 +30,6 @@ public final class TopOfBook implements Message {
     public static final String NAME = "Top Of Book";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Matching-engine transaction time in nanoseconds since Unix epoch
      */
     private final TransactTimeField transactTime = new TransactTimeField();
@@ -119,7 +112,7 @@ public final class TopOfBook implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -160,12 +153,7 @@ public final class TopOfBook implements Message {
             return false;
         }
         cursor += BidPxField.BYTE_LENGTH;
-        if (!offerPx.parse(data, cursor)) {
-            return false;
-        }
-        cursor += OfferPxField.BYTE_LENGTH;
-
-        return true;
+        return offerPx.parse(data, cursor);
     }
 
     @Override

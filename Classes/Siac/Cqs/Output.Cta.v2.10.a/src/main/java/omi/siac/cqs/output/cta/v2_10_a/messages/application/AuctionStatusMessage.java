@@ -49,13 +49,6 @@ public final class AuctionStatusMessage implements Message {
     public static final String NAME = "Auction Status Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Identifies the Participant or Processor that generated the message
      */
     private final ParticipantIdField participantId = new ParticipantIdField();
@@ -292,7 +285,7 @@ public final class AuctionStatusMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -377,12 +370,7 @@ public final class AuctionStatusMessage implements Message {
             return false;
         }
         cursor += FinancialStatusIndicatorField.BYTE_LENGTH;
-        if (!reserved.parse(data, cursor)) {
-            return false;
-        }
-        cursor += ReservedField.BYTE_LENGTH;
-
-        return true;
+        return reserved.parse(data, cursor);
     }
 
     @Override

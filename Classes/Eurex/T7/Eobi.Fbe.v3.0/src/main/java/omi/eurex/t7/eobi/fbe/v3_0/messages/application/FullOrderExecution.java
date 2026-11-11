@@ -218,12 +218,7 @@ public final class FullOrderExecution implements Message {
             return false;
         }
         cursor += LastQtyField.BYTE_LENGTH;
-        if (!lastPx.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LastPxField.BYTE_LENGTH;
-
-        return true;
+        return lastPx.parse(data, cursor);
     }
 
     @Override
@@ -231,7 +226,7 @@ public final class FullOrderExecution implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = side.encode(data, cursor);
-        if (buffer != null && buffer.length >= 1 + 7) {
+        if (buffer != null && buffer.length >= 8) {
             System.arraycopy(buffer, 1, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

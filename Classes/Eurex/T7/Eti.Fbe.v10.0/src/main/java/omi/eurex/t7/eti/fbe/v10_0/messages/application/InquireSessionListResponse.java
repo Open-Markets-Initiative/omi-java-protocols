@@ -169,11 +169,8 @@ public final class InquireSessionListResponse implements Message {
             return false;
         }
         cursor += sessionsGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -184,7 +181,7 @@ public final class InquireSessionListResponse implements Message {
         }
         noSessions.value(sessionsGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -192,7 +189,7 @@ public final class InquireSessionListResponse implements Message {
         cursor += 2;
         cursor = responseHeaderComp.encode(data, cursor);
         cursor = noSessions.encode(data, cursor);
-        if (buffer != null && buffer.length >= 28 + 6) {
+        if (buffer != null && buffer.length >= 34) {
             System.arraycopy(buffer, 28, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding
@@ -235,10 +232,7 @@ public final class InquireSessionListResponse implements Message {
                 return false;
             }
         }
-        if (!sessionsGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return sessionsGrpComp.isRecognized();
     }
 
     @Override
@@ -296,10 +290,7 @@ public final class InquireSessionListResponse implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "NoSessions" -> Optional.of(noSessions);
-            default -> Optional.empty();
-        };
+        return "NoSessions".equals(name) ? Optional.of(noSessions) : Optional.empty();
     }
 
     @Override

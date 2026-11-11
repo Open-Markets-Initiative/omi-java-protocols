@@ -184,11 +184,8 @@ public final class MdIncrementalRefreshTradeSummary implements Message {
             return false;
         }
         cursor += incrementalRefreshTradeSummaryOrderIdGroups.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -197,7 +194,7 @@ public final class MdIncrementalRefreshTradeSummary implements Message {
         int cursor = offset;
         cursor = transactTime.encode(data, cursor);
         cursor = matchEventIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 9 + 2) {
+        if (buffer != null && buffer.length >= 11) {
             System.arraycopy(buffer, 9, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -244,10 +241,7 @@ public final class MdIncrementalRefreshTradeSummary implements Message {
         if (!incrementalRefreshTradeSummaryGroups.isRecognized()) {
             return false;
         }
-        if (!incrementalRefreshTradeSummaryOrderIdGroups.isRecognized()) {
-            return false;
-        }
-        return true;
+        return incrementalRefreshTradeSummaryOrderIdGroups.isRecognized();
     }
 
     @Override

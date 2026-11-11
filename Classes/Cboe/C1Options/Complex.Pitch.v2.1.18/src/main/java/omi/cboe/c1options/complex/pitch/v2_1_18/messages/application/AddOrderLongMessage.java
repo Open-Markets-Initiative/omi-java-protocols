@@ -204,7 +204,6 @@ public final class AddOrderLongMessage implements Message {
             return false;
         }
         cursor += PriceField.BYTE_LENGTH;
-        cursor += 1; // padding
 
         return true;
     }
@@ -219,7 +218,7 @@ public final class AddOrderLongMessage implements Message {
         cursor = quantity.encode(data, cursor);
         cursor = complexInstrumentId.encode(data, cursor);
         cursor = price.encode(data, cursor);
-        if (buffer != null && buffer.length >= 31 + 1) {
+        if (buffer != null && buffer.length >= 32) {
             System.arraycopy(buffer, 31, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

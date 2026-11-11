@@ -48,9 +48,6 @@ public enum CorrectedSaleCondition1 {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<CorrectedSaleCondition1> fromWire(char wire) {
-        return switch (wire) {
-            case '@' -> Optional.of(REGULAR);
-            default -> Optional.empty();
-        };
+        return wire == '@' ? Optional.of(REGULAR) : Optional.empty();
     }
 }

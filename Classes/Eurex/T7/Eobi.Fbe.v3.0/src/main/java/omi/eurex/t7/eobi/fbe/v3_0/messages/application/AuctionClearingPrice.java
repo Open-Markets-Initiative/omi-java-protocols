@@ -29,13 +29,6 @@ public final class AuctionClearingPrice implements Message {
     public static final String NAME = "Auction Clearing Price";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Matching-engine transaction time in nanoseconds since Unix epoch
      */
     private final TransactTimeField transactTime = new TransactTimeField();
@@ -104,7 +97,7 @@ public final class AuctionClearingPrice implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -141,12 +134,7 @@ public final class AuctionClearingPrice implements Message {
             return false;
         }
         cursor += SecurityIdField.BYTE_LENGTH;
-        if (!lastPx.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LastPxField.BYTE_LENGTH;
-
-        return true;
+        return lastPx.parse(data, cursor);
     }
 
     @Override

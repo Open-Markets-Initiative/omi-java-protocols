@@ -39,13 +39,6 @@ public final class SnapshotFullRefreshOrdersMbO71MessageNoMDEntriesGroupEntry im
     public static final String NAME = "SnapshotFullRefreshOrdersMbO71MessageNoMDEntriesGroup";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * mDEntryPx
      */
     private final MdCorporateOffsetPriceOptionalField mdCorporateOffsetPriceOptional = new MdCorporateOffsetPriceOptionalField();
@@ -217,7 +210,7 @@ public final class SnapshotFullRefreshOrdersMbO71MessageNoMDEntriesGroupEntry im
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override

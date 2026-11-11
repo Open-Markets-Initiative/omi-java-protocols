@@ -333,7 +333,7 @@ public final class DeleteAllOrderBroadcast implements Message {
         cursor += 1;
         cursor += 1;
         cursor += 1;
-        cursor = notAffectedOrdersGrpComp.padding(runs, cursor);
+        cursor += notAffectedOrdersGrpComp.byteLength();
         cursor = affectedOrderRequestsGrpComp.padding(runs, cursor);
         return cursor;
     }
@@ -432,11 +432,8 @@ public final class DeleteAllOrderBroadcast implements Message {
             return false;
         }
         cursor += affectedOrderRequestsGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -451,7 +448,7 @@ public final class DeleteAllOrderBroadcast implements Message {
         noNotAffectedOrders.value(notAffectedOrdersGrpComp.size());
         noAffectedOrderRequests.value(affectedOrderRequestsGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -513,10 +510,7 @@ public final class DeleteAllOrderBroadcast implements Message {
         if (!notAffectedOrdersGrpComp.isRecognized()) {
             return false;
         }
-        if (!affectedOrderRequestsGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return affectedOrderRequestsGrpComp.isRecognized();
     }
 
     @Override

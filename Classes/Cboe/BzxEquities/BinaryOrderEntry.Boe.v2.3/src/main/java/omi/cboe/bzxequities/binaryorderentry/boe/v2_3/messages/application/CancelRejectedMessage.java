@@ -1342,11 +1342,8 @@ public final class CancelRejectedMessage implements Message {
             }
             cursor += StopPxField.BYTE_LENGTH;
         }
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -1447,7 +1444,7 @@ public final class CancelRejectedMessage implements Message {
         cursor = clOrdId.encode(data, cursor);
         cursor = cancelRejectReason.encode(data, cursor);
         cursor = text.encode(data, cursor);
-        if (buffer != null && buffer.length >= 89 + 1) {
+        if (buffer != null && buffer.length >= 90) {
             System.arraycopy(buffer, 89, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

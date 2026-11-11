@@ -105,19 +105,14 @@ public final class UnsubscribeResponse implements Message {
 
         int cursor = offset;
         cursor += 2; // padding
-        if (!responseHeaderComp.parseFrom(data, cursor, end)) {
-            return false;
-        }
-        cursor += responseHeaderComp.byteLength();
-
-        return true;
+        return responseHeaderComp.parseFrom(data, cursor, end);
     }
 
     @Override
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

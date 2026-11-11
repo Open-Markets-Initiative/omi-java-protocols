@@ -212,7 +212,6 @@ public final class OrderBookItemGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += MdSubBookTypeField.BYTE_LENGTH;
-        cursor += 6; // padding
 
         return true;
     }
@@ -228,7 +227,7 @@ public final class OrderBookItemGrpCompEntry implements GroupEntry {
         cursor = bestOfferSize.encode(data, cursor);
         cursor = mdBookType.encode(data, cursor);
         cursor = mdSubBookType.encode(data, cursor);
-        if (buffer != null && buffer.length >= 42 + 6) {
+        if (buffer != null && buffer.length >= 48) {
             System.arraycopy(buffer, 42, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding

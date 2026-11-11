@@ -240,7 +240,6 @@ public final class TopOfBook implements Message {
             return false;
         }
         cursor += NumberOfSellOrdersField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -257,7 +256,7 @@ public final class TopOfBook implements Message {
         cursor = offerSize.encode(data, cursor);
         cursor = numberOfBuyOrders.encode(data, cursor);
         cursor = numberOfSellOrders.encode(data, cursor);
-        if (buffer != null && buffer.length >= 52 + 4) {
+        if (buffer != null && buffer.length >= 56) {
             System.arraycopy(buffer, 52, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

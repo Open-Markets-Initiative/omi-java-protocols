@@ -34,13 +34,6 @@ public final class SystemEventMessage implements Message {
     public static final String NAME = "System Event Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * See System Event Codes.
      */
     private final EventCodeField eventCode = new EventCodeField();
@@ -81,7 +74,7 @@ public final class SystemEventMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -110,12 +103,7 @@ public final class SystemEventMessage implements Message {
         }
 
         int cursor = offset;
-        if (!eventCode.parse(data, cursor)) {
-            return false;
-        }
-        cursor += EventCodeField.BYTE_LENGTH;
-
-        return true;
+        return eventCode.parse(data, cursor);
     }
 
     @Override
@@ -202,10 +190,7 @@ public final class SystemEventMessage implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "EventCode" -> Optional.of(eventCode);
-            default -> Optional.empty();
-        };
+        return "EventCode".equals(name) ? Optional.of(eventCode) : Optional.empty();
     }
 
     @Override

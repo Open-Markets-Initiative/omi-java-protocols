@@ -37,13 +37,6 @@ public final class IncrementalRefreshLimitsBandingGroupEntry implements GroupEnt
     public static final String NAME = "IncrementalRefreshLimitsBandingGroup";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Upper price threshold for the instrument
      */
     private final HighLimitPriceExField highLimitPriceEx = new HighLimitPriceExField();
@@ -181,7 +174,7 @@ public final class IncrementalRefreshLimitsBandingGroupEntry implements GroupEnt
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override

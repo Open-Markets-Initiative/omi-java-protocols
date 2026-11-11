@@ -29,13 +29,6 @@ public final class SequenceNumberResetMessage implements Message {
     public static final String NAME = "Sequence Number Reset Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * The sequence number that will follow in the next packet. Always = 2.
      */
     private final NextSequenceNumberField nextSequenceNumber = new NextSequenceNumberField();
@@ -76,7 +69,7 @@ public final class SequenceNumberResetMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -105,12 +98,7 @@ public final class SequenceNumberResetMessage implements Message {
         }
 
         int cursor = offset;
-        if (!nextSequenceNumber.parse(data, cursor)) {
-            return false;
-        }
-        cursor += NextSequenceNumberField.BYTE_LENGTH;
-
-        return true;
+        return nextSequenceNumber.parse(data, cursor);
     }
 
     @Override
@@ -197,10 +185,7 @@ public final class SequenceNumberResetMessage implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "NextSequenceNumber" -> Optional.of(nextSequenceNumber);
-            default -> Optional.empty();
-        };
+        return "NextSequenceNumber".equals(name) ? Optional.of(nextSequenceNumber) : Optional.empty();
     }
 
     @Override

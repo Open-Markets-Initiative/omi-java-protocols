@@ -218,12 +218,7 @@ public final class ComplexCubeRfqMessage implements Message {
             return false;
         }
         cursor += VolumeField.BYTE_LENGTH;
-        if (!price.parse(data, cursor)) {
-            return false;
-        }
-        cursor += PriceField.BYTE_LENGTH;
-
-        return true;
+        return price.parse(data, cursor);
     }
 
     @Override
@@ -235,7 +230,7 @@ public final class ComplexCubeRfqMessage implements Message {
         cursor = complexIndex.encode(data, cursor);
         cursor = symbolSeqNum.encode(data, cursor);
         cursor = side.encode(data, cursor);
-        if (buffer != null && buffer.length >= 17 + 1) {
+        if (buffer != null && buffer.length >= 18) {
             System.arraycopy(buffer, 17, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

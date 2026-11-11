@@ -273,7 +273,7 @@ public final class CrossSidesGroupEntry implements GroupEntry {
             cursor = side.encode(data, cursor);
         }
         if (known >= 2) {
-            if (buffer != null && buffer.length >= 1 + 1) {
+            if (buffer != null && buffer.length >= 2) {
                 System.arraycopy(buffer, 1, data, cursor, 1); // padding
             } else {
                 Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

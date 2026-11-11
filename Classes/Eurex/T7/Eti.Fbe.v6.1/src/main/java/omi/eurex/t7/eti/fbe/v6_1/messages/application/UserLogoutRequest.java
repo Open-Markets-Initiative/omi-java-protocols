@@ -147,7 +147,6 @@ public final class UserLogoutRequest implements Message {
             return false;
         }
         cursor += UsernameField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -157,7 +156,7 @@ public final class UserLogoutRequest implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -165,7 +164,7 @@ public final class UserLogoutRequest implements Message {
         cursor += 2;
         cursor = requestHeaderComp.encode(data, cursor);
         cursor = username.encode(data, cursor);
-        if (buffer != null && buffer.length >= 22 + 4) {
+        if (buffer != null && buffer.length >= 26) {
             System.arraycopy(buffer, 22, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

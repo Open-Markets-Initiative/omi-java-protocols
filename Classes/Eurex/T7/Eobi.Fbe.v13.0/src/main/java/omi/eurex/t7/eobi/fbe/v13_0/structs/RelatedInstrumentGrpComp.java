@@ -28,13 +28,6 @@ public final class RelatedInstrumentGrpComp implements GroupEntry {
     public static final String NAME = "RelatedInstrumentGrpComp";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Related Security Id
      */
     private final RelatedSecurityIdField relatedSecurityId = new RelatedSecurityIdField();
@@ -70,7 +63,7 @@ public final class RelatedInstrumentGrpComp implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -94,12 +87,7 @@ public final class RelatedInstrumentGrpComp implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!relatedSecurityId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += RelatedSecurityIdField.BYTE_LENGTH;
-
-        return true;
+        return relatedSecurityId.parse(data, cursor);
     }
 
     @Override
@@ -186,10 +174,7 @@ public final class RelatedInstrumentGrpComp implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "RelatedSecurityId" -> Optional.of(relatedSecurityId);
-            default -> Optional.empty();
-        };
+        return "RelatedSecurityId".equals(name) ? Optional.of(relatedSecurityId) : Optional.empty();
     }
 
     @Override

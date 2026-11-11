@@ -240,12 +240,7 @@ public final class SecurityGroupPhase10Message implements Message {
             return false;
         }
         cursor += TradSesOpenTimeField.BYTE_LENGTH;
-        if (!transactTime.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TransactTimeField.BYTE_LENGTH;
-
-        return true;
+        return transactTime.parse(data, cursor);
     }
 
     @Override
@@ -253,7 +248,7 @@ public final class SecurityGroupPhase10Message implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = securityGroup.encode(data, cursor);
-        if (buffer != null && buffer.length >= 3 + 5) {
+        if (buffer != null && buffer.length >= 8) {
             System.arraycopy(buffer, 3, data, cursor, 5); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 5, (byte) 0); // padding
@@ -264,7 +259,7 @@ public final class SecurityGroupPhase10Message implements Message {
         cursor = tradingSessionSubId.encode(data, cursor);
         cursor = securityTradingEvent.encode(data, cursor);
         cursor = tradeDate.encode(data, cursor);
-        if (buffer != null && buffer.length >= 14 + 2) {
+        if (buffer != null && buffer.length >= 16) {
             System.arraycopy(buffer, 14, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

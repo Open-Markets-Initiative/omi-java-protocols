@@ -162,19 +162,14 @@ public final class SrqsQuoteResponse implements Message {
             return false;
         }
         cursor += NegotiationIdField.BYTE_LENGTH;
-        if (!quoteReqId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += QuoteReqIdField.BYTE_LENGTH;
-
-        return true;
+        return quoteReqId.parse(data, cursor);
     }
 
     @Override
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

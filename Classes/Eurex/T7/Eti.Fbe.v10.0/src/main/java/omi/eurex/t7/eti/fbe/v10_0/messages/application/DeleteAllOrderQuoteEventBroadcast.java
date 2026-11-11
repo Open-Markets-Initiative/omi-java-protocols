@@ -204,7 +204,6 @@ public final class DeleteAllOrderQuoteEventBroadcast implements Message {
             return false;
         }
         cursor += ExecInstField.BYTE_LENGTH;
-        cursor += 2; // padding
 
         return true;
     }
@@ -213,7 +212,7 @@ public final class DeleteAllOrderQuoteEventBroadcast implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -225,7 +224,7 @@ public final class DeleteAllOrderQuoteEventBroadcast implements Message {
         cursor = marketSegmentId.encode(data, cursor);
         cursor = massActionReason.encode(data, cursor);
         cursor = execInst.encode(data, cursor);
-        if (buffer != null && buffer.length >= 80 + 2) {
+        if (buffer != null && buffer.length >= 82) {
             System.arraycopy(buffer, 80, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

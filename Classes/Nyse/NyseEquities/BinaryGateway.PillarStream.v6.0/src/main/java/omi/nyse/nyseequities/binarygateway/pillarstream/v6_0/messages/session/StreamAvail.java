@@ -33,13 +33,6 @@ public final class StreamAvail implements Message {
     public static final String NAME = "Stream Avail";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Next sequence number
      */
     private final NextSeqField nextSeq = new NextSeqField();
@@ -122,7 +115,7 @@ public final class StreamAvail implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -163,12 +156,7 @@ public final class StreamAvail implements Message {
             return false;
         }
         cursor += NextSeqField.BYTE_LENGTH;
-        if (!access.parse(data, cursor)) {
-            return false;
-        }
-        cursor += AccessField.BYTE_LENGTH;
-
-        return true;
+        return access.parse(data, cursor);
     }
 
     @Override

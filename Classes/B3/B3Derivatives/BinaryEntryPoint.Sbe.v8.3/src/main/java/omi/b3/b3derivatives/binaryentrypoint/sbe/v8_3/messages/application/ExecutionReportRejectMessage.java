@@ -555,9 +555,9 @@ public final class ExecutionReportRejectMessage implements Message {
         cursor += InvestorId.BYTE_LENGTH;
         cursor += 4;
         cursor += 4;
-        cursor = deskId.padding(runs, cursor);
-        cursor = memo.padding(runs, cursor);
-        cursor = text.padding(runs, cursor);
+        cursor += deskId.byteLength();
+        cursor += memo.byteLength();
+        cursor += text.byteLength();
         return cursor;
     }
 
@@ -714,11 +714,8 @@ public final class ExecutionReportRejectMessage implements Message {
             return false;
         }
         cursor += text.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -748,7 +745,7 @@ public final class ExecutionReportRejectMessage implements Message {
         cursor = crossidOptional.encode(data, cursor);
         cursor = crossedIndicator.encode(data, cursor);
         cursor = receivedTime.encode(data, cursor);
-        if (buffer != null && buffer.length >= 146 + 3) {
+        if (buffer != null && buffer.length >= 149) {
             System.arraycopy(buffer, 146, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding

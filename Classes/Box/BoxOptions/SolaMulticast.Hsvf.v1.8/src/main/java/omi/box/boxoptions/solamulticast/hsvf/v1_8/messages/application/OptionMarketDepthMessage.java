@@ -155,7 +155,7 @@ public final class OptionMarketDepthMessage implements Message {
         cursor += InstrumentDescription.BYTE_LENGTH;
         cursor += 1;
         cursor += 1;
-        cursor = marketDepthLevel.padding(runs, cursor);
+        cursor += marketDepthLevel.byteLength();
         return cursor;
     }
 
@@ -208,11 +208,8 @@ public final class OptionMarketDepthMessage implements Message {
             return false;
         }
         cursor += marketDepthLevel.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -264,10 +261,7 @@ public final class OptionMarketDepthMessage implements Message {
                 return false;
             }
         }
-        if (!marketDepthLevel.isRecognized()) {
-            return false;
-        }
-        return true;
+        return marketDepthLevel.isRecognized();
     }
 
     @Override

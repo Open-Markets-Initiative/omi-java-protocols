@@ -296,12 +296,7 @@ public final class ComplexOrderInstrumentTradeMessage implements Message {
             return false;
         }
         cursor += TimestampField.BYTE_LENGTH;
-        if (!priceIndicatorMarker.parse(data, cursor)) {
-            return false;
-        }
-        cursor += PriceIndicatorMarkerField.BYTE_LENGTH;
-
-        return true;
+        return priceIndicatorMarker.parse(data, cursor);
     }
 
     @Override
@@ -317,7 +312,7 @@ public final class ComplexOrderInstrumentTradeMessage implements Message {
         cursor = netChangeSign.encode(data, cursor);
         cursor = netChange.encode(data, cursor);
         cursor = netChangeFractionIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 55 + 6) {
+        if (buffer != null && buffer.length >= 61) {
             System.arraycopy(buffer, 55, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding

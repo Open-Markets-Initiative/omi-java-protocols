@@ -35,13 +35,6 @@ public final class RepoRelatedInstrumentsGroupEntry implements GroupEntry {
     public static final String NAME = "RepoRelatedInstrumentsGroup";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Related Security ID
      */
     private final RelatedSecurityIdField relatedSecurityId = new RelatedSecurityIdField();
@@ -145,7 +138,7 @@ public final class RepoRelatedInstrumentsGroupEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override

@@ -142,11 +142,8 @@ public final class FullUpdateMessage implements Message {
             return false;
         }
         cursor += fullUpdateMessageBody.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -194,10 +191,7 @@ public final class FullUpdateMessage implements Message {
                 return false;
             }
         }
-        if (!fullUpdateMessageBody.isRecognized()) {
-            return false;
-        }
-        return true;
+        return fullUpdateMessageBody.isRecognized();
     }
 
     @Override
@@ -252,10 +246,7 @@ public final class FullUpdateMessage implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "UpdateSize" -> Optional.of(updateSize);
-            default -> Optional.empty();
-        };
+        return "UpdateSize".equals(name) ? Optional.of(updateSize) : Optional.empty();
     }
 
     @Override

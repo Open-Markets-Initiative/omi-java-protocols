@@ -465,11 +465,8 @@ public final class LongEquityAndIndexQuoteMessage implements Message {
             }
             cursor += bestBidAndOfferAppendage.byteLength();
         }
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -480,7 +477,7 @@ public final class LongEquityAndIndexQuoteMessage implements Message {
         cursor = transactionId.encode(data, cursor);
         cursor = participantReferenceNumber.encode(data, cursor);
         cursor = securitySymbol.encode(data, cursor);
-        if (buffer != null && buffer.length >= 14 + 1) {
+        if (buffer != null && buffer.length >= 15) {
             System.arraycopy(buffer, 14, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
@@ -544,10 +541,7 @@ public final class LongEquityAndIndexQuoteMessage implements Message {
         if (bestOfferAppendagePresent() && !bestOfferAppendage.isRecognized()) {
             return false;
         }
-        if (bestBidAndOfferAppendagePresent() && !bestBidAndOfferAppendage.isRecognized()) {
-            return false;
-        }
-        return true;
+        return !bestBidAndOfferAppendagePresent() || bestBidAndOfferAppendage.isRecognized();
     }
 
     @Override

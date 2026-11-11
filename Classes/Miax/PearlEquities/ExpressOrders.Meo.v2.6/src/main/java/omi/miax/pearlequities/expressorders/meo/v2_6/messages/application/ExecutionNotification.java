@@ -432,7 +432,6 @@ public final class ExecutionNotification implements Message {
             return false;
         }
         cursor += ExecutingTradingCenterMpidField.BYTE_LENGTH;
-        cursor += 12; // padding
 
         return true;
     }
@@ -459,7 +458,7 @@ public final class ExecutionNotification implements Message {
         cursor = originalOrderCapacity.encode(data, cursor);
         cursor = additionalLiquidityIndicator.encode(data, cursor);
         cursor = executingTradingCenterMpid.encode(data, cursor);
-        if (buffer != null && buffer.length >= 90 + 12) {
+        if (buffer != null && buffer.length >= 102) {
             System.arraycopy(buffer, 90, data, cursor, 12); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 12, (byte) 0); // padding

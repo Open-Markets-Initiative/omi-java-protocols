@@ -189,11 +189,8 @@ public final class InquireEnrichmentRuleIdListResponse implements Message {
             return false;
         }
         cursor += enrichmentRulesGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -204,7 +201,7 @@ public final class InquireEnrichmentRuleIdListResponse implements Message {
         }
         noEnrichmentRules.value(enrichmentRulesGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -213,7 +210,7 @@ public final class InquireEnrichmentRuleIdListResponse implements Message {
         cursor = responseHeaderComp.encode(data, cursor);
         cursor = lastEntityProcessed.encode(data, cursor);
         cursor = noEnrichmentRules.encode(data, cursor);
-        if (buffer != null && buffer.length >= 44 + 6) {
+        if (buffer != null && buffer.length >= 50) {
             System.arraycopy(buffer, 44, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding
@@ -256,10 +253,7 @@ public final class InquireEnrichmentRuleIdListResponse implements Message {
                 return false;
             }
         }
-        if (!enrichmentRulesGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return enrichmentRulesGrpComp.isRecognized();
     }
 
     @Override

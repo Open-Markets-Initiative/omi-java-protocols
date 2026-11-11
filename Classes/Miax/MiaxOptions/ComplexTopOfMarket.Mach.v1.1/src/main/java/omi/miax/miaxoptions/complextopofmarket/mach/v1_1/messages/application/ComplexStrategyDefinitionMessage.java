@@ -252,11 +252,8 @@ public final class ComplexStrategyDefinitionMessage implements Message {
             return false;
         }
         cursor += legDefinition.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -271,14 +268,14 @@ public final class ComplexStrategyDefinitionMessage implements Message {
         cursor = strategyId.encode(data, cursor);
         cursor = underlyingSymbol.encode(data, cursor);
         cursor = activeOnMiax.encode(data, cursor);
-        if (buffer != null && buffer.length >= 20 + 1) {
+        if (buffer != null && buffer.length >= 21) {
             System.arraycopy(buffer, 20, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
         }
         cursor += 1;
         cursor = updateReason.encode(data, cursor);
-        if (buffer != null && buffer.length >= 22 + 10) {
+        if (buffer != null && buffer.length >= 32) {
             System.arraycopy(buffer, 22, data, cursor, 10); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 10, (byte) 0); // padding
@@ -321,10 +318,7 @@ public final class ComplexStrategyDefinitionMessage implements Message {
                 return false;
             }
         }
-        if (!legDefinition.isRecognized()) {
-            return false;
-        }
-        return true;
+        return legDefinition.isRecognized();
     }
 
     @Override

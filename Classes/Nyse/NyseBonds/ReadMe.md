@@ -7,7 +7,7 @@ A division of [New York Stock Exchange](..).
 
 | [Protocol][Omi.Nyse.Protocol.Definitions] | [Encoding][Omi.Encoding.Definitions] | Version | Date | Size | [Deployment][Omi.Glossary.Deployment] | [Testing][Omi.Glossary.Testing] | [Documentation][Omi.Nyse.Specifications] |
 | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| [DepthOfBook][Nyse.NyseBonds.DepthOfBook] | [Abp][Omi.Encoding.Abp] | [4.01.b][Nyse.NyseBonds.DepthOfBook.Abp.v4.01.b.Parser] | 10/13/2015 | 13,575 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Nyse.NyseBonds.DepthOfBook.Abp.v4.01.b.Url] |
+| [DepthOfBook][Nyse.NyseBonds.DepthOfBook] | [Abp][Omi.Encoding.Abp] | [4.01.b][Nyse.NyseBonds.DepthOfBook.Abp.v4.01.b.Parser] | 10/13/2015 | 13,388 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Nyse.NyseBonds.DepthOfBook.Abp.v4.01.b.Url] |
 
 
 <p align="center"><a href="https://www.nyse.com" title="New York Stock Exchange Website"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Website.png" alt="Website" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://www.linkedin.com/company/nyse" title="New York Stock Exchange on LinkedIn"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/LinkedIn.png" alt="LinkedIn" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://en.wikipedia.org/wiki/New_York_Stock_Exchange" title="New York Stock Exchange on Wikipedia"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Wikipedia.png" alt="Wikipedia" width="32" height="32"></a></p>

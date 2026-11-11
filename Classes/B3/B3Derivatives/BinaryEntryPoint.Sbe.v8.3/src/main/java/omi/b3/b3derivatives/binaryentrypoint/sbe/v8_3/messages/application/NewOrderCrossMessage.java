@@ -313,8 +313,8 @@ public final class NewOrderCrossMessage implements Message {
         cursor += 1;
         cursor += 8;
         cursor = crossSidesGroups.padding(runs, cursor);
-        cursor = deskId.padding(runs, cursor);
-        cursor = memo.padding(runs, cursor);
+        cursor += deskId.byteLength();
+        cursor += memo.byteLength();
         return cursor;
     }
 
@@ -411,11 +411,8 @@ public final class NewOrderCrossMessage implements Message {
             return false;
         }
         cursor += memo.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -423,7 +420,7 @@ public final class NewOrderCrossMessage implements Message {
         Objects.checkFromIndexSize(offset, byteLength(), data.length);
         int cursor = offset;
         cursor = inboundBusinessHeader.encode(data, cursor);
-        if (buffer != null && buffer.length >= 18 + 2) {
+        if (buffer != null && buffer.length >= 20) {
             System.arraycopy(buffer, 18, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -481,10 +478,7 @@ public final class NewOrderCrossMessage implements Message {
                 return false;
             }
         }
-        if (!crossSidesGroups.isRecognized()) {
-            return false;
-        }
-        return true;
+        return crossSidesGroups.isRecognized();
     }
 
     @Override

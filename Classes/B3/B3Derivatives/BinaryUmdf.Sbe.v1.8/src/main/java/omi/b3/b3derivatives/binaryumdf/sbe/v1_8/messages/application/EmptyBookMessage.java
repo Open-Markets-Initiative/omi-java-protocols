@@ -144,12 +144,7 @@ public final class EmptyBookMessage implements Message {
         }
         cursor += MatchEventIndicatorField.BYTE_LENGTH;
         cursor += 3; // padding
-        if (!mdEntryTimestamp.parse(data, cursor)) {
-            return false;
-        }
-        cursor += MdEntryTimestampField.BYTE_LENGTH;
-
-        return true;
+        return mdEntryTimestamp.parse(data, cursor);
     }
 
     @Override
@@ -158,7 +153,7 @@ public final class EmptyBookMessage implements Message {
         int cursor = offset;
         cursor = securityId.encode(data, cursor);
         cursor = matchEventIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 9 + 3) {
+        if (buffer != null && buffer.length >= 12) {
             System.arraycopy(buffer, 9, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding

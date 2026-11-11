@@ -133,12 +133,7 @@ public final class CompactBid implements GroupEntry {
         }
         cursor += CompactBidSizeField.BYTE_LENGTH;
         cursor += 2; // padding
-        if (!bidCondition.parse(data, cursor)) {
-            return false;
-        }
-        cursor += BidConditionField.BYTE_LENGTH;
-
-        return true;
+        return bidCondition.parse(data, cursor);
     }
 
     @Override
@@ -147,7 +142,7 @@ public final class CompactBid implements GroupEntry {
         int cursor = offset;
         cursor = compactBidPrice.encode(data, cursor);
         cursor = compactBidSize.encode(data, cursor);
-        if (buffer != null && buffer.length >= 4 + 2) {
+        if (buffer != null && buffer.length >= 6) {
             System.arraycopy(buffer, 4, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

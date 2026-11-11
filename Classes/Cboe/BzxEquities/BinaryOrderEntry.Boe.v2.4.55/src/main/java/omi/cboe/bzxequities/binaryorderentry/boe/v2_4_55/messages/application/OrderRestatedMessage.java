@@ -2330,11 +2330,8 @@ public final class OrderRestatedMessage implements Message {
             }
             cursor += StepUpAmountField.BYTE_LENGTH;
         }
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -2513,7 +2510,7 @@ public final class OrderRestatedMessage implements Message {
         cursor = clOrdId.encode(data, cursor);
         cursor = orderId.encode(data, cursor);
         cursor = restatementReason.encode(data, cursor);
-        if (buffer != null && buffer.length >= 37 + 1) {
+        if (buffer != null && buffer.length >= 38) {
             System.arraycopy(buffer, 37, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

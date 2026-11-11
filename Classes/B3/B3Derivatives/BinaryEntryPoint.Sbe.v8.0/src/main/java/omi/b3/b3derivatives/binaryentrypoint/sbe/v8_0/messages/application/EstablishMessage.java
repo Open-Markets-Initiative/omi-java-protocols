@@ -199,7 +199,7 @@ public final class EstablishMessage implements Message {
         runs.add(cursor).add(1);
         cursor += 1;
         cursor += 8;
-        cursor = credentials.padding(runs, cursor);
+        cursor += credentials.byteLength();
         return cursor;
     }
 
@@ -262,11 +262,8 @@ public final class EstablishMessage implements Message {
             return false;
         }
         cursor += credentials.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -279,7 +276,7 @@ public final class EstablishMessage implements Message {
         cursor = keepAliveInterval.encode(data, cursor);
         cursor = nextSeqNo.encode(data, cursor);
         cursor = cancelOnDisconnectType.encode(data, cursor);
-        if (buffer != null && buffer.length >= 33 + 1) {
+        if (buffer != null && buffer.length >= 34) {
             System.arraycopy(buffer, 33, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

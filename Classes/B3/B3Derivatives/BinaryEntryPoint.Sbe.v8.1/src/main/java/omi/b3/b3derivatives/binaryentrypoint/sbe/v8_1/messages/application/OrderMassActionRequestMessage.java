@@ -278,12 +278,7 @@ public final class OrderMassActionRequestMessage implements Message {
             return false;
         }
         cursor += SecurityIdOptionalField.BYTE_LENGTH;
-        if (!investorId.parseFrom(data, cursor, end)) {
-            return false;
-        }
-        cursor += investorId.byteLength();
-
-        return true;
+        return investorId.parseFrom(data, cursor, end);
     }
 
     @Override
@@ -297,7 +292,7 @@ public final class OrderMassActionRequestMessage implements Message {
         cursor = massCancelRestatementReason.encode(data, cursor);
         cursor = ordtagid.encode(data, cursor);
         cursor = sideOptional.encode(data, cursor);
-        if (buffer != null && buffer.length >= 31 + 1) {
+        if (buffer != null && buffer.length >= 32) {
             System.arraycopy(buffer, 31, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

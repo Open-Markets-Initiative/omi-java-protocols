@@ -231,7 +231,6 @@ public final class RiskLimitsRptGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += RiskLimitGroupField.BYTE_LENGTH;
-        cursor += 2; // padding
 
         return true;
     }
@@ -248,7 +247,7 @@ public final class RiskLimitsRptGrpCompEntry implements GroupEntry {
         cursor = riskLimitRequestingPartyRole.encode(data, cursor);
         cursor = riskLimitViolationIndicator.encode(data, cursor);
         cursor = riskLimitGroup.encode(data, cursor);
-        if (buffer != null && buffer.length >= 38 + 2) {
+        if (buffer != null && buffer.length >= 40) {
             System.arraycopy(buffer, 38, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

@@ -317,7 +317,7 @@ public final class OrderMassActionReportMessage implements Message {
             runs.add(cursor + run[index[0]]).add(run[index[0] + 1]);
         }
         cursor += InvestorId.BYTE_LENGTH;
-        cursor = text.padding(runs, cursor);
+        cursor += text.byteLength();
         return cursor;
     }
 
@@ -408,11 +408,8 @@ public final class OrderMassActionReportMessage implements Message {
             return false;
         }
         cursor += text.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -430,7 +427,7 @@ public final class OrderMassActionReportMessage implements Message {
         cursor = massCancelRestatementReason.encode(data, cursor);
         cursor = ordtagid.encode(data, cursor);
         cursor = sideOptional.encode(data, cursor);
-        if (buffer != null && buffer.length >= 49 + 1) {
+        if (buffer != null && buffer.length >= 50) {
             System.arraycopy(buffer, 49, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

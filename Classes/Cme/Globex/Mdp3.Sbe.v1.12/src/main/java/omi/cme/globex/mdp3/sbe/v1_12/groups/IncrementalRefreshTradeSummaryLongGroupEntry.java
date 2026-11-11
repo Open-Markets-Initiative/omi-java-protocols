@@ -366,7 +366,7 @@ public final class IncrementalRefreshTradeSummaryLongGroupEntry implements Group
             cursor = mdUpdateAction.encode(data, cursor);
         }
         if (known >= 40) {
-            if (buffer != null && buffer.length >= 34 + 6) {
+            if (buffer != null && buffer.length >= 40) {
                 System.arraycopy(buffer, 34, data, cursor, 6); // padding
             } else {
                 Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding

@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import omi.nasdaq.uqdf.output.utp.v1_5.fields.TextLengthField;
 import omi.nasdaq.uqdf.output.utp.v1_5.structs.MessageInfo;
@@ -106,27 +105,7 @@ public final class GeneralAdministrativeMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        for (int[] run = MessageInfo.padding(), index = { 0 }; index[0] < run.length; index[0] += 2) {
-            runs.add(cursor + run[index[0]]).add(run[index[0] + 1]);
-        }
-        cursor += MessageInfo.BYTE_LENGTH;
-        cursor += 2;
-        cursor += text.byteLength();
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -167,11 +146,8 @@ public final class GeneralAdministrativeMessage implements Message {
             return false;
         }
         cursor += text.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override

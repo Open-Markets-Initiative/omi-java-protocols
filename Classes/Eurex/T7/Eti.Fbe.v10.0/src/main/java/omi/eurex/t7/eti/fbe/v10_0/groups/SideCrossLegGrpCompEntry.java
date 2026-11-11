@@ -136,7 +136,6 @@ public final class SideCrossLegGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += LegAccountField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -148,7 +147,7 @@ public final class SideCrossLegGrpCompEntry implements GroupEntry {
         cursor = legInputSource.encode(data, cursor);
         cursor = legPositionEffect.encode(data, cursor);
         cursor = legAccount.encode(data, cursor);
-        if (buffer != null && buffer.length >= 4 + 4) {
+        if (buffer != null && buffer.length >= 8) {
             System.arraycopy(buffer, 4, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

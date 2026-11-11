@@ -187,12 +187,7 @@ public final class WideComplexTopOfMarketOfferMessage implements Message {
         }
         cursor += WideSizeField.BYTE_LENGTH;
         cursor += 4; // padding
-        if (!topOfMarketQuoteCondition.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TopOfMarketQuoteConditionField.BYTE_LENGTH;
-
-        return true;
+        return topOfMarketQuoteCondition.parse(data, cursor);
     }
 
     @Override
@@ -203,7 +198,7 @@ public final class WideComplexTopOfMarketOfferMessage implements Message {
         cursor = strategyId.encode(data, cursor);
         cursor = widePrice.encode(data, cursor);
         cursor = wideSize.encode(data, cursor);
-        if (buffer != null && buffer.length >= 20 + 4) {
+        if (buffer != null && buffer.length >= 24) {
             System.arraycopy(buffer, 20, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

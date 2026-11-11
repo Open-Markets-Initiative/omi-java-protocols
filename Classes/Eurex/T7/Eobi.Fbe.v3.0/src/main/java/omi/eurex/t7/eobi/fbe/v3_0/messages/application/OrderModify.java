@@ -200,12 +200,7 @@ public final class OrderModify implements Message {
             return false;
         }
         cursor += SecurityIdField.BYTE_LENGTH;
-        if (!orderDetailsComp.parseFrom(data, cursor, end)) {
-            return false;
-        }
-        cursor += orderDetailsComp.byteLength();
-
-        return true;
+        return orderDetailsComp.parseFrom(data, cursor, end);
     }
 
     @Override
@@ -216,7 +211,7 @@ public final class OrderModify implements Message {
         cursor = trdRegTsPrevTimePriority.encode(data, cursor);
         cursor = prevPrice.encode(data, cursor);
         cursor = prevDisplayQty.encode(data, cursor);
-        if (buffer != null && buffer.length >= 28 + 4) {
+        if (buffer != null && buffer.length >= 32) {
             System.arraycopy(buffer, 28, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

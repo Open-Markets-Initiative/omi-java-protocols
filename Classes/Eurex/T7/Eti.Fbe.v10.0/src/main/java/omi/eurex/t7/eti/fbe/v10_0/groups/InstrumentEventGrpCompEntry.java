@@ -117,7 +117,6 @@ public final class InstrumentEventGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += EventTypeField.BYTE_LENGTH;
-        cursor += 3; // padding
 
         return true;
     }
@@ -128,7 +127,7 @@ public final class InstrumentEventGrpCompEntry implements GroupEntry {
         int cursor = offset;
         cursor = eventDate.encode(data, cursor);
         cursor = eventType.encode(data, cursor);
-        if (buffer != null && buffer.length >= 5 + 3) {
+        if (buffer != null && buffer.length >= 8) {
             System.arraycopy(buffer, 5, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding

@@ -31,13 +31,6 @@ public final class GroupStatusMessage implements Message {
     public static final String NAME = "Group Status Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Identifies the exchange Q = Montreal
      */
     private final ExchangeIdField exchangeId = new ExchangeIdField();
@@ -106,7 +99,7 @@ public final class GroupStatusMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -143,12 +136,7 @@ public final class GroupStatusMessage implements Message {
             return false;
         }
         cursor += RootSymbolGroupField.BYTE_LENGTH;
-        if (!groupStatus.parse(data, cursor)) {
-            return false;
-        }
-        cursor += GroupStatusField.BYTE_LENGTH;
-
-        return true;
+        return groupStatus.parse(data, cursor);
     }
 
     @Override

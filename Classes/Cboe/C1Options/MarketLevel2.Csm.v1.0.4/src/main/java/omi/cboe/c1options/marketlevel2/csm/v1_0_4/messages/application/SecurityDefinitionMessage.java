@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import omi.cboe.c1options.marketlevel2.csm.v1_0_4.fields.ClassKeyField;
 import omi.cboe.c1options.marketlevel2.csm.v1_0_4.fields.ContractSizeField;
@@ -394,61 +393,7 @@ public final class SecurityDefinitionMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor = securityType.padding(runs, cursor);
-        cursor += 1;
-        cursor = symbol.padding(runs, cursor);
-        cursor = targetLocationId.padding(runs, cursor);
-        cursor += 4;
-        cursor += 4;
-        cursor += 8;
-        cursor += 1;
-        for (int[] run = StrikePrice.padding(), index = { 0 }; index[0] < run.length; index[0] += 2) {
-            runs.add(cursor + run[index[0]]).add(run[index[0] + 1]);
-        }
-        cursor += StrikePrice.BYTE_LENGTH;
-        cursor += 1;
-        for (int[] run = MinimumStrikePriceFraction.padding(), index = { 0 }; index[0] < run.length; index[0] += 2) {
-            runs.add(cursor + run[index[0]]).add(run[index[0] + 1]);
-        }
-        cursor += MinimumStrikePriceFraction.BYTE_LENGTH;
-        for (int[] run = MaxStrikePrice.padding(), index = { 0 }; index[0] < run.length; index[0] += 2) {
-            runs.add(cursor + run[index[0]]).add(run[index[0] + 1]);
-        }
-        cursor += MaxStrikePrice.BYTE_LENGTH;
-        for (int[] run = PremiumBreakPoint.padding(), index = { 0 }; index[0] < run.length; index[0] += 2) {
-            runs.add(cursor + run[index[0]]).add(run[index[0] + 1]);
-        }
-        cursor += PremiumBreakPoint.BYTE_LENGTH;
-        for (int[] run = MinimumAbovePremiumFraction.padding(), index = { 0 }; index[0] < run.length; index[0] += 2) {
-            runs.add(cursor + run[index[0]]).add(run[index[0] + 1]);
-        }
-        cursor += MinimumAbovePremiumFraction.BYTE_LENGTH;
-        for (int[] run = MinimumBelowPremiumFraction.padding(), index = { 0 }; index[0] < run.length; index[0] += 2) {
-            runs.add(cursor + run[index[0]]).add(run[index[0] + 1]);
-        }
-        cursor += MinimumBelowPremiumFraction.BYTE_LENGTH;
-        cursor += 1;
-        cursor = currencyCode.padding(runs, cursor);
-        cursor = underlyingSymbol.padding(runs, cursor);
-        cursor = underlyingType.padding(runs, cursor);
-        cursor += 4;
-        cursor += 1;
-        cursor = securityDefinitionLeg.padding(runs, cursor);
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -583,11 +528,8 @@ public final class SecurityDefinitionMessage implements Message {
             return false;
         }
         cursor += securityDefinitionLeg.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -667,10 +609,7 @@ public final class SecurityDefinitionMessage implements Message {
                 return false;
             }
         }
-        if (!securityDefinitionLeg.isRecognized()) {
-            return false;
-        }
-        return true;
+        return securityDefinitionLeg.isRecognized();
     }
 
     @Override

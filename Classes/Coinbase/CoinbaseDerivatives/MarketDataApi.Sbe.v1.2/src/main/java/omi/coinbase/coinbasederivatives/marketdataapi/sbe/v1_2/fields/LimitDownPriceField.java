@@ -1,6 +1,7 @@
 package omi.coinbase.coinbasederivatives.marketdataapi.sbe.v1_2.fields;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 import omi.coinbase.coinbasederivatives.marketdataapi.sbe.v1_2.types.ByteOps;
 import omi.coinbase.coinbasederivatives.marketdataapi.sbe.v1_2.types.Field;
@@ -58,7 +59,7 @@ public final class LimitDownPriceField extends Field {
      */
     public void value(BigDecimal value) {
         this.value = value;
-        this.rawValue = value == null ? 0L : value.setScale(SCALE).unscaledValue().longValueExact();
+        this.rawValue = value == null ? 0L : value.setScale(SCALE, RoundingMode.UNNECESSARY).unscaledValue().longValueExact();
         markSet(value != null);
     }
 

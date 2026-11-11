@@ -210,7 +210,6 @@ public final class UnderlyingValueLastSaleMessage implements Message {
             return false;
         }
         cursor += IndexValueField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -223,7 +222,7 @@ public final class UnderlyingValueLastSaleMessage implements Message {
         cursor = transactionId.encode(data, cursor);
         cursor = participantReferenceNumber.encode(data, cursor);
         cursor = securitySymbol.encode(data, cursor);
-        if (buffer != null && buffer.length >= 14 + 1) {
+        if (buffer != null && buffer.length >= 15) {
             System.arraycopy(buffer, 14, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
@@ -231,7 +230,7 @@ public final class UnderlyingValueLastSaleMessage implements Message {
         cursor += 1;
         cursor = indexValueDenominatorCode.encode(data, cursor);
         cursor = indexValue.encode(data, cursor);
-        if (buffer != null && buffer.length >= 20 + 4) {
+        if (buffer != null && buffer.length >= 24) {
             System.arraycopy(buffer, 20, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

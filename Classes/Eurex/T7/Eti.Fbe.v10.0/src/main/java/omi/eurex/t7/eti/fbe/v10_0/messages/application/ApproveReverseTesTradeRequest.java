@@ -261,7 +261,6 @@ public final class ApproveReverseTesTradeRequest implements Message {
             return false;
         }
         cursor += TradeReportIdField.BYTE_LENGTH;
-        cursor += 6; // padding
 
         return true;
     }
@@ -271,7 +270,7 @@ public final class ApproveReverseTesTradeRequest implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -285,7 +284,7 @@ public final class ApproveReverseTesTradeRequest implements Message {
         cursor = relatedMarketSegmentId.encode(data, cursor);
         cursor = trdType.encode(data, cursor);
         cursor = tradeReportId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 60 + 6) {
+        if (buffer != null && buffer.length >= 66) {
             System.arraycopy(buffer, 60, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding

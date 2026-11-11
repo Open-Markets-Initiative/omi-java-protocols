@@ -37,13 +37,6 @@ public final class SecurityStatus implements Message {
     public static final String NAME = "Security Status";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Start of event processing time in number of nanoseconds since Unix epoch
      */
     private final TransactTimeField transactTime = new TransactTimeField();
@@ -196,7 +189,7 @@ public final class SecurityStatus implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -257,12 +250,7 @@ public final class SecurityStatus implements Message {
             return false;
         }
         cursor += HaltReasonField.BYTE_LENGTH;
-        if (!securityTradingEvent.parse(data, cursor)) {
-            return false;
-        }
-        cursor += SecurityTradingEventField.BYTE_LENGTH;
-
-        return true;
+        return securityTradingEvent.parse(data, cursor);
     }
 
     @Override

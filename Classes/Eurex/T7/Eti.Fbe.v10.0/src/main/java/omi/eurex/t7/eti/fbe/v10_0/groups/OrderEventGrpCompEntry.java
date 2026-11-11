@@ -155,7 +155,6 @@ public final class OrderEventGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += OrderEventReasonField.BYTE_LENGTH;
-        cursor += 3; // padding
 
         return true;
     }
@@ -168,7 +167,7 @@ public final class OrderEventGrpCompEntry implements GroupEntry {
         cursor = orderEventQty.encode(data, cursor);
         cursor = orderEventMatchId.encode(data, cursor);
         cursor = orderEventReason.encode(data, cursor);
-        if (buffer != null && buffer.length >= 21 + 3) {
+        if (buffer != null && buffer.length >= 24) {
             System.arraycopy(buffer, 21, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding

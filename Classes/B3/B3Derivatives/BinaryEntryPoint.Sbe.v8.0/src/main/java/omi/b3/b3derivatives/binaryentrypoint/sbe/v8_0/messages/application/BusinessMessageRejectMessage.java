@@ -185,8 +185,8 @@ public final class BusinessMessageRejectMessage implements Message {
         cursor += 4;
         cursor += 8;
         cursor += 4;
-        cursor = memo.padding(runs, cursor);
-        cursor = text.padding(runs, cursor);
+        cursor += memo.byteLength();
+        cursor += text.byteLength();
         return cursor;
     }
 
@@ -248,11 +248,8 @@ public final class BusinessMessageRejectMessage implements Message {
             return false;
         }
         cursor += text.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -261,7 +258,7 @@ public final class BusinessMessageRejectMessage implements Message {
         int cursor = offset;
         cursor = outboundBusinessHeader.encode(data, cursor);
         cursor = refMsgType.encode(data, cursor);
-        if (buffer != null && buffer.length >= 19 + 1) {
+        if (buffer != null && buffer.length >= 20) {
             System.arraycopy(buffer, 19, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

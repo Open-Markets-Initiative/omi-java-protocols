@@ -218,12 +218,7 @@ public final class InstrumentStateChange implements Message {
         }
         cursor += SecurityTradingEventField.BYTE_LENGTH;
         cursor += 3; // padding
-        if (!transactTime.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TransactTimeField.BYTE_LENGTH;
-
-        return true;
+        return transactTime.parse(data, cursor);
     }
 
     @Override
@@ -236,7 +231,7 @@ public final class InstrumentStateChange implements Message {
         cursor = marketCondition.encode(data, cursor);
         cursor = fastMarketIndicator.encode(data, cursor);
         cursor = securityTradingEvent.encode(data, cursor);
-        if (buffer != null && buffer.length >= 13 + 3) {
+        if (buffer != null && buffer.length >= 16) {
             System.arraycopy(buffer, 13, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding

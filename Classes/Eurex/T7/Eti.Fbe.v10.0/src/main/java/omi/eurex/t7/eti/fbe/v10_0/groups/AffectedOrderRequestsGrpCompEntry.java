@@ -98,7 +98,6 @@ public final class AffectedOrderRequestsGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += AffectedOrderRequestIdField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -108,7 +107,7 @@ public final class AffectedOrderRequestsGrpCompEntry implements GroupEntry {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = affectedOrderRequestId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 4 + 4) {
+        if (buffer != null && buffer.length >= 8) {
             System.arraycopy(buffer, 4, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding
@@ -193,10 +192,7 @@ public final class AffectedOrderRequestsGrpCompEntry implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "AffectedOrderRequestId" -> Optional.of(affectedOrderRequestId);
-            default -> Optional.empty();
-        };
+        return "AffectedOrderRequestId".equals(name) ? Optional.of(affectedOrderRequestId) : Optional.empty();
     }
 
     @Override

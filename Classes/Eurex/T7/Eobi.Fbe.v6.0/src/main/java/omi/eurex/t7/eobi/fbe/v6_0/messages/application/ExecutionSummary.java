@@ -275,12 +275,7 @@ public final class ExecutionSummary implements Message {
             return false;
         }
         cursor += RestingHiddenQtyField.BYTE_LENGTH;
-        if (!restingCxlQty.parse(data, cursor)) {
-            return false;
-        }
-        cursor += RestingCxlQtyField.BYTE_LENGTH;
-
-        return true;
+        return restingCxlQty.parse(data, cursor);
     }
 
     @Override
@@ -294,7 +289,7 @@ public final class ExecutionSummary implements Message {
         cursor = lastQty.encode(data, cursor);
         cursor = aggressorSide.encode(data, cursor);
         cursor = tradeCondition.encode(data, cursor);
-        if (buffer != null && buffer.length >= 38 + 2) {
+        if (buffer != null && buffer.length >= 40) {
             System.arraycopy(buffer, 38, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

@@ -271,7 +271,7 @@ public final class TradeReversal implements Message {
         cursor = lastPx.encode(data, cursor);
         cursor = trdRegTsExecutionTime.encode(data, cursor);
         cursor = noMdEntries.encode(data, cursor);
-        if (buffer != null && buffer.length >= 41 + 7) {
+        if (buffer != null && buffer.length >= 48) {
             System.arraycopy(buffer, 41, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding
@@ -313,10 +313,7 @@ public final class TradeReversal implements Message {
                 return false;
             }
         }
-        if (!mdTradeEntryGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return mdTradeEntryGrpComp.isRecognized();
     }
 
     @Override

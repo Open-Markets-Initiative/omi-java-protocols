@@ -134,11 +134,8 @@ public final class CrossSidesGroups implements GroupEntry {
             return false;
         }
         cursor += crossSidesGroup.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -188,10 +185,7 @@ public final class CrossSidesGroups implements GroupEntry {
                 return false;
             }
         }
-        if (!crossSidesGroup.isRecognized()) {
-            return false;
-        }
-        return true;
+        return crossSidesGroup.isRecognized();
     }
 
     @Override

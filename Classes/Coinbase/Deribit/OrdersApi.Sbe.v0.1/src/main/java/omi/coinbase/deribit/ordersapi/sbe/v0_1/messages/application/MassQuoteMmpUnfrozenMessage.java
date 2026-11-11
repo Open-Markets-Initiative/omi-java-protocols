@@ -32,13 +32,6 @@ public final class MassQuoteMmpUnfrozenMessage implements Message {
     public static final String NAME = "Mass Quote Mmp Unfrozen Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * timestamp
      */
     private final TimestampField timestampField = new TimestampField();
@@ -121,7 +114,7 @@ public final class MassQuoteMmpUnfrozenMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -162,12 +155,7 @@ public final class MassQuoteMmpUnfrozenMessage implements Message {
             return false;
         }
         cursor += MmpGroupIdField.BYTE_LENGTH;
-        if (!correlationIdOptional.parse(data, cursor)) {
-            return false;
-        }
-        cursor += CorrelationIdOptionalField.BYTE_LENGTH;
-
-        return true;
+        return correlationIdOptional.parse(data, cursor);
     }
 
     @Override

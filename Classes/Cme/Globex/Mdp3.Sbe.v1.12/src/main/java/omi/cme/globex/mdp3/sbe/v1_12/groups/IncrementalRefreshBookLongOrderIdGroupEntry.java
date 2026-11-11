@@ -285,7 +285,7 @@ public final class IncrementalRefreshBookLongOrderIdGroupEntry implements GroupE
             cursor = orderUpdateAction.encode(data, cursor);
         }
         if (known >= 24) {
-            if (buffer != null && buffer.length >= 22 + 2) {
+            if (buffer != null && buffer.length >= 24) {
                 System.arraycopy(buffer, 22, data, cursor, 2); // padding
             } else {
                 Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

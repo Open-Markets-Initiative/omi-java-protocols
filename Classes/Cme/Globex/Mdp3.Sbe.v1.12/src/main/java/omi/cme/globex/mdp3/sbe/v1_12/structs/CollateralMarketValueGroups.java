@@ -134,11 +134,8 @@ public final class CollateralMarketValueGroups implements GroupEntry {
             return false;
         }
         cursor += collateralMarketValueGroup.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -188,10 +185,7 @@ public final class CollateralMarketValueGroups implements GroupEntry {
                 return false;
             }
         }
-        if (!collateralMarketValueGroup.isRecognized()) {
-            return false;
-        }
-        return true;
+        return collateralMarketValueGroup.isRecognized();
     }
 
     @Override

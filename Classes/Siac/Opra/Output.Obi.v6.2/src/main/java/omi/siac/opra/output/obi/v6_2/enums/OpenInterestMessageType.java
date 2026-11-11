@@ -48,9 +48,6 @@ public enum OpenInterestMessageType {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<OpenInterestMessageType> fromWire(char wire) {
-        return switch (wire) {
-            case ' ' -> Optional.of(OPEN_INTEREST);
-            default -> Optional.empty();
-        };
+        return wire == ' ' ? Optional.of(OPEN_INTEREST) : Optional.empty();
     }
 }

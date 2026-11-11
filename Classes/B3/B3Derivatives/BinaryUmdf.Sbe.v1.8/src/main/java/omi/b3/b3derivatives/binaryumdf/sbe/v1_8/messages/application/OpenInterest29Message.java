@@ -201,12 +201,7 @@ public final class OpenInterest29Message implements Message {
             return false;
         }
         cursor += MdEntryTimestampField.BYTE_LENGTH;
-        if (!rptSeq.parse(data, cursor)) {
-            return false;
-        }
-        cursor += RptSeqField.BYTE_LENGTH;
-
-        return true;
+        return rptSeq.parse(data, cursor);
     }
 
     @Override
@@ -215,7 +210,7 @@ public final class OpenInterest29Message implements Message {
         int cursor = offset;
         cursor = securityId.encode(data, cursor);
         cursor = matchEventIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 9 + 1) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 9, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

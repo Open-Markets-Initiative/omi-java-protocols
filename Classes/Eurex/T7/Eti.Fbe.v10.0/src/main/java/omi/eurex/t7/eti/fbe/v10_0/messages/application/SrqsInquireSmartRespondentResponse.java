@@ -189,11 +189,8 @@ public final class SrqsInquireSmartRespondentResponse implements Message {
             return false;
         }
         cursor += smartPartyDetailGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -204,7 +201,7 @@ public final class SrqsInquireSmartRespondentResponse implements Message {
         }
         noPartyDetails.value(smartPartyDetailGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -213,7 +210,7 @@ public final class SrqsInquireSmartRespondentResponse implements Message {
         cursor = responseHeaderComp.encode(data, cursor);
         cursor = marketSegmentId.encode(data, cursor);
         cursor = noPartyDetails.encode(data, cursor);
-        if (buffer != null && buffer.length >= 32 + 2) {
+        if (buffer != null && buffer.length >= 34) {
             System.arraycopy(buffer, 32, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -256,10 +253,7 @@ public final class SrqsInquireSmartRespondentResponse implements Message {
                 return false;
             }
         }
-        if (!smartPartyDetailGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return smartPartyDetailGrpComp.isRecognized();
     }
 
     @Override

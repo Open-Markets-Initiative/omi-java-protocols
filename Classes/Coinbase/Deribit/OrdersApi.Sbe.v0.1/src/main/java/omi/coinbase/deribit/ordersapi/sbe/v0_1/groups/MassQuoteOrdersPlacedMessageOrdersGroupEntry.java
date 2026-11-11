@@ -43,13 +43,6 @@ public final class MassQuoteOrdersPlacedMessageOrdersGroupEntry implements Group
     public static final String NAME = "MassQuoteOrdersPlacedMessageOrdersGroup";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * clientOrderId
      */
     private final ClientOrderIdField clientOrderId = new ClientOrderIdField();
@@ -272,7 +265,7 @@ public final class MassQuoteOrdersPlacedMessageOrdersGroupEntry implements Group
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override

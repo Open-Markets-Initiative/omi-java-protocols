@@ -312,7 +312,7 @@ public final class CollateralMarketValueGroupEntry implements GroupEntry {
             cursor = mdStreamId.encode(data, cursor);
         }
         if (known >= 40) {
-            if (buffer != null && buffer.length >= 38 + 2) {
+            if (buffer != null && buffer.length >= 40) {
                 System.arraycopy(buffer, 38, data, cursor, 2); // padding
             } else {
                 Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

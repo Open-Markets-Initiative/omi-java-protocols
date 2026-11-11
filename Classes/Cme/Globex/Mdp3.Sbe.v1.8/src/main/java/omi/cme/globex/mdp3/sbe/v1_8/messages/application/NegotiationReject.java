@@ -166,7 +166,6 @@ public final class NegotiationReject implements Message {
             return false;
         }
         cursor += ErrorCodesField.BYTE_LENGTH;
-        cursor += 5; // padding
 
         return true;
     }
@@ -179,7 +178,7 @@ public final class NegotiationReject implements Message {
         cursor = uuid.encode(data, cursor);
         cursor = requestTimestamp.encode(data, cursor);
         cursor = errorCodes.encode(data, cursor);
-        if (buffer != null && buffer.length >= 65 + 5) {
+        if (buffer != null && buffer.length >= 70) {
             System.arraycopy(buffer, 65, data, cursor, 5); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 5, (byte) 0); // padding

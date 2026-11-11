@@ -144,19 +144,14 @@ public final class BulletinsMessage implements Message {
             return false;
         }
         cursor += BulletinContentsField.BYTE_LENGTH;
-        if (!continueMarker.parse(data, cursor)) {
-            return false;
-        }
-        cursor += ContinueMarkerField.BYTE_LENGTH;
-
-        return true;
+        return continueMarker.parse(data, cursor);
     }
 
     @Override
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 1) {
+        if (buffer != null && buffer.length >= 1) {
             System.arraycopy(buffer, 0, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

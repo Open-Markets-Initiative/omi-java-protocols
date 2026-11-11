@@ -37,13 +37,6 @@ public final class TextMessage implements Message {
     public static final String NAME = "Text Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Nanoseconds portion of the Nanoseconds, accurate to 1,000 nanoseconds.
      */
     private final NanosecondsField nanoseconds = new NanosecondsField();
@@ -126,7 +119,7 @@ public final class TextMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -167,12 +160,7 @@ public final class TextMessage implements Message {
             return false;
         }
         cursor += SourceIdField.BYTE_LENGTH;
-        if (!text.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TextField.BYTE_LENGTH;
-
-        return true;
+        return text.parse(data, cursor);
     }
 
     @Override

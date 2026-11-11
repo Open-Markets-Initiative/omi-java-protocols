@@ -1,7 +1,6 @@
 package omi.cme.globex.mdp3.sbe.v1_9.dispatch;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import omi.cme.globex.mdp3.sbe.v1_9.types.ByteOps;
@@ -91,10 +90,8 @@ public final class ServerTcpPacketDecoder {
                 return new Decoded(messages, undecoded, false, trailing, padding);
             }
 
-            int frameEnd = limit;
-
             long templateId = ByteOps.unsigned(data, position + 4, 2, true);
-            Optional<Message> selected = ServerPayloadDispatch.decode(templateId, data, position + MESSAGE_HEADER_LENGTH, frameEnd);
+            Optional<Message> selected = ServerPayloadDispatch.decode(templateId, data, position + MESSAGE_HEADER_LENGTH, limit);
             if (selected.isPresent()) {
                 Message message = selected.get();
                 if (!message.isDecoded()) {

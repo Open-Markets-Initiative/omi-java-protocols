@@ -37,13 +37,6 @@ public final class PurgeOrders implements Message {
     public static final String NAME = "Purge Orders";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * User-defined identifier of the mass cancel or purge request
      */
     private final MassCancelIdField massCancelId = new MassCancelIdField();
@@ -182,7 +175,7 @@ public final class PurgeOrders implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -239,12 +232,7 @@ public final class PurgeOrders implements Message {
             return false;
         }
         cursor += CustomGroupIdCntField.BYTE_LENGTH;
-        if (!customGroupId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += CustomGroupIdField.BYTE_LENGTH;
-
-        return true;
+        return customGroupId.parse(data, cursor);
     }
 
     @Override

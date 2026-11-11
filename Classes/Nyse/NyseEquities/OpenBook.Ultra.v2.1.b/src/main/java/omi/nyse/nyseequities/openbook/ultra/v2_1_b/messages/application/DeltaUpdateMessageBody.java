@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import omi.nyse.nyseequities.openbook.ultra.v2_1_b.fields.PriceScaleCodeField;
 import omi.nyse.nyseequities.openbook.ultra.v2_1_b.fields.QuoteConditionField;
 import omi.nyse.nyseequities.openbook.ultra.v2_1_b.fields.SourceSeqNumField;
@@ -198,30 +197,7 @@ public final class DeltaUpdateMessageBody implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor += 4;
-        cursor += 4;
-        cursor += 2;
-        cursor += 4;
-        cursor += 1;
-        cursor += 1;
-        cursor += 1;
-        cursor += 1;
-        cursor = deltaPricePoint.padding(runs, cursor);
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -286,11 +262,8 @@ public final class DeltaUpdateMessageBody implements Message {
             return false;
         }
         cursor += deltaPricePoint.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -341,10 +314,7 @@ public final class DeltaUpdateMessageBody implements Message {
                 return false;
             }
         }
-        if (!deltaPricePoint.isRecognized()) {
-            return false;
-        }
-        return true;
+        return deltaPricePoint.isRecognized();
     }
 
     @Override

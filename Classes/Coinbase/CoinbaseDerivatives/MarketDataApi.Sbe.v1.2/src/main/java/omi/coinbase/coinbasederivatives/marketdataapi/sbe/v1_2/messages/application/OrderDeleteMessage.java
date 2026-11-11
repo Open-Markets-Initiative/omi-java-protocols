@@ -31,13 +31,6 @@ public final class OrderDeleteMessage implements Message {
     public static final String NAME = "Order Delete Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * orderId
      */
     private final OrderIdField orderId = new OrderIdField();
@@ -92,7 +85,7 @@ public final class OrderDeleteMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -125,12 +118,7 @@ public final class OrderDeleteMessage implements Message {
             return false;
         }
         cursor += instrHeader.byteLength();
-        if (!orderId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += OrderIdField.BYTE_LENGTH;
-
-        return true;
+        return orderId.parse(data, cursor);
     }
 
     @Override
@@ -219,10 +207,7 @@ public final class OrderDeleteMessage implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "OrderId" -> Optional.of(orderId);
-            default -> Optional.empty();
-        };
+        return "OrderId".equals(name) ? Optional.of(orderId) : Optional.empty();
     }
 
     @Override

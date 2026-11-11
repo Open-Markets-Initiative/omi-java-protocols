@@ -357,7 +357,6 @@ public final class RefreshOutrightMarketDepthSellMessage implements Message {
             return false;
         }
         cursor += ThirdLevelCustomerVolumeField.BYTE_LENGTH;
-        cursor += 2; // padding
 
         return true;
     }
@@ -377,7 +376,7 @@ public final class RefreshOutrightMarketDepthSellMessage implements Message {
         cursor = secondVolume.encode(data, cursor);
         cursor = thirdVolume.encode(data, cursor);
         cursor = quoteCondition.encode(data, cursor);
-        if (buffer != null && buffer.length >= 35 + 1) {
+        if (buffer != null && buffer.length >= 36) {
             System.arraycopy(buffer, 35, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
@@ -386,7 +385,7 @@ public final class RefreshOutrightMarketDepthSellMessage implements Message {
         cursor = firstLevelCustomerVolume.encode(data, cursor);
         cursor = secondLevelCustomerVolume.encode(data, cursor);
         cursor = thirdLevelCustomerVolume.encode(data, cursor);
-        if (buffer != null && buffer.length >= 42 + 2) {
+        if (buffer != null && buffer.length >= 44) {
             System.arraycopy(buffer, 42, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

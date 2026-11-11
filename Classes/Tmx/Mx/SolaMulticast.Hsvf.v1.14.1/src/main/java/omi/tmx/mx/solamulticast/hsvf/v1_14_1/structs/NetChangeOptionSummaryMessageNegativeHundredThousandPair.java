@@ -29,13 +29,6 @@ public final class NetChangeOptionSummaryMessageNegativeHundredThousandPair impl
     public static final String NAME = "NetChangeOptionSummaryMessageNegativeHundredThousandPair";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Net change = last trade price – previous settlement price Net change will be zero if the option did not trade on the last business day or did not trade today
      */
     private final RawNetChangeOptionSummaryMessageField rawNetChangeOptionSummaryMessage = new RawNetChangeOptionSummaryMessageField();
@@ -85,7 +78,7 @@ public final class NetChangeOptionSummaryMessageNegativeHundredThousandPair impl
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class NetChangeOptionSummaryMessageNegativeHundredThousandPair impl
             return false;
         }
         cursor += RawNetChangeOptionSummaryMessageField.BYTE_LENGTH;
-        if (!netChangeFractionIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += NetChangeFractionIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return netChangeFractionIndicator.parse(data, cursor);
     }
 
     @Override

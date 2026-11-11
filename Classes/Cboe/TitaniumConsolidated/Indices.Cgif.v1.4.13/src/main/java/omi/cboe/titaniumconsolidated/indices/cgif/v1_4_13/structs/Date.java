@@ -29,13 +29,6 @@ public final class Date implements GroupEntry {
     public static final String NAME = "Date";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Byte Length
      */
     private final ByteLengthField byteLengthField = new ByteLengthField();
@@ -85,7 +78,7 @@ public final class Date implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class Date implements GroupEntry {
             return false;
         }
         cursor += ByteLengthField.BYTE_LENGTH;
-        if (!dateChars.parse(data, cursor)) {
-            return false;
-        }
-        cursor += DateCharsField.BYTE_LENGTH;
-
-        return true;
+        return dateChars.parse(data, cursor);
     }
 
     @Override

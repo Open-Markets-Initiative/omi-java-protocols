@@ -41,13 +41,6 @@ public final class ComplexOrderQuoteMessage implements Message {
     public static final String NAME = "Complex Order Quote Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Q by default
      */
     private final ExchangeIdField exchangeId = new ExchangeIdField();
@@ -256,7 +249,7 @@ public final class ComplexOrderQuoteMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -333,12 +326,7 @@ public final class ComplexOrderQuoteMessage implements Message {
             return false;
         }
         cursor += PublicCustomerBidSizeField.BYTE_LENGTH;
-        if (!publicCustomerAskSize.parse(data, cursor)) {
-            return false;
-        }
-        cursor += PublicCustomerAskSizeField.BYTE_LENGTH;
-
-        return true;
+        return publicCustomerAskSize.parse(data, cursor);
     }
 
     @Override

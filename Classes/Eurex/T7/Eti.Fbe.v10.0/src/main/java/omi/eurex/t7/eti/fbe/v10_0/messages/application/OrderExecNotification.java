@@ -601,11 +601,8 @@ public final class OrderExecNotification implements Message {
             return false;
         }
         cursor += orderEventGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -624,7 +621,7 @@ public final class OrderExecNotification implements Message {
         noLegExecs.value(instrmntLegExecGrpComp.size());
         noOrderEvents.value((short) orderEventGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -651,7 +648,7 @@ public final class OrderExecNotification implements Message {
         cursor = fixClOrdId.encode(data, cursor);
         cursor = noFills.encode(data, cursor);
         cursor = noOrderEvents.encode(data, cursor);
-        if (buffer != null && buffer.length >= 158 + 4) {
+        if (buffer != null && buffer.length >= 162) {
             System.arraycopy(buffer, 158, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding
@@ -704,10 +701,7 @@ public final class OrderExecNotification implements Message {
         if (!instrmntLegExecGrpComp.isRecognized()) {
             return false;
         }
-        if (!orderEventGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return orderEventGrpComp.isRecognized();
     }
 
     @Override

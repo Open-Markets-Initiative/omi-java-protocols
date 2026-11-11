@@ -29,13 +29,6 @@ public final class StrikePriceScheduleNoticeNegativeHundredThousandPair implemen
     public static final String NAME = "StrikePriceScheduleNoticeNegativeHundredThousandPair";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Strike price of the option in full
      */
     private final RawStrikePriceScheduleNoticeField rawStrikePriceScheduleNotice = new RawStrikePriceScheduleNoticeField();
@@ -85,7 +78,7 @@ public final class StrikePriceScheduleNoticeNegativeHundredThousandPair implemen
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class StrikePriceScheduleNoticeNegativeHundredThousandPair implemen
             return false;
         }
         cursor += RawStrikePriceScheduleNoticeField.BYTE_LENGTH;
-        if (!strikePriceFractionIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += StrikePriceFractionIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return strikePriceFractionIndicator.parse(data, cursor);
     }
 
     @Override

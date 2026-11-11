@@ -31,13 +31,6 @@ public final class CombinationLegEntry implements GroupEntry {
     public static final String NAME = "CombinationLeg";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Instrument Id of the leg
      */
     private final TradeableInstrumentIdLegField tradeableInstrumentIdLeg = new TradeableInstrumentIdLegField();
@@ -115,7 +108,7 @@ public final class CombinationLegEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -151,12 +144,7 @@ public final class CombinationLegEntry implements GroupEntry {
             return false;
         }
         cursor += RatioLegField.BYTE_LENGTH;
-        if (!priceLeg.parse(data, cursor)) {
-            return false;
-        }
-        cursor += PriceLegField.BYTE_LENGTH;
-
-        return true;
+        return priceLeg.parse(data, cursor);
     }
 
     @Override

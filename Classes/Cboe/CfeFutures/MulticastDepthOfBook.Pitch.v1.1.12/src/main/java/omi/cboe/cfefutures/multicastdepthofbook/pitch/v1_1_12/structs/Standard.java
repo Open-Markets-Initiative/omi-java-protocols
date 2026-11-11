@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.OptionalLong;
-import java.util.stream.IntStream;
 import omi.cboe.cfefutures.multicastdepthofbook.pitch.v1_1_12.groups.FutureLegEntry;
 import omi.cboe.cfefutures.multicastdepthofbook.pitch.v1_1_12.groups.FutureLegList;
 import omi.cboe.cfefutures.multicastdepthofbook.pitch.v1_1_12.types.Field;
@@ -101,22 +100,7 @@ public final class Standard implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor = futureLeg.padding(runs, cursor);
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -144,11 +128,8 @@ public final class Standard implements GroupEntry {
             return false;
         }
         cursor += futureLeg.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -195,10 +176,7 @@ public final class Standard implements GroupEntry {
                 return false;
             }
         }
-        if (!futureLeg.isRecognized()) {
-            return false;
-        }
-        return true;
+        return futureLeg.isRecognized();
     }
 
     @Override

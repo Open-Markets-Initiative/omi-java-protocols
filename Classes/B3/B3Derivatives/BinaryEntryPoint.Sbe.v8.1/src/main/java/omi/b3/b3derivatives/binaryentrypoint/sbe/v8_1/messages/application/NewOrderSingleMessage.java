@@ -477,8 +477,8 @@ public final class NewOrderSingleMessage implements Message {
         }
         cursor += InvestorId.BYTE_LENGTH;
         cursor += 4;
-        cursor = deskId.padding(runs, cursor);
-        cursor = memo.padding(runs, cursor);
+        cursor += deskId.byteLength();
+        cursor += memo.byteLength();
         return cursor;
     }
 
@@ -611,11 +611,8 @@ public final class NewOrderSingleMessage implements Message {
             return false;
         }
         cursor += memo.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override

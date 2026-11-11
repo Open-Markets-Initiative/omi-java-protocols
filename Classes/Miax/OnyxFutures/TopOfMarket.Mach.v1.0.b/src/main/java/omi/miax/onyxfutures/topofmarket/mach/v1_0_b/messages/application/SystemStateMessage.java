@@ -35,13 +35,6 @@ public final class SystemStateMessage implements Message {
     public static final String NAME = "System State Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Matching Engine time
      */
     private final TimestampField timestampField = new TimestampField();
@@ -124,7 +117,7 @@ public final class SystemStateMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -165,12 +158,7 @@ public final class SystemStateMessage implements Message {
             return false;
         }
         cursor += SessionIdField.BYTE_LENGTH;
-        if (!systemStatus.parse(data, cursor)) {
-            return false;
-        }
-        cursor += SystemStatusField.BYTE_LENGTH;
-
-        return true;
+        return systemStatus.parse(data, cursor);
     }
 
     @Override

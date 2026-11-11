@@ -566,7 +566,6 @@ public final class RiskControlAlertMessage implements Message {
             return false;
         }
         cursor += ReinstatementRequiredByOtherField.BYTE_LENGTH;
-        cursor += 200; // padding
 
         return true;
     }
@@ -579,7 +578,7 @@ public final class RiskControlAlertMessage implements Message {
         cursor = mpid.encode(data, cursor);
         cursor = marketMakerNul.encode(data, cursor);
         cursor = mpsubid.encode(data, cursor);
-        if (buffer != null && buffer.length >= 22 + 4) {
+        if (buffer != null && buffer.length >= 26) {
             System.arraycopy(buffer, 22, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding
@@ -606,7 +605,7 @@ public final class RiskControlAlertMessage implements Message {
         cursor = blockedByKillSwitchIndicator.encode(data, cursor);
         cursor = reinstatementRequiredBySelf.encode(data, cursor);
         cursor = reinstatementRequiredByOther.encode(data, cursor);
-        if (buffer != null && buffer.length >= 101 + 200) {
+        if (buffer != null && buffer.length >= 301) {
             System.arraycopy(buffer, 101, data, cursor, 200); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 200, (byte) 0); // padding

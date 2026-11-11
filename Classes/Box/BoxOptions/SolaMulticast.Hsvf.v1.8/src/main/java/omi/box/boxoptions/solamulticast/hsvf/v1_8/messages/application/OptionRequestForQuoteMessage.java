@@ -144,12 +144,7 @@ public final class OptionRequestForQuoteMessage implements Message {
             return false;
         }
         cursor += instrumentDescription.byteLength();
-        if (!requestedSize.parse(data, cursor)) {
-            return false;
-        }
-        cursor += RequestedSizeField.BYTE_LENGTH;
-
-        return true;
+        return requestedSize.parse(data, cursor);
     }
 
     @Override

@@ -262,7 +262,6 @@ public final class SettlementPrice28Message implements Message {
             return false;
         }
         cursor += RptSeqField.BYTE_LENGTH;
-        cursor += 1; // padding
 
         return true;
     }
@@ -273,7 +272,7 @@ public final class SettlementPrice28Message implements Message {
         int cursor = offset;
         cursor = securityId.encode(data, cursor);
         cursor = matchEventIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 9 + 1) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 9, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
@@ -286,7 +285,7 @@ public final class SettlementPrice28Message implements Message {
         cursor = priceType.encode(data, cursor);
         cursor = settlPriceType.encode(data, cursor);
         cursor = rptSeq.encode(data, cursor);
-        if (buffer != null && buffer.length >= 35 + 1) {
+        if (buffer != null && buffer.length >= 36) {
             System.arraycopy(buffer, 35, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

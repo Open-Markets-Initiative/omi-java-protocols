@@ -180,12 +180,7 @@ public final class ProductStateChange implements Message {
         }
         cursor += FastMarketIndicatorField.BYTE_LENGTH;
         cursor += 4; // padding
-        if (!transactTime.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TransactTimeField.BYTE_LENGTH;
-
-        return true;
+        return transactTime.parse(data, cursor);
     }
 
     @Override
@@ -196,7 +191,7 @@ public final class ProductStateChange implements Message {
         cursor = tradingSessionSubId.encode(data, cursor);
         cursor = tradSesStatus.encode(data, cursor);
         cursor = fastMarketIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 4 + 4) {
+        if (buffer != null && buffer.length >= 8) {
             System.arraycopy(buffer, 4, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

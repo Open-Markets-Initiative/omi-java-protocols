@@ -29,13 +29,6 @@ public final class NetChangeFutureOptionsSummaryMessageNegativeTenThousandPair i
     public static final String NAME = "NetChangeFutureOptionsSummaryMessageNegativeTenThousandPair";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Net change = last trade price – previous settlement price If no previous settlement price (new series) then net change is zero
      */
     private final RawNetChangeFutureOptionsSummaryMessageField rawNetChangeFutureOptionsSummaryMessage = new RawNetChangeFutureOptionsSummaryMessageField();
@@ -85,7 +78,7 @@ public final class NetChangeFutureOptionsSummaryMessageNegativeTenThousandPair i
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class NetChangeFutureOptionsSummaryMessageNegativeTenThousandPair i
             return false;
         }
         cursor += RawNetChangeFutureOptionsSummaryMessageField.BYTE_LENGTH;
-        if (!netChangeFractionIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += NetChangeFractionIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return netChangeFractionIndicator.parse(data, cursor);
     }
 
     @Override

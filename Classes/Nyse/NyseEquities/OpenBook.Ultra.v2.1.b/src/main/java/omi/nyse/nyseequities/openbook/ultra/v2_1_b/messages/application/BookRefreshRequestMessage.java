@@ -30,13 +30,6 @@ public final class BookRefreshRequestMessage implements Message {
     public static final String NAME = "Book Refresh Request Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * A sequence of characters representing the symbol, padded with NULLs. The symbol contains the root, optionally followed by a space and an optional suffix in host format, for example "IBM PRA".
      */
     private final SymbolField symbol = new SymbolField();
@@ -91,7 +84,7 @@ public final class BookRefreshRequestMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -124,12 +117,7 @@ public final class BookRefreshRequestMessage implements Message {
             return false;
         }
         cursor += SymbolField.BYTE_LENGTH;
-        if (!sourceId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += SourceIdField.BYTE_LENGTH;
-
-        return true;
+        return sourceId.parse(data, cursor);
     }
 
     @Override

@@ -30,13 +30,6 @@ public final class TrdInstrmntLegGrpCompEntry implements GroupEntry {
     public static final String NAME = "TrdInstrmntLegGrpComp";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Leg Security Id
      */
     private final LegSecurityIdField legSecurityId = new LegSecurityIdField();
@@ -100,7 +93,7 @@ public final class TrdInstrmntLegGrpCompEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -132,12 +125,7 @@ public final class TrdInstrmntLegGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += LegPriceField.BYTE_LENGTH;
-        if (!legQty.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LegQtyField.BYTE_LENGTH;
-
-        return true;
+        return legQty.parse(data, cursor);
     }
 
     @Override

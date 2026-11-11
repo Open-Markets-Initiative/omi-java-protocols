@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import omi.cboe.titaniumconsolidated.indices.cgif.v1_4_13.fields.NoMdEntriesField;
 import omi.cboe.titaniumconsolidated.indices.cgif.v1_4_13.groups.MdEntriesEntry;
@@ -104,24 +103,7 @@ public final class IndexValueMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor = symbol.padding(runs, cursor);
-        cursor += 1;
-        cursor = mdEntries.padding(runs, cursor);
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -165,11 +147,8 @@ public final class IndexValueMessage implements Message {
             return false;
         }
         cursor += mdEntries.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -219,10 +198,7 @@ public final class IndexValueMessage implements Message {
                 return false;
             }
         }
-        if (!mdEntries.isRecognized()) {
-            return false;
-        }
-        return true;
+        return mdEntries.isRecognized();
     }
 
     @Override
@@ -280,10 +256,7 @@ public final class IndexValueMessage implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "NoMdEntries" -> Optional.of(noMdEntries);
-            default -> Optional.empty();
-        };
+        return "NoMdEntries".equals(name) ? Optional.of(noMdEntries) : Optional.empty();
     }
 
     @Override

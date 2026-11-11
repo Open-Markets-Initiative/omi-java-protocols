@@ -220,12 +220,7 @@ public final class SnapshotFullRefreshHeader30Message implements Message {
         }
         cursor += TotNumStatsField.BYTE_LENGTH;
         cursor += 2; // padding
-        if (!lastRptSeq.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LastRptSeqField.BYTE_LENGTH;
-
-        return true;
+        return lastRptSeq.parse(data, cursor);
     }
 
     @Override
@@ -238,7 +233,7 @@ public final class SnapshotFullRefreshHeader30Message implements Message {
         cursor = totNumBids.encode(data, cursor);
         cursor = totNumOffers.encode(data, cursor);
         cursor = totNumStats.encode(data, cursor);
-        if (buffer != null && buffer.length >= 26 + 2) {
+        if (buffer != null && buffer.length >= 28) {
             System.arraycopy(buffer, 26, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

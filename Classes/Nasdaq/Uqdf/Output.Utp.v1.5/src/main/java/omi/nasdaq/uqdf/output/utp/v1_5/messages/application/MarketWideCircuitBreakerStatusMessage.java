@@ -36,13 +36,6 @@ public final class MarketWideCircuitBreakerStatusMessage implements Message {
     public static final String NAME = "Market Wide Circuit Breaker Status Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * MWCB Status Level Indicator
      */
     private final MwcbStatusLevelIndicatorField mwcbStatusLevelIndicator = new MwcbStatusLevelIndicatorField();
@@ -97,7 +90,7 @@ public final class MarketWideCircuitBreakerStatusMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -130,12 +123,7 @@ public final class MarketWideCircuitBreakerStatusMessage implements Message {
             return false;
         }
         cursor += messageInfo.byteLength();
-        if (!mwcbStatusLevelIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += MwcbStatusLevelIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return mwcbStatusLevelIndicator.parse(data, cursor);
     }
 
     @Override
@@ -224,10 +212,7 @@ public final class MarketWideCircuitBreakerStatusMessage implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "MwcbStatusLevelIndicator" -> Optional.of(mwcbStatusLevelIndicator);
-            default -> Optional.empty();
-        };
+        return "MwcbStatusLevelIndicator".equals(name) ? Optional.of(mwcbStatusLevelIndicator) : Optional.empty();
     }
 
     @Override

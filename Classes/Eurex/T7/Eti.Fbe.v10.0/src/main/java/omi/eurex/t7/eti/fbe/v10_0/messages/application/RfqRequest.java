@@ -223,7 +223,6 @@ public final class RfqRequest implements Message {
             return false;
         }
         cursor += ComplianceTextField.BYTE_LENGTH;
-        cursor += 7; // padding
 
         return true;
     }
@@ -233,7 +232,7 @@ public final class RfqRequest implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -245,7 +244,7 @@ public final class RfqRequest implements Message {
         cursor = marketSegmentId.encode(data, cursor);
         cursor = side.encode(data, cursor);
         cursor = complianceText.encode(data, cursor);
-        if (buffer != null && buffer.length >= 59 + 7) {
+        if (buffer != null && buffer.length >= 66) {
             System.arraycopy(buffer, 59, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

@@ -48,9 +48,6 @@ public enum AdministrativeMessageType {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<AdministrativeMessageType> fromWire(char wire) {
-        return switch (wire) {
-            case 'S' -> Optional.of(SYMBOL_REFERENCE_DATA);
-            default -> Optional.empty();
-        };
+        return wire == 'S' ? Optional.of(SYMBOL_REFERENCE_DATA) : Optional.empty();
     }
 }

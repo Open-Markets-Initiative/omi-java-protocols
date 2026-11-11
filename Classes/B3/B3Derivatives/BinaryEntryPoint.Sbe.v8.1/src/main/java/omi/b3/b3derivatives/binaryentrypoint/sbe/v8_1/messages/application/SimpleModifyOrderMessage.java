@@ -379,7 +379,7 @@ public final class SimpleModifyOrderMessage implements Message {
             runs.add(cursor + run[index[0]]).add(run[index[0] + 1]);
         }
         cursor += InvestorId.BYTE_LENGTH;
-        cursor = memo.padding(runs, cursor);
+        cursor += memo.byteLength();
         return cursor;
     }
 
@@ -485,11 +485,8 @@ public final class SimpleModifyOrderMessage implements Message {
             return false;
         }
         cursor += memo.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override

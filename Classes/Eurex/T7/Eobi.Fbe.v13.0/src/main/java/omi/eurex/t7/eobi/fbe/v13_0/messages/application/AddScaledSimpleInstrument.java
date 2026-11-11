@@ -201,12 +201,7 @@ public final class AddScaledSimpleInstrument implements Message {
         }
         cursor += QuantityScalingFactorField.BYTE_LENGTH;
         cursor += 4; // padding
-        if (!relatedInstrumentGrpComp.parseFrom(data, cursor, end)) {
-            return false;
-        }
-        cursor += relatedInstrumentGrpComp.byteLength();
-
-        return true;
+        return relatedInstrumentGrpComp.parseFrom(data, cursor, end);
     }
 
     @Override
@@ -217,14 +212,14 @@ public final class AddScaledSimpleInstrument implements Message {
         cursor = transactTime.encode(data, cursor);
         cursor = securityDesc.encode(data, cursor);
         cursor = securityType.encode(data, cursor);
-        if (buffer != null && buffer.length >= 57 + 1) {
+        if (buffer != null && buffer.length >= 58) {
             System.arraycopy(buffer, 57, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
         }
         cursor += 1;
         cursor = quantityScalingFactor.encode(data, cursor);
-        if (buffer != null && buffer.length >= 60 + 4) {
+        if (buffer != null && buffer.length >= 64) {
             System.arraycopy(buffer, 60, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

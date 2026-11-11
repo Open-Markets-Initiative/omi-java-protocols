@@ -48,9 +48,6 @@ public enum TradingSessionStatusOperationalHaltReason {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<TradingSessionStatusOperationalHaltReason> fromWire(byte wire) {
-        return switch (wire) {
-            case 0 -> Optional.of(ADMINISTRATIVE);
-            default -> Optional.empty();
-        };
+        return wire == 0 ? Optional.of(ADMINISTRATIVE) : Optional.empty();
     }
 }

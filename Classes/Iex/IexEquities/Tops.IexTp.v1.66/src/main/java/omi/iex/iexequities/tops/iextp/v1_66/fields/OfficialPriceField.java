@@ -1,6 +1,7 @@
 package omi.iex.iexequities.tops.iextp.v1_66.fields;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 import omi.iex.iexequities.tops.iextp.v1_66.types.ByteOps;
 import omi.iex.iexequities.tops.iextp.v1_66.types.Field;
@@ -58,7 +59,7 @@ public final class OfficialPriceField extends Field {
      */
     public void value(BigDecimal value) {
         this.value = value;
-        this.rawValue = value == null ? 0L : value.setScale(SCALE).unscaledValue().longValueExact();
+        this.rawValue = value == null ? 0L : value.setScale(SCALE, RoundingMode.UNNECESSARY).unscaledValue().longValueExact();
         markSet(value != null);
     }
 

@@ -299,7 +299,6 @@ public final class QuoteActivationRequest implements Message {
             return false;
         }
         cursor += ExecutingTraderQualifierField.BYTE_LENGTH;
-        cursor += 3; // padding
 
         return true;
     }
@@ -309,7 +308,7 @@ public final class QuoteActivationRequest implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -325,7 +324,7 @@ public final class QuoteActivationRequest implements Message {
         cursor = productComplex.encode(data, cursor);
         cursor = partyIdInvestmentDecisionMakerQualifier.encode(data, cursor);
         cursor = executingTraderQualifier.encode(data, cursor);
-        if (buffer != null && buffer.length >= 47 + 3) {
+        if (buffer != null && buffer.length >= 50) {
             System.arraycopy(buffer, 47, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding

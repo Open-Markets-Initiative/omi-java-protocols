@@ -29,13 +29,6 @@ public final class HeartbeatResponseMessage implements Message {
     public static final String NAME = "Heartbeat Response Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * The ID of the client requesting this retransmission . This field is up to 9 characters, null terminated.
      */
     private final SourceIdField sourceId = new SourceIdField();
@@ -76,7 +69,7 @@ public final class HeartbeatResponseMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -105,12 +98,7 @@ public final class HeartbeatResponseMessage implements Message {
         }
 
         int cursor = offset;
-        if (!sourceId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += SourceIdField.BYTE_LENGTH;
-
-        return true;
+        return sourceId.parse(data, cursor);
     }
 
     @Override
@@ -197,10 +185,7 @@ public final class HeartbeatResponseMessage implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "SourceId" -> Optional.of(sourceId);
-            default -> Optional.empty();
-        };
+        return "SourceId".equals(name) ? Optional.of(sourceId) : Optional.empty();
     }
 
     @Override

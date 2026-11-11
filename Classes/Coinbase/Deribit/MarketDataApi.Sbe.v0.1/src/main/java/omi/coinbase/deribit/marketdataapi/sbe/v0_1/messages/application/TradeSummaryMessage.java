@@ -36,13 +36,6 @@ public final class TradeSummaryMessage implements Message {
     public static final String NAME = "Trade Summary Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * instrumentId
      */
     private final InstrumentIdField instrumentId = new InstrumentIdField();
@@ -181,7 +174,7 @@ public final class TradeSummaryMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -238,12 +231,7 @@ public final class TradeSummaryMessage implements Message {
             return false;
         }
         cursor += ImpliedVolatilityField.BYTE_LENGTH;
-        if (!takerFlags.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TakerFlagsField.BYTE_LENGTH;
-
-        return true;
+        return takerFlags.parse(data, cursor);
     }
 
     @Override

@@ -259,7 +259,6 @@ public final class AuctionBbo implements Message {
             return false;
         }
         cursor += OfferOrdTypeField.BYTE_LENGTH;
-        cursor += 5; // padding
 
         return true;
     }
@@ -277,7 +276,7 @@ public final class AuctionBbo implements Message {
         cursor = potentialSecurityTradingEvent.encode(data, cursor);
         cursor = bidOrdType.encode(data, cursor);
         cursor = offerOrdType.encode(data, cursor);
-        if (buffer != null && buffer.length >= 51 + 5) {
+        if (buffer != null && buffer.length >= 56) {
             System.arraycopy(buffer, 51, data, cursor, 5); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 5, (byte) 0); // padding

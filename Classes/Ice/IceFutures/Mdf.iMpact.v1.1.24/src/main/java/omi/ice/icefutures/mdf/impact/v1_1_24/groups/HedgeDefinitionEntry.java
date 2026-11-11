@@ -34,13 +34,6 @@ public final class HedgeDefinitionEntry implements GroupEntry {
     public static final String NAME = "HedgeDefinition";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Message length, including this field, for a hedge
      */
     private final HedgeBodyLengthField hedgeBodyLength = new HedgeBodyLengthField();
@@ -160,7 +153,7 @@ public final class HedgeDefinitionEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -208,12 +201,7 @@ public final class HedgeDefinitionEntry implements GroupEntry {
             return false;
         }
         cursor += HedgePriceDenominatorField.BYTE_LENGTH;
-        if (!hedgeDelta.parse(data, cursor)) {
-            return false;
-        }
-        cursor += HedgeDeltaField.BYTE_LENGTH;
-
-        return true;
+        return hedgeDelta.parse(data, cursor);
     }
 
     @Override

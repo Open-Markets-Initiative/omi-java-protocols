@@ -369,11 +369,8 @@ public final class TesReversalBroadcast implements Message {
             return false;
         }
         cursor += sideAllocGrpBcComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -384,7 +381,7 @@ public final class TesReversalBroadcast implements Message {
         }
         noSideAllocs.value((short) sideAllocGrpBcComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -402,7 +399,7 @@ public final class TesReversalBroadcast implements Message {
         cursor = noSideAllocs.encode(data, cursor);
         cursor = tradeReportId.encode(data, cursor);
         cursor = reversalReasonText.encode(data, cursor);
-        if (buffer != null && buffer.length >= 215 + 3) {
+        if (buffer != null && buffer.length >= 218) {
             System.arraycopy(buffer, 215, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding
@@ -445,10 +442,7 @@ public final class TesReversalBroadcast implements Message {
                 return false;
             }
         }
-        if (!sideAllocGrpBcComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return sideAllocGrpBcComp.isRecognized();
     }
 
     @Override

@@ -298,12 +298,7 @@ public final class OptionTradeMessage implements Message {
         }
         cursor += OpenInterestField.BYTE_LENGTH;
         cursor += 1; // padding
-        if (!priceIndicatorMarker.parse(data, cursor)) {
-            return false;
-        }
-        cursor += PriceIndicatorMarkerField.BYTE_LENGTH;
-
-        return true;
+        return priceIndicatorMarker.parse(data, cursor);
     }
 
     @Override
@@ -318,7 +313,7 @@ public final class OptionTradeMessage implements Message {
         cursor = netChangeSign.encode(data, cursor);
         cursor = netChange.encode(data, cursor);
         cursor = netChangeFractionIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 44 + 6) {
+        if (buffer != null && buffer.length >= 50) {
             System.arraycopy(buffer, 44, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding
@@ -326,7 +321,7 @@ public final class OptionTradeMessage implements Message {
         cursor += 6;
         cursor = timestampField.encode(data, cursor);
         cursor = openInterest.encode(data, cursor);
-        if (buffer != null && buffer.length >= 63 + 1) {
+        if (buffer != null && buffer.length >= 64) {
             System.arraycopy(buffer, 63, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

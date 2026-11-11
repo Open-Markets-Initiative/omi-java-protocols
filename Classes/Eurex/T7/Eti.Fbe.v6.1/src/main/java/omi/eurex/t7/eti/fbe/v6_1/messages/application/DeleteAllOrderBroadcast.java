@@ -301,7 +301,7 @@ public final class DeleteAllOrderBroadcast implements Message {
         cursor += 1;
         runs.add(cursor).add(2);
         cursor += 2;
-        cursor = notAffectedOrdersGrpComp.padding(runs, cursor);
+        cursor += notAffectedOrdersGrpComp.byteLength();
         return cursor;
     }
 
@@ -389,11 +389,8 @@ public final class DeleteAllOrderBroadcast implements Message {
             return false;
         }
         cursor += notAffectedOrdersGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -404,7 +401,7 @@ public final class DeleteAllOrderBroadcast implements Message {
         }
         noNotAffectedOrders.value(notAffectedOrdersGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -423,7 +420,7 @@ public final class DeleteAllOrderBroadcast implements Message {
         cursor = massActionReason.encode(data, cursor);
         cursor = execInst.encode(data, cursor);
         cursor = side.encode(data, cursor);
-        if (buffer != null && buffer.length >= 104 + 2) {
+        if (buffer != null && buffer.length >= 106) {
             System.arraycopy(buffer, 104, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -466,10 +463,7 @@ public final class DeleteAllOrderBroadcast implements Message {
                 return false;
             }
         }
-        if (!notAffectedOrdersGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return notAffectedOrdersGrpComp.isRecognized();
     }
 
     @Override

@@ -109,7 +109,6 @@ public final class StreamIdMessage implements Message {
             return false;
         }
         cursor += StreamIdField.BYTE_LENGTH;
-        cursor += 2; // padding
 
         return true;
     }
@@ -119,7 +118,7 @@ public final class StreamIdMessage implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = streamId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 2 + 2) {
+        if (buffer != null && buffer.length >= 4) {
             System.arraycopy(buffer, 2, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -204,10 +203,7 @@ public final class StreamIdMessage implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "StreamId" -> Optional.of(streamId);
-            default -> Optional.empty();
-        };
+        return "StreamId".equals(name) ? Optional.of(streamId) : Optional.empty();
     }
 
     @Override

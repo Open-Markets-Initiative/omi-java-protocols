@@ -28,13 +28,6 @@ public final class LocateBroker implements GroupEntry {
     public static final String NAME = "LocateBroker";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Broker code from which the locate has been acquired for short sale orders
      */
     private final LocateBrokerField locateBroker = new LocateBrokerField();
@@ -70,7 +63,7 @@ public final class LocateBroker implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -94,12 +87,7 @@ public final class LocateBroker implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!locateBroker.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LocateBrokerField.BYTE_LENGTH;
-
-        return true;
+        return locateBroker.parse(data, cursor);
     }
 
     @Override
@@ -186,10 +174,7 @@ public final class LocateBroker implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "LocateBroker" -> Optional.of(locateBroker);
-            default -> Optional.empty();
-        };
+        return "LocateBroker".equals(name) ? Optional.of(locateBroker) : Optional.empty();
     }
 
     @Override

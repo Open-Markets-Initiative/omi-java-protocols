@@ -38,13 +38,6 @@ public final class FixingTransitionMessage implements Message {
     public static final String NAME = "Fixing Transition Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Market Id
      */
     private final MarketIdField marketId = new MarketIdField();
@@ -141,7 +134,7 @@ public final class FixingTransitionMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -186,12 +179,7 @@ public final class FixingTransitionMessage implements Message {
             return false;
         }
         cursor += ThresholdImbalanceQtyField.BYTE_LENGTH;
-        if (!messageDateTime.parse(data, cursor)) {
-            return false;
-        }
-        cursor += MessageDateTimeField.BYTE_LENGTH;
-
-        return true;
+        return messageDateTime.parse(data, cursor);
     }
 
     @Override

@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import omi.cboe.bzxequities.binaryorderentry.boe.v2_4_55.fields.MessageTypeField;
 import omi.cboe.bzxequities.binaryorderentry.boe.v2_4_55.fields.NumberOfReturnBitfieldsField;
 import omi.cboe.bzxequities.binaryorderentry.boe.v2_4_55.fields.ReturnBitfield10Field;
@@ -577,80 +576,7 @@ public final class ReturnBitfieldsParamGroup implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor += 1;
-        cursor += 1;
-        if (returnBitfield1Present()) {
-            cursor += 1;
-        }
-        if (returnBitfield2Present()) {
-            cursor += 1;
-        }
-        if (returnBitfield3Present()) {
-            cursor += 1;
-        }
-        if (returnBitfield4Present()) {
-            cursor += 1;
-        }
-        if (returnBitfield5Present()) {
-            cursor += 1;
-        }
-        if (returnBitfield6Present()) {
-            cursor += 1;
-        }
-        if (returnBitfield7Present()) {
-            cursor += 1;
-        }
-        if (returnBitfield8Present()) {
-            cursor += 1;
-        }
-        if (returnBitfield9Present()) {
-            cursor += 1;
-        }
-        if (returnBitfield10Present()) {
-            cursor += 1;
-        }
-        if (returnBitfield11Present()) {
-            cursor += 1;
-        }
-        if (returnBitfield12Present()) {
-            cursor += 1;
-        }
-        if (returnBitfield13Present()) {
-            cursor += 1;
-        }
-        if (returnBitfield14Present()) {
-            cursor += 1;
-        }
-        if (returnBitfield15Present()) {
-            cursor += 1;
-        }
-        if (returnBitfield16Present()) {
-            cursor += 1;
-        }
-        if (returnBitfield17Present()) {
-            cursor += 1;
-        }
-        if (returnBitfield18Present()) {
-            cursor += 1;
-        }
-        if (returnBitfield19Present()) {
-            cursor += 1;
-        }
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -850,11 +776,8 @@ public final class ReturnBitfieldsParamGroup implements GroupEntry {
             }
             cursor += ReturnBitfield19Field.BYTE_LENGTH;
         }
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override

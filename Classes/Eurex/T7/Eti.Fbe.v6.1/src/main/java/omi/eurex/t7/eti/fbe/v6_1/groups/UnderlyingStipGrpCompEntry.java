@@ -117,7 +117,6 @@ public final class UnderlyingStipGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += UnderlyingStipTypeField.BYTE_LENGTH;
-        cursor += 1; // padding
 
         return true;
     }
@@ -128,7 +127,7 @@ public final class UnderlyingStipGrpCompEntry implements GroupEntry {
         int cursor = offset;
         cursor = underlyingStipValue.encode(data, cursor);
         cursor = underlyingStipType.encode(data, cursor);
-        if (buffer != null && buffer.length >= 39 + 1) {
+        if (buffer != null && buffer.length >= 40) {
             System.arraycopy(buffer, 39, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

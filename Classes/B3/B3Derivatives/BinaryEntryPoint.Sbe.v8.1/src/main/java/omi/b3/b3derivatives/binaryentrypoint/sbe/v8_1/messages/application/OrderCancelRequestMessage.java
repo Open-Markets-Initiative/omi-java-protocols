@@ -267,8 +267,8 @@ public final class OrderCancelRequestMessage implements Message {
         cursor += 10;
         cursor += 5;
         cursor += 5;
-        cursor = deskId.padding(runs, cursor);
-        cursor = memo.padding(runs, cursor);
+        cursor += deskId.byteLength();
+        cursor += memo.byteLength();
         return cursor;
     }
 
@@ -351,11 +351,8 @@ public final class OrderCancelRequestMessage implements Message {
             return false;
         }
         cursor += memo.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -363,7 +360,7 @@ public final class OrderCancelRequestMessage implements Message {
         Objects.checkFromIndexSize(offset, byteLength(), data.length);
         int cursor = offset;
         cursor = inboundBusinessHeader.encode(data, cursor);
-        if (buffer != null && buffer.length >= 18 + 2) {
+        if (buffer != null && buffer.length >= 20) {
             System.arraycopy(buffer, 18, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -375,7 +372,7 @@ public final class OrderCancelRequestMessage implements Message {
         cursor = origclordid.encode(data, cursor);
         cursor = side.encode(data, cursor);
         cursor = singleCancelRestatementReason.encode(data, cursor);
-        if (buffer != null && buffer.length >= 54 + 2) {
+        if (buffer != null && buffer.length >= 56) {
             System.arraycopy(buffer, 54, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

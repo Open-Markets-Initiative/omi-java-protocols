@@ -50,6 +50,9 @@ jobs:
       - name: Test Classes/Cboe/BzxEquities/BinaryOrderEntry.Boe.v2.4.55
         run: gradle --quiet :cboe-bzxequities-binaryorderentry-boe-v2-4-55:captureTest -Pcapture=omi-data-packets/Cboe/BzxEquities.BinaryOrderEntry.Boe.v2.4.55 -Pstrict
 
+      - name: Test Classes/Cboe/BzxEquities/BinaryOrderEntry.Boe.v2.4.57
+        run: gradle --quiet :cboe-bzxequities-binaryorderentry-boe-v2-4-57:captureTest -Pcapture=omi-data-packets/Cboe/BzxEquities.BinaryOrderEntry.Boe.v2.4.55 -Pstrict
+
       - name: Test Classes/Cboe/BzxEquities/MulticastDepthOfBook.Spin.v2.20.4
         run: gradle --quiet :cboe-bzxequities-multicastdepthofbook-spin-v2-20-4:captureTest -Pcapture=omi-data-packets/Cboe/BzxEquities.MulticastDepthOfBook.Spin.v2.20.4 -Pstrict
 

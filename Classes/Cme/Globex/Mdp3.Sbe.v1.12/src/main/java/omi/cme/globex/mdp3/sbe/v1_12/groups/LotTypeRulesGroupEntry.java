@@ -34,13 +34,6 @@ public final class LotTypeRulesGroupEntry implements GroupEntry {
     public static final String NAME = "LotTypeRulesGroup";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * This tag is required to interpret the value in tag 1231-MinLotSize
      */
     private final LotTypeField lotType = new LotTypeField();
@@ -127,7 +120,7 @@ public final class LotTypeRulesGroupEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override

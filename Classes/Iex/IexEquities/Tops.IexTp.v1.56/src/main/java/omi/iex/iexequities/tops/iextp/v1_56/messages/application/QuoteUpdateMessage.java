@@ -40,13 +40,6 @@ public final class QuoteUpdateMessage implements Message {
     public static final String NAME = "Quote Update Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Quote Update Flags
      */
     private final QuoteUpdateFlagsField quoteUpdateFlags = new QuoteUpdateFlagsField();
@@ -171,7 +164,7 @@ public final class QuoteUpdateMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -224,12 +217,7 @@ public final class QuoteUpdateMessage implements Message {
             return false;
         }
         cursor += AskPriceField.BYTE_LENGTH;
-        if (!askSize.parse(data, cursor)) {
-            return false;
-        }
-        cursor += AskSizeField.BYTE_LENGTH;
-
-        return true;
+        return askSize.parse(data, cursor);
     }
 
     @Override

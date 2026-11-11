@@ -41,13 +41,6 @@ public final class QuoteExecution implements Message {
     public static final String NAME = "Quote Execution";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * The time the event occurred in the CFE Matching Engine (not the time the message was sent)
      */
     private final TransactionTimeField transactionTime = new TransactionTimeField();
@@ -256,7 +249,7 @@ public final class QuoteExecution implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -333,12 +326,7 @@ public final class QuoteExecution implements Message {
             return false;
         }
         cursor += SubLiquidityIndicatorField.BYTE_LENGTH;
-        if (!feeCode.parse(data, cursor)) {
-            return false;
-        }
-        cursor += FeeCodeField.BYTE_LENGTH;
-
-        return true;
+        return feeCode.parse(data, cursor);
     }
 
     @Override

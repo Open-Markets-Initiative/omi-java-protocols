@@ -242,7 +242,6 @@ public final class SrqsDealResponse implements Message {
             return false;
         }
         cursor += FirmNegotiationIdField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -251,7 +250,7 @@ public final class SrqsDealResponse implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -265,7 +264,7 @@ public final class SrqsDealResponse implements Message {
         cursor = secondaryTradeId.encode(data, cursor);
         cursor = firmTradeId.encode(data, cursor);
         cursor = firmNegotiationId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 94 + 4) {
+        if (buffer != null && buffer.length >= 98) {
             System.arraycopy(buffer, 94, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

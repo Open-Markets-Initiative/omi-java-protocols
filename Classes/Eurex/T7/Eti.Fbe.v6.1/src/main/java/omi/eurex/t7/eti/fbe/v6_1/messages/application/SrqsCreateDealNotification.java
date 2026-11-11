@@ -626,11 +626,8 @@ public final class SrqsCreateDealNotification implements Message {
             return false;
         }
         cursor += orderBookItemGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -641,7 +638,7 @@ public final class SrqsCreateDealNotification implements Message {
         }
         noOrderBookItems.value((short) orderBookItemGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -709,10 +706,7 @@ public final class SrqsCreateDealNotification implements Message {
                 return false;
             }
         }
-        if (!orderBookItemGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return orderBookItemGrpComp.isRecognized();
     }
 
     @Override

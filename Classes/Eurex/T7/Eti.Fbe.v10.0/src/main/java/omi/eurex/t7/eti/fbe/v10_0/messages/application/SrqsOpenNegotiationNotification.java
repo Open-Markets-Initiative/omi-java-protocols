@@ -829,11 +829,8 @@ public final class SrqsOpenNegotiationNotification implements Message {
             return false;
         }
         cursor += quotReqLegsGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -844,7 +841,7 @@ public final class SrqsOpenNegotiationNotification implements Message {
         }
         noLegs.value((short) quotReqLegsGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -885,7 +882,7 @@ public final class SrqsOpenNegotiationNotification implements Message {
         cursor = firmNegotiationId.encode(data, cursor);
         cursor = freeText.encode(data, cursor);
         cursor = partyOrderOriginationTrader.encode(data, cursor);
-        if (buffer != null && buffer.length >= 476 + 6) {
+        if (buffer != null && buffer.length >= 482) {
             System.arraycopy(buffer, 476, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding
@@ -928,10 +925,7 @@ public final class SrqsOpenNegotiationNotification implements Message {
                 return false;
             }
         }
-        if (!quotReqLegsGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return quotReqLegsGrpComp.isRecognized();
     }
 
     @Override

@@ -167,7 +167,6 @@ public final class CancelOrderByExchangeOrderIdRequest implements Message {
             return false;
         }
         cursor += SymbolIdField.BYTE_LENGTH;
-        cursor += 10; // padding
 
         return true;
     }
@@ -176,7 +175,7 @@ public final class CancelOrderByExchangeOrderIdRequest implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 8) {
+        if (buffer != null && buffer.length >= 8) {
             System.arraycopy(buffer, 0, data, cursor, 8); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 8, (byte) 0); // padding
@@ -186,7 +185,7 @@ public final class CancelOrderByExchangeOrderIdRequest implements Message {
         cursor = clientOrderId.encode(data, cursor);
         cursor = orderId.encode(data, cursor);
         cursor = symbolId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 44 + 10) {
+        if (buffer != null && buffer.length >= 54) {
             System.arraycopy(buffer, 44, data, cursor, 10); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 10, (byte) 0); // padding

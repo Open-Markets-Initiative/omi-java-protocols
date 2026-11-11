@@ -181,11 +181,8 @@ public final class QuoteRequest implements Message {
             return false;
         }
         cursor += relatedSymGroups.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -195,7 +192,7 @@ public final class QuoteRequest implements Message {
         cursor = transactTime.encode(data, cursor);
         cursor = quoteReqId.encode(data, cursor);
         cursor = matchEventIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 32 + 3) {
+        if (buffer != null && buffer.length >= 35) {
             System.arraycopy(buffer, 32, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding
@@ -237,10 +234,7 @@ public final class QuoteRequest implements Message {
                 return false;
             }
         }
-        if (!relatedSymGroups.isRecognized()) {
-            return false;
-        }
-        return true;
+        return relatedSymGroups.isRecognized();
     }
 
     @Override

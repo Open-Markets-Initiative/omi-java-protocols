@@ -34,13 +34,6 @@ public final class BrokenTradeMessage implements Message {
     public static final String NAME = "Broken Trade Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * The NASDAQ generated day-unique Match Number of this execution. The match number is also referenced in the Trade Break Message.
      */
     private final MatchNumberField matchNumber = new MatchNumberField();
@@ -81,7 +74,7 @@ public final class BrokenTradeMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -110,12 +103,7 @@ public final class BrokenTradeMessage implements Message {
         }
 
         int cursor = offset;
-        if (!matchNumber.parse(data, cursor)) {
-            return false;
-        }
-        cursor += MatchNumberField.BYTE_LENGTH;
-
-        return true;
+        return matchNumber.parse(data, cursor);
     }
 
     @Override
@@ -202,10 +190,7 @@ public final class BrokenTradeMessage implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "MatchNumber" -> Optional.of(matchNumber);
-            default -> Optional.empty();
-        };
+        return "MatchNumber".equals(name) ? Optional.of(matchNumber) : Optional.empty();
     }
 
     @Override

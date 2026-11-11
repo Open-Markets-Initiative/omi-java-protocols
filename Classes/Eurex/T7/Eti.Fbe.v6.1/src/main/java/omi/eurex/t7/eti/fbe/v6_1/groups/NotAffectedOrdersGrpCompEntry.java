@@ -29,13 +29,6 @@ public final class NotAffectedOrdersGrpCompEntry implements GroupEntry {
     public static final String NAME = "NotAffectedOrdersGrpComp";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Not Affected Order Id
      */
     private final NotAffectedOrderIdField notAffectedOrderId = new NotAffectedOrderIdField();
@@ -85,7 +78,7 @@ public final class NotAffectedOrdersGrpCompEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class NotAffectedOrdersGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += NotAffectedOrderIdField.BYTE_LENGTH;
-        if (!notAffOrigClOrdId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += NotAffOrigClOrdIdField.BYTE_LENGTH;
-
-        return true;
+        return notAffOrigClOrdId.parse(data, cursor);
     }
 
     @Override

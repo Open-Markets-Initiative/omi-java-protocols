@@ -117,7 +117,6 @@ public final class InstrumentAttributeGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += InstrAttribValueField.BYTE_LENGTH;
-        cursor += 7; // padding
 
         return true;
     }
@@ -128,7 +127,7 @@ public final class InstrumentAttributeGrpCompEntry implements GroupEntry {
         int cursor = offset;
         cursor = instrAttribType.encode(data, cursor);
         cursor = instrAttribValue.encode(data, cursor);
-        if (buffer != null && buffer.length >= 33 + 7) {
+        if (buffer != null && buffer.length >= 40) {
             System.arraycopy(buffer, 33, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

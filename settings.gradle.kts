@@ -38,6 +38,9 @@ project(":cboe-bzxequities-binaryorderentry-boe-v2-3").projectDir = file("Classe
 include("cboe-bzxequities-binaryorderentry-boe-v2-4-55")
 project(":cboe-bzxequities-binaryorderentry-boe-v2-4-55").projectDir = file("Classes/Cboe/BzxEquities/BinaryOrderEntry.Boe.v2.4.55")
 
+include("cboe-bzxequities-binaryorderentry-boe-v2-4-57")
+project(":cboe-bzxequities-binaryorderentry-boe-v2-4-57").projectDir = file("Classes/Cboe/BzxEquities/BinaryOrderEntry.Boe.v2.4.57")
+
 include("cboe-bzxequities-multicastdepthofbook-pitch-v2-20-4")
 project(":cboe-bzxequities-multicastdepthofbook-pitch-v2-20-4").projectDir = file("Classes/Cboe/BzxEquities/MulticastDepthOfBook.Pitch.v2.20.4")
 

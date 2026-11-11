@@ -37,13 +37,6 @@ public final class OfficialPriceMessage implements Message {
     public static final String NAME = "Official Price Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Price type identifier
      */
     private final PriceTypeField priceType = new PriceTypeField();
@@ -126,7 +119,7 @@ public final class OfficialPriceMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -167,12 +160,7 @@ public final class OfficialPriceMessage implements Message {
             return false;
         }
         cursor += SymbolField.BYTE_LENGTH;
-        if (!officialPrice.parse(data, cursor)) {
-            return false;
-        }
-        cursor += OfficialPriceField.BYTE_LENGTH;
-
-        return true;
+        return officialPrice.parse(data, cursor);
     }
 
     @Override

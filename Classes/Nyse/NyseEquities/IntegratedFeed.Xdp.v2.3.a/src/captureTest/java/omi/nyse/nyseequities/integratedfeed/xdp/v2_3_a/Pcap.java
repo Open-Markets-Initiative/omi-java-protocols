@@ -81,7 +81,7 @@ final class Pcap implements AutoCloseable {
             }
 
             records++;
-            Packet packet = transport(data, 0, data.length, link);
+            Packet packet = transport(data, data.length, link);
             if (packet != null) {
                 return packet;
             }
@@ -198,23 +198,23 @@ final class Pcap implements AutoCloseable {
         return slice;
     }
 
-    private static Packet transport(byte[] data, int start, int end, int link) throws IOException {
+    private static Packet transport(byte[] data, int end, int link) throws IOException {
         int ip;
         if (link == 1) {
-            ip = afterEtherType(data, start + 12, start + 14, end);
+            ip = afterEtherType(data, 12, 14, end);
         } else if (link == 113) {
-            ip = afterEtherType(data, start + 14, start + 16, end);
+            ip = afterEtherType(data, 14, 16, end);
         } else if (link == 276) {
-            ip = afterEtherType(data, start, start + 20, end);
+            ip = afterEtherType(data, 0, 20, end);
         } else if (link == 0 || link == 108) {
             // BSD loopback: the address family, in the capturing host's byte order or, for 108, the network's
-            if (start + 4 > end || (read(data, start, 4, false) != 2 && read(data, start, 4, true) != 2)) {
+            if (4 > end || (read(data, 0, 4, false) != 2 && read(data, 0, 4, true) != 2)) {
                 return null;
             }
 
-            ip = start + 4;
+            ip = 4;
         } else if (link == 101 || link == 228) {
-            ip = start;
+            ip = 0;
         } else {
             throw new IOException("link type " + link + " is not read");
         }

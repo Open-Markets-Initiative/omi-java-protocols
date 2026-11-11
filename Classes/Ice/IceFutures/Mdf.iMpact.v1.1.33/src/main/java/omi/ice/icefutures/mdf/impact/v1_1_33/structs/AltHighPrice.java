@@ -28,13 +28,6 @@ public final class AltHighPrice implements GroupEntry {
     public static final String NAME = "AltHighPrice";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * High Eris Futures Price
      */
     private final AltHighPriceField altHighPrice = new AltHighPriceField();
@@ -70,7 +63,7 @@ public final class AltHighPrice implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -94,12 +87,7 @@ public final class AltHighPrice implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!altHighPrice.parse(data, cursor)) {
-            return false;
-        }
-        cursor += AltHighPriceField.BYTE_LENGTH;
-
-        return true;
+        return altHighPrice.parse(data, cursor);
     }
 
     @Override
@@ -186,10 +174,7 @@ public final class AltHighPrice implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "AltHighPrice" -> Optional.of(altHighPrice);
-            default -> Optional.empty();
-        };
+        return "AltHighPrice".equals(name) ? Optional.of(altHighPrice) : Optional.empty();
     }
 
     @Override

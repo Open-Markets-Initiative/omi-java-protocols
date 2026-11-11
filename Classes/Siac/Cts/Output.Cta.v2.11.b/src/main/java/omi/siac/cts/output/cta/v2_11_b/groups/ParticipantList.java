@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import omi.siac.cts.output.cta.v2_11_b.types.Field;
 import omi.siac.cts.output.cta.v2_11_b.types.PrintOptions;
 
@@ -123,25 +122,6 @@ public final class ParticipantList extends AbstractList<ParticipantEntry> {
      */
     public int byteLength() {
         return entries.size() * ParticipantEntry.BYTE_LENGTH;
-    }
-
-    /**
-     * Adds the declared padding of every entry, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of the first entry, relative to the start of the message
-     * @return the offset just past the last entry
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        int[] padding = ParticipantEntry.padding();
-        for (int index = 0; index < entries.size(); index++) {
-            for (int run = 0; run < padding.length; run += 2) {
-                runs.add(cursor + padding[run]).add(padding[run + 1]);
-            }
-            cursor += ParticipantEntry.BYTE_LENGTH;
-        }
-        return cursor;
     }
 
     /**

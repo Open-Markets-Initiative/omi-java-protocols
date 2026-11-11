@@ -612,7 +612,6 @@ public final class SideAllocExtGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += ComplianceTextField.BYTE_LENGTH;
-        cursor += 1; // padding
 
         return true;
     }
@@ -628,7 +627,7 @@ public final class SideAllocExtGrpCompEntry implements GroupEntry {
         cursor = individualAllocId.encode(data, cursor);
         cursor = partyExecutingFirm.encode(data, cursor);
         cursor = partyExecutingTrader.encode(data, cursor);
-        if (buffer != null && buffer.length >= 47 + 1) {
+        if (buffer != null && buffer.length >= 48) {
             System.arraycopy(buffer, 47, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
@@ -655,7 +654,7 @@ public final class SideAllocExtGrpCompEntry implements GroupEntry {
         cursor = partyIdLocationId.encode(data, cursor);
         cursor = custOrderHandlingInst.encode(data, cursor);
         cursor = complianceText.encode(data, cursor);
-        if (buffer != null && buffer.length >= 175 + 1) {
+        if (buffer != null && buffer.length >= 176) {
             System.arraycopy(buffer, 175, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

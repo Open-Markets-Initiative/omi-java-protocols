@@ -43,13 +43,6 @@ public final class StripInfoMessage implements Message {
     public static final String NAME = "Strip Info Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Not used. Kept here for backward compatibility. Client should use the new 4-byte StripID field.
      */
     private final OldStripIdField oldStripId = new OldStripIdField();
@@ -216,7 +209,7 @@ public final class StripInfoMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -281,12 +274,7 @@ public final class StripInfoMessage implements Message {
             return false;
         }
         cursor += StripInfoField.BYTE_LENGTH;
-        if (!stripId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += StripIdField.BYTE_LENGTH;
-
-        return true;
+        return stripId.parse(data, cursor);
     }
 
     @Override

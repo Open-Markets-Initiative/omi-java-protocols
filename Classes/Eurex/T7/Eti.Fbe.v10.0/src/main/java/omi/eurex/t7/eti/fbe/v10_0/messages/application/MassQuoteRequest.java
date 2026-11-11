@@ -349,7 +349,7 @@ public final class MassQuoteRequest implements Message {
         cursor += 1;
         runs.add(cursor).add(6);
         cursor += 6;
-        cursor = quoteEntryGrpComp.padding(runs, cursor);
+        cursor += quoteEntryGrpComp.byteLength();
         return cursor;
     }
 
@@ -449,11 +449,8 @@ public final class MassQuoteRequest implements Message {
             return false;
         }
         cursor += quoteEntryGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -465,7 +462,7 @@ public final class MassQuoteRequest implements Message {
         noQuoteEntries.value((short) quoteEntryGrpComp.size());
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -486,7 +483,7 @@ public final class MassQuoteRequest implements Message {
         cursor = noQuoteEntries.encode(data, cursor);
         cursor = partyIdInvestmentDecisionMakerQualifier.encode(data, cursor);
         cursor = executingTraderQualifier.encode(data, cursor);
-        if (buffer != null && buffer.length >= 60 + 6) {
+        if (buffer != null && buffer.length >= 66) {
             System.arraycopy(buffer, 60, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding
@@ -529,10 +526,7 @@ public final class MassQuoteRequest implements Message {
                 return false;
             }
         }
-        if (!quoteEntryGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return quoteEntryGrpComp.isRecognized();
     }
 
     @Override

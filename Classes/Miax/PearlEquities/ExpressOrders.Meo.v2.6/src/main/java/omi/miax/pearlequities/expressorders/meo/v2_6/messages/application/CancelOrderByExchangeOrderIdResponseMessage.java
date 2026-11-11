@@ -223,7 +223,6 @@ public final class CancelOrderByExchangeOrderIdResponseMessage implements Messag
             return false;
         }
         cursor += CancelStatusField.BYTE_LENGTH;
-        cursor += 10; // padding
 
         return true;
     }
@@ -239,7 +238,7 @@ public final class CancelOrderByExchangeOrderIdResponseMessage implements Messag
         cursor = orderId.encode(data, cursor);
         cursor = leavesQty.encode(data, cursor);
         cursor = cancelStatus.encode(data, cursor);
-        if (buffer != null && buffer.length >= 49 + 10) {
+        if (buffer != null && buffer.length >= 59) {
             System.arraycopy(buffer, 49, data, cursor, 10); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 10, (byte) 0); // padding

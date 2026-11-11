@@ -91,14 +91,12 @@ public final class PacketDecoder {
                 return new Decoded(messages, undecoded, false, trailing, padding);
             }
 
-            int frameEnd = limit;
-
             long schemaId = ByteOps.unsigned(data, position + 28, 2, true);
             Optional<Message> selected;
             if (schemaId == 1100L) {
-                selected = SessionPayloadDispatch.decode(ByteOps.unsigned(data, position + 26, 2, true), data, position + MESSAGE_HEADER_LENGTH, frameEnd);
+                selected = SessionPayloadDispatch.decode(ByteOps.unsigned(data, position + 26, 2, true), data, position + MESSAGE_HEADER_LENGTH, limit);
             } else if (schemaId == 1101L) {
-                selected = OrderPayloadDispatch.decode(ByteOps.unsigned(data, position + 26, 2, true), data, position + MESSAGE_HEADER_LENGTH, frameEnd);
+                selected = OrderPayloadDispatch.decode(ByteOps.unsigned(data, position + 26, 2, true), data, position + MESSAGE_HEADER_LENGTH, limit);
             } else {
                 selected = Optional.empty();
             }
@@ -109,13 +107,13 @@ public final class PacketDecoder {
                 }
                 messages.add(message);
                 int consumed = position + MESSAGE_HEADER_LENGTH + message.byteLength();
-                if (consumed < frameEnd) {
-                    padding.add(new Trailing(message, Arrays.copyOfRange(data, consumed, frameEnd)));
+                if (consumed < limit) {
+                    padding.add(new Trailing(message, Arrays.copyOfRange(data, consumed, limit)));
                 }
             } else {
                 undecoded++;
             }
-            position = frameEnd;
+            position = limit;
         }
 
         return new Decoded(messages, undecoded, position == limit, trailing, padding);

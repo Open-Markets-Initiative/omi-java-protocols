@@ -47,13 +47,6 @@ public final class StartOfSpreadInstrumentSnapshotMessage implements Message {
     public static final String NAME = "Start Of Spread Instrument Snapshot Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * snapshotSeqNum
      */
     private final SnapshotSeqNumField snapshotSeqNum = new SnapshotSeqNumField();
@@ -346,7 +339,7 @@ public final class StartOfSpreadInstrumentSnapshotMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -447,12 +440,7 @@ public final class StartOfSpreadInstrumentSnapshotMessage implements Message {
             return false;
         }
         cursor += Leg2InstrumentIdField.BYTE_LENGTH;
-        if (!spreadBuyConvention.parse(data, cursor)) {
-            return false;
-        }
-        cursor += SpreadBuyConventionField.BYTE_LENGTH;
-
-        return true;
+        return spreadBuyConvention.parse(data, cursor);
     }
 
     @Override

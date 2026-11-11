@@ -330,7 +330,7 @@ public final class AddComplexInstrument implements Message {
         cursor = quantityScalingFactor.encode(data, cursor);
         cursor = legRatioMultiplier.encode(data, cursor);
         cursor = noLegs.encode(data, cursor);
-        if (buffer != null && buffer.length >= 69 + 2) {
+        if (buffer != null && buffer.length >= 71) {
             System.arraycopy(buffer, 69, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -373,10 +373,7 @@ public final class AddComplexInstrument implements Message {
                 return false;
             }
         }
-        if (!instrmtLegGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return instrmtLegGrpComp.isRecognized();
     }
 
     @Override

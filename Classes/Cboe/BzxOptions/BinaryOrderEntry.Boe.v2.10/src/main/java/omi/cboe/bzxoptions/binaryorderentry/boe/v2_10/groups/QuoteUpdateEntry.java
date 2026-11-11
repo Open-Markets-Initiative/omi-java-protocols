@@ -174,7 +174,6 @@ public final class QuoteUpdateEntry implements GroupEntry {
             return false;
         }
         cursor += OrderQtyLongField.BYTE_LENGTH;
-        cursor += 12; // padding
 
         return true;
     }
@@ -188,7 +187,7 @@ public final class QuoteUpdateEntry implements GroupEntry {
         cursor = openClose.encode(data, cursor);
         cursor = priceLong.encode(data, cursor);
         cursor = orderQtyLong.encode(data, cursor);
-        if (buffer != null && buffer.length >= 20 + 12) {
+        if (buffer != null && buffer.length >= 32) {
             System.arraycopy(buffer, 20, data, cursor, 12); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 12, (byte) 0); // padding

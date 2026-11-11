@@ -31,13 +31,6 @@ public final class MaturityMonthYear implements GroupEntry {
     public static final String NAME = "MaturityMonthYear";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * year
      */
     private final YearField year = new YearField();
@@ -115,7 +108,7 @@ public final class MaturityMonthYear implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -151,12 +144,7 @@ public final class MaturityMonthYear implements GroupEntry {
             return false;
         }
         cursor += DayField.BYTE_LENGTH;
-        if (!week.parse(data, cursor)) {
-            return false;
-        }
-        cursor += WeekField.BYTE_LENGTH;
-
-        return true;
+        return week.parse(data, cursor);
     }
 
     @Override

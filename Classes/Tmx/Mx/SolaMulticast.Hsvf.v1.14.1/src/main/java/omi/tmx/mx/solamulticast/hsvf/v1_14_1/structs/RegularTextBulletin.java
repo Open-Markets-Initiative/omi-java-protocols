@@ -29,13 +29,6 @@ public final class RegularTextBulletin implements GroupEntry {
     public static final String NAME = "RegularTextBulletin";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Bulletin in textual form
      */
     private final RegularBulletinContentsField regularBulletinContents = new RegularBulletinContentsField();
@@ -85,7 +78,7 @@ public final class RegularTextBulletin implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class RegularTextBulletin implements GroupEntry {
             return false;
         }
         cursor += RegularBulletinContentsField.BYTE_LENGTH;
-        if (!continueMarker.parse(data, cursor)) {
-            return false;
-        }
-        cursor += ContinueMarkerField.BYTE_LENGTH;
-
-        return true;
+        return continueMarker.parse(data, cursor);
     }
 
     @Override

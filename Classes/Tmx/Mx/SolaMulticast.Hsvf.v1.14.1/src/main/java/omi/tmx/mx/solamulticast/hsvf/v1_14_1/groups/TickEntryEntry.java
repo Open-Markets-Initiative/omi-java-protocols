@@ -29,13 +29,6 @@ public final class TickEntryEntry implements GroupEntry {
     public static final String NAME = "TickEntry";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Branch
      */
     private final MinPriceFractionPair minPriceFractionPair = new MinPriceFractionPair();
@@ -85,7 +78,7 @@ public final class TickEntryEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class TickEntryEntry implements GroupEntry {
             return false;
         }
         cursor += minPriceFractionPair.byteLength();
-        if (!tickPriceFractionPair.parseFrom(data, cursor, end)) {
-            return false;
-        }
-        cursor += tickPriceFractionPair.byteLength();
-
-        return true;
+        return tickPriceFractionPair.parseFrom(data, cursor, end);
     }
 
     @Override
@@ -163,10 +151,7 @@ public final class TickEntryEntry implements GroupEntry {
         if (!minPriceFractionPair.isRecognized()) {
             return false;
         }
-        if (!tickPriceFractionPair.isRecognized()) {
-            return false;
-        }
-        return true;
+        return tickPriceFractionPair.isRecognized();
     }
 
     @Override

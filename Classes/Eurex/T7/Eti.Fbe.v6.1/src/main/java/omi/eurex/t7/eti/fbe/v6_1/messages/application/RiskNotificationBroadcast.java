@@ -280,7 +280,6 @@ public final class RiskNotificationBroadcast implements Message {
             return false;
         }
         cursor += RequestingPartyClearingFirmField.BYTE_LENGTH;
-        cursor += 6; // padding
 
         return true;
     }
@@ -289,7 +288,7 @@ public final class RiskNotificationBroadcast implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -305,7 +304,7 @@ public final class RiskNotificationBroadcast implements Message {
         cursor = riskLimitAction.encode(data, cursor);
         cursor = requestingPartyEnteringFirm.encode(data, cursor);
         cursor = requestingPartyClearingFirm.encode(data, cursor);
-        if (buffer != null && buffer.length >= 76 + 6) {
+        if (buffer != null && buffer.length >= 82) {
             System.arraycopy(buffer, 76, data, cursor, 6); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 6, (byte) 0); // padding

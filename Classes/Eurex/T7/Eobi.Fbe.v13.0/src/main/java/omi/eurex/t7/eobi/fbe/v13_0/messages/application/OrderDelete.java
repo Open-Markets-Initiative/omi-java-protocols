@@ -161,12 +161,7 @@ public final class OrderDelete implements Message {
             return false;
         }
         cursor += SecurityIdField.BYTE_LENGTH;
-        if (!orderDetailsComp.parseFrom(data, cursor, end)) {
-            return false;
-        }
-        cursor += orderDetailsComp.byteLength();
-
-        return true;
+        return orderDetailsComp.parseFrom(data, cursor, end);
     }
 
     @Override

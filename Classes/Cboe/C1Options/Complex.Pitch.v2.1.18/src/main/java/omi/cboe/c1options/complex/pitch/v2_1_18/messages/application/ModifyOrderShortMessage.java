@@ -166,7 +166,6 @@ public final class ModifyOrderShortMessage implements Message {
             return false;
         }
         cursor += PriceShortField.BYTE_LENGTH;
-        cursor += 1; // padding
 
         return true;
     }
@@ -179,7 +178,7 @@ public final class ModifyOrderShortMessage implements Message {
         cursor = orderId.encode(data, cursor);
         cursor = quantityShort.encode(data, cursor);
         cursor = priceShort.encode(data, cursor);
-        if (buffer != null && buffer.length >= 16 + 1) {
+        if (buffer != null && buffer.length >= 17) {
             System.arraycopy(buffer, 16, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

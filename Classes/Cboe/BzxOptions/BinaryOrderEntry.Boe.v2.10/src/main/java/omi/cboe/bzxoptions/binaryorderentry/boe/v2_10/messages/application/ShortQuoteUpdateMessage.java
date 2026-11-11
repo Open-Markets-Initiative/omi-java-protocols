@@ -304,11 +304,8 @@ public final class ShortQuoteUpdateMessage implements Message {
             return false;
         }
         cursor += shortQuoteUpdate.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -324,7 +321,7 @@ public final class ShortQuoteUpdateMessage implements Message {
         cursor = clearingAccount.encode(data, cursor);
         cursor = customGroupId.encode(data, cursor);
         cursor = capacity.encode(data, cursor);
-        if (buffer != null && buffer.length >= 27 + 3) {
+        if (buffer != null && buffer.length >= 30) {
             System.arraycopy(buffer, 27, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding
@@ -370,10 +367,7 @@ public final class ShortQuoteUpdateMessage implements Message {
                 return false;
             }
         }
-        if (!shortQuoteUpdate.isRecognized()) {
-            return false;
-        }
-        return true;
+        return shortQuoteUpdate.isRecognized();
     }
 
     @Override

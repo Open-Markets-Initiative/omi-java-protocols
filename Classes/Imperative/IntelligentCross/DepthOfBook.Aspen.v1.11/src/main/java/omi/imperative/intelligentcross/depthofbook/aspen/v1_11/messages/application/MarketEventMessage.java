@@ -36,13 +36,6 @@ public final class MarketEventMessage implements Message {
     public static final String NAME = "Market Event Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Reserved for future use
      */
     private final ReservedField reserved = new ReservedField();
@@ -111,7 +104,7 @@ public final class MarketEventMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -148,12 +141,7 @@ public final class MarketEventMessage implements Message {
             return false;
         }
         cursor += TimestampField.BYTE_LENGTH;
-        if (!event.parse(data, cursor)) {
-            return false;
-        }
-        cursor += EventField.BYTE_LENGTH;
-
-        return true;
+        return event.parse(data, cursor);
     }
 
     @Override

@@ -32,13 +32,6 @@ public final class Sequence implements Message {
     public static final String NAME = "Sequence";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Session Identifier defined as type long (uInt64); recommended to use timestamp as number of microseconds since epoch (Jan 1, 1970)
      */
     private final UuidField uuid = new UuidField();
@@ -121,7 +114,7 @@ public final class Sequence implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -162,12 +155,7 @@ public final class Sequence implements Message {
             return false;
         }
         cursor += FaultToleranceIndicatorField.BYTE_LENGTH;
-        if (!keepAliveIntervalLapsed.parse(data, cursor)) {
-            return false;
-        }
-        cursor += KeepAliveIntervalLapsedField.BYTE_LENGTH;
-
-        return true;
+        return keepAliveIntervalLapsed.parse(data, cursor);
     }
 
     @Override

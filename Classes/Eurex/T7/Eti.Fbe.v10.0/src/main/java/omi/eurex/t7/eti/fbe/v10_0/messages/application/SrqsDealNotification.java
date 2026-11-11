@@ -769,11 +769,8 @@ public final class SrqsDealNotification implements Message {
             return false;
         }
         cursor += srqsTargetPartyTrdGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -784,7 +781,7 @@ public final class SrqsDealNotification implements Message {
         }
         noSrqsTargetPartyTrdGrps.value((short) srqsTargetPartyTrdGrpComp.size());
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -822,7 +819,7 @@ public final class SrqsDealNotification implements Message {
         cursor = partyIdLocationId.encode(data, cursor);
         cursor = complianceText.encode(data, cursor);
         cursor = partyIdTakeUpTradingFirm.encode(data, cursor);
-        if (buffer != null && buffer.length >= 393 + 1) {
+        if (buffer != null && buffer.length >= 394) {
             System.arraycopy(buffer, 393, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
@@ -865,10 +862,7 @@ public final class SrqsDealNotification implements Message {
                 return false;
             }
         }
-        if (!srqsTargetPartyTrdGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return srqsTargetPartyTrdGrpComp.isRecognized();
     }
 
     @Override

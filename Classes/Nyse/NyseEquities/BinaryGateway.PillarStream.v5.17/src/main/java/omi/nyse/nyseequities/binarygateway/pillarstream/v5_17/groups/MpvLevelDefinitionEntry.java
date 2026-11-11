@@ -32,13 +32,6 @@ public final class MpvLevelDefinitionEntry implements GroupEntry {
     public static final String NAME = "MpvLevelDefinition";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Name of the Minimum Price Variant (MPV) Level. Naming convention includes the MPVClassName
      */
     private final MpvLevelNameField mpvLevelName = new MpvLevelNameField();
@@ -130,7 +123,7 @@ public final class MpvLevelDefinitionEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -170,12 +163,7 @@ public final class MpvLevelDefinitionEntry implements GroupEntry {
             return false;
         }
         cursor += TradingMpvField.BYTE_LENGTH;
-        if (!mpvClassId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += MpvClassIdField.BYTE_LENGTH;
-
-        return true;
+        return mpvClassId.parse(data, cursor);
     }
 
     @Override

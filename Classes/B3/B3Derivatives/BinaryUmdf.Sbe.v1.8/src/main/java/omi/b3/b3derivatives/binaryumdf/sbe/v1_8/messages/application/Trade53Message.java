@@ -334,12 +334,7 @@ public final class Trade53Message implements Message {
             return false;
         }
         cursor += MdEntryTimestampField.BYTE_LENGTH;
-        if (!rptSeq.parse(data, cursor)) {
-            return false;
-        }
-        cursor += RptSeqField.BYTE_LENGTH;
-
-        return true;
+        return rptSeq.parse(data, cursor);
     }
 
     @Override
@@ -357,7 +352,7 @@ public final class Trade53Message implements Message {
         cursor = mdEntrySeller.encode(data, cursor);
         cursor = tradeDate.encode(data, cursor);
         cursor = trdSubType.encode(data, cursor);
-        if (buffer != null && buffer.length >= 43 + 1) {
+        if (buffer != null && buffer.length >= 44) {
             System.arraycopy(buffer, 43, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

@@ -258,12 +258,7 @@ public final class AddOrderExpandedMessage implements Message {
             return false;
         }
         cursor += CustomerIndicatorField.BYTE_LENGTH;
-        if (!clientId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += ClientIdField.BYTE_LENGTH;
-
-        return true;
+        return clientId.parse(data, cursor);
     }
 
     @Override
@@ -276,7 +271,7 @@ public final class AddOrderExpandedMessage implements Message {
         cursor = quantity.encode(data, cursor);
         cursor = complexInstrumentId.encode(data, cursor);
         cursor = price.encode(data, cursor);
-        if (buffer != null && buffer.length >= 33 + 1) {
+        if (buffer != null && buffer.length >= 34) {
             System.arraycopy(buffer, 33, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

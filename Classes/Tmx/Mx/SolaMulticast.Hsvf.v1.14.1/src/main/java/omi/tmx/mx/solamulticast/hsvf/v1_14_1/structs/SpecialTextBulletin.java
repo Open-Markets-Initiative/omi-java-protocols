@@ -30,13 +30,6 @@ public final class SpecialTextBulletin implements GroupEntry {
     public static final String NAME = "SpecialTextBulletin";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Identifies the strategy. The legs (underlying) are defined in message type NS. Alphanumeric with ".", "+", "-"
      */
     private final SymbolField symbol = new SymbolField();
@@ -100,7 +93,7 @@ public final class SpecialTextBulletin implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -132,12 +125,7 @@ public final class SpecialTextBulletin implements GroupEntry {
             return false;
         }
         cursor += SpecialBulletinContentsField.BYTE_LENGTH;
-        if (!continueMarker.parse(data, cursor)) {
-            return false;
-        }
-        cursor += ContinueMarkerField.BYTE_LENGTH;
-
-        return true;
+        return continueMarker.parse(data, cursor);
     }
 
     @Override

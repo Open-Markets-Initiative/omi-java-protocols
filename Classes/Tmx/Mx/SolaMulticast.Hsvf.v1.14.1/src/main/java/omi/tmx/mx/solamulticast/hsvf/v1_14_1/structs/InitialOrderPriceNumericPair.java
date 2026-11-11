@@ -29,13 +29,6 @@ public final class InitialOrderPriceNumericPair implements GroupEntry {
     public static final String NAME = "InitialOrderPriceNumericPair";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Indicates the price of the initial order
      */
     private final InitialOrderPriceField initialOrderPrice = new InitialOrderPriceField();
@@ -85,7 +78,7 @@ public final class InitialOrderPriceNumericPair implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class InitialOrderPriceNumericPair implements GroupEntry {
             return false;
         }
         cursor += InitialOrderPriceField.BYTE_LENGTH;
-        if (!initialOrderPriceFractionIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += InitialOrderPriceFractionIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return initialOrderPriceFractionIndicator.parse(data, cursor);
     }
 
     @Override

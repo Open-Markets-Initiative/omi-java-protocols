@@ -40,13 +40,6 @@ public final class ExpectedOpeningPriceAndSizeMessage implements Message {
     public static final String NAME = "Expected Opening Price And Size Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Class key
      */
     private final ClassKeyField classKey = new ClassKeyField();
@@ -157,7 +150,7 @@ public final class ExpectedOpeningPriceAndSizeMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -206,12 +199,7 @@ public final class ExpectedOpeningPriceAndSizeMessage implements Message {
             return false;
         }
         cursor += EopTypeField.BYTE_LENGTH;
-        if (!legalMarket.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LegalMarketField.BYTE_LENGTH;
-
-        return true;
+        return legalMarket.parse(data, cursor);
     }
 
     @Override

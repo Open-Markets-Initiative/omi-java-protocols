@@ -29,13 +29,6 @@ public final class LowPriceNegativeTenPair implements GroupEntry {
     public static final String NAME = "LowPriceNegativeTenPair";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Lowest trade price of the day or current low price if sent after a cancellation
      */
     private final RawLowPriceField rawLowPrice = new RawLowPriceField();
@@ -85,7 +78,7 @@ public final class LowPriceNegativeTenPair implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class LowPriceNegativeTenPair implements GroupEntry {
             return false;
         }
         cursor += RawLowPriceField.BYTE_LENGTH;
-        if (!lowPriceFractionIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LowPriceFractionIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return lowPriceFractionIndicator.parse(data, cursor);
     }
 
     @Override

@@ -29,13 +29,6 @@ public final class StrikePrice implements GroupEntry {
     public static final String NAME = "StrikePrice";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * First byte is the exponent, last 4 bytes are the mantissa. This field is required for options
      */
     private final StrikePriceExponentField strikePriceExponent = new StrikePriceExponentField();
@@ -85,7 +78,7 @@ public final class StrikePrice implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class StrikePrice implements GroupEntry {
             return false;
         }
         cursor += StrikePriceExponentField.BYTE_LENGTH;
-        if (!strikePriceMantissa.parse(data, cursor)) {
-            return false;
-        }
-        cursor += StrikePriceMantissaField.BYTE_LENGTH;
-
-        return true;
+        return strikePriceMantissa.parse(data, cursor);
     }
 
     @Override

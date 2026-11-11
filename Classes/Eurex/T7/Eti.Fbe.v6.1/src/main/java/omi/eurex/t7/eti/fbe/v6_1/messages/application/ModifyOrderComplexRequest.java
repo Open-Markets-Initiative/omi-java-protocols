@@ -929,11 +929,8 @@ public final class ModifyOrderComplexRequest implements Message {
             return false;
         }
         cursor += legOrdGrpComp.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -945,7 +942,7 @@ public final class ModifyOrderComplexRequest implements Message {
         noLegs.value((short) legOrdGrpComp.size());
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -990,7 +987,7 @@ public final class ModifyOrderComplexRequest implements Message {
         cursor = freeText3.encode(data, cursor);
         cursor = fixClOrdId.encode(data, cursor);
         cursor = noLegs.encode(data, cursor);
-        if (buffer != null && buffer.length >= 248 + 2) {
+        if (buffer != null && buffer.length >= 250) {
             System.arraycopy(buffer, 248, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -1033,10 +1030,7 @@ public final class ModifyOrderComplexRequest implements Message {
                 return false;
             }
         }
-        if (!legOrdGrpComp.isRecognized()) {
-            return false;
-        }
-        return true;
+        return legOrdGrpComp.isRecognized();
     }
 
     @Override

@@ -181,12 +181,7 @@ public final class OrderModifySamePrio implements Message {
             return false;
         }
         cursor += SecurityIdField.BYTE_LENGTH;
-        if (!orderDetailsComp.parseFrom(data, cursor, end)) {
-            return false;
-        }
-        cursor += orderDetailsComp.byteLength();
-
-        return true;
+        return orderDetailsComp.parseFrom(data, cursor, end);
     }
 
     @Override
@@ -196,7 +191,7 @@ public final class OrderModifySamePrio implements Message {
         cursor = trdRegTsTimeIn.encode(data, cursor);
         cursor = transactTime.encode(data, cursor);
         cursor = prevDisplayQty.encode(data, cursor);
-        if (buffer != null && buffer.length >= 20 + 4) {
+        if (buffer != null && buffer.length >= 24) {
             System.arraycopy(buffer, 20, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

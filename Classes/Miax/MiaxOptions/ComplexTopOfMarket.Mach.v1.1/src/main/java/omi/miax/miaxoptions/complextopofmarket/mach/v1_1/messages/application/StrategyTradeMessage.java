@@ -209,7 +209,6 @@ public final class StrategyTradeMessage implements Message {
             return false;
         }
         cursor += TradeConditionField.BYTE_LENGTH;
-        cursor += 16; // padding
 
         return true;
     }
@@ -224,7 +223,7 @@ public final class StrategyTradeMessage implements Message {
         cursor = netPrice.encode(data, cursor);
         cursor = tradeSize.encode(data, cursor);
         cursor = tradeCondition.encode(data, cursor);
-        if (buffer != null && buffer.length >= 25 + 16) {
+        if (buffer != null && buffer.length >= 41) {
             System.arraycopy(buffer, 25, data, cursor, 16); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 16, (byte) 0); // padding

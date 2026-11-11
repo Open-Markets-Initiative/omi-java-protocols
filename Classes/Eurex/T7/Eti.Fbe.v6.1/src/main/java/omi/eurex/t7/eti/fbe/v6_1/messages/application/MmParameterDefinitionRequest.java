@@ -280,7 +280,6 @@ public final class MmParameterDefinitionRequest implements Message {
             return false;
         }
         cursor += ProductComplexField.BYTE_LENGTH;
-        cursor += 7; // padding
 
         return true;
     }
@@ -290,7 +289,7 @@ public final class MmParameterDefinitionRequest implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = networkMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 8 + 2) {
+        if (buffer != null && buffer.length >= 10) {
             System.arraycopy(buffer, 8, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -305,7 +304,7 @@ public final class MmParameterDefinitionRequest implements Message {
         cursor = delta.encode(data, cursor);
         cursor = vega.encode(data, cursor);
         cursor = productComplex.encode(data, cursor);
-        if (buffer != null && buffer.length >= 51 + 7) {
+        if (buffer != null && buffer.length >= 58) {
             System.arraycopy(buffer, 51, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

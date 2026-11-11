@@ -98,7 +98,6 @@ public final class CorrectionCondition implements GroupEntry {
             return false;
         }
         cursor += TransactionField.BYTE_LENGTH;
-        cursor += 3; // padding
 
         return true;
     }
@@ -108,7 +107,7 @@ public final class CorrectionCondition implements GroupEntry {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = transaction.encode(data, cursor);
-        if (buffer != null && buffer.length >= 1 + 3) {
+        if (buffer != null && buffer.length >= 4) {
             System.arraycopy(buffer, 1, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding
@@ -193,10 +192,7 @@ public final class CorrectionCondition implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "Transaction" -> Optional.of(transaction);
-            default -> Optional.empty();
-        };
+        return "Transaction".equals(name) ? Optional.of(transaction) : Optional.empty();
     }
 
     @Override

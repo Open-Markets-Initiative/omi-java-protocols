@@ -35,13 +35,6 @@ public final class LoginAcceptedMessage implements Message {
     public static final String NAME = "Login Accepted Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Version of the Nyse ArcaBook protocol, formatted vv.vv.
      */
     private final VersionIdField versionId = new VersionIdField();
@@ -96,7 +89,7 @@ public final class LoginAcceptedMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -129,12 +122,7 @@ public final class LoginAcceptedMessage implements Message {
             return false;
         }
         cursor += VersionIdField.BYTE_LENGTH;
-        if (!paddingAscii.parse(data, cursor)) {
-            return false;
-        }
-        cursor += PaddingAsciiField2.BYTE_LENGTH;
-
-        return true;
+        return paddingAscii.parse(data, cursor);
     }
 
     @Override

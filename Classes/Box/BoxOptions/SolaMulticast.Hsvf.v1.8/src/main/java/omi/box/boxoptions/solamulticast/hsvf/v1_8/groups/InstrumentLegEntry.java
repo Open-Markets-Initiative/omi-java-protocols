@@ -30,13 +30,6 @@ public final class InstrumentLegEntry implements GroupEntry {
     public static final String NAME = "InstrumentLeg";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * + : Buy the leg
      */
     private final LegRatioSignField legRatioSign = new LegRatioSignField();
@@ -100,7 +93,7 @@ public final class InstrumentLegEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -132,12 +125,7 @@ public final class InstrumentLegEntry implements GroupEntry {
             return false;
         }
         cursor += LegRatioField.BYTE_LENGTH;
-        if (!legSymbol.parse(data, cursor)) {
-            return false;
-        }
-        cursor += LegSymbolField.BYTE_LENGTH;
-
-        return true;
+        return legSymbol.parse(data, cursor);
     }
 
     @Override

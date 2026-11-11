@@ -866,11 +866,8 @@ public final class PurgeRejectedMessage implements Message {
             }
             cursor += MassCancelIdField.BYTE_LENGTH;
         }
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -934,7 +931,7 @@ public final class PurgeRejectedMessage implements Message {
         cursor = transactionTime.encode(data, cursor);
         cursor = purgeRejectReason.encode(data, cursor);
         cursor = text.encode(data, cursor);
-        if (buffer != null && buffer.length >= 69 + 1) {
+        if (buffer != null && buffer.length >= 70) {
             System.arraycopy(buffer, 69, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

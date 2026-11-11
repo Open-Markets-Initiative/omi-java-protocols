@@ -28,13 +28,6 @@ public final class SrqsQuoteGrpCompEntry implements GroupEntry {
     public static final String NAME = "SrqsQuoteGrpComp";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Quote Id
      */
     private final QuoteIdField quoteId = new QuoteIdField();
@@ -70,7 +63,7 @@ public final class SrqsQuoteGrpCompEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -94,12 +87,7 @@ public final class SrqsQuoteGrpCompEntry implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!quoteId.parse(data, cursor)) {
-            return false;
-        }
-        cursor += QuoteIdField.BYTE_LENGTH;
-
-        return true;
+        return quoteId.parse(data, cursor);
     }
 
     @Override
@@ -186,10 +174,7 @@ public final class SrqsQuoteGrpCompEntry implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "QuoteId" -> Optional.of(quoteId);
-            default -> Optional.empty();
-        };
+        return "QuoteId".equals(name) ? Optional.of(quoteId) : Optional.empty();
     }
 
     @Override

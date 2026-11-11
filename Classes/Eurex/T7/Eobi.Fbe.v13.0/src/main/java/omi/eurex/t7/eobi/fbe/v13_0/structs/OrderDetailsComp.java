@@ -190,12 +190,7 @@ public final class OrderDetailsComp implements GroupEntry {
         }
         cursor += HhiIndicatorField.BYTE_LENGTH;
         cursor += 5; // padding
-        if (!price.parse(data, cursor)) {
-            return false;
-        }
-        cursor += PriceField.BYTE_LENGTH;
-
-        return true;
+        return price.parse(data, cursor);
     }
 
     @Override
@@ -207,7 +202,7 @@ public final class OrderDetailsComp implements GroupEntry {
         cursor = side.encode(data, cursor);
         cursor = ordType.encode(data, cursor);
         cursor = hhiIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 19 + 5) {
+        if (buffer != null && buffer.length >= 24) {
             System.arraycopy(buffer, 19, data, cursor, 5); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 5, (byte) 0); // padding

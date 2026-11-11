@@ -134,11 +134,8 @@ public final class IncrementalRefreshSessionStatisticsLongGroups implements Grou
             return false;
         }
         cursor += incrementalRefreshSessionStatisticsLongGroup.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -188,10 +185,7 @@ public final class IncrementalRefreshSessionStatisticsLongGroups implements Grou
                 return false;
             }
         }
-        if (!incrementalRefreshSessionStatisticsLongGroup.isRecognized()) {
-            return false;
-        }
-        return true;
+        return incrementalRefreshSessionStatisticsLongGroup.isRecognized();
     }
 
     @Override

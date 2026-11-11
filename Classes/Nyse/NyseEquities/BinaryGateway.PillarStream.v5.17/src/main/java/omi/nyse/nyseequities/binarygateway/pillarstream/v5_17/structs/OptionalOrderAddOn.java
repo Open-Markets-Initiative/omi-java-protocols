@@ -191,12 +191,7 @@ public final class OptionalOrderAddOn implements GroupEntry {
             return false;
         }
         cursor += OffsetPriceField.BYTE_LENGTH;
-        if (!effectiveTime.parse(data, cursor)) {
-            return false;
-        }
-        cursor += EffectiveTimeField.BYTE_LENGTH;
-
-        return true;
+        return effectiveTime.parse(data, cursor);
     }
 
     @Override
@@ -207,7 +202,7 @@ public final class OptionalOrderAddOn implements GroupEntry {
         cursor = deliverToCompId.encode(data, cursor);
         cursor = maxFloor.encode(data, cursor);
         cursor = locateBroker.encode(data, cursor);
-        if (buffer != null && buffer.length >= 17 + 8) {
+        if (buffer != null && buffer.length >= 25) {
             System.arraycopy(buffer, 17, data, cursor, 8); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 8, (byte) 0); // padding

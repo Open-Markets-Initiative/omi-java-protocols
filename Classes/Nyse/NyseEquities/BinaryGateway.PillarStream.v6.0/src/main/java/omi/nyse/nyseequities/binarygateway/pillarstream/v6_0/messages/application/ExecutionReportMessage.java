@@ -515,7 +515,7 @@ public final class ExecutionReportMessage implements Message {
         cursor = lastQty.encode(data, cursor);
         cursor = liquidityIndicator.encode(data, cursor);
         cursor = bitfieldExecutionDetails.encode(data, cursor);
-        if (buffer != null && buffer.length >= 65 + 3) {
+        if (buffer != null && buffer.length >= 68) {
             System.arraycopy(buffer, 65, data, cursor, 3); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding
@@ -561,10 +561,7 @@ public final class ExecutionReportMessage implements Message {
                 return false;
             }
         }
-        if (optionalSettlementTypeAddOnPresent() && !optionalSettlementTypeAddOn.isRecognized()) {
-            return false;
-        }
-        return true;
+        return !optionalSettlementTypeAddOnPresent() || optionalSettlementTypeAddOn.isRecognized();
     }
 
     @Override

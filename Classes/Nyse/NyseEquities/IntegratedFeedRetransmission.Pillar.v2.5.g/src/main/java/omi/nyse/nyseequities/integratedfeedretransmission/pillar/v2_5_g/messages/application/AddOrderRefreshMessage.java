@@ -261,7 +261,6 @@ public final class AddOrderRefreshMessage implements Message {
             return false;
         }
         cursor += FirmIdField.BYTE_LENGTH;
-        cursor += 1; // padding
 
         return true;
     }
@@ -279,7 +278,7 @@ public final class AddOrderRefreshMessage implements Message {
         cursor = volume.encode(data, cursor);
         cursor = side.encode(data, cursor);
         cursor = firmId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 38 + 1) {
+        if (buffer != null && buffer.length >= 39) {
             System.arraycopy(buffer, 38, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

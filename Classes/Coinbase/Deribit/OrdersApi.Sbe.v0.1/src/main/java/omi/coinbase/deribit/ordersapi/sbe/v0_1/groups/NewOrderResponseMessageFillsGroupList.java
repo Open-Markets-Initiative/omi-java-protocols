@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.types.Field;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.types.PrintOptions;
 
@@ -150,27 +149,6 @@ public final class NewOrderResponseMessageFillsGroupList extends AbstractList<Ne
             length += entry.byteLength();
         }
         return length;
-    }
-
-    /**
-     * Adds the declared padding of every entry, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of the first entry, relative to the start of the message
-     * @return the offset just past the last entry
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        int[] padding = NewOrderResponseMessageFillsGroupEntry.padding();
-        for (NewOrderResponseMessageFillsGroupEntry entry : entries) {
-            for (int run = 0; run < padding.length; run += 2) {
-                if (padding[run] + padding[run + 1] <= entry.knownBytes()) {
-                    runs.add(cursor + padding[run]).add(padding[run + 1]);
-                }
-            }
-            cursor += entry.byteLength();
-        }
-        return cursor;
     }
 
     /**

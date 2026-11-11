@@ -185,7 +185,6 @@ public final class TradingSessionStatusBroadcast implements Message {
             return false;
         }
         cursor += RefApplLastMsgIdField.BYTE_LENGTH;
-        cursor += 7; // padding
 
         return true;
     }
@@ -194,7 +193,7 @@ public final class TradingSessionStatusBroadcast implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -205,7 +204,7 @@ public final class TradingSessionStatusBroadcast implements Message {
         cursor = tradeDate.encode(data, cursor);
         cursor = tradSesEvent.encode(data, cursor);
         cursor = refApplLastMsgId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 83 + 7) {
+        if (buffer != null && buffer.length >= 90) {
             System.arraycopy(buffer, 83, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

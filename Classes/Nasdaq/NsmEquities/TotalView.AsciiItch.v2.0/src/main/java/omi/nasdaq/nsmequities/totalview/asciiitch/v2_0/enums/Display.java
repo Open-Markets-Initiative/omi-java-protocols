@@ -48,9 +48,6 @@ public enum Display {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<Display> fromWire(char wire) {
-        return switch (wire) {
-            case 'Y' -> Optional.of(DISPLAYED);
-            default -> Optional.empty();
-        };
+        return wire == 'Y' ? Optional.of(DISPLAYED) : Optional.empty();
     }
 }

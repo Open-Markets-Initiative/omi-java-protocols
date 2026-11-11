@@ -136,7 +136,6 @@ public final class LegDefinitionEntry implements GroupEntry {
             return false;
         }
         cursor += LegSideField.BYTE_LENGTH;
-        cursor += 8; // padding
 
         return true;
     }
@@ -148,7 +147,7 @@ public final class LegDefinitionEntry implements GroupEntry {
         cursor = productId.encode(data, cursor);
         cursor = legRatioQty.encode(data, cursor);
         cursor = legSide.encode(data, cursor);
-        if (buffer != null && buffer.length >= 7 + 8) {
+        if (buffer != null && buffer.length >= 15) {
             System.arraycopy(buffer, 7, data, cursor, 8); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 8, (byte) 0); // padding

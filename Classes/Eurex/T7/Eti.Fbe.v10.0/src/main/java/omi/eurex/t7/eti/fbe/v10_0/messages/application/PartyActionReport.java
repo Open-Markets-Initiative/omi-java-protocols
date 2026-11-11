@@ -276,19 +276,14 @@ public final class PartyActionReport implements Message {
             return false;
         }
         cursor += PartyActionTypeField.BYTE_LENGTH;
-        if (!requestingPartyIdEnteringFirm.parse(data, cursor)) {
-            return false;
-        }
-        cursor += RequestingPartyIdEnteringFirmField.BYTE_LENGTH;
-
-        return true;
+        return requestingPartyIdEnteringFirm.parse(data, cursor);
     }
 
     @Override
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

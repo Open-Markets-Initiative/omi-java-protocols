@@ -174,7 +174,6 @@ public final class PartyDetailsGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += PartyDetailDeskIdField.BYTE_LENGTH;
-        cursor += 1; // padding
 
         return true;
     }
@@ -188,7 +187,7 @@ public final class PartyDetailsGrpCompEntry implements GroupEntry {
         cursor = partyDetailRoleQualifier.encode(data, cursor);
         cursor = partyDetailStatus.encode(data, cursor);
         cursor = partyDetailDeskId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 15 + 1) {
+        if (buffer != null && buffer.length >= 16) {
             System.arraycopy(buffer, 15, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

@@ -48,9 +48,6 @@ public enum FlatPricing {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<FlatPricing> fromWire(char wire) {
-        return switch (wire) {
-            case 'F' -> Optional.of(FLAT_PRICING_IS_IN_EFFECT);
-            default -> Optional.empty();
-        };
+        return wire == 'F' ? Optional.of(FLAT_PRICING_IS_IN_EFFECT) : Optional.empty();
     }
 }

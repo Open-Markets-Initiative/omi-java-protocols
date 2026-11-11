@@ -28,13 +28,6 @@ public final class Aon implements GroupEntry {
     public static final String NAME = "Aon";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Order is All-Or-None
      */
     private final AonField aon = new AonField();
@@ -70,7 +63,7 @@ public final class Aon implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -94,12 +87,7 @@ public final class Aon implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!aon.parse(data, cursor)) {
-            return false;
-        }
-        cursor += AonField.BYTE_LENGTH;
-
-        return true;
+        return aon.parse(data, cursor);
     }
 
     @Override
@@ -186,10 +174,7 @@ public final class Aon implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "Aon" -> Optional.of(aon);
-            default -> Optional.empty();
-        };
+        return "Aon".equals(name) ? Optional.of(aon) : Optional.empty();
     }
 
     @Override

@@ -138,7 +138,7 @@ public final class BulletinsMessage implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         bulletin.writeKey(bulletinType);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 1) {
+        if (buffer != null && buffer.length >= 1) {
             System.arraycopy(buffer, 0, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
@@ -178,10 +178,7 @@ public final class BulletinsMessage implements Message {
                 return false;
             }
         }
-        if (!bulletin.isRecognized()) {
-            return false;
-        }
-        return true;
+        return bulletin.isRecognized();
     }
 
     @Override
@@ -232,10 +229,7 @@ public final class BulletinsMessage implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "BulletinType" -> Optional.of(bulletinType);
-            default -> Optional.empty();
-        };
+        return "BulletinType".equals(name) ? Optional.of(bulletinType) : Optional.empty();
     }
 
     @Override

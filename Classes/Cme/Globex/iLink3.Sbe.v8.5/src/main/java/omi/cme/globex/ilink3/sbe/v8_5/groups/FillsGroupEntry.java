@@ -36,13 +36,6 @@ public final class FillsGroupEntry implements GroupEntry {
     public static final String NAME = "FillsGroup";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Price of this fill reason or allocation. Required if NoFills(1362) &gt; 0. Same as LastPx(31)
      */
     private final FillPxField fillPx = new FillPxField();
@@ -163,7 +156,7 @@ public final class FillsGroupEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override

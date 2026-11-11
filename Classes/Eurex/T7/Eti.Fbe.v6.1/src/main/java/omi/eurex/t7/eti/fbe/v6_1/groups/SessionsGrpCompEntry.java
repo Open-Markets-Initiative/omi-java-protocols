@@ -136,7 +136,6 @@ public final class SessionsGrpCompEntry implements GroupEntry {
             return false;
         }
         cursor += SessionSubModeField.BYTE_LENGTH;
-        cursor += 2; // padding
 
         return true;
     }
@@ -148,7 +147,7 @@ public final class SessionsGrpCompEntry implements GroupEntry {
         cursor = partyIdSessionId.encode(data, cursor);
         cursor = sessionMode.encode(data, cursor);
         cursor = sessionSubMode.encode(data, cursor);
-        if (buffer != null && buffer.length >= 6 + 2) {
+        if (buffer != null && buffer.length >= 8) {
             System.arraycopy(buffer, 6, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

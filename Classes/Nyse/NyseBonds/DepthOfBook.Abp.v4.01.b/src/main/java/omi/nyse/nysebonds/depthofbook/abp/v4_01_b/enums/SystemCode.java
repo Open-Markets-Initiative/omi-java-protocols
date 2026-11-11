@@ -48,9 +48,6 @@ public enum SystemCode {
      * @return the matching value, or empty when the protocol declares no value for it
      */
     public static Optional<SystemCode> fromWire(char wire) {
-        return switch (wire) {
-            case 'F' -> Optional.of(BONDS);
-            default -> Optional.empty();
-        };
+        return wire == 'F' ? Optional.of(BONDS) : Optional.empty();
     }
 }

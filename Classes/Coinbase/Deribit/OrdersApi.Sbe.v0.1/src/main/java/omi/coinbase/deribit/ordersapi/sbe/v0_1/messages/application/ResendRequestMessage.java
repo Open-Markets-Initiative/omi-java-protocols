@@ -30,13 +30,6 @@ public final class ResendRequestMessage implements Message {
     public static final String NAME = "Resend Request Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * fromSequenceNumber
      */
     private final FromSequenceNumberField fromSequenceNumber = new FromSequenceNumberField();
@@ -91,7 +84,7 @@ public final class ResendRequestMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -124,12 +117,7 @@ public final class ResendRequestMessage implements Message {
             return false;
         }
         cursor += FromSequenceNumberField.BYTE_LENGTH;
-        if (!toSequenceNumber.parse(data, cursor)) {
-            return false;
-        }
-        cursor += ToSequenceNumberField.BYTE_LENGTH;
-
-        return true;
+        return toSequenceNumber.parse(data, cursor);
     }
 
     @Override

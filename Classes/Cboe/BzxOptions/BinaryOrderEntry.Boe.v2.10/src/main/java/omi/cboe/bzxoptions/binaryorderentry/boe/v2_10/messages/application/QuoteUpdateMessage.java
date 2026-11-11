@@ -344,11 +344,8 @@ public final class QuoteUpdateMessage implements Message {
             return false;
         }
         cursor += quoteUpdate.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -366,7 +363,7 @@ public final class QuoteUpdateMessage implements Message {
         cursor = account.encode(data, cursor);
         cursor = customGroupId.encode(data, cursor);
         cursor = capacity.encode(data, cursor);
-        if (buffer != null && buffer.length >= 47 + 15) {
+        if (buffer != null && buffer.length >= 62) {
             System.arraycopy(buffer, 47, data, cursor, 15); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 15, (byte) 0); // padding
@@ -412,10 +409,7 @@ public final class QuoteUpdateMessage implements Message {
                 return false;
             }
         }
-        if (!quoteUpdate.isRecognized()) {
-            return false;
-        }
-        return true;
+        return quoteUpdate.isRecognized();
     }
 
     @Override

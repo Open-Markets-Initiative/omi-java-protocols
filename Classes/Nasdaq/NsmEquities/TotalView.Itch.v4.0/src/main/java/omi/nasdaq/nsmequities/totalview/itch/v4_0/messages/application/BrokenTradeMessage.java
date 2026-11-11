@@ -35,13 +35,6 @@ public final class BrokenTradeMessage implements Message {
     public static final String NAME = "Broken Trade Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Nanoseconds portion of the timestamp.
      */
     private final NanosecondsField nanoseconds = new NanosecondsField();
@@ -96,7 +89,7 @@ public final class BrokenTradeMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -129,12 +122,7 @@ public final class BrokenTradeMessage implements Message {
             return false;
         }
         cursor += NanosecondsField.BYTE_LENGTH;
-        if (!matchNumber.parse(data, cursor)) {
-            return false;
-        }
-        cursor += MatchNumberField.BYTE_LENGTH;
-
-        return true;
+        return matchNumber.parse(data, cursor);
     }
 
     @Override

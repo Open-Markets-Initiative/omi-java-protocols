@@ -337,7 +337,6 @@ public final class OutrightSeriesIndexMappingMessage implements Message {
             return false;
         }
         cursor += ClosingOnlyIndicatorField.BYTE_LENGTH;
-        cursor += 1; // padding
 
         return true;
     }
@@ -359,7 +358,7 @@ public final class OutrightSeriesIndexMappingMessage implements Message {
         cursor = putOrCall.encode(data, cursor);
         cursor = strikePrice.encode(data, cursor);
         cursor = closingOnlyIndicator.encode(data, cursor);
-        if (buffer != null && buffer.length >= 50 + 1) {
+        if (buffer != null && buffer.length >= 51) {
             System.arraycopy(buffer, 50, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding

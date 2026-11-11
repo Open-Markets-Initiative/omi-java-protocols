@@ -239,12 +239,7 @@ public final class EquitiesSymbolReferenceDataMessage implements Message {
             return false;
         }
         cursor += MpvClassIdField.BYTE_LENGTH;
-        if (!testSymbolIndicator.parse(data, cursor)) {
-            return false;
-        }
-        cursor += TestSymbolIndicatorField.BYTE_LENGTH;
-
-        return true;
+        return testSymbolIndicator.parse(data, cursor);
     }
 
     @Override
@@ -257,7 +252,7 @@ public final class EquitiesSymbolReferenceDataMessage implements Message {
         cursor = listedMic.encode(data, cursor);
         cursor = roundLotSize.encode(data, cursor);
         cursor = advRiskRangeId.encode(data, cursor);
-        if (buffer != null && buffer.length >= 42 + 7) {
+        if (buffer != null && buffer.length >= 49) {
             System.arraycopy(buffer, 42, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding

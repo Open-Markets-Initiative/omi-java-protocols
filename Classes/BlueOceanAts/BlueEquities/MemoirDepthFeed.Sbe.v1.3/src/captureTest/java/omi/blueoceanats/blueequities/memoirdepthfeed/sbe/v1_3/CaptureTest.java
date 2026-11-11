@@ -3,7 +3,6 @@ package omi.blueoceanats.blueequities.memoirdepthfeed.sbe.v1_3;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HexFormat;
 import java.util.List;
@@ -35,8 +34,6 @@ public final class CaptureTest {
 
     private long packets;
     private long otherPackets;
-    private long records;
-    private long otherFlows;
     private long messages;
     private long undecoded;
     private long trailing;
@@ -66,7 +63,7 @@ public final class CaptureTest {
         }
         test.summary();
 
-        if (test.packets + test.records == 0) {
+        if (test.packets == 0) {
             System.err.println("No packet was read from the capture.");
             System.exit(1);
         }
@@ -93,7 +90,7 @@ public final class CaptureTest {
     }
 
     private void walk(Path path, boolean strict) throws IOException {
-        long before = packets + records;
+        long before = packets;
         try (Pcap pcap = Pcap.open(path)) {
             for (Pcap.Packet packet = pcap.next(); packet != null; packet = pcap.next()) {
                 String where = path.getFileName() + " packet " + pcap.records();
@@ -109,7 +106,7 @@ public final class CaptureTest {
         }
 
         // One capture among many could otherwise hold nothing and pass unnoticed.
-        if (strict && packets + records == before) {
+        if (strict && packets == before) {
             errors++;
             System.out.println(path.getFileName() + ": no packet was read");
         }

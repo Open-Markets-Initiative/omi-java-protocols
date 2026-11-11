@@ -261,7 +261,6 @@ public final class GatewayResponse implements Message {
             return false;
         }
         cursor += TradSesModeField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -270,7 +269,7 @@ public final class GatewayResponse implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -285,7 +284,7 @@ public final class GatewayResponse implements Message {
         cursor = secondaryGatewayStatus.encode(data, cursor);
         cursor = sessionMode.encode(data, cursor);
         cursor = tradSesMode.encode(data, cursor);
-        if (buffer != null && buffer.length >= 46 + 4) {
+        if (buffer != null && buffer.length >= 50) {
             System.arraycopy(buffer, 46, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

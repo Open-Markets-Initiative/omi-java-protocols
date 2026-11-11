@@ -262,7 +262,6 @@ public final class OpeningPrice15Message implements Message {
             return false;
         }
         cursor += RptSeqField.BYTE_LENGTH;
-        cursor += 2; // padding
 
         return true;
     }
@@ -275,7 +274,7 @@ public final class OpeningPrice15Message implements Message {
         cursor = matchEventIndicator.encode(data, cursor);
         cursor = mdUpdateAction.encode(data, cursor);
         cursor = openCloseSettlFlag.encode(data, cursor);
-        if (buffer != null && buffer.length >= 11 + 1) {
+        if (buffer != null && buffer.length >= 12) {
             System.arraycopy(buffer, 11, data, cursor, 1); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
@@ -286,7 +285,7 @@ public final class OpeningPrice15Message implements Message {
         cursor = tradeDate.encode(data, cursor);
         cursor = mdEntryTimestamp.encode(data, cursor);
         cursor = rptSeq.encode(data, cursor);
-        if (buffer != null && buffer.length >= 42 + 2) {
+        if (buffer != null && buffer.length >= 44) {
             System.arraycopy(buffer, 42, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

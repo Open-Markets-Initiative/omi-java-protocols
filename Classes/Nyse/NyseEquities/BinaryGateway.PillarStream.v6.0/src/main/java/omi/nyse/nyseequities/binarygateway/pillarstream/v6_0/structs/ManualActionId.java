@@ -30,13 +30,6 @@ public final class ManualActionId implements GroupEntry {
     public static final String NAME = "ManualActionId";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Message sequence number
      */
     private final SeqField seq = new SeqField();
@@ -86,7 +79,7 @@ public final class ManualActionId implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -114,12 +107,7 @@ public final class ManualActionId implements GroupEntry {
             return false;
         }
         cursor += streamId.byteLength();
-        if (!seq.parse(data, cursor)) {
-            return false;
-        }
-        cursor += SeqField.BYTE_LENGTH;
-
-        return true;
+        return seq.parse(data, cursor);
     }
 
     @Override
@@ -208,10 +196,7 @@ public final class ManualActionId implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "Seq" -> Optional.of(seq);
-            default -> Optional.empty();
-        };
+        return "Seq".equals(name) ? Optional.of(seq) : Optional.empty();
     }
 
     @Override

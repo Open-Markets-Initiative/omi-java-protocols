@@ -1,7 +1,6 @@
 package omi.nyse.nyseequities.openbook.ultra.v2_1_b.dispatch;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalLong;
@@ -92,10 +91,8 @@ public final class PacketDecoder {
                 return new Decoded(messages, undecoded, false, trailing, padding);
             }
 
-            int frameEnd = limit;
-
             long messageType = ByteOps.unsigned(data, position + 2, 2, false);
-            Optional<Message> selected = PayloadDispatch.decode(messageType, OptionalLong.of(ByteOps.unsigned(data, position + 14, 1, false)), data, position + MESSAGE_HEADER_LENGTH, frameEnd);
+            Optional<Message> selected = PayloadDispatch.decode(messageType, OptionalLong.of(ByteOps.unsigned(data, position + 14, 1, false)), data, position + MESSAGE_HEADER_LENGTH, limit);
             if (selected.isPresent()) {
                 Message message = selected.get();
                 if (!message.isDecoded()) {

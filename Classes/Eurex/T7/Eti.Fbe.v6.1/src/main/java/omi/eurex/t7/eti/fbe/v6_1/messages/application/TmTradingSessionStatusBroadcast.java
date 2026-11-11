@@ -128,7 +128,6 @@ public final class TmTradingSessionStatusBroadcast implements Message {
             return false;
         }
         cursor += TradSesEventField.BYTE_LENGTH;
-        cursor += 7; // padding
 
         return true;
     }
@@ -137,7 +136,7 @@ public final class TmTradingSessionStatusBroadcast implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        if (buffer != null && buffer.length >= 0 + 2) {
+        if (buffer != null && buffer.length >= 2) {
             System.arraycopy(buffer, 0, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
@@ -145,7 +144,7 @@ public final class TmTradingSessionStatusBroadcast implements Message {
         cursor += 2;
         cursor = rbcHeaderComp.encode(data, cursor);
         cursor = tradSesEvent.encode(data, cursor);
-        if (buffer != null && buffer.length >= 35 + 7) {
+        if (buffer != null && buffer.length >= 42) {
             System.arraycopy(buffer, 35, data, cursor, 7); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 7, (byte) 0); // padding
@@ -231,10 +230,7 @@ public final class TmTradingSessionStatusBroadcast implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "TradSesEvent" -> Optional.of(tradSesEvent);
-            default -> Optional.empty();
-        };
+        return "TradSesEvent".equals(name) ? Optional.of(tradSesEvent) : Optional.empty();
     }
 
     @Override

@@ -33,13 +33,6 @@ public final class FutureOptionSymbol implements GroupEntry {
     public static final String NAME = "FutureOptionSymbol";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Option base symbol (symbol of the underlying)
      */
     private final RootSymbolField rootSymbol = new RootSymbolField();
@@ -145,7 +138,7 @@ public final class FutureOptionSymbol implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -189,12 +182,7 @@ public final class FutureOptionSymbol implements GroupEntry {
             return false;
         }
         cursor += CallPutCodeField.BYTE_LENGTH;
-        if (!strikePriceFractionPair.parseFrom(data, cursor, end)) {
-            return false;
-        }
-        cursor += strikePriceFractionPair.byteLength();
-
-        return true;
+        return strikePriceFractionPair.parseFrom(data, cursor, end);
     }
 
     @Override
@@ -239,10 +227,7 @@ public final class FutureOptionSymbol implements GroupEntry {
                 return false;
             }
         }
-        if (!strikePriceFractionPair.isRecognized()) {
-            return false;
-        }
-        return true;
+        return strikePriceFractionPair.isRecognized();
     }
 
     @Override

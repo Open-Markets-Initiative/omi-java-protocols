@@ -32,13 +32,6 @@ public final class MarketStatMessage implements Message {
     public static final String NAME = "Market Stat Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Price encoded with 9 decimal places
      */
     private final PriceField price = new PriceField();
@@ -107,7 +100,7 @@ public final class MarketStatMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -144,12 +137,7 @@ public final class MarketStatMessage implements Message {
             return false;
         }
         cursor += PriceField.BYTE_LENGTH;
-        if (!statType.parse(data, cursor)) {
-            return false;
-        }
-        cursor += StatTypeField.BYTE_LENGTH;
-
-        return true;
+        return statType.parse(data, cursor);
     }
 
     @Override

@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import omi.ice.icefutures.mdf.impact.v1_1_33.fields.NumberOfSpecialFieldsField;
 import omi.ice.icefutures.mdf.impact.v1_1_33.groups.SpecialFieldEntry;
 import omi.ice.icefutures.mdf.impact.v1_1_33.groups.SpecialFieldList;
@@ -93,23 +92,7 @@ public final class SpecialFieldMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public int[] padding() {
-        IntStream.Builder runs = IntStream.builder();
-        padding(runs, 0);
-        return runs.build().toArray();
-    }
-
-    /**
-     * Adds the declared padding runs, as offset and length pairs.
-     *
-     * @param runs   the destination
-     * @param offset the offset of this class's first byte, relative to the start of the message
-     * @return the offset just past this class's last byte
-     */
-    public int padding(IntStream.Builder runs, int offset) {
-        int cursor = offset;
-        cursor += 1;
-        cursor = specialField.padding(runs, cursor);
-        return cursor;
+        return new int[0];
     }
 
     @Override
@@ -146,11 +129,8 @@ public final class SpecialFieldMessage implements Message {
             return false;
         }
         cursor += specialField.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -198,10 +178,7 @@ public final class SpecialFieldMessage implements Message {
                 return false;
             }
         }
-        if (!specialField.isRecognized()) {
-            return false;
-        }
-        return true;
+        return specialField.isRecognized();
     }
 
     @Override
@@ -256,10 +233,7 @@ public final class SpecialFieldMessage implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "NumberOfSpecialFields" -> Optional.of(numberOfSpecialFields);
-            default -> Optional.empty();
-        };
+        return "NumberOfSpecialFields".equals(name) ? Optional.of(numberOfSpecialFields) : Optional.empty();
     }
 
     @Override

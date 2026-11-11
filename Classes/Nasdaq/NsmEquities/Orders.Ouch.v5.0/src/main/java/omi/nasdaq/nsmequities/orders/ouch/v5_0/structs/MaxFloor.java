@@ -28,13 +28,6 @@ public final class MaxFloor implements GroupEntry {
     public static final String NAME = "MaxFloor";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Represents the portion of your order that you wish to have displayed.
      */
     private final MaxFloorField maxFloor = new MaxFloorField();
@@ -70,7 +63,7 @@ public final class MaxFloor implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -94,12 +87,7 @@ public final class MaxFloor implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!maxFloor.parse(data, cursor)) {
-            return false;
-        }
-        cursor += MaxFloorField.BYTE_LENGTH;
-
-        return true;
+        return maxFloor.parse(data, cursor);
     }
 
     @Override
@@ -186,10 +174,7 @@ public final class MaxFloor implements GroupEntry {
 
     @Override
     public Optional<Field> field(String name) {
-        return switch (name) {
-            case "MaxFloor" -> Optional.of(maxFloor);
-            default -> Optional.empty();
-        };
+        return "MaxFloor".equals(name) ? Optional.of(maxFloor) : Optional.empty();
     }
 
     @Override

@@ -537,8 +537,8 @@ public final class ExecutionReportForwardMessage implements Message {
         cursor += 1;
         cursor += 1;
         cursor += 1;
-        cursor = deskId.padding(runs, cursor);
-        cursor = memo.padding(runs, cursor);
+        cursor += deskId.byteLength();
+        cursor += memo.byteLength();
         return cursor;
     }
 
@@ -688,11 +688,8 @@ public final class ExecutionReportForwardMessage implements Message {
             return false;
         }
         cursor += memo.byteLength();
-        if (end - cursor < 0) {
-            return false;
-        }
 
-        return true;
+        return cursor <= end;
     }
 
     @Override
@@ -719,7 +716,7 @@ public final class ExecutionReportForwardMessage implements Message {
         cursor = settlTypeOptional.encode(data, cursor);
         cursor = tradeDate.encode(data, cursor);
         cursor = daysToSettlementOptional.encode(data, cursor);
-        if (buffer != null && buffer.length >= 118 + 2) {
+        if (buffer != null && buffer.length >= 120) {
             System.arraycopy(buffer, 118, data, cursor, 2); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding

@@ -259,7 +259,6 @@ public final class TradeReport implements Message {
             return false;
         }
         cursor += TradeConditionField.BYTE_LENGTH;
-        cursor += 4; // padding
 
         return true;
     }
@@ -277,7 +276,7 @@ public final class TradeReport implements Message {
         cursor = matchSubType.encode(data, cursor);
         cursor = algorithmicTradeIndicator.encode(data, cursor);
         cursor = tradeCondition.encode(data, cursor);
-        if (buffer != null && buffer.length >= 36 + 4) {
+        if (buffer != null && buffer.length >= 40) {
             System.arraycopy(buffer, 36, data, cursor, 4); // padding
         } else {
             Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding

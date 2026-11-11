@@ -29,13 +29,6 @@ public final class AuctionResponseEntry implements GroupEntry {
     public static final String NAME = "AuctionResponse";
 
     /**
-     * This entry's declared padding runs, as {@code offset, length} pairs relative to the start of the entry.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = {};
-
-    /**
      * Price of the auction response in fixed point format with 6 whole number places followed by 4 decimal digits. The response, if shown (zero if not shown) is the best response on the contra side.
      */
     private final ResponsePriceField responsePrice = new ResponsePriceField();
@@ -85,7 +78,7 @@ public final class AuctionResponseEntry implements GroupEntry {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -113,12 +106,7 @@ public final class AuctionResponseEntry implements GroupEntry {
             return false;
         }
         cursor += ResponsePriceField.BYTE_LENGTH;
-        if (!responseSize.parse(data, cursor)) {
-            return false;
-        }
-        cursor += ResponseSizeField.BYTE_LENGTH;
-
-        return true;
+        return responseSize.parse(data, cursor);
     }
 
     @Override
