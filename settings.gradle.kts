@@ -346,3 +346,24 @@ project(":tmx-mx-solamulticast-hsvf-v1-14-1").projectDir = file("Classes/Tmx/Mx/
 
 include("txse-txseequities-seed-rake-v1-0")
 project(":txse-txseequities-seed-rake-v1-0").projectDir = file("Classes/Txse/TxseEquities/Seed.Rake.v1.0")
+
+include("zerocopy-iex-iexequities-deep-iextp-v1-06")
+project(":zerocopy-iex-iexequities-deep-iextp-v1-06").projectDir = file("ZeroCopy/Iex/IexEquities/Deep.IexTp.v1.06")
+
+include("zerocopy-iex-iexequities-deep-iextp-v1-08")
+project(":zerocopy-iex-iexequities-deep-iextp-v1-08").projectDir = file("ZeroCopy/Iex/IexEquities/Deep.IexTp.v1.08")
+
+include("zerocopy-iex-iexequities-deepplus-iextp-v1-01")
+project(":zerocopy-iex-iexequities-deepplus-iextp-v1-01").projectDir = file("ZeroCopy/Iex/IexEquities/DeepPlus.IexTp.v1.01")
+
+include("zerocopy-iex-iexequities-deepplus-iextp-v1-05")
+project(":zerocopy-iex-iexequities-deepplus-iextp-v1-05").projectDir = file("ZeroCopy/Iex/IexEquities/DeepPlus.IexTp.v1.05")
+
+include("zerocopy-iex-iexequities-tops-iextp-v1-56")
+project(":zerocopy-iex-iexequities-tops-iextp-v1-56").projectDir = file("ZeroCopy/Iex/IexEquities/Tops.IexTp.v1.56")
+
+include("zerocopy-iex-iexequities-tops-iextp-v1-64")
+project(":zerocopy-iex-iexequities-tops-iextp-v1-64").projectDir = file("ZeroCopy/Iex/IexEquities/Tops.IexTp.v1.64")
+
+include("zerocopy-iex-iexequities-tops-iextp-v1-66")
+project(":zerocopy-iex-iexequities-tops-iextp-v1-66").projectDir = file("ZeroCopy/Iex/IexEquities/Tops.IexTp.v1.66")

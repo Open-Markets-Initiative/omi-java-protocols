@@ -2,7 +2,7 @@
 
 ## What This Is
 
-Source generated Java classes for common binary exchange protocols, market data and order entry, each message a plain class that decodes from bytes and encodes back to them, held under Classes as Organization/Division/Protocol.Version.
+Source generated Java classes for common binary exchange protocols, market data and order entry, each message a plain class that decodes from bytes and encodes back to them, held under Classes as Organization/Division/Protocol.Version, and as flyweights read where their bytes lie, held under ZeroCopy the same way.
 
 For every organization and protocol published here: [ReadMe](ReadMe.md "Omi Java Protocols ReadMe")
 
@@ -11,6 +11,7 @@ For every organization and protocol published here: [ReadMe](ReadMe.md "Omi Java
 - Build with gradle at the repository root. Each protocol is a subproject of that one build, not a published artifact, so there is no coordinate to add to a dependency list: build its jar with `gradle :<project>:jar`, or copy its `src/main/java`, which needs only the JDK. The protocol's ReadMe names its project.
 - `parseFrom` copies each field's value into the message, so the values it hands back stay valid after the buffer is reused. `raw()` is the exception: the message and its fields keep a reference to the caller's buffer and copy from it when asked, so call `raw()` before reusing the buffer.
 - A protocol framed as a packet of counted messages has a `PacketDecoder` in its `dispatch` package that walks the packet headers and every message; use it rather than locating messages by hand. The headers have no class of their own. A protocol without a `PacketDecoder` leaves finding each message's offset to the caller, and the `decode(type, data, offset)` of its `dispatch` classes decodes the message for a type code there.
+- A ZeroCopy message is a flyweight over the caller's buffer, which its decoder rewraps for the next message of its type: copy out any value needed after that, or after the buffer is reused. Its `PacketDecoder` is an instance, started on a packet with `start` and read with `next` until it returns null.
 
 ## How This Was Generated
 

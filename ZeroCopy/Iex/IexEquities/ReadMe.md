@@ -1,0 +1,64 @@
+[![Iex](https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/Organizations/Iex/Images/Logo.png)](https://www.iex.io)
+
+
+## IEX Equities
+
+A division of [Investors Exchange](..).
+
+| [Protocol][Omi.Iex.Protocol.Definitions] | [Encoding][Omi.Encoding.Definitions] | Version | Date | Size | [Deployment][Omi.Glossary.Deployment] | [Testing][Omi.Glossary.Testing] | [Documentation][Omi.Iex.Specifications] |
+| --- | --- | --- | ---: | ---: | --- | --- | --- |
+| [DeepPlus][Iex.IexEquities.DeepPlus] | [IexTp][Omi.Encoding.IexTp] | [1.01][Iex.IexEquities.DeepPlus.IexTp.v1.01.Parser] | 9/30/2024 | 3,484 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Verified][Omi.Glossary.Testing.Verified] | [url][Iex.IexEquities.DeepPlus.IexTp.v1.01.Url] - [pdf][Iex.IexEquities.DeepPlus.IexTp.v1.01.Pdf] |
+| [DeepPlus][Iex.IexEquities.DeepPlus] | [IexTp][Omi.Encoding.IexTp] | [1.05][Iex.IexEquities.DeepPlus.IexTp.v1.05.Parser] | 8/21/2026 | 3,484 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Iex.IexEquities.DeepPlus.IexTp.v1.05.Url] - [pdf][Iex.IexEquities.DeepPlus.IexTp.v1.05.Pdf] |
+| [Deep][Iex.IexEquities.Deep] | [IexTp][Omi.Encoding.IexTp] | [1.06][Iex.IexEquities.Deep.IexTp.v1.06.Parser] | 2/27/2018 | 3,441 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Verified][Omi.Glossary.Testing.Verified] | [url][Iex.IexEquities.Deep.IexTp.v1.06.Url] - [pdf][Iex.IexEquities.Deep.IexTp.v1.06.Pdf] |
+| [Deep][Iex.IexEquities.Deep] | [IexTp][Omi.Encoding.IexTp] | [1.08][Iex.IexEquities.Deep.IexTp.v1.08.Parser] | 2/27/2018 | 3,647 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Iex.IexEquities.Deep.IexTp.v1.08.Url] - [pdf][Iex.IexEquities.Deep.IexTp.v1.08.Pdf] |
+| [Tops][Iex.IexEquities.Tops] | [IexTp][Omi.Encoding.IexTp] | [1.56][Iex.IexEquities.Tops.IexTp.v1.56.Parser] | 9/23/2016 | 1,275 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Verified][Omi.Glossary.Testing.Verified] | [url][Iex.IexEquities.Tops.IexTp.v1.56.Url] - [pdf][Iex.IexEquities.Tops.IexTp.v1.56.Pdf] |
+| [Tops][Iex.IexEquities.Tops] | [IexTp][Omi.Encoding.IexTp] | [1.64][Iex.IexEquities.Tops.IexTp.v1.64.Parser] | 2/27/2018 | 3,266 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Verified][Omi.Glossary.Testing.Verified] | [url][Iex.IexEquities.Tops.IexTp.v1.64.Url] - [pdf][Iex.IexEquities.Tops.IexTp.v1.64.Pdf] |
+| [Tops][Iex.IexEquities.Tops] | [IexTp][Omi.Encoding.IexTp] | [1.66][Iex.IexEquities.Tops.IexTp.v1.66.Parser] | 10/19/2021 | 3,286 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Iex.IexEquities.Tops.IexTp.v1.66.Url] - [pdf][Iex.IexEquities.Tops.IexTp.v1.66.Pdf] |
+
+
+<p align="center"><a href="https://www.iex.io" title="Investors Exchange Website"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Website.png" alt="Website" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://www.linkedin.com/company/iex-group-inc-" title="Investors Exchange on LinkedIn"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/LinkedIn.png" alt="LinkedIn" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://en.wikipedia.org/wiki/IEX" title="Investors Exchange on Wikipedia"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Wikipedia.png" alt="Wikipedia" width="32" height="32"></a></p>
+
+
+[Omi.Glossary.Deployment]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Deployment.md "Protocol Deployment"
+[Omi.Glossary.Deployment.Active]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Deployment.md "Deployment: Protocol is in active production"
+[Omi.Glossary.Deployment.Deprecated]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Deployment.md "Deployment: Protocol is no longer in active use"
+[Omi.Glossary.Deployment.Pending]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Deployment.md "Deployment: Protocol is not yet deployed to an active production environment"
+[Omi.Glossary.Deployment.Observability]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Deployment.md "Deployment: Protocol is carried for observability rather than trading"
+[Omi.Glossary.Deployment.Header]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Deployment.md "Deployment: Header only protocol provided for debugging"
+[Omi.Glossary.Deployment.Unknown]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Deployment.md "Deployment: Protocol deployment is unknown"
+[Omi.Glossary.Testing]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Testing.md "Protocol Testing Status"
+[Omi.Glossary.Testing.Verified]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Testing.md "Testing Status: Protocol has been tested on live data"
+[Omi.Glossary.Testing.Incomplete]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Testing.md "Testing Status: Protocol has been tested on live data but contains known issues"
+[Omi.Glossary.Testing.Beta]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Testing.md "Testing Status: Protocol has not been tested and structure is speculative"
+[Omi.Glossary.Testing.Untested]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Testing.md "Testing Status: Protocol has not been tested on live data"
+[Omi.Glossary.Testing.Unavailable]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Glossary/Testing.md "Testing Status: Protocol does not state a testing status"
+[Omi.Encoding.Definitions]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Protocols/ReadMe.md "Encoding Directory"
+[Omi.Iex.Protocol.Definitions]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/tree/main/Organizations/Iex/Protocols "Iex Protocol Directory"
+[Omi.Iex.Specifications]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/tree/main/Organizations/Iex/Specifications "Iex Specifications Directory"
+[Omi.Encoding.IexTp]: https://github.com/Open-Markets-Initiative/Directory/blob/main/Protocols/IexTp.md "IexTp Encoding"
+[IexEquities.Exchange]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/ZeroCopy/Iex/IexEquities "IEX Equities"
+[Iex.IexEquities.Deep]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Iex/Protocols/IexEquities/Deep.md "Depth Of Book"
+[Iex.IexEquities.DeepPlus]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Iex/Protocols/IexEquities/DeepPlus.md "DeepPlus"
+[Iex.IexEquities.Tops]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Iex/Protocols/IexEquities/Tops.md "Top Of Book"
+
+[Iex.IexEquities.Deep.IexTp.v1.06.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/ZeroCopy/Iex/IexEquities/Deep.IexTp.v1.06 "Iex IexEquities Deep IexTp v1.06 Java Parser"
+[Iex.IexEquities.Deep.IexTp.v1.06.Url]: https://www.iexexchange.io/resources/trading/documents "Investors Exchange 1.06 Url"
+[Iex.IexEquities.Deep.IexTp.v1.06.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Iex/Specifications/IexEquities/Deep/Iex.IexEquities.Deep.IexTp.v1.06.pdf "Investors Exchange 1.06 Pdf"
+[Iex.IexEquities.Deep.IexTp.v1.08.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/ZeroCopy/Iex/IexEquities/Deep.IexTp.v1.08 "Iex IexEquities Deep IexTp v1.08 Java Parser"
+[Iex.IexEquities.Deep.IexTp.v1.08.Url]: https://www.iexexchange.io/resources/trading/documents "Investors Exchange 1.08 Url"
+[Iex.IexEquities.Deep.IexTp.v1.08.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Iex/Specifications/IexEquities/Deep/Iex.IexEquities.Deep.IexTp.v1.08.pdf "Investors Exchange 1.08 Pdf"
+[Iex.IexEquities.DeepPlus.IexTp.v1.01.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/ZeroCopy/Iex/IexEquities/DeepPlus.IexTp.v1.01 "Iex IexEquities DeepPlus IexTp v1.01 Java Parser"
+[Iex.IexEquities.DeepPlus.IexTp.v1.01.Url]: https://www.iexexchange.io/resources/trading/documents "Investors Exchange 1.01 Url"
+[Iex.IexEquities.DeepPlus.IexTp.v1.01.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Iex/Specifications/IexEquities/DeepPlus/Iex.IexEquities.DeepPlus.IexTp.v1.01.pdf "Investors Exchange 1.01 Pdf"
+[Iex.IexEquities.DeepPlus.IexTp.v1.05.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/ZeroCopy/Iex/IexEquities/DeepPlus.IexTp.v1.05 "Iex IexEquities DeepPlus IexTp v1.05 Java Parser"
+[Iex.IexEquities.DeepPlus.IexTp.v1.05.Url]: https://www.iexexchange.io/resources/trading/documents "Investors Exchange 1.05 Url"
+[Iex.IexEquities.DeepPlus.IexTp.v1.05.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Iex/Specifications/IexEquities/DeepPlus/Iex.IexEquities.DeepPlus.IexTp.v1.05.pdf "Investors Exchange 1.05 Pdf"
+[Iex.IexEquities.Tops.IexTp.v1.56.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/ZeroCopy/Iex/IexEquities/Tops.IexTp.v1.56 "Iex IexEquities Tops IexTp v1.56 Java Parser"
+[Iex.IexEquities.Tops.IexTp.v1.56.Url]: https://www.iexexchange.io/resources/trading/documents "Investors Exchange 1.56 Url"
+[Iex.IexEquities.Tops.IexTp.v1.56.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Iex/Specifications/IexEquities/Tops/Iex.IexEquities.Tops.IexTp.v1.56.pdf "Investors Exchange 1.56 Pdf"
+[Iex.IexEquities.Tops.IexTp.v1.64.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/ZeroCopy/Iex/IexEquities/Tops.IexTp.v1.64 "Iex IexEquities Tops IexTp v1.64 Java Parser"
+[Iex.IexEquities.Tops.IexTp.v1.64.Url]: https://www.iexexchange.io/resources/trading/documents "Investors Exchange 1.64 Url"
+[Iex.IexEquities.Tops.IexTp.v1.64.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Iex/Specifications/IexEquities/Tops/Iex.IexEquities.Tops.IexTp.v1.64.pdf "Investors Exchange 1.64 Pdf"
+[Iex.IexEquities.Tops.IexTp.v1.66.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/ZeroCopy/Iex/IexEquities/Tops.IexTp.v1.66 "Iex IexEquities Tops IexTp v1.66 Java Parser"
+[Iex.IexEquities.Tops.IexTp.v1.66.Url]: https://www.iexexchange.io/resources/trading/documents "Investors Exchange 1.66 Url"
+[Iex.IexEquities.Tops.IexTp.v1.66.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Iex/Specifications/IexEquities/Tops/Iex.IexEquities.Tops.IexTp.v1.66.pdf "Investors Exchange 1.66 Pdf"
