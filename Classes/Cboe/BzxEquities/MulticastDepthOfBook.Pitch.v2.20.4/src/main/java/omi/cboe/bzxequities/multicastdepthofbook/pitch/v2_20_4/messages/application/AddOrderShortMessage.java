@@ -8,8 +8,8 @@ import java.util.Objects;
 import java.util.Optional;
 import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.AddFlagsField;
 import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.OrderIdField;
-import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.PriceBinaryShortPriceField;
-import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.QuantityBinaryField2;
+import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.PriceShortField;
+import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.QuantityShortField;
 import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.SideIndicatorField;
 import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.SymbolShortField;
 import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.TimeOffsetField;
@@ -52,7 +52,7 @@ public final class AddOrderShortMessage implements Message {
     /**
      * Number of shares/contracts being added to the book (may be less than the number entered)
      */
-    private final QuantityBinaryField2 quantityBinary = new QuantityBinaryField2();
+    private final QuantityShortField quantityShort = new QuantityShortField();
 
     /**
      * Symbol right padded with spaces
@@ -62,7 +62,7 @@ public final class AddOrderShortMessage implements Message {
     /**
      * The limit order price
      */
-    private final PriceBinaryShortPriceField priceBinaryShortPrice = new PriceBinaryShortPriceField();
+    private final PriceShortField priceShort = new PriceShortField();
 
     /**
      * Add Flags
@@ -72,7 +72,7 @@ public final class AddOrderShortMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(timeOffset, orderId, sideIndicator, quantityBinary, symbolShort, priceBinaryShortPrice, addFlags);
+    private final List<Field> fields = List.of(timeOffset, orderId, sideIndicator, quantityShort, symbolShort, priceShort, addFlags);
 
     private byte[] buffer;
 
@@ -108,10 +108,10 @@ public final class AddOrderShortMessage implements Message {
     /**
      * Number of shares/contracts being added to the book (may be less than the number entered)
      *
-     * @return the QuantityBinary field
+     * @return the QuantityShort field
      */
-    public QuantityBinaryField2 quantityBinary() {
-        return quantityBinary;
+    public QuantityShortField quantityShort() {
+        return quantityShort;
     }
 
     /**
@@ -126,10 +126,10 @@ public final class AddOrderShortMessage implements Message {
     /**
      * The limit order price
      *
-     * @return the PriceBinaryShortPrice field
+     * @return the PriceShort field
      */
-    public PriceBinaryShortPriceField priceBinaryShortPrice() {
-        return priceBinaryShortPrice;
+    public PriceShortField priceShort() {
+        return priceShort;
     }
 
     /**
@@ -200,18 +200,18 @@ public final class AddOrderShortMessage implements Message {
             return false;
         }
         cursor += SideIndicatorField.BYTE_LENGTH;
-        if (!quantityBinary.parse(data, cursor)) {
+        if (!quantityShort.parse(data, cursor)) {
             return false;
         }
-        cursor += QuantityBinaryField2.BYTE_LENGTH;
+        cursor += QuantityShortField.BYTE_LENGTH;
         if (!symbolShort.parse(data, cursor)) {
             return false;
         }
         cursor += SymbolShortField.BYTE_LENGTH;
-        if (!priceBinaryShortPrice.parse(data, cursor)) {
+        if (!priceShort.parse(data, cursor)) {
             return false;
         }
-        cursor += PriceBinaryShortPriceField.BYTE_LENGTH;
+        cursor += PriceShortField.BYTE_LENGTH;
         return addFlags.parse(data, cursor);
     }
 
@@ -222,9 +222,9 @@ public final class AddOrderShortMessage implements Message {
         cursor = timeOffset.encode(data, cursor);
         cursor = orderId.encode(data, cursor);
         cursor = sideIndicator.encode(data, cursor);
-        cursor = quantityBinary.encode(data, cursor);
+        cursor = quantityShort.encode(data, cursor);
         cursor = symbolShort.encode(data, cursor);
-        cursor = priceBinaryShortPrice.encode(data, cursor);
+        cursor = priceShort.encode(data, cursor);
         cursor = addFlags.encode(data, cursor);
         return cursor;
     }
@@ -309,9 +309,9 @@ public final class AddOrderShortMessage implements Message {
             case "TimeOffset" -> Optional.of(timeOffset);
             case "OrderId" -> Optional.of(orderId);
             case "SideIndicator" -> Optional.of(sideIndicator);
-            case "QuantityBinary" -> Optional.of(quantityBinary);
+            case "QuantityShort" -> Optional.of(quantityShort);
             case "SymbolShort" -> Optional.of(symbolShort);
-            case "PriceBinaryShortPrice" -> Optional.of(priceBinaryShortPrice);
+            case "PriceShort" -> Optional.of(priceShort);
             case "AddFlags" -> Optional.of(addFlags);
             default -> Optional.empty();
         };

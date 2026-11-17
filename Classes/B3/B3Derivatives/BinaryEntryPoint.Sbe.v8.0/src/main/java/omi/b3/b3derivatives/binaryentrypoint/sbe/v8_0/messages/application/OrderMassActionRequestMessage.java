@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.AssetField;
-import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.ClordidField;
+import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.ClOrdIdField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.MassActionScopeField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.MassActionTypeField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.MassCancelRestatementReasonField;
@@ -58,7 +58,7 @@ public final class OrderMassActionRequestMessage implements Message {
     /**
      * clOrdID
      */
-    private final ClordidField clordid = new ClordidField();
+    private final ClOrdIdField clOrdId = new ClOrdIdField();
 
     /**
      * execRestatementReason
@@ -98,7 +98,7 @@ public final class OrderMassActionRequestMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(inboundBusinessHeader.fields(), List.<Field>of(massActionType), List.<Field>of(massActionScope), List.<Field>of(clordid), List.<Field>of(massCancelRestatementReason), List.<Field>of(ordtagid), List.<Field>of(sideOptional), List.<Field>of(asset), List.<Field>of(securityIdOptional), investorId.fields()).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(inboundBusinessHeader.fields(), List.<Field>of(massActionType), List.<Field>of(massActionScope), List.<Field>of(clOrdId), List.<Field>of(massCancelRestatementReason), List.<Field>of(ordtagid), List.<Field>of(sideOptional), List.<Field>of(asset), List.<Field>of(securityIdOptional), investorId.fields()).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -125,10 +125,10 @@ public final class OrderMassActionRequestMessage implements Message {
     /**
      * clOrdID
      *
-     * @return the Clordid field
+     * @return the ClOrdId field
      */
-    public ClordidField clordid() {
-        return clordid;
+    public ClOrdIdField clOrdId() {
+        return clOrdId;
     }
 
     /**
@@ -253,10 +253,10 @@ public final class OrderMassActionRequestMessage implements Message {
             return false;
         }
         cursor += MassActionScopeField.BYTE_LENGTH;
-        if (!clordid.parse(data, cursor)) {
+        if (!clOrdId.parse(data, cursor)) {
             return false;
         }
-        cursor += ClordidField.BYTE_LENGTH;
+        cursor += ClOrdIdField.BYTE_LENGTH;
         if (!massCancelRestatementReason.parse(data, cursor)) {
             return false;
         }
@@ -288,7 +288,7 @@ public final class OrderMassActionRequestMessage implements Message {
         cursor = inboundBusinessHeader.encode(data, cursor);
         cursor = massActionType.encode(data, cursor);
         cursor = massActionScope.encode(data, cursor);
-        cursor = clordid.encode(data, cursor);
+        cursor = clOrdId.encode(data, cursor);
         cursor = massCancelRestatementReason.encode(data, cursor);
         cursor = ordtagid.encode(data, cursor);
         cursor = sideOptional.encode(data, cursor);
@@ -385,7 +385,7 @@ public final class OrderMassActionRequestMessage implements Message {
         return switch (name) {
             case "MassActionType" -> Optional.of(massActionType);
             case "MassActionScope" -> Optional.of(massActionScope);
-            case "Clordid" -> Optional.of(clordid);
+            case "ClOrdId" -> Optional.of(clOrdId);
             case "MassCancelRestatementReason" -> Optional.of(massCancelRestatementReason);
             case "Ordtagid" -> Optional.of(ordtagid);
             case "SideOptional" -> Optional.of(sideOptional);

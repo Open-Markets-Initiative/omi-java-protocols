@@ -3,7 +3,7 @@ package omi.miax.miaxoptions.complextopofmarket.mach.v1_1.enums;
 import java.util.Optional;
 
 /**
- * protocol packet type
+ * Mach protocol packet type
  *
  * <p>Backed by short. Values correspond to the wire integer encoding.</p>
  */
@@ -15,9 +15,9 @@ public enum PacketType {
     HEARTBEAT((short) 0, "Mach Heartbeat Message"),
 
     /**
-     * Mach Start Of Session Message
+     * Mach Start Of Session Message; Sequence Number is set to 0
      */
-    START_OF_SESSION((short) 1, "Mach Start Of Session Message"),
+    START_OF_SESSION((short) 1, "Mach Start Of Session Message; Sequence Number is set to 0"),
 
     /**
      * Mach end of session Message

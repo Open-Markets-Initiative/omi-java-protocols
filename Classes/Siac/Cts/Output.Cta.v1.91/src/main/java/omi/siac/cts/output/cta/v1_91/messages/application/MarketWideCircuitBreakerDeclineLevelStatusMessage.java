@@ -13,7 +13,6 @@ import omi.siac.cts.output.cta.v1_91.fields.MwcbLevel2Field;
 import omi.siac.cts.output.cta.v1_91.fields.MwcbLevel3Field;
 import omi.siac.cts.output.cta.v1_91.fields.ParticipantIdField;
 import omi.siac.cts.output.cta.v1_91.fields.ParticipantReferenceNumberField;
-import omi.siac.cts.output.cta.v1_91.fields.ReservedField;
 import omi.siac.cts.output.cta.v1_91.fields.TransactionIdField;
 import omi.siac.cts.output.cta.v1_91.structs.Timestamp;
 import omi.siac.cts.output.cta.v1_91.types.Field;
@@ -41,6 +40,13 @@ public final class MarketWideCircuitBreakerDeclineLevelStatusMessage implements 
      * This message's declared name.
      */
     public static final String NAME = "Market Wide Circuit Breaker Decline Level Status Message";
+
+    /**
+     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
+     *
+     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
+     */
+    private static final int[] PADDING = { 46, 1 };
 
     /**
      * Participant or Processor that generated the message
@@ -78,11 +84,6 @@ public final class MarketWideCircuitBreakerDeclineLevelStatusMessage implements 
     private final MwcbLevel3Field mwcbLevel3 = new MwcbLevel3Field();
 
     /**
-     * Field is reserved for future use.
-     */
-    private final ReservedField reserved = new ReservedField();
-
-    /**
      * Timestamp 1
      */
     private final Timestamp timestampField = new Timestamp();
@@ -90,7 +91,7 @@ public final class MarketWideCircuitBreakerDeclineLevelStatusMessage implements 
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(List.<Field>of(participantId), timestampField.fields(), List.<Field>of(messageId), List.<Field>of(transactionId), List.<Field>of(participantReferenceNumber), List.<Field>of(mwcbLevel1), List.<Field>of(mwcbLevel2), List.<Field>of(mwcbLevel3), List.<Field>of(reserved)).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(List.<Field>of(participantId), timestampField.fields(), List.<Field>of(messageId), List.<Field>of(transactionId), List.<Field>of(participantReferenceNumber), List.<Field>of(mwcbLevel1), List.<Field>of(mwcbLevel2), List.<Field>of(mwcbLevel3)).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -160,15 +161,6 @@ public final class MarketWideCircuitBreakerDeclineLevelStatusMessage implements 
     }
 
     /**
-     * Field is reserved for future use.
-     *
-     * @return the Reserved field
-     */
-    public ReservedField reserved() {
-        return reserved;
-    }
-
-    /**
      * Timestamp 1
      *
      * @return the Timestamp record
@@ -195,7 +187,7 @@ public final class MarketWideCircuitBreakerDeclineLevelStatusMessage implements 
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return new int[0];
+        return PADDING.clone();
     }
 
     @Override
@@ -256,7 +248,8 @@ public final class MarketWideCircuitBreakerDeclineLevelStatusMessage implements 
             return false;
         }
         cursor += MwcbLevel3Field.BYTE_LENGTH;
-        return reserved.parse(data, cursor);
+
+        return true;
     }
 
     @Override
@@ -271,7 +264,12 @@ public final class MarketWideCircuitBreakerDeclineLevelStatusMessage implements 
         cursor = mwcbLevel1.encode(data, cursor);
         cursor = mwcbLevel2.encode(data, cursor);
         cursor = mwcbLevel3.encode(data, cursor);
-        cursor = reserved.encode(data, cursor);
+        if (buffer != null && buffer.length >= 47) {
+            System.arraycopy(buffer, 46, data, cursor, 1); // padding
+        } else {
+            Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
+        }
+        cursor += 1;
         return cursor;
     }
 
@@ -360,7 +358,6 @@ public final class MarketWideCircuitBreakerDeclineLevelStatusMessage implements 
             case "MwcbLevel1" -> Optional.of(mwcbLevel1);
             case "MwcbLevel2" -> Optional.of(mwcbLevel2);
             case "MwcbLevel3" -> Optional.of(mwcbLevel3);
-            case "Reserved" -> Optional.of(reserved);
             default -> Optional.empty();
         };
     }

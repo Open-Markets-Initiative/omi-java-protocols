@@ -11,7 +11,7 @@ import omi.miax.pearlequities.expressorders.meo.v2_6.messages.application.NewOrd
 import omi.miax.pearlequities.expressorders.meo.v2_6.messages.application.NewOrderResponseMessage;
 import omi.miax.pearlequities.expressorders.meo.v2_6.messages.application.OrderPriceUpdateNotification;
 import omi.miax.pearlequities.expressorders.meo.v2_6.messages.application.ReserveOrderReplenishmentNotification;
-import omi.miax.pearlequities.expressorders.meo.v2_6.messages.application.SymbolUpdate;
+import omi.miax.pearlequities.expressorders.meo.v2_6.messages.application.SymbolUpdateMessage;
 import omi.miax.pearlequities.expressorders.meo.v2_6.messages.application.SystemStateNotification;
 import omi.miax.pearlequities.expressorders.meo.v2_6.types.Message;
 
@@ -35,7 +35,7 @@ public final class SequencedMessageDispatch {
     public static Optional<Message> decode(String sequencedMessageType, byte[] data, int offset, int end) {
         Message message;
         if ("SU".equals(sequencedMessageType)) {
-            message = new SymbolUpdate();
+            message = new SymbolUpdateMessage();
         } else if ("NR".equals(sequencedMessageType)) {
             message = new NewOrderResponseMessage();
         } else if ("MR".equals(sequencedMessageType)) {

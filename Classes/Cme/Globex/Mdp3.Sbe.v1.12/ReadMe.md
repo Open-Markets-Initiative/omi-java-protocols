@@ -97,8 +97,8 @@ Each message class carries its wire length as `BYTE_LENGTH`, and its type as `ME
 | `SnapshotFullRefreshTcpLongQty` | `messages.application` |  | 40 |
 | `SnapshotRefreshTopOrders` | `messages.application` |  | 16 |
 | `Terminate` | `messages.application` |  | 70 |
-| `AdminHeartbeat` | `messages.application` |  | 0 |
-| `SubscriberHeartbeat` | `messages.application` |  | 0 |
+| `AdminHeartbeat` | `messages.session` |  | 0 |
+| `SubscriberHeartbeat` | `messages.session` |  | 0 |
 
 ## Verification
 

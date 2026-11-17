@@ -55,7 +55,7 @@ Each message class carries its wire length as `BYTE_LENGTH`, and its type as `ME
 | `EndOfEndOfDaySummaryMessage` | `messages.application` | `'B'` | 22 |
 | `EndOfStartOfDaySummaryMessage` | `messages.application` | `'D'` | 22 |
 | `EndOfTestCycleMessage` | `messages.application` | `'N'` | 22 |
-| `Index` | `messages.application` | `'I'` | 41 |
+| `IndexMessage` | `messages.application` | `'I'` | 41 |
 | `LineIntegrityMessage` | `messages.application` | `'T'` | 22 |
 | `LongTradeMessage` | `messages.application` | `'L'` | 68 |
 | `MarketWideCircuitBreakerDeclineLevelStatusMessage` | `messages.application` | `'K'` | 47 |

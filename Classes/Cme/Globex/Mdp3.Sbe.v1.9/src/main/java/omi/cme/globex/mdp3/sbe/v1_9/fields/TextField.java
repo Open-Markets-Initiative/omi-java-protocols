@@ -7,16 +7,16 @@ import omi.cme.globex.mdp3.sbe.v1_9.types.FieldKind;
 import omi.cme.globex.mdp3.sbe.v1_9.types.PrintOptions;
 
 /**
- * Reject reason details
+ * Free format text string. May include logout confirmation or reason for logout
  *
- * <p>A 100-byte ASCII field padded with null characters. Trailing padding is stripped on decode.</p>
+ * <p>A 180-byte ASCII field padded with null characters. Trailing padding is stripped on decode.</p>
  */
 public final class TextField extends Field {
 
     /**
      * This field's fixed width on the wire.
      */
-    public static final int BYTE_LENGTH = 100;
+    public static final int BYTE_LENGTH = 180;
 
     /**
      * This field's declared name.

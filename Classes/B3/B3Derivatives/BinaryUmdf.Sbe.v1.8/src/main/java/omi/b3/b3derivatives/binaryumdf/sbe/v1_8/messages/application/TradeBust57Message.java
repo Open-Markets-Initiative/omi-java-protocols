@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MatchEventIndicatorField;
-import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntrySizeQuantityField;
+import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntrySizeField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntryTimestampField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdFuturePriceField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.RptSeqField;
@@ -66,7 +66,7 @@ public final class TradeBust57Message implements Message {
     /**
      * mDEntrySize
      */
-    private final MdEntrySizeQuantityField mdEntrySizeQuantity = new MdEntrySizeQuantityField();
+    private final MdEntrySizeField mdEntrySize = new MdEntrySizeField();
 
     /**
      * tradeID
@@ -91,7 +91,7 @@ public final class TradeBust57Message implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(securityId, matchEventIndicator, tradingSessionId, mdFuturePrice, mdEntrySizeQuantity, tradeId, tradeDate, mdEntryTimestamp, rptSeq);
+    private final List<Field> fields = List.of(securityId, matchEventIndicator, tradingSessionId, mdFuturePrice, mdEntrySize, tradeId, tradeDate, mdEntryTimestamp, rptSeq);
 
     private byte[] buffer;
 
@@ -136,10 +136,10 @@ public final class TradeBust57Message implements Message {
     /**
      * mDEntrySize
      *
-     * @return the MdEntrySizeQuantity field
+     * @return the MdEntrySize field
      */
-    public MdEntrySizeQuantityField mdEntrySizeQuantity() {
-        return mdEntrySizeQuantity;
+    public MdEntrySizeField mdEntrySize() {
+        return mdEntrySize;
     }
 
     /**
@@ -242,10 +242,10 @@ public final class TradeBust57Message implements Message {
             return false;
         }
         cursor += MdFuturePriceField.BYTE_LENGTH;
-        if (!mdEntrySizeQuantity.parse(data, cursor)) {
+        if (!mdEntrySize.parse(data, cursor)) {
             return false;
         }
-        cursor += MdEntrySizeQuantityField.BYTE_LENGTH;
+        cursor += MdEntrySizeField.BYTE_LENGTH;
         if (!tradeId.parse(data, cursor)) {
             return false;
         }
@@ -276,7 +276,7 @@ public final class TradeBust57Message implements Message {
         }
         cursor += 2;
         cursor = mdFuturePrice.encode(data, cursor);
-        cursor = mdEntrySizeQuantity.encode(data, cursor);
+        cursor = mdEntrySize.encode(data, cursor);
         cursor = tradeId.encode(data, cursor);
         cursor = tradeDate.encode(data, cursor);
         if (buffer != null && buffer.length >= 36) {
@@ -371,7 +371,7 @@ public final class TradeBust57Message implements Message {
             case "MatchEventIndicator" -> Optional.of(matchEventIndicator);
             case "TradingSessionId" -> Optional.of(tradingSessionId);
             case "MdFuturePrice" -> Optional.of(mdFuturePrice);
-            case "MdEntrySizeQuantity" -> Optional.of(mdEntrySizeQuantity);
+            case "MdEntrySize" -> Optional.of(mdEntrySize);
             case "TradeId" -> Optional.of(tradeId);
             case "TradeDate" -> Optional.of(tradeDate);
             case "MdEntryTimestamp" -> Optional.of(mdEntryTimestamp);

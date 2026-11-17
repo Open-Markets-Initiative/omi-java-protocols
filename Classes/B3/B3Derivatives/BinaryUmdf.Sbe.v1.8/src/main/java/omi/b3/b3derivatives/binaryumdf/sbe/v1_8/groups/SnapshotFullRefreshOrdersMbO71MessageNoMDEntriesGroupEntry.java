@@ -8,7 +8,7 @@ import java.util.Optional;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.EnteringFirmField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdCorporateOffsetPriceOptionalField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntryPositionNoField;
-import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntrySizeQuantityField;
+import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntrySizeField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntryTypeField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdInsertTimestampField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.SecondaryOrderIdField;
@@ -46,7 +46,7 @@ public final class SnapshotFullRefreshOrdersMbO71MessageNoMDEntriesGroupEntry im
     /**
      * mDEntrySize
      */
-    private final MdEntrySizeQuantityField mdEntrySizeQuantity = new MdEntrySizeQuantityField();
+    private final MdEntrySizeField mdEntrySize = new MdEntrySizeField();
 
     /**
      * mDEntryPositionNo
@@ -76,7 +76,7 @@ public final class SnapshotFullRefreshOrdersMbO71MessageNoMDEntriesGroupEntry im
     /**
      * This entry's fields, in wire order.
      */
-    private final List<Field> fields = List.of(mdCorporateOffsetPriceOptional, mdEntrySizeQuantity, mdEntryPositionNo, enteringFirm, mdInsertTimestamp, secondaryOrderId, mdEntryType);
+    private final List<Field> fields = List.of(mdCorporateOffsetPriceOptional, mdEntrySize, mdEntryPositionNo, enteringFirm, mdInsertTimestamp, secondaryOrderId, mdEntryType);
 
     private byte[] buffer;
 
@@ -94,10 +94,10 @@ public final class SnapshotFullRefreshOrdersMbO71MessageNoMDEntriesGroupEntry im
     /**
      * mDEntrySize
      *
-     * @return the MdEntrySizeQuantity field
+     * @return the MdEntrySize field
      */
-    public MdEntrySizeQuantityField mdEntrySizeQuantity() {
-        return mdEntrySizeQuantity;
+    public MdEntrySizeField mdEntrySize() {
+        return mdEntrySize;
     }
 
     /**
@@ -256,10 +256,10 @@ public final class SnapshotFullRefreshOrdersMbO71MessageNoMDEntriesGroupEntry im
             cursor += MdCorporateOffsetPriceOptionalField.BYTE_LENGTH;
         }
         if (known >= 16) {
-            if (!mdEntrySizeQuantity.parse(data, cursor)) {
+            if (!mdEntrySize.parse(data, cursor)) {
                 return false;
             }
-            cursor += MdEntrySizeQuantityField.BYTE_LENGTH;
+            cursor += MdEntrySizeField.BYTE_LENGTH;
         }
         if (known >= 20) {
             if (!mdEntryPositionNo.parse(data, cursor)) {
@@ -308,7 +308,7 @@ public final class SnapshotFullRefreshOrdersMbO71MessageNoMDEntriesGroupEntry im
             cursor = mdCorporateOffsetPriceOptional.encode(data, cursor);
         }
         if (known >= 16) {
-            cursor = mdEntrySizeQuantity.encode(data, cursor);
+            cursor = mdEntrySize.encode(data, cursor);
         }
         if (known >= 20) {
             cursor = mdEntryPositionNo.encode(data, cursor);
@@ -411,7 +411,7 @@ public final class SnapshotFullRefreshOrdersMbO71MessageNoMDEntriesGroupEntry im
     public Optional<Field> field(String name) {
         return switch (name) {
             case "MdCorporateOffsetPriceOptional" -> Optional.of(mdCorporateOffsetPriceOptional);
-            case "MdEntrySizeQuantity" -> Optional.of(mdEntrySizeQuantity);
+            case "MdEntrySize" -> Optional.of(mdEntrySize);
             case "MdEntryPositionNo" -> Optional.of(mdEntryPositionNo);
             case "EnteringFirm" -> Optional.of(enteringFirm);
             case "MdInsertTimestamp" -> Optional.of(mdInsertTimestamp);

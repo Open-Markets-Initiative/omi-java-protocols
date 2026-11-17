@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.AccountField;
-import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.ClordidField;
+import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.ClOrdIdField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.EnteringTraderField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.ExecutingTraderOptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.ExpireDateField;
@@ -68,7 +68,7 @@ public final class NewOrderSingleMessage implements Message {
     /**
      * clOrdID
      */
-    private final ClordidField clordid = new ClordidField();
+    private final ClOrdIdField clOrdId = new ClOrdIdField();
 
     /**
      * account
@@ -188,7 +188,7 @@ public final class NewOrderSingleMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(inboundBusinessHeader.fields(), List.<Field>of(ordtagid), List.<Field>of(mmProtectionReset), List.<Field>of(clordid), List.<Field>of(account), List.<Field>of(senderLocation), List.<Field>of(enteringTrader), List.<Field>of(selfTradePreventionInstruction), List.<Field>of(securityId), List.<Field>of(side), List.<Field>of(ordtype), List.<Field>of(timeInForce), List.<Field>of(routingInstruction), List.<Field>of(orderQty), List.<Field>of(priceOptional), List.<Field>of(stopPx), List.<Field>of(minQty), List.<Field>of(maxFloor), List.<Field>of(executingTraderOptional), List.<Field>of(expireDate), custodianInfo.fields(), investorId.fields(), List.<Field>of(strategyId), List.<Field>of(tradingSubAccount), deskId.fields(), memo.fields()).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(inboundBusinessHeader.fields(), List.<Field>of(ordtagid), List.<Field>of(mmProtectionReset), List.<Field>of(clOrdId), List.<Field>of(account), List.<Field>of(senderLocation), List.<Field>of(enteringTrader), List.<Field>of(selfTradePreventionInstruction), List.<Field>of(securityId), List.<Field>of(side), List.<Field>of(ordtype), List.<Field>of(timeInForce), List.<Field>of(routingInstruction), List.<Field>of(orderQty), List.<Field>of(priceOptional), List.<Field>of(stopPx), List.<Field>of(minQty), List.<Field>of(maxFloor), List.<Field>of(executingTraderOptional), List.<Field>of(expireDate), custodianInfo.fields(), investorId.fields(), List.<Field>of(strategyId), List.<Field>of(tradingSubAccount), deskId.fields(), memo.fields()).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -215,10 +215,10 @@ public final class NewOrderSingleMessage implements Message {
     /**
      * clOrdID
      *
-     * @return the Clordid field
+     * @return the ClOrdId field
      */
-    public ClordidField clordid() {
-        return clordid;
+    public ClOrdIdField clOrdId() {
+        return clOrdId;
     }
 
     /**
@@ -536,10 +536,10 @@ public final class NewOrderSingleMessage implements Message {
             return false;
         }
         cursor += MmProtectionResetField.BYTE_LENGTH;
-        if (!clordid.parse(data, cursor)) {
+        if (!clOrdId.parse(data, cursor)) {
             return false;
         }
-        cursor += ClordidField.BYTE_LENGTH;
+        cursor += ClOrdIdField.BYTE_LENGTH;
         if (!account.parse(data, cursor)) {
             return false;
         }
@@ -642,7 +642,7 @@ public final class NewOrderSingleMessage implements Message {
         cursor = inboundBusinessHeader.encode(data, cursor);
         cursor = ordtagid.encode(data, cursor);
         cursor = mmProtectionReset.encode(data, cursor);
-        cursor = clordid.encode(data, cursor);
+        cursor = clOrdId.encode(data, cursor);
         cursor = account.encode(data, cursor);
         cursor = senderLocation.encode(data, cursor);
         cursor = enteringTrader.encode(data, cursor);
@@ -752,7 +752,7 @@ public final class NewOrderSingleMessage implements Message {
         return switch (name) {
             case "Ordtagid" -> Optional.of(ordtagid);
             case "MmProtectionReset" -> Optional.of(mmProtectionReset);
-            case "Clordid" -> Optional.of(clordid);
+            case "ClOrdId" -> Optional.of(clOrdId);
             case "Account" -> Optional.of(account);
             case "SenderLocation" -> Optional.of(senderLocation);
             case "EnteringTrader" -> Optional.of(enteringTrader);

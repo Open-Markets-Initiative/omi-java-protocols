@@ -28,11 +28,6 @@ public final class ClearBookMessage extends Flyweight implements Message {
     public static final int BYTE_LENGTH = 17;
 
     /**
-     * Where {@link #reserved()} starts, from the message's start.
-     */
-    public static final int RESERVED_OFFSET = 0;
-
-    /**
      * Where {@link #timestamp()} starts, from the message's start.
      */
     public static final int TIMESTAMP_OFFSET = 1;
@@ -61,15 +56,6 @@ public final class ClearBookMessage extends Flyweight implements Message {
     }
 
     /**
-     * Reserved for future use
-     *
-     * @return the character
-     */
-    public char reserved() {
-        return (char) (buffer[offset + RESERVED_OFFSET] & 0xFF);
-    }
-
-    /**
      * Time stamp of the system event
      *
      * @return nanoseconds since the Unix epoch
@@ -92,8 +78,7 @@ public final class ClearBookMessage extends Flyweight implements Message {
     @Override
     public StringBuilder dump(StringBuilder builder) {
         builder.append(NAME).append('{');
-        builder.append("reserved=").append(reserved());
-        builder.append(", timestamp=").append(timestamp());
+        builder.append("timestamp=").append(timestamp());
         builder.append(", symbol=").append(symbol());
         return builder.append('}');
     }

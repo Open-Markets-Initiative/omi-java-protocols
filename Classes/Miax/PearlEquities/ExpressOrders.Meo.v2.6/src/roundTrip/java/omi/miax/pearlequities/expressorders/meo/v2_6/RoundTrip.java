@@ -20,7 +20,7 @@ import omi.miax.pearlequities.expressorders.meo.v2_6.messages.application.NewOrd
 import omi.miax.pearlequities.expressorders.meo.v2_6.messages.application.NewOrderResponseMessage;
 import omi.miax.pearlequities.expressorders.meo.v2_6.messages.application.OrderPriceUpdateNotification;
 import omi.miax.pearlequities.expressorders.meo.v2_6.messages.application.ReserveOrderReplenishmentNotification;
-import omi.miax.pearlequities.expressorders.meo.v2_6.messages.application.SymbolUpdate;
+import omi.miax.pearlequities.expressorders.meo.v2_6.messages.application.SymbolUpdateMessage;
 import omi.miax.pearlequities.expressorders.meo.v2_6.messages.application.SystemStateNotification;
 import omi.miax.pearlequities.expressorders.meo.v2_6.messages.session.ClientHeartbeat;
 import omi.miax.pearlequities.expressorders.meo.v2_6.messages.session.GoodbyePacket;
@@ -65,7 +65,7 @@ public final class RoundTrip {
         check(OrderPriceUpdateNotification::new);
         check(ReserveOrderReplenishmentNotification::new);
         check(RetransmissionRequest::new);
-        check(SymbolUpdate::new);
+        check(SymbolUpdateMessage::new);
         check(SynchronizationComplete::new);
         check(SystemStateNotification::new);
         checkGrouped(TestPacket::new, RoundTrip::wire5, true, false, false, 1, 0);
@@ -183,7 +183,7 @@ public final class RoundTrip {
         random(wire, random, 5);
         random(wire, random, 8);
         random(wire, random, 8);
-        count(wire, count, 1, true);
+        count(wire, count, 1, false);
         for (int entry0 = 0; entry0 < entries; entry0++) {
             random(wire, random, 1);
             random(wire, random, 8);
@@ -193,7 +193,7 @@ public final class RoundTrip {
 
     private static byte[] wire2(Random random, int entries, long count) {
         ByteArrayOutputStream wire = new ByteArrayOutputStream();
-        count(wire, count, 1, true);
+        count(wire, count, 1, false);
         for (int entry0 = 0; entry0 < entries; entry0++) {
             random(wire, random, 1);
             random(wire, random, 1);
@@ -214,7 +214,7 @@ public final class RoundTrip {
         random(wire, random, 8);
         random(wire, random, 4);
         random(wire, random, 20);
-        count(wire, count, 1, true);
+        count(wire, count, 1, false);
         for (int entry0 = 0; entry0 < entries; entry0++) {
             random(wire, random, 1);
         }

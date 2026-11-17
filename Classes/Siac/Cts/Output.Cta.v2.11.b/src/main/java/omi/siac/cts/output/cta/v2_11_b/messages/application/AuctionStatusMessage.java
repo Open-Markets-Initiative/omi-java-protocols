@@ -17,7 +17,6 @@ import omi.siac.cts.output.cta.v2_11_b.fields.NumberOfExtensionsField;
 import omi.siac.cts.output.cta.v2_11_b.fields.ParticipantIdField;
 import omi.siac.cts.output.cta.v2_11_b.fields.ParticipantReferenceNumberField;
 import omi.siac.cts.output.cta.v2_11_b.fields.PrimaryListingMarketParticipantIdField;
-import omi.siac.cts.output.cta.v2_11_b.fields.ReservedField;
 import omi.siac.cts.output.cta.v2_11_b.fields.SecuritySymbolField;
 import omi.siac.cts.output.cta.v2_11_b.fields.ShortSaleRestrictionIndicatorField;
 import omi.siac.cts.output.cta.v2_11_b.fields.TransactionIdField;
@@ -47,6 +46,13 @@ public final class AuctionStatusMessage implements Message {
      * This message's declared name.
      */
     public static final String NAME = "Auction Status Message";
+
+    /**
+     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
+     *
+     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
+     */
+    private static final int[] PADDING = { 62, 62 };
 
     /**
      * Identifies the Participant or Processor that initiated the message
@@ -114,11 +120,6 @@ public final class AuctionStatusMessage implements Message {
     private final FinancialStatusIndicatorField financialStatusIndicator = new FinancialStatusIndicatorField();
 
     /**
-     * Space-filled. Field is reserved for future use
-     */
-    private final ReservedField reserved = new ReservedField();
-
-    /**
      * Timestamp 1
      */
     private final Timestamp timestampField = new Timestamp();
@@ -126,7 +127,7 @@ public final class AuctionStatusMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(List.<Field>of(participantId), timestampField.fields(), List.<Field>of(messageId), List.<Field>of(transactionId), List.<Field>of(participantReferenceNumber), List.<Field>of(securitySymbol), List.<Field>of(instrumentType), List.<Field>of(auctionCollarReferencePrice), List.<Field>of(auctionCollarUpperThresholdPrice), List.<Field>of(auctionCollarLowerThresholdPrice), List.<Field>of(numberOfExtensions), List.<Field>of(shortSaleRestrictionIndicator), List.<Field>of(primaryListingMarketParticipantId), List.<Field>of(financialStatusIndicator), List.<Field>of(reserved)).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(List.<Field>of(participantId), timestampField.fields(), List.<Field>of(messageId), List.<Field>of(transactionId), List.<Field>of(participantReferenceNumber), List.<Field>of(securitySymbol), List.<Field>of(instrumentType), List.<Field>of(auctionCollarReferencePrice), List.<Field>of(auctionCollarUpperThresholdPrice), List.<Field>of(auctionCollarLowerThresholdPrice), List.<Field>of(numberOfExtensions), List.<Field>of(shortSaleRestrictionIndicator), List.<Field>of(primaryListingMarketParticipantId), List.<Field>of(financialStatusIndicator)).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -250,15 +251,6 @@ public final class AuctionStatusMessage implements Message {
     }
 
     /**
-     * Space-filled. Field is reserved for future use
-     *
-     * @return the Reserved field
-     */
-    public ReservedField reserved() {
-        return reserved;
-    }
-
-    /**
      * Timestamp 1
      *
      * @return the Timestamp record
@@ -285,7 +277,7 @@ public final class AuctionStatusMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return new int[0];
+        return PADDING.clone();
     }
 
     @Override
@@ -370,7 +362,8 @@ public final class AuctionStatusMessage implements Message {
             return false;
         }
         cursor += FinancialStatusIndicatorField.BYTE_LENGTH;
-        return reserved.parse(data, cursor);
+
+        return true;
     }
 
     @Override
@@ -391,7 +384,12 @@ public final class AuctionStatusMessage implements Message {
         cursor = shortSaleRestrictionIndicator.encode(data, cursor);
         cursor = primaryListingMarketParticipantId.encode(data, cursor);
         cursor = financialStatusIndicator.encode(data, cursor);
-        cursor = reserved.encode(data, cursor);
+        if (buffer != null && buffer.length >= 124) {
+            System.arraycopy(buffer, 62, data, cursor, 62); // padding
+        } else {
+            Arrays.fill(data, cursor, cursor + 62, (byte) 0); // padding
+        }
+        cursor += 62;
         return cursor;
     }
 
@@ -486,7 +484,6 @@ public final class AuctionStatusMessage implements Message {
             case "ShortSaleRestrictionIndicator" -> Optional.of(shortSaleRestrictionIndicator);
             case "PrimaryListingMarketParticipantId" -> Optional.of(primaryListingMarketParticipantId);
             case "FinancialStatusIndicator" -> Optional.of(financialStatusIndicator);
-            case "Reserved" -> Optional.of(reserved);
             default -> Optional.empty();
         };
     }

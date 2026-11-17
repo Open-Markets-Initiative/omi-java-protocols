@@ -124,7 +124,7 @@ public final class NewOrderInstructionsField extends Field {
     }
 
     /**
-     * Attributable Order
+     * MinQty Exec Type
      *
      * @return bits 10 through 11 of the container
      */

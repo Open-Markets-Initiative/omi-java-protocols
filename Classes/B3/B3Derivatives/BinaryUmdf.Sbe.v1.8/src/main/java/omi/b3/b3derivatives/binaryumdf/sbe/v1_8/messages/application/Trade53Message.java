@@ -9,7 +9,7 @@ import java.util.Optional;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MatchEventIndicatorField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntryBuyerField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntrySellerField;
-import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntrySizeQuantityField;
+import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntrySizeField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntryTimestampField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdFuturePriceField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.RptSeqField;
@@ -75,7 +75,7 @@ public final class Trade53Message implements Message {
     /**
      * mDEntrySize
      */
-    private final MdEntrySizeQuantityField mdEntrySizeQuantity = new MdEntrySizeQuantityField();
+    private final MdEntrySizeField mdEntrySize = new MdEntrySizeField();
 
     /**
      * tradeID
@@ -115,7 +115,7 @@ public final class Trade53Message implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(securityId, matchEventIndicator, tradingSessionId, tradeCondition, mdFuturePrice, mdEntrySizeQuantity, tradeId, mdEntryBuyer, mdEntrySeller, tradeDate, trdSubType, mdEntryTimestamp, rptSeq);
+    private final List<Field> fields = List.of(securityId, matchEventIndicator, tradingSessionId, tradeCondition, mdFuturePrice, mdEntrySize, tradeId, mdEntryBuyer, mdEntrySeller, tradeDate, trdSubType, mdEntryTimestamp, rptSeq);
 
     private byte[] buffer;
 
@@ -169,10 +169,10 @@ public final class Trade53Message implements Message {
     /**
      * mDEntrySize
      *
-     * @return the MdEntrySizeQuantity field
+     * @return the MdEntrySize field
      */
-    public MdEntrySizeQuantityField mdEntrySizeQuantity() {
-        return mdEntrySizeQuantity;
+    public MdEntrySizeField mdEntrySize() {
+        return mdEntrySize;
     }
 
     /**
@@ -305,10 +305,10 @@ public final class Trade53Message implements Message {
             return false;
         }
         cursor += MdFuturePriceField.BYTE_LENGTH;
-        if (!mdEntrySizeQuantity.parse(data, cursor)) {
+        if (!mdEntrySize.parse(data, cursor)) {
             return false;
         }
-        cursor += MdEntrySizeQuantityField.BYTE_LENGTH;
+        cursor += MdEntrySizeField.BYTE_LENGTH;
         if (!tradeId.parse(data, cursor)) {
             return false;
         }
@@ -346,7 +346,7 @@ public final class Trade53Message implements Message {
         cursor = tradingSessionId.encode(data, cursor);
         cursor = tradeCondition.encode(data, cursor);
         cursor = mdFuturePrice.encode(data, cursor);
-        cursor = mdEntrySizeQuantity.encode(data, cursor);
+        cursor = mdEntrySize.encode(data, cursor);
         cursor = tradeId.encode(data, cursor);
         cursor = mdEntryBuyer.encode(data, cursor);
         cursor = mdEntrySeller.encode(data, cursor);
@@ -445,7 +445,7 @@ public final class Trade53Message implements Message {
             case "TradingSessionId" -> Optional.of(tradingSessionId);
             case "TradeCondition" -> Optional.of(tradeCondition);
             case "MdFuturePrice" -> Optional.of(mdFuturePrice);
-            case "MdEntrySizeQuantity" -> Optional.of(mdEntrySizeQuantity);
+            case "MdEntrySize" -> Optional.of(mdEntrySize);
             case "TradeId" -> Optional.of(tradeId);
             case "MdEntryBuyer" -> Optional.of(mdEntryBuyer);
             case "MdEntrySeller" -> Optional.of(mdEntrySeller);

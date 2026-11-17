@@ -1,7 +1,10 @@
 package omi.nyse.arcaoptions.topfeed.pillar.v1_2_c.fields;
 
+import java.nio.charset.StandardCharsets;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Objects;
-import omi.nyse.arcaoptions.topfeed.pillar.v1_2_c.types.ByteOps;
 import omi.nyse.arcaoptions.topfeed.pillar.v1_2_c.types.Field;
 import omi.nyse.arcaoptions.topfeed.pillar.v1_2_c.types.FieldKind;
 import omi.nyse.arcaoptions.topfeed.pillar.v1_2_c.types.PrintOptions;
@@ -9,7 +12,7 @@ import omi.nyse.arcaoptions.topfeed.pillar.v1_2_c.types.PrintOptions;
 /**
  * Option maturity date - YYMMDD
  *
- * <p>A 6-byte ASCII field padded with null characters. Trailing padding is stripped on decode.</p>
+ * <p>A date spelled in 6 ASCII characters as YYMMDD. The bytes re-encode as they arrived.</p>
  */
 public final class MaturityDateField extends Field {
 
@@ -24,29 +27,108 @@ public final class MaturityDateField extends Field {
     public static final String NAME = "MaturityDate";
 
     /**
-     * The byte this field is right-padded with (null characters).
+     * The format the date is spelled in.
      */
-    public static final byte PADDING = 0;
-
-    private String value = "";
+    public static final String TOKEN = "YYMMDD";
 
     /**
-     * Returns the decoded value.
-     *
-     * @return the decoded value, empty when the field has not decoded
+     * The character written around the spelled value where the field is wider than its format.
      */
-    public String value() {
+    public static final byte FILL = (byte) '\u0000';
+
+    /**
+     * The year a two-digit year counts from.
+     */
+    public static final int YEAR_BASE = 2000;
+
+    private LocalDate value;
+
+    /**
+     * The characters on the wire, retained so the field re-encodes exactly as it arrived.
+     */
+    private final byte[] text = " ".repeat(BYTE_LENGTH).getBytes(StandardCharsets.US_ASCII);
+
+    /**
+     * Returns the date the characters spell.
+     *
+     * @return the decoded value, or null when the field has not decoded or its characters are not a valid date
+     */
+    public LocalDate value() {
         return value;
     }
 
     /**
-     * Sets the value to encode.
+     * Sets the date, spelling it in the field's format. A finer fraction of a second than the format holds is cut off.
      *
      * @param value the value to encode, or null to clear the field
+     * @throws ArithmeticException when a part of the value has more digits than the format holds
      */
-    public void value(String value) {
-        this.value = value == null ? "" : value;
-        markSet(value != null);
+    public void value(LocalDate value) {
+        if (value == null) {
+            Arrays.fill(text, (byte) ' ');
+            this.value = null;
+            markSet(false);
+            return;
+        }
+        byte[] spelled = (digits(value.getYear() - YEAR_BASE, 2) + digits(value.getMonthValue(), 2) + digits(value.getDayOfMonth(), 2)).getBytes(StandardCharsets.US_ASCII);
+        Arrays.fill(text, FILL);
+        System.arraycopy(spelled, 0, text, 0, spelled.length);
+        this.value = read(text);
+        markSet(true);
+    }
+
+    /**
+     * Reads the date the characters spell.
+     *
+     * @param text the characters on the wire
+     * @return the date, or null when the characters are not a valid one
+     */
+    private static LocalDate read(byte[] text) {
+        String spelled = new String(text, StandardCharsets.US_ASCII).replace('\0', ' ').strip();
+        if (!spelled.matches("[0-9]+")) {
+            return null;
+        }
+        int excess = spelled.length() - TOKEN.length();
+        if (excess > 0) {
+            if (!spelled.substring(0, excess).matches("0+")) {
+                return null;
+            }
+            spelled = spelled.substring(excess);
+        }
+        spelled = "0".repeat(Math.max(0, -excess)) + spelled;
+        try {
+            return LocalDate.of(YEAR_BASE + part(spelled, 0, 2), part(spelled, 2, 2), part(spelled, 4, 2));
+        } catch (DateTimeException invalid) {
+            return null;
+        }
+    }
+
+    /**
+     * Reads the number a part of the spelled value states.
+     *
+     * @param spelled the spelled value, its digits checked
+     * @param start where the part starts
+     * @param digits the digits of the part
+     * @return the number
+     */
+    private static int part(String spelled, int start, int digits) {
+        return Integer.parseInt(spelled, start, start + digits, 10);
+    }
+
+    /**
+     * Spells a part of the value in its digits, zeros before it.
+     *
+     * @param number the number the part states
+     * @param digits the digits of the part
+     * @return the digits
+     * @throws ArithmeticException when the number is negative or has more digits than the part
+     */
+    private static String digits(int number, int digits) {
+        String spelled = Integer.toString(number);
+        if (number < 0 || spelled.length() > digits) {
+            throw new ArithmeticException(NAME + " cannot spell " + number + " in " + digits + " digits of " + TOKEN);
+        }
+        return "0".repeat(digits - spelled.length()) + spelled;
     }
 
     @Override
@@ -56,7 +138,7 @@ public final class MaturityDateField extends Field {
 
     @Override
     public FieldKind kind() {
-        return FieldKind.STRING;
+        return FieldKind.CLOCK;
     }
 
     @Override
@@ -70,7 +152,8 @@ public final class MaturityDateField extends Field {
             return false;
         }
 
-        this.value = ByteOps.ascii(data, offset, BYTE_LENGTH, PADDING);
+        System.arraycopy(data, offset, text, 0, BYTE_LENGTH);
+        this.value = read(text);
         markDecoded(data, offset);
         return true;
     }
@@ -78,14 +161,15 @@ public final class MaturityDateField extends Field {
     @Override
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
-        ByteOps.putAscii(data, offset, BYTE_LENGTH, value, PADDING);
+        System.arraycopy(text, 0, data, offset, BYTE_LENGTH);
         return offset + BYTE_LENGTH;
     }
 
     @Override
     public void reset() {
         super.reset();
-        this.value = "";
+        this.value = null;
+        Arrays.fill(text, (byte) ' ');
     }
 
     @Override
@@ -96,7 +180,7 @@ public final class MaturityDateField extends Field {
             return;
         }
 
-        builder.append('\'').append(value).append('\'');
+        builder.append(value == null ? "'" + new String(text, StandardCharsets.US_ASCII) + "'" : value.toString());
     }
 
     @Override
@@ -107,11 +191,11 @@ public final class MaturityDateField extends Field {
         if (!(other instanceof MaturityDateField field)) {
             return false;
         }
-        return hasValue() == field.hasValue() && Objects.equals(value, field.value);
+        return hasValue() == field.hasValue() && Arrays.equals(text, field.text);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hasValue(), value);
+        return Objects.hash(hasValue(), Arrays.hashCode(text));
     }
 }

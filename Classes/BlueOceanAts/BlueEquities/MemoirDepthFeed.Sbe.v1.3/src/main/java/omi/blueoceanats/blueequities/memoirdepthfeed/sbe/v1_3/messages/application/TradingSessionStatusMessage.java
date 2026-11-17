@@ -94,7 +94,7 @@ public final class TradingSessionStatusMessage implements Message {
 
     @Override
     public Optional<Instant> timestamp() {
-        return Optional.empty();
+        return Optional.ofNullable(timestampField.value());
     }
 
     @Override

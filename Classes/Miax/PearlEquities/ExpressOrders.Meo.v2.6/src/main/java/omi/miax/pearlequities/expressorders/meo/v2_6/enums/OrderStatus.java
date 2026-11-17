@@ -70,9 +70,9 @@ public enum OrderStatus {
     INVALID_SIZE('K', "Invalid Size"),
 
     /**
-     * Blocked By Firm Over Miax Member Firm
+     * Blocked By Firm Over Miax Member Firm Portal Or By Helpdesk
      */
-    BLOCKED_BY_FIRM_OVER_MIAX_MEMBER_FIRM('L', "Blocked By Firm Over Miax Member Firm"),
+    BLOCKED_BY_FIRM_OVER_MIAX_MEMBER_FIRM_PORTAL_OR_BY_HELPDESK('L', "Blocked By Firm Over Miax Member Firm Portal Or By Helpdesk"),
 
     /**
      * Exceeded Max Allowed Size
@@ -155,9 +155,9 @@ public enum OrderStatus {
     INVALID_TIME_IN_FORCE('b', "Invalid Time In Force"),
 
     /**
-     * Invalid Routing Instruction Or Use
+     * Invalid Routing Instruction Or Its Use
      */
-    INVALID_ROUTING_INSTRUCTION_OR_USE('c', "Invalid Routing Instruction Or Use"),
+    INVALID_ROUTING_INSTRUCTION_OR_ITS_USE('c', "Invalid Routing Instruction Or Its Use"),
 
     /**
      * Invalid Self Trade Protection Level
@@ -165,9 +165,9 @@ public enum OrderStatus {
     INVALID_SELF_TRADE_PROTECTION_LEVEL('d', "Invalid Self Trade Protection Level"),
 
     /**
-     * Invalid Self Trade Protection Instruction Or Use
+     * Invalid Self Trade Protection Instruction Or Its Use
      */
-    INVALID_SELF_TRADE_PROTECTION_INSTRUCTION_OR_USE('e', "Invalid Self Trade Protection Instruction Or Use"),
+    INVALID_SELF_TRADE_PROTECTION_INSTRUCTION_OR_ITS_USE('e', "Invalid Self Trade Protection Instruction Or Its Use"),
 
     /**
      * Invalid Attributable Value Or Use
@@ -190,9 +190,9 @@ public enum OrderStatus {
     INVALID_USE_OF_DISPLAY_INSTRUCTION('i', "Invalid Use Of Display Instruction"),
 
     /**
-     * Invalid Value Or Use For Available When Locked
+     * Invalid Value Or Use For Available When Locked Instruction
      */
-    INVALID_VALUE_OR_USE_FOR_AVAILABLE_WHEN_LOCKED('j', "Invalid Value Or Use For Available When Locked"),
+    INVALID_VALUE_OR_USE_FOR_AVAILABLE_WHEN_LOCKED_INSTRUCTION('j', "Invalid Value Or Use For Available When Locked Instruction"),
 
     /**
      * Market Order Price Protection
@@ -205,14 +205,14 @@ public enum OrderStatus {
     INVALID_ROUTING_STRATEGY_OR_ITS_USE('l', "Invalid Routing Strategy Or Its Use"),
 
     /**
-     * Invalid Value In Account
+     * Invalid Value In Account Field
      */
-    INVALID_VALUE_IN_ACCOUNT('m', "Invalid Value In Account"),
+    INVALID_VALUE_IN_ACCOUNT_FIELD('m', "Invalid Value In Account Field"),
 
     /**
-     * Invalid Value In Clearing Account
+     * Invalid Value In Clearing Account Field
      */
-    INVALID_VALUE_IN_CLEARING_ACCOUNT('n', "Invalid Value In Clearing Account"),
+    INVALID_VALUE_IN_CLEARING_ACCOUNT_FIELD('n', "Invalid Value In Clearing Account Field"),
 
     /**
      * Invalid Use Of Trading Collar Dollar Value
@@ -265,9 +265,9 @@ public enum OrderStatus {
     TOO_LATE_FOR_PRIMARY_LISTING_MARKET_ORDER('x', "Too Late For Primary Listing Market Order"),
 
     /**
-     * Pac Orders Are Not Allowed Routing To Primary
+     * Pac Orders Are Not Allowed Routing To Primary Listing Market Disabled
      */
-    PAC_ORDERS_ARE_NOT_ALLOWED_ROUTING_TO_PRIMARY('y', "Pac Orders Are Not Allowed Routing To Primary"),
+    PAC_ORDERS_ARE_NOT_ALLOWED_ROUTING_TO_PRIMARY_LISTING_MARKET_DISABLED('y', "Pac Orders Are Not Allowed Routing To Primary Listing Market Disabled"),
 
     /**
      * Short Sale Exempt Orders Not Allowed
@@ -310,9 +310,9 @@ public enum OrderStatus {
     INVALID_PURGE_GROUP_SPECIFIED('6', "Invalid Purge Group Specified"),
 
     /**
-     * Invalid Or Not Permitted Value In Locate Account
+     * Invalid Or Not Permitted Value In Locate Account Field
      */
-    INVALID_OR_NOT_PERMITTED_VALUE_IN_LOCATE_ACCOUNT('7', "Invalid Or Not Permitted Value In Locate Account"),
+    INVALID_OR_NOT_PERMITTED_VALUE_IN_LOCATE_ACCOUNT_FIELD('7', "Invalid Or Not Permitted Value In Locate Account Field"),
 
     /**
      * Blocked By Drop Copy Acod Event
@@ -325,9 +325,9 @@ public enum OrderStatus {
     BLOCKED_BY_DROP_COPY_ACOSF_EVENT('9', "Blocked By Drop Copy Acosf Event"),
 
     /**
-     * Invalid Use Of Cancel Order If Not A Nbbo Setter
+     * Invalid Use Of Cancel Order If Not A Nbbo Setter Order Instruction
      */
-    INVALID_USE_OF_CANCEL_ORDER_IF_NOT_A_NBBO_SETTER('!', "Invalid Use Of Cancel Order If Not A Nbbo Setter"),
+    INVALID_USE_OF_CANCEL_ORDER_IF_NOT_A_NBBO_SETTER_ORDER_INSTRUCTION('!', "Invalid Use Of Cancel Order If Not A Nbbo Setter Order Instruction"),
 
     /**
      * Downgraded From Older Version
@@ -381,7 +381,7 @@ public enum OrderStatus {
             case 'I' -> Optional.of(INVALID_MPID);
             case 'J' -> Optional.of(INVALID_PRICE);
             case 'K' -> Optional.of(INVALID_SIZE);
-            case 'L' -> Optional.of(BLOCKED_BY_FIRM_OVER_MIAX_MEMBER_FIRM);
+            case 'L' -> Optional.of(BLOCKED_BY_FIRM_OVER_MIAX_MEMBER_FIRM_PORTAL_OR_BY_HELPDESK);
             case 'M' -> Optional.of(EXCEEDED_MAX_ALLOWED_SIZE);
             case 'N' -> Optional.of(EXCEEDED_MAX_NOTIONAL_VALUE);
             case 'O' -> Optional.of(INVALID_CLIENT_ORDER_ID);
@@ -398,18 +398,18 @@ public enum OrderStatus {
             case 'Z' -> Optional.of(UNDEFINED_REASON);
             case 'a' -> Optional.of(INVALID_CAPACITY);
             case 'b' -> Optional.of(INVALID_TIME_IN_FORCE);
-            case 'c' -> Optional.of(INVALID_ROUTING_INSTRUCTION_OR_USE);
+            case 'c' -> Optional.of(INVALID_ROUTING_INSTRUCTION_OR_ITS_USE);
             case 'd' -> Optional.of(INVALID_SELF_TRADE_PROTECTION_LEVEL);
-            case 'e' -> Optional.of(INVALID_SELF_TRADE_PROTECTION_INSTRUCTION_OR_USE);
+            case 'e' -> Optional.of(INVALID_SELF_TRADE_PROTECTION_INSTRUCTION_OR_ITS_USE);
             case 'f' -> Optional.of(INVALID_ATTRIBUTABLE_VALUE_OR_USE);
             case 'g' -> Optional.of(INVALID_PRICE_SLIDING_AND_REPRICE_FREQUENCY_VALUE_OR_USE);
             case 'h' -> Optional.of(INVALID_USE_OF_POST_ONLY_INSTRUCTION);
             case 'i' -> Optional.of(INVALID_USE_OF_DISPLAY_INSTRUCTION);
-            case 'j' -> Optional.of(INVALID_VALUE_OR_USE_FOR_AVAILABLE_WHEN_LOCKED);
+            case 'j' -> Optional.of(INVALID_VALUE_OR_USE_FOR_AVAILABLE_WHEN_LOCKED_INSTRUCTION);
             case 'k' -> Optional.of(MARKET_ORDER_PRICE_PROTECTION);
             case 'l' -> Optional.of(INVALID_ROUTING_STRATEGY_OR_ITS_USE);
-            case 'm' -> Optional.of(INVALID_VALUE_IN_ACCOUNT);
-            case 'n' -> Optional.of(INVALID_VALUE_IN_CLEARING_ACCOUNT);
+            case 'm' -> Optional.of(INVALID_VALUE_IN_ACCOUNT_FIELD);
+            case 'n' -> Optional.of(INVALID_VALUE_IN_CLEARING_ACCOUNT_FIELD);
             case 'o' -> Optional.of(INVALID_USE_OF_TRADING_COLLAR_DOLLAR_VALUE);
             case 'p' -> Optional.of(INVALID_FOR_CURRENT_SYMBOL_TRADING_STATUS);
             case 'q' -> Optional.of(PRIMARY_EXCHANGE_IPO_NOT_COMPLETE_IPO_IN_PROGRESS);
@@ -420,7 +420,7 @@ public enum OrderStatus {
             case 'v' -> Optional.of(FEATURE_NOT_AVAILABLE);
             case 'w' -> Optional.of(PRIMARY_LISTING_MARKET_ROUTING_NOT_SUPPORTED);
             case 'x' -> Optional.of(TOO_LATE_FOR_PRIMARY_LISTING_MARKET_ORDER);
-            case 'y' -> Optional.of(PAC_ORDERS_ARE_NOT_ALLOWED_ROUTING_TO_PRIMARY);
+            case 'y' -> Optional.of(PAC_ORDERS_ARE_NOT_ALLOWED_ROUTING_TO_PRIMARY_LISTING_MARKET_DISABLED);
             case 'z' -> Optional.of(SHORT_SALE_EXEMPT_ORDERS_NOT_ALLOWED);
             case '0' -> Optional.of(LIMIT_PRICE_MORE_AGGRESSIVE_THAN_MARKET_IMPACT_COLLAR);
             case '1' -> Optional.of(MARKET_ORDERS_NOT_ALLOWED);
@@ -429,10 +429,10 @@ public enum OrderStatus {
             case '4' -> Optional.of(AVERAGE_DAILY_VOLUME_PROTECTION);
             case '5' -> Optional.of(INVALID_OFFSET_FOR_PRIMARY_PEG_ORDER);
             case '6' -> Optional.of(INVALID_PURGE_GROUP_SPECIFIED);
-            case '7' -> Optional.of(INVALID_OR_NOT_PERMITTED_VALUE_IN_LOCATE_ACCOUNT);
+            case '7' -> Optional.of(INVALID_OR_NOT_PERMITTED_VALUE_IN_LOCATE_ACCOUNT_FIELD);
             case '8' -> Optional.of(BLOCKED_BY_DROP_COPY_ACOD_EVENT);
             case '9' -> Optional.of(BLOCKED_BY_DROP_COPY_ACOSF_EVENT);
-            case '!' -> Optional.of(INVALID_USE_OF_CANCEL_ORDER_IF_NOT_A_NBBO_SETTER);
+            case '!' -> Optional.of(INVALID_USE_OF_CANCEL_ORDER_IF_NOT_A_NBBO_SETTER_ORDER_INSTRUCTION);
             case '*' -> Optional.of(DOWNGRADED_FROM_OLDER_VERSION);
             default -> Optional.empty();
         };

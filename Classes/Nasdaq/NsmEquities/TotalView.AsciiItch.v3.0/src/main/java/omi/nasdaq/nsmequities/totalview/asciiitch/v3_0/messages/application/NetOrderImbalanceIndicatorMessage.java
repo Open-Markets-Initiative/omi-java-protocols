@@ -14,7 +14,7 @@ import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.ImbalanceSharesFie
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.NearPriceField;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.PairedSharesField;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.PriceVariationIndicatorField;
-import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.StockAlphanumericField;
+import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.StockField;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.Field;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.Message;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.PrintOptions;
@@ -59,7 +59,7 @@ public final class NetOrderImbalanceIndicatorMessage implements Message {
     /**
      * Stock symbol right padded with spaces.
      */
-    private final StockAlphanumericField stockAlphanumeric = new StockAlphanumericField();
+    private final StockField stock = new StockField();
 
     /**
      * A hypothetical auction-clearing price for cross orders only.
@@ -89,7 +89,7 @@ public final class NetOrderImbalanceIndicatorMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(pairedShares, imbalanceShares, imbalanceDirection, stockAlphanumeric, farPrice, nearPrice, currentReferencePrice, crossType, priceVariationIndicator);
+    private final List<Field> fields = List.of(pairedShares, imbalanceShares, imbalanceDirection, stock, farPrice, nearPrice, currentReferencePrice, crossType, priceVariationIndicator);
 
     private byte[] buffer;
 
@@ -125,10 +125,10 @@ public final class NetOrderImbalanceIndicatorMessage implements Message {
     /**
      * Stock symbol right padded with spaces.
      *
-     * @return the StockAlphanumeric field
+     * @return the Stock field
      */
-    public StockAlphanumericField stockAlphanumeric() {
-        return stockAlphanumeric;
+    public StockField stock() {
+        return stock;
     }
 
     /**
@@ -235,10 +235,10 @@ public final class NetOrderImbalanceIndicatorMessage implements Message {
             return false;
         }
         cursor += ImbalanceDirectionField.BYTE_LENGTH;
-        if (!stockAlphanumeric.parse(data, cursor)) {
+        if (!stock.parse(data, cursor)) {
             return false;
         }
-        cursor += StockAlphanumericField.BYTE_LENGTH;
+        cursor += StockField.BYTE_LENGTH;
         if (!farPrice.parse(data, cursor)) {
             return false;
         }
@@ -265,7 +265,7 @@ public final class NetOrderImbalanceIndicatorMessage implements Message {
         cursor = pairedShares.encode(data, cursor);
         cursor = imbalanceShares.encode(data, cursor);
         cursor = imbalanceDirection.encode(data, cursor);
-        cursor = stockAlphanumeric.encode(data, cursor);
+        cursor = stock.encode(data, cursor);
         cursor = farPrice.encode(data, cursor);
         cursor = nearPrice.encode(data, cursor);
         cursor = currentReferencePrice.encode(data, cursor);
@@ -354,7 +354,7 @@ public final class NetOrderImbalanceIndicatorMessage implements Message {
             case "PairedShares" -> Optional.of(pairedShares);
             case "ImbalanceShares" -> Optional.of(imbalanceShares);
             case "ImbalanceDirection" -> Optional.of(imbalanceDirection);
-            case "StockAlphanumeric" -> Optional.of(stockAlphanumeric);
+            case "Stock" -> Optional.of(stock);
             case "FarPrice" -> Optional.of(farPrice);
             case "NearPrice" -> Optional.of(nearPrice);
             case "CurrentReferencePrice" -> Optional.of(currentReferencePrice);

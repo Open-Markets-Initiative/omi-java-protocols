@@ -3,7 +3,7 @@ package omi.miax.onyxfutures.topofmarket.mach.v1_0_b.enums;
 import java.util.Optional;
 
 /**
- * protocol packet type
+ * Mach protocol packet type
  *
  * <p>Backed by short. Values correspond to the wire integer encoding.</p>
  */

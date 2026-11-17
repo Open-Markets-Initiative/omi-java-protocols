@@ -5,8 +5,8 @@ import omi.cme.globex.mdp3.sbe.v1_9.messages.application.MarketDataRequest;
 import omi.cme.globex.mdp3.sbe.v1_9.messages.application.Negotiate;
 import omi.cme.globex.mdp3.sbe.v1_9.messages.application.SecurityListRequest;
 import omi.cme.globex.mdp3.sbe.v1_9.messages.application.SecurityStatusRequest;
-import omi.cme.globex.mdp3.sbe.v1_9.messages.application.SubscriberHeartbeat;
 import omi.cme.globex.mdp3.sbe.v1_9.messages.application.Terminate;
+import omi.cme.globex.mdp3.sbe.v1_9.messages.session.SubscriberHeartbeat;
 import omi.cme.globex.mdp3.sbe.v1_9.types.Message;
 
 /**

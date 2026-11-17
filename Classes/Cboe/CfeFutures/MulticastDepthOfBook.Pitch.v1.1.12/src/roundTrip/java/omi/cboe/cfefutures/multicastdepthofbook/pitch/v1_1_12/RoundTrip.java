@@ -163,12 +163,12 @@ public final class RoundTrip {
         random(wire, random, 6);
         random(wire, random, 4);
         random(wire, random, 6);
-        count(wire, new long[] { 0L, 1L }[pick0], 1, true);
+        count(wire, new long[] { 0L, 1L }[pick0], 1, false);
         random(wire, random, 4);
         random(wire, random, 2);
         random(wire, random, 1);
         random(wire, random, 8);
-        count(wire, count, 1, true);
+        count(wire, count, 1, false);
         random(wire, random, 1);
         random(wire, random, 1);
         random(wire, random, 4);

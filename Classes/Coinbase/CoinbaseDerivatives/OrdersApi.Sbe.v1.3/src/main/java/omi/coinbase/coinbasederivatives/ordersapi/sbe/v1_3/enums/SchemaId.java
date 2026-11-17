@@ -17,7 +17,7 @@ public enum SchemaId {
     /**
      * Sbe Schema Id for fairx.gateway.sbe.codec.order
      */
-    ORDER(1101, "Sbe Schema Id for fairx.gateway.sbe.codec.order");
+    ORDERS_API(1101, "Sbe Schema Id for fairx.gateway.sbe.codec.order");
 
     private final int wire;
 
@@ -55,7 +55,7 @@ public enum SchemaId {
     public static Optional<SchemaId> fromWire(int wire) {
         return switch (wire) {
             case 1100 -> Optional.of(SESSION);
-            case 1101 -> Optional.of(ORDER);
+            case 1101 -> Optional.of(ORDERS_API);
             default -> Optional.empty();
         };
     }

@@ -9,9 +9,9 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.AccountField;
-import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.ClordidField;
+import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.ClOrdIdField;
+import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.CrossIdOptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.CrossedIndicatorField;
-import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.CrossidOptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.CxlRejResponseToField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.ExecIdField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.ExpireDateField;
@@ -72,7 +72,7 @@ public final class ExecutionReportRejectMessage implements Message {
     /**
      * clOrdID
      */
-    private final ClordidField clordid = new ClordidField();
+    private final ClOrdIdField clOrdId = new ClOrdIdField();
 
     /**
      * secondaryOrderID
@@ -157,7 +157,7 @@ public final class ExecutionReportRejectMessage implements Message {
     /**
      * crossID
      */
-    private final CrossidOptionalField crossidOptional = new CrossidOptionalField();
+    private final CrossIdOptionalField crossIdOptional = new CrossIdOptionalField();
 
     /**
      * crossedIndicator
@@ -212,7 +212,7 @@ public final class ExecutionReportRejectMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(outboundBusinessHeader.fields(), List.<Field>of(side), List.<Field>of(cxlRejResponseTo), List.<Field>of(clordid), List.<Field>of(secondaryOrderIdOptional), List.<Field>of(securityId), List.<Field>of(ordRejReason), List.<Field>of(transactTime), List.<Field>of(execId), List.<Field>of(orderIdOptional), List.<Field>of(origclordid), List.<Field>of(account), List.<Field>of(ordtype), List.<Field>of(timeInForce), List.<Field>of(expireDate), List.<Field>of(orderQtyOptional), List.<Field>of(priceOptional), List.<Field>of(stopPx), List.<Field>of(minQty), List.<Field>of(maxFloor), List.<Field>of(crossidOptional), List.<Field>of(crossedIndicator), List.<Field>of(receivedTime), List.<Field>of(ordtagid), investorId.fields(), List.<Field>of(strategyId), List.<Field>of(tradingSubAccount), deskId.fields(), memo.fields(), text.fields()).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(outboundBusinessHeader.fields(), List.<Field>of(side), List.<Field>of(cxlRejResponseTo), List.<Field>of(clOrdId), List.<Field>of(secondaryOrderIdOptional), List.<Field>of(securityId), List.<Field>of(ordRejReason), List.<Field>of(transactTime), List.<Field>of(execId), List.<Field>of(orderIdOptional), List.<Field>of(origclordid), List.<Field>of(account), List.<Field>of(ordtype), List.<Field>of(timeInForce), List.<Field>of(expireDate), List.<Field>of(orderQtyOptional), List.<Field>of(priceOptional), List.<Field>of(stopPx), List.<Field>of(minQty), List.<Field>of(maxFloor), List.<Field>of(crossIdOptional), List.<Field>of(crossedIndicator), List.<Field>of(receivedTime), List.<Field>of(ordtagid), investorId.fields(), List.<Field>of(strategyId), List.<Field>of(tradingSubAccount), deskId.fields(), memo.fields(), text.fields()).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -239,10 +239,10 @@ public final class ExecutionReportRejectMessage implements Message {
     /**
      * clOrdID
      *
-     * @return the Clordid field
+     * @return the ClOrdId field
      */
-    public ClordidField clordid() {
-        return clordid;
+    public ClOrdIdField clOrdId() {
+        return clOrdId;
     }
 
     /**
@@ -392,10 +392,10 @@ public final class ExecutionReportRejectMessage implements Message {
     /**
      * crossID
      *
-     * @return the CrossidOptional field
+     * @return the CrossIdOptional field
      */
-    public CrossidOptionalField crossidOptional() {
-        return crossidOptional;
+    public CrossIdOptionalField crossIdOptional() {
+        return crossIdOptional;
     }
 
     /**
@@ -599,10 +599,10 @@ public final class ExecutionReportRejectMessage implements Message {
             return false;
         }
         cursor += CxlRejResponseToField.BYTE_LENGTH;
-        if (!clordid.parse(data, cursor)) {
+        if (!clOrdId.parse(data, cursor)) {
             return false;
         }
-        cursor += ClordidField.BYTE_LENGTH;
+        cursor += ClOrdIdField.BYTE_LENGTH;
         if (!secondaryOrderIdOptional.parse(data, cursor)) {
             return false;
         }
@@ -667,10 +667,10 @@ public final class ExecutionReportRejectMessage implements Message {
             return false;
         }
         cursor += MaxFloorField.BYTE_LENGTH;
-        if (!crossidOptional.parse(data, cursor)) {
+        if (!crossIdOptional.parse(data, cursor)) {
             return false;
         }
-        cursor += CrossidOptionalField.BYTE_LENGTH;
+        cursor += CrossIdOptionalField.BYTE_LENGTH;
         if (!crossedIndicator.parse(data, cursor)) {
             return false;
         }
@@ -725,7 +725,7 @@ public final class ExecutionReportRejectMessage implements Message {
         cursor = outboundBusinessHeader.encode(data, cursor);
         cursor = side.encode(data, cursor);
         cursor = cxlRejResponseTo.encode(data, cursor);
-        cursor = clordid.encode(data, cursor);
+        cursor = clOrdId.encode(data, cursor);
         cursor = secondaryOrderIdOptional.encode(data, cursor);
         cursor = securityId.encode(data, cursor);
         cursor = ordRejReason.encode(data, cursor);
@@ -742,7 +742,7 @@ public final class ExecutionReportRejectMessage implements Message {
         cursor = stopPx.encode(data, cursor);
         cursor = minQty.encode(data, cursor);
         cursor = maxFloor.encode(data, cursor);
-        cursor = crossidOptional.encode(data, cursor);
+        cursor = crossIdOptional.encode(data, cursor);
         cursor = crossedIndicator.encode(data, cursor);
         cursor = receivedTime.encode(data, cursor);
         if (buffer != null && buffer.length >= 149) {
@@ -845,7 +845,7 @@ public final class ExecutionReportRejectMessage implements Message {
         return switch (name) {
             case "Side" -> Optional.of(side);
             case "CxlRejResponseTo" -> Optional.of(cxlRejResponseTo);
-            case "Clordid" -> Optional.of(clordid);
+            case "ClOrdId" -> Optional.of(clOrdId);
             case "SecondaryOrderIdOptional" -> Optional.of(secondaryOrderIdOptional);
             case "SecurityId" -> Optional.of(securityId);
             case "OrdRejReason" -> Optional.of(ordRejReason);
@@ -862,7 +862,7 @@ public final class ExecutionReportRejectMessage implements Message {
             case "StopPx" -> Optional.of(stopPx);
             case "MinQty" -> Optional.of(minQty);
             case "MaxFloor" -> Optional.of(maxFloor);
-            case "CrossidOptional" -> Optional.of(crossidOptional);
+            case "CrossIdOptional" -> Optional.of(crossIdOptional);
             case "CrossedIndicator" -> Optional.of(crossedIndicator);
             case "ReceivedTime" -> Optional.of(receivedTime);
             case "Ordtagid" -> Optional.of(ordtagid);

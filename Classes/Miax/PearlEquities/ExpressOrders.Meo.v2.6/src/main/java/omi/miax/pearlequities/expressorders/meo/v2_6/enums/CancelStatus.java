@@ -40,9 +40,9 @@ public enum CancelStatus {
     EXCEEDED_TEST_SYMBOL_THROTTLE('E', "Exceeded Test Symbol Throttle"),
 
     /**
-     * Order Is Routed
+     * Routed Order Already Pending Cancel
      */
-    ORDER_IS_ROUTED('F', "Order Is Routed"),
+    ROUTED_ORDER_ALREADY_PENDING_CANCEL('F', "Routed Order Already Pending Cancel"),
 
     /**
      * Invalid Mpid
@@ -70,9 +70,9 @@ public enum CancelStatus {
     INVALID_SYMBOL_ID('S', "Invalid Symbol Id"),
 
     /**
-     * Invalid Target Client Order Id
+     * Invalid Target Order Id
      */
-    INVALID_TARGET_CLIENT_ORDER_ID('T', "Invalid Target Client Order Id"),
+    INVALID_TARGET_ORDER_ID('T', "Invalid Target Order Id"),
 
     /**
      * Mpid Not Permitted
@@ -85,9 +85,9 @@ public enum CancelStatus {
     UNDEFINED_REASON('Z', "Undefined Reason"),
 
     /**
-     * Modification Request Is Sent To Another Market And Pending Completion
+     * Cancellation Request Is Routed To Another Market And Pending Completion
      */
-    MODIFICATION_REQUEST_IS_SENT_TO_ANOTHER_MARKET_AND_PENDING_COMPLETION('c', "Modification Request Is Sent To Another Market And Pending Completion"),
+    CANCELLATION_REQUEST_IS_ROUTED_TO_ANOTHER_MARKET_AND_PENDING_COMPLETION('c', "Cancellation Request Is Routed To Another Market And Pending Completion"),
 
     /**
      * Downgraded From Older Version
@@ -135,16 +135,16 @@ public enum CancelStatus {
             case 'C' -> Optional.of(MATCHING_ENGINE_IS_NOT_AVAILABLE);
             case 'D' -> Optional.of(CANNOT_FIND_ORDER_WITH_TARGET_CLIENT_ORDER_ID);
             case 'E' -> Optional.of(EXCEEDED_TEST_SYMBOL_THROTTLE);
-            case 'F' -> Optional.of(ORDER_IS_ROUTED);
+            case 'F' -> Optional.of(ROUTED_ORDER_ALREADY_PENDING_CANCEL);
             case 'I' -> Optional.of(INVALID_MPID);
             case 'O' -> Optional.of(INVALID_CLIENT_ORDER_ID);
             case 'P' -> Optional.of(REQUEST_IS_NOT_PERMITTED_FOR_THIS_SESSION);
             case 'Q' -> Optional.of(SPECIFIED_MPID_DOES_NOT_MATCH_TARGET_ORDER);
             case 'S' -> Optional.of(INVALID_SYMBOL_ID);
-            case 'T' -> Optional.of(INVALID_TARGET_CLIENT_ORDER_ID);
+            case 'T' -> Optional.of(INVALID_TARGET_ORDER_ID);
             case 'X' -> Optional.of(MPID_NOT_PERMITTED);
             case 'Z' -> Optional.of(UNDEFINED_REASON);
-            case 'c' -> Optional.of(MODIFICATION_REQUEST_IS_SENT_TO_ANOTHER_MARKET_AND_PENDING_COMPLETION);
+            case 'c' -> Optional.of(CANCELLATION_REQUEST_IS_ROUTED_TO_ANOTHER_MARKET_AND_PENDING_COMPLETION);
             case '*' -> Optional.of(DOWNGRADED_FROM_OLDER_VERSION);
             default -> Optional.empty();
         };

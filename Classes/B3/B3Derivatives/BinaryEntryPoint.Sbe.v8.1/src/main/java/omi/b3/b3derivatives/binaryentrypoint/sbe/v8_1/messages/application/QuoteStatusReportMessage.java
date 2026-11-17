@@ -13,7 +13,7 @@ import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.DaysToSettlementOpt
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.EnteringTraderField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.ExecuteUnderlyingTradeField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.ExecutingTraderField;
-import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.FixedRatePercentage8OptionalField;
+import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.FixedRateOptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.OrderQtyField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.Price8OptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.QuoteIdField;
@@ -140,7 +140,7 @@ public final class QuoteStatusReportMessage implements Message {
     /**
      * fixedRate
      */
-    private final FixedRatePercentage8OptionalField fixedRatePercentage8Optional = new FixedRatePercentage8OptionalField();
+    private final FixedRateOptionalField fixedRateOptional = new FixedRateOptionalField();
 
     /**
      * executeUnderlyingTrade
@@ -175,7 +175,7 @@ public final class QuoteStatusReportMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(bidirectionalBusinessHeader.fields(), List.<Field>of(quoteRejectReason), List.<Field>of(securityId), List.<Field>of(quoteReqId), List.<Field>of(quoteId), List.<Field>of(tradeIdOptional), List.<Field>of(contraBroker), List.<Field>of(transactTime), List.<Field>of(quoteStatus), List.<Field>of(quoteStatusResponseTo), List.<Field>of(account), List.<Field>of(sideOptional), List.<Field>of(settlTypeOptional), List.<Field>of(price8Optional), List.<Field>of(orderQty), List.<Field>of(senderLocation), List.<Field>of(enteringTrader), List.<Field>of(executingTrader), List.<Field>of(fixedRatePercentage8Optional), List.<Field>of(executeUnderlyingTrade), List.<Field>of(daysToSettlementOptional), deskId.fields(), memo.fields(), text.fields()).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(bidirectionalBusinessHeader.fields(), List.<Field>of(quoteRejectReason), List.<Field>of(securityId), List.<Field>of(quoteReqId), List.<Field>of(quoteId), List.<Field>of(tradeIdOptional), List.<Field>of(contraBroker), List.<Field>of(transactTime), List.<Field>of(quoteStatus), List.<Field>of(quoteStatusResponseTo), List.<Field>of(account), List.<Field>of(sideOptional), List.<Field>of(settlTypeOptional), List.<Field>of(price8Optional), List.<Field>of(orderQty), List.<Field>of(senderLocation), List.<Field>of(enteringTrader), List.<Field>of(executingTrader), List.<Field>of(fixedRateOptional), List.<Field>of(executeUnderlyingTrade), List.<Field>of(daysToSettlementOptional), deskId.fields(), memo.fields(), text.fields()).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -337,10 +337,10 @@ public final class QuoteStatusReportMessage implements Message {
     /**
      * fixedRate
      *
-     * @return the FixedRatePercentage8Optional field
+     * @return the FixedRateOptional field
      */
-    public FixedRatePercentage8OptionalField fixedRatePercentage8Optional() {
-        return fixedRatePercentage8Optional;
+    public FixedRateOptionalField fixedRateOptional() {
+        return fixedRateOptional;
     }
 
     /**
@@ -516,10 +516,10 @@ public final class QuoteStatusReportMessage implements Message {
             return false;
         }
         cursor += ExecutingTraderField.BYTE_LENGTH;
-        if (!fixedRatePercentage8Optional.parse(data, cursor)) {
+        if (!fixedRateOptional.parse(data, cursor)) {
             return false;
         }
-        cursor += FixedRatePercentage8OptionalField.BYTE_LENGTH;
+        cursor += FixedRateOptionalField.BYTE_LENGTH;
         if (!executeUnderlyingTrade.parse(data, cursor)) {
             return false;
         }
@@ -572,7 +572,7 @@ public final class QuoteStatusReportMessage implements Message {
         cursor = senderLocation.encode(data, cursor);
         cursor = enteringTrader.encode(data, cursor);
         cursor = executingTrader.encode(data, cursor);
-        cursor = fixedRatePercentage8Optional.encode(data, cursor);
+        cursor = fixedRateOptional.encode(data, cursor);
         cursor = executeUnderlyingTrade.encode(data, cursor);
         cursor = daysToSettlementOptional.encode(data, cursor);
         cursor = deskId.encode(data, cursor);
@@ -679,7 +679,7 @@ public final class QuoteStatusReportMessage implements Message {
             case "SenderLocation" -> Optional.of(senderLocation);
             case "EnteringTrader" -> Optional.of(enteringTrader);
             case "ExecutingTrader" -> Optional.of(executingTrader);
-            case "FixedRatePercentage8Optional" -> Optional.of(fixedRatePercentage8Optional);
+            case "FixedRateOptional" -> Optional.of(fixedRateOptional);
             case "ExecuteUnderlyingTrade" -> Optional.of(executeUnderlyingTrade);
             case "DaysToSettlementOptional" -> Optional.of(daysToSettlementOptional);
             default -> Optional.empty();

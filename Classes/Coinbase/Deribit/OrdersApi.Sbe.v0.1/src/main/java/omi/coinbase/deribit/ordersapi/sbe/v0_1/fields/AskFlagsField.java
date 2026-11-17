@@ -52,11 +52,11 @@ public final class AskFlagsField extends Field {
     }
 
     /**
-     * Unused OrderFlags 0
+     * 1 unused bit
      *
      * @return bit 0 of the container
      */
-    public boolean unusedOrderFlags() {
+    public boolean unused() {
         return (value & 1L) != 0L;
     }
 

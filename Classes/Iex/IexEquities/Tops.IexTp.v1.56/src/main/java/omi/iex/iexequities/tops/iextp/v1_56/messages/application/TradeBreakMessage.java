@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import omi.iex.iexequities.tops.iextp.v1_56.fields.PriceField;
-import omi.iex.iexequities.tops.iextp.v1_56.fields.ReservedField;
 import omi.iex.iexequities.tops.iextp.v1_56.fields.SaleConditionFlagsField;
 import omi.iex.iexequities.tops.iextp.v1_56.fields.SizeField;
 import omi.iex.iexequities.tops.iextp.v1_56.fields.SymbolField;
@@ -40,6 +39,13 @@ public final class TradeBreakMessage implements Message {
     public static final String NAME = "Trade Break Message";
 
     /**
+     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
+     *
+     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
+     */
+    private static final int[] PADDING = { 37, 4 };
+
+    /**
      * Sale Condition Flags
      */
     private final SaleConditionFlagsField saleConditionFlags = new SaleConditionFlagsField();
@@ -70,14 +76,9 @@ public final class TradeBreakMessage implements Message {
     private final TradeIdField tradeId = new TradeIdField();
 
     /**
-     * Reserved bytes
-     */
-    private final ReservedField reserved = new ReservedField();
-
-    /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(saleConditionFlags, timestampField, symbol, size, price, tradeId, reserved);
+    private final List<Field> fields = List.of(saleConditionFlags, timestampField, symbol, size, price, tradeId);
 
     private byte[] buffer;
 
@@ -137,15 +138,6 @@ public final class TradeBreakMessage implements Message {
         return tradeId;
     }
 
-    /**
-     * Reserved bytes
-     *
-     * @return the Reserved field
-     */
-    public ReservedField reserved() {
-        return reserved;
-    }
-
     @Override
     public Optional<Character> type() {
         return Optional.of(MESSAGE_TYPE);
@@ -164,7 +156,7 @@ public final class TradeBreakMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return new int[0];
+        return PADDING.clone();
     }
 
     @Override
@@ -217,7 +209,8 @@ public final class TradeBreakMessage implements Message {
             return false;
         }
         cursor += TradeIdField.BYTE_LENGTH;
-        return reserved.parse(data, cursor);
+
+        return true;
     }
 
     @Override
@@ -230,7 +223,12 @@ public final class TradeBreakMessage implements Message {
         cursor = size.encode(data, cursor);
         cursor = price.encode(data, cursor);
         cursor = tradeId.encode(data, cursor);
-        cursor = reserved.encode(data, cursor);
+        if (buffer != null && buffer.length >= 41) {
+            System.arraycopy(buffer, 37, data, cursor, 4); // padding
+        } else {
+            Arrays.fill(data, cursor, cursor + 4, (byte) 0); // padding
+        }
+        cursor += 4;
         return cursor;
     }
 
@@ -317,7 +315,6 @@ public final class TradeBreakMessage implements Message {
             case "Size" -> Optional.of(size);
             case "Price" -> Optional.of(price);
             case "TradeId" -> Optional.of(tradeId);
-            case "Reserved" -> Optional.of(reserved);
             default -> Optional.empty();
         };
     }

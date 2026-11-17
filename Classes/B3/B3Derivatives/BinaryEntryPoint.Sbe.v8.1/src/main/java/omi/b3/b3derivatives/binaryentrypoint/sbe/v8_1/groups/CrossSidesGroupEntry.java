@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.AccountField;
-import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.ClordidField;
+import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.ClOrdIdField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.EnteringFirmOptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.SideField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.types.Field;
@@ -60,12 +60,12 @@ public final class CrossSidesGroupEntry implements GroupEntry {
     /**
      * clOrdID
      */
-    private final ClordidField clordid = new ClordidField();
+    private final ClOrdIdField clOrdId = new ClOrdIdField();
 
     /**
      * This entry's fields, in wire order.
      */
-    private final List<Field> fields = List.of(side, account, enteringFirmOptional, clordid);
+    private final List<Field> fields = List.of(side, account, enteringFirmOptional, clOrdId);
 
     private byte[] buffer;
 
@@ -101,10 +101,10 @@ public final class CrossSidesGroupEntry implements GroupEntry {
     /**
      * clOrdID
      *
-     * @return the Clordid field
+     * @return the ClOrdId field
      */
-    public ClordidField clordid() {
-        return clordid;
+    public ClOrdIdField clOrdId() {
+        return clOrdId;
     }
 
     private int wireBlock = ROOT_BYTE_LENGTH;
@@ -227,10 +227,10 @@ public final class CrossSidesGroupEntry implements GroupEntry {
             cursor += EnteringFirmOptionalField.BYTE_LENGTH;
         }
         if (known >= 18) {
-            if (!clordid.parse(data, cursor)) {
+            if (!clOrdId.parse(data, cursor)) {
                 return false;
             }
-            cursor += ClordidField.BYTE_LENGTH;
+            cursor += ClOrdIdField.BYTE_LENGTH;
         }
         if (wireBlock > known) {
             this.blockTrailer = Arrays.copyOfRange(data, offset + known, offset + wireBlock);
@@ -263,7 +263,7 @@ public final class CrossSidesGroupEntry implements GroupEntry {
             cursor = enteringFirmOptional.encode(data, cursor);
         }
         if (known >= 18) {
-            cursor = clordid.encode(data, cursor);
+            cursor = clOrdId.encode(data, cursor);
         }
         int kept = Math.min(blockTrailer.length, wireBlock - known);
         System.arraycopy(blockTrailer, 0, data, offset + known, kept);
@@ -353,7 +353,7 @@ public final class CrossSidesGroupEntry implements GroupEntry {
             case "Side" -> Optional.of(side);
             case "Account" -> Optional.of(account);
             case "EnteringFirmOptional" -> Optional.of(enteringFirmOptional);
-            case "Clordid" -> Optional.of(clordid);
+            case "ClOrdId" -> Optional.of(clOrdId);
             default -> Optional.empty();
         };
     }

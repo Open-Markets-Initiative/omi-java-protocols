@@ -1,5 +1,7 @@
 package omi.nasdaq.iseoptions.topcomboquotefeed.itch.v1_0.fields;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 import omi.nasdaq.iseoptions.topcomboquotefeed.itch.v1_0.types.ByteOps;
 import omi.nasdaq.iseoptions.topcomboquotefeed.itch.v1_0.types.Field;
@@ -9,7 +11,7 @@ import omi.nasdaq.iseoptions.topcomboquotefeed.itch.v1_0.types.PrintOptions;
 /**
  * High price for the day.
  *
- * <p>An unsigned 64-bit integer. The long holds the raw bits: compare with Long.compareUnsigned and format with Long.toUnsignedString.</p>
+ * <p>Fixed-point decimal: a raw 8-byte big-endian signed integer scaled by 10^-8.</p>
  */
 public final class HighField extends Field {
 
@@ -28,27 +30,46 @@ public final class HighField extends Field {
      */
     public static final boolean LITTLE_ENDIAN = false;
 
-    private long value;
+    /**
+     * The number of implied decimal places the wire integer is scaled by.
+     */
+    public static final int SCALE = 8;
+
+    private BigDecimal value;
 
     /**
-     * Returns the decoded value.
-     *
-     * <p>This field is 64 bits wide and unsigned, and Java has no wider type to widen into, so the returned {@code long} carries the raw bit pattern: a value above {@link Long#MAX_VALUE} reads as negative. Compare it with {@link Long#compareUnsigned} and format it with {@link Long#toUnsignedString}. Widths of one to seven bytes return the mathematical value and need none of this.</p>
-     *
-     * @return the decoded value, zero when the field has not decoded
+     * The undecoded wire value, retained so the field re-encodes exactly as it arrived.
      */
-    public long value() {
+    private long rawValue;
+
+    /**
+     * Returns the decoded value, scaled by the implied decimal places.
+     *
+     * @return the decoded value, or null when the field has not decoded
+     */
+    public BigDecimal value() {
         return value;
     }
 
     /**
-     * Sets the value to encode.
+     * Sets the value, deriving the wire integer from it.
      *
      * @param value the value to encode
+     * @throws ArithmeticException when the value has more decimal places than the field's scale, or does not fit the field's width
      */
-    public void value(long value) {
+    public void value(BigDecimal value) {
         this.value = value;
-        markSet(true);
+        this.rawValue = value == null ? 0L : value.setScale(SCALE, RoundingMode.UNNECESSARY).unscaledValue().longValueExact();
+        markSet(value != null);
+    }
+
+    /**
+     * Returns the undecoded wire value.
+     *
+     * @return the value exactly as it appeared on the wire
+     */
+    public long rawValue() {
+        return rawValue;
     }
 
     @Override
@@ -58,7 +79,7 @@ public final class HighField extends Field {
 
     @Override
     public FieldKind kind() {
-        return FieldKind.UNSIGNED_INTEGER;
+        return FieldKind.DECIMAL;
     }
 
     @Override
@@ -72,7 +93,8 @@ public final class HighField extends Field {
             return false;
         }
 
-        this.value = ByteOps.unsigned(data, offset, BYTE_LENGTH, LITTLE_ENDIAN);
+        this.rawValue = ByteOps.signed(data, offset, BYTE_LENGTH, LITTLE_ENDIAN);
+        this.value = BigDecimal.valueOf(rawValue, SCALE);
         markDecoded(data, offset);
         return true;
     }
@@ -80,14 +102,15 @@ public final class HighField extends Field {
     @Override
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
-        ByteOps.put(data, offset, BYTE_LENGTH, value, LITTLE_ENDIAN);
+        ByteOps.put(data, offset, BYTE_LENGTH, rawValue, LITTLE_ENDIAN);
         return offset + BYTE_LENGTH;
     }
 
     @Override
     public void reset() {
         super.reset();
-        this.value = 0L;
+        this.value = null;
+        this.rawValue = 0L;
     }
 
     @Override
@@ -98,7 +121,7 @@ public final class HighField extends Field {
             return;
         }
 
-        builder.append(Long.toUnsignedString(value));
+        builder.append(value);
     }
 
     @Override
@@ -109,11 +132,11 @@ public final class HighField extends Field {
         if (!(other instanceof HighField field)) {
             return false;
         }
-        return hasValue() == field.hasValue() && value == field.value;
+        return hasValue() == field.hasValue() && rawValue == field.rawValue;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hasValue(), value);
+        return Objects.hash(hasValue(), rawValue);
     }
 }

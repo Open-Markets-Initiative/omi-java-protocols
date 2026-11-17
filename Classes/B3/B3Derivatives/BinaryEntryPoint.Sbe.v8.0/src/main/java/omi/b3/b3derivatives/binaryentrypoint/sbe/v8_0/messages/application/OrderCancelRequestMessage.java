@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.ClordidField;
+import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.ClOrdIdField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.EnteringTraderField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.ExecutingTraderOptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.OrderIdOptionalField;
@@ -44,7 +44,7 @@ public final class OrderCancelRequestMessage implements Message {
     /**
      * clOrdID
      */
-    private final ClordidField clordid = new ClordidField();
+    private final ClOrdIdField clOrdId = new ClOrdIdField();
 
     /**
      * securityID
@@ -104,7 +104,7 @@ public final class OrderCancelRequestMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(inboundBusinessHeader.fields(), List.<Field>of(clordid), List.<Field>of(securityId), List.<Field>of(orderIdOptional), List.<Field>of(origclordid), List.<Field>of(side), List.<Field>of(singleCancelRestatementReason), List.<Field>of(senderLocation), List.<Field>of(enteringTrader), List.<Field>of(executingTraderOptional), deskId.fields(), memo.fields()).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(inboundBusinessHeader.fields(), List.<Field>of(clOrdId), List.<Field>of(securityId), List.<Field>of(orderIdOptional), List.<Field>of(origclordid), List.<Field>of(side), List.<Field>of(singleCancelRestatementReason), List.<Field>of(senderLocation), List.<Field>of(enteringTrader), List.<Field>of(executingTraderOptional), deskId.fields(), memo.fields()).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -113,10 +113,10 @@ public final class OrderCancelRequestMessage implements Message {
     /**
      * clOrdID
      *
-     * @return the Clordid field
+     * @return the ClOrdId field
      */
-    public ClordidField clordid() {
-        return clordid;
+    public ClOrdIdField clOrdId() {
+        return clOrdId;
     }
 
     /**
@@ -303,10 +303,10 @@ public final class OrderCancelRequestMessage implements Message {
         }
         cursor += inboundBusinessHeader.byteLength();
         cursor += 2; // padding
-        if (!clordid.parse(data, cursor)) {
+        if (!clOrdId.parse(data, cursor)) {
             return false;
         }
-        cursor += ClordidField.BYTE_LENGTH;
+        cursor += ClOrdIdField.BYTE_LENGTH;
         if (!securityId.parse(data, cursor)) {
             return false;
         }
@@ -366,7 +366,7 @@ public final class OrderCancelRequestMessage implements Message {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
         }
         cursor += 2;
-        cursor = clordid.encode(data, cursor);
+        cursor = clOrdId.encode(data, cursor);
         cursor = securityId.encode(data, cursor);
         cursor = orderIdOptional.encode(data, cursor);
         cursor = origclordid.encode(data, cursor);
@@ -466,7 +466,7 @@ public final class OrderCancelRequestMessage implements Message {
     @Override
     public Optional<Field> field(String name) {
         return switch (name) {
-            case "Clordid" -> Optional.of(clordid);
+            case "ClOrdId" -> Optional.of(clOrdId);
             case "SecurityId" -> Optional.of(securityId);
             case "OrderIdOptional" -> Optional.of(orderIdOptional);
             case "Origclordid" -> Optional.of(origclordid);

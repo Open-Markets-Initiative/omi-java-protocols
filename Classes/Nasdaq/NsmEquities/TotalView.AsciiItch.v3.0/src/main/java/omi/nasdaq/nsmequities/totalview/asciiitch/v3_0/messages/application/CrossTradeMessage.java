@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.CrossPriceField;
+import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.CrossSharesField;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.CrossTypeField;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.MatchNumberField;
-import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.SharesNumericField2;
-import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.StockAlphanumericField;
+import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.StockField;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.Field;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.Message;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.PrintOptions;
@@ -40,12 +40,12 @@ public final class CrossTradeMessage implements Message {
     /**
      * The number of shares matched in the NASDAQ Cross.
      */
-    private final SharesNumericField2 sharesNumeric = new SharesNumericField2();
+    private final CrossSharesField crossShares = new CrossSharesField();
 
     /**
      * Stock symbol right padded with spaces.
      */
-    private final StockAlphanumericField stockAlphanumeric = new StockAlphanumericField();
+    private final StockField stock = new StockField();
 
     /**
      * The price at which the cross occurred. Refer to Data Types for field processing notes.
@@ -65,7 +65,7 @@ public final class CrossTradeMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(sharesNumeric, stockAlphanumeric, crossPrice, matchNumber, crossType);
+    private final List<Field> fields = List.of(crossShares, stock, crossPrice, matchNumber, crossType);
 
     private byte[] buffer;
 
@@ -74,19 +74,19 @@ public final class CrossTradeMessage implements Message {
     /**
      * The number of shares matched in the NASDAQ Cross.
      *
-     * @return the SharesNumeric field
+     * @return the CrossShares field
      */
-    public SharesNumericField2 sharesNumeric() {
-        return sharesNumeric;
+    public CrossSharesField crossShares() {
+        return crossShares;
     }
 
     /**
      * Stock symbol right padded with spaces.
      *
-     * @return the StockAlphanumeric field
+     * @return the Stock field
      */
-    public StockAlphanumericField stockAlphanumeric() {
-        return stockAlphanumeric;
+    public StockField stock() {
+        return stock;
     }
 
     /**
@@ -163,14 +163,14 @@ public final class CrossTradeMessage implements Message {
         }
 
         int cursor = offset;
-        if (!sharesNumeric.parse(data, cursor)) {
+        if (!crossShares.parse(data, cursor)) {
             return false;
         }
-        cursor += SharesNumericField2.BYTE_LENGTH;
-        if (!stockAlphanumeric.parse(data, cursor)) {
+        cursor += CrossSharesField.BYTE_LENGTH;
+        if (!stock.parse(data, cursor)) {
             return false;
         }
-        cursor += StockAlphanumericField.BYTE_LENGTH;
+        cursor += StockField.BYTE_LENGTH;
         if (!crossPrice.parse(data, cursor)) {
             return false;
         }
@@ -186,8 +186,8 @@ public final class CrossTradeMessage implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        cursor = sharesNumeric.encode(data, cursor);
-        cursor = stockAlphanumeric.encode(data, cursor);
+        cursor = crossShares.encode(data, cursor);
+        cursor = stock.encode(data, cursor);
         cursor = crossPrice.encode(data, cursor);
         cursor = matchNumber.encode(data, cursor);
         cursor = crossType.encode(data, cursor);
@@ -271,8 +271,8 @@ public final class CrossTradeMessage implements Message {
     @Override
     public Optional<Field> field(String name) {
         return switch (name) {
-            case "SharesNumeric" -> Optional.of(sharesNumeric);
-            case "StockAlphanumeric" -> Optional.of(stockAlphanumeric);
+            case "CrossShares" -> Optional.of(crossShares);
+            case "Stock" -> Optional.of(stock);
             case "CrossPrice" -> Optional.of(crossPrice);
             case "MatchNumber" -> Optional.of(matchNumber);
             case "CrossType" -> Optional.of(crossType);

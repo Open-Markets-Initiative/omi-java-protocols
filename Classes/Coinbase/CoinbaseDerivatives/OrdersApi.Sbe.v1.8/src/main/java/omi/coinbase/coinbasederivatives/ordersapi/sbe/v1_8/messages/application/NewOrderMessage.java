@@ -8,10 +8,10 @@ import java.util.Objects;
 import java.util.Optional;
 import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.fields.ClientOrderIdField;
 import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.fields.CorrelationIdField;
-import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.fields.FlagsField;
 import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.fields.GoodTilDateField;
 import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.fields.InstrumentIdField;
 import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.fields.LimitPriceField;
+import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.fields.NewOrderFlagsField;
 import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.fields.QuantityField;
 import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.fields.SideField;
 import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.types.Field;
@@ -68,7 +68,7 @@ public final class NewOrderMessage implements Message {
     /**
      * NewOrderFlags bit set
      */
-    private final FlagsField flags = new FlagsField();
+    private final NewOrderFlagsField newOrderFlags = new NewOrderFlagsField();
 
     /**
      * goodTilDate
@@ -78,7 +78,7 @@ public final class NewOrderMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(clientOrderId, correlationId, limitPrice, quantity, instrumentId, side, flags, goodTilDate);
+    private final List<Field> fields = List.of(clientOrderId, correlationId, limitPrice, quantity, instrumentId, side, newOrderFlags, goodTilDate);
 
     private byte[] buffer;
 
@@ -141,10 +141,10 @@ public final class NewOrderMessage implements Message {
     /**
      * NewOrderFlags bit set
      *
-     * @return the Flags field
+     * @return the NewOrderFlags field
      */
-    public FlagsField flags() {
-        return flags;
+    public NewOrderFlagsField newOrderFlags() {
+        return newOrderFlags;
     }
 
     /**
@@ -227,10 +227,10 @@ public final class NewOrderMessage implements Message {
             return false;
         }
         cursor += SideField.BYTE_LENGTH;
-        if (!flags.parse(data, cursor)) {
+        if (!newOrderFlags.parse(data, cursor)) {
             return false;
         }
-        cursor += FlagsField.BYTE_LENGTH;
+        cursor += NewOrderFlagsField.BYTE_LENGTH;
         return goodTilDate.parse(data, cursor);
     }
 
@@ -244,7 +244,7 @@ public final class NewOrderMessage implements Message {
         cursor = quantity.encode(data, cursor);
         cursor = instrumentId.encode(data, cursor);
         cursor = side.encode(data, cursor);
-        cursor = flags.encode(data, cursor);
+        cursor = newOrderFlags.encode(data, cursor);
         cursor = goodTilDate.encode(data, cursor);
         return cursor;
     }
@@ -332,7 +332,7 @@ public final class NewOrderMessage implements Message {
             case "Quantity" -> Optional.of(quantity);
             case "InstrumentId" -> Optional.of(instrumentId);
             case "Side" -> Optional.of(side);
-            case "Flags" -> Optional.of(flags);
+            case "NewOrderFlags" -> Optional.of(newOrderFlags);
             case "GoodTilDate" -> Optional.of(goodTilDate);
             default -> Optional.empty();
         };

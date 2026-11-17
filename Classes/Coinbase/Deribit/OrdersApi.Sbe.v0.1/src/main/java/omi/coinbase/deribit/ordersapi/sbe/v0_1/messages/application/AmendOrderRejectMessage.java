@@ -12,7 +12,7 @@ import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.CorrelationIdField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.ExecIdField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.InstrumentIdField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.OrderIdField;
-import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.ReasonOrderRejectReasonField;
+import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.OrderRejectReasonField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.TimestampField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.structs.Details;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.types.Field;
@@ -69,7 +69,7 @@ public final class AmendOrderRejectMessage implements Message {
     /**
      * reason
      */
-    private final ReasonOrderRejectReasonField reasonOrderRejectReason = new ReasonOrderRejectReasonField();
+    private final OrderRejectReasonField orderRejectReason = new OrderRejectReasonField();
 
     /**
      * details data struct
@@ -79,7 +79,7 @@ public final class AmendOrderRejectMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(List.<Field>of(timestampField), List.<Field>of(execId), List.<Field>of(clientOrderId), List.<Field>of(correlationId), List.<Field>of(orderId), List.<Field>of(instrumentId), List.<Field>of(reasonOrderRejectReason), details.fields()).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(List.<Field>of(timestampField), List.<Field>of(execId), List.<Field>of(clientOrderId), List.<Field>of(correlationId), List.<Field>of(orderId), List.<Field>of(instrumentId), List.<Field>of(orderRejectReason), details.fields()).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -142,10 +142,10 @@ public final class AmendOrderRejectMessage implements Message {
     /**
      * reason
      *
-     * @return the ReasonOrderRejectReason field
+     * @return the OrderRejectReason field
      */
-    public ReasonOrderRejectReasonField reasonOrderRejectReason() {
-        return reasonOrderRejectReason;
+    public OrderRejectReasonField orderRejectReason() {
+        return orderRejectReason;
     }
 
     /**
@@ -228,10 +228,10 @@ public final class AmendOrderRejectMessage implements Message {
             return false;
         }
         cursor += InstrumentIdField.BYTE_LENGTH;
-        if (!reasonOrderRejectReason.parse(data, cursor)) {
+        if (!orderRejectReason.parse(data, cursor)) {
             return false;
         }
-        cursor += ReasonOrderRejectReasonField.BYTE_LENGTH;
+        cursor += OrderRejectReasonField.BYTE_LENGTH;
         if (!details.parseFrom(data, cursor, end)) {
             return false;
         }
@@ -250,7 +250,7 @@ public final class AmendOrderRejectMessage implements Message {
         cursor = correlationId.encode(data, cursor);
         cursor = orderId.encode(data, cursor);
         cursor = instrumentId.encode(data, cursor);
-        cursor = reasonOrderRejectReason.encode(data, cursor);
+        cursor = orderRejectReason.encode(data, cursor);
         cursor = details.encode(data, cursor);
         return cursor;
     }
@@ -339,7 +339,7 @@ public final class AmendOrderRejectMessage implements Message {
             case "CorrelationId" -> Optional.of(correlationId);
             case "OrderId" -> Optional.of(orderId);
             case "InstrumentId" -> Optional.of(instrumentId);
-            case "ReasonOrderRejectReason" -> Optional.of(reasonOrderRejectReason);
+            case "OrderRejectReason" -> Optional.of(orderRejectReason);
             default -> Optional.empty();
         };
     }
