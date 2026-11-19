@@ -1,0 +1,184 @@
+package omi.cboe.cboeeurope.tradereporting.boe.v2_0_15.fields;
+
+import java.util.Objects;
+import omi.cboe.cboeeurope.tradereporting.boe.v2_0_15.types.ByteOps;
+import omi.cboe.cboeeurope.tradereporting.boe.v2_0_15.types.Field;
+import omi.cboe.cboeeurope.tradereporting.boe.v2_0_15.types.FieldKind;
+import omi.cboe.cboeeurope.tradereporting.boe.v2_0_15.types.PrintOptions;
+
+/**
+ * BitSet TradeCaptureConfirmV2 byte 4.
+ *
+ * <p>A 1-byte packed bitfield; each accessor masks its own bit range out of the container.</p>
+ */
+public final class TradeCaptureConfirmV2Bitfield4Field extends Field {
+
+    /**
+     * This field's fixed width on the wire.
+     */
+    public static final int BYTE_LENGTH = 1;
+
+    /**
+     * This field's declared name.
+     */
+    public static final String NAME = "TradeCaptureConfirmV2Bitfield4";
+
+    private byte value;
+
+    /**
+     * Returns the whole bitfield container. Prefer the named accessors below.
+     *
+     * @return the decoded value, zero when the field has not decoded
+     */
+    public byte value() {
+        return value;
+    }
+
+    /**
+     * Sets the value to encode.
+     *
+     * @param value the value to encode
+     */
+    public void value(byte value) {
+        this.value = value;
+        markSet(true);
+    }
+
+    /**
+     * Trade Capture Confirm V 2 Bitfield 4 Maturity Date
+     *
+     * @return bit 0 of the container
+     */
+    public boolean tradeCaptureConfirmV2Bitfield4MaturityDate() {
+        return (value & 1L) != 0L;
+    }
+
+    /**
+     * Trade Capture Confirm V 2 Bitfield 4 Strike Price
+     *
+     * @return bit 1 of the container
+     */
+    public boolean tradeCaptureConfirmV2Bitfield4StrikePrice() {
+        return ((value >>> 1) & 1L) != 0L;
+    }
+
+    /**
+     * Trade Capture Confirm V 2 Bitfield 4 Put Or Call
+     *
+     * @return bit 2 of the container
+     */
+    public boolean tradeCaptureConfirmV2Bitfield4PutOrCall() {
+        return ((value >>> 2) & 1L) != 0L;
+    }
+
+    /**
+     * Trade Capture Confirm V 2 Bitfield 4 Open Close
+     *
+     * @return bit 3 of the container
+     */
+    public boolean tradeCaptureConfirmV2Bitfield4OpenClose() {
+        return ((value >>> 3) & 1L) != 0L;
+    }
+
+    /**
+     * Trade Capture Confirm V 2 Bitfield 4 Cl Ord Id Batch
+     *
+     * @return bit 4 of the container
+     */
+    public boolean tradeCaptureConfirmV2Bitfield4ClOrdIdBatch() {
+        return ((value >>> 4) & 1L) != 0L;
+    }
+
+    /**
+     * Trade Capture Confirm V 2 Bitfield 4 Corrected Size
+     *
+     * @return bit 5 of the container
+     */
+    public boolean tradeCaptureConfirmV2Bitfield4CorrectedSize() {
+        return ((value >>> 5) & 1L) != 0L;
+    }
+
+    /**
+     * Trade Capture Confirm V 2 Bitfield 4 Party Id
+     *
+     * @return bit 6 of the container
+     */
+    public boolean tradeCaptureConfirmV2Bitfield4PartyId() {
+        return ((value >>> 6) & 1L) != 0L;
+    }
+
+    /**
+     * Trade Capture Confirm V 2 Bitfield 4 Access Fee
+     *
+     * @return bit 7 of the container
+     */
+    public boolean tradeCaptureConfirmV2Bitfield4AccessFee() {
+        return ((value >>> 7) & 1L) != 0L;
+    }
+
+    @Override
+    public String name() {
+        return NAME;
+    }
+
+    @Override
+    public FieldKind kind() {
+        return FieldKind.BITFIELD;
+    }
+
+    @Override
+    public int byteLength() {
+        return BYTE_LENGTH;
+    }
+
+    @Override
+    public boolean parse(byte[] data, int offset) {
+        if (offset < 0 || offset + BYTE_LENGTH > data.length) {
+            return false;
+        }
+
+        this.value = (byte) ByteOps.unsigned(data, offset, BYTE_LENGTH, false);
+        markDecoded(data, offset);
+        return true;
+    }
+
+    @Override
+    public int encode(byte[] data, int offset) {
+        Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
+        ByteOps.put(data, offset, BYTE_LENGTH, value, false);
+        return offset + BYTE_LENGTH;
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        this.value = (byte) 0;
+    }
+
+    @Override
+    public void toFormattedString(StringBuilder builder, PrintOptions options) {
+        builder.append(NAME).append(": ");
+        if (!hasValue()) {
+            builder.append("<unset>");
+            return;
+        }
+
+        builder.append("0x").append(Integer.toHexString(value & 0xFF));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof TradeCaptureConfirmV2Bitfield4Field field)) {
+            return false;
+        }
+        return hasValue() == field.hasValue() && value == field.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(hasValue(), value);
+    }
+}

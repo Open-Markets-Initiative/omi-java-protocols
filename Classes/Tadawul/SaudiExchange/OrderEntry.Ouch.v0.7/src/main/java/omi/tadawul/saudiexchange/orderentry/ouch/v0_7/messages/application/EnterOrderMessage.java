@@ -1,0 +1,486 @@
+package omi.tadawul.saudiexchange.orderentry.ouch.v0_7.messages.application;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import omi.tadawul.saudiexchange.orderentry.ouch.v0_7.fields.AccountField;
+import omi.tadawul.saudiexchange.orderentry.ouch.v0_7.fields.ClientIdField;
+import omi.tadawul.saudiexchange.orderentry.ouch.v0_7.fields.CsdAccountField;
+import omi.tadawul.saudiexchange.orderentry.ouch.v0_7.fields.MinimumQuantityField;
+import omi.tadawul.saudiexchange.orderentry.ouch.v0_7.fields.OrderTokenField;
+import omi.tadawul.saudiexchange.orderentry.ouch.v0_7.fields.OrderVerbField;
+import omi.tadawul.saudiexchange.orderentry.ouch.v0_7.fields.OrderbookField;
+import omi.tadawul.saudiexchange.orderentry.ouch.v0_7.fields.PriceField;
+import omi.tadawul.saudiexchange.orderentry.ouch.v0_7.fields.QuantityField;
+import omi.tadawul.saudiexchange.orderentry.ouch.v0_7.fields.SelfMatchPreventionKeyField;
+import omi.tadawul.saudiexchange.orderentry.ouch.v0_7.fields.TimeInForceField;
+import omi.tadawul.saudiexchange.orderentry.ouch.v0_7.types.Field;
+import omi.tadawul.saudiexchange.orderentry.ouch.v0_7.types.Message;
+import omi.tadawul.saudiexchange.orderentry.ouch.v0_7.types.PrintOptions;
+
+/**
+ * Represents the EnterOrderMessage message from the OrderEntry protocol.
+ *
+ * <p>Client-generated enter order request</p>
+ */
+public final class EnterOrderMessage implements Message {
+
+    /**
+     * The character identifying this message on the wire.
+     */
+    public static final char MESSAGE_TYPE = 'O';
+
+    /**
+     * This message's fixed width on the wire.
+     */
+    public static final int BYTE_LENGTH = 68;
+
+    /**
+     * This message's declared name.
+     */
+    public static final String NAME = "Enter Order Message";
+
+    /**
+     * Token must be unique for each OUCH user per trading cycle
+     */
+    private final OrderTokenField orderToken = new OrderTokenField();
+
+    /**
+     * Investor account for the order
+     */
+    private final AccountField account = new AccountField();
+
+    /**
+     * Assigned by the Participant. Forwarded to clearing and settlement venues. First 3 characters must be alphanumeric; remaining 8 must be numeric
+     */
+    private final CsdAccountField csdAccount = new CsdAccountField();
+
+    /**
+     * B = Buy, S = Sell, T = Short Sell
+     */
+    private final OrderVerbField orderVerb = new OrderVerbField();
+
+    /**
+     * Total number of shares. Maximum value 9223372036854775807
+     */
+    private final QuantityField quantity = new QuantityField();
+
+    /**
+     * Unique orderbook identifier
+     */
+    private final OrderbookField orderbook = new OrderbookField();
+
+    /**
+     * The price of this order. 2147483647 represents a `market` order
+     */
+    private final PriceField price = new PriceField();
+
+    /**
+     * 0 = immediate, 99997 = at the opening (session order), 99998 = market hours (i.e. day). Any other values are not supported and the order will be rejected
+     */
+    private final TimeInForceField timeInForce = new TimeInForceField();
+
+    /**
+     * Client all-purpose identifier for this order. Not validated by the exchange and simply returned to the client via the Accepted Order [A] sequenced message
+     */
+    private final ClientIdField clientId = new ClientIdField();
+
+    /**
+     * If Time-in-force is 0, specifies the minimum acceptable quantity to execute. Non-0 values are only supported for immediate orders
+     */
+    private final MinimumQuantityField minimumQuantity = new MinimumQuantityField();
+
+    /**
+     * The self-match prevention key of the order (0 .. 4294967295). Echoed back via the Accepted Order [A] sequenced message. If 0 is specified, it will be treated as no SMP key specified in the order. Default value 0 indicates SMP ID is not provided in the request
+     */
+    private final SelfMatchPreventionKeyField selfMatchPreventionKey = new SelfMatchPreventionKeyField();
+
+    /**
+     * This message's fields, in wire order.
+     */
+    private final List<Field> fields = List.of(orderToken, account, csdAccount, orderVerb, quantity, orderbook, price, timeInForce, clientId, minimumQuantity, selfMatchPreventionKey);
+
+    private byte[] buffer;
+
+    private boolean decoded;
+
+    /**
+     * Token must be unique for each OUCH user per trading cycle
+     *
+     * @return the OrderToken field
+     */
+    public OrderTokenField orderToken() {
+        return orderToken;
+    }
+
+    /**
+     * Investor account for the order
+     *
+     * @return the Account field
+     */
+    public AccountField account() {
+        return account;
+    }
+
+    /**
+     * Assigned by the Participant. Forwarded to clearing and settlement venues. First 3 characters must be alphanumeric; remaining 8 must be numeric
+     *
+     * @return the CsdAccount field
+     */
+    public CsdAccountField csdAccount() {
+        return csdAccount;
+    }
+
+    /**
+     * B = Buy, S = Sell, T = Short Sell
+     *
+     * @return the OrderVerb field
+     */
+    public OrderVerbField orderVerb() {
+        return orderVerb;
+    }
+
+    /**
+     * Total number of shares. Maximum value 9223372036854775807
+     *
+     * @return the Quantity field
+     */
+    public QuantityField quantity() {
+        return quantity;
+    }
+
+    /**
+     * Unique orderbook identifier
+     *
+     * @return the Orderbook field
+     */
+    public OrderbookField orderbook() {
+        return orderbook;
+    }
+
+    /**
+     * The price of this order. 2147483647 represents a `market` order
+     *
+     * @return the Price field
+     */
+    public PriceField price() {
+        return price;
+    }
+
+    /**
+     * 0 = immediate, 99997 = at the opening (session order), 99998 = market hours (i.e. day). Any other values are not supported and the order will be rejected
+     *
+     * @return the TimeInForce field
+     */
+    public TimeInForceField timeInForce() {
+        return timeInForce;
+    }
+
+    /**
+     * Client all-purpose identifier for this order. Not validated by the exchange and simply returned to the client via the Accepted Order [A] sequenced message
+     *
+     * @return the ClientId field
+     */
+    public ClientIdField clientId() {
+        return clientId;
+    }
+
+    /**
+     * If Time-in-force is 0, specifies the minimum acceptable quantity to execute. Non-0 values are only supported for immediate orders
+     *
+     * @return the MinimumQuantity field
+     */
+    public MinimumQuantityField minimumQuantity() {
+        return minimumQuantity;
+    }
+
+    /**
+     * The self-match prevention key of the order (0 .. 4294967295). Echoed back via the Accepted Order [A] sequenced message. If 0 is specified, it will be treated as no SMP key specified in the order. Default value 0 indicates SMP ID is not provided in the request
+     *
+     * @return the SelfMatchPreventionKey field
+     */
+    public SelfMatchPreventionKeyField selfMatchPreventionKey() {
+        return selfMatchPreventionKey;
+    }
+
+    @Override
+    public Optional<Character> type() {
+        return Optional.of(MESSAGE_TYPE);
+    }
+
+    @Override
+    public int byteLength() {
+        return BYTE_LENGTH;
+    }
+
+    /**
+     * Returns this message's declared padding runs, as consecutive offset and length pairs relative to the start of the message.
+     *
+     * <p>Padding carries no value: decode advances over it, and encode writes back what decode received, or zero for a message assembled from values. Use this to check a received message's padding where the specification constrains it, or to render a byte map of the layout.</p>
+     *
+     * @return the padding runs, empty when the layout has none
+     */
+    public static int[] padding() {
+        return new int[0];
+    }
+
+    @Override
+    public Optional<Instant> timestamp() {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset) {
+        return parseFrom(data, offset, data.length);
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset, int end) {
+        clear();
+        this.decoded = read(data, offset, end);
+
+        int stop = Math.max(0, Math.min(data.length, offset + BYTE_LENGTH));
+        this.buffer = Arrays.copyOfRange(data, Math.min(Math.max(offset, 0), stop), stop);
+        return decoded;
+    }
+
+    private boolean read(byte[] data, int offset, int end) {
+        if (offset < 0 || end > data.length || end - offset < BYTE_LENGTH) {
+            return false;
+        }
+
+        int cursor = offset;
+        if (!orderToken.parse(data, cursor)) {
+            return false;
+        }
+        cursor += OrderTokenField.BYTE_LENGTH;
+        if (!account.parse(data, cursor)) {
+            return false;
+        }
+        cursor += AccountField.BYTE_LENGTH;
+        if (!csdAccount.parse(data, cursor)) {
+            return false;
+        }
+        cursor += CsdAccountField.BYTE_LENGTH;
+        if (!orderVerb.parse(data, cursor)) {
+            return false;
+        }
+        cursor += OrderVerbField.BYTE_LENGTH;
+        if (!quantity.parse(data, cursor)) {
+            return false;
+        }
+        cursor += QuantityField.BYTE_LENGTH;
+        if (!orderbook.parse(data, cursor)) {
+            return false;
+        }
+        cursor += OrderbookField.BYTE_LENGTH;
+        if (!price.parse(data, cursor)) {
+            return false;
+        }
+        cursor += PriceField.BYTE_LENGTH;
+        if (!timeInForce.parse(data, cursor)) {
+            return false;
+        }
+        cursor += TimeInForceField.BYTE_LENGTH;
+        if (!clientId.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ClientIdField.BYTE_LENGTH;
+        if (!minimumQuantity.parse(data, cursor)) {
+            return false;
+        }
+        cursor += MinimumQuantityField.BYTE_LENGTH;
+        return selfMatchPreventionKey.parse(data, cursor);
+    }
+
+    @Override
+    public int encode(byte[] data, int offset) {
+        Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
+        int cursor = offset;
+        cursor = orderToken.encode(data, cursor);
+        cursor = account.encode(data, cursor);
+        cursor = csdAccount.encode(data, cursor);
+        cursor = orderVerb.encode(data, cursor);
+        cursor = quantity.encode(data, cursor);
+        cursor = orderbook.encode(data, cursor);
+        cursor = price.encode(data, cursor);
+        cursor = timeInForce.encode(data, cursor);
+        cursor = clientId.encode(data, cursor);
+        cursor = minimumQuantity.encode(data, cursor);
+        cursor = selfMatchPreventionKey.encode(data, cursor);
+        return cursor;
+    }
+
+    @Override
+    public byte[] toBytes() {
+        byte[] data = new byte[BYTE_LENGTH];
+        encode(data, 0);
+        return data;
+    }
+
+    @Override
+    public void clear() {
+        for (Field field : fields) {
+            field.reset();
+        }
+        this.buffer = null;
+        this.decoded = false;
+    }
+
+    @Override
+    public boolean isDecoded() {
+        return decoded;
+    }
+
+    @Override
+    public boolean isRecognized() {
+        for (Field field : fields) {
+            if (!field.isRecognized()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isValid() {
+        for (Field field : fields) {
+            if (!field.isValid()) {
+                return false;
+            }
+        }
+        return isRecognized();
+    }
+
+    /**
+     * Returns a copy of the bytes this message was decoded from.
+     *
+     * <p>A failed decode leaves behind the partial range that was available, which is what a diagnostic needs to see.</p>
+     *
+     * @return the message bytes, or empty when no decode has been attempted
+     */
+    @Override
+    public Optional<byte[]> raw() {
+        if (buffer == null) {
+            return Optional.empty();
+        }
+        return Optional.of(buffer.clone());
+    }
+
+    @Override
+    public Optional<Field> failedAt() {
+        if (buffer == null || decoded) {
+            return Optional.empty();
+        }
+        for (Field field : fields) {
+            if (!field.isDecoded()) {
+                return Optional.of(field);
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Field> fields() {
+        return fields;
+    }
+
+    @Override
+    public Optional<Field> field(String name) {
+        return switch (name) {
+            case "OrderToken" -> Optional.of(orderToken);
+            case "Account" -> Optional.of(account);
+            case "CsdAccount" -> Optional.of(csdAccount);
+            case "OrderVerb" -> Optional.of(orderVerb);
+            case "Quantity" -> Optional.of(quantity);
+            case "Orderbook" -> Optional.of(orderbook);
+            case "Price" -> Optional.of(price);
+            case "TimeInForce" -> Optional.of(timeInForce);
+            case "ClientId" -> Optional.of(clientId);
+            case "MinimumQuantity" -> Optional.of(minimumQuantity);
+            case "SelfMatchPreventionKey" -> Optional.of(selfMatchPreventionKey);
+            default -> Optional.empty();
+        };
+    }
+
+    @Override
+    public List<Field> diffFields(Message other) {
+        if (!(other instanceof EnterOrderMessage message)) {
+            return List.of();
+        }
+        List<Field> changed = new ArrayList<>();
+        for (int index = 0; index < fields.size(); index++) {
+            if (!fields.get(index).equals(message.fields.get(index))) {
+                changed.add(fields.get(index));
+            }
+        }
+        return changed;
+    }
+
+    @Override
+    public String toFormattedString(PrintOptions options) {
+        StringBuilder builder = new StringBuilder();
+        toFormattedString(builder, options);
+        return builder.toString();
+    }
+
+    /**
+     * Appends this message's formatted representation.
+     *
+     * <p>The identifier form renders the message name alone, which is what a debugger label or a log line tracking message flow needs. The compact form adds every field on the same line, and the default form indents one field per line.</p>
+     *
+     * @param builder the destination
+     * @param options the display options
+     */
+    @Override
+    public void toFormattedString(StringBuilder builder, PrintOptions options) {
+        if (options.identifier()) {
+            builder.append(NAME);
+            return;
+        }
+
+        if (options.compact()) {
+            builder.append(NAME).append(" { ");
+            for (int index = 0; index < fields.size(); index++) {
+                if (index > 0) {
+                    builder.append(", ");
+                }
+                fields.get(index).toFormattedString(builder, options);
+            }
+            builder.append(" }");
+            return;
+        }
+
+        builder.append(options.prefix()).append(NAME).append(System.lineSeparator());
+        PrintOptions nested = options.nested();
+        for (Field field : fields) {
+            builder.append(nested.prefix());
+            field.toFormattedString(builder, nested);
+            builder.append(System.lineSeparator());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return toFormattedString(PrintOptions.DEFAULT);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof EnterOrderMessage message)) {
+            return false;
+        }
+        return fields.equals(message.fields);
+    }
+
+    @Override
+    public int hashCode() {
+        return fields.hashCode();
+    }
+}

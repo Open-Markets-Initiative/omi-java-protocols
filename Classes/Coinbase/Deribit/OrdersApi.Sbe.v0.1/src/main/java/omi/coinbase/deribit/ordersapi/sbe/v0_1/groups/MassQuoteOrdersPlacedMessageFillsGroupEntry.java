@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.FillPriceField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.MatchIdField;
-import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.OrderIdField;
+import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.OrderIdFillIdField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.structs.FillQty;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.types.Field;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.types.GroupEntry;
@@ -44,7 +44,7 @@ public final class MassQuoteOrdersPlacedMessageFillsGroupEntry implements GroupE
     /**
      * orderId
      */
-    private final OrderIdField orderId = new OrderIdField();
+    private final OrderIdFillIdField orderIdFillId = new OrderIdFillIdField();
 
     /**
      * fillPrice
@@ -59,7 +59,7 @@ public final class MassQuoteOrdersPlacedMessageFillsGroupEntry implements GroupE
     /**
      * This entry's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(List.<Field>of(matchId), List.<Field>of(orderId), List.<Field>of(fillPrice), fillQty.fields()).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(List.<Field>of(matchId), List.<Field>of(orderIdFillId), List.<Field>of(fillPrice), fillQty.fields()).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -77,10 +77,10 @@ public final class MassQuoteOrdersPlacedMessageFillsGroupEntry implements GroupE
     /**
      * orderId
      *
-     * @return the OrderId field
+     * @return the OrderIdFillId field
      */
-    public OrderIdField orderId() {
-        return orderId;
+    public OrderIdFillIdField orderIdFillId() {
+        return orderIdFillId;
     }
 
     /**
@@ -203,10 +203,10 @@ public final class MassQuoteOrdersPlacedMessageFillsGroupEntry implements GroupE
             cursor += MatchIdField.BYTE_LENGTH;
         }
         if (known >= 16) {
-            if (!orderId.parse(data, cursor)) {
+            if (!orderIdFillId.parse(data, cursor)) {
                 return false;
             }
-            cursor += OrderIdField.BYTE_LENGTH;
+            cursor += OrderIdFillIdField.BYTE_LENGTH;
         }
         if (known >= 24) {
             if (!fillPrice.parse(data, cursor)) {
@@ -237,7 +237,7 @@ public final class MassQuoteOrdersPlacedMessageFillsGroupEntry implements GroupE
             cursor = matchId.encode(data, cursor);
         }
         if (known >= 16) {
-            cursor = orderId.encode(data, cursor);
+            cursor = orderIdFillId.encode(data, cursor);
         }
         if (known >= 24) {
             cursor = fillPrice.encode(data, cursor);
@@ -332,7 +332,7 @@ public final class MassQuoteOrdersPlacedMessageFillsGroupEntry implements GroupE
     public Optional<Field> field(String name) {
         return switch (name) {
             case "MatchId" -> Optional.of(matchId);
-            case "OrderId" -> Optional.of(orderId);
+            case "OrderIdFillId" -> Optional.of(orderIdFillId);
             case "FillPrice" -> Optional.of(fillPrice);
             default -> Optional.empty();
         };

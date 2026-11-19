@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Optional;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.ReasonField;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.ReservedField;
-import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.StockField;
+import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.StockAlphanumericField;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.TradingStateField;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.Field;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.Message;
@@ -39,7 +39,7 @@ public final class StockTradingActionMessage implements Message {
     /**
      * Stock symbol right padded with spaces.
      */
-    private final StockField stock = new StockField();
+    private final StockAlphanumericField stockAlphanumeric = new StockAlphanumericField();
 
     /**
      * Indicates the current trading state for the stock.
@@ -59,7 +59,7 @@ public final class StockTradingActionMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(stock, tradingState, reserved, reason);
+    private final List<Field> fields = List.of(stockAlphanumeric, tradingState, reserved, reason);
 
     private byte[] buffer;
 
@@ -68,10 +68,10 @@ public final class StockTradingActionMessage implements Message {
     /**
      * Stock symbol right padded with spaces.
      *
-     * @return the Stock field
+     * @return the StockAlphanumeric field
      */
-    public StockField stock() {
-        return stock;
+    public StockAlphanumericField stockAlphanumeric() {
+        return stockAlphanumeric;
     }
 
     /**
@@ -148,10 +148,10 @@ public final class StockTradingActionMessage implements Message {
         }
 
         int cursor = offset;
-        if (!stock.parse(data, cursor)) {
+        if (!stockAlphanumeric.parse(data, cursor)) {
             return false;
         }
-        cursor += StockField.BYTE_LENGTH;
+        cursor += StockAlphanumericField.BYTE_LENGTH;
         if (!tradingState.parse(data, cursor)) {
             return false;
         }
@@ -167,7 +167,7 @@ public final class StockTradingActionMessage implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        cursor = stock.encode(data, cursor);
+        cursor = stockAlphanumeric.encode(data, cursor);
         cursor = tradingState.encode(data, cursor);
         cursor = reserved.encode(data, cursor);
         cursor = reason.encode(data, cursor);
@@ -251,7 +251,7 @@ public final class StockTradingActionMessage implements Message {
     @Override
     public Optional<Field> field(String name) {
         return switch (name) {
-            case "Stock" -> Optional.of(stock);
+            case "StockAlphanumeric" -> Optional.of(stockAlphanumeric);
             case "TradingState" -> Optional.of(tradingState);
             case "Reserved" -> Optional.of(reserved);
             case "Reason" -> Optional.of(reason);

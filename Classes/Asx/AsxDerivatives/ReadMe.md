@@ -7,7 +7,8 @@ A division of [Australian Securities Exchange](..).
 
 | [Protocol][Omi.Asx.Protocol.Definitions] | [Encoding][Omi.Encoding.Definitions] | Version | Date | Size | [Deployment][Omi.Glossary.Deployment] | [Testing][Omi.Glossary.Testing] | [Documentation][Omi.Asx.Specifications] |
 | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| [Ntp][Asx.AsxDerivatives.Ntp] | [Itch][Omi.Encoding.Itch] | [1.05][Asx.AsxDerivatives.Ntp.Itch.v1.05.Parser] | 12/1/2017 | 27,117 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Asx.AsxDerivatives.Ntp.Itch.v1.05.Url] |
+| [T24][Asx.AsxDerivatives.T24] | [Itch][Omi.Encoding.Itch] | [1.13][Asx.AsxDerivatives.T24.Itch.v1.13.Parser] | 7/15/2014 | 27,372 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Untested][Omi.Glossary.Testing.Untested] |  |
+| [Ntp][Asx.AsxDerivatives.Ntp] | [Itch][Omi.Encoding.Itch] | [1.05][Asx.AsxDerivatives.Ntp.Itch.v1.05.Parser] | 12/1/2017 | 27,120 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Asx.AsxDerivatives.Ntp.Itch.v1.05.Url] |
 
 
 <p align="center"><a href="https://www.asx.com.au" title="Australian Securities Exchange Website"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Website.png" alt="Website" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://www.linkedin.com/company/asx" title="Australian Securities Exchange on LinkedIn"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/LinkedIn.png" alt="LinkedIn" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://en.wikipedia.org/wiki/Australian_Securities_Exchange" title="Australian Securities Exchange on Wikipedia"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Wikipedia.png" alt="Wikipedia" width="32" height="32"></a></p>
@@ -32,6 +33,8 @@ A division of [Australian Securities Exchange](..).
 [Omi.Encoding.Itch]: https://github.com/Open-Markets-Initiative/Directory/blob/main/Protocols/Itch.md "Itch Encoding"
 [AsxDerivatives.Exchange]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Asx/AsxDerivatives "Asx Derivatives"
 [Asx.AsxDerivatives.Ntp]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Asx/Protocols/AsxDerivatives/Ntp.md "New Trading Platform"
+[Asx.AsxDerivatives.T24]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Asx/Protocols/AsxDerivatives/T24.md "24 Itch"
 
 [Asx.AsxDerivatives.Ntp.Itch.v1.05.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Asx/AsxDerivatives/Ntp.Itch.v1.05 "Asx AsxDerivatives Ntp Itch v1.05 Java Parser"
 [Asx.AsxDerivatives.Ntp.Itch.v1.05.Url]: https://asxonline.com/public/landing-pages/ntp-document-library.html "Australian Securities Exchange 1.05 Url"
+[Asx.AsxDerivatives.T24.Itch.v1.13.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Asx/AsxDerivatives/T24.Itch.v1.13 "Asx AsxDerivatives T24 Itch v1.13 Java Parser"

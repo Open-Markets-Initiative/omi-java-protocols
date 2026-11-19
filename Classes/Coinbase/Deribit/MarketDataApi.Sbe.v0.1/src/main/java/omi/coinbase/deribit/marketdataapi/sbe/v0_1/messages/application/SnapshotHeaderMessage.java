@@ -104,7 +104,7 @@ public final class SnapshotHeaderMessage implements Message {
 
     @Override
     public Optional<Instant> timestamp() {
-        return Optional.ofNullable(incrementalTimestamp.value());
+        return Optional.empty();
     }
 
     @Override

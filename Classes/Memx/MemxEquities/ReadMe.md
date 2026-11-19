@@ -7,7 +7,13 @@ A division of [The Members Exchange](..).
 
 | [Protocol][Omi.Memx.Protocol.Definitions] | [Encoding][Omi.Encoding.Definitions] | Version | Date | Size | [Deployment][Omi.Glossary.Deployment] | [Testing][Omi.Glossary.Testing] | [Documentation][Omi.Memx.Specifications] |
 | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| [MemoirDepthFeed][Memx.MemxEquities.MemoirDepthFeed] | [Sbe][Omi.Encoding.Sbe] | [1.3][Memx.MemxEquities.MemoirDepthFeed.Sbe.v1.3.Parser] | 4/5/2021 | 9,360 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Memx.MemxEquities.MemoirDepthFeed.Sbe.v1.3.Url] |
+| [CommonHeader][Memx.MemxEquities.CommonHeader] | [Tcp][Omi.Encoding.Tcp] | [1.2][Memx.MemxEquities.CommonHeader.Tcp.v1.2.Parser] | 10/23/2025 | 9,085 | [Header][Omi.Glossary.Deployment.Header] | [Untested][Omi.Glossary.Testing.Untested] | [url][Memx.MemxEquities.CommonHeader.Tcp.v1.2.Url] |
+| [MemoirLastSale][Memx.MemxEquities.MemoirLastSale] | [Sbe][Omi.Encoding.Sbe] | [1.1][Memx.MemxEquities.MemoirLastSale.Sbe.v1.1.Parser] | 7/27/2020 | 9,785 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Beta][Omi.Glossary.Testing.Beta] | [url][Memx.MemxEquities.MemoirLastSale.Sbe.v1.1.Url] |
+| [MemoirLastSale][Memx.MemxEquities.MemoirLastSale] | [Sbe][Omi.Encoding.Sbe] | [1.3][Memx.MemxEquities.MemoirLastSale.Sbe.v1.3.Parser] | 4/5/2021 | 9,785 | [Active][Omi.Glossary.Deployment.Active] | [Beta][Omi.Glossary.Testing.Beta] | [url][Memx.MemxEquities.MemoirLastSale.Sbe.v1.3.Url] |
+| [MemoirDepthFeed][Memx.MemxEquities.MemoirDepthFeed] | [Sbe][Omi.Encoding.Sbe] | [1.1][Memx.MemxEquities.MemoirDepthFeed.Sbe.v1.1.Parser] | 7/27/2020 | 9,480 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Beta][Omi.Glossary.Testing.Beta] | [url][Memx.MemxEquities.MemoirDepthFeed.Sbe.v1.1.Url] |
+| [MemoirDepthFeed][Memx.MemxEquities.MemoirDepthFeed] | [Sbe][Omi.Encoding.Sbe] | [1.3][Memx.MemxEquities.MemoirDepthFeed.Sbe.v1.3.Parser] | 4/5/2021 | 9,480 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Memx.MemxEquities.MemoirDepthFeed.Sbe.v1.3.Url] |
+| [MemoirTopOfBook][Memx.MemxEquities.MemoirTopOfBook] | [Sbe][Omi.Encoding.Sbe] | [1.1][Memx.MemxEquities.MemoirTopOfBook.Sbe.v1.1.Parser] | 7/27/2020 | 8,338 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Beta][Omi.Glossary.Testing.Beta] | [url][Memx.MemxEquities.MemoirTopOfBook.Sbe.v1.1.Url] |
+| [MemoirTopOfBook][Memx.MemxEquities.MemoirTopOfBook] | [Sbe][Omi.Encoding.Sbe] | [1.3][Memx.MemxEquities.MemoirTopOfBook.Sbe.v1.3.Parser] | 4/5/2021 | 8,338 | [Active][Omi.Glossary.Deployment.Active] | [Beta][Omi.Glossary.Testing.Beta] | [url][Memx.MemxEquities.MemoirTopOfBook.Sbe.v1.3.Url] |
 
 
 <p align="center"><a href="https://www.memx.com" title="The Members Exchange Website"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Website.png" alt="Website" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://www.linkedin.com/company/memxtrading" title="The Members Exchange on LinkedIn"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/LinkedIn.png" alt="LinkedIn" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://en.wikipedia.org/wiki/Members_Exchange" title="The Members Exchange on Wikipedia"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Wikipedia.png" alt="Wikipedia" width="32" height="32"></a></p>
@@ -29,9 +35,25 @@ A division of [The Members Exchange](..).
 [Omi.Encoding.Definitions]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Protocols/ReadMe.md "Encoding Directory"
 [Omi.Memx.Protocol.Definitions]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/tree/main/Organizations/Memx/Protocols "Memx Protocol Directory"
 [Omi.Memx.Specifications]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/tree/main/Organizations/Memx/Specifications "Memx Specifications Directory"
+[Omi.Encoding.Tcp]: https://github.com/Open-Markets-Initiative/Directory/blob/main/Protocols/Tcp.md "Tcp Encoding"
 [Omi.Encoding.Sbe]: https://github.com/Open-Markets-Initiative/Directory/blob/main/Protocols/Sbe.md "Sbe Encoding"
 [MemxEquities.Exchange]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Memx/MemxEquities "Memx Equities"
+[Memx.MemxEquities.CommonHeader]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Memx/Protocols/MemxEquities/CommonHeader.md "Common Header"
 [Memx.MemxEquities.MemoirDepthFeed]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Memx/Protocols/MemxEquities/MemoirDepthFeed.md "Memoir Depth Feed"
+[Memx.MemxEquities.MemoirLastSale]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Memx/Protocols/MemxEquities/MemoirLastSale.md "Member Order Information Record Last Sale"
+[Memx.MemxEquities.MemoirTopOfBook]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Memx/Protocols/MemxEquities/MemoirTopOfBook.md "Memoir Top Of Book"
 
+[Memx.MemxEquities.CommonHeader.Tcp.v1.2.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Memx/MemxEquities/CommonHeader.Tcp.v1.2 "Memx MemxEquities CommonHeader Tcp v1.2 Java Parser"
+[Memx.MemxEquities.CommonHeader.Tcp.v1.2.Url]: https://info.memxtrading.com/equities-trading-resources/ "The Members Exchange 1.2 Url"
+[Memx.MemxEquities.MemoirDepthFeed.Sbe.v1.1.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Memx/MemxEquities/MemoirDepthFeed.Sbe.v1.1 "Memx MemxEquities MemoirDepthFeed Sbe v1.1 Java Parser"
+[Memx.MemxEquities.MemoirDepthFeed.Sbe.v1.1.Url]: https://www.memxtrading.com/specs "The Members Exchange 1.1 Url"
 [Memx.MemxEquities.MemoirDepthFeed.Sbe.v1.3.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Memx/MemxEquities/MemoirDepthFeed.Sbe.v1.3 "Memx MemxEquities MemoirDepthFeed Sbe v1.3 Java Parser"
 [Memx.MemxEquities.MemoirDepthFeed.Sbe.v1.3.Url]: https://www.memxtrading.com/specs "The Members Exchange 1.3 Url"
+[Memx.MemxEquities.MemoirLastSale.Sbe.v1.1.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Memx/MemxEquities/MemoirLastSale.Sbe.v1.1 "Memx MemxEquities MemoirLastSale Sbe v1.1 Java Parser"
+[Memx.MemxEquities.MemoirLastSale.Sbe.v1.1.Url]: https://www.memxtrading.com/specs "The Members Exchange 1.1 Url"
+[Memx.MemxEquities.MemoirLastSale.Sbe.v1.3.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Memx/MemxEquities/MemoirLastSale.Sbe.v1.3 "Memx MemxEquities MemoirLastSale Sbe v1.3 Java Parser"
+[Memx.MemxEquities.MemoirLastSale.Sbe.v1.3.Url]: https://www.memxtrading.com/specs "The Members Exchange 1.3 Url"
+[Memx.MemxEquities.MemoirTopOfBook.Sbe.v1.1.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Memx/MemxEquities/MemoirTopOfBook.Sbe.v1.1 "Memx MemxEquities MemoirTopOfBook Sbe v1.1 Java Parser"
+[Memx.MemxEquities.MemoirTopOfBook.Sbe.v1.1.Url]: https://www.memxtrading.com/specs "The Members Exchange 1.1 Url"
+[Memx.MemxEquities.MemoirTopOfBook.Sbe.v1.3.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Memx/MemxEquities/MemoirTopOfBook.Sbe.v1.3 "Memx MemxEquities MemoirTopOfBook Sbe v1.3 Java Parser"
+[Memx.MemxEquities.MemoirTopOfBook.Sbe.v1.3.Url]: https://www.memxtrading.com/specs "The Members Exchange 1.3 Url"

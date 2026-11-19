@@ -20,11 +20,6 @@ public enum Category2 {
     INTER_MARKET_SWEEP_ORDER('F', "Inter Market Sweep Order"),
 
     /**
-     * Market Center Opening Trade
-     */
-    MARKET_CENTER_OPENING_TRADE('O', "Market Center Opening Trade"),
-
-    /**
      * Derivatively Priced
      */
     DERIVATIVELY_PRICED('4', "Derivatively Priced"),
@@ -91,7 +86,6 @@ public enum Category2 {
         return switch (wire) {
             case ' ' -> Optional.of(NO_TRADE_THROUGH_EXEMPT_REASON);
             case 'F' -> Optional.of(INTER_MARKET_SWEEP_ORDER);
-            case 'O' -> Optional.of(MARKET_CENTER_OPENING_TRADE);
             case '4' -> Optional.of(DERIVATIVELY_PRICED);
             case '5' -> Optional.of(MARKET_CENTER_REOPENING_TRADE);
             case '6' -> Optional.of(MARKET_CENTER_CLOSING_TRADE);

@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
-import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.CancelOrderRejectReasonField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.ClientOrderIdField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.CorrelationIdField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.ExecIdField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.InstrumentIdField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.OrderIdOptionalField;
+import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.ReasonCancelOrderRejectReasonField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.TimestampField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.structs.Details;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.types.Field;
@@ -69,7 +69,7 @@ public final class CancelOrderRejectMessage implements Message {
     /**
      * reason
      */
-    private final CancelOrderRejectReasonField cancelOrderRejectReason = new CancelOrderRejectReasonField();
+    private final ReasonCancelOrderRejectReasonField reasonCancelOrderRejectReason = new ReasonCancelOrderRejectReasonField();
 
     /**
      * details data struct
@@ -79,7 +79,7 @@ public final class CancelOrderRejectMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(List.<Field>of(timestampField), List.<Field>of(execId), List.<Field>of(clientOrderId), List.<Field>of(correlationId), List.<Field>of(orderIdOptional), List.<Field>of(instrumentId), List.<Field>of(cancelOrderRejectReason), details.fields()).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(List.<Field>of(timestampField), List.<Field>of(execId), List.<Field>of(clientOrderId), List.<Field>of(correlationId), List.<Field>of(orderIdOptional), List.<Field>of(instrumentId), List.<Field>of(reasonCancelOrderRejectReason), details.fields()).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -142,10 +142,10 @@ public final class CancelOrderRejectMessage implements Message {
     /**
      * reason
      *
-     * @return the CancelOrderRejectReason field
+     * @return the ReasonCancelOrderRejectReason field
      */
-    public CancelOrderRejectReasonField cancelOrderRejectReason() {
-        return cancelOrderRejectReason;
+    public ReasonCancelOrderRejectReasonField reasonCancelOrderRejectReason() {
+        return reasonCancelOrderRejectReason;
     }
 
     /**
@@ -228,10 +228,10 @@ public final class CancelOrderRejectMessage implements Message {
             return false;
         }
         cursor += InstrumentIdField.BYTE_LENGTH;
-        if (!cancelOrderRejectReason.parse(data, cursor)) {
+        if (!reasonCancelOrderRejectReason.parse(data, cursor)) {
             return false;
         }
-        cursor += CancelOrderRejectReasonField.BYTE_LENGTH;
+        cursor += ReasonCancelOrderRejectReasonField.BYTE_LENGTH;
         if (!details.parseFrom(data, cursor, end)) {
             return false;
         }
@@ -250,7 +250,7 @@ public final class CancelOrderRejectMessage implements Message {
         cursor = correlationId.encode(data, cursor);
         cursor = orderIdOptional.encode(data, cursor);
         cursor = instrumentId.encode(data, cursor);
-        cursor = cancelOrderRejectReason.encode(data, cursor);
+        cursor = reasonCancelOrderRejectReason.encode(data, cursor);
         cursor = details.encode(data, cursor);
         return cursor;
     }
@@ -339,7 +339,7 @@ public final class CancelOrderRejectMessage implements Message {
             case "CorrelationId" -> Optional.of(correlationId);
             case "OrderIdOptional" -> Optional.of(orderIdOptional);
             case "InstrumentId" -> Optional.of(instrumentId);
-            case "CancelOrderRejectReason" -> Optional.of(cancelOrderRejectReason);
+            case "ReasonCancelOrderRejectReason" -> Optional.of(reasonCancelOrderRejectReason);
             default -> Optional.empty();
         };
     }

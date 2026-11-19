@@ -7,7 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-1:
+    name: Build 1 of 10 (Classes/24X/24XEquities/MemoirDepthFeed.Sbe.v1.3 to Classes/Cboe/BzxEquities/MulticastDepthOfBook.Pitch.v2.41.29)
     runs-on: ubuntu-latest
 
     steps:
@@ -22,12 +23,141 @@ jobs:
         with:
           gradle-version: 9.8.2
 
-      # Compiles every protocol and runs each one's round trip.
+      # Compiles this job's protocols and runs each one's round trip.
       - name: Build
-        run: gradle build
+        run: >-
+          gradle
+          :24x-24xequities-memoirdepthfeed-sbe-v1-3:build
+          :24x-24xequities-memoirdepthfeed-sbe-v2-0:build
+          :24x-24xequities-memoirlastsale-sbe-v1-3:build
+          :24x-24xequities-memoirlastsale-sbe-v2-0:build
+          :24x-24xequities-memoirtopofbook-sbe-v1-3:build
+          :24x-24xequities-memoirtopofbook-sbe-v2-0:build
+          :a2x-a2xequities-rtmdf-amd-v1-3-2:build
+          :a2x-a2xequities-rtmdf-amd-v2-5:build
+          :a2x-a2xequities-snapshot-amd-v1-3-2:build
+          :a2x-a2xequities-snapshot-amd-v2-5:build
+          :aix-aixmarket-geniuminet-glimpse-v1-0:build
+          :aix-aixmarket-geniuminet-itch-v3-0:build
+          :aquis-aquisequities-realtime-amd-v2-4-2:build
+          :aquis-aquisequities-realtime-amd-v2-5:build
+          :aquis-aquisequities-realtime-amd-v4-0:build
+          :aquis-aquisequities-realtime-amd-v4-1:build
+          :aquis-aquisequities-realtime-amd-v4-2:build
+          :aquis-aquisequities-replay-amd-v2-4-2:build
+          :aquis-aquisequities-replay-amd-v2-5:build
+          :aquis-aquisequities-replay-amd-v4-0:build
+          :aquis-aquisequities-replay-amd-v4-1:build
+          :aquis-aquisequities-replay-amd-v4-2:build
+          :aquis-aquisequities-snapshot-amd-v2-4-2:build
+          :aquis-aquisequities-snapshot-amd-v2-5:build
+          :aquis-aquisequities-snapshot-amd-v4-0:build
+          :aquis-aquisequities-snapshot-amd-v4-1:build
+          :aquis-aquisequities-snapshot-amd-v4-2:build
+          :aquis-aquisstockexchange-realtime-amd-v1-2-3:build
+          :aquis-aquisstockexchange-replay-amd-v1-2-3:build
+          :aquis-aquisstockexchange-snapshot-amd-v1-2-3:build
+          :asianext-asianextderivatives-realtime-amd-v1-3:build
+          :asianext-asianextderivatives-replay-amd-v1-3:build
+          :asianext-asianextderivatives-snapshot-amd-v1-3:build
+          :asx-asxderivatives-ntp-itch-v1-05:build
+          :asx-asxderivatives-t24-itch-v1-13:build
+          :b3-b3derivatives-binaryentrypoint-sbe-v7-0:build
+          :b3-b3derivatives-binaryentrypoint-sbe-v7-1:build
+          :b3-b3derivatives-binaryentrypoint-sbe-v8-0:build
+          :b3-b3derivatives-binaryentrypoint-sbe-v8-1:build
+          :b3-b3derivatives-binaryentrypoint-sbe-v8-2:build
+          :b3-b3derivatives-binaryentrypoint-sbe-v8-3:build
+          :b3-b3derivatives-binaryentrypoint-sbe-v8-4:build
+          :b3-b3derivatives-binaryumdf-sbe-v1-6:build
+          :b3-b3derivatives-binaryumdf-sbe-v1-7:build
+          :b3-b3derivatives-binaryumdf-sbe-v1-8:build
+          :b3-b3derivatives-binaryumdf-sbe-v1-9:build
+          :b3-b3derivatives-binaryumdf-sbe-v2-1:build
+          :b3-b3derivatives-binaryumdf-sbe-v2-2:build
+          :b3-b3derivatives-binaryumdf-sbe-v2-3:build
+          :bist-borsaistanbul-geniuminet-glimpse-v2-7:build
+          :bist-borsaistanbul-geniuminet-itch-v21-12:build
+          :biva-bivaequities-basic-itch-v1-12:build
+          :biva-bivaequities-index-itch-v1-12:build
+          :biva-bivaequities-lastsale-itch-v1-12:build
+          :biva-bivaequities-orderentry-ouch-v1-05:build
+          :biva-bivaequities-totalview-glimpse-v1-12:build
+          :biva-bivaequities-totalview-itch-v1-12:build
+          :blueoceanats-blueequities-memoirdepthfeed-sbe-v1-3:build
+          :blueoceanats-blueequities-memoirlastsale-sbe-v1-3:build
+          :blueoceanats-blueequities-memoirtopofbook-sbe-v1-3:build
+          :bme-bmeequities-fulldepth-bmegate-v1-6:build
+          :bme-bmeequities-marketandorder-bmegate-v1-6:build
+          :bme-bmeequities-orderentry-bmegate-v1-6:build
+          :bme-bmeequities-recovery-bmegate-v1-6:build
+          :bme-bmeequities-replay-bmegate-v1-6:build
+          :bme-bmeequities-retail-bmegate-v1-6:build
+          :bme-bmeequities-retail5-bmegate-v1-6:build
+          :bme-bmeequities-topofbook-bmegate-v1-6:build
+          :bme-bmeequities-topofbook5-bmegate-v1-6:build
+          :bme-bmefixedincome-fulldepth-bmegate-v1-6:build
+          :bme-bmefixedincome-retail-bmegate-v1-6:build
+          :bme-bmefixedincome-retail5-bmegate-v1-6:build
+          :bme-bmefixedincome-topofbook-bmegate-v1-6:build
+          :bme-bmefixedincome-topofbook5-bmegate-v1-6:build
+          :bme-meff-fulldepth-bmegate-v1-6:build
+          :bme-meff-retail-bmegate-v1-6:build
+          :bme-meff-retail5-bmegate-v1-6:build
+          :bme-meff-topofbook-bmegate-v1-6:build
+          :bme-meff-topofbook5-bmegate-v1-6:build
+          :box-boxoptions-solamulticast-hsvf-v1-5:build
+          :box-boxoptions-solamulticast-hsvf-v1-8:build
+          :box-boxoptions-solamulticast-hsvf-v1-9:build
+          :box-boxoptions-solamulticast-hsvf-v2-1:build
+          :box-boxoptions-solamulticast-hsvf-v2-2:build
+          :box-boxoptions-solatradereporting-atr-v4-5:build
+          :box-boxoptions-solaunicast-hsvf-v4-5-1:build
+          :bruceats-bruceequities-bestbidandoffer-itch-v1-0:build
+          :bruceats-bruceequities-bestbidandoffer-itch-v3-3:build
+          :bruceats-bruceequities-depthofbook-itch-v1-0:build
+          :bruceats-bruceequities-depthofbook-itch-v3-3:build
+          :bruceats-bruceequities-lastsale-itch-v1-0:build
+          :bruceats-bruceequities-lastsale-itch-v3-3:build
+          :bse-bseindia-eobi-fbe-v1-4:build
+          :bse-bseindia-eti-fbe-v1-6-14:build
+          :cboe-bxeequities-binaryorderentry-boe-v2-0-30:build
+          :cboe-bxeequities-binaryorderentry-boe-v2-0-33:build
+          :cboe-bxeequities-binaryorderentry-boe-v2-0-41:build
+          :cboe-bxeequities-binaryorderentry-boe-v2-0-49:build
+          :cboe-bxeequities-binaryorderentry-boe-v2-0-52:build
+          :cboe-bxeequities-binaryorderentry-boe-v2-0-56:build
+          :cboe-bxeequities-binaryorderentry-boe-v2-0-57:build
+          :cboe-bxeequities-binaryorderentry-boe-v2-0-83:build
+          :cboe-bxeequities-multicastdepthofbook-pitch-v6-15:build
+          :cboe-bxeequities-multicastdepthofbook-pitch-v6-2:build
+          :cboe-bxeequities-multicastdepthofbook-pitch-v6-20:build
+          :cboe-bxeequities-multicastdepthofbook-pitch-v6-24:build
+          :cboe-bxeequities-multicastdepthofbook-pitch-v6-68:build
+          :cboe-bxeequities-multicastdepthofbook-pitch-v6-7:build
+          :cboe-byxequities-binaryorderentry-boe-v2-4-55:build
+          :cboe-byxequities-binaryorderentry-boe-v2-4-57:build
+          :cboe-byxequities-binaryorderentry-boe3-v1-0-14:build
+          :cboe-byxequities-multicastdepthofbook-pitch-v2-41-29:build
+          :cboe-byxequities-multicastdepthofbook-pitch-v2-41-64:build
+          :cboe-byxequities-multicastdepthofbook-pitch-v2-41-66:build
+          :cboe-byxequities-multicastdepthofbook-spin-v2-41-66:build
+          :cboe-byxequities-summarydepth-csdp-v1-0-4:build
+          :cboe-byxequities-top-asciipitch-v1-3-10:build
+          :cboe-byxequities-top-asciipitch-v1-3-2:build
+          :cboe-byxequities-top-asciipitch-v1-3-8:build
+          :cboe-bzxequities-binaryorderentry-boe-v2-3:build
+          :cboe-bzxequities-binaryorderentry-boe-v2-4-55:build
+          :cboe-bzxequities-binaryorderentry-boe-v2-4-57:build
+          :cboe-bzxequities-binaryorderentry-boe3-v1-0-14:build
+          :cboe-bzxequities-multicastdepthofbook-pitch-v2-20-4:build
+          :cboe-bzxequities-multicastdepthofbook-pitch-v2-41-29:build
 
       - name: Clone Omi Data
         run: git clone --depth=1 https://github.com/Open-Markets-Initiative/omi-data-packets.git
+
+      - name: Test Classes/Asx/AsxDerivatives/Ntp.Itch.v1.05
+        run: gradle --quiet :asx-asxderivatives-ntp-itch-v1-05:captureTest -Pcapture=omi-data-packets/Asx/AsxDerivatives.Ntp.Itch.v1.05 -Pstrict
 
       - name: Test Classes/B3/B3Derivatives/BinaryEntryPoint.Sbe.v8.0
         run: gradle --quiet :b3-b3derivatives-binaryentrypoint-sbe-v8-0:captureTest -Pcapture=omi-data-packets/B3/B3Derivatives.BinaryEntryPoint.Sbe.v8.0 -Pstrict
@@ -38,6 +168,9 @@ jobs:
       - name: Test Classes/B3/B3Derivatives/BinaryEntryPoint.Sbe.v8.3
         run: gradle --quiet :b3-b3derivatives-binaryentrypoint-sbe-v8-3:captureTest -Pcapture=omi-data-packets/B3/B3Derivatives.BinaryEntryPoint.Sbe.v8.3 -Pstrict
 
+      - name: Test Classes/B3/B3Derivatives/BinaryUmdf.Sbe.v1.8
+        run: gradle --quiet :b3-b3derivatives-binaryumdf-sbe-v1-8:captureTest -Pcapture=omi-data-packets/B3/B3Derivatives.BinaryUmdf.Sbe.v1.8 -Pstrict
+
       - name: Test Classes/BlueOceanAts/BlueEquities/MemoirDepthFeed.Sbe.v1.3
         run: gradle --quiet :blueoceanats-blueequities-memoirdepthfeed-sbe-v1-3:captureTest -Pcapture=omi-data-packets/BlueOceanAts/BlueEquities.MemoirDepthFeed.Sbe.v1.3 -Pstrict
 
@@ -47,23 +180,360 @@ jobs:
       - name: Test Classes/Box/BoxOptions/SolaMulticast.Hsvf.v1.8
         run: gradle --quiet :box-boxoptions-solamulticast-hsvf-v1-8:captureTest -Pcapture=omi-data-packets/Box/BoxOptions.SolaMulticast.Hsvf.v1.8 -Pstrict
 
+      - name: Test Classes/Cboe/ByxEquities/MulticastDepthOfBook.Pitch.v2.41.29
+        run: gradle --quiet :cboe-byxequities-multicastdepthofbook-pitch-v2-41-29:captureTest -Pcapture=omi-data-packets/Cboe/ByxEquities.MulticastDepthOfBook.Pitch.v2.41.29 -Pstrict
+
       - name: Test Classes/Cboe/BzxEquities/BinaryOrderEntry.Boe.v2.4.55
         run: gradle --quiet :cboe-bzxequities-binaryorderentry-boe-v2-4-55:captureTest -Pcapture=omi-data-packets/Cboe/BzxEquities.BinaryOrderEntry.Boe.v2.4.55 -Pstrict
 
       - name: Test Classes/Cboe/BzxEquities/BinaryOrderEntry.Boe.v2.4.57
         run: gradle --quiet :cboe-bzxequities-binaryorderentry-boe-v2-4-57:captureTest -Pcapture=omi-data-packets/Cboe/BzxEquities.BinaryOrderEntry.Boe.v2.4.55 -Pstrict
 
+      - name: Test Classes/Cboe/BzxEquities/MulticastDepthOfBook.Pitch.v2.20.4
+        run: gradle --quiet :cboe-bzxequities-multicastdepthofbook-pitch-v2-20-4:captureTest -Pcapture=omi-data-packets/Cboe/BzxEquities.MulticastDepthOfBook.Pitch.v2.20.4 -Pstrict
+
+      - name: Test Classes/Cboe/BzxEquities/MulticastDepthOfBook.Pitch.v2.41.29
+        run: gradle --quiet :cboe-bzxequities-multicastdepthofbook-pitch-v2-41-29:captureTest -Pcapture=omi-data-packets/Cboe/BzxEquities.MulticastDepthOfBook.Pitch.v2.41.29 -Pstrict
+
+  build-2:
+    name: Build 2 of 10 (Classes/Cboe/BzxEquities/MulticastDepthOfBook.Pitch.v2.41.64 to Classes/Cboe/CxeEquities/BinaryOrderEntry.Boe.v2.0.49)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 9.8.2
+
+      # Compiles this job's protocols and runs each one's round trip.
+      - name: Build
+        run: >-
+          gradle
+          :cboe-bzxequities-multicastdepthofbook-pitch-v2-41-64:build
+          :cboe-bzxequities-multicastdepthofbook-pitch-v2-41-66:build
+          :cboe-bzxequities-multicastdepthofbook-pitch-v2-41-81:build
+          :cboe-bzxequities-multicastdepthofbook-spin-v2-20-4:build
+          :cboe-bzxequities-multicastdepthofbook-spin-v2-41-66:build
+          :cboe-bzxequities-multicastdepthofbook-spin-v2-41-81:build
+          :cboe-bzxequities-summarydepth-csdp-v1-0-4:build
+          :cboe-bzxequities-top-asciipitch-v1-3-10:build
+          :cboe-bzxequities-top-asciipitch-v1-3-8:build
+          :cboe-bzxoptions-binaryorderentry-boe-v2-10:build
+          :cboe-bzxoptions-binaryorderentry-boe-v2-11-115:build
+          :cboe-bzxoptions-binaryorderentry-boe3-v1-0-10:build
+          :cboe-bzxoptions-binaryorderentry-boe3-v1-1-23:build
+          :cboe-bzxoptions-complex-pitch-v2-1-61:build
+          :cboe-bzxoptions-complex-spin-v2-1-61:build
+          :cboe-bzxoptions-complexauction-pitch-v2-2-41:build
+          :cboe-bzxoptions-complextop-pitch-v1-1-54:build
+          :cboe-bzxoptions-complextop-spin-v1-1-54:build
+          :cboe-bzxoptions-multicastdepthofbook-pitch-v2-41-29:build
+          :cboe-bzxoptions-multicastdepthofbook-pitch-v2-41-64:build
+          :cboe-bzxoptions-multicastdepthofbook-pitch-v2-41-66:build
+          :cboe-bzxoptions-multicastdepthofbook-pitch-v2-41-76:build
+          :cboe-bzxoptions-multicastdepthofbook-pitch-v2-41-80:build
+          :cboe-bzxoptions-multicastdepthofbook-spin-v2-41-66:build
+          :cboe-bzxoptions-multicasttop-pitch-v1-2-54:build
+          :cboe-bzxoptions-multicasttop-pitch-v1-2-64:build
+          :cboe-bzxoptions-multicasttop-spin-v1-2-54:build
+          :cboe-bzxoptions-multicasttop-spin-v1-2-64:build
+          :cboe-c1options-auctionfeed-pitch-v1-1-1:build
+          :cboe-c1options-auctionfeed-pitch-v1-1-39:build
+          :cboe-c1options-auctionfeed-pitch-v1-1-44:build
+          :cboe-c1options-binaryorderentry-boe-v2-10:build
+          :cboe-c1options-binaryorderentry-boe-v2-11-115:build
+          :cboe-c1options-binaryorderentry-boe3-v1-0-10:build
+          :cboe-c1options-binaryorderentry-boe3-v1-1-23:build
+          :cboe-c1options-complex-pitch-v2-1-18:build
+          :cboe-c1options-complex-pitch-v2-1-37:build
+          :cboe-c1options-complex-pitch-v2-1-61:build
+          :cboe-c1options-complex-spin-v2-1-61:build
+          :cboe-c1options-complexauction-pitch-v2-2-41:build
+          :cboe-c1options-complextop-pitch-v1-1-54:build
+          :cboe-c1options-complextop-spin-v1-1-54:build
+          :cboe-c1options-flex-pitch-v1-1-30:build
+          :cboe-c1options-flex-spin-v1-1-30:build
+          :cboe-c1options-marketdatafeed-csm-v1-4-2:build
+          :cboe-c1options-marketlevel2-csm-v1-0-4:build
+          :cboe-c1options-multicastdepthofbook-pitch-v2-39-4:build
+          :cboe-c1options-multicastdepthofbook-pitch-v2-41-29:build
+          :cboe-c1options-multicastdepthofbook-pitch-v2-41-64:build
+          :cboe-c1options-multicastdepthofbook-pitch-v2-41-66:build
+          :cboe-c1options-multicastdepthofbook-pitch-v2-41-76:build
+          :cboe-c1options-multicastdepthofbook-pitch-v2-41-80:build
+          :cboe-c1options-multicastdepthofbook-spin-v2-41-66:build
+          :cboe-c1options-multicasttop-pitch-v1-2-54:build
+          :cboe-c1options-multicasttop-pitch-v1-2-64:build
+          :cboe-c1options-multicasttop-spin-v1-2-54:build
+          :cboe-c1options-multicasttop-spin-v1-2-64:build
+          :cboe-c1options-openingauction-csm-v1-0:build
+          :cboe-c1options-openingprocess-pitch-v1-0-30:build
+          :cboe-c1options-openingprocess-pitch-v1-0-34:build
+          :cboe-c2options-binaryorderentry-boe-v2-10:build
+          :cboe-c2options-binaryorderentry-boe-v2-11-115:build
+          :cboe-c2options-binaryorderentry-boe3-v1-0-10:build
+          :cboe-c2options-binaryorderentry-boe3-v1-1-23:build
+          :cboe-c2options-complex-pitch-v2-1-61:build
+          :cboe-c2options-complex-spin-v2-1-61:build
+          :cboe-c2options-complexauction-pitch-v2-2-41:build
+          :cboe-c2options-complextop-pitch-v1-1-54:build
+          :cboe-c2options-complextop-spin-v1-1-54:build
+          :cboe-c2options-multicastdepthofbook-pitch-v2-41-29:build
+          :cboe-c2options-multicastdepthofbook-pitch-v2-41-64:build
+          :cboe-c2options-multicastdepthofbook-pitch-v2-41-66:build
+          :cboe-c2options-multicastdepthofbook-pitch-v2-41-76:build
+          :cboe-c2options-multicastdepthofbook-pitch-v2-41-80:build
+          :cboe-c2options-multicastdepthofbook-spin-v2-41-66:build
+          :cboe-c2options-multicasttop-pitch-v1-2-54:build
+          :cboe-c2options-multicasttop-pitch-v1-2-64:build
+          :cboe-c2options-multicasttop-spin-v1-2-54:build
+          :cboe-c2options-multicasttop-spin-v1-2-64:build
+          :cboe-cboeequities-binaryorderentry-boe-v2-3-7:build
+          :cboe-cboeeurope-latencyfeed-pitch-v1-4:build
+          :cboe-cboeeurope-multicastsiquotes-pitch-v6-68:build
+          :cboe-cboeeurope-multicasttradereporting-pitch-v6-68:build
+          :cboe-cboeeurope-tradereporting-boe-v2-0-15:build
+          :cboe-cboeeurope-tradereporting-boe-v2-0-17:build
+          :cboe-cboeeurope-tradereporting-boe-v2-0-23:build
+          :cboe-cboeeurope-tradereporting-boe-v2-0-24:build
+          :cboe-cboeeurope-tradereporting-boe-v2-0-40:build
+          :cboe-cedxderivatives-binaryorderentry-boe-v2-18:build
+          :cboe-cedxderivatives-binaryorderentry-boe-v2-30:build
+          :cboe-cedxderivatives-binaryorderentry-boe-v2-32:build
+          :cboe-cedxderivatives-binaryorderentry-boe-v2-6:build
+          :cboe-cedxderivatives-multicastdepthofbook-pitch-v1-01:build
+          :cboe-cedxderivatives-multicastdepthofbook-pitch-v1-11:build
+          :cboe-cfefutures-binaryorderentry-boe-v1-3:build
+          :cboe-cfefutures-binaryorderentry-boe-v1-3-12:build
+          :cboe-cfefutures-binaryorderentry-boe3-v1-0:build
+          :cboe-cfefutures-binaryorderentry-boe3-v1-1-18:build
+          :cboe-cfefutures-binaryorderentry-boe3-v1-1-20:build
+          :cboe-cfefutures-binaryorderentry-boe3-v1-1-31:build
+          :cboe-cfefutures-binaryorderentry-boe3-v1-1-36:build
+          :cboe-cfefutures-multicastdepthofbook-pitch-v1-1-12:build
+          :cboe-cfefutures-multicastdepthofbook-pitch-v1-1-6:build
+          :cboe-cfefutures-multicastdepthofbook-pitch-v1-2-13:build
+          :cboe-cfefutures-multicastdepthofbook-pitch-v1-2-19:build
+          :cboe-cfefutures-multicastdepthofbook-pitch-v1-2-22:build
+          :cboe-cfefutures-multicastdepthofbook-spin-v1-2-13:build
+          :cboe-cfefutures-multicastdepthofbook-spin-v1-2-19:build
+          :cboe-cfefutures-multicasttop-pitch-v1-2-20:build
+          :cboe-cfefutures-multicasttop-pitch-v1-2-22:build
+          :cboe-cfefutures-multicasttop-spin-v1-2-20:build
+          :cboe-cfefutures-multicasttop-spin-v1-2-22:build
+          :cboe-cfefutures-oofmulticastdepthofbook-pitch-v1-0-8:build
+          :cboe-cfefutures-oofmulticastdepthofbook-spin-v1-0-8:build
+          :cboe-cfefutures-oofmulticasttop-pitch-v1-0-8:build
+          :cboe-cfefutures-oofmulticasttop-spin-v1-0-8:build
+          :cboe-cxaequities-binaryorderentry-boe3-v1-0-20:build
+          :cboe-cxaequities-multicastdepthofbook-pitch-v1-0-12:build
+          :cboe-cxaequities-multicastdepthofbook-spin-v1-0-12:build
+          :cboe-cxaequities-multicasttopofbook-pitch-v1-0-10:build
+          :cboe-cxaequities-multicasttopofbook-spin-v1-0-10:build
+          :cboe-cxeequities-binaryorderentry-boe-v2-0-30:build
+          :cboe-cxeequities-binaryorderentry-boe-v2-0-33:build
+          :cboe-cxeequities-binaryorderentry-boe-v2-0-41:build
+          :cboe-cxeequities-binaryorderentry-boe-v2-0-49:build
+
+      - name: Clone Omi Data
+        run: git clone --depth=1 https://github.com/Open-Markets-Initiative/omi-data-packets.git
+
       - name: Test Classes/Cboe/BzxEquities/MulticastDepthOfBook.Spin.v2.20.4
         run: gradle --quiet :cboe-bzxequities-multicastdepthofbook-spin-v2-20-4:captureTest -Pcapture=omi-data-packets/Cboe/BzxEquities.MulticastDepthOfBook.Spin.v2.20.4 -Pstrict
+
+      - name: Test Classes/Cboe/C1Options/Complex.Pitch.v2.1.18
+        run: gradle --quiet :cboe-c1options-complex-pitch-v2-1-18:captureTest -Pcapture=omi-data-packets/Cboe/C1Options.Complex.Pitch.v2.1.18 -Pstrict
+
+      - name: Test Classes/Cboe/C1Options/MarketDataFeed.Csm.v1.4.2
+        run: gradle --quiet :cboe-c1options-marketdatafeed-csm-v1-4-2:captureTest -Pcapture=omi-data-packets/Cboe/C1Options.MarketDataFeed.Csm.v1.4.2 -Pstrict
+
+      - name: Test Classes/Cboe/C1Options/MarketLevel2.Csm.v1.0.4
+        run: gradle --quiet :cboe-c1options-marketlevel2-csm-v1-0-4:captureTest -Pcapture=omi-data-packets/Cboe/C1Options.MarketLevel2.Csm.v1.0.4 -Pstrict
+
+      - name: Test Classes/Cboe/C1Options/MulticastDepthOfBook.Pitch.v2.39.4
+        run: gradle --quiet :cboe-c1options-multicastdepthofbook-pitch-v2-39-4:captureTest -Pcapture=omi-data-packets/Cboe/C1Options.MulticastDepthOfBook.Pitch.v2.39.4 -Pstrict
+
+      - name: Test Classes/Cboe/C1Options/OpeningAuction.Csm.v1.0
+        run: gradle --quiet :cboe-c1options-openingauction-csm-v1-0:captureTest -Pcapture=omi-data-packets/Cboe/C1Options.OpeningAuction.Csm.v1.0 -Pstrict
 
       - name: Test Classes/Cboe/CfeFutures/BinaryOrderEntry.Boe3.v1.1.20
         run: gradle --quiet :cboe-cfefutures-binaryorderentry-boe3-v1-1-20:captureTest -Pcapture=omi-data-packets/Cboe/CfeFutures.BinaryOrderEntry.Boe3.v1.1.20 -Pstrict
 
+      - name: Test Classes/Cboe/CfeFutures/MulticastDepthOfBook.Pitch.v1.1.12
+        run: gradle --quiet :cboe-cfefutures-multicastdepthofbook-pitch-v1-1-12:captureTest -Pcapture=omi-data-packets/Cboe/CfeFutures.MulticastDepthOfBook.Pitch.v1.1.12 -Pstrict
+
+      - name: Test Classes/Cboe/CfeFutures/MulticastDepthOfBook.Pitch.v1.1.6
+        run: gradle --quiet :cboe-cfefutures-multicastdepthofbook-pitch-v1-1-6:captureTest -Pcapture=omi-data-packets/Cboe/CfeFutures.MulticastDepthOfBook.Pitch.v1.1.6 -Pstrict
+
       - name: Test Classes/Cboe/CfeFutures/MulticastTop.Pitch.v1.2.22
         run: gradle --quiet :cboe-cfefutures-multicasttop-pitch-v1-2-22:captureTest -Pcapture=omi-data-packets/Cboe/CfeFutures.MulticastTop.Pitch.v1.2.22 -Pstrict
 
+  build-3:
+    name: Build 3 of 10 (Classes/Cboe/CxeEquities/BinaryOrderEntry.Boe.v2.0.52 to Classes/Cnsx/Cse2/Multicast.Mmd.v1.6)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 9.8.2
+
+      # Compiles this job's protocols and runs each one's round trip.
+      - name: Build
+        run: >-
+          gradle
+          :cboe-cxeequities-binaryorderentry-boe-v2-0-52:build
+          :cboe-cxeequities-binaryorderentry-boe-v2-0-56:build
+          :cboe-cxeequities-binaryorderentry-boe-v2-0-57:build
+          :cboe-cxeequities-binaryorderentry-boe-v2-0-83:build
+          :cboe-cxeequities-multicastdepthofbook-pitch-v6-15:build
+          :cboe-cxeequities-multicastdepthofbook-pitch-v6-2:build
+          :cboe-cxeequities-multicastdepthofbook-pitch-v6-20:build
+          :cboe-cxeequities-multicastdepthofbook-pitch-v6-24:build
+          :cboe-cxeequities-multicastdepthofbook-pitch-v6-68:build
+          :cboe-cxeequities-multicastdepthofbook-pitch-v6-7:build
+          :cboe-cxjequities-binaryorderentry-boe3-v1-0-12:build
+          :cboe-cxjequities-multicastdepthofbook-pitch-v1-0-6:build
+          :cboe-cxjequities-multicastdepthofbook-spin-v1-0-6:build
+          :cboe-dxeequities-multicastdepthofbook-pitch-v6-68:build
+          :cboe-edgaequities-binaryorderentry-boe-v2-4-55:build
+          :cboe-edgaequities-binaryorderentry-boe-v2-4-57:build
+          :cboe-edgaequities-binaryorderentry-boe3-v1-0-14:build
+          :cboe-edgaequities-multicastdepthofbook-pitch-v2-41-29:build
+          :cboe-edgaequities-multicastdepthofbook-pitch-v2-41-64:build
+          :cboe-edgaequities-multicastdepthofbook-pitch-v2-41-66:build
+          :cboe-edgaequities-multicastdepthofbook-spin-v2-41-66:build
+          :cboe-edgaequities-summarydepth-csdp-v1-0-4:build
+          :cboe-edgaequities-top-asciipitch-v1-3-10:build
+          :cboe-edgaequities-top-asciipitch-v1-3-8:build
+          :cboe-edgxequities-binaryorderentry-boe-v2-3:build
+          :cboe-edgxequities-binaryorderentry-boe-v2-4-55:build
+          :cboe-edgxequities-binaryorderentry-boe-v2-4-57:build
+          :cboe-edgxequities-binaryorderentry-boe3-v1-0-14:build
+          :cboe-edgxequities-multicastdepthofbook-pitch-v2-41-29:build
+          :cboe-edgxequities-multicastdepthofbook-pitch-v2-41-64:build
+          :cboe-edgxequities-multicastdepthofbook-pitch-v2-41-66:build
+          :cboe-edgxequities-multicastdepthofbook-pitch-v2-41-81:build
+          :cboe-edgxequities-multicastdepthofbook-spin-v2-41-66:build
+          :cboe-edgxequities-multicastdepthofbook-spin-v2-41-81:build
+          :cboe-edgxequities-summarydepth-csdp-v1-0-4:build
+          :cboe-edgxequities-top-asciipitch-v1-3-10:build
+          :cboe-edgxequities-top-asciipitch-v1-3-8:build
+          :cboe-edgxoptions-auctionfeed-pitch-v1-1-1:build
+          :cboe-edgxoptions-auctionfeed-pitch-v1-1-39:build
+          :cboe-edgxoptions-auctionfeed-pitch-v1-1-44:build
+          :cboe-edgxoptions-binaryorderentry-boe-v2-10:build
+          :cboe-edgxoptions-binaryorderentry-boe-v2-11-115:build
+          :cboe-edgxoptions-binaryorderentry-boe3-v1-0-10:build
+          :cboe-edgxoptions-binaryorderentry-boe3-v1-1-23:build
+          :cboe-edgxoptions-complex-pitch-v2-1-61:build
+          :cboe-edgxoptions-complex-spin-v2-1-61:build
+          :cboe-edgxoptions-complexauction-pitch-v2-2-41:build
+          :cboe-edgxoptions-complextop-pitch-v1-1-54:build
+          :cboe-edgxoptions-complextop-spin-v1-1-54:build
+          :cboe-edgxoptions-multicastdepthofbook-pitch-v2-41-29:build
+          :cboe-edgxoptions-multicastdepthofbook-pitch-v2-41-64:build
+          :cboe-edgxoptions-multicastdepthofbook-pitch-v2-41-66:build
+          :cboe-edgxoptions-multicastdepthofbook-pitch-v2-41-76:build
+          :cboe-edgxoptions-multicastdepthofbook-pitch-v2-41-80:build
+          :cboe-edgxoptions-multicastdepthofbook-spin-v2-41-66:build
+          :cboe-edgxoptions-multicasttop-pitch-v1-2-54:build
+          :cboe-edgxoptions-multicasttop-pitch-v1-2-64:build
+          :cboe-edgxoptions-multicasttop-spin-v1-2-54:build
+          :cboe-edgxoptions-multicasttop-spin-v1-2-64:build
+          :cboe-gapdetection-pitch-v1:build
+          :cboe-gapdetection-pitch-v2:build
+          :cboe-gapdetection-pitch-v4:build
+          :cboe-gapdetection-pitch-v5:build
+          :cboe-gapdetection-pitch-v6:build
+          :cboe-gaprequestproxy-pitch-v1:build
+          :cboe-matchnow-gaprequestproxy-pitch-v1-0-13:build
+          :cboe-matchnow-gaprequestproxy-pitch-v1-0-14:build
+          :cboe-matchnow-multicasttrades-pitch-v1-0-13:build
+          :cboe-matchnow-multicasttrades-pitch-v1-0-14:build
+          :cboe-neoequities-crossingfacility-pitch-v1-0-13:build
+          :cboe-neoequities-crossingfacility-pitch-v1-0-14:build
+          :cboe-neoequities-gaprequestproxy-pitch-v1-0-13:build
+          :cboe-neoequities-gaprequestproxy-pitch-v1-0-14:build
+          :cboe-neoequities-multicastfulldepth-pitch-v1-0-13:build
+          :cboe-neoequities-multicastfulldepth-pitch-v1-0-14:build
+          :cboe-neoequities-multicastmarketbyprice-pitch-v1-0-13:build
+          :cboe-neoequities-multicastmarketbyprice-pitch-v1-0-14:build
+          :cboe-neoequities-multicasttrades-pitch-v1-0-13:build
+          :cboe-neoequities-multicasttrades-pitch-v1-0-14:build
+          :cboe-neoequities-orderentry-boe3-v1-0-19:build
+          :cboe-neoequities-spinserver-pitch-v1-0-13:build
+          :cboe-neoequities-spinserver-pitch-v1-0-14:build
+          :cboe-titaniumconsolidated-indices-cgif-v1-4-13:build
+          :cboe-titaniumconsolidated-oneoptions-pitch-v1-0-10:build
+          :cboe-titaniumconsolidated-oneoptions-pitch-v1-1-19:build
+          :cboe-titaniumconsolidated-oneoptions-spin-v1-0-10:build
+          :cixats-cixaspen-marketdatafeed-aspen-v1-4:build
+          :cme-brokertec-ustreasury-sbe-v10-1:build
+          :cme-brokertec-ilink3-sbe-v8-2:build
+          :cme-brokertec-ilink3-sbe-v8-3:build
+          :cme-brokertec-ilink3-sbe-v8-4:build
+          :cme-brokertec-ilink3-sbe-v8-5:build
+          :cme-brokertec-ilink3-sbe-v8-6:build
+          :cme-brokertec-ilink3-sbe-v8-7:build
+          :cme-brokertec-ilink3-sbe-v8-8:build
+          :cme-brokertec-ilink3-sbe-v8-9:build
+          :cme-ebs-spectrum-sbe-v12-0:build
+          :cme-ebs-ilink3-sbe-v8-2:build
+          :cme-ebs-ilink3-sbe-v8-3:build
+          :cme-ebs-ilink3-sbe-v8-4:build
+          :cme-ebs-ilink3-sbe-v8-5:build
+          :cme-ebs-ilink3-sbe-v8-6:build
+          :cme-ebs-ilink3-sbe-v8-7:build
+          :cme-ebs-ilink3-sbe-v8-8:build
+          :cme-ebs-ilink3-sbe-v8-9:build
+          :cme-globex-derived-sbe-v12-0:build
+          :cme-globex-mdp3-sbe-v1-10:build
+          :cme-globex-mdp3-sbe-v1-11:build
+          :cme-globex-mdp3-sbe-v1-12:build
+          :cme-globex-mdp3-sbe-v1-13:build
+          :cme-globex-mdp3-sbe-v1-5:build
+          :cme-globex-mdp3-sbe-v1-6:build
+          :cme-globex-mdp3-sbe-v1-8:build
+          :cme-globex-mdp3-sbe-v1-9:build
+          :cme-globex-sessionmgmt-sbe-v0-2:build
+          :cme-globex-settlements-sbe-v7-0:build
+          :cme-globex-ilink3-sbe-v8-2:build
+          :cme-globex-ilink3-sbe-v8-3:build
+          :cme-globex-ilink3-sbe-v8-4:build
+          :cme-globex-ilink3-sbe-v8-5:build
+          :cme-globex-ilink3-sbe-v8-6:build
+          :cme-globex-ilink3-sbe-v8-7:build
+          :cme-globex-ilink3-sbe-v8-8:build
+          :cme-globex-ilink3-sbe-v8-9:build
+          :cnsx-cse2-multicast-mmd-v1-6:build
+
+      - name: Clone Omi Data
+        run: git clone --depth=1 https://github.com/Open-Markets-Initiative/omi-data-packets.git
+
+      - name: Test Classes/Cboe/EdgaEquities/MulticastDepthOfBook.Pitch.v2.41.29
+        run: gradle --quiet :cboe-edgaequities-multicastdepthofbook-pitch-v2-41-29:captureTest -Pcapture=omi-data-packets/Cboe/EdgaEquities.MulticastDepthOfBook.Pitch.v2.41.29 -Pstrict
+
+      - name: Test Classes/Cboe/EdgxEquities/MulticastDepthOfBook.Pitch.v2.41.29
+        run: gradle --quiet :cboe-edgxequities-multicastdepthofbook-pitch-v2-41-29:captureTest -Pcapture=omi-data-packets/Cboe/EdgxEquities.MulticastDepthOfBook.Pitch.v2.41.29 -Pstrict
+
       - name: Test Classes/Cboe/GapRequestProxy.Pitch.v1
         run: gradle --quiet :cboe-gaprequestproxy-pitch-v1:captureTest -Pcapture=omi-data-packets/Cboe/GapRequestProxy.Pitch.v1 -Pstrict
+
+      - name: Test Classes/Cboe/TitaniumConsolidated/Indices.Cgif.v1.4.13
+        run: gradle --quiet :cboe-titaniumconsolidated-indices-cgif-v1-4-13:captureTest -Pcapture=omi-data-packets/Cboe/TitaniumConsolidated.Indices.Cgif.v1.4.13 -Pstrict
 
       - name: Test Classes/Cme/Globex/Mdp3.Sbe.v1.12
         run: gradle --quiet :cme-globex-mdp3-sbe-v1-12:captureTest -Pcapture=omi-data-packets/Cme/Globex.Mdp3.Sbe.v1.12 -Pstrict
@@ -80,6 +550,158 @@ jobs:
       - name: Test Classes/Cme/Globex/iLink3.Sbe.v8.5
         run: gradle --quiet :cme-globex-ilink3-sbe-v8-5:captureTest -Pcapture=omi-data-packets/Cme/Globex.iLink3.Sbe.v8.5 -Pstrict
 
+  build-4:
+    name: Build 4 of 10 (Classes/Cnsx/Cse2/Retransmission.Mmd.v1.6 to Classes/Hkex/HkexSecurities/IndexRetrans.Omd.v1.45)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 9.8.2
+
+      # Compiles this job's protocols and runs each one's round trip.
+      - name: Build
+        run: >-
+          gradle
+          :cnsx-cse2-retransmission-mmd-v1-6:build
+          :coinbase-coinbasederivatives-marketdataapi-sbe-v1-2:build
+          :coinbase-coinbasederivatives-marketdataapi-sbe-v1-3:build
+          :coinbase-coinbasederivatives-marketdataapi-sbe-v1-7:build
+          :coinbase-coinbasederivatives-marketdataapi-sbe-v1-9:build
+          :coinbase-coinbasederivatives-ordersapi-sbe-v1-3:build
+          :coinbase-coinbasederivatives-ordersapi-sbe-v1-4:build
+          :coinbase-coinbasederivatives-ordersapi-sbe-v1-5:build
+          :coinbase-coinbasederivatives-ordersapi-sbe-v1-6:build
+          :coinbase-coinbasederivatives-ordersapi-sbe-v1-7:build
+          :coinbase-coinbasederivatives-ordersapi-sbe-v1-8:build
+          :coinbase-coinbasederivatives-session-tcp-v1-2:build
+          :coinbase-deribit-marketdataapi-sbe-v0-1:build
+          :coinbase-deribit-marketdataapi-sbe-v1-0:build
+          :coinbase-deribit-ordersapi-sbe-v0-1:build
+          :coinbase-deribit-ordersapi-sbe-v1-0:build
+          :coinbase-deribit-ordersapi-sbe-v1-3:build
+          :coinbase-deribit-ordersapi-sbe-v1-4:build
+          :coinbase-deribit-ordersapi-sbe-v1-5:build
+          :currenex-currenexforex-esp-cbp-v9:build
+          :currenex-currenexforex-now-cbp-v10:build
+          :databento-marketdata-normalized-dbn-v1:build
+          :databento-marketdata-normalized-dbn-v2:build
+          :databento-marketdata-normalized-dbn-v3:build
+          :eurex-t7-edci-fbe-v13-0:build
+          :eurex-t7-edci-fbe-v13-1:build
+          :eurex-t7-edci-fbe-v14-0:build
+          :eurex-t7-edci-fbe-v14-1:build
+          :eurex-t7-edci-fbe-v15-0:build
+          :eurex-t7-eobi-fbe-v10-0:build
+          :eurex-t7-eobi-fbe-v10-1:build
+          :eurex-t7-eobi-fbe-v11-0:build
+          :eurex-t7-eobi-fbe-v11-1:build
+          :eurex-t7-eobi-fbe-v12-0:build
+          :eurex-t7-eobi-fbe-v12-1:build
+          :eurex-t7-eobi-fbe-v13-0:build
+          :eurex-t7-eobi-fbe-v13-1:build
+          :eurex-t7-eobi-fbe-v14-0:build
+          :eurex-t7-eobi-fbe-v14-1:build
+          :eurex-t7-eobi-fbe-v15-0:build
+          :eurex-t7-eobi-fbe-v2-5:build
+          :eurex-t7-eobi-fbe-v3-0:build
+          :eurex-t7-eobi-fbe-v4-0:build
+          :eurex-t7-eobi-fbe-v5-0:build
+          :eurex-t7-eobi-fbe-v6-0:build
+          :eurex-t7-eobi-fbe-v6-1:build
+          :eurex-t7-eobi-fbe-v7-0:build
+          :eurex-t7-eobi-fbe-v7-1:build
+          :eurex-t7-eobi-fbe-v8-0:build
+          :eurex-t7-eobi-fbe-v8-1:build
+          :eurex-t7-eobi-fbe-v9-0:build
+          :eurex-t7-eobi-fbe-v9-1:build
+          :eurex-t7-eti-fbe-v10-0:build
+          :eurex-t7-eti-fbe-v10-1:build
+          :eurex-t7-eti-fbe-v11-0:build
+          :eurex-t7-eti-fbe-v11-1:build
+          :eurex-t7-eti-fbe-v12-0:build
+          :eurex-t7-eti-fbe-v12-1:build
+          :eurex-t7-eti-fbe-v13-0:build
+          :eurex-t7-eti-fbe-v13-1:build
+          :eurex-t7-eti-fbe-v14-0:build
+          :eurex-t7-eti-fbe-v14-1:build
+          :eurex-t7-eti-fbe-v15-0:build
+          :eurex-t7-eti-fbe-v2-5:build
+          :eurex-t7-eti-fbe-v5-0:build
+          :eurex-t7-eti-fbe-v6-0:build
+          :eurex-t7-eti-fbe-v6-1:build
+          :eurex-t7-eti-fbe-v7-0:build
+          :eurex-t7-eti-fbe-v7-1:build
+          :eurex-t7-eti-fbe-v8-0:build
+          :eurex-t7-eti-fbe-v8-1:build
+          :eurex-t7-eti-fbe-v9-0:build
+          :eurex-t7-eti-fbe-v9-1:build
+          :eurex-t7-xti-fbe-v10-0:build
+          :eurex-t7-xti-fbe-v10-1:build
+          :eurex-t7-xti-fbe-v11-0:build
+          :eurex-t7-xti-fbe-v11-1:build
+          :eurex-t7-xti-fbe-v12-0:build
+          :eurex-t7-xti-fbe-v12-1:build
+          :eurex-t7-xti-fbe-v13-0:build
+          :eurex-t7-xti-fbe-v13-1:build
+          :eurex-t7-xti-fbe-v14-0:build
+          :eurex-t7-xti-fbe-v14-1:build
+          :eurex-t7-xti-fbe-v15-0:build
+          :eurex-t7-xti-fbe-v5-0:build
+          :eurex-t7-xti-fbe-v6-0:build
+          :eurex-t7-xti-fbe-v6-1:build
+          :eurex-t7-xti-fbe-v7-0:build
+          :eurex-t7-xti-fbe-v7-1:build
+          :eurex-t7-xti-fbe-v8-0:build
+          :eurex-t7-xti-fbe-v8-1:build
+          :eurex-t7-xti-fbe-v9-0:build
+          :eurex-t7-xti-fbe-v9-1:build
+          :euronext-optiq-dropcopygateway-sbe-v5-35:build
+          :euronext-optiq-dropcopygateway-sbe-v5-36:build
+          :euronext-optiq-dropcopygateway-sbe-v5-38:build
+          :euronext-optiq-dropcopygateway-sbe-v5-56:build
+          :euronext-optiq-dropcopygateway-sbe-v6-63:build
+          :euronext-optiq-dropcopygateway-sbe-v6-64:build
+          :euronext-optiq-dropcopygateway-sbe-v6-65:build
+          :euronext-optiq-dropcopygateway-sbe-v6-67:build
+          :euronext-optiq-dropcopygateway-sbe-v6-69:build
+          :euronext-optiq-orderentrygateway-sbe-v1-3:build
+          :finra-finraorf-tdds-dfi-v2-1:build
+          :gpw-wse-streambbo-wats-v1-7-6-20:build
+          :gpw-wse-streamfulldepth-wats-v1-7-6-20:build
+          :hkex-gapdetection-omd-v1:build
+          :hkex-gapdetection-omd-v2:build
+          :hkex-hkexsecurities-fulltick-omd-v1-44:build
+          :hkex-hkexsecurities-fulltick-omd-v1-45:build
+          :hkex-hkexsecurities-fulltick-omd-v1-46:build
+          :hkex-hkexsecurities-fulltickrefresh-omd-v1-44:build
+          :hkex-hkexsecurities-fulltickrefresh-omd-v1-45:build
+          :hkex-hkexsecurities-fulltickrefresh-omd-v1-46:build
+          :hkex-hkexsecurities-fulltickretrans-omd-v1-44:build
+          :hkex-hkexsecurities-fulltickretrans-omd-v1-45:build
+          :hkex-hkexsecurities-fulltickretrans-omd-v1-46:build
+          :hkex-hkexsecurities-index-omd-v1-44:build
+          :hkex-hkexsecurities-index-omd-v1-45:build
+          :hkex-hkexsecurities-index-omd-v1-46:build
+          :hkex-hkexsecurities-indexrefresh-omd-v1-44:build
+          :hkex-hkexsecurities-indexrefresh-omd-v1-45:build
+          :hkex-hkexsecurities-indexrefresh-omd-v1-46:build
+          :hkex-hkexsecurities-indexretrans-omd-v1-44:build
+          :hkex-hkexsecurities-indexretrans-omd-v1-45:build
+
+      - name: Clone Omi Data
+        run: git clone --depth=1 https://github.com/Open-Markets-Initiative/omi-data-packets.git
+
+      - name: Test Classes/Coinbase/CoinbaseDerivatives/MarketDataApi.Sbe.v1.2
+        run: gradle --quiet :coinbase-coinbasederivatives-marketdataapi-sbe-v1-2:captureTest -Pcapture=omi-data-packets/Coinbase/CoinbaseDerivatives.MarketDataApi.Sbe.v1.2 -Pstrict
+
       - name: Test Classes/Coinbase/CoinbaseDerivatives/OrdersApi.Sbe.v1.3
         run: gradle --quiet :coinbase-coinbasederivatives-ordersapi-sbe-v1-3:captureTest -Pcapture=omi-data-packets/Coinbase/CoinbaseDerivatives.OrdersApi.Sbe.v1.3 -Pstrict
 
@@ -89,8 +711,20 @@ jobs:
       - name: Test Classes/Coinbase/CoinbaseDerivatives/OrdersApi.Sbe.v1.8
         run: gradle --quiet :coinbase-coinbasederivatives-ordersapi-sbe-v1-8:captureTest -Pcapture=omi-data-packets/Coinbase/CoinbaseDerivatives.OrdersApi.Sbe.v1.8 -Pstrict
 
+      - name: Test Classes/Coinbase/Deribit/MarketDataApi.Sbe.v0.1
+        run: gradle --quiet :coinbase-deribit-marketdataapi-sbe-v0-1:captureTest -Pcapture=omi-data-packets/Coinbase/Deribit.MarketDataApi.Sbe.v0.1 -Pstrict
+
       - name: Test Classes/Coinbase/Deribit/OrdersApi.Sbe.v0.1
         run: gradle --quiet :coinbase-deribit-ordersapi-sbe-v0-1:captureTest -Pcapture=omi-data-packets/Coinbase/Deribit.OrdersApi.Sbe.v0.1 -Pstrict
+
+      - name: Test Classes/Eurex/T7/Eobi.Fbe.v13.0
+        run: gradle --quiet :eurex-t7-eobi-fbe-v13-0:captureTest -Pcapture=omi-data-packets/Eurex/T7.Eobi.Fbe.v13.0 -Pstrict
+
+      - name: Test Classes/Eurex/T7/Eobi.Fbe.v3.0
+        run: gradle --quiet :eurex-t7-eobi-fbe-v3-0:captureTest -Pcapture=omi-data-packets/Eurex/T7.Eobi.Fbe.v3.0 -Pstrict
+
+      - name: Test Classes/Eurex/T7/Eobi.Fbe.v6.0
+        run: gradle --quiet :eurex-t7-eobi-fbe-v6-0:captureTest -Pcapture=omi-data-packets/Eurex/T7.Eobi.Fbe.v6.0 -Pstrict
 
       - name: Test Classes/Eurex/T7/Eti.Fbe.v10.0
         run: gradle --quiet :eurex-t7-eti-fbe-v10-0:captureTest -Pcapture=omi-data-packets/Eurex/T7.Eti.Fbe.v10.0 -Pstrict
@@ -98,20 +732,351 @@ jobs:
       - name: Test Classes/Eurex/T7/Eti.Fbe.v6.1
         run: gradle --quiet :eurex-t7-eti-fbe-v6-1:captureTest -Pcapture=omi-data-packets/Eurex/T7.Eti.Fbe.v6.1 -Pstrict
 
+      - name: Test Classes/Hkex/HkexSecurities/FullTick.Omd.v1.46
+        run: gradle --quiet :hkex-hkexsecurities-fulltick-omd-v1-46:captureTest -Pcapture=omi-data-packets/Hkex/HkexSecurities.FullTick.Omd.v1.46 -Pstrict
+
+  build-5:
+    name: Build 5 of 10 (Classes/Hkex/HkexSecurities/IndexRetrans.Omd.v1.46 to Classes/Lseg/Turquoise/Recovery.Gtp.v24.4)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 9.8.2
+
+      # Compiles this job's protocols and runs each one's round trip.
+      - name: Build
+        run: >-
+          gradle
+          :hkex-hkexsecurities-indexretrans-omd-v1-46:build
+          :hkex-sse-chinaconnect-omd-v1-4:build
+          :hkex-sse-chinaconnectrefresh-omd-v1-4:build
+          :hkex-sse-chinaconnectretrans-omd-v1-4:build
+          :hkex-szse-chinaconnect-omd-v1-4:build
+          :hkex-szse-chinaconnectrefresh-omd-v1-4:build
+          :hkex-szse-chinaconnectretrans-omd-v1-4:build
+          :ice-icefutures-bgw-sbe-v7-0:build
+          :ice-icefutures-mdf-impact-v1-1-24:build
+          :ice-icefutures-mdf-impact-v1-1-33:build
+          :ice-icefutures-mdf-impact-v1-1-34:build
+          :ice-icefutures-mdf-impact-v1-1-43:build
+          :ice-icefutures-mdf-impact-v1-1-51:build
+          :iex-iexequities-deep-iextp-v1-06:build
+          :iex-iexequities-deep-iextp-v1-08:build
+          :iex-iexequities-deep-snap-v1-6:build
+          :iex-iexequities-deepplus-iextp-v1-01:build
+          :iex-iexequities-deepplus-iextp-v1-05:build
+          :iex-iexequities-deepplus-snap-v1-06:build
+          :iex-iexequities-tops-iextp-v1-56:build
+          :iex-iexequities-tops-iextp-v1-64:build
+          :iex-iexequities-tops-iextp-v1-66:build
+          :iex-iexequities-tops-snap-v1-6:build
+          :iex-iexoptions-binaryorderentry-sbe-v1-02:build
+          :iex-iexoptions-binaryorderentry-sbe-v1-03:build
+          :iex-iexoptions-session-sbe-v1-01:build
+          :imperative-intelligentcross-depthofbook-aspen-v1-11:build
+          :jnx-jnxbonds-pts-itch-v1-2:build
+          :jnx-jnxbonds-pts-itch-v2-02:build
+          :jnx-jnxbonds-pts-ouch-v1-4:build
+          :jnx-jnxbonds-pts-ouch-v2-01:build
+          :jnx-jnxequities-pts-glimpse-v1-3:build
+          :jnx-jnxequities-pts-itch-v1-6:build
+          :jnx-jnxequities-pts-itch-v1-7:build
+          :jnx-jnxequities-pts-itch-v2-0:build
+          :jnx-jnxequities-pts-ouch-v1-11:build
+          :jnx-jnxequities-pts-ouch-v2-01:build
+          :jpx-fseequities-marketbyorder-flex-v1-1:build
+          :jpx-fseequities-marketbyorder-flex-v1-3:build
+          :jpx-fseequities-standard-flex-v19-5:build
+          :jpx-nseequities-marketbyorder-flex-v1-1:build
+          :jpx-nseequities-marketbyorder-flex-v1-3:build
+          :jpx-nseequities-standard-flex-v19-5:build
+          :jpx-osederivatives-geniuminet-glimpse-v2-2:build
+          :jpx-osederivatives-geniuminet-itch-v5-0-6:build
+          :jpx-osederivatives-geniuminet-ouch-v5-0:build
+          :jpx-sseequities-marketbyorder-flex-v1-1:build
+          :jpx-sseequities-marketbyorder-flex-v1-3:build
+          :jpx-sseequities-standard-flex-v19-5:build
+          :jpx-tseequities-indexstatistics-flex-v19-5:build
+          :jpx-tseequities-issuebasicinformation-flex-v19-5:build
+          :jpx-tseequities-marketbyorder-flex-v1-1:build
+          :jpx-tseequities-marketbyorder-flex-v1-3:build
+          :jpx-tseequities-standard-flex-v19-5:build
+          :jpx-tseequities-tostnet-flex-v19-5:build
+          :jse-itac-enhancednativetrading-ntgi-v4-04:build
+          :jse-itac-enhancednativetradingrecovery-ntgi-v4-04:build
+          :koscom-mdcsrealtime-koscom-exture-v1-20:build
+          :lme-lmeselect-dailysummaries-lmesource-v4-18:build
+          :lme-lmeselect-dailysummariessnapshot-lmesource-v4-18:build
+          :lme-lmeselect-drsignal-lmesource-v4-18:build
+          :lme-lmeselect-level1-lmesource-v4-18:build
+          :lme-lmeselect-level1snapshot-lmesource-v4-18:build
+          :lme-lmeselect-level2-lmesource-v4-18:build
+          :lme-lmeselect-level2snapshot-lmesource-v4-18:build
+          :lme-lmeselect-level3-lmesource-v4-18:build
+          :lme-lmeselect-level3snapshot-lmesource-v4-18:build
+          :lme-lmeselect-nonelectronicrefdata-lmesource-v4-18:build
+          :lme-lmeselect-nonelectronicrefdatasnapshot-lmesource-v4-18:build
+          :lme-lmeselect-referencedata-lmesource-v4-18:build
+          :lme-lmeselect-referencedatasnapshot-lmesource-v4-18:build
+          :lme-lmeselect-referenceprices-lmesource-v4-18:build
+          :lme-lmeselect-referencepricessnapshot-lmesource-v4-18:build
+          :lme-lmeselect-ringdata-lmesource-v4-18:build
+          :lme-lmeselect-ringdatasnapshot-lmesource-v4-18:build
+          :lme-lmeselect-tradereplaysnapshot-lmesource-v4-18:build
+          :lme-lmeselect-tradestatistics-lmesource-v4-18:build
+          :lme-lmeselect-tradestatisticssnapshot-lmesource-v4-18:build
+          :lme-lmeselect-warehousestock-lmesource-v4-18:build
+          :lme-lmeselect-warehousestocksnapshot-lmesource-v4-18:build
+          :lseg-gapdetection-mitch-v1:build
+          :lseg-lse-analytics-gtp-v26-2:build
+          :lseg-lse-analyticsreplay-gtp-v26-2:build
+          :lseg-lse-level1-gtp-v26-2:build
+          :lseg-lse-level1recovery-gtp-v26-2:build
+          :lseg-lse-level1replay-gtp-v26-2:build
+          :lseg-lse-level2incremental-gtp-v26-2:build
+          :lseg-lse-level2incrementalrecovery-gtp-v26-2:build
+          :lseg-lse-level2incrementalreplay-gtp-v26-2:build
+          :lseg-lse-level2mbo-gtp-v26-2:build
+          :lseg-lse-level2mborecovery-gtp-v26-2:build
+          :lseg-lse-level2mboreplay-gtp-v26-2:build
+          :lseg-lse-level2mbp-gtp-v26-2:build
+          :lseg-lse-level2mbprecovery-gtp-v26-2:build
+          :lseg-lse-level2mbpreplay-gtp-v26-2:build
+          :lseg-lse-mifid2posttrade-gtp-v26-2:build
+          :lseg-lse-mifid2posttraderecovery-gtp-v26-2:build
+          :lseg-lse-mifid2posttradereplay-gtp-v26-2:build
+          :lseg-millennium-level2-mitch-v11-9:build
+          :lseg-millennium-level2recovery-mitch-v11-9:build
+          :lseg-millennium-level2replay-mitch-v11-9:build
+          :lseg-millennium-nativetradinggateway-ntgi-v21-2:build
+          :lseg-millennium-nativetradinggatewayrecovery-ntgi-v21-2:build
+          :lseg-tradeecho-level2incremental-gtp-v24-4:build
+          :lseg-tradeecho-level2incremental-gtp-v26-1-2:build
+          :lseg-tradeecho-level2incrementalrecovery-gtp-v24-4:build
+          :lseg-tradeecho-level2incrementalrecovery-gtp-v26-1-2:build
+          :lseg-tradeecho-level2incrementalreplay-gtp-v24-4:build
+          :lseg-tradeecho-level2incrementalreplay-gtp-v26-1-2:build
+          :lseg-tradeecho-mifid2posttrade-gtp-v24-4:build
+          :lseg-tradeecho-mifid2posttrade-gtp-v27-2-2:build
+          :lseg-tradeecho-mifid2posttraderecovery-gtp-v24-4:build
+          :lseg-tradeecho-mifid2posttraderecovery-gtp-v27-2-2:build
+          :lseg-tradeecho-mifid2posttradereplay-gtp-v24-4:build
+          :lseg-tradeecho-mifid2posttradereplay-gtp-v27-2-2:build
+          :lseg-turquoise-analytics-gtp-v24-4:build
+          :lseg-turquoise-analytics-gtp-v26-3:build
+          :lseg-turquoise-level1-gtp-v24-4:build
+          :lseg-turquoise-level1incremental-gtp-v26-3:build
+          :lseg-turquoise-level2incremental-gtp-v24-4:build
+          :lseg-turquoise-level2incremental-gtp-v26-3:build
+          :lseg-turquoise-mifid2posttrade-gtp-v24-4:build
+          :lseg-turquoise-mifid2posttrade-gtp-v26-3:build
+          :lseg-turquoise-mifid2pretrade-gtp-v26-3:build
+          :lseg-turquoise-recovery-gtp-v24-4:build
+
+      - name: Clone Omi Data
+        run: git clone --depth=1 https://github.com/Open-Markets-Initiative/omi-data-packets.git
+
+      - name: Test Classes/Ice/IceFutures/Mdf.iMpact.v1.1.24
+        run: gradle --quiet :ice-icefutures-mdf-impact-v1-1-24:captureTest -Pcapture=omi-data-packets/Ice/IceFutures.Mdf.iMpact.v1.1.24 -Pstrict
+
+      - name: Test Classes/Ice/IceFutures/Mdf.iMpact.v1.1.33
+        run: gradle --quiet :ice-icefutures-mdf-impact-v1-1-33:captureTest -Pcapture=omi-data-packets/Ice/IceFutures.Mdf.iMpact.v1.1.33 -Pstrict
+
+      - name: Test Classes/Iex/IexEquities/Deep.IexTp.v1.06
+        run: gradle --quiet :iex-iexequities-deep-iextp-v1-06:captureTest -Pcapture=omi-data-packets/Iex/IexEquities.Deep.IexTp.v1.06 -Pstrict
+
       - name: Test Classes/Iex/IexEquities/Deep.IexTp.v1.08
         run: gradle --quiet :iex-iexequities-deep-iextp-v1-08:captureTest -Pcapture=omi-data-packets/Iex/IexEquities.Deep.IexTp.v1.08 -Pstrict
+
+      - name: Test Classes/Iex/IexEquities/DeepPlus.IexTp.v1.01
+        run: gradle --quiet :iex-iexequities-deepplus-iextp-v1-01:captureTest -Pcapture=omi-data-packets/Iex/IexEquities.DeepPlus.IexTp.v1.01 -Pstrict
 
       - name: Test Classes/Iex/IexEquities/DeepPlus.IexTp.v1.05
         run: gradle --quiet :iex-iexequities-deepplus-iextp-v1-05:captureTest -Pcapture=omi-data-packets/Iex/IexEquities.DeepPlus.IexTp.v1.05 -Pstrict
 
+      - name: Test Classes/Iex/IexEquities/Tops.IexTp.v1.56
+        run: gradle --quiet :iex-iexequities-tops-iextp-v1-56:captureTest -Pcapture=omi-data-packets/Iex/IexEquities.Tops.IexTp.v1.56 -Pstrict
+
+      - name: Test Classes/Iex/IexEquities/Tops.IexTp.v1.64
+        run: gradle --quiet :iex-iexequities-tops-iextp-v1-64:captureTest -Pcapture=omi-data-packets/Iex/IexEquities.Tops.IexTp.v1.64 -Pstrict
+
       - name: Test Classes/Iex/IexEquities/Tops.IexTp.v1.66
         run: gradle --quiet :iex-iexequities-tops-iextp-v1-66:captureTest -Pcapture=omi-data-packets/Iex/IexEquities.Tops.IexTp.v1.66 -Pstrict
+
+      - name: Test Classes/Imperative/IntelligentCross/DepthOfBook.Aspen.v1.11
+        run: gradle --quiet :imperative-intelligentcross-depthofbook-aspen-v1-11:captureTest -Pcapture=omi-data-packets/Imperative/IntelligentCross.DepthOfBook.Aspen.v1.11 -Pstrict
 
       - name: Test Classes/Jnx/JnxEquities/Pts.Glimpse.v1.3
         run: gradle --quiet :jnx-jnxequities-pts-glimpse-v1-3:captureTest -Pcapture=omi-data-packets/Jnx/JnxEquities.Pts.Glimpse.v1.3 -Pstrict
 
+      - name: Test Classes/Jnx/JnxEquities/Pts.Itch.v1.6
+        run: gradle --quiet :jnx-jnxequities-pts-itch-v1-6:captureTest -Pcapture=omi-data-packets/Jnx/JnxEquities.Pts.Itch.v1.6 -Pstrict
+
+      - name: Test Classes/Jnx/JnxEquities/Pts.Itch.v1.7
+        run: gradle --quiet :jnx-jnxequities-pts-itch-v1-7:captureTest -Pcapture=omi-data-packets/Jnx/JnxEquities.Pts.Itch.v1.7 -Pstrict
+
       - name: Test Classes/Jnx/JnxEquities/Pts.Ouch.v1.11
         run: gradle --quiet :jnx-jnxequities-pts-ouch-v1-11:captureTest -Pcapture=omi-data-packets/Jnx/JnxEquities.Pts.Ouch.v1.11 -Pstrict
+
+      - name: Test Classes/Jpx/OseDerivatives/GeniumInet.Itch.v5.0.6
+        run: gradle --quiet :jpx-osederivatives-geniuminet-itch-v5-0-6:captureTest -Pcapture=omi-data-packets/Jpx/OseDerivatives.GeniumInet.Itch.v5.0.6 -Pstrict
+
+  build-6:
+    name: Build 6 of 10 (Classes/Lseg/Turquoise/Recovery.Gtp.v26.3 to Classes/Nasdaq/NordicEquities/OrderEntry.Ouch.v5.02.6)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 9.8.2
+
+      # Compiles this job's protocols and runs each one's round trip.
+      - name: Build
+        run: >-
+          gradle
+          :lseg-turquoise-recovery-gtp-v26-3:build
+          :lseg-turquoise-replay-gtp-v24-4:build
+          :lseg-turquoise-replay-gtp-v26-3:build
+          :ltse-ltseequities-memoirdepthfeed-sbe-v1-3:build
+          :ltse-ltseequities-memoirdepthfeed-sbe-v2-0:build
+          :ltse-ltseequities-memoirlastsale-sbe-v1-3:build
+          :ltse-ltseequities-memoirlastsale-sbe-v2-0:build
+          :ltse-ltseequities-memoirtopofbook-sbe-v1-3:build
+          :ltse-ltseequities-memoirtopofbook-sbe-v2-0:build
+          :memx-memxequities-commonheader-tcp-v1-2:build
+          :memx-memxequities-memoirdepthfeed-sbe-v1-1:build
+          :memx-memxequities-memoirdepthfeed-sbe-v1-3:build
+          :memx-memxequities-memoirlastsale-sbe-v1-1:build
+          :memx-memxequities-memoirlastsale-sbe-v1-3:build
+          :memx-memxequities-memoirtopofbook-sbe-v1-1:build
+          :memx-memxequities-memoirtopofbook-sbe-v1-3:build
+          :memx-memxoptions-memoirdepth-sbe-v1-3:build
+          :memx-memxoptions-memoirdepth-sbe-v1-6-a:build
+          :memx-memxoptions-memoirtop-sbe-v1-3:build
+          :memx-memxoptions-memoirtop-sbe-v1-6-a:build
+          :miax-miaxoptions-complextopofmarket-mach-v1-1:build
+          :miax-miaxoptions-complextopofmarket-mach-v1-3:build
+          :miax-onyxfutures-depthofmarket-mach-v1-0-b:build
+          :miax-onyxfutures-depthofmarket-mach-v1-3-a:build
+          :miax-onyxfutures-expressinterface-fei-v1-0-c:build
+          :miax-onyxfutures-topofmarket-mach-v1-0-b:build
+          :miax-onyxfutures-topofmarket-mach-v1-3-a:build
+          :miax-pearlequities-depthofmarket-mach-v1-3-a:build
+          :miax-pearlequities-depthofmarket-mach-v1-3-d:build
+          :miax-pearlequities-expressorders-meo-v2-6:build
+          :miax-pearlequities-expressorders-meo-v2-7:build
+          :miax-pearlequities-expressorders-meo-v2-7-a:build
+          :miax-pearlequities-expressorders-meo-v2-7-b:build
+          :miax-pearlequities-headeronly-esesm-v1-0-a:build
+          :miax-pearlequities-topofmarket-mach-v1-1-a:build
+          :miax-pearlequities-topofmarket-mach-v1-1-c:build
+          :miax-pearloptions-topofmarket-mach-v1-0:build
+          :miax-pearloptions-topofmarket-mach-v1-9:build
+          :miax-pearloptions-topofmarket-mach-v2-2:build
+          :miax-pearloptions-topofmarket-mach-v2-3:build
+          :moex-spectra-optinfoincremental-simba-v9-12-0:build
+          :moex-spectra-optinfoincremental-simba-v9-9-0:build
+          :moex-spectra-optinforeplay-simba-v9-12-0:build
+          :moex-spectra-optinforeplay-simba-v9-9-0:build
+          :moex-spectra-orderslogincremental-simba-v9-12-0:build
+          :moex-spectra-orderslogincremental-simba-v9-9-0:build
+          :moex-spectra-orderslogreplay-simba-v9-12-0:build
+          :moex-spectra-orderslogreplay-simba-v9-9-0:build
+          :moex-spectra-orderslogsnapshot-simba-v9-12-0:build
+          :moex-spectra-orderslogsnapshot-simba-v9-9-0:build
+          :nairobi-nairobiequities-realtime-mitch-v1-22:build
+          :nairobi-nairobiequities-replay-mitch-v1-22:build
+          :nairobi-nairobiequities-snapshot-mitch-v1-22:build
+          :nasdaq-bxequities-drop-asciidrop-v2-2:build
+          :nasdaq-common-soupbin-tcp-v3-0:build
+          :nasdaq-common-soupbin-tcp-v3-1:build
+          :nasdaq-gapdetection-itch-v11:build
+          :nasdaq-gapdetection-itch-v3:build
+          :nasdaq-gapdetection-itch-v7:build
+          :nasdaq-gapdetection-itch-v8:build
+          :nasdaq-gapdetection-utp-v2:build
+          :nasdaq-gemxoptions-cti-itch-v3-0:build
+          :nasdaq-gemxoptions-depthofmarket-glimpse-v2-1:build
+          :nasdaq-gemxoptions-depthofmarket-itch-v2-1:build
+          :nasdaq-gemxoptions-depthofmarket-itch-v2-1-2026:build
+          :nasdaq-gemxoptions-orderfeed-itch-v2-1:build
+          :nasdaq-gemxoptions-otto-ouch-v3-0-0:build
+          :nasdaq-gemxoptions-topofmarket-glimpse-v2-1:build
+          :nasdaq-gemxoptions-topofmarket-itch-v2-1:build
+          :nasdaq-gemxoptions-tradefeed-itch-v2-1:build
+          :nasdaq-iseoptions-cti-itch-v3-0:build
+          :nasdaq-iseoptions-depthofmarket-glimpse-v2-1:build
+          :nasdaq-iseoptions-depthofmarket-itch-v2-1:build
+          :nasdaq-iseoptions-depthofmarket-itch-v2-1-2026:build
+          :nasdaq-iseoptions-ordercombofeed-itch-v1-1:build
+          :nasdaq-iseoptions-orderfeed-itch-v1-1:build
+          :nasdaq-iseoptions-orderfeed-itch-v2-1:build
+          :nasdaq-iseoptions-otto-ouch-v3-0-0:build
+          :nasdaq-iseoptions-spreaddepthofmarket-glimpse-v2-02:build
+          :nasdaq-iseoptions-spreaddepthofmarket-glimpse-v2-1:build
+          :nasdaq-iseoptions-spreaddepthofmarket-itch-v2-1:build
+          :nasdaq-iseoptions-spreadorders-itch-v2-1:build
+          :nasdaq-iseoptions-spreadtopofmarket-glimpse-v2-02:build
+          :nasdaq-iseoptions-spreadtopofmarket-glimpse-v2-1:build
+          :nasdaq-iseoptions-spreadtopofmarket-itch-v2-1:build
+          :nasdaq-iseoptions-spreadtradefeed-itch-v2-1:build
+          :nasdaq-iseoptions-topcomboquotefeed-itch-v1-0:build
+          :nasdaq-iseoptions-topofmarket-glimpse-v2-1:build
+          :nasdaq-iseoptions-topofmarket-itch-v2-1:build
+          :nasdaq-iseoptions-tradefeed-itch-v2-1:build
+          :nasdaq-mrxoptions-cti-itch-v3-0:build
+          :nasdaq-mrxoptions-depthofmarket-glimpse-v2-1:build
+          :nasdaq-mrxoptions-depthofmarket-itch-v2-1:build
+          :nasdaq-mrxoptions-depthofmarket-itch-v2-1-2026:build
+          :nasdaq-mrxoptions-orderfeed-itch-v2-1:build
+          :nasdaq-mrxoptions-otto-ouch-v3-0-0:build
+          :nasdaq-mrxoptions-spreaddepthofmarket-glimpse-v2-02:build
+          :nasdaq-mrxoptions-spreaddepthofmarket-glimpse-v2-1:build
+          :nasdaq-mrxoptions-spreaddepthofmarket-itch-v2-1:build
+          :nasdaq-mrxoptions-spreadorders-itch-v2-1:build
+          :nasdaq-mrxoptions-spreadtopofmarket-glimpse-v2-02:build
+          :nasdaq-mrxoptions-spreadtopofmarket-glimpse-v2-1:build
+          :nasdaq-mrxoptions-spreadtopofmarket-itch-v2-1:build
+          :nasdaq-mrxoptions-spreadtradefeed-itch-v2-1:build
+          :nasdaq-mrxoptions-topofmarket-glimpse-v2-1:build
+          :nasdaq-mrxoptions-topofmarket-itch-v2-1:build
+          :nasdaq-mrxoptions-tradefeed-itch-v2-1:build
+          :nasdaq-nasdaqcanada-chixmd-asciiitch-v3-4-1-23:build
+          :nasdaq-nasdaqcanada-chixmmd-asciiitch-v1-1-3-5:build
+          :nasdaq-nasdaqcanada-chixmmd-glimpse-v1-0:build
+          :nasdaq-nasdaqcanada-orderentry-ouch-v5-0-1-4:build
+          :nasdaq-nfxfutures-marketdata-geniumamd-v2-30-7:build
+          :nasdaq-nomoptions-bono-itch-v3-2:build
+          :nasdaq-nomoptions-bono-itch-v3-3:build
+          :nasdaq-nomoptions-cti-itch-v3-0:build
+          :nasdaq-nomoptions-itto-itch-v4-0:build
+          :nasdaq-nomoptions-itto-itch-v4-0-2025:build
+          :nasdaq-nomoptions-otto-ouch-v3-0-0:build
+          :nasdaq-nordicderivatives-depthofbook-glimpse-v2-22-4:build
+          :nasdaq-nordicderivatives-marketdata-geniumamd-v2-28-7:build
+          :nasdaq-nordicequities-lastsale-itch-v1-2-11:build
+          :nasdaq-nordicequities-lastsale-itch-v1-2-9:build
+          :nasdaq-nordicequities-orderentry-ouch-v5-01-14:build
+          :nasdaq-nordicequities-orderentry-ouch-v5-02-11:build
+          :nasdaq-nordicequities-orderentry-ouch-v5-02-6:build
+
+      - name: Clone Omi Data
+        run: git clone --depth=1 https://github.com/Open-Markets-Initiative/omi-data-packets.git
 
       - name: Test Classes/Memx/MemxEquities/MemoirDepthFeed.Sbe.v1.3
         run: gradle --quiet :memx-memxequities-memoirdepthfeed-sbe-v1-3:captureTest -Pcapture=omi-data-packets/Memx/MemxEquities.MemoirDepthFeed.Sbe.v1.3 -Pstrict
@@ -128,8 +1093,169 @@ jobs:
       - name: Test Classes/Miax/PearlEquities/ExpressOrders.Meo.v2.6
         run: gradle --quiet :miax-pearlequities-expressorders-meo-v2-6:captureTest -Pcapture=omi-data-packets/Miax/PearlEquities.ExpressOrders.Meo.v2.6 -Pstrict
 
+      - name: Test Classes/Nasdaq/IseOptions/OrderComboFeed.Itch.v1.1
+        run: gradle --quiet :nasdaq-iseoptions-ordercombofeed-itch-v1-1:captureTest -Pcapture=omi-data-packets/Nasdaq/IseOptions.OrderComboFeed.Itch.v1.1 -Pstrict
+
+      - name: Test Classes/Nasdaq/IseOptions/TopComboQuoteFeed.Itch.v1.0
+        run: gradle --quiet :nasdaq-iseoptions-topcomboquotefeed-itch-v1-0:captureTest -Pcapture=omi-data-packets/Nasdaq/IseOptions.TopComboQuoteFeed.Itch.v1.0 -Pstrict
+
+  build-7:
+    name: Build 7 of 10 (Classes/Nasdaq/NordicEquities/RiskControl.Prm.v1.00.1 to Classes/Nasdaq/PsxEquities/Bbo.Itch.v2.0.2014)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 9.8.2
+
+      # Compiles this job's protocols and runs each one's round trip.
+      - name: Build
+        run: >-
+          gradle
+          :nasdaq-nordicequities-riskcontrol-prm-v1-00-1:build
+          :nasdaq-nordicequities-totalview-itch-v3-04-5:build
+          :nasdaq-nordicequities-totalview-itch-v3-04-6:build
+          :nasdaq-nordicequities-totalview-itch-v3-04-x:build
+          :nasdaq-nsmequities-aggregated-itch-v2-0:build
+          :nasdaq-nsmequities-aggregated-itch-v2-0-2026:build
+          :nasdaq-nsmequities-basicplus-itch-v1-0:build
+          :nasdaq-nsmequities-drop-asciidrop-v2-2:build
+          :nasdaq-nsmequities-drop-asciidrop-v2-3:build
+          :nasdaq-nsmequities-lastsale-asciiitch-v1-0-2010:build
+          :nasdaq-nsmequities-lastsale-asciiitch-v1-2-2013:build
+          :nasdaq-nsmequities-lastsale-asciiitch-v2-0-2013:build
+          :nasdaq-nsmequities-lastsale-itch-v2-1-2015:build
+          :nasdaq-nsmequities-lastsale-itch-v3-0-2025:build
+          :nasdaq-nsmequities-lastsale-itch-v4-0-2026:build
+          :nasdaq-nsmequities-lastsaletradesfilterview-asciiitch-v1-0-2010:build
+          :nasdaq-nsmequities-lastsaletradesfilterview-asciiitch-v1-2-2013:build
+          :nasdaq-nsmequities-lastsaletradesfilterview-asciiitch-v2-0-2013:build
+          :nasdaq-nsmequities-lastsaletradesfilterview-itch-v2-1-2025:build
+          :nasdaq-nsmequities-lastsaletradesfilterview-itch-v4-0-2026:build
+          :nasdaq-nsmequities-lastsaletrftradesfilterview-asciiitch-v1-0-2010:build
+          :nasdaq-nsmequities-lastsaletrftradesfilterview-asciiitch-v2-0-2013:build
+          :nasdaq-nsmequities-lastsaletrftradesfilterview-itch-v3-0-2024:build
+          :nasdaq-nsmequities-lastsaletrftradesfilterview-itch-v4-0-2026:build
+          :nasdaq-nsmequities-level2-itch-v2-0:build
+          :nasdaq-nsmequities-level2-itch-v2-0-2026:build
+          :nasdaq-nsmequities-matchview-asciiitch-v1-0:build
+          :nasdaq-nsmequities-matchview-asciiitch-v1-1:build
+          :nasdaq-nsmequities-nlsplus-itch-v3-0:build
+          :nasdaq-nsmequities-nlsplus-itch-v4-0:build
+          :nasdaq-nsmequities-nlsplus-itch-v4-0-2026:build
+          :nasdaq-nsmequities-nlsplus-itch-v5-0:build
+          :nasdaq-nsmequities-noiview-asciiitch-v2-0-2007:build
+          :nasdaq-nsmequities-noiview-asciiitch-v2-0-2010-1:build
+          :nasdaq-nsmequities-noiview-asciiitch-v2-0-2010-2:build
+          :nasdaq-nsmequities-noiview-asciiitch-v2-1-2010:build
+          :nasdaq-nsmequities-noiview-asciiitch-v2-1-2011-1:build
+          :nasdaq-nsmequities-noiview-asciiitch-v2-1-2011-2:build
+          :nasdaq-nsmequities-noiview-asciiitch-v2-1-2012:build
+          :nasdaq-nsmequities-noiview-asciiitch-v2-1-2013-1:build
+          :nasdaq-nsmequities-noiview-asciiitch-v2-1-2013-2:build
+          :nasdaq-nsmequities-noiview-asciiitch-v3-0-2013:build
+          :nasdaq-nsmequities-noiview-itch-v3-0-2014:build
+          :nasdaq-nsmequities-noiview-itch-v3-0-2015:build
+          :nasdaq-nsmequities-noiview-itch-v3-0-2017:build
+          :nasdaq-nsmequities-noiview-itch-v3-0-2022:build
+          :nasdaq-nsmequities-noiview-itch-v3-0-2023:build
+          :nasdaq-nsmequities-noiview-itch-v3-0-2026:build
+          :nasdaq-nsmequities-noiview-itch-v3-0-2026-2:build
+          :nasdaq-nsmequities-nois-itch-v2-2:build
+          :nasdaq-nsmequities-nois-itch-v2-2-2022:build
+          :nasdaq-nsmequities-nois-itch-v2-2-2026:build
+          :nasdaq-nsmequities-orders-ouch-v4-2-2018:build
+          :nasdaq-nsmequities-orders-ouch-v4-2-2025:build
+          :nasdaq-nsmequities-orders-ouch-v5-0:build
+          :nasdaq-nsmequities-qbbo-itch-v2-1:build
+          :nasdaq-nsmequities-qbbo-itch-v2-1-2026:build
+          :nasdaq-nsmequities-rash-asciirash-v1-0-2016:build
+          :nasdaq-nsmequities-rash-asciirash-v1-1:build
+          :nasdaq-nsmequities-rash-asciirash-v1-1-2016:build
+          :nasdaq-nsmequities-totalview-asciiitch-v1-0:build
+          :nasdaq-nsmequities-totalview-asciiitch-v2-0:build
+          :nasdaq-nsmequities-totalview-asciiitch-v2-0-a:build
+          :nasdaq-nsmequities-totalview-asciiitch-v3-0:build
+          :nasdaq-nsmequities-totalview-asciiitch-v3-1:build
+          :nasdaq-nsmequities-totalview-asciiitch-v3-1-f:build
+          :nasdaq-nsmequities-totalview-asciiitch-v3-2:build
+          :nasdaq-nsmequities-totalview-glimpse-v5-0:build
+          :nasdaq-nsmequities-totalview-glimpse-v5-0-2026:build
+          :nasdaq-nsmequities-totalview-itch-v4-0:build
+          :nasdaq-nsmequities-totalview-itch-v4-0-f:build
+          :nasdaq-nsmequities-totalview-itch-v4-1:build
+          :nasdaq-nsmequities-totalview-itch-v5-0-2017:build
+          :nasdaq-nsmequities-totalview-itch-v5-0-2018:build
+          :nasdaq-nsmequities-totalview-itch-v5-0-2022:build
+          :nasdaq-nsmequities-totalview-itch-v5-0-2023:build
+          :nasdaq-nsmequities-totalview-itch-v5-0-2026:build
+          :nasdaq-nsmequities-totalview-itch-v5-2:build
+          :nasdaq-nsmequities-totalviewplus-itch-v1-0:build
+          :nasdaq-ntxequities-bbo-itch-v2-1:build
+          :nasdaq-ntxequities-bbo-itch-v2-1-2026:build
+          :nasdaq-ntxequities-drop-asciidrop-v2-3:build
+          :nasdaq-ntxequities-lastsale-itch-v4-0-2026:build
+          :nasdaq-ntxequities-matchview-asciiitch-v1-1:build
+          :nasdaq-ntxequities-orders-ouch-v4-2:build
+          :nasdaq-ntxequities-rash-asciirash-v1-1:build
+          :nasdaq-ntxequities-totalview-glimpse-v5-0:build
+          :nasdaq-ntxequities-totalview-glimpse-v5-0-2026:build
+          :nasdaq-ntxequities-totalview-itch-v5-0:build
+          :nasdaq-ntxoptions-cti-itch-v1-3:build
+          :nasdaq-ntxoptions-cti-itch-v2-1:build
+          :nasdaq-ntxoptions-cti-itch-v3-0:build
+          :nasdaq-ntxoptions-depthofmarket-glimpse-v2-1:build
+          :nasdaq-ntxoptions-depthofmarket-itch-v1-3:build
+          :nasdaq-ntxoptions-depthofmarket-itch-v2-2:build
+          :nasdaq-ntxoptions-topofmarket-glimpse-v1-1:build
+          :nasdaq-ntxoptions-topofmarket-itch-v1-2:build
+          :nasdaq-ntxoptions-topofmarket-itch-v2-2:build
+          :nasdaq-ntxoptions-tradefeed-itch-v2-1:build
+          :nasdaq-phlxoptions-cti-itch-v3-0:build
+          :nasdaq-phlxoptions-depthofmarket-glimpse-v2-1:build
+          :nasdaq-phlxoptions-depthofmarket-itch-v1-5:build
+          :nasdaq-phlxoptions-depthofmarket-itch-v1-6:build
+          :nasdaq-phlxoptions-depthofmarket-itch-v1-7:build
+          :nasdaq-phlxoptions-depthofmarket-itch-v2-1:build
+          :nasdaq-phlxoptions-depthofmarket-itch-v2-1-2026:build
+          :nasdaq-phlxoptions-orders-itch-v1-9:build
+          :nasdaq-phlxoptions-orders-itch-v1-91:build
+          :nasdaq-phlxoptions-orders-itch-v1-92:build
+          :nasdaq-phlxoptions-orders-itch-v2-1:build
+          :nasdaq-phlxoptions-otto-ouch-v3-0-0:build
+          :nasdaq-phlxoptions-spreaddepthofmarket-glimpse-v2-1:build
+          :nasdaq-phlxoptions-spreaddepthofmarket-itch-v2-1:build
+          :nasdaq-phlxoptions-spreadorders-itch-v2-1:build
+          :nasdaq-phlxoptions-spreadtopofmarket-glimpse-v2-1:build
+          :nasdaq-phlxoptions-spreadtopofmarket-itch-v2-1:build
+          :nasdaq-phlxoptions-spreadtradefeed-itch-v2-1:build
+          :nasdaq-phlxoptions-topofmarket-glimpse-v2-1:build
+          :nasdaq-phlxoptions-topofmarket-itch-v2-1:build
+          :nasdaq-phlxoptions-topofmarket-itch-v3-3:build
+          :nasdaq-phlxoptions-topofmarket-itch-v3-4:build
+          :nasdaq-phlxoptions-tradefeed-itch-v2-1:build
+          :nasdaq-psxequities-bbo-asciiitch-v1-1-2013-2:build
+          :nasdaq-psxequities-bbo-asciiitch-v2-0-2013-1:build
+          :nasdaq-psxequities-bbo-itch-v2-0-2014:build
+
+      - name: Clone Omi Data
+        run: git clone --depth=1 https://github.com/Open-Markets-Initiative/omi-data-packets.git
+
+      - name: Test Classes/Nasdaq/NsmEquities/NlsPlus.Itch.v3.0
+        run: gradle --quiet :nasdaq-nsmequities-nlsplus-itch-v3-0:captureTest -Pcapture=omi-data-packets/Nasdaq/NsmEquities.NlsPlus.Itch.v3.0 -Pstrict
+
       - name: Test Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0
         run: gradle --quiet :nasdaq-nsmequities-orders-ouch-v5-0:captureTest -Pcapture=omi-data-packets/Nasdaq/NsmEquities.Orders.Ouch.v5.0 -Pstrict
+
+      - name: Test Classes/Nasdaq/NsmEquities/Qbbo.Itch.v2.1
+        run: gradle --quiet :nasdaq-nsmequities-qbbo-itch-v2-1:captureTest -Pcapture=omi-data-packets/Nasdaq/NsmEquities.Qbbo.Itch.v2.1 -Pstrict
 
       - name: Test Classes/Nasdaq/NsmEquities/TotalView.AsciiItch.v2.0
         run: gradle --quiet :nasdaq-nsmequities-totalview-asciiitch-v2-0:captureTest -Pcapture=omi-data-packets/Nasdaq/NsmEquities.TotalView.AsciiItch.v2.0 -Pstrict
@@ -137,11 +1263,184 @@ jobs:
       - name: Test Classes/Nasdaq/NsmEquities/TotalView.AsciiItch.v3.0
         run: gradle --quiet :nasdaq-nsmequities-totalview-asciiitch-v3-0:captureTest -Pcapture=omi-data-packets/Nasdaq/NsmEquities.TotalView.AsciiItch.v3.0 -Pstrict
 
+      - name: Test Classes/Nasdaq/NsmEquities/TotalView.Itch.v4.0
+        run: gradle --quiet :nasdaq-nsmequities-totalview-itch-v4-0:captureTest -Pcapture=omi-data-packets/Nasdaq/NsmEquities.TotalView.Itch.v4.0 -Pstrict
+
+      - name: Test Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2017
+        run: gradle --quiet :nasdaq-nsmequities-totalview-itch-v5-0-2017:captureTest -Pcapture=omi-data-packets/Nasdaq/NsmEquities.TotalView.Itch.v5.0.2017 -Pstrict
+
+      - name: Test Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2023
+        run: gradle --quiet :nasdaq-nsmequities-totalview-itch-v5-0-2023:captureTest -Pcapture=omi-data-packets/Nasdaq/NsmEquities.TotalView.Itch.v5.0.2023 -Pstrict
+
       - name: Test Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2026
         run: gradle --quiet :nasdaq-nsmequities-totalview-itch-v5-0-2026:captureTest -Pcapture=omi-data-packets/Nasdaq/NsmEquities.TotalView.Itch.v5.0.2026 -Pstrict
 
+      - name: Test Classes/Nasdaq/NtxEquities/TotalView.Itch.v5.0
+        run: gradle --quiet :nasdaq-ntxequities-totalview-itch-v5-0:captureTest -Pcapture=omi-data-packets/Nasdaq/NtxEquities.TotalView.Itch.v5.0 -Pstrict
+
+  build-8:
+    name: Build 8 of 10 (Classes/Nasdaq/PsxEquities/Bbo.Itch.v2.1 to Classes/Nyse/ArcaEquities/DepthFeedRequest.Pillar.v1.7)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 9.8.2
+
+      # Compiles this job's protocols and runs each one's round trip.
+      - name: Build
+        run: >-
+          gradle
+          :nasdaq-psxequities-bbo-itch-v2-1:build
+          :nasdaq-psxequities-bbo-itch-v2-1-2017:build
+          :nasdaq-psxequities-bbo-itch-v2-1-2018:build
+          :nasdaq-psxequities-bbo-itch-v2-1-2026:build
+          :nasdaq-psxequities-drop-asciidrop-v2-1:build
+          :nasdaq-psxequities-drop-asciidrop-v2-2:build
+          :nasdaq-psxequities-lastsale-itch-v2-1-2018:build
+          :nasdaq-psxequities-lastsale-itch-v2-1-2026:build
+          :nasdaq-psxequities-lastsale-itch-v4-0-2026:build
+          :nasdaq-psxequities-matchview-asciiitch-v1-1:build
+          :nasdaq-psxequities-orders-ouch-v4-2:build
+          :nasdaq-psxequities-rash-asciirash-v1-0:build
+          :nasdaq-psxequities-rash-asciirash-v1-1:build
+          :nasdaq-psxequities-totalview-glimpse-v3-2:build
+          :nasdaq-psxequities-totalview-glimpse-v4-1:build
+          :nasdaq-psxequities-totalview-glimpse-v5-0:build
+          :nasdaq-psxequities-totalview-glimpse-v5-0-2022:build
+          :nasdaq-psxequities-totalview-itch-v5-0:build
+          :nasdaq-psxequities-totalview-itch-v5-0-2018:build
+          :nasdaq-uqdf-output-utp-v1-5:build
+          :nasdaq-utdf-output-utp-v1-5:build
+          :nasdaq-utdf-output-utp-v3-0-c:build
+          :nse-nsecd-dropcopy-nnfdirect-v1-7:build
+          :nse-nsecd-orderentry-nnf-v6-3:build
+          :nse-nsecd-recovery-tbt-v6-8:build
+          :nse-nsecd-recovery-tbt-v6-9:build
+          :nse-nsecd-recovery-tbt-v7-0:build
+          :nse-nsecd-recovery-tbt-v7-1:build
+          :nse-nsecd-snapshot-tbt-v6-8:build
+          :nse-nsecd-snapshot-tbt-v6-9:build
+          :nse-nsecd-snapshot-tbt-v7-0:build
+          :nse-nsecd-snapshot-tbt-v7-1:build
+          :nse-nsecm-recovery-tbt-v6-8:build
+          :nse-nsecm-recovery-tbt-v6-9:build
+          :nse-nsecm-recovery-tbt-v7-0:build
+          :nse-nsecm-recovery-tbt-v7-1:build
+          :nse-nsecm-snapshot-tbt-v6-8:build
+          :nse-nsecm-snapshot-tbt-v6-9:build
+          :nse-nsecm-snapshot-tbt-v7-0:build
+          :nse-nsecm-snapshot-tbt-v7-1:build
+          :nse-nsecom-dropcopy-nnfdirect-v1-5:build
+          :nse-nsecom-orderentry-nnf-v3-5:build
+          :nse-nsecom-recovery-tbt-v6-8:build
+          :nse-nsecom-recovery-tbt-v6-9:build
+          :nse-nsecom-recovery-tbt-v7-0:build
+          :nse-nsecom-recovery-tbt-v7-1:build
+          :nse-nsecom-snapshot-tbt-v6-8:build
+          :nse-nsecom-snapshot-tbt-v6-9:build
+          :nse-nsecom-snapshot-tbt-v7-0:build
+          :nse-nsecom-snapshot-tbt-v7-1:build
+          :nse-nsefo-recovery-tbt-v6-8:build
+          :nse-nsefo-recovery-tbt-v6-9:build
+          :nse-nsefo-recovery-tbt-v7-0:build
+          :nse-nsefo-recovery-tbt-v7-1:build
+          :nse-nsefo-snapshot-tbt-v6-8:build
+          :nse-nsefo-snapshot-tbt-v6-9:build
+          :nse-nsefo-snapshot-tbt-v7-0:build
+          :nse-nsefo-snapshot-tbt-v7-1:build
+          :nsxaustralia-nets-marketdatafeed-itch-v4-2-55:build
+          :nyse-amexequities-bbo-pillar-v2-5-d:build
+          :nyse-amexequities-binarygateway-pillarstream-v5-17:build
+          :nyse-amexequities-binarygateway-pillarstream-v6-0:build
+          :nyse-amexequities-binarygateway-pillarstream-v6-1:build
+          :nyse-amexequities-bqt-xdp-v2-4-a:build
+          :nyse-amexequities-bqt-xdp-v2-4-b:build
+          :nyse-amexequities-bqt-xdp-v2-4-c:build
+          :nyse-amexequities-depthfeed-pillar-v1-1:build
+          :nyse-amexequities-depthfeed-pillar-v1-6:build
+          :nyse-amexequities-depthfeed-pillar-v1-7:build
+          :nyse-amexequities-depthfeedrefresh-pillar-v1-1:build
+          :nyse-amexequities-depthfeedrefresh-pillar-v1-6:build
+          :nyse-amexequities-depthfeedrefresh-pillar-v1-7:build
+          :nyse-amexequities-depthfeedrequest-pillar-v1-1:build
+          :nyse-amexequities-depthfeedrequest-pillar-v1-6:build
+          :nyse-amexequities-depthfeedrequest-pillar-v1-7:build
+          :nyse-amexequities-depthfeedretransmission-pillar-v1-1:build
+          :nyse-amexequities-depthfeedretransmission-pillar-v1-6:build
+          :nyse-amexequities-depthfeedretransmission-pillar-v1-7:build
+          :nyse-amexequities-imbalancesfeed-pillar-v2-2-n:build
+          :nyse-amexequities-imbalancesfeed-pillar-v2-2-o:build
+          :nyse-amexequities-integratedfeed-pillar-v2-5-g:build
+          :nyse-amexequities-integratedfeed-pillar-v2-5-h:build
+          :nyse-amexequities-integratedfeed-xdp-v2-1-g:build
+          :nyse-amexequities-integratedfeedrefresh-pillar-v2-5-g:build
+          :nyse-amexequities-integratedfeedrefresh-pillar-v2-5-h:build
+          :nyse-amexequities-integratedfeedrequest-pillar-v2-5-g:build
+          :nyse-amexequities-integratedfeedrequest-pillar-v2-5-h:build
+          :nyse-amexequities-integratedfeedretransmission-pillar-v2-5-g:build
+          :nyse-amexequities-integratedfeedretransmission-pillar-v2-5-h:build
+          :nyse-amexequities-integratedfeedstocksummary-pillar-v2-5-g:build
+          :nyse-amexequities-integratedfeedstocksummary-pillar-v2-5-h:build
+          :nyse-amexequities-openbook-aggregated-xdp-v2-1-d:build
+          :nyse-amexequities-openbook-ultra-v2-1-b:build
+          :nyse-amexequities-openbook-ultra-v2-1-k:build
+          :nyse-amexequities-openbook-xdp-v1-9-a:build
+          :nyse-amexequities-trades-pillar-v2-6:build
+          :nyse-amexequities-trades-pillar-v2-6-a:build
+          :nyse-amexoptions-complexfeed-pillar-v1-0-h:build
+          :nyse-amexoptions-complexfeed-xdp-v1-3-a:build
+          :nyse-amexoptions-deepfeed-pillar-v1-2-l:build
+          :nyse-amexoptions-deepfeed-pillar-v1-2-m:build
+          :nyse-amexoptions-deepfeed-xdp-v1-3-a:build
+          :nyse-amexoptions-topfeed-pillar-v1-2-j:build
+          :nyse-amexoptions-topfeed-pillar-v1-2-k:build
+          :nyse-amexoptions-topfeed-xdp-v1-3-a:build
+          :nyse-arcaequities-arcabook-pillar-v2-1:build
+          :nyse-arcaequities-arcabook-pillar-v2-2:build
+          :nyse-arcaequities-arcabook-xdp-v1-9-a:build
+          :nyse-arcaequities-bbo-pillar-v2-5-d:build
+          :nyse-arcaequities-bbo-xdp-v2-4-c:build
+          :nyse-arcaequities-binarygateway-pillarstream-v5-17:build
+          :nyse-arcaequities-binarygateway-pillarstream-v6-0:build
+          :nyse-arcaequities-binarygateway-pillarstream-v6-1:build
+          :nyse-arcaequities-bqt-xdp-v2-4-a:build
+          :nyse-arcaequities-bqt-xdp-v2-4-b:build
+          :nyse-arcaequities-bqt-xdp-v2-4-c:build
+          :nyse-arcaequities-depthfeed-pillar-v1-1:build
+          :nyse-arcaequities-depthfeed-pillar-v1-6:build
+          :nyse-arcaequities-depthfeed-pillar-v1-7:build
+          :nyse-arcaequities-depthfeedrefresh-pillar-v1-1:build
+          :nyse-arcaequities-depthfeedrefresh-pillar-v1-6:build
+          :nyse-arcaequities-depthfeedrefresh-pillar-v1-7:build
+          :nyse-arcaequities-depthfeedrequest-pillar-v1-1:build
+          :nyse-arcaequities-depthfeedrequest-pillar-v1-6:build
+          :nyse-arcaequities-depthfeedrequest-pillar-v1-7:build
+
+      - name: Clone Omi Data
+        run: git clone --depth=1 https://github.com/Open-Markets-Initiative/omi-data-packets.git
+
+      - name: Test Classes/Nasdaq/PsxEquities/TotalView.Itch.v5.0
+        run: gradle --quiet :nasdaq-psxequities-totalview-itch-v5-0:captureTest -Pcapture=omi-data-packets/Nasdaq/PsxEquities.TotalView.Itch.v5.0 -Pstrict
+
       - name: Test Classes/Nasdaq/Uqdf/Output.Utp.v1.5
         run: gradle --quiet :nasdaq-uqdf-output-utp-v1-5:captureTest -Pcapture=omi-data-packets/Nasdaq/Uqdf.Output.Utp.v1.5 -Pstrict
+
+      - name: Test Classes/Nyse/AmexEquities/IntegratedFeed.Pillar.v2.5.g
+        run: gradle --quiet :nyse-amexequities-integratedfeed-pillar-v2-5-g:captureTest -Pcapture=omi-data-packets/Nyse/AmexEquities.IntegratedFeed.Pillar.v2.5.g -Pstrict
+
+      - name: Test Classes/Nyse/AmexEquities/IntegratedFeed.Xdp.v2.1.g
+        run: gradle --quiet :nyse-amexequities-integratedfeed-xdp-v2-1-g:captureTest -Pcapture=omi-data-packets/Nyse/AmexEquities.IntegratedFeed.Xdp.v2.1.g -Pstrict
+
+      - name: Test Classes/Nyse/AmexEquities/IntegratedFeedRefresh.Pillar.v2.5.g
+        run: gradle --quiet :nyse-amexequities-integratedfeedrefresh-pillar-v2-5-g:captureTest -Pcapture=omi-data-packets/Nyse/AmexEquities.IntegratedFeedRefresh.Pillar.v2.5.g -Pstrict
 
       - name: Test Classes/Nyse/AmexEquities/OpenBook.Aggregated.Xdp.v2.1.d
         run: gradle --quiet :nyse-amexequities-openbook-aggregated-xdp-v2-1-d:captureTest -Pcapture=omi-data-packets/Nyse/AmexEquities.OpenBook.Aggregated.Xdp.v2.1.d -Pstrict
@@ -149,8 +1448,14 @@ jobs:
       - name: Test Classes/Nyse/AmexEquities/OpenBook.Ultra.v2.1.b
         run: gradle --quiet :nyse-amexequities-openbook-ultra-v2-1-b:captureTest -Pcapture=omi-data-packets/Nyse/AmexEquities.OpenBook.Ultra.v2.1.b -Pstrict
 
+      - name: Test Classes/Nyse/AmexOptions/ComplexFeed.Xdp.v1.3.a
+        run: gradle --quiet :nyse-amexoptions-complexfeed-xdp-v1-3-a:captureTest -Pcapture=omi-data-packets/Nyse/AmexOptions.ComplexFeed.Xdp.v1.3.a -Pstrict
+
       - name: Test Classes/Nyse/AmexOptions/DeepFeed.Pillar.v1.2.m
         run: gradle --quiet :nyse-amexoptions-deepfeed-pillar-v1-2-m:captureTest -Pcapture=omi-data-packets/Nyse/AmexOptions.DeepFeed.Pillar.v1.2.m -Pstrict
+
+      - name: Test Classes/Nyse/AmexOptions/DeepFeed.Xdp.v1.3.a
+        run: gradle --quiet :nyse-amexoptions-deepfeed-xdp-v1-3-a:captureTest -Pcapture=omi-data-packets/Nyse/AmexOptions.DeepFeed.Xdp.v1.3.a -Pstrict
 
       - name: Test Classes/Nyse/AmexOptions/TopFeed.Pillar.v1.2.k
         run: gradle --quiet :nyse-amexoptions-topfeed-pillar-v1-2-k:captureTest -Pcapture=omi-data-packets/Nyse/AmexOptions.TopFeed.Pillar.v1.2.k -Pstrict
@@ -158,11 +1463,175 @@ jobs:
       - name: Test Classes/Nyse/AmexOptions/TopFeed.Xdp.v1.3.a
         run: gradle --quiet :nyse-amexoptions-topfeed-xdp-v1-3-a:captureTest -Pcapture=omi-data-packets/Nyse/AmexOptions.TopFeed.Xdp.v1.3.a -Pstrict
 
+      - name: Test Classes/Nyse/ArcaEquities/Bbo.Xdp.v2.4.c
+        run: gradle --quiet :nyse-arcaequities-bbo-xdp-v2-4-c:captureTest -Pcapture=omi-data-packets/Nyse/ArcaEquities.Bbo.Xdp.v2.4.c -Pstrict
+
+  build-9:
+    name: Build 9 of 10 (Classes/Nyse/ArcaEquities/DepthFeedRetransmission.Pillar.v1.1 to Classes/Nyse/TexasEquities/DepthFeed.Pillar.v1.1)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 9.8.2
+
+      # Compiles this job's protocols and runs each one's round trip.
+      - name: Build
+        run: >-
+          gradle
+          :nyse-arcaequities-depthfeedretransmission-pillar-v1-1:build
+          :nyse-arcaequities-depthfeedretransmission-pillar-v1-6:build
+          :nyse-arcaequities-depthfeedretransmission-pillar-v1-7:build
+          :nyse-arcaequities-imbalancesfeed-pillar-v2-2-n:build
+          :nyse-arcaequities-imbalancesfeed-pillar-v2-2-o:build
+          :nyse-arcaequities-integratedfeed-pillar-v2-5-g:build
+          :nyse-arcaequities-integratedfeed-pillar-v2-5-h:build
+          :nyse-arcaequities-integratedfeedrefresh-pillar-v2-5-g:build
+          :nyse-arcaequities-integratedfeedrefresh-pillar-v2-5-h:build
+          :nyse-arcaequities-integratedfeedrequest-pillar-v2-5-g:build
+          :nyse-arcaequities-integratedfeedrequest-pillar-v2-5-h:build
+          :nyse-arcaequities-integratedfeedretransmission-pillar-v2-5-g:build
+          :nyse-arcaequities-integratedfeedretransmission-pillar-v2-5-h:build
+          :nyse-arcaequities-integratedfeedstocksummary-pillar-v2-5-g:build
+          :nyse-arcaequities-integratedfeedstocksummary-pillar-v2-5-h:build
+          :nyse-arcaequities-trades-pillar-v2-6:build
+          :nyse-arcaequities-trades-pillar-v2-6-a:build
+          :nyse-arcaoptions-complexfeed-pillar-v1-0-d:build
+          :nyse-arcaoptions-complexfeed-pillar-v1-0-h:build
+          :nyse-arcaoptions-complexfeed-xdp-v1-3-a:build
+          :nyse-arcaoptions-deepfeed-pillar-v1-2-f:build
+          :nyse-arcaoptions-deepfeed-pillar-v1-2-l:build
+          :nyse-arcaoptions-deepfeed-pillar-v1-2-m:build
+          :nyse-arcaoptions-deepfeed-xdp-v1-3-a:build
+          :nyse-arcaoptions-topfeed-pillar-v1-2-c:build
+          :nyse-arcaoptions-topfeed-pillar-v1-2-j:build
+          :nyse-arcaoptions-topfeed-pillar-v1-2-k:build
+          :nyse-arcaoptions-topfeed-xdp-v1-3-a:build
+          :nyse-nationalequities-bbo-pillar-v2-5-d:build
+          :nyse-nationalequities-binarygateway-pillarstream-v5-17:build
+          :nyse-nationalequities-binarygateway-pillarstream-v6-0:build
+          :nyse-nationalequities-binarygateway-pillarstream-v6-1:build
+          :nyse-nationalequities-bqt-xdp-v2-4-a:build
+          :nyse-nationalequities-bqt-xdp-v2-4-b:build
+          :nyse-nationalequities-bqt-xdp-v2-4-c:build
+          :nyse-nationalequities-depthfeed-pillar-v1-1:build
+          :nyse-nationalequities-depthfeed-pillar-v1-6:build
+          :nyse-nationalequities-depthfeed-pillar-v1-7:build
+          :nyse-nationalequities-depthfeedrefresh-pillar-v1-1:build
+          :nyse-nationalequities-depthfeedrefresh-pillar-v1-6:build
+          :nyse-nationalequities-depthfeedrefresh-pillar-v1-7:build
+          :nyse-nationalequities-depthfeedrequest-pillar-v1-1:build
+          :nyse-nationalequities-depthfeedrequest-pillar-v1-6:build
+          :nyse-nationalequities-depthfeedrequest-pillar-v1-7:build
+          :nyse-nationalequities-depthfeedretransmission-pillar-v1-1:build
+          :nyse-nationalequities-depthfeedretransmission-pillar-v1-6:build
+          :nyse-nationalequities-depthfeedretransmission-pillar-v1-7:build
+          :nyse-nationalequities-integratedfeed-pillar-v2-5-g:build
+          :nyse-nationalequities-integratedfeed-pillar-v2-5-h:build
+          :nyse-nationalequities-integratedfeedrefresh-pillar-v2-5-g:build
+          :nyse-nationalequities-integratedfeedrefresh-pillar-v2-5-h:build
+          :nyse-nationalequities-integratedfeedrequest-pillar-v2-5-g:build
+          :nyse-nationalequities-integratedfeedrequest-pillar-v2-5-h:build
+          :nyse-nationalequities-integratedfeedretransmission-pillar-v2-5-g:build
+          :nyse-nationalequities-integratedfeedretransmission-pillar-v2-5-h:build
+          :nyse-nationalequities-integratedfeedstocksummary-pillar-v2-5-g:build
+          :nyse-nationalequities-integratedfeedstocksummary-pillar-v2-5-h:build
+          :nyse-nationalequities-trades-pillar-v2-6:build
+          :nyse-nationalequities-trades-pillar-v2-6-a:build
+          :nyse-nysebonds-depthofbook-abp-v4-01-b:build
+          :nyse-nysebonds-quote-pdp-v1-2-a:build
+          :nyse-nysebonds-trades-abp-v1-07-a:build
+          :nyse-nyseconsolidated-bqt-xdp-v2-4-a:build
+          :nyse-nyseconsolidated-bqt-xdp-v2-4-b:build
+          :nyse-nyseconsolidated-bqt-xdp-v2-4-c:build
+          :nyse-nyseequities-bbo-pillar-v2-5-b:build
+          :nyse-nyseequities-bbo-pillar-v2-5-d:build
+          :nyse-nyseequities-bbo-xdp-v2-4-g:build
+          :nyse-nyseequities-binarygateway-pillarstream-v5-10:build
+          :nyse-nyseequities-binarygateway-pillarstream-v5-17:build
+          :nyse-nyseequities-binarygateway-pillarstream-v6-0:build
+          :nyse-nyseequities-binarygateway-pillarstream-v6-1:build
+          :nyse-nyseequities-bqt-xdp-v1-7-a:build
+          :nyse-nyseequities-bqt-xdp-v2-1-a:build
+          :nyse-nyseequities-bqt-xdp-v2-4-a:build
+          :nyse-nyseequities-bqt-xdp-v2-4-b:build
+          :nyse-nyseequities-bqt-xdp-v2-4-c:build
+          :nyse-nyseequities-depthfeed-pillar-v1-1:build
+          :nyse-nyseequities-depthfeed-pillar-v1-6:build
+          :nyse-nyseequities-depthfeed-pillar-v1-7:build
+          :nyse-nyseequities-depthfeedrefresh-pillar-v1-1:build
+          :nyse-nyseequities-depthfeedrefresh-pillar-v1-6:build
+          :nyse-nyseequities-depthfeedrefresh-pillar-v1-7:build
+          :nyse-nyseequities-depthfeedrequest-pillar-v1-1:build
+          :nyse-nyseequities-depthfeedrequest-pillar-v1-6:build
+          :nyse-nyseequities-depthfeedrequest-pillar-v1-7:build
+          :nyse-nyseequities-depthfeedretransmission-pillar-v1-1:build
+          :nyse-nyseequities-depthfeedretransmission-pillar-v1-6:build
+          :nyse-nyseequities-depthfeedretransmission-pillar-v1-7:build
+          :nyse-nyseequities-imbalancesfeed-pillar-v2-2-h:build
+          :nyse-nyseequities-imbalancesfeed-pillar-v2-2-n:build
+          :nyse-nyseequities-imbalancesfeed-pillar-v2-2-o:build
+          :nyse-nyseequities-imbalancesfeed-xdp-v2-1-f:build
+          :nyse-nyseequities-imbalancesfeed-xdp-v2-2-a:build
+          :nyse-nyseequities-integratedfeed-pillar-v2-5-a:build
+          :nyse-nyseequities-integratedfeed-pillar-v2-5-g:build
+          :nyse-nyseequities-integratedfeed-pillar-v2-5-h:build
+          :nyse-nyseequities-integratedfeed-xdp-v2-1-g:build
+          :nyse-nyseequities-integratedfeed-xdp-v2-3-a:build
+          :nyse-nyseequities-integratedfeedrefresh-pillar-v2-5-g:build
+          :nyse-nyseequities-integratedfeedrefresh-pillar-v2-5-h:build
+          :nyse-nyseequities-integratedfeedrequest-pillar-v2-5-g:build
+          :nyse-nyseequities-integratedfeedrequest-pillar-v2-5-h:build
+          :nyse-nyseequities-integratedfeedretransmission-pillar-v2-5-g:build
+          :nyse-nyseequities-integratedfeedretransmission-pillar-v2-5-h:build
+          :nyse-nyseequities-integratedfeedstocksummary-pillar-v2-5-g:build
+          :nyse-nyseequities-integratedfeedstocksummary-pillar-v2-5-h:build
+          :nyse-nyseequities-openbook-aggregated-xdp-v2-1-d:build
+          :nyse-nyseequities-openbook-ultra-v2-1-b:build
+          :nyse-nyseequities-openbook-ultra-v2-1-k:build
+          :nyse-nyseequities-openbook-xdp-v1-9-a:build
+          :nyse-nyseequities-trades-pillar-v2-6:build
+          :nyse-nyseequities-trades-pillar-v2-6-a:build
+          :nyse-options-deepfeed-xdp-v1-3-a:build
+          :nyse-options-streamprotocol-pillarstream-v1-1-6:build
+          :nyse-options-streamprotocol-pillarstream-v1-1-7:build
+          :nyse-options-topfeed-xdp-v1-3-a:build
+          :nyse-texasequities-bbo-pillar-v2-5-d:build
+          :nyse-texasequities-binarygateway-pillarstream-v5-17:build
+          :nyse-texasequities-binarygateway-pillarstream-v6-0:build
+          :nyse-texasequities-binarygateway-pillarstream-v6-1:build
+          :nyse-texasequities-bqt-xdp-v2-4-a:build
+          :nyse-texasequities-bqt-xdp-v2-4-b:build
+          :nyse-texasequities-bqt-xdp-v2-4-c:build
+          :nyse-texasequities-depthfeed-pillar-v1-1:build
+
+      - name: Clone Omi Data
+        run: git clone --depth=1 https://github.com/Open-Markets-Initiative/omi-data-packets.git
+
+      - name: Test Classes/Nyse/ArcaEquities/IntegratedFeed.Pillar.v2.5.g
+        run: gradle --quiet :nyse-arcaequities-integratedfeed-pillar-v2-5-g:captureTest -Pcapture=omi-data-packets/Nyse/ArcaEquities.IntegratedFeed.Pillar.v2.5.g -Pstrict
+
+      - name: Test Classes/Nyse/ArcaEquities/IntegratedFeedRefresh.Pillar.v2.5.g
+        run: gradle --quiet :nyse-arcaequities-integratedfeedrefresh-pillar-v2-5-g:captureTest -Pcapture=omi-data-packets/Nyse/ArcaEquities.IntegratedFeedRefresh.Pillar.v2.5.g -Pstrict
+
       - name: Test Classes/Nyse/ArcaOptions/ComplexFeed.Pillar.v1.0.h
         run: gradle --quiet :nyse-arcaoptions-complexfeed-pillar-v1-0-h:captureTest -Pcapture=omi-data-packets/Nyse/ArcaOptions.ComplexFeed.Pillar.v1.0.h -Pstrict
 
       - name: Test Classes/Nyse/ArcaOptions/DeepFeed.Pillar.v1.2.m
         run: gradle --quiet :nyse-arcaoptions-deepfeed-pillar-v1-2-m:captureTest -Pcapture=omi-data-packets/Nyse/ArcaOptions.DeepFeed.Pillar.v1.2.m -Pstrict
+
+      - name: Test Classes/Nyse/ArcaOptions/TopFeed.Pillar.v1.2.c
+        run: gradle --quiet :nyse-arcaoptions-topfeed-pillar-v1-2-c:captureTest -Pcapture=omi-data-packets/Nyse/ArcaOptions.TopFeed.Pillar.v1.2.c -Pstrict
+
+      - name: Test Classes/Nyse/NationalEquities/Bbo.Pillar.v2.5.d
+        run: gradle --quiet :nyse-nationalequities-bbo-pillar-v2-5-d:captureTest -Pcapture=omi-data-packets/Nyse/NationalEquities.Bbo.Pillar.v2.5.d -Pstrict
 
       - name: Test Classes/Nyse/NationalEquities/IntegratedFeed.Pillar.v2.5.g
         run: gradle --quiet :nyse-nationalequities-integratedfeed-pillar-v2-5-g:captureTest -Pcapture=omi-data-packets/Nyse/NationalEquities.IntegratedFeed.Pillar.v2.5.g -Pstrict
@@ -170,8 +1639,17 @@ jobs:
       - name: Test Classes/Nyse/NationalEquities/IntegratedFeedStockSummary.Pillar.v2.5.g
         run: gradle --quiet :nyse-nationalequities-integratedfeedstocksummary-pillar-v2-5-g:captureTest -Pcapture=omi-data-packets/Nyse/NationalEquities.IntegratedFeedStockSummary.Pillar.v2.5.g -Pstrict
 
+      - name: Test Classes/Nyse/NationalEquities/Trades.Pillar.v2.6
+        run: gradle --quiet :nyse-nationalequities-trades-pillar-v2-6:captureTest -Pcapture=omi-data-packets/Nyse/NationalEquities.Trades.Pillar.v2.6 -Pstrict
+
       - name: Test Classes/Nyse/NyseBonds/DepthOfBook.Abp.v4.01.b
         run: gradle --quiet :nyse-nysebonds-depthofbook-abp-v4-01-b:captureTest -Pcapture=omi-data-packets/Nyse/NyseBonds.DepthOfBook.Abp.v4.01.b -Pstrict
+
+      - name: Test Classes/Nyse/NyseEquities/Bbo.Pillar.v2.5.b
+        run: gradle --quiet :nyse-nyseequities-bbo-pillar-v2-5-b:captureTest -Pcapture=omi-data-packets/Nyse/NyseEquities.Bbo.Pillar.v2.5.b -Pstrict
+
+      - name: Test Classes/Nyse/NyseEquities/Bbo.Xdp.v2.4.g
+        run: gradle --quiet :nyse-nyseequities-bbo-xdp-v2-4-g:captureTest -Pcapture=omi-data-packets/Nyse/NyseEquities.Bbo.Xdp.v2.4.g -Pstrict
 
       - name: Test Classes/Nyse/NyseEquities/BinaryGateway.PillarStream.v5.17
         run: gradle --quiet :nyse-nyseequities-binarygateway-pillarstream-v5-17:captureTest -Pcapture=omi-data-packets/Nyse/NyseEquities.BinaryGateway.PillarStream.v5.17 -Pstrict
@@ -185,8 +1663,190 @@ jobs:
       - name: Test Classes/Nyse/NyseEquities/DepthFeed.Pillar.v1.1
         run: gradle --quiet :nyse-nyseequities-depthfeed-pillar-v1-1:captureTest -Pcapture=omi-data-packets/Nyse/NyseEquities.DepthFeed.Pillar.v1.1 -Pstrict
 
+      - name: Test Classes/Nyse/NyseEquities/ImbalancesFeed.Xdp.v2.1.f
+        run: gradle --quiet :nyse-nyseequities-imbalancesfeed-xdp-v2-1-f:captureTest -Pcapture=omi-data-packets/Nyse/NyseEquities.ImbalancesFeed.Xdp.v2.1.f -Pstrict
+
+      - name: Test Classes/Nyse/NyseEquities/ImbalancesFeed.Xdp.v2.2.a
+        run: gradle --quiet :nyse-nyseequities-imbalancesfeed-xdp-v2-2-a:captureTest -Pcapture=omi-data-packets/Nyse/NyseEquities.ImbalancesFeed.Xdp.v2.2.a -Pstrict
+
+      - name: Test Classes/Nyse/NyseEquities/IntegratedFeed.Pillar.v2.5.g
+        run: gradle --quiet :nyse-nyseequities-integratedfeed-pillar-v2-5-g:captureTest -Pcapture=omi-data-packets/Nyse/NyseEquities.IntegratedFeed.Pillar.v2.5.g -Pstrict
+
+      - name: Test Classes/Nyse/NyseEquities/IntegratedFeed.Xdp.v2.1.g
+        run: gradle --quiet :nyse-nyseequities-integratedfeed-xdp-v2-1-g:captureTest -Pcapture=omi-data-packets/Nyse/NyseEquities.IntegratedFeed.Xdp.v2.1.g -Pstrict
+
+      - name: Test Classes/Nyse/NyseEquities/IntegratedFeed.Xdp.v2.3.a
+        run: gradle --quiet :nyse-nyseequities-integratedfeed-xdp-v2-3-a:captureTest -Pcapture=omi-data-packets/Nyse/NyseEquities.IntegratedFeed.Xdp.v2.3.a -Pstrict
+
+      - name: Test Classes/Nyse/NyseEquities/IntegratedFeedRefresh.Pillar.v2.5.g
+        run: gradle --quiet :nyse-nyseequities-integratedfeedrefresh-pillar-v2-5-g:captureTest -Pcapture=omi-data-packets/Nyse/NyseEquities.IntegratedFeedRefresh.Pillar.v2.5.g -Pstrict
+
+      - name: Test Classes/Nyse/NyseEquities/IntegratedFeedRetransmission.Pillar.v2.5.g
+        run: gradle --quiet :nyse-nyseequities-integratedfeedretransmission-pillar-v2-5-g:captureTest -Pcapture=omi-data-packets/Nyse/NyseEquities.IntegratedFeedRetransmission.Pillar.v2.5.g -Pstrict
+
       - name: Test Classes/Nyse/NyseEquities/OpenBook.Aggregated.Xdp.v2.1.d
         run: gradle --quiet :nyse-nyseequities-openbook-aggregated-xdp-v2-1-d:captureTest -Pcapture=omi-data-packets/Nyse/NyseEquities.OpenBook.Aggregated.Xdp.v2.1.d -Pstrict
+
+      - name: Test Classes/Nyse/NyseEquities/OpenBook.Ultra.v2.1.b
+        run: gradle --quiet :nyse-nyseequities-openbook-ultra-v2-1-b:captureTest -Pcapture=omi-data-packets/Nyse/NyseEquities.OpenBook.Ultra.v2.1.b -Pstrict
+
+  build-10:
+    name: Build 10 of 10 (Classes/Nyse/TexasEquities/DepthFeed.Pillar.v1.6 to ZeroCopyFlyweight/Nasdaq/IseOptions/OrderComboFeed.Itch.v1.1)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 9.8.2
+
+      # Compiles this job's protocols and runs each one's round trip.
+      - name: Build
+        run: >-
+          gradle
+          :nyse-texasequities-depthfeed-pillar-v1-6:build
+          :nyse-texasequities-depthfeed-pillar-v1-7:build
+          :nyse-texasequities-depthfeedrefresh-pillar-v1-1:build
+          :nyse-texasequities-depthfeedrefresh-pillar-v1-6:build
+          :nyse-texasequities-depthfeedrefresh-pillar-v1-7:build
+          :nyse-texasequities-depthfeedrequest-pillar-v1-1:build
+          :nyse-texasequities-depthfeedrequest-pillar-v1-6:build
+          :nyse-texasequities-depthfeedrequest-pillar-v1-7:build
+          :nyse-texasequities-depthfeedretransmission-pillar-v1-1:build
+          :nyse-texasequities-depthfeedretransmission-pillar-v1-6:build
+          :nyse-texasequities-depthfeedretransmission-pillar-v1-7:build
+          :nyse-texasequities-imbalancesfeed-pillar-v2-2-n:build
+          :nyse-texasequities-imbalancesfeed-pillar-v2-2-o:build
+          :nyse-texasequities-integratedfeed-pillar-v2-5-g:build
+          :nyse-texasequities-integratedfeed-pillar-v2-5-h:build
+          :nyse-texasequities-integratedfeedrefresh-pillar-v2-5-g:build
+          :nyse-texasequities-integratedfeedrefresh-pillar-v2-5-h:build
+          :nyse-texasequities-integratedfeedrequest-pillar-v2-5-g:build
+          :nyse-texasequities-integratedfeedrequest-pillar-v2-5-h:build
+          :nyse-texasequities-integratedfeedretransmission-pillar-v2-5-g:build
+          :nyse-texasequities-integratedfeedretransmission-pillar-v2-5-h:build
+          :nyse-texasequities-integratedfeedstocksummary-pillar-v2-5-g:build
+          :nyse-texasequities-integratedfeedstocksummary-pillar-v2-5-h:build
+          :nyse-texasequities-trades-pillar-v2-6:build
+          :nyse-texasequities-trades-pillar-v2-6-a:build
+          :odx-odxequities-pts-glimpse-v1-0:build
+          :odx-odxequities-pts-glimpse-v2-0:build
+          :odx-odxequities-pts-itch-v1-0:build
+          :odx-odxequities-pts-itch-v2-2:build
+          :odx-odxequities-pts-ouch-v1-0:build
+          :odx-odxequities-pts-ouch-v2-0:build
+          :odx-odxsecuritytoken-pts-itch-v1-0:build
+          :odx-odxsecuritytoken-pts-itch-v1-2:build
+          :omi-sbe-example-sbe-v2:build
+          :otcmarkets-linkats-extendedtrade-link-v4-10-4:build
+          :otcmarkets-linkats-multicast-link-v4-10-4:build
+          :otcmarkets-linkats-multicast-link-v4-3:build
+          :otcmarkets-linkats-multicast-link-v4-5:build
+          :otcmarkets-linkats-quotebook-link-v4-10-4:build
+          :otcmarkets-linkats-quotebookglobalotc-link-v4-10-4:build
+          :otcmarkets-linkats-quoteinside-link-v4-10-4:build
+          :otcmarkets-linkats-quoteinsideglobalotc-link-v4-10-4:build
+          :otcmarkets-linkats-quotereferenceprice-link-v4-10-4:build
+          :otcmarkets-linkats-referencedata-link-v4-10-4:build
+          :otcmarkets-linkats-referencedatanocusip-link-v4-10-4:build
+          :otcmarkets-linkats-trade-link-v4-10-4:build
+          :otcmarkets-linknqb-depthofbook-link-v1-18:build
+          :otcmarkets-linknqb-retransmission-link-v1-18:build
+          :otcmarkets-linknqb-topofbook-link-v1-18:build
+          :otcmarkets-moonats-depthofbook-link-v1-3:build
+          :otcmarkets-moonats-retransmission-link-v1-3:build
+          :otcmarkets-moonats-topofbook-link-v1-3:build
+          :otcmarkets-overnight-depthofbook-link-v1-0:build
+          :otcmarkets-overnight-retransmission-link-v1-0:build
+          :otcmarkets-overnight-topofbook-link-v1-0:build
+          :pse-pseequities-basicwithlastsale-itch-v2-3:build
+          :pse-pseequities-index-itch-v2-3:build
+          :pse-pseequities-totalview-itch-v2-3:build
+          :sgx-titandt-depthofbook-glimpse-v1-4:build
+          :sgx-titandt-depthofbook-itch-v1-4:build
+          :siac-cqs-output-cta-v1-91:build
+          :siac-cqs-output-cta-v2-10-a:build
+          :siac-cqs-output-cta-v2-9:build
+          :siac-cqs-snapshot-cta-v1-0:build
+          :siac-cqs-snapshot-cta-v2-1:build
+          :siac-cts-output-cta-v1-91:build
+          :siac-cts-output-cta-v2-10:build
+          :siac-cts-output-cta-v2-11-b:build
+          :siac-cts-output-cta-v2-9:build
+          :siac-gapdetection-obi-v1:build
+          :siac-opra-input-obi-v5-0-i:build
+          :siac-opra-output-obi-v4-0:build
+          :siac-opra-output-obi-v6-1:build
+          :siac-opra-output-obi-v6-2:build
+          :siac-opra-output-obi-v6-3-a:build
+          :smallx-smallfutures-orderbookfeed-sbe-v2-2:build
+          :tadawul-saudiexchange-basic-itch-v1-9:build
+          :tadawul-saudiexchange-lv3-mwz-v4-0:build
+          :tadawul-saudiexchange-orderentry-ouch-v0-7:build
+          :tadawul-saudiexchange-totalview-itch-v1-9:build
+          :tmx-mx-solamulticast-hsvf-v1-11:build
+          :tmx-mx-solamulticast-hsvf-v1-12-2:build
+          :tmx-mx-solamulticast-hsvf-v1-13-3:build
+          :tmx-mx-solamulticast-hsvf-v1-14-1:build
+          :tmx-mx-solatcpretransmission-hsvf-v1-11:build
+          :tmx-mx-solatcpretransmission-hsvf-v1-12-2:build
+          :tmx-mx-solatcpretransmission-hsvf-v1-13-3:build
+          :tmx-mx-solatcpretransmission-hsvf-v1-14-1:build
+          :tmx-tsx-globalfx-gfx-v1-0:build
+          :tmx-tsx-indexfeed-qrtmd-v1-19:build
+          :tmx-tsx-level1-qrtmd-v2-8:build
+          :tmx-tsxalpha-level1-qrtmd-v2-1:build
+          :tradelogiq-lynxats-snapshotrecovery-itch-v1-09:build
+          :tradelogiq-lynxats-tcplevel1-itch-v1-01:build
+          :tradelogiq-lynxats-tcplevel2-itch-v2-01:build
+          :tradelogiq-omegaats-snapshotrecovery-itch-v1-09:build
+          :tradelogiq-omegaats-tcplevel1-itch-v1-01:build
+          :tradelogiq-omegaats-tcplevel2-itch-v2-01:build
+          :txse-txseequities-bale-rake-v1-0:build
+          :txse-txseequities-feed-rake-v1-0:build
+          :txse-txseequities-seed-rake-v1-0:build
+          :flyweight-iex-iexequities-deep-iextp-v1-06:build
+          :flyweight-iex-iexequities-deep-iextp-v1-08:build
+          :flyweight-iex-iexequities-deepplus-iextp-v1-01:build
+          :flyweight-iex-iexequities-deepplus-iextp-v1-05:build
+          :flyweight-iex-iexequities-tops-iextp-v1-56:build
+          :flyweight-iex-iexequities-tops-iextp-v1-64:build
+          :flyweight-iex-iexequities-tops-iextp-v1-66:build
+          :flyweight-nasdaq-iseoptions-ordercombofeed-itch-v1-1:build
+          :zerocopy-iex-iexequities-deep-iextp-v1-06:build
+          :zerocopy-iex-iexequities-deep-iextp-v1-08:build
+          :zerocopy-iex-iexequities-deepplus-iextp-v1-01:build
+          :zerocopy-iex-iexequities-deepplus-iextp-v1-05:build
+          :zerocopy-iex-iexequities-tops-iextp-v1-56:build
+          :zerocopy-iex-iexequities-tops-iextp-v1-64:build
+          :zerocopy-iex-iexequities-tops-iextp-v1-66:build
+          :zerocopy-nasdaq-iseoptions-ordercombofeed-itch-v1-1:build
+          :zerocopyflyweight-iex-iexequities-deep-iextp-v1-06:build
+          :zerocopyflyweight-iex-iexequities-deep-iextp-v1-08:build
+          :zerocopyflyweight-iex-iexequities-deepplus-iextp-v1-01:build
+          :zerocopyflyweight-iex-iexequities-deepplus-iextp-v1-05:build
+          :zerocopyflyweight-iex-iexequities-tops-iextp-v1-56:build
+          :zerocopyflyweight-iex-iexequities-tops-iextp-v1-64:build
+          :zerocopyflyweight-iex-iexequities-tops-iextp-v1-66:build
+          :zerocopyflyweight-nasdaq-iseoptions-ordercombofeed-itch-v1-1:build
+
+      - name: Clone Omi Data
+        run: git clone --depth=1 https://github.com/Open-Markets-Initiative/omi-data-packets.git
+
+      - name: Test Classes/Nyse/TexasEquities/IntegratedFeed.Pillar.v2.5.g
+        run: gradle --quiet :nyse-texasequities-integratedfeed-pillar-v2-5-g:captureTest -Pcapture=omi-data-packets/Nyse/TexasEquities.IntegratedFeed.Pillar.v2.5.g -Pstrict
+
+      - name: Test Classes/Nyse/TexasEquities/IntegratedFeedRefresh.Pillar.v2.5.g
+        run: gradle --quiet :nyse-texasequities-integratedfeedrefresh-pillar-v2-5-g:captureTest -Pcapture=omi-data-packets/Nyse/TexasEquities.IntegratedFeedRefresh.Pillar.v2.5.g -Pstrict
+
+      - name: Test Classes/OtcMarkets/LinkAts/Multicast.Link.v4.3
+        run: gradle --quiet :otcmarkets-linkats-multicast-link-v4-3:captureTest -Pcapture=omi-data-packets/OtcMarkets/LinkAts.Multicast.Link.v4.3 -Pstrict
 
       - name: Test Classes/Siac/Cqs/Output.Cta.v1.91
         run: gradle --quiet :siac-cqs-output-cta-v1-91:captureTest -Pcapture=omi-data-packets/Siac/Cqs.Output.Cta.v1.91 -Pstrict

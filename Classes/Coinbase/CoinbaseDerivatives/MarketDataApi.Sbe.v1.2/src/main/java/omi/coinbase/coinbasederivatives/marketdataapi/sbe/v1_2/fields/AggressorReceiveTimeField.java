@@ -1,6 +1,5 @@
 package omi.coinbase.coinbasederivatives.marketdataapi.sbe.v1_2.fields;
 
-import java.time.Instant;
 import java.util.Objects;
 import omi.coinbase.coinbasederivatives.marketdataapi.sbe.v1_2.types.ByteOps;
 import omi.coinbase.coinbasederivatives.marketdataapi.sbe.v1_2.types.Field;
@@ -9,8 +8,6 @@ import omi.coinbase.coinbasederivatives.marketdataapi.sbe.v1_2.types.PrintOption
 
 /**
  * aggressorReceiveTime
- *
- * <p>Nanoseconds since the Unix epoch, decoded to an Instant with nanosecond precision.</p>
  */
 public final class AggressorReceiveTimeField extends Field {
 
@@ -29,41 +26,25 @@ public final class AggressorReceiveTimeField extends Field {
      */
     public static final boolean LITTLE_ENDIAN = true;
 
-    private Instant value;
+    private long value;
 
     /**
-     * The undecoded wire value, retained so the field re-encodes exactly as it arrived.
-     */
-    private long rawValue;
-
-    /**
-     * Returns the decoded timestamp.
+     * Returns the decoded value.
      *
-     * @return the decoded value, or null when the field has not decoded
+     * @return the decoded value, zero when the field has not decoded
      */
-    public Instant value() {
+    public long value() {
         return value;
     }
 
     /**
-     * Sets the timestamp, deriving the wire nanosecond count from it.
+     * Sets the value to encode.
      *
-     * @param value the timestamp to encode
+     * @param value the value to encode
      */
-    public void value(Instant value) {
+    public void value(long value) {
         this.value = value;
-        this.rawValue = value == null ? 0L : Math.addExact(
-            Math.multiplyExact(value.getEpochSecond(), 1_000_000_000L), value.getNano());
-        markSet(value != null);
-    }
-
-    /**
-     * Returns the undecoded wire value.
-     *
-     * @return the value exactly as it appeared on the wire
-     */
-    public long rawValue() {
-        return rawValue;
+        markSet(true);
     }
 
     @Override
@@ -73,7 +54,7 @@ public final class AggressorReceiveTimeField extends Field {
 
     @Override
     public FieldKind kind() {
-        return FieldKind.TIMESTAMP;
+        return FieldKind.SIGNED_INTEGER;
     }
 
     @Override
@@ -87,9 +68,7 @@ public final class AggressorReceiveTimeField extends Field {
             return false;
         }
 
-        this.rawValue = ByteOps.signed(data, offset, BYTE_LENGTH, LITTLE_ENDIAN);
-        this.value = Instant.ofEpochSecond(
-                Math.floorDiv(rawValue, 1_000_000_000L), Math.floorMod(rawValue, 1_000_000_000L));
+        this.value = ByteOps.signed(data, offset, BYTE_LENGTH, LITTLE_ENDIAN);
         markDecoded(data, offset);
         return true;
     }
@@ -97,15 +76,14 @@ public final class AggressorReceiveTimeField extends Field {
     @Override
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
-        ByteOps.put(data, offset, BYTE_LENGTH, rawValue, LITTLE_ENDIAN);
+        ByteOps.put(data, offset, BYTE_LENGTH, value, LITTLE_ENDIAN);
         return offset + BYTE_LENGTH;
     }
 
     @Override
     public void reset() {
         super.reset();
-        this.value = null;
-        this.rawValue = 0L;
+        this.value = 0L;
     }
 
     @Override
@@ -127,11 +105,11 @@ public final class AggressorReceiveTimeField extends Field {
         if (!(other instanceof AggressorReceiveTimeField field)) {
             return false;
         }
-        return hasValue() == field.hasValue() && rawValue == field.rawValue;
+        return hasValue() == field.hasValue() && value == field.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hasValue(), rawValue);
+        return Objects.hash(hasValue(), value);
     }
 }

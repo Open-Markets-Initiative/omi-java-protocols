@@ -161,7 +161,7 @@ public final class RoundTrip {
     private static byte[] wire0(Random random, int entries, long count) {
         ByteArrayOutputStream wire = new ByteArrayOutputStream();
         random(wire, random, 20);
-        count(wire, entries > 0 ? 2L : 0L, 1, false);
+        count(wire, entries > 0 ? 2L : 0L, 1, true);
         if (entries > 0) {
             count(wire, entries > 0 ? 1L : 0L, 1, true);
         }
@@ -181,7 +181,7 @@ public final class RoundTrip {
         random(wire, random, 1);
         random(wire, random, 60);
         random(wire, random, 1);
-        count(wire, entries > 0 ? 22L : 0L, 1, false);
+        count(wire, entries > 0 ? 22L : 0L, 1, true);
         if (entries > 0) {
             count(wire, entries > 0 ? 127L : 0L, 1, true);
         }
@@ -292,21 +292,21 @@ public final class RoundTrip {
         random(wire, random, 4);
         random(wire, random, 4);
         random(wire, random, 10);
-        count(wire, count, 1, false);
+        count(wire, count, 1, true);
         for (int entry0 = 0; entry0 < entries; entry0++) {
             int pick0 = random.nextInt(2);
             random(wire, random, 2);
-            count(wire, new long[] { 128L, 129L }[pick0], 1, false);
+            count(wire, new long[] { 128L, 129L }[pick0], 1, true);
             if (pick0 == 0) {
                 random(wire, random, 1);
-                count(wire, count, 1, false);
+                count(wire, count, 1, true);
                 for (int entry1 = 0; entry1 < entries; entry1++) {
                     random(wire, random, 1);
                     random(wire, random, 4);
                 }
             } else if (pick0 == 1) {
                 random(wire, random, 1);
-                count(wire, entries > 0 ? 22L : 0L, 1, false);
+                count(wire, entries > 0 ? 22L : 0L, 1, true);
                 if (entries > 0) {
                     random(wire, random, 1);
                 }
@@ -384,26 +384,26 @@ public final class RoundTrip {
         random(wire, random, 60);
         random(wire, random, 1);
         random(wire, random, 4);
-        count(wire, count, 1, false);
+        count(wire, count, 1, true);
         for (int entry0 = 0; entry0 < entries; entry0++) {
             random(wire, random, 1);
             random(wire, random, 4);
         }
-        count(wire, count, 1, false);
+        count(wire, count, 1, true);
         for (int entry0 = 0; entry0 < entries; entry0++) {
             int pick1 = random.nextInt(2);
             random(wire, random, 2);
-            count(wire, new long[] { 128L, 129L }[pick1], 1, false);
+            count(wire, new long[] { 128L, 129L }[pick1], 1, true);
             if (pick1 == 0) {
                 random(wire, random, 1);
-                count(wire, count, 1, false);
+                count(wire, count, 1, true);
                 for (int entry1 = 0; entry1 < entries; entry1++) {
                     random(wire, random, 1);
                     random(wire, random, 4);
                 }
             } else if (pick1 == 1) {
                 random(wire, random, 1);
-                count(wire, entries > 0 ? 22L : 0L, 1, false);
+                count(wire, entries > 0 ? 22L : 0L, 1, true);
                 if (entries > 0) {
                     random(wire, random, 1);
                 }
@@ -480,7 +480,7 @@ public final class RoundTrip {
         random(wire, random, 1);
         random(wire, random, 60);
         random(wire, random, 4);
-        count(wire, count, 1, false);
+        count(wire, count, 1, true);
         for (int entry0 = 0; entry0 < entries; entry0++) {
             random(wire, random, 1);
             random(wire, random, 4);
@@ -492,7 +492,7 @@ public final class RoundTrip {
         ByteArrayOutputStream wire = new ByteArrayOutputStream();
         random(wire, random, 20);
         random(wire, random, 20);
-        count(wire, entries > 0 ? 2L : 0L, 1, false);
+        count(wire, entries > 0 ? 2L : 0L, 1, true);
         if (entries > 0) {
             count(wire, entries > 0 ? 253L : 0L, 1, true);
         }
@@ -537,7 +537,7 @@ public final class RoundTrip {
         random(wire, random, 20);
         random(wire, random, 1);
         random(wire, random, 4);
-        count(wire, entries > 0 ? 12L : 0L, 1, false);
+        count(wire, entries > 0 ? 12L : 0L, 1, true);
         if (entries > 0) {
             count(wire, entries > 0 ? 255L : 0L, 1, true);
         }
@@ -682,7 +682,7 @@ public final class RoundTrip {
         random(wire, random, 20);
         random(wire, random, 8);
         random(wire, random, 1);
-        count(wire, entries > 0 ? 22L : 0L, 1, false);
+        count(wire, entries > 0 ? 22L : 0L, 1, true);
         if (entries > 0) {
             count(wire, entries > 0 ? 127L : 0L, 1, true);
         }
@@ -878,7 +878,7 @@ public final class RoundTrip {
         random(wire, random, 20);
         random(wire, random, 1);
         random(wire, random, 1);
-        count(wire, entries > 0 ? 22L : 0L, 1, false);
+        count(wire, entries > 0 ? 22L : 0L, 1, true);
         if (entries > 0) {
             count(wire, entries > 0 ? 127L : 0L, 1, true);
         }
@@ -1068,7 +1068,7 @@ public final class RoundTrip {
         random(wire, random, 1);
         random(wire, random, 4);
         random(wire, random, 1);
-        count(wire, entries > 0 ? 22L : 0L, 1, false);
+        count(wire, entries > 0 ? 22L : 0L, 1, true);
         if (entries > 0) {
             count(wire, entries > 0 ? 127L : 0L, 1, true);
         }
@@ -1231,7 +1231,7 @@ public final class RoundTrip {
         random(wire, random, 20);
         random(wire, random, 8);
         random(wire, random, 1);
-        count(wire, entries > 0 ? 22L : 0L, 1, false);
+        count(wire, entries > 0 ? 22L : 0L, 1, true);
         if (entries > 0) {
             count(wire, entries > 0 ? 127L : 0L, 1, true);
         }
@@ -1416,7 +1416,7 @@ public final class RoundTrip {
         random(wire, random, 1);
         random(wire, random, 60);
         random(wire, random, 1);
-        count(wire, entries > 0 ? 22L : 0L, 1, false);
+        count(wire, entries > 0 ? 22L : 0L, 1, true);
         if (entries > 0) {
             count(wire, entries > 0 ? 127L : 0L, 1, true);
         }
@@ -1574,7 +1574,7 @@ public final class RoundTrip {
         random(wire, random, 8);
         random(wire, random, 1);
         random(wire, random, 1);
-        count(wire, entries > 0 ? 22L : 0L, 1, false);
+        count(wire, entries > 0 ? 22L : 0L, 1, true);
         if (entries > 0) {
             count(wire, entries > 0 ? 127L : 0L, 1, true);
         }
@@ -1758,14 +1758,14 @@ public final class RoundTrip {
     private static byte[] wire13(Random random, int entries, long count) {
         ByteArrayOutputStream wire = new ByteArrayOutputStream();
         random(wire, random, 1);
-        count(wire, entries > 0 ? 2L : 0L, 1, false);
+        count(wire, entries > 0 ? 2L : 0L, 1, true);
         if (entries > 0) {
             count(wire, entries > 0 ? 21L : 0L, 1, true);
         }
         if (entries > 0) {
             count(wire, entries > 0 ? 131L : 0L, 1, true);
         }
-        count(wire, count, 1, false);
+        count(wire, count, 1, true);
         for (int entry0 = 0; entry0 < entries; entry0++) {
             random(wire, random, 2);
         }
@@ -1796,7 +1796,7 @@ public final class RoundTrip {
         random(wire, random, 1);
         random(wire, random, 60);
         random(wire, random, 1);
-        count(wire, entries > 0 ? 20L : 0L, 1, false);
+        count(wire, entries > 0 ? 20L : 0L, 1, true);
         if (entries > 0) {
             random(wire, random, 1);
         }
@@ -1878,7 +1878,7 @@ public final class RoundTrip {
         random(wire, random, 8);
         random(wire, random, 8);
         random(wire, random, 1);
-        count(wire, entries > 0 ? 21L : 0L, 1, false);
+        count(wire, entries > 0 ? 21L : 0L, 1, true);
         if (entries > 0) {
             random(wire, random, 1);
         }
@@ -1964,7 +1964,7 @@ public final class RoundTrip {
         random(wire, random, 1);
         random(wire, random, 60);
         random(wire, random, 1);
-        count(wire, entries > 0 ? 22L : 0L, 1, false);
+        count(wire, entries > 0 ? 22L : 0L, 1, true);
         if (entries > 0) {
             random(wire, random, 1);
         }

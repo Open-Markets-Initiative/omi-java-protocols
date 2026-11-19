@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.AccountField;
-import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.ClOrdIdField;
+import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.ClordidField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.CumQtyField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.ExecIdField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.ExecRestatementReasonField;
@@ -69,7 +69,7 @@ public final class ExecutionReportCancelMessage implements Message {
     /**
      * clOrdID
      */
-    private final ClOrdIdField clOrdId = new ClOrdIdField();
+    private final ClordidField clordid = new ClordidField();
 
     /**
      * secondaryOrderID
@@ -194,7 +194,7 @@ public final class ExecutionReportCancelMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(outboundBusinessHeader.fields(), List.<Field>of(side), List.<Field>of(ordStatus), List.<Field>of(clOrdId), List.<Field>of(secondaryOrderId), List.<Field>of(securityId), List.<Field>of(cumQty), List.<Field>of(account), List.<Field>of(execId), List.<Field>of(transactTime), List.<Field>of(marketSegmentReceivedTime), List.<Field>of(orderId), List.<Field>of(origclordid), List.<Field>of(tradeDate), List.<Field>of(workingIndicator), List.<Field>of(execRestatementReason), List.<Field>of(massActionReportIdOptional), List.<Field>of(ordtype), List.<Field>of(timeInForce), List.<Field>of(expireDate), List.<Field>of(orderQty), List.<Field>of(priceOptional), List.<Field>of(stopPx), List.<Field>of(minQty), List.<Field>of(maxFloor), deskId.fields(), memo.fields()).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(outboundBusinessHeader.fields(), List.<Field>of(side), List.<Field>of(ordStatus), List.<Field>of(clordid), List.<Field>of(secondaryOrderId), List.<Field>of(securityId), List.<Field>of(cumQty), List.<Field>of(account), List.<Field>of(execId), List.<Field>of(transactTime), List.<Field>of(marketSegmentReceivedTime), List.<Field>of(orderId), List.<Field>of(origclordid), List.<Field>of(tradeDate), List.<Field>of(workingIndicator), List.<Field>of(execRestatementReason), List.<Field>of(massActionReportIdOptional), List.<Field>of(ordtype), List.<Field>of(timeInForce), List.<Field>of(expireDate), List.<Field>of(orderQty), List.<Field>of(priceOptional), List.<Field>of(stopPx), List.<Field>of(minQty), List.<Field>of(maxFloor), deskId.fields(), memo.fields()).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -221,10 +221,10 @@ public final class ExecutionReportCancelMessage implements Message {
     /**
      * clOrdID
      *
-     * @return the ClOrdId field
+     * @return the Clordid field
      */
-    public ClOrdIdField clOrdId() {
-        return clOrdId;
+    public ClordidField clordid() {
+        return clordid;
     }
 
     /**
@@ -548,10 +548,10 @@ public final class ExecutionReportCancelMessage implements Message {
             return false;
         }
         cursor += OrdStatusField.BYTE_LENGTH;
-        if (!clOrdId.parse(data, cursor)) {
+        if (!clordid.parse(data, cursor)) {
             return false;
         }
-        cursor += ClOrdIdField.BYTE_LENGTH;
+        cursor += ClordidField.BYTE_LENGTH;
         if (!secondaryOrderId.parse(data, cursor)) {
             return false;
         }
@@ -659,7 +659,7 @@ public final class ExecutionReportCancelMessage implements Message {
         cursor = outboundBusinessHeader.encode(data, cursor);
         cursor = side.encode(data, cursor);
         cursor = ordStatus.encode(data, cursor);
-        cursor = clOrdId.encode(data, cursor);
+        cursor = clordid.encode(data, cursor);
         cursor = secondaryOrderId.encode(data, cursor);
         cursor = securityId.encode(data, cursor);
         cursor = cumQty.encode(data, cursor);
@@ -774,7 +774,7 @@ public final class ExecutionReportCancelMessage implements Message {
         return switch (name) {
             case "Side" -> Optional.of(side);
             case "OrdStatus" -> Optional.of(ordStatus);
-            case "ClOrdId" -> Optional.of(clOrdId);
+            case "Clordid" -> Optional.of(clordid);
             case "SecondaryOrderId" -> Optional.of(secondaryOrderId);
             case "SecurityId" -> Optional.of(securityId);
             case "CumQty" -> Optional.of(cumQty);

@@ -22,7 +22,7 @@ public enum MessageCategory {
     /**
      * Index Messages Header
      */
-    INDICES('I', "Index Messages Header"),
+    INDEX('I', "Index Messages Header"),
 
     /**
      * Market Status Message Header
@@ -81,7 +81,7 @@ public enum MessageCategory {
         return switch (wire) {
             case 'A' -> Optional.of(ADMINISTRATIVE);
             case 'C' -> Optional.of(CONTROL);
-            case 'I' -> Optional.of(INDICES);
+            case 'I' -> Optional.of(INDEX);
             case 'M' -> Optional.of(MARKET_STATUS);
             case 'P' -> Optional.of(PRIOR_DAY);
             case 'S' -> Optional.of(SUMMARY);

@@ -1,0 +1,122 @@
+package omi.asianext.asianextderivatives.realtime.amd.v1_3.enums;
+
+import java.util.Optional;
+
+/**
+ * Message type identifier
+ *
+ * <p>Backed by short. Values correspond to the wire integer encoding.</p>
+ */
+public enum MsgType {
+
+    /**
+     * The Heartbeat message carries no data; it is simply a message header with msgType of 1.
+     */
+    HEARTBEAT_MESSAGE((short) 1, "The Heartbeat message carries no data; it is simply a message header with msgType of 1."),
+
+    /**
+     * The Sequence Number Reset is published when AsiaNext initiates a seqNo reset.
+     */
+    SEQUENCE_NUMBER_RESET_MESSAGE((short) 29, "The Sequence Number Reset is published when AsiaNext initiates a seqNo reset."),
+
+    /**
+     * The Order Add message is published when order quantity is posted to the order book for a particular security.
+     */
+    ORDER_ADD_MESSAGE((short) 2, "The Order Add message is published when order quantity is posted to the order book for a particular security."),
+
+    /**
+     * The Order Cancel message is published when a visible order is removed from the book.
+     */
+    ORDER_CANCEL_MESSAGE((short) 3, "The Order Cancel message is published when a visible order is removed from the book."),
+
+    /**
+     * The Order Modify message is published when a visible order is modified by the client (change of price and/or quantity).
+     */
+    ORDER_MODIFY_MESSAGE((short) 4, "The Order Modify message is published when a visible order is modified by the client (change of price and/or quantity)."),
+
+    /**
+     * Whenever an order trades, partially or fully, a Trade message is published.
+     */
+    TRADE_MESSAGE((short) 5, "Whenever an order trades, partially or fully, a Trade message is published."),
+
+    /**
+     * If a trade has been declared erroneous by AsiaNext then a Trade Bust message is published.
+     */
+    TRADE_BUST_MESSAGE((short) 6, "If a trade has been declared erroneous by AsiaNext then a Trade Bust message is published."),
+
+    /**
+     * A series of Tick Table Data messages are published to specify the dynamic tick tables and static ticks that apply to the securities traded on AsiaNext.
+     */
+    TICK_TABLE_DATA_MESSAGE((short) 7, "A series of Tick Table Data messages are published to specify the dynamic tick tables and static ticks that apply to the securities traded on AsiaNext."),
+
+    /**
+     * Security Definition messages are published to identify the securities traded on AsiaNext.
+     */
+    SECURITY_DEFINITION_MESSAGE((short) 8, "Security Definition messages are published to identify the securities traded on AsiaNext."),
+
+    /**
+     * Security Definition messages are published to identify the Futures securities traded on AsiaNext.
+     */
+    SECURITY_DEFINITION_FUTURES_MESSAGE((short) 30, "Security Definition messages are published to identify the Futures securities traded on AsiaNext."),
+
+    /**
+     * Security Definition messages are published to identify the Option securities traded on AsiaNext.
+     */
+    SECURITY_DEFINITION_OPTIONS_MESSAGE((short) 32, "Security Definition messages are published to identify the Option securities traded on AsiaNext."),
+
+    /**
+     * The Security Status message is published when the trading status of a security changes or when there is a change to the status of the market on AsiaNext to which the security belongs.
+     */
+    SECURITY_STATUS_MESSAGE((short) 9, "The Security Status message is published when the trading status of a security changes or when there is a change to the status of the market on AsiaNext to which the security belongs.");
+
+    private final short wire;
+
+    private final String description;
+
+    MsgType(short wire, String description) {
+        this.wire = wire;
+        this.description = description;
+    }
+
+    /**
+     * Returns this value's encoding on the wire.
+     *
+     * @return the wire value
+     */
+    public short wire() {
+        return wire;
+    }
+
+    /**
+     * Returns the description the protocol specification gives this value.
+     *
+     * @return the description
+     */
+    public String description() {
+        return description;
+    }
+
+    /**
+     * Returns the value with the given wire encoding.
+     *
+     * @param wire the encoding read from the wire
+     * @return the matching value, or empty when the protocol declares no value for it
+     */
+    public static Optional<MsgType> fromWire(short wire) {
+        return switch (wire) {
+            case 1 -> Optional.of(HEARTBEAT_MESSAGE);
+            case 29 -> Optional.of(SEQUENCE_NUMBER_RESET_MESSAGE);
+            case 2 -> Optional.of(ORDER_ADD_MESSAGE);
+            case 3 -> Optional.of(ORDER_CANCEL_MESSAGE);
+            case 4 -> Optional.of(ORDER_MODIFY_MESSAGE);
+            case 5 -> Optional.of(TRADE_MESSAGE);
+            case 6 -> Optional.of(TRADE_BUST_MESSAGE);
+            case 7 -> Optional.of(TICK_TABLE_DATA_MESSAGE);
+            case 8 -> Optional.of(SECURITY_DEFINITION_MESSAGE);
+            case 30 -> Optional.of(SECURITY_DEFINITION_FUTURES_MESSAGE);
+            case 32 -> Optional.of(SECURITY_DEFINITION_OPTIONS_MESSAGE);
+            case 9 -> Optional.of(SECURITY_STATUS_MESSAGE);
+            default -> Optional.empty();
+        };
+    }
+}

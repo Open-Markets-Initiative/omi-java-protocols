@@ -1,0 +1,649 @@
+package omi.tmx.tsx.level1.qrtmd.v2_8.messages.application;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import omi.tmx.tsx.level1.qrtmd.v2_8.fields.BoardLotField;
+import omi.tmx.tsx.level1.qrtmd.v2_8.fields.BuyMaximumQuantityField;
+import omi.tmx.tsx.level1.qrtmd.v2_8.fields.BuyMinimumQuantityField;
+import omi.tmx.tsx.level1.qrtmd.v2_8.fields.CurrencyField;
+import omi.tmx.tsx.level1.qrtmd.v2_8.fields.CusipField;
+import omi.tmx.tsx.level1.qrtmd.v2_8.fields.ExchangeIdField;
+import omi.tmx.tsx.level1.qrtmd.v2_8.fields.FaceValueField;
+import omi.tmx.tsx.level1.qrtmd.v2_8.fields.LastSaleField;
+import omi.tmx.tsx.level1.qrtmd.v2_8.fields.ListingMarketField;
+import omi.tmx.tsx.level1.qrtmd.v2_8.fields.MocEligibleField;
+import omi.tmx.tsx.level1.qrtmd.v2_8.fields.ProductTypeField;
+import omi.tmx.tsx.level1.qrtmd.v2_8.fields.SellMaximumQuantityField;
+import omi.tmx.tsx.level1.qrtmd.v2_8.fields.SellMinimumQuantityField;
+import omi.tmx.tsx.level1.qrtmd.v2_8.fields.StockGroupField;
+import omi.tmx.tsx.level1.qrtmd.v2_8.fields.StockStateField;
+import omi.tmx.tsx.level1.qrtmd.v2_8.fields.SymbolField;
+import omi.tmx.tsx.level1.qrtmd.v2_8.fields.SymbolNameField;
+import omi.tmx.tsx.level1.qrtmd.v2_8.fields.TestSymbolField;
+import omi.tmx.tsx.level1.qrtmd.v2_8.fields.TradingSystemTimeStampField;
+import omi.tmx.tsx.level1.qrtmd.v2_8.types.Field;
+import omi.tmx.tsx.level1.qrtmd.v2_8.types.Message;
+import omi.tmx.tsx.level1.qrtmd.v2_8.types.PrintOptions;
+
+/**
+ * Represents the SymbolStatusMessage message from the Level1 protocol.
+ *
+ * <p>Reference information for a symbol trading on the current day.</p>
+ */
+public final class SymbolStatusMessage implements Message {
+
+    /**
+     * This message's fixed width on the wire.
+     */
+    public static final int BYTE_LENGTH = 164;
+
+    /**
+     * This message's declared name.
+     */
+    public static final String NAME = "Symbol Status Message";
+
+    /**
+     * Stock symbol.
+     */
+    private final SymbolField symbol = new SymbolField();
+
+    /**
+     * The time at which the business action occurred.
+     */
+    private final TradingSystemTimeStampField tradingSystemTimeStamp = new TradingSystemTimeStampField();
+
+    /**
+     * Identifies the exchange from which the message originated.
+     */
+    private final ExchangeIdField exchangeId = new ExchangeIdField();
+
+    /**
+     * Clearing and settlement registration number.
+     */
+    private final CusipField cusip = new CusipField();
+
+    /**
+     * Board lot volume.
+     */
+    private final BoardLotField boardLot = new BoardLotField();
+
+    /**
+     * The currency of a price.
+     */
+    private final CurrencyField currency = new CurrencyField();
+
+    /**
+     * The face value of a debenture.
+     */
+    private final FaceValueField faceValue = new FaceValueField();
+
+    /**
+     * Last sale price of the symbol.
+     */
+    private final LastSaleField lastSale = new LastSaleField();
+
+    /**
+     * Identifies whether the stock is eligible to participate in the Market On Close session each day.
+     */
+    private final MocEligibleField mocEligible = new MocEligibleField();
+
+    /**
+     * The product type for a symbol.
+     */
+    private final ProductTypeField productType = new ProductTypeField();
+
+    /**
+     * The security or issue symbol's complete company name.
+     */
+    private final SymbolNameField symbolName = new SymbolNameField();
+
+    /**
+     * An indicator of stock group.
+     */
+    private final StockGroupField stockGroup = new StockGroupField();
+
+    /**
+     * The state of the stock.
+     */
+    private final StockStateField stockState = new StockStateField();
+
+    /**
+     * The market on which a security is listed.
+     */
+    private final ListingMarketField listingMarket = new ListingMarketField();
+
+    /**
+     * The maximum quantity of a mutual fund allowed to buy.
+     */
+    private final BuyMaximumQuantityField buyMaximumQuantity = new BuyMaximumQuantityField();
+
+    /**
+     * The minimum quantity of a mutual fund required to buy.
+     */
+    private final BuyMinimumQuantityField buyMinimumQuantity = new BuyMinimumQuantityField();
+
+    /**
+     * The maximum quantity of a mutual fund allowed to sell.
+     */
+    private final SellMaximumQuantityField sellMaximumQuantity = new SellMaximumQuantityField();
+
+    /**
+     * The minimum quantity of a mutual fund required to sell.
+     */
+    private final SellMinimumQuantityField sellMinimumQuantity = new SellMinimumQuantityField();
+
+    /**
+     * Indicates the symbol is a test symbol.
+     */
+    private final TestSymbolField testSymbol = new TestSymbolField();
+
+    /**
+     * This message's fields, in wire order.
+     */
+    private final List<Field> fields = List.of(symbol, tradingSystemTimeStamp, exchangeId, cusip, boardLot, currency, faceValue, lastSale, mocEligible, productType, symbolName, stockGroup, stockState, listingMarket, buyMaximumQuantity, buyMinimumQuantity, sellMaximumQuantity, sellMinimumQuantity, testSymbol);
+
+    private byte[] buffer;
+
+    private boolean decoded;
+
+    /**
+     * Stock symbol.
+     *
+     * @return the Symbol field
+     */
+    public SymbolField symbol() {
+        return symbol;
+    }
+
+    /**
+     * The time at which the business action occurred.
+     *
+     * @return the TradingSystemTimeStamp field
+     */
+    public TradingSystemTimeStampField tradingSystemTimeStamp() {
+        return tradingSystemTimeStamp;
+    }
+
+    /**
+     * Identifies the exchange from which the message originated.
+     *
+     * @return the ExchangeId field
+     */
+    public ExchangeIdField exchangeId() {
+        return exchangeId;
+    }
+
+    /**
+     * Clearing and settlement registration number.
+     *
+     * @return the Cusip field
+     */
+    public CusipField cusip() {
+        return cusip;
+    }
+
+    /**
+     * Board lot volume.
+     *
+     * @return the BoardLot field
+     */
+    public BoardLotField boardLot() {
+        return boardLot;
+    }
+
+    /**
+     * The currency of a price.
+     *
+     * @return the Currency field
+     */
+    public CurrencyField currency() {
+        return currency;
+    }
+
+    /**
+     * The face value of a debenture.
+     *
+     * @return the FaceValue field
+     */
+    public FaceValueField faceValue() {
+        return faceValue;
+    }
+
+    /**
+     * Last sale price of the symbol.
+     *
+     * @return the LastSale field
+     */
+    public LastSaleField lastSale() {
+        return lastSale;
+    }
+
+    /**
+     * Identifies whether the stock is eligible to participate in the Market On Close session each day.
+     *
+     * @return the MocEligible field
+     */
+    public MocEligibleField mocEligible() {
+        return mocEligible;
+    }
+
+    /**
+     * The product type for a symbol.
+     *
+     * @return the ProductType field
+     */
+    public ProductTypeField productType() {
+        return productType;
+    }
+
+    /**
+     * The security or issue symbol's complete company name.
+     *
+     * @return the SymbolName field
+     */
+    public SymbolNameField symbolName() {
+        return symbolName;
+    }
+
+    /**
+     * An indicator of stock group.
+     *
+     * @return the StockGroup field
+     */
+    public StockGroupField stockGroup() {
+        return stockGroup;
+    }
+
+    /**
+     * The state of the stock.
+     *
+     * @return the StockState field
+     */
+    public StockStateField stockState() {
+        return stockState;
+    }
+
+    /**
+     * The market on which a security is listed.
+     *
+     * @return the ListingMarket field
+     */
+    public ListingMarketField listingMarket() {
+        return listingMarket;
+    }
+
+    /**
+     * The maximum quantity of a mutual fund allowed to buy.
+     *
+     * @return the BuyMaximumQuantity field
+     */
+    public BuyMaximumQuantityField buyMaximumQuantity() {
+        return buyMaximumQuantity;
+    }
+
+    /**
+     * The minimum quantity of a mutual fund required to buy.
+     *
+     * @return the BuyMinimumQuantity field
+     */
+    public BuyMinimumQuantityField buyMinimumQuantity() {
+        return buyMinimumQuantity;
+    }
+
+    /**
+     * The maximum quantity of a mutual fund allowed to sell.
+     *
+     * @return the SellMaximumQuantity field
+     */
+    public SellMaximumQuantityField sellMaximumQuantity() {
+        return sellMaximumQuantity;
+    }
+
+    /**
+     * The minimum quantity of a mutual fund required to sell.
+     *
+     * @return the SellMinimumQuantity field
+     */
+    public SellMinimumQuantityField sellMinimumQuantity() {
+        return sellMinimumQuantity;
+    }
+
+    /**
+     * Indicates the symbol is a test symbol.
+     *
+     * @return the TestSymbol field
+     */
+    public TestSymbolField testSymbol() {
+        return testSymbol;
+    }
+
+    @Override
+    public Optional<Character> type() {
+        return Optional.empty();
+    }
+
+    @Override
+    public int byteLength() {
+        return BYTE_LENGTH;
+    }
+
+    /**
+     * Returns this message's declared padding runs, as consecutive offset and length pairs relative to the start of the message.
+     *
+     * <p>Padding carries no value: decode advances over it, and encode writes back what decode received, or zero for a message assembled from values. Use this to check a received message's padding where the specification constrains it, or to render a byte map of the layout.</p>
+     *
+     * @return the padding runs, empty when the layout has none
+     */
+    public static int[] padding() {
+        return new int[0];
+    }
+
+    @Override
+    public Optional<Instant> timestamp() {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset) {
+        return parseFrom(data, offset, data.length);
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset, int end) {
+        clear();
+        this.decoded = read(data, offset, end);
+
+        int stop = Math.max(0, Math.min(data.length, offset + BYTE_LENGTH));
+        this.buffer = Arrays.copyOfRange(data, Math.min(Math.max(offset, 0), stop), stop);
+        return decoded;
+    }
+
+    private boolean read(byte[] data, int offset, int end) {
+        if (offset < 0 || end > data.length || end - offset < BYTE_LENGTH) {
+            return false;
+        }
+
+        int cursor = offset;
+        if (!symbol.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SymbolField.BYTE_LENGTH;
+        if (!tradingSystemTimeStamp.parse(data, cursor)) {
+            return false;
+        }
+        cursor += TradingSystemTimeStampField.BYTE_LENGTH;
+        if (!exchangeId.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ExchangeIdField.BYTE_LENGTH;
+        if (!cusip.parse(data, cursor)) {
+            return false;
+        }
+        cursor += CusipField.BYTE_LENGTH;
+        if (!boardLot.parse(data, cursor)) {
+            return false;
+        }
+        cursor += BoardLotField.BYTE_LENGTH;
+        if (!currency.parse(data, cursor)) {
+            return false;
+        }
+        cursor += CurrencyField.BYTE_LENGTH;
+        if (!faceValue.parse(data, cursor)) {
+            return false;
+        }
+        cursor += FaceValueField.BYTE_LENGTH;
+        if (!lastSale.parse(data, cursor)) {
+            return false;
+        }
+        cursor += LastSaleField.BYTE_LENGTH;
+        if (!mocEligible.parse(data, cursor)) {
+            return false;
+        }
+        cursor += MocEligibleField.BYTE_LENGTH;
+        if (!productType.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ProductTypeField.BYTE_LENGTH;
+        if (!symbolName.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SymbolNameField.BYTE_LENGTH;
+        if (!stockGroup.parse(data, cursor)) {
+            return false;
+        }
+        cursor += StockGroupField.BYTE_LENGTH;
+        if (!stockState.parse(data, cursor)) {
+            return false;
+        }
+        cursor += StockStateField.BYTE_LENGTH;
+        if (!listingMarket.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ListingMarketField.BYTE_LENGTH;
+        if (!buyMaximumQuantity.parse(data, cursor)) {
+            return false;
+        }
+        cursor += BuyMaximumQuantityField.BYTE_LENGTH;
+        if (!buyMinimumQuantity.parse(data, cursor)) {
+            return false;
+        }
+        cursor += BuyMinimumQuantityField.BYTE_LENGTH;
+        if (!sellMaximumQuantity.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SellMaximumQuantityField.BYTE_LENGTH;
+        if (!sellMinimumQuantity.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SellMinimumQuantityField.BYTE_LENGTH;
+        return testSymbol.parse(data, cursor);
+    }
+
+    @Override
+    public int encode(byte[] data, int offset) {
+        Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
+        int cursor = offset;
+        cursor = symbol.encode(data, cursor);
+        cursor = tradingSystemTimeStamp.encode(data, cursor);
+        cursor = exchangeId.encode(data, cursor);
+        cursor = cusip.encode(data, cursor);
+        cursor = boardLot.encode(data, cursor);
+        cursor = currency.encode(data, cursor);
+        cursor = faceValue.encode(data, cursor);
+        cursor = lastSale.encode(data, cursor);
+        cursor = mocEligible.encode(data, cursor);
+        cursor = productType.encode(data, cursor);
+        cursor = symbolName.encode(data, cursor);
+        cursor = stockGroup.encode(data, cursor);
+        cursor = stockState.encode(data, cursor);
+        cursor = listingMarket.encode(data, cursor);
+        cursor = buyMaximumQuantity.encode(data, cursor);
+        cursor = buyMinimumQuantity.encode(data, cursor);
+        cursor = sellMaximumQuantity.encode(data, cursor);
+        cursor = sellMinimumQuantity.encode(data, cursor);
+        cursor = testSymbol.encode(data, cursor);
+        return cursor;
+    }
+
+    @Override
+    public byte[] toBytes() {
+        byte[] data = new byte[BYTE_LENGTH];
+        encode(data, 0);
+        return data;
+    }
+
+    @Override
+    public void clear() {
+        for (Field field : fields) {
+            field.reset();
+        }
+        this.buffer = null;
+        this.decoded = false;
+    }
+
+    @Override
+    public boolean isDecoded() {
+        return decoded;
+    }
+
+    @Override
+    public boolean isRecognized() {
+        for (Field field : fields) {
+            if (!field.isRecognized()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isValid() {
+        for (Field field : fields) {
+            if (!field.isValid()) {
+                return false;
+            }
+        }
+        return isRecognized();
+    }
+
+    /**
+     * Returns a copy of the bytes this message was decoded from.
+     *
+     * <p>A failed decode leaves behind the partial range that was available, which is what a diagnostic needs to see.</p>
+     *
+     * @return the message bytes, or empty when no decode has been attempted
+     */
+    @Override
+    public Optional<byte[]> raw() {
+        if (buffer == null) {
+            return Optional.empty();
+        }
+        return Optional.of(buffer.clone());
+    }
+
+    @Override
+    public Optional<Field> failedAt() {
+        if (buffer == null || decoded) {
+            return Optional.empty();
+        }
+        for (Field field : fields) {
+            if (!field.isDecoded()) {
+                return Optional.of(field);
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Field> fields() {
+        return fields;
+    }
+
+    @Override
+    public Optional<Field> field(String name) {
+        return switch (name) {
+            case "Symbol" -> Optional.of(symbol);
+            case "TradingSystemTimeStamp" -> Optional.of(tradingSystemTimeStamp);
+            case "ExchangeId" -> Optional.of(exchangeId);
+            case "Cusip" -> Optional.of(cusip);
+            case "BoardLot" -> Optional.of(boardLot);
+            case "Currency" -> Optional.of(currency);
+            case "FaceValue" -> Optional.of(faceValue);
+            case "LastSale" -> Optional.of(lastSale);
+            case "MocEligible" -> Optional.of(mocEligible);
+            case "ProductType" -> Optional.of(productType);
+            case "SymbolName" -> Optional.of(symbolName);
+            case "StockGroup" -> Optional.of(stockGroup);
+            case "StockState" -> Optional.of(stockState);
+            case "ListingMarket" -> Optional.of(listingMarket);
+            case "BuyMaximumQuantity" -> Optional.of(buyMaximumQuantity);
+            case "BuyMinimumQuantity" -> Optional.of(buyMinimumQuantity);
+            case "SellMaximumQuantity" -> Optional.of(sellMaximumQuantity);
+            case "SellMinimumQuantity" -> Optional.of(sellMinimumQuantity);
+            case "TestSymbol" -> Optional.of(testSymbol);
+            default -> Optional.empty();
+        };
+    }
+
+    @Override
+    public List<Field> diffFields(Message other) {
+        if (!(other instanceof SymbolStatusMessage message)) {
+            return List.of();
+        }
+        List<Field> changed = new ArrayList<>();
+        for (int index = 0; index < fields.size(); index++) {
+            if (!fields.get(index).equals(message.fields.get(index))) {
+                changed.add(fields.get(index));
+            }
+        }
+        return changed;
+    }
+
+    @Override
+    public String toFormattedString(PrintOptions options) {
+        StringBuilder builder = new StringBuilder();
+        toFormattedString(builder, options);
+        return builder.toString();
+    }
+
+    /**
+     * Appends this message's formatted representation.
+     *
+     * <p>The identifier form renders the message name alone, which is what a debugger label or a log line tracking message flow needs. The compact form adds every field on the same line, and the default form indents one field per line.</p>
+     *
+     * @param builder the destination
+     * @param options the display options
+     */
+    @Override
+    public void toFormattedString(StringBuilder builder, PrintOptions options) {
+        if (options.identifier()) {
+            builder.append(NAME);
+            return;
+        }
+
+        if (options.compact()) {
+            builder.append(NAME).append(" { ");
+            for (int index = 0; index < fields.size(); index++) {
+                if (index > 0) {
+                    builder.append(", ");
+                }
+                fields.get(index).toFormattedString(builder, options);
+            }
+            builder.append(" }");
+            return;
+        }
+
+        builder.append(options.prefix()).append(NAME).append(System.lineSeparator());
+        PrintOptions nested = options.nested();
+        for (Field field : fields) {
+            builder.append(nested.prefix());
+            field.toFormattedString(builder, nested);
+            builder.append(System.lineSeparator());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return toFormattedString(PrintOptions.DEFAULT);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof SymbolStatusMessage message)) {
+            return false;
+        }
+        return fields.equals(message.fields);
+    }
+
+    @Override
+    public int hashCode() {
+        return fields.hashCode();
+    }
+}

@@ -139,7 +139,7 @@ public final class BrokenTradeMessage implements Message {
 
     @Override
     public Optional<Instant> timestamp() {
-        return Optional.ofNullable(timestampField.value());
+        return Optional.empty();
     }
 
     @Override

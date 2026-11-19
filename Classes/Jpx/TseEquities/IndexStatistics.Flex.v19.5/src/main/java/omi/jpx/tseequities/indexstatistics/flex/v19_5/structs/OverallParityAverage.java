@@ -1,0 +1,365 @@
+package omi.jpx.tseequities.indexstatistics.flex.v19_5.structs;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import omi.jpx.tseequities.indexstatistics.flex.v19_5.fields.DayOnDayComparisonCField;
+import omi.jpx.tseequities.indexstatistics.flex.v19_5.fields.ParityAverageCField;
+import omi.jpx.tseequities.indexstatistics.flex.v19_5.fields.SecondSignField;
+import omi.jpx.tseequities.indexstatistics.flex.v19_5.fields.SecondUnitFlagField;
+import omi.jpx.tseequities.indexstatistics.flex.v19_5.fields.SignField;
+import omi.jpx.tseequities.indexstatistics.flex.v19_5.fields.UnitFlagField;
+import omi.jpx.tseequities.indexstatistics.flex.v19_5.types.Field;
+import omi.jpx.tseequities.indexstatistics.flex.v19_5.types.GroupEntry;
+import omi.jpx.tseequities.indexstatistics.flex.v19_5.types.PrintOptions;
+
+/**
+ * The OverallParityAverage record a message holds.
+ *
+ * <p>Overall Parity average</p>
+ */
+public final class OverallParityAverage implements GroupEntry {
+
+    /**
+     * This entry's fixed width on the wire.
+     */
+    public static final int BYTE_LENGTH = 32;
+
+    /**
+     * This entry's declared name.
+     */
+    public static final String NAME = "OverallParityAverage";
+
+    /**
+     * Indicates that this is the unit flag.
+     */
+    private final UnitFlagField unitFlag = new UnitFlagField();
+
+    /**
+     * Indicates the parity average. The unit used for the computation is 1/100 points.
+     */
+    private final ParityAverageCField parityAverageC = new ParityAverageCField();
+
+    /**
+     * Indicates the sign of Day-on-day comparison.
+     */
+    private final SignField sign = new SignField();
+
+    /**
+     * Indicates that this is the unit flag.
+     */
+    private final SecondUnitFlagField secondUnitFlag = new SecondUnitFlagField();
+
+    /**
+     * Indicates the change in the total market value (after adjustment) from the previous day.
+     */
+    private final DayOnDayComparisonCField dayOnDayComparisonC = new DayOnDayComparisonCField();
+
+    /**
+     * Indicates the sign of Day-on-day comparison.
+     */
+    private final SecondSignField secondSign = new SecondSignField();
+
+    /**
+     * This entry's fields, in wire order.
+     */
+    private final List<Field> fields = List.of(unitFlag, parityAverageC, sign, secondUnitFlag, dayOnDayComparisonC, secondSign);
+
+    private byte[] buffer;
+
+    private boolean decoded;
+
+    /**
+     * Indicates that this is the unit flag.
+     *
+     * @return the UnitFlag field
+     */
+    public UnitFlagField unitFlag() {
+        return unitFlag;
+    }
+
+    /**
+     * Indicates the parity average. The unit used for the computation is 1/100 points.
+     *
+     * @return the ParityAverageC field
+     */
+    public ParityAverageCField parityAverageC() {
+        return parityAverageC;
+    }
+
+    /**
+     * Indicates the sign of Day-on-day comparison.
+     *
+     * @return the Sign field
+     */
+    public SignField sign() {
+        return sign;
+    }
+
+    /**
+     * Indicates that this is the unit flag.
+     *
+     * @return the SecondUnitFlag field
+     */
+    public SecondUnitFlagField secondUnitFlag() {
+        return secondUnitFlag;
+    }
+
+    /**
+     * Indicates the change in the total market value (after adjustment) from the previous day.
+     *
+     * @return the DayOnDayComparisonC field
+     */
+    public DayOnDayComparisonCField dayOnDayComparisonC() {
+        return dayOnDayComparisonC;
+    }
+
+    /**
+     * Indicates the sign of Day-on-day comparison.
+     *
+     * @return the SecondSign field
+     */
+    public SecondSignField secondSign() {
+        return secondSign;
+    }
+
+    @Override
+    public int byteLength() {
+        return BYTE_LENGTH;
+    }
+
+    /**
+     * Returns this entry's declared padding runs, as consecutive offset and length pairs relative to the start of the entry.
+     *
+     * <p>Padding carries no value: decode advances over it, and encode writes back what decode received, or zero for a entry assembled from values. Use this to check a received entry's padding where the specification constrains it, or to render a byte map of the layout.</p>
+     *
+     * @return the padding runs, empty when the layout has none
+     */
+    public static int[] padding() {
+        return new int[0];
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset) {
+        return parseFrom(data, offset, data.length);
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset, int end) {
+        clear();
+        this.decoded = read(data, offset, end);
+
+        int stop = Math.max(0, Math.min(data.length, offset + BYTE_LENGTH));
+        this.buffer = Arrays.copyOfRange(data, Math.min(Math.max(offset, 0), stop), stop);
+        return decoded;
+    }
+
+    private boolean read(byte[] data, int offset, int end) {
+        if (offset < 0 || end > data.length || end - offset < BYTE_LENGTH) {
+            return false;
+        }
+
+        int cursor = offset;
+        if (!unitFlag.parse(data, cursor)) {
+            return false;
+        }
+        cursor += UnitFlagField.BYTE_LENGTH;
+        if (!parityAverageC.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ParityAverageCField.BYTE_LENGTH;
+        if (!sign.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SignField.BYTE_LENGTH;
+        if (!secondUnitFlag.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SecondUnitFlagField.BYTE_LENGTH;
+        if (!dayOnDayComparisonC.parse(data, cursor)) {
+            return false;
+        }
+        cursor += DayOnDayComparisonCField.BYTE_LENGTH;
+        return secondSign.parse(data, cursor);
+    }
+
+    @Override
+    public int encode(byte[] data, int offset) {
+        Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
+        int cursor = offset;
+        cursor = unitFlag.encode(data, cursor);
+        cursor = parityAverageC.encode(data, cursor);
+        cursor = sign.encode(data, cursor);
+        cursor = secondUnitFlag.encode(data, cursor);
+        cursor = dayOnDayComparisonC.encode(data, cursor);
+        cursor = secondSign.encode(data, cursor);
+        return cursor;
+    }
+
+    @Override
+    public byte[] toBytes() {
+        byte[] data = new byte[BYTE_LENGTH];
+        encode(data, 0);
+        return data;
+    }
+
+    @Override
+    public void clear() {
+        for (Field field : fields) {
+            field.reset();
+        }
+        this.buffer = null;
+        this.decoded = false;
+    }
+
+    @Override
+    public boolean isDecoded() {
+        return decoded;
+    }
+
+    @Override
+    public boolean isRecognized() {
+        for (Field field : fields) {
+            if (!field.isRecognized()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isValid() {
+        for (Field field : fields) {
+            if (!field.isValid()) {
+                return false;
+            }
+        }
+        return isRecognized();
+    }
+
+    /**
+     * Returns a copy of the bytes this entry was decoded from.
+     *
+     * <p>A failed decode leaves behind the partial range that was available, which is what a diagnostic needs to see.</p>
+     *
+     * @return the entry bytes, or empty when no decode has been attempted
+     */
+    @Override
+    public Optional<byte[]> raw() {
+        if (buffer == null) {
+            return Optional.empty();
+        }
+        return Optional.of(buffer.clone());
+    }
+
+    @Override
+    public Optional<Field> failedAt() {
+        if (buffer == null || decoded) {
+            return Optional.empty();
+        }
+        for (Field field : fields) {
+            if (!field.isDecoded()) {
+                return Optional.of(field);
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Field> fields() {
+        return fields;
+    }
+
+    @Override
+    public Optional<Field> field(String name) {
+        return switch (name) {
+            case "UnitFlag" -> Optional.of(unitFlag);
+            case "ParityAverageC" -> Optional.of(parityAverageC);
+            case "Sign" -> Optional.of(sign);
+            case "SecondUnitFlag" -> Optional.of(secondUnitFlag);
+            case "DayOnDayComparisonC" -> Optional.of(dayOnDayComparisonC);
+            case "SecondSign" -> Optional.of(secondSign);
+            default -> Optional.empty();
+        };
+    }
+
+    @Override
+    public List<Field> diffFields(GroupEntry other) {
+        if (!(other instanceof OverallParityAverage message)) {
+            return List.of();
+        }
+        List<Field> changed = new ArrayList<>();
+        for (int index = 0; index < fields.size(); index++) {
+            if (!fields.get(index).equals(message.fields.get(index))) {
+                changed.add(fields.get(index));
+            }
+        }
+        return changed;
+    }
+
+    @Override
+    public String toFormattedString(PrintOptions options) {
+        StringBuilder builder = new StringBuilder();
+        toFormattedString(builder, options);
+        return builder.toString();
+    }
+
+    /**
+     * Appends this entry's formatted representation.
+     *
+     * <p>The identifier form renders the entry name alone, which is what a debugger label or a log line tracking message flow needs. The compact form adds every field on the same line, and the default form indents one field per line.</p>
+     *
+     * @param builder the destination
+     * @param options the display options
+     */
+    @Override
+    public void toFormattedString(StringBuilder builder, PrintOptions options) {
+        if (options.identifier()) {
+            builder.append(NAME);
+            return;
+        }
+
+        if (options.compact()) {
+            builder.append(NAME).append(" { ");
+            for (int index = 0; index < fields.size(); index++) {
+                if (index > 0) {
+                    builder.append(", ");
+                }
+                fields.get(index).toFormattedString(builder, options);
+            }
+            builder.append(" }");
+            return;
+        }
+
+        builder.append(options.prefix()).append(NAME).append(System.lineSeparator());
+        PrintOptions nested = options.nested();
+        for (Field field : fields) {
+            builder.append(nested.prefix());
+            field.toFormattedString(builder, nested);
+            builder.append(System.lineSeparator());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return toFormattedString(PrintOptions.DEFAULT);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof OverallParityAverage message)) {
+            return false;
+        }
+        return fields.equals(message.fields);
+    }
+
+    @Override
+    public int hashCode() {
+        return fields.hashCode();
+    }
+}

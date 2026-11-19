@@ -1,0 +1,68 @@
+package omi.jse.itac.enhancednativetrading.ntgi.v4_04.enums;
+
+import java.util.Optional;
+
+/**
+ * Type of trade
+ *
+ * <p>Backed by short. Values correspond to the wire integer encoding.</p>
+ */
+public enum MultiLegReportingType {
+
+    /**
+     * Trade Of Single Instrument
+     */
+    TRADE_OF_SINGLE_INSTRUMENT((short) 1, "Trade Of Single Instrument"),
+
+    /**
+     * Leg Trade Of A Multi Leg Instrument
+     */
+    LEG_TRADE_OF_A_MULTI_LEG_INSTRUMENT((short) 2, "Leg Trade Of A Multi Leg Instrument"),
+
+    /**
+     * Trade Of Multi Leg Instrument
+     */
+    TRADE_OF_MULTI_LEG_INSTRUMENT((short) 3, "Trade Of Multi Leg Instrument");
+
+    private final short wire;
+
+    private final String description;
+
+    MultiLegReportingType(short wire, String description) {
+        this.wire = wire;
+        this.description = description;
+    }
+
+    /**
+     * Returns this value's encoding on the wire.
+     *
+     * @return the wire value
+     */
+    public short wire() {
+        return wire;
+    }
+
+    /**
+     * Returns the description the protocol specification gives this value.
+     *
+     * @return the description
+     */
+    public String description() {
+        return description;
+    }
+
+    /**
+     * Returns the value with the given wire encoding.
+     *
+     * @param wire the encoding read from the wire
+     * @return the matching value, or empty when the protocol declares no value for it
+     */
+    public static Optional<MultiLegReportingType> fromWire(short wire) {
+        return switch (wire) {
+            case 1 -> Optional.of(TRADE_OF_SINGLE_INSTRUMENT);
+            case 2 -> Optional.of(LEG_TRADE_OF_A_MULTI_LEG_INSTRUMENT);
+            case 3 -> Optional.of(TRADE_OF_MULTI_LEG_INSTRUMENT);
+            default -> Optional.empty();
+        };
+    }
+}

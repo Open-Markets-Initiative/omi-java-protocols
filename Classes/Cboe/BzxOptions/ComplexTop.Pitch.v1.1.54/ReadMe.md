@@ -1,0 +1,87 @@
+# Chicago Board Options Exchange Complex Top Pitch v1.1.54
+
+Generated Java parser for Cboe Complex Top Pitch v1.1.54.
+
+Messages are plain classes that you can decode, inspect, modify, and encode back to their bytes.
+
+A protocol of [Cboe Bzx Options](..).
+
+## Usage
+
+Gradle project `:cboe-bzxoptions-complextop-pitch-v1-1-54` builds package `omi.cboe.bzxoptions.complextop.pitch.v1_1_54`. Each protocol version has its own package, so a program can use two versions together.
+
+Decode one message. The offset is where the message starts, after any packet or message header:
+
+```java
+import omi.cboe.bzxoptions.complextop.pitch.v1_1_54.messages.application.AuctionSummaryMessage;
+
+AuctionSummaryMessage message = new AuctionSummaryMessage();
+if (message.parseFrom(data, offset)) {
+    System.out.println(message);
+    byte[] bytes = message.toBytes();
+}
+```
+
+Decode one packet. The payload is the UDP datagram body, without the Ethernet, IP, and UDP headers:
+
+```java
+import omi.cboe.bzxoptions.complextop.pitch.v1_1_54.dispatch.PacketDecoder;
+import omi.cboe.bzxoptions.complextop.pitch.v1_1_54.types.Message;
+
+PacketDecoder.Decoded decoded = PacketDecoder.decode(payload, 0, payload.length);
+for (Message message : decoded.messages()) {
+    System.out.println(message);
+}
+```
+
+`decoded.complete()` says whether every counted message lay inside the packet, and `decoded.undecoded()` counts the messages of a type this package does not decode.
+
+## Messages
+
+Each message class carries its wire length as `BYTE_LENGTH`, and its type as `MESSAGE_TYPE` where the protocol selects messages by a type code.
+
+| Message | Package | Type | Bytes |
+| --- | --- | --- | ---: |
+| `AuctionSummaryMessage` | `messages.application` |  | 25 |
+| `ComplexInstrumentDefinitionExpandedMessage` | `messages.application` |  | 23 |
+| `EndOfSessionMessage` | `messages.application` |  | 4 |
+| `OptionsAuctionUpdateMessage` | `messages.application` |  | 62 |
+| `SingleSideUpdateExpandedLongMessage` | `messages.application` |  | 28 |
+| `SingleSideUpdateExpandedShortMessage` | `messages.application` |  | 18 |
+| `SymbolMappingMessage` | `messages.application` |  | 36 |
+| `TimeMessage` | `messages.application` |  | 4 |
+| `TopTradeMessage` | `messages.application` |  | 35 |
+| `TradingStatusMessage` | `messages.application` |  | 16 |
+| `TwoSideUpdateExpandedLongMessage` | `messages.application` |  | 43 |
+| `TwoSideUpdateExpandedShortMessage` | `messages.application` |  | 23 |
+| `UnitClearMessage` | `messages.application` |  | 4 |
+
+## Verification
+
+| Task | Reads | Description |
+| --- | --- | --- |
+| `roundTrip` |  | Program that decodes deterministic bytes into each message at a non-zero offset and requires it to encode back to the same bytes, decode again to an equal message, clear, and refuse a buffer too short to hold it. Runs as part of `check`. |
+| `captureTest` | pcap or pcap-ng | Program that walks every UDP datagram of a capture through the `PacketDecoder`, and the records of every TCP connection through the stream of the side sending them, and requires every message to encode back to its own bytes. Not part of `check`, since it needs a capture: `-Pcapture` names it, and `-Pstrict` makes a datagram or record the decoder cannot walk, or a message of a type it does not decode, an error. A TCP connection missing bytes, or ending in bytes that make no whole record, is always an error. |
+
+No public capture of this protocol is configured, so the build workflow does not run its capture test. Please post captures to [omi-data-packets](https://github.com/Open-Markets-Initiative/omi-data-packets) if you can.
+
+## Build
+
+Requires JDK 17 and Gradle. Run from the repository root, since every protocol is a subproject of one build:
+
+```
+gradle :cboe-bzxoptions-complextop-pitch-v1-1-54:build
+```
+
+Run the round trip alone:
+
+```
+gradle :cboe-bzxoptions-complextop-pitch-v1-1-54:roundTrip
+```
+
+Run the capture test on a capture or a directory of captures, its path relative to the directory gradle runs in:
+
+```
+gradle :cboe-bzxoptions-complextop-pitch-v1-1-54:captureTest -Pcapture=/path/to/capture.pcap
+```
+

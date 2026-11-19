@@ -104,7 +104,7 @@ public final class SnapshotTrailerMessage implements Message {
 
     @Override
     public Optional<Instant> timestamp() {
-        return Optional.ofNullable(timestampField.value());
+        return Optional.empty();
     }
 
     @Override

@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
+import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.ReasonRejectReasonField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.RefSequenceNumberField;
-import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.RejectReasonField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.structs.Details;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.types.Field;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.types.Message;
@@ -39,7 +39,7 @@ public final class RejectMessage implements Message {
     /**
      * reason
      */
-    private final RejectReasonField rejectReason = new RejectReasonField();
+    private final ReasonRejectReasonField reasonRejectReason = new ReasonRejectReasonField();
 
     /**
      * details data struct
@@ -49,7 +49,7 @@ public final class RejectMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(List.<Field>of(refSequenceNumber), List.<Field>of(rejectReason), details.fields()).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(List.<Field>of(refSequenceNumber), List.<Field>of(reasonRejectReason), details.fields()).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -67,10 +67,10 @@ public final class RejectMessage implements Message {
     /**
      * reason
      *
-     * @return the RejectReason field
+     * @return the ReasonRejectReason field
      */
-    public RejectReasonField rejectReason() {
-        return rejectReason;
+    public ReasonRejectReasonField reasonRejectReason() {
+        return reasonRejectReason;
     }
 
     /**
@@ -133,10 +133,10 @@ public final class RejectMessage implements Message {
             return false;
         }
         cursor += RefSequenceNumberField.BYTE_LENGTH;
-        if (!rejectReason.parse(data, cursor)) {
+        if (!reasonRejectReason.parse(data, cursor)) {
             return false;
         }
-        cursor += RejectReasonField.BYTE_LENGTH;
+        cursor += ReasonRejectReasonField.BYTE_LENGTH;
         if (!details.parseFrom(data, cursor, end)) {
             return false;
         }
@@ -150,7 +150,7 @@ public final class RejectMessage implements Message {
         Objects.checkFromIndexSize(offset, byteLength(), data.length);
         int cursor = offset;
         cursor = refSequenceNumber.encode(data, cursor);
-        cursor = rejectReason.encode(data, cursor);
+        cursor = reasonRejectReason.encode(data, cursor);
         cursor = details.encode(data, cursor);
         return cursor;
     }
@@ -234,7 +234,7 @@ public final class RejectMessage implements Message {
     public Optional<Field> field(String name) {
         return switch (name) {
             case "RefSequenceNumber" -> Optional.of(refSequenceNumber);
-            case "RejectReason" -> Optional.of(rejectReason);
+            case "ReasonRejectReason" -> Optional.of(reasonRejectReason);
             default -> Optional.empty();
         };
     }

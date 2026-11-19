@@ -10,7 +10,7 @@ import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.EnteringFirmField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MatchEventIndicatorField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdCorporateOffsetPriceOptionalField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntryPositionNoField;
-import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntrySizeField;
+import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntrySizeQuantityField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntryTimestampField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntryTypeField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdInsertTimestampField;
@@ -74,7 +74,7 @@ public final class OrderMbO50Message implements Message {
     /**
      * mDEntrySize
      */
-    private final MdEntrySizeField mdEntrySize = new MdEntrySizeField();
+    private final MdEntrySizeQuantityField mdEntrySizeQuantity = new MdEntrySizeQuantityField();
 
     /**
      * mDEntryPositionNo
@@ -109,7 +109,7 @@ public final class OrderMbO50Message implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(securityId, matchEventIndicator, mdUpdateAction, mdEntryType, mdCorporateOffsetPriceOptional, mdEntrySize, mdEntryPositionNo, enteringFirm, mdInsertTimestamp, secondaryOrderId, rptSeq, mdEntryTimestamp);
+    private final List<Field> fields = List.of(securityId, matchEventIndicator, mdUpdateAction, mdEntryType, mdCorporateOffsetPriceOptional, mdEntrySizeQuantity, mdEntryPositionNo, enteringFirm, mdInsertTimestamp, secondaryOrderId, rptSeq, mdEntryTimestamp);
 
     private byte[] buffer;
 
@@ -163,10 +163,10 @@ public final class OrderMbO50Message implements Message {
     /**
      * mDEntrySize
      *
-     * @return the MdEntrySize field
+     * @return the MdEntrySizeQuantity field
      */
-    public MdEntrySizeField mdEntrySize() {
-        return mdEntrySize;
+    public MdEntrySizeQuantityField mdEntrySizeQuantity() {
+        return mdEntrySizeQuantity;
     }
 
     /**
@@ -291,10 +291,10 @@ public final class OrderMbO50Message implements Message {
             return false;
         }
         cursor += MdCorporateOffsetPriceOptionalField.BYTE_LENGTH;
-        if (!mdEntrySize.parse(data, cursor)) {
+        if (!mdEntrySizeQuantity.parse(data, cursor)) {
             return false;
         }
-        cursor += MdEntrySizeField.BYTE_LENGTH;
+        cursor += MdEntrySizeQuantityField.BYTE_LENGTH;
         if (!mdEntryPositionNo.parse(data, cursor)) {
             return false;
         }
@@ -333,7 +333,7 @@ public final class OrderMbO50Message implements Message {
         }
         cursor += 1;
         cursor = mdCorporateOffsetPriceOptional.encode(data, cursor);
-        cursor = mdEntrySize.encode(data, cursor);
+        cursor = mdEntrySizeQuantity.encode(data, cursor);
         cursor = mdEntryPositionNo.encode(data, cursor);
         cursor = enteringFirm.encode(data, cursor);
         cursor = mdInsertTimestamp.encode(data, cursor);
@@ -425,7 +425,7 @@ public final class OrderMbO50Message implements Message {
             case "MdUpdateAction" -> Optional.of(mdUpdateAction);
             case "MdEntryType" -> Optional.of(mdEntryType);
             case "MdCorporateOffsetPriceOptional" -> Optional.of(mdCorporateOffsetPriceOptional);
-            case "MdEntrySize" -> Optional.of(mdEntrySize);
+            case "MdEntrySizeQuantity" -> Optional.of(mdEntrySizeQuantity);
             case "MdEntryPositionNo" -> Optional.of(mdEntryPositionNo);
             case "EnteringFirm" -> Optional.of(enteringFirm);
             case "MdInsertTimestamp" -> Optional.of(mdInsertTimestamp);

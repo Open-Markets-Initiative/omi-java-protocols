@@ -1,0 +1,62 @@
+package omi.nasdaq.nsmequities.noiview.asciiitch.v3_0_2013.enums;
+
+import java.util.Optional;
+
+/**
+ * Denotes the qualifier for the IPO quotation release.
+ *
+ * <p>Each value corresponds to the ASCII character used as the wire discriminator.</p>
+ */
+public enum IpoQuotationReleaseQualifier {
+
+    /**
+     * Anticipated Quotation Release Time
+     */
+    ANTICIPATED_QUOTATION_RELEASE_TIME('A', "Anticipated Quotation Release Time"),
+
+    /**
+     * Ipo Release Canceledpostponed
+     */
+    IPO_RELEASE_CANCELEDPOSTPONED('C', "Ipo Release Canceledpostponed");
+
+    private final char wire;
+
+    private final String description;
+
+    IpoQuotationReleaseQualifier(char wire, String description) {
+        this.wire = wire;
+        this.description = description;
+    }
+
+    /**
+     * Returns this value's encoding on the wire.
+     *
+     * @return the wire value
+     */
+    public char wire() {
+        return wire;
+    }
+
+    /**
+     * Returns the description the protocol specification gives this value.
+     *
+     * @return the description
+     */
+    public String description() {
+        return description;
+    }
+
+    /**
+     * Returns the value with the given wire encoding.
+     *
+     * @param wire the encoding read from the wire
+     * @return the matching value, or empty when the protocol declares no value for it
+     */
+    public static Optional<IpoQuotationReleaseQualifier> fromWire(char wire) {
+        return switch (wire) {
+            case 'A' -> Optional.of(ANTICIPATED_QUOTATION_RELEASE_TIME);
+            case 'C' -> Optional.of(IPO_RELEASE_CANCELEDPOSTPONED);
+            default -> Optional.empty();
+        };
+    }
+}

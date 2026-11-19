@@ -88,12 +88,21 @@ public final class TradeConditionField extends Field {
     }
 
     /**
-     * 2 unused bits
+     * Unused TradeCondition 4
      *
-     * @return bits 4 through 5 of the container
+     * @return bit 4 of the container
      */
-    public int unusedBits4To() {
-        return (int) ((value >>> 4) & 0x3L);
+    public boolean unusedTradeCondition4() {
+        return ((value >>> 4) & 1L) != 0L;
+    }
+
+    /**
+     * Unused TradeCondition 5
+     *
+     * @return bit 5 of the container
+     */
+    public boolean unusedTradeCondition5() {
+        return ((value >>> 5) & 1L) != 0L;
     }
 
     /**
@@ -106,12 +115,57 @@ public final class TradeConditionField extends Field {
     }
 
     /**
-     * 6 unused bits
+     * Unused TradeCondition 7
      *
-     * @return bits 7 through 12 of the container
+     * @return bit 7 of the container
      */
-    public int unusedBits7To() {
-        return (int) ((value >>> 7) & 0x3FL);
+    public boolean unusedTradeCondition7() {
+        return ((value >>> 7) & 1L) != 0L;
+    }
+
+    /**
+     * Unused TradeCondition 8
+     *
+     * @return bit 8 of the container
+     */
+    public boolean unusedTradeCondition8() {
+        return ((value >>> 8) & 1L) != 0L;
+    }
+
+    /**
+     * Unused TradeCondition 9
+     *
+     * @return bit 9 of the container
+     */
+    public boolean unusedTradeCondition9() {
+        return ((value >>> 9) & 1L) != 0L;
+    }
+
+    /**
+     * Unused TradeCondition 10
+     *
+     * @return bit 10 of the container
+     */
+    public boolean unusedTradeCondition10() {
+        return ((value >>> 10) & 1L) != 0L;
+    }
+
+    /**
+     * Unused TradeCondition 11
+     *
+     * @return bit 11 of the container
+     */
+    public boolean unusedTradeCondition11() {
+        return ((value >>> 11) & 1L) != 0L;
+    }
+
+    /**
+     * Unused TradeCondition 12
+     *
+     * @return bit 12 of the container
+     */
+    public boolean unusedTradeCondition12() {
+        return ((value >>> 12) & 1L) != 0L;
     }
 
     /**
@@ -133,11 +187,11 @@ public final class TradeConditionField extends Field {
     }
 
     /**
-     * 1 unused bit
+     * Unused TradeCondition 15
      *
      * @return bit 15 of the container
      */
-    public boolean unusedBit() {
+    public boolean unusedTradeCondition15() {
         return ((value >>> 15) & 1L) != 0L;
     }
 

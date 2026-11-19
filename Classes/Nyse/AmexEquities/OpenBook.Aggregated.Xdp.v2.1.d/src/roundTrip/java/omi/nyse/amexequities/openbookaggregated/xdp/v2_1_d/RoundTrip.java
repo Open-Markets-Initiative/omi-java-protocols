@@ -150,7 +150,7 @@ public final class RoundTrip {
         random(wire, random, 4);
         random(wire, random, 1);
         random(wire, random, 2);
-        count(wire, count, 1, false);
+        count(wire, count, 1, true);
         for (int entry0 = 0; entry0 < entries; entry0++) {
             random(wire, random, 4);
             random(wire, random, 4);
@@ -171,7 +171,7 @@ public final class RoundTrip {
         random(wire, random, 1);
         random(wire, random, 2);
         random(wire, random, 2);
-        count(wire, count, 1, false);
+        count(wire, count, 1, true);
         for (int entry0 = 0; entry0 < entries; entry0++) {
             random(wire, random, 4);
             random(wire, random, 4);

@@ -169,7 +169,7 @@ public final class InstrumentDirectoryMessage implements Message {
 
     @Override
     public Optional<Instant> timestamp() {
-        return Optional.ofNullable(timestampField.value());
+        return Optional.empty();
     }
 
     @Override

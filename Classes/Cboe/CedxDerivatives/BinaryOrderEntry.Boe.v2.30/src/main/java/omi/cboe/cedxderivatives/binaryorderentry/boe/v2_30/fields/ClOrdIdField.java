@@ -1,0 +1,117 @@
+package omi.cboe.cedxderivatives.binaryorderentry.boe.v2_30.fields;
+
+import java.util.Objects;
+import omi.cboe.cedxderivatives.binaryorderentry.boe.v2_30.types.ByteOps;
+import omi.cboe.cedxderivatives.binaryorderentry.boe.v2_30.types.Field;
+import omi.cboe.cedxderivatives.binaryorderentry.boe.v2_30.types.FieldKind;
+import omi.cboe.cedxderivatives.binaryorderentry.boe.v2_30.types.PrintOptions;
+
+/**
+ * Corresponds to ClOrdID (11) in Cboe FIX. Day-unique ID chosen by the client. Characters in the ASCII range 33–126 are allowed, except for comma, semicolon, and pipe. A leading tilde (˜) cannot be sent on any ClOrdId and will result in a reject. These are reserved for internal use by Cboe and could be received as a result of a system generated ClOrdId. If the ClOrdID matches a live order, the order will be rejected as duplicate. Note: Cboe only enforces uniqueness of ClOrdID values among currently live orders. However, we strongly recommend that you keep your ClOrdID values day-unique.
+ *
+ * <p>A 20-byte ASCII field padded with null characters. Trailing padding is stripped on decode.</p>
+ */
+public final class ClOrdIdField extends Field {
+
+    /**
+     * This field's fixed width on the wire.
+     */
+    public static final int BYTE_LENGTH = 20;
+
+    /**
+     * This field's declared name.
+     */
+    public static final String NAME = "ClOrdId";
+
+    /**
+     * The byte this field is right-padded with (null characters).
+     */
+    public static final byte PADDING = 0;
+
+    private String value = "";
+
+    /**
+     * Returns the decoded value.
+     *
+     * @return the decoded value, empty when the field has not decoded
+     */
+    public String value() {
+        return value;
+    }
+
+    /**
+     * Sets the value to encode.
+     *
+     * @param value the value to encode, or null to clear the field
+     */
+    public void value(String value) {
+        this.value = value == null ? "" : value;
+        markSet(value != null);
+    }
+
+    @Override
+    public String name() {
+        return NAME;
+    }
+
+    @Override
+    public FieldKind kind() {
+        return FieldKind.STRING;
+    }
+
+    @Override
+    public int byteLength() {
+        return BYTE_LENGTH;
+    }
+
+    @Override
+    public boolean parse(byte[] data, int offset) {
+        if (offset < 0 || offset + BYTE_LENGTH > data.length) {
+            return false;
+        }
+
+        this.value = ByteOps.ascii(data, offset, BYTE_LENGTH, PADDING);
+        markDecoded(data, offset);
+        return true;
+    }
+
+    @Override
+    public int encode(byte[] data, int offset) {
+        Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
+        ByteOps.putAscii(data, offset, BYTE_LENGTH, value, PADDING);
+        return offset + BYTE_LENGTH;
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        this.value = "";
+    }
+
+    @Override
+    public void toFormattedString(StringBuilder builder, PrintOptions options) {
+        builder.append(NAME).append(": ");
+        if (!hasValue()) {
+            builder.append("<unset>");
+            return;
+        }
+
+        builder.append('\'').append(value).append('\'');
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof ClOrdIdField field)) {
+            return false;
+        }
+        return hasValue() == field.hasValue() && Objects.equals(value, field.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(hasValue(), value);
+    }
+}

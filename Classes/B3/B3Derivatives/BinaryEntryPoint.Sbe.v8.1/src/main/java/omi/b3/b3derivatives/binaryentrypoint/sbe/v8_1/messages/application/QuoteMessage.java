@@ -12,7 +12,7 @@ import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.DaysToSettlementFie
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.EnteringTraderField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.ExecuteUnderlyingTradeField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.ExecutingTraderField;
-import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.FixedRateField;
+import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.FixedRatePercentageField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.OrderQtyField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.Price8OptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.QuoteIdField;
@@ -109,7 +109,7 @@ public final class QuoteMessage implements Message {
     /**
      * fixedRate
      */
-    private final FixedRateField fixedRate = new FixedRateField();
+    private final FixedRatePercentageField fixedRatePercentage = new FixedRatePercentageField();
 
     /**
      * executeUnderlyingTrade
@@ -139,7 +139,7 @@ public final class QuoteMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(bidirectionalBusinessHeader.fields(), List.<Field>of(securityId), List.<Field>of(quoteReqId), List.<Field>of(quoteId), List.<Field>of(transactTime), List.<Field>of(price8Optional), List.<Field>of(orderQty), List.<Field>of(side), List.<Field>of(settlType), List.<Field>of(account), List.<Field>of(senderLocation), List.<Field>of(enteringTrader), List.<Field>of(executingTrader), List.<Field>of(fixedRate), List.<Field>of(executeUnderlyingTrade), List.<Field>of(daysToSettlement), deskId.fields(), memo.fields()).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(bidirectionalBusinessHeader.fields(), List.<Field>of(securityId), List.<Field>of(quoteReqId), List.<Field>of(quoteId), List.<Field>of(transactTime), List.<Field>of(price8Optional), List.<Field>of(orderQty), List.<Field>of(side), List.<Field>of(settlType), List.<Field>of(account), List.<Field>of(senderLocation), List.<Field>of(enteringTrader), List.<Field>of(executingTrader), List.<Field>of(fixedRatePercentage), List.<Field>of(executeUnderlyingTrade), List.<Field>of(daysToSettlement), deskId.fields(), memo.fields()).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -256,10 +256,10 @@ public final class QuoteMessage implements Message {
     /**
      * fixedRate
      *
-     * @return the FixedRate field
+     * @return the FixedRatePercentage field
      */
-    public FixedRateField fixedRate() {
-        return fixedRate;
+    public FixedRatePercentageField fixedRatePercentage() {
+        return fixedRatePercentage;
     }
 
     /**
@@ -406,10 +406,10 @@ public final class QuoteMessage implements Message {
             return false;
         }
         cursor += ExecutingTraderField.BYTE_LENGTH;
-        if (!fixedRate.parse(data, cursor)) {
+        if (!fixedRatePercentage.parse(data, cursor)) {
             return false;
         }
-        cursor += FixedRateField.BYTE_LENGTH;
+        cursor += FixedRatePercentageField.BYTE_LENGTH;
         if (!executeUnderlyingTrade.parse(data, cursor)) {
             return false;
         }
@@ -450,7 +450,7 @@ public final class QuoteMessage implements Message {
         cursor = senderLocation.encode(data, cursor);
         cursor = enteringTrader.encode(data, cursor);
         cursor = executingTrader.encode(data, cursor);
-        cursor = fixedRate.encode(data, cursor);
+        cursor = fixedRatePercentage.encode(data, cursor);
         cursor = executeUnderlyingTrade.encode(data, cursor);
         cursor = daysToSettlement.encode(data, cursor);
         cursor = deskId.encode(data, cursor);
@@ -550,7 +550,7 @@ public final class QuoteMessage implements Message {
             case "SenderLocation" -> Optional.of(senderLocation);
             case "EnteringTrader" -> Optional.of(enteringTrader);
             case "ExecutingTrader" -> Optional.of(executingTrader);
-            case "FixedRate" -> Optional.of(fixedRate);
+            case "FixedRatePercentage" -> Optional.of(fixedRatePercentage);
             case "ExecuteUnderlyingTrade" -> Optional.of(executeUnderlyingTrade);
             case "DaysToSettlement" -> Optional.of(daysToSettlement);
             default -> Optional.empty();

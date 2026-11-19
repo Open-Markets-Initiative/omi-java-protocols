@@ -1,0 +1,479 @@
+package omi.jpx.osederivatives.geniuminet.glimpse.v2_2.messages.application;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import omi.jpx.osederivatives.geniuminet.glimpse.v2_2.fields.ComboGroupIdField;
+import omi.jpx.osederivatives.geniuminet.glimpse.v2_2.fields.ExecutedQuantityField;
+import omi.jpx.osederivatives.geniuminet.glimpse.v2_2.fields.MatchIdField;
+import omi.jpx.osederivatives.geniuminet.glimpse.v2_2.fields.NanosecondsField;
+import omi.jpx.osederivatives.geniuminet.glimpse.v2_2.fields.OccurredAtCrossField;
+import omi.jpx.osederivatives.geniuminet.glimpse.v2_2.fields.OrderBookIdField;
+import omi.jpx.osederivatives.geniuminet.glimpse.v2_2.fields.OrderIdField;
+import omi.jpx.osederivatives.geniuminet.glimpse.v2_2.fields.PrintableField;
+import omi.jpx.osederivatives.geniuminet.glimpse.v2_2.fields.SideField;
+import omi.jpx.osederivatives.geniuminet.glimpse.v2_2.fields.TradePriceField;
+import omi.jpx.osederivatives.geniuminet.glimpse.v2_2.types.Field;
+import omi.jpx.osederivatives.geniuminet.glimpse.v2_2.types.Message;
+import omi.jpx.osederivatives.geniuminet.glimpse.v2_2.types.PrintOptions;
+
+/**
+ * Represents the ExecutionNoticeWithTradeInformationMessage message from the GeniumInet protocol.
+ *
+ * <p>Provides an execution notice with trade information.</p>
+ */
+public final class ExecutionNoticeWithTradeInformationMessage implements Message {
+
+    /**
+     * The character identifying this message on the wire.
+     */
+    public static final char MESSAGE_TYPE = 'C';
+
+    /**
+     * This message's fixed width on the wire.
+     */
+    public static final int BYTE_LENGTH = 57;
+
+    /**
+     * This message's declared name.
+     */
+    public static final String NAME = "Execution Notice With Trade Information Message";
+
+    /**
+     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
+     *
+     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
+     */
+    private static final int[] PADDING = { 37, 7, 44, 7 };
+
+    /**
+     * A timestamp is set in nanoseconds
+     */
+    private final NanosecondsField nanoseconds = new NanosecondsField();
+
+    /**
+     * An order number is set, unique for each order book and sell/buy side
+     */
+    private final OrderIdField orderId = new OrderIdField();
+
+    /**
+     * A series ID is set
+     */
+    private final OrderBookIdField orderBookId = new OrderBookIdField();
+
+    /**
+     * Sell or Buy is set
+     */
+    private final SideField side = new SideField();
+
+    /**
+     * An executed quantity is set
+     */
+    private final ExecutedQuantityField executedQuantity = new ExecutedQuantityField();
+
+    /**
+     * An ExecutionEventNumber is set
+     */
+    private final MatchIdField matchId = new MatchIdField();
+
+    /**
+     * In the case of a combination series execution a combo group ID is set, otherwise 0 is set
+     */
+    private final ComboGroupIdField comboGroupId = new ComboGroupIdField();
+
+    /**
+     * An execution price is set
+     */
+    private final TradePriceField tradePrice = new TradePriceField();
+
+    /**
+     * Identification flag for auction
+     */
+    private final OccurredAtCrossField occurredAtCross = new OccurredAtCrossField();
+
+    /**
+     * Item not used
+     */
+    private final PrintableField printable = new PrintableField();
+
+    /**
+     * This message's fields, in wire order.
+     */
+    private final List<Field> fields = List.of(nanoseconds, orderId, orderBookId, side, executedQuantity, matchId, comboGroupId, tradePrice, occurredAtCross, printable);
+
+    private byte[] buffer;
+
+    private boolean decoded;
+
+    /**
+     * A timestamp is set in nanoseconds
+     *
+     * @return the Nanoseconds field
+     */
+    public NanosecondsField nanoseconds() {
+        return nanoseconds;
+    }
+
+    /**
+     * An order number is set, unique for each order book and sell/buy side
+     *
+     * @return the OrderId field
+     */
+    public OrderIdField orderId() {
+        return orderId;
+    }
+
+    /**
+     * A series ID is set
+     *
+     * @return the OrderBookId field
+     */
+    public OrderBookIdField orderBookId() {
+        return orderBookId;
+    }
+
+    /**
+     * Sell or Buy is set
+     *
+     * @return the Side field
+     */
+    public SideField side() {
+        return side;
+    }
+
+    /**
+     * An executed quantity is set
+     *
+     * @return the ExecutedQuantity field
+     */
+    public ExecutedQuantityField executedQuantity() {
+        return executedQuantity;
+    }
+
+    /**
+     * An ExecutionEventNumber is set
+     *
+     * @return the MatchId field
+     */
+    public MatchIdField matchId() {
+        return matchId;
+    }
+
+    /**
+     * In the case of a combination series execution a combo group ID is set, otherwise 0 is set
+     *
+     * @return the ComboGroupId field
+     */
+    public ComboGroupIdField comboGroupId() {
+        return comboGroupId;
+    }
+
+    /**
+     * An execution price is set
+     *
+     * @return the TradePrice field
+     */
+    public TradePriceField tradePrice() {
+        return tradePrice;
+    }
+
+    /**
+     * Identification flag for auction
+     *
+     * @return the OccurredAtCross field
+     */
+    public OccurredAtCrossField occurredAtCross() {
+        return occurredAtCross;
+    }
+
+    /**
+     * Item not used
+     *
+     * @return the Printable field
+     */
+    public PrintableField printable() {
+        return printable;
+    }
+
+    @Override
+    public Optional<Character> type() {
+        return Optional.of(MESSAGE_TYPE);
+    }
+
+    @Override
+    public int byteLength() {
+        return BYTE_LENGTH;
+    }
+
+    /**
+     * Returns this message's declared padding runs, as consecutive offset and length pairs relative to the start of the message.
+     *
+     * <p>Padding carries no value: decode advances over it, and encode writes back what decode received, or zero for a message assembled from values. Use this to check a received message's padding where the specification constrains it, or to render a byte map of the layout.</p>
+     *
+     * @return the padding runs, empty when the layout has none
+     */
+    public static int[] padding() {
+        return PADDING.clone();
+    }
+
+    @Override
+    public Optional<Instant> timestamp() {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset) {
+        return parseFrom(data, offset, data.length);
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset, int end) {
+        clear();
+        this.decoded = read(data, offset, end);
+
+        int stop = Math.max(0, Math.min(data.length, offset + BYTE_LENGTH));
+        this.buffer = Arrays.copyOfRange(data, Math.min(Math.max(offset, 0), stop), stop);
+        return decoded;
+    }
+
+    private boolean read(byte[] data, int offset, int end) {
+        if (offset < 0 || end > data.length || end - offset < BYTE_LENGTH) {
+            return false;
+        }
+
+        int cursor = offset;
+        if (!nanoseconds.parse(data, cursor)) {
+            return false;
+        }
+        cursor += NanosecondsField.BYTE_LENGTH;
+        if (!orderId.parse(data, cursor)) {
+            return false;
+        }
+        cursor += OrderIdField.BYTE_LENGTH;
+        if (!orderBookId.parse(data, cursor)) {
+            return false;
+        }
+        cursor += OrderBookIdField.BYTE_LENGTH;
+        if (!side.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SideField.BYTE_LENGTH;
+        if (!executedQuantity.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ExecutedQuantityField.BYTE_LENGTH;
+        if (!matchId.parse(data, cursor)) {
+            return false;
+        }
+        cursor += MatchIdField.BYTE_LENGTH;
+        if (!comboGroupId.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ComboGroupIdField.BYTE_LENGTH;
+        cursor += 14; // padding
+        if (!tradePrice.parse(data, cursor)) {
+            return false;
+        }
+        cursor += TradePriceField.BYTE_LENGTH;
+        if (!occurredAtCross.parse(data, cursor)) {
+            return false;
+        }
+        cursor += OccurredAtCrossField.BYTE_LENGTH;
+        return printable.parse(data, cursor);
+    }
+
+    @Override
+    public int encode(byte[] data, int offset) {
+        Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
+        int cursor = offset;
+        cursor = nanoseconds.encode(data, cursor);
+        cursor = orderId.encode(data, cursor);
+        cursor = orderBookId.encode(data, cursor);
+        cursor = side.encode(data, cursor);
+        cursor = executedQuantity.encode(data, cursor);
+        cursor = matchId.encode(data, cursor);
+        cursor = comboGroupId.encode(data, cursor);
+        if (buffer != null && buffer.length >= 51) {
+            System.arraycopy(buffer, 37, data, cursor, 14); // padding
+        } else {
+            Arrays.fill(data, cursor, cursor + 14, (byte) 0); // padding
+        }
+        cursor += 14;
+        cursor = tradePrice.encode(data, cursor);
+        cursor = occurredAtCross.encode(data, cursor);
+        cursor = printable.encode(data, cursor);
+        return cursor;
+    }
+
+    @Override
+    public byte[] toBytes() {
+        byte[] data = new byte[BYTE_LENGTH];
+        encode(data, 0);
+        return data;
+    }
+
+    @Override
+    public void clear() {
+        for (Field field : fields) {
+            field.reset();
+        }
+        this.buffer = null;
+        this.decoded = false;
+    }
+
+    @Override
+    public boolean isDecoded() {
+        return decoded;
+    }
+
+    @Override
+    public boolean isRecognized() {
+        for (Field field : fields) {
+            if (!field.isRecognized()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isValid() {
+        for (Field field : fields) {
+            if (!field.isValid()) {
+                return false;
+            }
+        }
+        return isRecognized();
+    }
+
+    /**
+     * Returns a copy of the bytes this message was decoded from.
+     *
+     * <p>A failed decode leaves behind the partial range that was available, which is what a diagnostic needs to see.</p>
+     *
+     * @return the message bytes, or empty when no decode has been attempted
+     */
+    @Override
+    public Optional<byte[]> raw() {
+        if (buffer == null) {
+            return Optional.empty();
+        }
+        return Optional.of(buffer.clone());
+    }
+
+    @Override
+    public Optional<Field> failedAt() {
+        if (buffer == null || decoded) {
+            return Optional.empty();
+        }
+        for (Field field : fields) {
+            if (!field.isDecoded()) {
+                return Optional.of(field);
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Field> fields() {
+        return fields;
+    }
+
+    @Override
+    public Optional<Field> field(String name) {
+        return switch (name) {
+            case "Nanoseconds" -> Optional.of(nanoseconds);
+            case "OrderId" -> Optional.of(orderId);
+            case "OrderBookId" -> Optional.of(orderBookId);
+            case "Side" -> Optional.of(side);
+            case "ExecutedQuantity" -> Optional.of(executedQuantity);
+            case "MatchId" -> Optional.of(matchId);
+            case "ComboGroupId" -> Optional.of(comboGroupId);
+            case "TradePrice" -> Optional.of(tradePrice);
+            case "OccurredAtCross" -> Optional.of(occurredAtCross);
+            case "Printable" -> Optional.of(printable);
+            default -> Optional.empty();
+        };
+    }
+
+    @Override
+    public List<Field> diffFields(Message other) {
+        if (!(other instanceof ExecutionNoticeWithTradeInformationMessage message)) {
+            return List.of();
+        }
+        List<Field> changed = new ArrayList<>();
+        for (int index = 0; index < fields.size(); index++) {
+            if (!fields.get(index).equals(message.fields.get(index))) {
+                changed.add(fields.get(index));
+            }
+        }
+        return changed;
+    }
+
+    @Override
+    public String toFormattedString(PrintOptions options) {
+        StringBuilder builder = new StringBuilder();
+        toFormattedString(builder, options);
+        return builder.toString();
+    }
+
+    /**
+     * Appends this message's formatted representation.
+     *
+     * <p>The identifier form renders the message name alone, which is what a debugger label or a log line tracking message flow needs. The compact form adds every field on the same line, and the default form indents one field per line.</p>
+     *
+     * @param builder the destination
+     * @param options the display options
+     */
+    @Override
+    public void toFormattedString(StringBuilder builder, PrintOptions options) {
+        if (options.identifier()) {
+            builder.append(NAME);
+            return;
+        }
+
+        if (options.compact()) {
+            builder.append(NAME).append(" { ");
+            for (int index = 0; index < fields.size(); index++) {
+                if (index > 0) {
+                    builder.append(", ");
+                }
+                fields.get(index).toFormattedString(builder, options);
+            }
+            builder.append(" }");
+            return;
+        }
+
+        builder.append(options.prefix()).append(NAME).append(System.lineSeparator());
+        PrintOptions nested = options.nested();
+        for (Field field : fields) {
+            builder.append(nested.prefix());
+            field.toFormattedString(builder, nested);
+            builder.append(System.lineSeparator());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return toFormattedString(PrintOptions.DEFAULT);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof ExecutionNoticeWithTradeInformationMessage message)) {
+            return false;
+        }
+        return fields.equals(message.fields);
+    }
+
+    @Override
+    public int hashCode() {
+        return fields.hashCode();
+    }
+}

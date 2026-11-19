@@ -1,0 +1,549 @@
+package omi.siac.cqs.snapshot.cta.v1_0.messages.application;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import omi.siac.cqs.snapshot.cta.v1_0.fields.FinraBboLuldIndicatorField;
+import omi.siac.cqs.snapshot.cta.v1_0.fields.FinraBestBidMarketMakerIdField;
+import omi.siac.cqs.snapshot.cta.v1_0.fields.FinraBestBidPriceField;
+import omi.siac.cqs.snapshot.cta.v1_0.fields.FinraBestBidQuoteConditionField;
+import omi.siac.cqs.snapshot.cta.v1_0.fields.FinraBestBidSizeField;
+import omi.siac.cqs.snapshot.cta.v1_0.fields.FinraBestOfferMarketMakerIdField;
+import omi.siac.cqs.snapshot.cta.v1_0.fields.FinraBestOfferPriceField;
+import omi.siac.cqs.snapshot.cta.v1_0.fields.FinraBestOfferQuoteConditionField;
+import omi.siac.cqs.snapshot.cta.v1_0.fields.FinraBestOfferSizeField;
+import omi.siac.cqs.snapshot.cta.v1_0.fields.HaltReasonField;
+import omi.siac.cqs.snapshot.cta.v1_0.fields.HighIndicationPriceField;
+import omi.siac.cqs.snapshot.cta.v1_0.fields.LowIndicationPriceField;
+import omi.siac.cqs.snapshot.cta.v1_0.fields.ParticipantIdField;
+import omi.siac.cqs.snapshot.cta.v1_0.fields.SecuritySymbolField;
+import omi.siac.cqs.snapshot.cta.v1_0.types.Field;
+import omi.siac.cqs.snapshot.cta.v1_0.types.Message;
+import omi.siac.cqs.snapshot.cta.v1_0.types.PrintOptions;
+
+/**
+ * Represents the FinraSnapshotMessage message from the Snapshot protocol.
+ *
+ * <p>The FINRA Snapshot message is a SIP Generated Message used to report FINRA Best Bid and Offer</p>
+ */
+public final class FinraSnapshotMessage implements Message {
+
+    /**
+     * The character identifying this message on the wire.
+     */
+    public static final char MESSAGE_TYPE = 'F';
+
+    /**
+     * This message's fixed width on the wire.
+     */
+    public static final int BYTE_LENGTH = 64;
+
+    /**
+     * This message's declared name.
+     */
+    public static final String NAME = "Finra Snapshot Message";
+
+    /**
+     * Participant or Processor that generated the message
+     */
+    private final ParticipantIdField participantId = new ParticipantIdField();
+
+    /**
+     * Contains the security symbol
+     */
+    private final SecuritySymbolField securitySymbol = new SecuritySymbolField();
+
+    /**
+     * Contains the FINRA ADF provided FINRA Best Bid Price that is the FINRA Best Bid (FBBO
+     */
+    private final FinraBestBidQuoteConditionField finraBestBidQuoteCondition = new FinraBestBidQuoteConditionField();
+
+    /**
+     * Contains the FINRA ADF provided FINRA Best Bid Price that is the FINRA Best Bid (FBBO
+     */
+    private final FinraBestBidPriceField finraBestBidPrice = new FinraBestBidPriceField();
+
+    /**
+     * Contains the FINRA ADF provided FINRA Best Bid Size associated with the FINRA Best Bid Price that had the FINRA Best Bid
+     */
+    private final FinraBestBidSizeField finraBestBidSize = new FinraBestBidSizeField();
+
+    /**
+     * Contains the FINRA ADF provided FINRA Best Bid Market Maker identifier of the Market Maker that had the FINRA Best Bid (FBBO).
+     */
+    private final FinraBestBidMarketMakerIdField finraBestBidMarketMakerId = new FinraBestBidMarketMakerIdField();
+
+    /**
+     * Contains the FINRA ADF provided FINRA Best Offer Quote Condition associated with the Best FINRA Offer Price that had the FINRA Best Offer
+     */
+    private final FinraBestOfferQuoteConditionField finraBestOfferQuoteCondition = new FinraBestOfferQuoteConditionField();
+
+    /**
+     * Contains the FINRAADF provided Best FINRA Offer Price that is the FINRA Best Offer
+     */
+    private final FinraBestOfferPriceField finraBestOfferPrice = new FinraBestOfferPriceField();
+
+    /**
+     * Contains the FINRA ADF provided FINRA Best Offer Size associated with the FINRA Best Offer Price that had the FINRA Best Offer
+     */
+    private final FinraBestOfferSizeField finraBestOfferSize = new FinraBestOfferSizeField();
+
+    /**
+     * Contains the FINRA ADF provided FINRA Best Offer Market Maker identifier of the Market Maker that had the FINRA Best Offer
+     */
+    private final FinraBestOfferMarketMakerIdField finraBestOfferMarketMakerId = new FinraBestOfferMarketMakerIdField();
+
+    /**
+     * Indicates the affect that the Limit Up-Limit Down Price Bands have on the FINRA Best Bid and FINRA Best Offer
+     */
+    private final FinraBboLuldIndicatorField finraBboLuldIndicator = new FinraBboLuldIndicatorField();
+
+    /**
+     * The High Indication Price represents an approximation of what the high end ‘Offer’ price of a security's trading range may be.
+     */
+    private final HighIndicationPriceField highIndicationPrice = new HighIndicationPriceField();
+
+    /**
+     * The Low Indication Price represents an approximation of what the low end "Bid" price of a security's trading range may be
+     */
+    private final LowIndicationPriceField lowIndicationPrice = new LowIndicationPriceField();
+
+    /**
+     * Denotes the reason for the Trading Halt
+     */
+    private final HaltReasonField haltReason = new HaltReasonField();
+
+    /**
+     * This message's fields, in wire order.
+     */
+    private final List<Field> fields = List.of(participantId, securitySymbol, finraBestBidQuoteCondition, finraBestBidPrice, finraBestBidSize, finraBestBidMarketMakerId, finraBestOfferQuoteCondition, finraBestOfferPrice, finraBestOfferSize, finraBestOfferMarketMakerId, finraBboLuldIndicator, highIndicationPrice, lowIndicationPrice, haltReason);
+
+    private byte[] buffer;
+
+    private boolean decoded;
+
+    /**
+     * Participant or Processor that generated the message
+     *
+     * @return the ParticipantId field
+     */
+    public ParticipantIdField participantId() {
+        return participantId;
+    }
+
+    /**
+     * Contains the security symbol
+     *
+     * @return the SecuritySymbol field
+     */
+    public SecuritySymbolField securitySymbol() {
+        return securitySymbol;
+    }
+
+    /**
+     * Contains the FINRA ADF provided FINRA Best Bid Price that is the FINRA Best Bid (FBBO
+     *
+     * @return the FinraBestBidQuoteCondition field
+     */
+    public FinraBestBidQuoteConditionField finraBestBidQuoteCondition() {
+        return finraBestBidQuoteCondition;
+    }
+
+    /**
+     * Contains the FINRA ADF provided FINRA Best Bid Price that is the FINRA Best Bid (FBBO
+     *
+     * @return the FinraBestBidPrice field
+     */
+    public FinraBestBidPriceField finraBestBidPrice() {
+        return finraBestBidPrice;
+    }
+
+    /**
+     * Contains the FINRA ADF provided FINRA Best Bid Size associated with the FINRA Best Bid Price that had the FINRA Best Bid
+     *
+     * @return the FinraBestBidSize field
+     */
+    public FinraBestBidSizeField finraBestBidSize() {
+        return finraBestBidSize;
+    }
+
+    /**
+     * Contains the FINRA ADF provided FINRA Best Bid Market Maker identifier of the Market Maker that had the FINRA Best Bid (FBBO).
+     *
+     * @return the FinraBestBidMarketMakerId field
+     */
+    public FinraBestBidMarketMakerIdField finraBestBidMarketMakerId() {
+        return finraBestBidMarketMakerId;
+    }
+
+    /**
+     * Contains the FINRA ADF provided FINRA Best Offer Quote Condition associated with the Best FINRA Offer Price that had the FINRA Best Offer
+     *
+     * @return the FinraBestOfferQuoteCondition field
+     */
+    public FinraBestOfferQuoteConditionField finraBestOfferQuoteCondition() {
+        return finraBestOfferQuoteCondition;
+    }
+
+    /**
+     * Contains the FINRAADF provided Best FINRA Offer Price that is the FINRA Best Offer
+     *
+     * @return the FinraBestOfferPrice field
+     */
+    public FinraBestOfferPriceField finraBestOfferPrice() {
+        return finraBestOfferPrice;
+    }
+
+    /**
+     * Contains the FINRA ADF provided FINRA Best Offer Size associated with the FINRA Best Offer Price that had the FINRA Best Offer
+     *
+     * @return the FinraBestOfferSize field
+     */
+    public FinraBestOfferSizeField finraBestOfferSize() {
+        return finraBestOfferSize;
+    }
+
+    /**
+     * Contains the FINRA ADF provided FINRA Best Offer Market Maker identifier of the Market Maker that had the FINRA Best Offer
+     *
+     * @return the FinraBestOfferMarketMakerId field
+     */
+    public FinraBestOfferMarketMakerIdField finraBestOfferMarketMakerId() {
+        return finraBestOfferMarketMakerId;
+    }
+
+    /**
+     * Indicates the affect that the Limit Up-Limit Down Price Bands have on the FINRA Best Bid and FINRA Best Offer
+     *
+     * @return the FinraBboLuldIndicator field
+     */
+    public FinraBboLuldIndicatorField finraBboLuldIndicator() {
+        return finraBboLuldIndicator;
+    }
+
+    /**
+     * The High Indication Price represents an approximation of what the high end ‘Offer’ price of a security's trading range may be.
+     *
+     * @return the HighIndicationPrice field
+     */
+    public HighIndicationPriceField highIndicationPrice() {
+        return highIndicationPrice;
+    }
+
+    /**
+     * The Low Indication Price represents an approximation of what the low end "Bid" price of a security's trading range may be
+     *
+     * @return the LowIndicationPrice field
+     */
+    public LowIndicationPriceField lowIndicationPrice() {
+        return lowIndicationPrice;
+    }
+
+    /**
+     * Denotes the reason for the Trading Halt
+     *
+     * @return the HaltReason field
+     */
+    public HaltReasonField haltReason() {
+        return haltReason;
+    }
+
+    @Override
+    public Optional<Character> type() {
+        return Optional.of(MESSAGE_TYPE);
+    }
+
+    @Override
+    public int byteLength() {
+        return BYTE_LENGTH;
+    }
+
+    /**
+     * Returns this message's declared padding runs, as consecutive offset and length pairs relative to the start of the message.
+     *
+     * <p>Padding carries no value: decode advances over it, and encode writes back what decode received, or zero for a message assembled from values. Use this to check a received message's padding where the specification constrains it, or to render a byte map of the layout.</p>
+     *
+     * @return the padding runs, empty when the layout has none
+     */
+    public static int[] padding() {
+        return new int[0];
+    }
+
+    @Override
+    public Optional<Instant> timestamp() {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset) {
+        return parseFrom(data, offset, data.length);
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset, int end) {
+        clear();
+        this.decoded = read(data, offset, end);
+
+        int stop = Math.max(0, Math.min(data.length, offset + BYTE_LENGTH));
+        this.buffer = Arrays.copyOfRange(data, Math.min(Math.max(offset, 0), stop), stop);
+        return decoded;
+    }
+
+    private boolean read(byte[] data, int offset, int end) {
+        if (offset < 0 || end > data.length || end - offset < BYTE_LENGTH) {
+            return false;
+        }
+
+        int cursor = offset;
+        if (!participantId.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ParticipantIdField.BYTE_LENGTH;
+        if (!securitySymbol.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SecuritySymbolField.BYTE_LENGTH;
+        if (!finraBestBidQuoteCondition.parse(data, cursor)) {
+            return false;
+        }
+        cursor += FinraBestBidQuoteConditionField.BYTE_LENGTH;
+        if (!finraBestBidPrice.parse(data, cursor)) {
+            return false;
+        }
+        cursor += FinraBestBidPriceField.BYTE_LENGTH;
+        if (!finraBestBidSize.parse(data, cursor)) {
+            return false;
+        }
+        cursor += FinraBestBidSizeField.BYTE_LENGTH;
+        if (!finraBestBidMarketMakerId.parse(data, cursor)) {
+            return false;
+        }
+        cursor += FinraBestBidMarketMakerIdField.BYTE_LENGTH;
+        if (!finraBestOfferQuoteCondition.parse(data, cursor)) {
+            return false;
+        }
+        cursor += FinraBestOfferQuoteConditionField.BYTE_LENGTH;
+        if (!finraBestOfferPrice.parse(data, cursor)) {
+            return false;
+        }
+        cursor += FinraBestOfferPriceField.BYTE_LENGTH;
+        if (!finraBestOfferSize.parse(data, cursor)) {
+            return false;
+        }
+        cursor += FinraBestOfferSizeField.BYTE_LENGTH;
+        if (!finraBestOfferMarketMakerId.parse(data, cursor)) {
+            return false;
+        }
+        cursor += FinraBestOfferMarketMakerIdField.BYTE_LENGTH;
+        if (!finraBboLuldIndicator.parse(data, cursor)) {
+            return false;
+        }
+        cursor += FinraBboLuldIndicatorField.BYTE_LENGTH;
+        if (!highIndicationPrice.parse(data, cursor)) {
+            return false;
+        }
+        cursor += HighIndicationPriceField.BYTE_LENGTH;
+        if (!lowIndicationPrice.parse(data, cursor)) {
+            return false;
+        }
+        cursor += LowIndicationPriceField.BYTE_LENGTH;
+        return haltReason.parse(data, cursor);
+    }
+
+    @Override
+    public int encode(byte[] data, int offset) {
+        Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
+        int cursor = offset;
+        cursor = participantId.encode(data, cursor);
+        cursor = securitySymbol.encode(data, cursor);
+        cursor = finraBestBidQuoteCondition.encode(data, cursor);
+        cursor = finraBestBidPrice.encode(data, cursor);
+        cursor = finraBestBidSize.encode(data, cursor);
+        cursor = finraBestBidMarketMakerId.encode(data, cursor);
+        cursor = finraBestOfferQuoteCondition.encode(data, cursor);
+        cursor = finraBestOfferPrice.encode(data, cursor);
+        cursor = finraBestOfferSize.encode(data, cursor);
+        cursor = finraBestOfferMarketMakerId.encode(data, cursor);
+        cursor = finraBboLuldIndicator.encode(data, cursor);
+        cursor = highIndicationPrice.encode(data, cursor);
+        cursor = lowIndicationPrice.encode(data, cursor);
+        cursor = haltReason.encode(data, cursor);
+        return cursor;
+    }
+
+    @Override
+    public byte[] toBytes() {
+        byte[] data = new byte[BYTE_LENGTH];
+        encode(data, 0);
+        return data;
+    }
+
+    @Override
+    public void clear() {
+        for (Field field : fields) {
+            field.reset();
+        }
+        this.buffer = null;
+        this.decoded = false;
+    }
+
+    @Override
+    public boolean isDecoded() {
+        return decoded;
+    }
+
+    @Override
+    public boolean isRecognized() {
+        for (Field field : fields) {
+            if (!field.isRecognized()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isValid() {
+        for (Field field : fields) {
+            if (!field.isValid()) {
+                return false;
+            }
+        }
+        return isRecognized();
+    }
+
+    /**
+     * Returns a copy of the bytes this message was decoded from.
+     *
+     * <p>A failed decode leaves behind the partial range that was available, which is what a diagnostic needs to see.</p>
+     *
+     * @return the message bytes, or empty when no decode has been attempted
+     */
+    @Override
+    public Optional<byte[]> raw() {
+        if (buffer == null) {
+            return Optional.empty();
+        }
+        return Optional.of(buffer.clone());
+    }
+
+    @Override
+    public Optional<Field> failedAt() {
+        if (buffer == null || decoded) {
+            return Optional.empty();
+        }
+        for (Field field : fields) {
+            if (!field.isDecoded()) {
+                return Optional.of(field);
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Field> fields() {
+        return fields;
+    }
+
+    @Override
+    public Optional<Field> field(String name) {
+        return switch (name) {
+            case "ParticipantId" -> Optional.of(participantId);
+            case "SecuritySymbol" -> Optional.of(securitySymbol);
+            case "FinraBestBidQuoteCondition" -> Optional.of(finraBestBidQuoteCondition);
+            case "FinraBestBidPrice" -> Optional.of(finraBestBidPrice);
+            case "FinraBestBidSize" -> Optional.of(finraBestBidSize);
+            case "FinraBestBidMarketMakerId" -> Optional.of(finraBestBidMarketMakerId);
+            case "FinraBestOfferQuoteCondition" -> Optional.of(finraBestOfferQuoteCondition);
+            case "FinraBestOfferPrice" -> Optional.of(finraBestOfferPrice);
+            case "FinraBestOfferSize" -> Optional.of(finraBestOfferSize);
+            case "FinraBestOfferMarketMakerId" -> Optional.of(finraBestOfferMarketMakerId);
+            case "FinraBboLuldIndicator" -> Optional.of(finraBboLuldIndicator);
+            case "HighIndicationPrice" -> Optional.of(highIndicationPrice);
+            case "LowIndicationPrice" -> Optional.of(lowIndicationPrice);
+            case "HaltReason" -> Optional.of(haltReason);
+            default -> Optional.empty();
+        };
+    }
+
+    @Override
+    public List<Field> diffFields(Message other) {
+        if (!(other instanceof FinraSnapshotMessage message)) {
+            return List.of();
+        }
+        List<Field> changed = new ArrayList<>();
+        for (int index = 0; index < fields.size(); index++) {
+            if (!fields.get(index).equals(message.fields.get(index))) {
+                changed.add(fields.get(index));
+            }
+        }
+        return changed;
+    }
+
+    @Override
+    public String toFormattedString(PrintOptions options) {
+        StringBuilder builder = new StringBuilder();
+        toFormattedString(builder, options);
+        return builder.toString();
+    }
+
+    /**
+     * Appends this message's formatted representation.
+     *
+     * <p>The identifier form renders the message name alone, which is what a debugger label or a log line tracking message flow needs. The compact form adds every field on the same line, and the default form indents one field per line.</p>
+     *
+     * @param builder the destination
+     * @param options the display options
+     */
+    @Override
+    public void toFormattedString(StringBuilder builder, PrintOptions options) {
+        if (options.identifier()) {
+            builder.append(NAME);
+            return;
+        }
+
+        if (options.compact()) {
+            builder.append(NAME).append(" { ");
+            for (int index = 0; index < fields.size(); index++) {
+                if (index > 0) {
+                    builder.append(", ");
+                }
+                fields.get(index).toFormattedString(builder, options);
+            }
+            builder.append(" }");
+            return;
+        }
+
+        builder.append(options.prefix()).append(NAME).append(System.lineSeparator());
+        PrintOptions nested = options.nested();
+        for (Field field : fields) {
+            builder.append(nested.prefix());
+            field.toFormattedString(builder, nested);
+            builder.append(System.lineSeparator());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return toFormattedString(PrintOptions.DEFAULT);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof FinraSnapshotMessage message)) {
+            return false;
+        }
+        return fields.equals(message.fields);
+    }
+
+    @Override
+    public int hashCode() {
+        return fields.hashCode();
+    }
+}

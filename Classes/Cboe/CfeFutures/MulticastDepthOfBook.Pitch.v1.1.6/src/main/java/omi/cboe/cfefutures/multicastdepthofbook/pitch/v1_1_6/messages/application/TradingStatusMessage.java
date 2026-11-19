@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import omi.cboe.cfefutures.multicastdepthofbook.pitch.v1_1_6.fields.Reserved2Field;
+import omi.cboe.cfefutures.multicastdepthofbook.pitch.v1_1_6.fields.Reserved3Field;
 import omi.cboe.cfefutures.multicastdepthofbook.pitch.v1_1_6.fields.SymbolField;
 import omi.cboe.cfefutures.multicastdepthofbook.pitch.v1_1_6.fields.TimeOffsetField;
 import omi.cboe.cfefutures.multicastdepthofbook.pitch.v1_1_6.fields.TradingStatusField;
@@ -31,13 +33,6 @@ public final class TradingStatusMessage implements Message {
     public static final String NAME = "Trading Status Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = { 10, 2, 13, 3 };
-
-    /**
      * Nanosecond offset from last unit timestamp.
      */
     private final TimeOffsetField timeOffset = new TimeOffsetField();
@@ -48,14 +43,24 @@ public final class TradingStatusMessage implements Message {
     private final SymbolField symbol = new SymbolField();
 
     /**
+     * Reserved
+     */
+    private final Reserved2Field reserved2 = new Reserved2Field();
+
+    /**
      * Trading Status Values
      */
     private final TradingStatusField tradingStatus = new TradingStatusField();
 
     /**
+     * Reserved
+     */
+    private final Reserved3Field reserved3 = new Reserved3Field();
+
+    /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(timeOffset, symbol, tradingStatus);
+    private final List<Field> fields = List.of(timeOffset, symbol, reserved2, tradingStatus, reserved3);
 
     private byte[] buffer;
 
@@ -80,12 +85,30 @@ public final class TradingStatusMessage implements Message {
     }
 
     /**
+     * Reserved
+     *
+     * @return the Reserved2 field
+     */
+    public Reserved2Field reserved2() {
+        return reserved2;
+    }
+
+    /**
      * Trading Status Values
      *
      * @return the TradingStatus field
      */
     public TradingStatusField tradingStatus() {
         return tradingStatus;
+    }
+
+    /**
+     * Reserved
+     *
+     * @return the Reserved3 field
+     */
+    public Reserved3Field reserved3() {
+        return reserved3;
     }
 
     @Override
@@ -106,7 +129,7 @@ public final class TradingStatusMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -143,13 +166,15 @@ public final class TradingStatusMessage implements Message {
             return false;
         }
         cursor += SymbolField.BYTE_LENGTH;
-        cursor += 2; // padding
+        if (!reserved2.parse(data, cursor)) {
+            return false;
+        }
+        cursor += Reserved2Field.BYTE_LENGTH;
         if (!tradingStatus.parse(data, cursor)) {
             return false;
         }
         cursor += TradingStatusField.BYTE_LENGTH;
-
-        return true;
+        return reserved3.parse(data, cursor);
     }
 
     @Override
@@ -158,19 +183,9 @@ public final class TradingStatusMessage implements Message {
         int cursor = offset;
         cursor = timeOffset.encode(data, cursor);
         cursor = symbol.encode(data, cursor);
-        if (buffer != null && buffer.length >= 12) {
-            System.arraycopy(buffer, 10, data, cursor, 2); // padding
-        } else {
-            Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
-        }
-        cursor += 2;
+        cursor = reserved2.encode(data, cursor);
         cursor = tradingStatus.encode(data, cursor);
-        if (buffer != null && buffer.length >= 16) {
-            System.arraycopy(buffer, 13, data, cursor, 3); // padding
-        } else {
-            Arrays.fill(data, cursor, cursor + 3, (byte) 0); // padding
-        }
-        cursor += 3;
+        cursor = reserved3.encode(data, cursor);
         return cursor;
     }
 
@@ -253,7 +268,9 @@ public final class TradingStatusMessage implements Message {
         return switch (name) {
             case "TimeOffset" -> Optional.of(timeOffset);
             case "Symbol" -> Optional.of(symbol);
+            case "Reserved2" -> Optional.of(reserved2);
             case "TradingStatus" -> Optional.of(tradingStatus);
+            case "Reserved3" -> Optional.of(reserved3);
             default -> Optional.empty();
         };
     }

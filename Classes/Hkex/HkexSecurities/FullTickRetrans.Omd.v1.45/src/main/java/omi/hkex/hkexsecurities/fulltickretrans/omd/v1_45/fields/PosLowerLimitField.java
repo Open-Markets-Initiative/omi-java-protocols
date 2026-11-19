@@ -1,0 +1,142 @@
+package omi.hkex.hkexsecurities.fulltickretrans.omd.v1_45.fields;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Objects;
+import omi.hkex.hkexsecurities.fulltickretrans.omd.v1_45.types.ByteOps;
+import omi.hkex.hkexsecurities.fulltickretrans.omd.v1_45.types.Field;
+import omi.hkex.hkexsecurities.fulltickretrans.omd.v1_45.types.FieldKind;
+import omi.hkex.hkexsecurities.fulltickretrans.omd.v1_45.types.PrintOptions;
+
+/**
+ * Lower price limit of all orders in POS Order Input period, and At-auction Limit buy order in POS No Cancellation and Random Matching periods. 3 implied decimal places. 0 means Not available.
+ *
+ * <p>Fixed-point decimal: a raw 4-byte little-endian signed integer scaled by 10^-3.</p>
+ */
+public final class PosLowerLimitField extends Field {
+
+    /**
+     * This field's fixed width on the wire.
+     */
+    public static final int BYTE_LENGTH = 4;
+
+    /**
+     * This field's declared name.
+     */
+    public static final String NAME = "PosLowerLimit";
+
+    /**
+     * Whether the wire value is stored least significant byte first.
+     */
+    public static final boolean LITTLE_ENDIAN = true;
+
+    /**
+     * The number of implied decimal places the wire integer is scaled by.
+     */
+    public static final int SCALE = 3;
+
+    private BigDecimal value;
+
+    /**
+     * The undecoded wire value, retained so the field re-encodes exactly as it arrived.
+     */
+    private long rawValue;
+
+    /**
+     * Returns the decoded value, scaled by the implied decimal places.
+     *
+     * @return the decoded value, or null when the field has not decoded
+     */
+    public BigDecimal value() {
+        return value;
+    }
+
+    /**
+     * Sets the value, deriving the wire integer from it.
+     *
+     * @param value the value to encode
+     * @throws ArithmeticException when the value has more decimal places than the field's scale, or does not fit the field's width
+     */
+    public void value(BigDecimal value) {
+        this.value = value;
+        this.rawValue = value == null ? 0L : value.setScale(SCALE, RoundingMode.UNNECESSARY).unscaledValue().longValueExact();
+        markSet(value != null);
+    }
+
+    /**
+     * Returns the undecoded wire value.
+     *
+     * @return the value exactly as it appeared on the wire
+     */
+    public long rawValue() {
+        return rawValue;
+    }
+
+    @Override
+    public String name() {
+        return NAME;
+    }
+
+    @Override
+    public FieldKind kind() {
+        return FieldKind.DECIMAL;
+    }
+
+    @Override
+    public int byteLength() {
+        return BYTE_LENGTH;
+    }
+
+    @Override
+    public boolean parse(byte[] data, int offset) {
+        if (offset < 0 || offset + BYTE_LENGTH > data.length) {
+            return false;
+        }
+
+        this.rawValue = ByteOps.signed(data, offset, BYTE_LENGTH, LITTLE_ENDIAN);
+        this.value = BigDecimal.valueOf(rawValue, SCALE);
+        markDecoded(data, offset);
+        return true;
+    }
+
+    @Override
+    public int encode(byte[] data, int offset) {
+        Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
+        ByteOps.put(data, offset, BYTE_LENGTH, rawValue, LITTLE_ENDIAN);
+        return offset + BYTE_LENGTH;
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        this.value = null;
+        this.rawValue = 0L;
+    }
+
+    @Override
+    public void toFormattedString(StringBuilder builder, PrintOptions options) {
+        builder.append(NAME).append(": ");
+        if (!hasValue()) {
+            builder.append("<unset>");
+            return;
+        }
+
+        builder.append(value);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof PosLowerLimitField field)) {
+            return false;
+        }
+        return hasValue() == field.hasValue() && rawValue == field.rawValue;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(hasValue(), rawValue);
+    }
+}

@@ -161,7 +161,7 @@ public final class RoundTrip {
         random(wire, random, 2);
         random(wire, random, 1);
         random(wire, random, 8);
-        count(wire, count, 1, false);
+        count(wire, count, 1, true);
         random(wire, random, 1);
         random(wire, random, 1);
         random(wire, random, 4);

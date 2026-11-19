@@ -1,0 +1,62 @@
+package omi.cboe.bzxequities.summarydepth.csdp.v1_0_4.enums;
+
+import java.util.Optional;
+
+/**
+ * Session Indicator
+ *
+ * <p>Each value corresponds to the ASCII character used as the wire discriminator.</p>
+ */
+public enum SessionIndicator {
+
+    /**
+     * Regular Trading Session
+     */
+    REGULAR_TRADING_SESSION('R', "Regular Trading Session"),
+
+    /**
+     * Pre Or Post Market Session
+     */
+    PRE_OR_POST_MARKET_SESSION('P', "Pre Or Post Market Session");
+
+    private final char wire;
+
+    private final String description;
+
+    SessionIndicator(char wire, String description) {
+        this.wire = wire;
+        this.description = description;
+    }
+
+    /**
+     * Returns this value's encoding on the wire.
+     *
+     * @return the wire value
+     */
+    public char wire() {
+        return wire;
+    }
+
+    /**
+     * Returns the description the protocol specification gives this value.
+     *
+     * @return the description
+     */
+    public String description() {
+        return description;
+    }
+
+    /**
+     * Returns the value with the given wire encoding.
+     *
+     * @param wire the encoding read from the wire
+     * @return the matching value, or empty when the protocol declares no value for it
+     */
+    public static Optional<SessionIndicator> fromWire(char wire) {
+        return switch (wire) {
+            case 'R' -> Optional.of(REGULAR_TRADING_SESSION);
+            case 'P' -> Optional.of(PRE_OR_POST_MARKET_SESSION);
+            default -> Optional.empty();
+        };
+    }
+}

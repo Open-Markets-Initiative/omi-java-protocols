@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Optional;
 import omi.memx.memxequities.memoirdepthfeed.sbe.v1_3.fields.IsTestSymbolField;
 import omi.memx.memxequities.memoirdepthfeed.sbe.v1_3.fields.MpvField;
+import omi.memx.memxequities.memoirdepthfeed.sbe.v1_3.fields.ReservedField;
 import omi.memx.memxequities.memoirdepthfeed.sbe.v1_3.fields.RoundLotField;
 import omi.memx.memxequities.memoirdepthfeed.sbe.v1_3.fields.SecurityIdField;
 import omi.memx.memxequities.memoirdepthfeed.sbe.v1_3.fields.SymbolField;
@@ -40,13 +41,6 @@ public final class InstrumentDirectoryMessage implements Message {
     public static final String NAME = "Instrument Directory Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = { 26, 1 };
-
-    /**
      * Timestamp
      */
     private final TimestampField timestampField = new TimestampField();
@@ -72,6 +66,11 @@ public final class InstrumentDirectoryMessage implements Message {
     private final RoundLotField roundLot = new RoundLotField();
 
     /**
+     * Reserved
+     */
+    private final ReservedField reserved = new ReservedField();
+
+    /**
      * IsTestSymbol
      */
     private final IsTestSymbolField isTestSymbol = new IsTestSymbolField();
@@ -84,7 +83,7 @@ public final class InstrumentDirectoryMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(timestampField, securityId, symbol, symbolSfx, roundLot, isTestSymbol, mpv);
+    private final List<Field> fields = List.of(timestampField, securityId, symbol, symbolSfx, roundLot, reserved, isTestSymbol, mpv);
 
     private byte[] buffer;
 
@@ -136,6 +135,15 @@ public final class InstrumentDirectoryMessage implements Message {
     }
 
     /**
+     * Reserved
+     *
+     * @return the Reserved field
+     */
+    public ReservedField reserved() {
+        return reserved;
+    }
+
+    /**
      * IsTestSymbol
      *
      * @return the IsTestSymbol field
@@ -171,7 +179,7 @@ public final class InstrumentDirectoryMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -220,7 +228,10 @@ public final class InstrumentDirectoryMessage implements Message {
             return false;
         }
         cursor += RoundLotField.BYTE_LENGTH;
-        cursor += 1; // padding
+        if (!reserved.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ReservedField.BYTE_LENGTH;
         if (!isTestSymbol.parse(data, cursor)) {
             return false;
         }
@@ -237,12 +248,7 @@ public final class InstrumentDirectoryMessage implements Message {
         cursor = symbol.encode(data, cursor);
         cursor = symbolSfx.encode(data, cursor);
         cursor = roundLot.encode(data, cursor);
-        if (buffer != null && buffer.length >= 27) {
-            System.arraycopy(buffer, 26, data, cursor, 1); // padding
-        } else {
-            Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
-        }
-        cursor += 1;
+        cursor = reserved.encode(data, cursor);
         cursor = isTestSymbol.encode(data, cursor);
         cursor = mpv.encode(data, cursor);
         return cursor;
@@ -330,6 +336,7 @@ public final class InstrumentDirectoryMessage implements Message {
             case "Symbol" -> Optional.of(symbol);
             case "SymbolSfx" -> Optional.of(symbolSfx);
             case "RoundLot" -> Optional.of(roundLot);
+            case "Reserved" -> Optional.of(reserved);
             case "IsTestSymbol" -> Optional.of(isTestSymbol);
             case "Mpv" -> Optional.of(mpv);
             default -> Optional.empty();

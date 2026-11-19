@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.fields.CorrelationIdField;
-import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.fields.EventResendRejectDetailsField;
+import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.fields.DetailsStringField;
 import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.fields.ResendRejectReasonField;
 import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.types.Field;
 import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.types.Message;
@@ -43,12 +43,12 @@ public final class EventResendRejectMessage implements Message {
     /**
      * details
      */
-    private final EventResendRejectDetailsField eventResendRejectDetails = new EventResendRejectDetailsField();
+    private final DetailsStringField detailsString = new DetailsStringField();
 
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(correlationId, resendRejectReason, eventResendRejectDetails);
+    private final List<Field> fields = List.of(correlationId, resendRejectReason, detailsString);
 
     private byte[] buffer;
 
@@ -75,10 +75,10 @@ public final class EventResendRejectMessage implements Message {
     /**
      * details
      *
-     * @return the EventResendRejectDetails field
+     * @return the DetailsString field
      */
-    public EventResendRejectDetailsField eventResendRejectDetails() {
-        return eventResendRejectDetails;
+    public DetailsStringField detailsString() {
+        return detailsString;
     }
 
     @Override
@@ -136,7 +136,7 @@ public final class EventResendRejectMessage implements Message {
             return false;
         }
         cursor += ResendRejectReasonField.BYTE_LENGTH;
-        return eventResendRejectDetails.parse(data, cursor);
+        return detailsString.parse(data, cursor);
     }
 
     @Override
@@ -145,7 +145,7 @@ public final class EventResendRejectMessage implements Message {
         int cursor = offset;
         cursor = correlationId.encode(data, cursor);
         cursor = resendRejectReason.encode(data, cursor);
-        cursor = eventResendRejectDetails.encode(data, cursor);
+        cursor = detailsString.encode(data, cursor);
         return cursor;
     }
 
@@ -228,7 +228,7 @@ public final class EventResendRejectMessage implements Message {
         return switch (name) {
             case "CorrelationId" -> Optional.of(correlationId);
             case "ResendRejectReason" -> Optional.of(resendRejectReason);
-            case "EventResendRejectDetails" -> Optional.of(eventResendRejectDetails);
+            case "DetailsString" -> Optional.of(detailsString);
             default -> Optional.empty();
         };
     }

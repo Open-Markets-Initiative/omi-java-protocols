@@ -5,8 +5,116 @@ rootProject.name = "omi-java-protocols"
 // Gradle reads a dot in a project name as a path separator, so a protocol is included
 // under a flattened name and pointed at the directory it actually occupies.
 
+include("24x-24xequities-memoirdepthfeed-sbe-v1-3")
+project(":24x-24xequities-memoirdepthfeed-sbe-v1-3").projectDir = file("Classes/24X/24XEquities/MemoirDepthFeed.Sbe.v1.3")
+
+include("24x-24xequities-memoirdepthfeed-sbe-v2-0")
+project(":24x-24xequities-memoirdepthfeed-sbe-v2-0").projectDir = file("Classes/24X/24XEquities/MemoirDepthFeed.Sbe.v2.0")
+
+include("24x-24xequities-memoirlastsale-sbe-v1-3")
+project(":24x-24xequities-memoirlastsale-sbe-v1-3").projectDir = file("Classes/24X/24XEquities/MemoirLastSale.Sbe.v1.3")
+
+include("24x-24xequities-memoirlastsale-sbe-v2-0")
+project(":24x-24xequities-memoirlastsale-sbe-v2-0").projectDir = file("Classes/24X/24XEquities/MemoirLastSale.Sbe.v2.0")
+
+include("24x-24xequities-memoirtopofbook-sbe-v1-3")
+project(":24x-24xequities-memoirtopofbook-sbe-v1-3").projectDir = file("Classes/24X/24XEquities/MemoirTopOfBook.Sbe.v1.3")
+
+include("24x-24xequities-memoirtopofbook-sbe-v2-0")
+project(":24x-24xequities-memoirtopofbook-sbe-v2-0").projectDir = file("Classes/24X/24XEquities/MemoirTopOfBook.Sbe.v2.0")
+
+include("a2x-a2xequities-rtmdf-amd-v1-3-2")
+project(":a2x-a2xequities-rtmdf-amd-v1-3-2").projectDir = file("Classes/A2X/A2XEquities/Rtmdf.Amd.v1.3.2")
+
+include("a2x-a2xequities-rtmdf-amd-v2-5")
+project(":a2x-a2xequities-rtmdf-amd-v2-5").projectDir = file("Classes/A2X/A2XEquities/Rtmdf.Amd.v2.5")
+
+include("a2x-a2xequities-snapshot-amd-v1-3-2")
+project(":a2x-a2xequities-snapshot-amd-v1-3-2").projectDir = file("Classes/A2X/A2XEquities/Snapshot.Amd.v1.3.2")
+
+include("a2x-a2xequities-snapshot-amd-v2-5")
+project(":a2x-a2xequities-snapshot-amd-v2-5").projectDir = file("Classes/A2X/A2XEquities/Snapshot.Amd.v2.5")
+
+include("aix-aixmarket-geniuminet-glimpse-v1-0")
+project(":aix-aixmarket-geniuminet-glimpse-v1-0").projectDir = file("Classes/Aix/AixMarket/GeniumInet.Glimpse.v1.0")
+
+include("aix-aixmarket-geniuminet-itch-v3-0")
+project(":aix-aixmarket-geniuminet-itch-v3-0").projectDir = file("Classes/Aix/AixMarket/GeniumInet.Itch.v3.0")
+
+include("aquis-aquisequities-realtime-amd-v2-4-2")
+project(":aquis-aquisequities-realtime-amd-v2-4-2").projectDir = file("Classes/Aquis/AquisEquities/RealTime.Amd.v2.4.2")
+
+include("aquis-aquisequities-realtime-amd-v2-5")
+project(":aquis-aquisequities-realtime-amd-v2-5").projectDir = file("Classes/Aquis/AquisEquities/RealTime.Amd.v2.5")
+
+include("aquis-aquisequities-realtime-amd-v4-0")
+project(":aquis-aquisequities-realtime-amd-v4-0").projectDir = file("Classes/Aquis/AquisEquities/RealTime.Amd.v4.0")
+
+include("aquis-aquisequities-realtime-amd-v4-1")
+project(":aquis-aquisequities-realtime-amd-v4-1").projectDir = file("Classes/Aquis/AquisEquities/RealTime.Amd.v4.1")
+
+include("aquis-aquisequities-realtime-amd-v4-2")
+project(":aquis-aquisequities-realtime-amd-v4-2").projectDir = file("Classes/Aquis/AquisEquities/RealTime.Amd.v4.2")
+
+include("aquis-aquisequities-replay-amd-v2-4-2")
+project(":aquis-aquisequities-replay-amd-v2-4-2").projectDir = file("Classes/Aquis/AquisEquities/Replay.Amd.v2.4.2")
+
+include("aquis-aquisequities-replay-amd-v2-5")
+project(":aquis-aquisequities-replay-amd-v2-5").projectDir = file("Classes/Aquis/AquisEquities/Replay.Amd.v2.5")
+
+include("aquis-aquisequities-replay-amd-v4-0")
+project(":aquis-aquisequities-replay-amd-v4-0").projectDir = file("Classes/Aquis/AquisEquities/Replay.Amd.v4.0")
+
+include("aquis-aquisequities-replay-amd-v4-1")
+project(":aquis-aquisequities-replay-amd-v4-1").projectDir = file("Classes/Aquis/AquisEquities/Replay.Amd.v4.1")
+
+include("aquis-aquisequities-replay-amd-v4-2")
+project(":aquis-aquisequities-replay-amd-v4-2").projectDir = file("Classes/Aquis/AquisEquities/Replay.Amd.v4.2")
+
+include("aquis-aquisequities-snapshot-amd-v2-4-2")
+project(":aquis-aquisequities-snapshot-amd-v2-4-2").projectDir = file("Classes/Aquis/AquisEquities/Snapshot.Amd.v2.4.2")
+
+include("aquis-aquisequities-snapshot-amd-v2-5")
+project(":aquis-aquisequities-snapshot-amd-v2-5").projectDir = file("Classes/Aquis/AquisEquities/Snapshot.Amd.v2.5")
+
+include("aquis-aquisequities-snapshot-amd-v4-0")
+project(":aquis-aquisequities-snapshot-amd-v4-0").projectDir = file("Classes/Aquis/AquisEquities/Snapshot.Amd.v4.0")
+
+include("aquis-aquisequities-snapshot-amd-v4-1")
+project(":aquis-aquisequities-snapshot-amd-v4-1").projectDir = file("Classes/Aquis/AquisEquities/Snapshot.Amd.v4.1")
+
+include("aquis-aquisequities-snapshot-amd-v4-2")
+project(":aquis-aquisequities-snapshot-amd-v4-2").projectDir = file("Classes/Aquis/AquisEquities/Snapshot.Amd.v4.2")
+
+include("aquis-aquisstockexchange-realtime-amd-v1-2-3")
+project(":aquis-aquisstockexchange-realtime-amd-v1-2-3").projectDir = file("Classes/Aquis/AquisStockExchange/RealTime.Amd.v1.2.3")
+
+include("aquis-aquisstockexchange-replay-amd-v1-2-3")
+project(":aquis-aquisstockexchange-replay-amd-v1-2-3").projectDir = file("Classes/Aquis/AquisStockExchange/Replay.Amd.v1.2.3")
+
+include("aquis-aquisstockexchange-snapshot-amd-v1-2-3")
+project(":aquis-aquisstockexchange-snapshot-amd-v1-2-3").projectDir = file("Classes/Aquis/AquisStockExchange/Snapshot.Amd.v1.2.3")
+
+include("asianext-asianextderivatives-realtime-amd-v1-3")
+project(":asianext-asianextderivatives-realtime-amd-v1-3").projectDir = file("Classes/AsiaNext/AsiaNextDerivatives/RealTime.Amd.v1.3")
+
+include("asianext-asianextderivatives-replay-amd-v1-3")
+project(":asianext-asianextderivatives-replay-amd-v1-3").projectDir = file("Classes/AsiaNext/AsiaNextDerivatives/Replay.Amd.v1.3")
+
+include("asianext-asianextderivatives-snapshot-amd-v1-3")
+project(":asianext-asianextderivatives-snapshot-amd-v1-3").projectDir = file("Classes/AsiaNext/AsiaNextDerivatives/Snapshot.Amd.v1.3")
+
 include("asx-asxderivatives-ntp-itch-v1-05")
 project(":asx-asxderivatives-ntp-itch-v1-05").projectDir = file("Classes/Asx/AsxDerivatives/Ntp.Itch.v1.05")
+
+include("asx-asxderivatives-t24-itch-v1-13")
+project(":asx-asxderivatives-t24-itch-v1-13").projectDir = file("Classes/Asx/AsxDerivatives/T24.Itch.v1.13")
+
+include("b3-b3derivatives-binaryentrypoint-sbe-v7-0")
+project(":b3-b3derivatives-binaryentrypoint-sbe-v7-0").projectDir = file("Classes/B3/B3Derivatives/BinaryEntryPoint.Sbe.v7.0")
+
+include("b3-b3derivatives-binaryentrypoint-sbe-v7-1")
+project(":b3-b3derivatives-binaryentrypoint-sbe-v7-1").projectDir = file("Classes/B3/B3Derivatives/BinaryEntryPoint.Sbe.v7.1")
 
 include("b3-b3derivatives-binaryentrypoint-sbe-v8-0")
 project(":b3-b3derivatives-binaryentrypoint-sbe-v8-0").projectDir = file("Classes/B3/B3Derivatives/BinaryEntryPoint.Sbe.v8.0")
@@ -14,14 +122,59 @@ project(":b3-b3derivatives-binaryentrypoint-sbe-v8-0").projectDir = file("Classe
 include("b3-b3derivatives-binaryentrypoint-sbe-v8-1")
 project(":b3-b3derivatives-binaryentrypoint-sbe-v8-1").projectDir = file("Classes/B3/B3Derivatives/BinaryEntryPoint.Sbe.v8.1")
 
+include("b3-b3derivatives-binaryentrypoint-sbe-v8-2")
+project(":b3-b3derivatives-binaryentrypoint-sbe-v8-2").projectDir = file("Classes/B3/B3Derivatives/BinaryEntryPoint.Sbe.v8.2")
+
 include("b3-b3derivatives-binaryentrypoint-sbe-v8-3")
 project(":b3-b3derivatives-binaryentrypoint-sbe-v8-3").projectDir = file("Classes/B3/B3Derivatives/BinaryEntryPoint.Sbe.v8.3")
+
+include("b3-b3derivatives-binaryentrypoint-sbe-v8-4")
+project(":b3-b3derivatives-binaryentrypoint-sbe-v8-4").projectDir = file("Classes/B3/B3Derivatives/BinaryEntryPoint.Sbe.v8.4")
+
+include("b3-b3derivatives-binaryumdf-sbe-v1-6")
+project(":b3-b3derivatives-binaryumdf-sbe-v1-6").projectDir = file("Classes/B3/B3Derivatives/BinaryUmdf.Sbe.v1.6")
+
+include("b3-b3derivatives-binaryumdf-sbe-v1-7")
+project(":b3-b3derivatives-binaryumdf-sbe-v1-7").projectDir = file("Classes/B3/B3Derivatives/BinaryUmdf.Sbe.v1.7")
 
 include("b3-b3derivatives-binaryumdf-sbe-v1-8")
 project(":b3-b3derivatives-binaryumdf-sbe-v1-8").projectDir = file("Classes/B3/B3Derivatives/BinaryUmdf.Sbe.v1.8")
 
+include("b3-b3derivatives-binaryumdf-sbe-v1-9")
+project(":b3-b3derivatives-binaryumdf-sbe-v1-9").projectDir = file("Classes/B3/B3Derivatives/BinaryUmdf.Sbe.v1.9")
+
+include("b3-b3derivatives-binaryumdf-sbe-v2-1")
+project(":b3-b3derivatives-binaryumdf-sbe-v2-1").projectDir = file("Classes/B3/B3Derivatives/BinaryUmdf.Sbe.v2.1")
+
+include("b3-b3derivatives-binaryumdf-sbe-v2-2")
+project(":b3-b3derivatives-binaryumdf-sbe-v2-2").projectDir = file("Classes/B3/B3Derivatives/BinaryUmdf.Sbe.v2.2")
+
+include("b3-b3derivatives-binaryumdf-sbe-v2-3")
+project(":b3-b3derivatives-binaryumdf-sbe-v2-3").projectDir = file("Classes/B3/B3Derivatives/BinaryUmdf.Sbe.v2.3")
+
+include("bist-borsaistanbul-geniuminet-glimpse-v2-7")
+project(":bist-borsaistanbul-geniuminet-glimpse-v2-7").projectDir = file("Classes/Bist/BorsaIstanbul/GeniumInet.Glimpse.v2.7")
+
 include("bist-borsaistanbul-geniuminet-itch-v21-12")
 project(":bist-borsaistanbul-geniuminet-itch-v21-12").projectDir = file("Classes/Bist/BorsaIstanbul/GeniumInet.Itch.v21.12")
+
+include("biva-bivaequities-basic-itch-v1-12")
+project(":biva-bivaequities-basic-itch-v1-12").projectDir = file("Classes/Biva/BivaEquities/Basic.Itch.v1.12")
+
+include("biva-bivaequities-index-itch-v1-12")
+project(":biva-bivaequities-index-itch-v1-12").projectDir = file("Classes/Biva/BivaEquities/Index.Itch.v1.12")
+
+include("biva-bivaequities-lastsale-itch-v1-12")
+project(":biva-bivaequities-lastsale-itch-v1-12").projectDir = file("Classes/Biva/BivaEquities/LastSale.Itch.v1.12")
+
+include("biva-bivaequities-orderentry-ouch-v1-05")
+project(":biva-bivaequities-orderentry-ouch-v1-05").projectDir = file("Classes/Biva/BivaEquities/OrderEntry.Ouch.v1.05")
+
+include("biva-bivaequities-totalview-glimpse-v1-12")
+project(":biva-bivaequities-totalview-glimpse-v1-12").projectDir = file("Classes/Biva/BivaEquities/TotalView.Glimpse.v1.12")
+
+include("biva-bivaequities-totalview-itch-v1-12")
+project(":biva-bivaequities-totalview-itch-v1-12").projectDir = file("Classes/Biva/BivaEquities/TotalView.Itch.v1.12")
 
 include("blueoceanats-blueequities-memoirdepthfeed-sbe-v1-3")
 project(":blueoceanats-blueequities-memoirdepthfeed-sbe-v1-3").projectDir = file("Classes/BlueOceanAts/BlueEquities/MemoirDepthFeed.Sbe.v1.3")
@@ -29,11 +182,185 @@ project(":blueoceanats-blueequities-memoirdepthfeed-sbe-v1-3").projectDir = file
 include("blueoceanats-blueequities-memoirlastsale-sbe-v1-3")
 project(":blueoceanats-blueequities-memoirlastsale-sbe-v1-3").projectDir = file("Classes/BlueOceanAts/BlueEquities/MemoirLastSale.Sbe.v1.3")
 
+include("blueoceanats-blueequities-memoirtopofbook-sbe-v1-3")
+project(":blueoceanats-blueequities-memoirtopofbook-sbe-v1-3").projectDir = file("Classes/BlueOceanAts/BlueEquities/MemoirTopOfBook.Sbe.v1.3")
+
+include("bme-bmeequities-fulldepth-bmegate-v1-6")
+project(":bme-bmeequities-fulldepth-bmegate-v1-6").projectDir = file("Classes/Bme/BmeEquities/FullDepth.BmeGate.v1.6")
+
+include("bme-bmeequities-marketandorder-bmegate-v1-6")
+project(":bme-bmeequities-marketandorder-bmegate-v1-6").projectDir = file("Classes/Bme/BmeEquities/MarketAndOrder.BmeGate.v1.6")
+
+include("bme-bmeequities-orderentry-bmegate-v1-6")
+project(":bme-bmeequities-orderentry-bmegate-v1-6").projectDir = file("Classes/Bme/BmeEquities/OrderEntry.BmeGate.v1.6")
+
+include("bme-bmeequities-recovery-bmegate-v1-6")
+project(":bme-bmeequities-recovery-bmegate-v1-6").projectDir = file("Classes/Bme/BmeEquities/Recovery.BmeGate.v1.6")
+
+include("bme-bmeequities-replay-bmegate-v1-6")
+project(":bme-bmeequities-replay-bmegate-v1-6").projectDir = file("Classes/Bme/BmeEquities/Replay.BmeGate.v1.6")
+
+include("bme-bmeequities-retail-bmegate-v1-6")
+project(":bme-bmeequities-retail-bmegate-v1-6").projectDir = file("Classes/Bme/BmeEquities/Retail.BmeGate.v1.6")
+
+include("bme-bmeequities-retail5-bmegate-v1-6")
+project(":bme-bmeequities-retail5-bmegate-v1-6").projectDir = file("Classes/Bme/BmeEquities/Retail5.BmeGate.v1.6")
+
+include("bme-bmeequities-topofbook-bmegate-v1-6")
+project(":bme-bmeequities-topofbook-bmegate-v1-6").projectDir = file("Classes/Bme/BmeEquities/TopOfBook.BmeGate.v1.6")
+
+include("bme-bmeequities-topofbook5-bmegate-v1-6")
+project(":bme-bmeequities-topofbook5-bmegate-v1-6").projectDir = file("Classes/Bme/BmeEquities/TopOfBook5.BmeGate.v1.6")
+
+include("bme-bmefixedincome-fulldepth-bmegate-v1-6")
+project(":bme-bmefixedincome-fulldepth-bmegate-v1-6").projectDir = file("Classes/Bme/BmeFixedIncome/FullDepth.BmeGate.v1.6")
+
+include("bme-bmefixedincome-retail-bmegate-v1-6")
+project(":bme-bmefixedincome-retail-bmegate-v1-6").projectDir = file("Classes/Bme/BmeFixedIncome/Retail.BmeGate.v1.6")
+
+include("bme-bmefixedincome-retail5-bmegate-v1-6")
+project(":bme-bmefixedincome-retail5-bmegate-v1-6").projectDir = file("Classes/Bme/BmeFixedIncome/Retail5.BmeGate.v1.6")
+
+include("bme-bmefixedincome-topofbook-bmegate-v1-6")
+project(":bme-bmefixedincome-topofbook-bmegate-v1-6").projectDir = file("Classes/Bme/BmeFixedIncome/TopOfBook.BmeGate.v1.6")
+
+include("bme-bmefixedincome-topofbook5-bmegate-v1-6")
+project(":bme-bmefixedincome-topofbook5-bmegate-v1-6").projectDir = file("Classes/Bme/BmeFixedIncome/TopOfBook5.BmeGate.v1.6")
+
+include("bme-meff-fulldepth-bmegate-v1-6")
+project(":bme-meff-fulldepth-bmegate-v1-6").projectDir = file("Classes/Bme/Meff/FullDepth.BmeGate.v1.6")
+
+include("bme-meff-retail-bmegate-v1-6")
+project(":bme-meff-retail-bmegate-v1-6").projectDir = file("Classes/Bme/Meff/Retail.BmeGate.v1.6")
+
+include("bme-meff-retail5-bmegate-v1-6")
+project(":bme-meff-retail5-bmegate-v1-6").projectDir = file("Classes/Bme/Meff/Retail5.BmeGate.v1.6")
+
+include("bme-meff-topofbook-bmegate-v1-6")
+project(":bme-meff-topofbook-bmegate-v1-6").projectDir = file("Classes/Bme/Meff/TopOfBook.BmeGate.v1.6")
+
+include("bme-meff-topofbook5-bmegate-v1-6")
+project(":bme-meff-topofbook5-bmegate-v1-6").projectDir = file("Classes/Bme/Meff/TopOfBook5.BmeGate.v1.6")
+
+include("box-boxoptions-solamulticast-hsvf-v1-5")
+project(":box-boxoptions-solamulticast-hsvf-v1-5").projectDir = file("Classes/Box/BoxOptions/SolaMulticast.Hsvf.v1.5")
+
 include("box-boxoptions-solamulticast-hsvf-v1-8")
 project(":box-boxoptions-solamulticast-hsvf-v1-8").projectDir = file("Classes/Box/BoxOptions/SolaMulticast.Hsvf.v1.8")
 
+include("box-boxoptions-solamulticast-hsvf-v1-9")
+project(":box-boxoptions-solamulticast-hsvf-v1-9").projectDir = file("Classes/Box/BoxOptions/SolaMulticast.Hsvf.v1.9")
+
+include("box-boxoptions-solamulticast-hsvf-v2-1")
+project(":box-boxoptions-solamulticast-hsvf-v2-1").projectDir = file("Classes/Box/BoxOptions/SolaMulticast.Hsvf.v2.1")
+
+include("box-boxoptions-solamulticast-hsvf-v2-2")
+project(":box-boxoptions-solamulticast-hsvf-v2-2").projectDir = file("Classes/Box/BoxOptions/SolaMulticast.Hsvf.v2.2")
+
+include("box-boxoptions-solatradereporting-atr-v4-5")
+project(":box-boxoptions-solatradereporting-atr-v4-5").projectDir = file("Classes/Box/BoxOptions/SolaTradeReporting.Atr.v4.5")
+
+include("box-boxoptions-solaunicast-hsvf-v4-5-1")
+project(":box-boxoptions-solaunicast-hsvf-v4-5-1").projectDir = file("Classes/Box/BoxOptions/SolaUnicast.Hsvf.v4.5.1")
+
+include("bruceats-bruceequities-bestbidandoffer-itch-v1-0")
+project(":bruceats-bruceequities-bestbidandoffer-itch-v1-0").projectDir = file("Classes/BruceAts/BruceEquities/BestBidAndOffer.Itch.v1.0")
+
+include("bruceats-bruceequities-bestbidandoffer-itch-v3-3")
+project(":bruceats-bruceequities-bestbidandoffer-itch-v3-3").projectDir = file("Classes/BruceAts/BruceEquities/BestBidAndOffer.Itch.v3.3")
+
+include("bruceats-bruceequities-depthofbook-itch-v1-0")
+project(":bruceats-bruceequities-depthofbook-itch-v1-0").projectDir = file("Classes/BruceAts/BruceEquities/DepthOfBook.Itch.v1.0")
+
+include("bruceats-bruceequities-depthofbook-itch-v3-3")
+project(":bruceats-bruceequities-depthofbook-itch-v3-3").projectDir = file("Classes/BruceAts/BruceEquities/DepthOfBook.Itch.v3.3")
+
+include("bruceats-bruceequities-lastsale-itch-v1-0")
+project(":bruceats-bruceequities-lastsale-itch-v1-0").projectDir = file("Classes/BruceAts/BruceEquities/LastSale.Itch.v1.0")
+
+include("bruceats-bruceequities-lastsale-itch-v3-3")
+project(":bruceats-bruceequities-lastsale-itch-v3-3").projectDir = file("Classes/BruceAts/BruceEquities/LastSale.Itch.v3.3")
+
+include("bse-bseindia-eobi-fbe-v1-4")
+project(":bse-bseindia-eobi-fbe-v1-4").projectDir = file("Classes/Bse/BseIndia/Eobi.Fbe.v1.4")
+
+include("bse-bseindia-eti-fbe-v1-6-14")
+project(":bse-bseindia-eti-fbe-v1-6-14").projectDir = file("Classes/Bse/BseIndia/Eti.Fbe.v1.6.14")
+
+include("cboe-bxeequities-binaryorderentry-boe-v2-0-30")
+project(":cboe-bxeequities-binaryorderentry-boe-v2-0-30").projectDir = file("Classes/Cboe/BxeEquities/BinaryOrderEntry.Boe.v2.0.30")
+
+include("cboe-bxeequities-binaryorderentry-boe-v2-0-33")
+project(":cboe-bxeequities-binaryorderentry-boe-v2-0-33").projectDir = file("Classes/Cboe/BxeEquities/BinaryOrderEntry.Boe.v2.0.33")
+
+include("cboe-bxeequities-binaryorderentry-boe-v2-0-41")
+project(":cboe-bxeequities-binaryorderentry-boe-v2-0-41").projectDir = file("Classes/Cboe/BxeEquities/BinaryOrderEntry.Boe.v2.0.41")
+
+include("cboe-bxeequities-binaryorderentry-boe-v2-0-49")
+project(":cboe-bxeequities-binaryorderentry-boe-v2-0-49").projectDir = file("Classes/Cboe/BxeEquities/BinaryOrderEntry.Boe.v2.0.49")
+
+include("cboe-bxeequities-binaryorderentry-boe-v2-0-52")
+project(":cboe-bxeequities-binaryorderentry-boe-v2-0-52").projectDir = file("Classes/Cboe/BxeEquities/BinaryOrderEntry.Boe.v2.0.52")
+
+include("cboe-bxeequities-binaryorderentry-boe-v2-0-56")
+project(":cboe-bxeequities-binaryorderentry-boe-v2-0-56").projectDir = file("Classes/Cboe/BxeEquities/BinaryOrderEntry.Boe.v2.0.56")
+
+include("cboe-bxeequities-binaryorderentry-boe-v2-0-57")
+project(":cboe-bxeequities-binaryorderentry-boe-v2-0-57").projectDir = file("Classes/Cboe/BxeEquities/BinaryOrderEntry.Boe.v2.0.57")
+
+include("cboe-bxeequities-binaryorderentry-boe-v2-0-83")
+project(":cboe-bxeequities-binaryorderentry-boe-v2-0-83").projectDir = file("Classes/Cboe/BxeEquities/BinaryOrderEntry.Boe.v2.0.83")
+
+include("cboe-bxeequities-multicastdepthofbook-pitch-v6-15")
+project(":cboe-bxeequities-multicastdepthofbook-pitch-v6-15").projectDir = file("Classes/Cboe/BxeEquities/MulticastDepthOfBook.Pitch.v6.15")
+
+include("cboe-bxeequities-multicastdepthofbook-pitch-v6-2")
+project(":cboe-bxeequities-multicastdepthofbook-pitch-v6-2").projectDir = file("Classes/Cboe/BxeEquities/MulticastDepthOfBook.Pitch.v6.2")
+
+include("cboe-bxeequities-multicastdepthofbook-pitch-v6-20")
+project(":cboe-bxeequities-multicastdepthofbook-pitch-v6-20").projectDir = file("Classes/Cboe/BxeEquities/MulticastDepthOfBook.Pitch.v6.20")
+
+include("cboe-bxeequities-multicastdepthofbook-pitch-v6-24")
+project(":cboe-bxeequities-multicastdepthofbook-pitch-v6-24").projectDir = file("Classes/Cboe/BxeEquities/MulticastDepthOfBook.Pitch.v6.24")
+
+include("cboe-bxeequities-multicastdepthofbook-pitch-v6-68")
+project(":cboe-bxeequities-multicastdepthofbook-pitch-v6-68").projectDir = file("Classes/Cboe/BxeEquities/MulticastDepthOfBook.Pitch.v6.68")
+
+include("cboe-bxeequities-multicastdepthofbook-pitch-v6-7")
+project(":cboe-bxeequities-multicastdepthofbook-pitch-v6-7").projectDir = file("Classes/Cboe/BxeEquities/MulticastDepthOfBook.Pitch.v6.7")
+
+include("cboe-byxequities-binaryorderentry-boe-v2-4-55")
+project(":cboe-byxequities-binaryorderentry-boe-v2-4-55").projectDir = file("Classes/Cboe/ByxEquities/BinaryOrderEntry.Boe.v2.4.55")
+
+include("cboe-byxequities-binaryorderentry-boe-v2-4-57")
+project(":cboe-byxequities-binaryorderentry-boe-v2-4-57").projectDir = file("Classes/Cboe/ByxEquities/BinaryOrderEntry.Boe.v2.4.57")
+
+include("cboe-byxequities-binaryorderentry-boe3-v1-0-14")
+project(":cboe-byxequities-binaryorderentry-boe3-v1-0-14").projectDir = file("Classes/Cboe/ByxEquities/BinaryOrderEntry.Boe3.v1.0.14")
+
 include("cboe-byxequities-multicastdepthofbook-pitch-v2-41-29")
 project(":cboe-byxequities-multicastdepthofbook-pitch-v2-41-29").projectDir = file("Classes/Cboe/ByxEquities/MulticastDepthOfBook.Pitch.v2.41.29")
+
+include("cboe-byxequities-multicastdepthofbook-pitch-v2-41-64")
+project(":cboe-byxequities-multicastdepthofbook-pitch-v2-41-64").projectDir = file("Classes/Cboe/ByxEquities/MulticastDepthOfBook.Pitch.v2.41.64")
+
+include("cboe-byxequities-multicastdepthofbook-pitch-v2-41-66")
+project(":cboe-byxequities-multicastdepthofbook-pitch-v2-41-66").projectDir = file("Classes/Cboe/ByxEquities/MulticastDepthOfBook.Pitch.v2.41.66")
+
+include("cboe-byxequities-multicastdepthofbook-spin-v2-41-66")
+project(":cboe-byxequities-multicastdepthofbook-spin-v2-41-66").projectDir = file("Classes/Cboe/ByxEquities/MulticastDepthOfBook.Spin.v2.41.66")
+
+include("cboe-byxequities-summarydepth-csdp-v1-0-4")
+project(":cboe-byxequities-summarydepth-csdp-v1-0-4").projectDir = file("Classes/Cboe/ByxEquities/SummaryDepth.Csdp.v1.0.4")
+
+include("cboe-byxequities-top-asciipitch-v1-3-10")
+project(":cboe-byxequities-top-asciipitch-v1-3-10").projectDir = file("Classes/Cboe/ByxEquities/Top.AsciiPitch.v1.3.10")
+
+include("cboe-byxequities-top-asciipitch-v1-3-2")
+project(":cboe-byxequities-top-asciipitch-v1-3-2").projectDir = file("Classes/Cboe/ByxEquities/Top.AsciiPitch.v1.3.2")
+
+include("cboe-byxequities-top-asciipitch-v1-3-8")
+project(":cboe-byxequities-top-asciipitch-v1-3-8").projectDir = file("Classes/Cboe/ByxEquities/Top.AsciiPitch.v1.3.8")
 
 include("cboe-bzxequities-binaryorderentry-boe-v2-3")
 project(":cboe-bzxequities-binaryorderentry-boe-v2-3").projectDir = file("Classes/Cboe/BzxEquities/BinaryOrderEntry.Boe.v2.3")
@@ -44,20 +371,146 @@ project(":cboe-bzxequities-binaryorderentry-boe-v2-4-55").projectDir = file("Cla
 include("cboe-bzxequities-binaryorderentry-boe-v2-4-57")
 project(":cboe-bzxequities-binaryorderentry-boe-v2-4-57").projectDir = file("Classes/Cboe/BzxEquities/BinaryOrderEntry.Boe.v2.4.57")
 
+include("cboe-bzxequities-binaryorderentry-boe3-v1-0-14")
+project(":cboe-bzxequities-binaryorderentry-boe3-v1-0-14").projectDir = file("Classes/Cboe/BzxEquities/BinaryOrderEntry.Boe3.v1.0.14")
+
 include("cboe-bzxequities-multicastdepthofbook-pitch-v2-20-4")
 project(":cboe-bzxequities-multicastdepthofbook-pitch-v2-20-4").projectDir = file("Classes/Cboe/BzxEquities/MulticastDepthOfBook.Pitch.v2.20.4")
 
 include("cboe-bzxequities-multicastdepthofbook-pitch-v2-41-29")
 project(":cboe-bzxequities-multicastdepthofbook-pitch-v2-41-29").projectDir = file("Classes/Cboe/BzxEquities/MulticastDepthOfBook.Pitch.v2.41.29")
 
+include("cboe-bzxequities-multicastdepthofbook-pitch-v2-41-64")
+project(":cboe-bzxequities-multicastdepthofbook-pitch-v2-41-64").projectDir = file("Classes/Cboe/BzxEquities/MulticastDepthOfBook.Pitch.v2.41.64")
+
+include("cboe-bzxequities-multicastdepthofbook-pitch-v2-41-66")
+project(":cboe-bzxequities-multicastdepthofbook-pitch-v2-41-66").projectDir = file("Classes/Cboe/BzxEquities/MulticastDepthOfBook.Pitch.v2.41.66")
+
+include("cboe-bzxequities-multicastdepthofbook-pitch-v2-41-81")
+project(":cboe-bzxequities-multicastdepthofbook-pitch-v2-41-81").projectDir = file("Classes/Cboe/BzxEquities/MulticastDepthOfBook.Pitch.v2.41.81")
+
 include("cboe-bzxequities-multicastdepthofbook-spin-v2-20-4")
 project(":cboe-bzxequities-multicastdepthofbook-spin-v2-20-4").projectDir = file("Classes/Cboe/BzxEquities/MulticastDepthOfBook.Spin.v2.20.4")
+
+include("cboe-bzxequities-multicastdepthofbook-spin-v2-41-66")
+project(":cboe-bzxequities-multicastdepthofbook-spin-v2-41-66").projectDir = file("Classes/Cboe/BzxEquities/MulticastDepthOfBook.Spin.v2.41.66")
+
+include("cboe-bzxequities-multicastdepthofbook-spin-v2-41-81")
+project(":cboe-bzxequities-multicastdepthofbook-spin-v2-41-81").projectDir = file("Classes/Cboe/BzxEquities/MulticastDepthOfBook.Spin.v2.41.81")
+
+include("cboe-bzxequities-summarydepth-csdp-v1-0-4")
+project(":cboe-bzxequities-summarydepth-csdp-v1-0-4").projectDir = file("Classes/Cboe/BzxEquities/SummaryDepth.Csdp.v1.0.4")
+
+include("cboe-bzxequities-top-asciipitch-v1-3-10")
+project(":cboe-bzxequities-top-asciipitch-v1-3-10").projectDir = file("Classes/Cboe/BzxEquities/Top.AsciiPitch.v1.3.10")
+
+include("cboe-bzxequities-top-asciipitch-v1-3-8")
+project(":cboe-bzxequities-top-asciipitch-v1-3-8").projectDir = file("Classes/Cboe/BzxEquities/Top.AsciiPitch.v1.3.8")
 
 include("cboe-bzxoptions-binaryorderentry-boe-v2-10")
 project(":cboe-bzxoptions-binaryorderentry-boe-v2-10").projectDir = file("Classes/Cboe/BzxOptions/BinaryOrderEntry.Boe.v2.10")
 
+include("cboe-bzxoptions-binaryorderentry-boe-v2-11-115")
+project(":cboe-bzxoptions-binaryorderentry-boe-v2-11-115").projectDir = file("Classes/Cboe/BzxOptions/BinaryOrderEntry.Boe.v2.11.115")
+
+include("cboe-bzxoptions-binaryorderentry-boe3-v1-0-10")
+project(":cboe-bzxoptions-binaryorderentry-boe3-v1-0-10").projectDir = file("Classes/Cboe/BzxOptions/BinaryOrderEntry.Boe3.v1.0.10")
+
+include("cboe-bzxoptions-binaryorderentry-boe3-v1-1-23")
+project(":cboe-bzxoptions-binaryorderentry-boe3-v1-1-23").projectDir = file("Classes/Cboe/BzxOptions/BinaryOrderEntry.Boe3.v1.1.23")
+
+include("cboe-bzxoptions-complex-pitch-v2-1-61")
+project(":cboe-bzxoptions-complex-pitch-v2-1-61").projectDir = file("Classes/Cboe/BzxOptions/Complex.Pitch.v2.1.61")
+
+include("cboe-bzxoptions-complex-spin-v2-1-61")
+project(":cboe-bzxoptions-complex-spin-v2-1-61").projectDir = file("Classes/Cboe/BzxOptions/Complex.Spin.v2.1.61")
+
+include("cboe-bzxoptions-complexauction-pitch-v2-2-41")
+project(":cboe-bzxoptions-complexauction-pitch-v2-2-41").projectDir = file("Classes/Cboe/BzxOptions/ComplexAuction.Pitch.v2.2.41")
+
+include("cboe-bzxoptions-complextop-pitch-v1-1-54")
+project(":cboe-bzxoptions-complextop-pitch-v1-1-54").projectDir = file("Classes/Cboe/BzxOptions/ComplexTop.Pitch.v1.1.54")
+
+include("cboe-bzxoptions-complextop-spin-v1-1-54")
+project(":cboe-bzxoptions-complextop-spin-v1-1-54").projectDir = file("Classes/Cboe/BzxOptions/ComplexTop.Spin.v1.1.54")
+
+include("cboe-bzxoptions-multicastdepthofbook-pitch-v2-41-29")
+project(":cboe-bzxoptions-multicastdepthofbook-pitch-v2-41-29").projectDir = file("Classes/Cboe/BzxOptions/MulticastDepthOfBook.Pitch.v2.41.29")
+
+include("cboe-bzxoptions-multicastdepthofbook-pitch-v2-41-64")
+project(":cboe-bzxoptions-multicastdepthofbook-pitch-v2-41-64").projectDir = file("Classes/Cboe/BzxOptions/MulticastDepthOfBook.Pitch.v2.41.64")
+
+include("cboe-bzxoptions-multicastdepthofbook-pitch-v2-41-66")
+project(":cboe-bzxoptions-multicastdepthofbook-pitch-v2-41-66").projectDir = file("Classes/Cboe/BzxOptions/MulticastDepthOfBook.Pitch.v2.41.66")
+
+include("cboe-bzxoptions-multicastdepthofbook-pitch-v2-41-76")
+project(":cboe-bzxoptions-multicastdepthofbook-pitch-v2-41-76").projectDir = file("Classes/Cboe/BzxOptions/MulticastDepthOfBook.Pitch.v2.41.76")
+
+include("cboe-bzxoptions-multicastdepthofbook-pitch-v2-41-80")
+project(":cboe-bzxoptions-multicastdepthofbook-pitch-v2-41-80").projectDir = file("Classes/Cboe/BzxOptions/MulticastDepthOfBook.Pitch.v2.41.80")
+
+include("cboe-bzxoptions-multicastdepthofbook-spin-v2-41-66")
+project(":cboe-bzxoptions-multicastdepthofbook-spin-v2-41-66").projectDir = file("Classes/Cboe/BzxOptions/MulticastDepthOfBook.Spin.v2.41.66")
+
+include("cboe-bzxoptions-multicasttop-pitch-v1-2-54")
+project(":cboe-bzxoptions-multicasttop-pitch-v1-2-54").projectDir = file("Classes/Cboe/BzxOptions/MulticastTop.Pitch.v1.2.54")
+
+include("cboe-bzxoptions-multicasttop-pitch-v1-2-64")
+project(":cboe-bzxoptions-multicasttop-pitch-v1-2-64").projectDir = file("Classes/Cboe/BzxOptions/MulticastTop.Pitch.v1.2.64")
+
+include("cboe-bzxoptions-multicasttop-spin-v1-2-54")
+project(":cboe-bzxoptions-multicasttop-spin-v1-2-54").projectDir = file("Classes/Cboe/BzxOptions/MulticastTop.Spin.v1.2.54")
+
+include("cboe-bzxoptions-multicasttop-spin-v1-2-64")
+project(":cboe-bzxoptions-multicasttop-spin-v1-2-64").projectDir = file("Classes/Cboe/BzxOptions/MulticastTop.Spin.v1.2.64")
+
+include("cboe-c1options-auctionfeed-pitch-v1-1-1")
+project(":cboe-c1options-auctionfeed-pitch-v1-1-1").projectDir = file("Classes/Cboe/C1Options/AuctionFeed.Pitch.v1.1.1")
+
+include("cboe-c1options-auctionfeed-pitch-v1-1-39")
+project(":cboe-c1options-auctionfeed-pitch-v1-1-39").projectDir = file("Classes/Cboe/C1Options/AuctionFeed.Pitch.v1.1.39")
+
+include("cboe-c1options-auctionfeed-pitch-v1-1-44")
+project(":cboe-c1options-auctionfeed-pitch-v1-1-44").projectDir = file("Classes/Cboe/C1Options/AuctionFeed.Pitch.v1.1.44")
+
+include("cboe-c1options-binaryorderentry-boe-v2-10")
+project(":cboe-c1options-binaryorderentry-boe-v2-10").projectDir = file("Classes/Cboe/C1Options/BinaryOrderEntry.Boe.v2.10")
+
+include("cboe-c1options-binaryorderentry-boe-v2-11-115")
+project(":cboe-c1options-binaryorderentry-boe-v2-11-115").projectDir = file("Classes/Cboe/C1Options/BinaryOrderEntry.Boe.v2.11.115")
+
+include("cboe-c1options-binaryorderentry-boe3-v1-0-10")
+project(":cboe-c1options-binaryorderentry-boe3-v1-0-10").projectDir = file("Classes/Cboe/C1Options/BinaryOrderEntry.Boe3.v1.0.10")
+
+include("cboe-c1options-binaryorderentry-boe3-v1-1-23")
+project(":cboe-c1options-binaryorderentry-boe3-v1-1-23").projectDir = file("Classes/Cboe/C1Options/BinaryOrderEntry.Boe3.v1.1.23")
+
 include("cboe-c1options-complex-pitch-v2-1-18")
 project(":cboe-c1options-complex-pitch-v2-1-18").projectDir = file("Classes/Cboe/C1Options/Complex.Pitch.v2.1.18")
+
+include("cboe-c1options-complex-pitch-v2-1-37")
+project(":cboe-c1options-complex-pitch-v2-1-37").projectDir = file("Classes/Cboe/C1Options/Complex.Pitch.v2.1.37")
+
+include("cboe-c1options-complex-pitch-v2-1-61")
+project(":cboe-c1options-complex-pitch-v2-1-61").projectDir = file("Classes/Cboe/C1Options/Complex.Pitch.v2.1.61")
+
+include("cboe-c1options-complex-spin-v2-1-61")
+project(":cboe-c1options-complex-spin-v2-1-61").projectDir = file("Classes/Cboe/C1Options/Complex.Spin.v2.1.61")
+
+include("cboe-c1options-complexauction-pitch-v2-2-41")
+project(":cboe-c1options-complexauction-pitch-v2-2-41").projectDir = file("Classes/Cboe/C1Options/ComplexAuction.Pitch.v2.2.41")
+
+include("cboe-c1options-complextop-pitch-v1-1-54")
+project(":cboe-c1options-complextop-pitch-v1-1-54").projectDir = file("Classes/Cboe/C1Options/ComplexTop.Pitch.v1.1.54")
+
+include("cboe-c1options-complextop-spin-v1-1-54")
+project(":cboe-c1options-complextop-spin-v1-1-54").projectDir = file("Classes/Cboe/C1Options/ComplexTop.Spin.v1.1.54")
+
+include("cboe-c1options-flex-pitch-v1-1-30")
+project(":cboe-c1options-flex-pitch-v1-1-30").projectDir = file("Classes/Cboe/C1Options/Flex.Pitch.v1.1.30")
+
+include("cboe-c1options-flex-spin-v1-1-30")
+project(":cboe-c1options-flex-spin-v1-1-30").projectDir = file("Classes/Cboe/C1Options/Flex.Spin.v1.1.30")
 
 include("cboe-c1options-marketdatafeed-csm-v1-4-2")
 project(":cboe-c1options-marketdatafeed-csm-v1-4-2").projectDir = file("Classes/Cboe/C1Options/MarketDataFeed.Csm.v1.4.2")
@@ -68,11 +521,167 @@ project(":cboe-c1options-marketlevel2-csm-v1-0-4").projectDir = file("Classes/Cb
 include("cboe-c1options-multicastdepthofbook-pitch-v2-39-4")
 project(":cboe-c1options-multicastdepthofbook-pitch-v2-39-4").projectDir = file("Classes/Cboe/C1Options/MulticastDepthOfBook.Pitch.v2.39.4")
 
+include("cboe-c1options-multicastdepthofbook-pitch-v2-41-29")
+project(":cboe-c1options-multicastdepthofbook-pitch-v2-41-29").projectDir = file("Classes/Cboe/C1Options/MulticastDepthOfBook.Pitch.v2.41.29")
+
+include("cboe-c1options-multicastdepthofbook-pitch-v2-41-64")
+project(":cboe-c1options-multicastdepthofbook-pitch-v2-41-64").projectDir = file("Classes/Cboe/C1Options/MulticastDepthOfBook.Pitch.v2.41.64")
+
+include("cboe-c1options-multicastdepthofbook-pitch-v2-41-66")
+project(":cboe-c1options-multicastdepthofbook-pitch-v2-41-66").projectDir = file("Classes/Cboe/C1Options/MulticastDepthOfBook.Pitch.v2.41.66")
+
+include("cboe-c1options-multicastdepthofbook-pitch-v2-41-76")
+project(":cboe-c1options-multicastdepthofbook-pitch-v2-41-76").projectDir = file("Classes/Cboe/C1Options/MulticastDepthOfBook.Pitch.v2.41.76")
+
+include("cboe-c1options-multicastdepthofbook-pitch-v2-41-80")
+project(":cboe-c1options-multicastdepthofbook-pitch-v2-41-80").projectDir = file("Classes/Cboe/C1Options/MulticastDepthOfBook.Pitch.v2.41.80")
+
+include("cboe-c1options-multicastdepthofbook-spin-v2-41-66")
+project(":cboe-c1options-multicastdepthofbook-spin-v2-41-66").projectDir = file("Classes/Cboe/C1Options/MulticastDepthOfBook.Spin.v2.41.66")
+
+include("cboe-c1options-multicasttop-pitch-v1-2-54")
+project(":cboe-c1options-multicasttop-pitch-v1-2-54").projectDir = file("Classes/Cboe/C1Options/MulticastTop.Pitch.v1.2.54")
+
+include("cboe-c1options-multicasttop-pitch-v1-2-64")
+project(":cboe-c1options-multicasttop-pitch-v1-2-64").projectDir = file("Classes/Cboe/C1Options/MulticastTop.Pitch.v1.2.64")
+
+include("cboe-c1options-multicasttop-spin-v1-2-54")
+project(":cboe-c1options-multicasttop-spin-v1-2-54").projectDir = file("Classes/Cboe/C1Options/MulticastTop.Spin.v1.2.54")
+
+include("cboe-c1options-multicasttop-spin-v1-2-64")
+project(":cboe-c1options-multicasttop-spin-v1-2-64").projectDir = file("Classes/Cboe/C1Options/MulticastTop.Spin.v1.2.64")
+
 include("cboe-c1options-openingauction-csm-v1-0")
 project(":cboe-c1options-openingauction-csm-v1-0").projectDir = file("Classes/Cboe/C1Options/OpeningAuction.Csm.v1.0")
 
+include("cboe-c1options-openingprocess-pitch-v1-0-30")
+project(":cboe-c1options-openingprocess-pitch-v1-0-30").projectDir = file("Classes/Cboe/C1Options/OpeningProcess.Pitch.v1.0.30")
+
+include("cboe-c1options-openingprocess-pitch-v1-0-34")
+project(":cboe-c1options-openingprocess-pitch-v1-0-34").projectDir = file("Classes/Cboe/C1Options/OpeningProcess.Pitch.v1.0.34")
+
+include("cboe-c2options-binaryorderentry-boe-v2-10")
+project(":cboe-c2options-binaryorderentry-boe-v2-10").projectDir = file("Classes/Cboe/C2Options/BinaryOrderEntry.Boe.v2.10")
+
+include("cboe-c2options-binaryorderentry-boe-v2-11-115")
+project(":cboe-c2options-binaryorderentry-boe-v2-11-115").projectDir = file("Classes/Cboe/C2Options/BinaryOrderEntry.Boe.v2.11.115")
+
+include("cboe-c2options-binaryorderentry-boe3-v1-0-10")
+project(":cboe-c2options-binaryorderentry-boe3-v1-0-10").projectDir = file("Classes/Cboe/C2Options/BinaryOrderEntry.Boe3.v1.0.10")
+
+include("cboe-c2options-binaryorderentry-boe3-v1-1-23")
+project(":cboe-c2options-binaryorderentry-boe3-v1-1-23").projectDir = file("Classes/Cboe/C2Options/BinaryOrderEntry.Boe3.v1.1.23")
+
+include("cboe-c2options-complex-pitch-v2-1-61")
+project(":cboe-c2options-complex-pitch-v2-1-61").projectDir = file("Classes/Cboe/C2Options/Complex.Pitch.v2.1.61")
+
+include("cboe-c2options-complex-spin-v2-1-61")
+project(":cboe-c2options-complex-spin-v2-1-61").projectDir = file("Classes/Cboe/C2Options/Complex.Spin.v2.1.61")
+
+include("cboe-c2options-complexauction-pitch-v2-2-41")
+project(":cboe-c2options-complexauction-pitch-v2-2-41").projectDir = file("Classes/Cboe/C2Options/ComplexAuction.Pitch.v2.2.41")
+
+include("cboe-c2options-complextop-pitch-v1-1-54")
+project(":cboe-c2options-complextop-pitch-v1-1-54").projectDir = file("Classes/Cboe/C2Options/ComplexTop.Pitch.v1.1.54")
+
+include("cboe-c2options-complextop-spin-v1-1-54")
+project(":cboe-c2options-complextop-spin-v1-1-54").projectDir = file("Classes/Cboe/C2Options/ComplexTop.Spin.v1.1.54")
+
+include("cboe-c2options-multicastdepthofbook-pitch-v2-41-29")
+project(":cboe-c2options-multicastdepthofbook-pitch-v2-41-29").projectDir = file("Classes/Cboe/C2Options/MulticastDepthOfBook.Pitch.v2.41.29")
+
+include("cboe-c2options-multicastdepthofbook-pitch-v2-41-64")
+project(":cboe-c2options-multicastdepthofbook-pitch-v2-41-64").projectDir = file("Classes/Cboe/C2Options/MulticastDepthOfBook.Pitch.v2.41.64")
+
+include("cboe-c2options-multicastdepthofbook-pitch-v2-41-66")
+project(":cboe-c2options-multicastdepthofbook-pitch-v2-41-66").projectDir = file("Classes/Cboe/C2Options/MulticastDepthOfBook.Pitch.v2.41.66")
+
+include("cboe-c2options-multicastdepthofbook-pitch-v2-41-76")
+project(":cboe-c2options-multicastdepthofbook-pitch-v2-41-76").projectDir = file("Classes/Cboe/C2Options/MulticastDepthOfBook.Pitch.v2.41.76")
+
+include("cboe-c2options-multicastdepthofbook-pitch-v2-41-80")
+project(":cboe-c2options-multicastdepthofbook-pitch-v2-41-80").projectDir = file("Classes/Cboe/C2Options/MulticastDepthOfBook.Pitch.v2.41.80")
+
+include("cboe-c2options-multicastdepthofbook-spin-v2-41-66")
+project(":cboe-c2options-multicastdepthofbook-spin-v2-41-66").projectDir = file("Classes/Cboe/C2Options/MulticastDepthOfBook.Spin.v2.41.66")
+
+include("cboe-c2options-multicasttop-pitch-v1-2-54")
+project(":cboe-c2options-multicasttop-pitch-v1-2-54").projectDir = file("Classes/Cboe/C2Options/MulticastTop.Pitch.v1.2.54")
+
+include("cboe-c2options-multicasttop-pitch-v1-2-64")
+project(":cboe-c2options-multicasttop-pitch-v1-2-64").projectDir = file("Classes/Cboe/C2Options/MulticastTop.Pitch.v1.2.64")
+
+include("cboe-c2options-multicasttop-spin-v1-2-54")
+project(":cboe-c2options-multicasttop-spin-v1-2-54").projectDir = file("Classes/Cboe/C2Options/MulticastTop.Spin.v1.2.54")
+
+include("cboe-c2options-multicasttop-spin-v1-2-64")
+project(":cboe-c2options-multicasttop-spin-v1-2-64").projectDir = file("Classes/Cboe/C2Options/MulticastTop.Spin.v1.2.64")
+
+include("cboe-cboeequities-binaryorderentry-boe-v2-3-7")
+project(":cboe-cboeequities-binaryorderentry-boe-v2-3-7").projectDir = file("Classes/Cboe/CboeEquities/BinaryOrderEntry.Boe.v2.3.7")
+
+include("cboe-cboeeurope-latencyfeed-pitch-v1-4")
+project(":cboe-cboeeurope-latencyfeed-pitch-v1-4").projectDir = file("Classes/Cboe/CboeEurope/LatencyFeed.Pitch.v1.4")
+
+include("cboe-cboeeurope-multicastsiquotes-pitch-v6-68")
+project(":cboe-cboeeurope-multicastsiquotes-pitch-v6-68").projectDir = file("Classes/Cboe/CboeEurope/MulticastSiQuotes.Pitch.v6.68")
+
+include("cboe-cboeeurope-multicasttradereporting-pitch-v6-68")
+project(":cboe-cboeeurope-multicasttradereporting-pitch-v6-68").projectDir = file("Classes/Cboe/CboeEurope/MulticastTradeReporting.Pitch.v6.68")
+
+include("cboe-cboeeurope-tradereporting-boe-v2-0-15")
+project(":cboe-cboeeurope-tradereporting-boe-v2-0-15").projectDir = file("Classes/Cboe/CboeEurope/TradeReporting.Boe.v2.0.15")
+
+include("cboe-cboeeurope-tradereporting-boe-v2-0-17")
+project(":cboe-cboeeurope-tradereporting-boe-v2-0-17").projectDir = file("Classes/Cboe/CboeEurope/TradeReporting.Boe.v2.0.17")
+
+include("cboe-cboeeurope-tradereporting-boe-v2-0-23")
+project(":cboe-cboeeurope-tradereporting-boe-v2-0-23").projectDir = file("Classes/Cboe/CboeEurope/TradeReporting.Boe.v2.0.23")
+
+include("cboe-cboeeurope-tradereporting-boe-v2-0-24")
+project(":cboe-cboeeurope-tradereporting-boe-v2-0-24").projectDir = file("Classes/Cboe/CboeEurope/TradeReporting.Boe.v2.0.24")
+
+include("cboe-cboeeurope-tradereporting-boe-v2-0-40")
+project(":cboe-cboeeurope-tradereporting-boe-v2-0-40").projectDir = file("Classes/Cboe/CboeEurope/TradeReporting.Boe.v2.0.40")
+
+include("cboe-cedxderivatives-binaryorderentry-boe-v2-18")
+project(":cboe-cedxderivatives-binaryorderentry-boe-v2-18").projectDir = file("Classes/Cboe/CedxDerivatives/BinaryOrderEntry.Boe.v2.18")
+
+include("cboe-cedxderivatives-binaryorderentry-boe-v2-30")
+project(":cboe-cedxderivatives-binaryorderentry-boe-v2-30").projectDir = file("Classes/Cboe/CedxDerivatives/BinaryOrderEntry.Boe.v2.30")
+
+include("cboe-cedxderivatives-binaryorderentry-boe-v2-32")
+project(":cboe-cedxderivatives-binaryorderentry-boe-v2-32").projectDir = file("Classes/Cboe/CedxDerivatives/BinaryOrderEntry.Boe.v2.32")
+
+include("cboe-cedxderivatives-binaryorderentry-boe-v2-6")
+project(":cboe-cedxderivatives-binaryorderentry-boe-v2-6").projectDir = file("Classes/Cboe/CedxDerivatives/BinaryOrderEntry.Boe.v2.6")
+
+include("cboe-cedxderivatives-multicastdepthofbook-pitch-v1-01")
+project(":cboe-cedxderivatives-multicastdepthofbook-pitch-v1-01").projectDir = file("Classes/Cboe/CedxDerivatives/MulticastDepthOfBook.Pitch.v1.01")
+
+include("cboe-cedxderivatives-multicastdepthofbook-pitch-v1-11")
+project(":cboe-cedxderivatives-multicastdepthofbook-pitch-v1-11").projectDir = file("Classes/Cboe/CedxDerivatives/MulticastDepthOfBook.Pitch.v1.11")
+
+include("cboe-cfefutures-binaryorderentry-boe-v1-3")
+project(":cboe-cfefutures-binaryorderentry-boe-v1-3").projectDir = file("Classes/Cboe/CfeFutures/BinaryOrderEntry.Boe.v1.3")
+
+include("cboe-cfefutures-binaryorderentry-boe-v1-3-12")
+project(":cboe-cfefutures-binaryorderentry-boe-v1-3-12").projectDir = file("Classes/Cboe/CfeFutures/BinaryOrderEntry.Boe.v1.3.12")
+
+include("cboe-cfefutures-binaryorderentry-boe3-v1-0")
+project(":cboe-cfefutures-binaryorderentry-boe3-v1-0").projectDir = file("Classes/Cboe/CfeFutures/BinaryOrderEntry.Boe3.v1.0")
+
+include("cboe-cfefutures-binaryorderentry-boe3-v1-1-18")
+project(":cboe-cfefutures-binaryorderentry-boe3-v1-1-18").projectDir = file("Classes/Cboe/CfeFutures/BinaryOrderEntry.Boe3.v1.1.18")
+
 include("cboe-cfefutures-binaryorderentry-boe3-v1-1-20")
 project(":cboe-cfefutures-binaryorderentry-boe3-v1-1-20").projectDir = file("Classes/Cboe/CfeFutures/BinaryOrderEntry.Boe3.v1.1.20")
+
+include("cboe-cfefutures-binaryorderentry-boe3-v1-1-31")
+project(":cboe-cfefutures-binaryorderentry-boe3-v1-1-31").projectDir = file("Classes/Cboe/CfeFutures/BinaryOrderEntry.Boe3.v1.1.31")
+
+include("cboe-cfefutures-binaryorderentry-boe3-v1-1-36")
+project(":cboe-cfefutures-binaryorderentry-boe3-v1-1-36").projectDir = file("Classes/Cboe/CfeFutures/BinaryOrderEntry.Boe3.v1.1.36")
 
 include("cboe-cfefutures-multicastdepthofbook-pitch-v1-1-12")
 project(":cboe-cfefutures-multicastdepthofbook-pitch-v1-1-12").projectDir = file("Classes/Cboe/CfeFutures/MulticastDepthOfBook.Pitch.v1.1.12")
@@ -80,26 +689,407 @@ project(":cboe-cfefutures-multicastdepthofbook-pitch-v1-1-12").projectDir = file
 include("cboe-cfefutures-multicastdepthofbook-pitch-v1-1-6")
 project(":cboe-cfefutures-multicastdepthofbook-pitch-v1-1-6").projectDir = file("Classes/Cboe/CfeFutures/MulticastDepthOfBook.Pitch.v1.1.6")
 
+include("cboe-cfefutures-multicastdepthofbook-pitch-v1-2-13")
+project(":cboe-cfefutures-multicastdepthofbook-pitch-v1-2-13").projectDir = file("Classes/Cboe/CfeFutures/MulticastDepthOfBook.Pitch.v1.2.13")
+
+include("cboe-cfefutures-multicastdepthofbook-pitch-v1-2-19")
+project(":cboe-cfefutures-multicastdepthofbook-pitch-v1-2-19").projectDir = file("Classes/Cboe/CfeFutures/MulticastDepthOfBook.Pitch.v1.2.19")
+
+include("cboe-cfefutures-multicastdepthofbook-pitch-v1-2-22")
+project(":cboe-cfefutures-multicastdepthofbook-pitch-v1-2-22").projectDir = file("Classes/Cboe/CfeFutures/MulticastDepthOfBook.Pitch.v1.2.22")
+
+include("cboe-cfefutures-multicastdepthofbook-spin-v1-2-13")
+project(":cboe-cfefutures-multicastdepthofbook-spin-v1-2-13").projectDir = file("Classes/Cboe/CfeFutures/MulticastDepthOfBook.Spin.v1.2.13")
+
+include("cboe-cfefutures-multicastdepthofbook-spin-v1-2-19")
+project(":cboe-cfefutures-multicastdepthofbook-spin-v1-2-19").projectDir = file("Classes/Cboe/CfeFutures/MulticastDepthOfBook.Spin.v1.2.19")
+
+include("cboe-cfefutures-multicasttop-pitch-v1-2-20")
+project(":cboe-cfefutures-multicasttop-pitch-v1-2-20").projectDir = file("Classes/Cboe/CfeFutures/MulticastTop.Pitch.v1.2.20")
+
 include("cboe-cfefutures-multicasttop-pitch-v1-2-22")
 project(":cboe-cfefutures-multicasttop-pitch-v1-2-22").projectDir = file("Classes/Cboe/CfeFutures/MulticastTop.Pitch.v1.2.22")
+
+include("cboe-cfefutures-multicasttop-spin-v1-2-20")
+project(":cboe-cfefutures-multicasttop-spin-v1-2-20").projectDir = file("Classes/Cboe/CfeFutures/MulticastTop.Spin.v1.2.20")
+
+include("cboe-cfefutures-multicasttop-spin-v1-2-22")
+project(":cboe-cfefutures-multicasttop-spin-v1-2-22").projectDir = file("Classes/Cboe/CfeFutures/MulticastTop.Spin.v1.2.22")
+
+include("cboe-cfefutures-oofmulticastdepthofbook-pitch-v1-0-8")
+project(":cboe-cfefutures-oofmulticastdepthofbook-pitch-v1-0-8").projectDir = file("Classes/Cboe/CfeFutures/OofMulticastDepthOfBook.Pitch.v1.0.8")
+
+include("cboe-cfefutures-oofmulticastdepthofbook-spin-v1-0-8")
+project(":cboe-cfefutures-oofmulticastdepthofbook-spin-v1-0-8").projectDir = file("Classes/Cboe/CfeFutures/OofMulticastDepthOfBook.Spin.v1.0.8")
+
+include("cboe-cfefutures-oofmulticasttop-pitch-v1-0-8")
+project(":cboe-cfefutures-oofmulticasttop-pitch-v1-0-8").projectDir = file("Classes/Cboe/CfeFutures/OofMulticastTop.Pitch.v1.0.8")
+
+include("cboe-cfefutures-oofmulticasttop-spin-v1-0-8")
+project(":cboe-cfefutures-oofmulticasttop-spin-v1-0-8").projectDir = file("Classes/Cboe/CfeFutures/OofMulticastTop.Spin.v1.0.8")
+
+include("cboe-cxaequities-binaryorderentry-boe3-v1-0-20")
+project(":cboe-cxaequities-binaryorderentry-boe3-v1-0-20").projectDir = file("Classes/Cboe/CxaEquities/BinaryOrderEntry.Boe3.v1.0.20")
+
+include("cboe-cxaequities-multicastdepthofbook-pitch-v1-0-12")
+project(":cboe-cxaequities-multicastdepthofbook-pitch-v1-0-12").projectDir = file("Classes/Cboe/CxaEquities/MulticastDepthOfBook.Pitch.v1.0.12")
+
+include("cboe-cxaequities-multicastdepthofbook-spin-v1-0-12")
+project(":cboe-cxaequities-multicastdepthofbook-spin-v1-0-12").projectDir = file("Classes/Cboe/CxaEquities/MulticastDepthOfBook.Spin.v1.0.12")
+
+include("cboe-cxaequities-multicasttopofbook-pitch-v1-0-10")
+project(":cboe-cxaequities-multicasttopofbook-pitch-v1-0-10").projectDir = file("Classes/Cboe/CxaEquities/MulticastTopOfBook.Pitch.v1.0.10")
+
+include("cboe-cxaequities-multicasttopofbook-spin-v1-0-10")
+project(":cboe-cxaequities-multicasttopofbook-spin-v1-0-10").projectDir = file("Classes/Cboe/CxaEquities/MulticastTopOfBook.Spin.v1.0.10")
+
+include("cboe-cxeequities-binaryorderentry-boe-v2-0-30")
+project(":cboe-cxeequities-binaryorderentry-boe-v2-0-30").projectDir = file("Classes/Cboe/CxeEquities/BinaryOrderEntry.Boe.v2.0.30")
+
+include("cboe-cxeequities-binaryorderentry-boe-v2-0-33")
+project(":cboe-cxeequities-binaryorderentry-boe-v2-0-33").projectDir = file("Classes/Cboe/CxeEquities/BinaryOrderEntry.Boe.v2.0.33")
+
+include("cboe-cxeequities-binaryorderentry-boe-v2-0-41")
+project(":cboe-cxeequities-binaryorderentry-boe-v2-0-41").projectDir = file("Classes/Cboe/CxeEquities/BinaryOrderEntry.Boe.v2.0.41")
+
+include("cboe-cxeequities-binaryorderentry-boe-v2-0-49")
+project(":cboe-cxeequities-binaryorderentry-boe-v2-0-49").projectDir = file("Classes/Cboe/CxeEquities/BinaryOrderEntry.Boe.v2.0.49")
+
+include("cboe-cxeequities-binaryorderentry-boe-v2-0-52")
+project(":cboe-cxeequities-binaryorderentry-boe-v2-0-52").projectDir = file("Classes/Cboe/CxeEquities/BinaryOrderEntry.Boe.v2.0.52")
+
+include("cboe-cxeequities-binaryorderentry-boe-v2-0-56")
+project(":cboe-cxeequities-binaryorderentry-boe-v2-0-56").projectDir = file("Classes/Cboe/CxeEquities/BinaryOrderEntry.Boe.v2.0.56")
+
+include("cboe-cxeequities-binaryorderentry-boe-v2-0-57")
+project(":cboe-cxeequities-binaryorderentry-boe-v2-0-57").projectDir = file("Classes/Cboe/CxeEquities/BinaryOrderEntry.Boe.v2.0.57")
+
+include("cboe-cxeequities-binaryorderentry-boe-v2-0-83")
+project(":cboe-cxeequities-binaryorderentry-boe-v2-0-83").projectDir = file("Classes/Cboe/CxeEquities/BinaryOrderEntry.Boe.v2.0.83")
+
+include("cboe-cxeequities-multicastdepthofbook-pitch-v6-15")
+project(":cboe-cxeequities-multicastdepthofbook-pitch-v6-15").projectDir = file("Classes/Cboe/CxeEquities/MulticastDepthOfBook.Pitch.v6.15")
+
+include("cboe-cxeequities-multicastdepthofbook-pitch-v6-2")
+project(":cboe-cxeequities-multicastdepthofbook-pitch-v6-2").projectDir = file("Classes/Cboe/CxeEquities/MulticastDepthOfBook.Pitch.v6.2")
+
+include("cboe-cxeequities-multicastdepthofbook-pitch-v6-20")
+project(":cboe-cxeequities-multicastdepthofbook-pitch-v6-20").projectDir = file("Classes/Cboe/CxeEquities/MulticastDepthOfBook.Pitch.v6.20")
+
+include("cboe-cxeequities-multicastdepthofbook-pitch-v6-24")
+project(":cboe-cxeequities-multicastdepthofbook-pitch-v6-24").projectDir = file("Classes/Cboe/CxeEquities/MulticastDepthOfBook.Pitch.v6.24")
+
+include("cboe-cxeequities-multicastdepthofbook-pitch-v6-68")
+project(":cboe-cxeequities-multicastdepthofbook-pitch-v6-68").projectDir = file("Classes/Cboe/CxeEquities/MulticastDepthOfBook.Pitch.v6.68")
+
+include("cboe-cxeequities-multicastdepthofbook-pitch-v6-7")
+project(":cboe-cxeequities-multicastdepthofbook-pitch-v6-7").projectDir = file("Classes/Cboe/CxeEquities/MulticastDepthOfBook.Pitch.v6.7")
+
+include("cboe-cxjequities-binaryorderentry-boe3-v1-0-12")
+project(":cboe-cxjequities-binaryorderentry-boe3-v1-0-12").projectDir = file("Classes/Cboe/CxjEquities/BinaryOrderEntry.Boe3.v1.0.12")
+
+include("cboe-cxjequities-multicastdepthofbook-pitch-v1-0-6")
+project(":cboe-cxjequities-multicastdepthofbook-pitch-v1-0-6").projectDir = file("Classes/Cboe/CxjEquities/MulticastDepthOfBook.Pitch.v1.0.6")
+
+include("cboe-cxjequities-multicastdepthofbook-spin-v1-0-6")
+project(":cboe-cxjequities-multicastdepthofbook-spin-v1-0-6").projectDir = file("Classes/Cboe/CxjEquities/MulticastDepthOfBook.Spin.v1.0.6")
+
+include("cboe-dxeequities-multicastdepthofbook-pitch-v6-68")
+project(":cboe-dxeequities-multicastdepthofbook-pitch-v6-68").projectDir = file("Classes/Cboe/DxeEquities/MulticastDepthOfBook.Pitch.v6.68")
+
+include("cboe-edgaequities-binaryorderentry-boe-v2-4-55")
+project(":cboe-edgaequities-binaryorderentry-boe-v2-4-55").projectDir = file("Classes/Cboe/EdgaEquities/BinaryOrderEntry.Boe.v2.4.55")
+
+include("cboe-edgaequities-binaryorderentry-boe-v2-4-57")
+project(":cboe-edgaequities-binaryorderentry-boe-v2-4-57").projectDir = file("Classes/Cboe/EdgaEquities/BinaryOrderEntry.Boe.v2.4.57")
+
+include("cboe-edgaequities-binaryorderentry-boe3-v1-0-14")
+project(":cboe-edgaequities-binaryorderentry-boe3-v1-0-14").projectDir = file("Classes/Cboe/EdgaEquities/BinaryOrderEntry.Boe3.v1.0.14")
 
 include("cboe-edgaequities-multicastdepthofbook-pitch-v2-41-29")
 project(":cboe-edgaequities-multicastdepthofbook-pitch-v2-41-29").projectDir = file("Classes/Cboe/EdgaEquities/MulticastDepthOfBook.Pitch.v2.41.29")
 
+include("cboe-edgaequities-multicastdepthofbook-pitch-v2-41-64")
+project(":cboe-edgaequities-multicastdepthofbook-pitch-v2-41-64").projectDir = file("Classes/Cboe/EdgaEquities/MulticastDepthOfBook.Pitch.v2.41.64")
+
+include("cboe-edgaequities-multicastdepthofbook-pitch-v2-41-66")
+project(":cboe-edgaequities-multicastdepthofbook-pitch-v2-41-66").projectDir = file("Classes/Cboe/EdgaEquities/MulticastDepthOfBook.Pitch.v2.41.66")
+
+include("cboe-edgaequities-multicastdepthofbook-spin-v2-41-66")
+project(":cboe-edgaequities-multicastdepthofbook-spin-v2-41-66").projectDir = file("Classes/Cboe/EdgaEquities/MulticastDepthOfBook.Spin.v2.41.66")
+
+include("cboe-edgaequities-summarydepth-csdp-v1-0-4")
+project(":cboe-edgaequities-summarydepth-csdp-v1-0-4").projectDir = file("Classes/Cboe/EdgaEquities/SummaryDepth.Csdp.v1.0.4")
+
+include("cboe-edgaequities-top-asciipitch-v1-3-10")
+project(":cboe-edgaequities-top-asciipitch-v1-3-10").projectDir = file("Classes/Cboe/EdgaEquities/Top.AsciiPitch.v1.3.10")
+
+include("cboe-edgaequities-top-asciipitch-v1-3-8")
+project(":cboe-edgaequities-top-asciipitch-v1-3-8").projectDir = file("Classes/Cboe/EdgaEquities/Top.AsciiPitch.v1.3.8")
+
+include("cboe-edgxequities-binaryorderentry-boe-v2-3")
+project(":cboe-edgxequities-binaryorderentry-boe-v2-3").projectDir = file("Classes/Cboe/EdgxEquities/BinaryOrderEntry.Boe.v2.3")
+
+include("cboe-edgxequities-binaryorderentry-boe-v2-4-55")
+project(":cboe-edgxequities-binaryorderentry-boe-v2-4-55").projectDir = file("Classes/Cboe/EdgxEquities/BinaryOrderEntry.Boe.v2.4.55")
+
+include("cboe-edgxequities-binaryorderentry-boe-v2-4-57")
+project(":cboe-edgxequities-binaryorderentry-boe-v2-4-57").projectDir = file("Classes/Cboe/EdgxEquities/BinaryOrderEntry.Boe.v2.4.57")
+
+include("cboe-edgxequities-binaryorderentry-boe3-v1-0-14")
+project(":cboe-edgxequities-binaryorderentry-boe3-v1-0-14").projectDir = file("Classes/Cboe/EdgxEquities/BinaryOrderEntry.Boe3.v1.0.14")
+
 include("cboe-edgxequities-multicastdepthofbook-pitch-v2-41-29")
 project(":cboe-edgxequities-multicastdepthofbook-pitch-v2-41-29").projectDir = file("Classes/Cboe/EdgxEquities/MulticastDepthOfBook.Pitch.v2.41.29")
+
+include("cboe-edgxequities-multicastdepthofbook-pitch-v2-41-64")
+project(":cboe-edgxequities-multicastdepthofbook-pitch-v2-41-64").projectDir = file("Classes/Cboe/EdgxEquities/MulticastDepthOfBook.Pitch.v2.41.64")
+
+include("cboe-edgxequities-multicastdepthofbook-pitch-v2-41-66")
+project(":cboe-edgxequities-multicastdepthofbook-pitch-v2-41-66").projectDir = file("Classes/Cboe/EdgxEquities/MulticastDepthOfBook.Pitch.v2.41.66")
+
+include("cboe-edgxequities-multicastdepthofbook-pitch-v2-41-81")
+project(":cboe-edgxequities-multicastdepthofbook-pitch-v2-41-81").projectDir = file("Classes/Cboe/EdgxEquities/MulticastDepthOfBook.Pitch.v2.41.81")
+
+include("cboe-edgxequities-multicastdepthofbook-spin-v2-41-66")
+project(":cboe-edgxequities-multicastdepthofbook-spin-v2-41-66").projectDir = file("Classes/Cboe/EdgxEquities/MulticastDepthOfBook.Spin.v2.41.66")
+
+include("cboe-edgxequities-multicastdepthofbook-spin-v2-41-81")
+project(":cboe-edgxequities-multicastdepthofbook-spin-v2-41-81").projectDir = file("Classes/Cboe/EdgxEquities/MulticastDepthOfBook.Spin.v2.41.81")
+
+include("cboe-edgxequities-summarydepth-csdp-v1-0-4")
+project(":cboe-edgxequities-summarydepth-csdp-v1-0-4").projectDir = file("Classes/Cboe/EdgxEquities/SummaryDepth.Csdp.v1.0.4")
+
+include("cboe-edgxequities-top-asciipitch-v1-3-10")
+project(":cboe-edgxequities-top-asciipitch-v1-3-10").projectDir = file("Classes/Cboe/EdgxEquities/Top.AsciiPitch.v1.3.10")
+
+include("cboe-edgxequities-top-asciipitch-v1-3-8")
+project(":cboe-edgxequities-top-asciipitch-v1-3-8").projectDir = file("Classes/Cboe/EdgxEquities/Top.AsciiPitch.v1.3.8")
+
+include("cboe-edgxoptions-auctionfeed-pitch-v1-1-1")
+project(":cboe-edgxoptions-auctionfeed-pitch-v1-1-1").projectDir = file("Classes/Cboe/EdgxOptions/AuctionFeed.Pitch.v1.1.1")
+
+include("cboe-edgxoptions-auctionfeed-pitch-v1-1-39")
+project(":cboe-edgxoptions-auctionfeed-pitch-v1-1-39").projectDir = file("Classes/Cboe/EdgxOptions/AuctionFeed.Pitch.v1.1.39")
+
+include("cboe-edgxoptions-auctionfeed-pitch-v1-1-44")
+project(":cboe-edgxoptions-auctionfeed-pitch-v1-1-44").projectDir = file("Classes/Cboe/EdgxOptions/AuctionFeed.Pitch.v1.1.44")
+
+include("cboe-edgxoptions-binaryorderentry-boe-v2-10")
+project(":cboe-edgxoptions-binaryorderentry-boe-v2-10").projectDir = file("Classes/Cboe/EdgxOptions/BinaryOrderEntry.Boe.v2.10")
+
+include("cboe-edgxoptions-binaryorderentry-boe-v2-11-115")
+project(":cboe-edgxoptions-binaryorderentry-boe-v2-11-115").projectDir = file("Classes/Cboe/EdgxOptions/BinaryOrderEntry.Boe.v2.11.115")
+
+include("cboe-edgxoptions-binaryorderentry-boe3-v1-0-10")
+project(":cboe-edgxoptions-binaryorderentry-boe3-v1-0-10").projectDir = file("Classes/Cboe/EdgxOptions/BinaryOrderEntry.Boe3.v1.0.10")
+
+include("cboe-edgxoptions-binaryorderentry-boe3-v1-1-23")
+project(":cboe-edgxoptions-binaryorderentry-boe3-v1-1-23").projectDir = file("Classes/Cboe/EdgxOptions/BinaryOrderEntry.Boe3.v1.1.23")
+
+include("cboe-edgxoptions-complex-pitch-v2-1-61")
+project(":cboe-edgxoptions-complex-pitch-v2-1-61").projectDir = file("Classes/Cboe/EdgxOptions/Complex.Pitch.v2.1.61")
+
+include("cboe-edgxoptions-complex-spin-v2-1-61")
+project(":cboe-edgxoptions-complex-spin-v2-1-61").projectDir = file("Classes/Cboe/EdgxOptions/Complex.Spin.v2.1.61")
+
+include("cboe-edgxoptions-complexauction-pitch-v2-2-41")
+project(":cboe-edgxoptions-complexauction-pitch-v2-2-41").projectDir = file("Classes/Cboe/EdgxOptions/ComplexAuction.Pitch.v2.2.41")
+
+include("cboe-edgxoptions-complextop-pitch-v1-1-54")
+project(":cboe-edgxoptions-complextop-pitch-v1-1-54").projectDir = file("Classes/Cboe/EdgxOptions/ComplexTop.Pitch.v1.1.54")
+
+include("cboe-edgxoptions-complextop-spin-v1-1-54")
+project(":cboe-edgxoptions-complextop-spin-v1-1-54").projectDir = file("Classes/Cboe/EdgxOptions/ComplexTop.Spin.v1.1.54")
+
+include("cboe-edgxoptions-multicastdepthofbook-pitch-v2-41-29")
+project(":cboe-edgxoptions-multicastdepthofbook-pitch-v2-41-29").projectDir = file("Classes/Cboe/EdgxOptions/MulticastDepthOfBook.Pitch.v2.41.29")
+
+include("cboe-edgxoptions-multicastdepthofbook-pitch-v2-41-64")
+project(":cboe-edgxoptions-multicastdepthofbook-pitch-v2-41-64").projectDir = file("Classes/Cboe/EdgxOptions/MulticastDepthOfBook.Pitch.v2.41.64")
+
+include("cboe-edgxoptions-multicastdepthofbook-pitch-v2-41-66")
+project(":cboe-edgxoptions-multicastdepthofbook-pitch-v2-41-66").projectDir = file("Classes/Cboe/EdgxOptions/MulticastDepthOfBook.Pitch.v2.41.66")
+
+include("cboe-edgxoptions-multicastdepthofbook-pitch-v2-41-76")
+project(":cboe-edgxoptions-multicastdepthofbook-pitch-v2-41-76").projectDir = file("Classes/Cboe/EdgxOptions/MulticastDepthOfBook.Pitch.v2.41.76")
+
+include("cboe-edgxoptions-multicastdepthofbook-pitch-v2-41-80")
+project(":cboe-edgxoptions-multicastdepthofbook-pitch-v2-41-80").projectDir = file("Classes/Cboe/EdgxOptions/MulticastDepthOfBook.Pitch.v2.41.80")
+
+include("cboe-edgxoptions-multicastdepthofbook-spin-v2-41-66")
+project(":cboe-edgxoptions-multicastdepthofbook-spin-v2-41-66").projectDir = file("Classes/Cboe/EdgxOptions/MulticastDepthOfBook.Spin.v2.41.66")
+
+include("cboe-edgxoptions-multicasttop-pitch-v1-2-54")
+project(":cboe-edgxoptions-multicasttop-pitch-v1-2-54").projectDir = file("Classes/Cboe/EdgxOptions/MulticastTop.Pitch.v1.2.54")
+
+include("cboe-edgxoptions-multicasttop-pitch-v1-2-64")
+project(":cboe-edgxoptions-multicasttop-pitch-v1-2-64").projectDir = file("Classes/Cboe/EdgxOptions/MulticastTop.Pitch.v1.2.64")
+
+include("cboe-edgxoptions-multicasttop-spin-v1-2-54")
+project(":cboe-edgxoptions-multicasttop-spin-v1-2-54").projectDir = file("Classes/Cboe/EdgxOptions/MulticastTop.Spin.v1.2.54")
+
+include("cboe-edgxoptions-multicasttop-spin-v1-2-64")
+project(":cboe-edgxoptions-multicasttop-spin-v1-2-64").projectDir = file("Classes/Cboe/EdgxOptions/MulticastTop.Spin.v1.2.64")
+
+include("cboe-gapdetection-pitch-v1")
+project(":cboe-gapdetection-pitch-v1").projectDir = file("Classes/Cboe/GapDetection.Pitch.v1")
+
+include("cboe-gapdetection-pitch-v2")
+project(":cboe-gapdetection-pitch-v2").projectDir = file("Classes/Cboe/GapDetection.Pitch.v2")
+
+include("cboe-gapdetection-pitch-v4")
+project(":cboe-gapdetection-pitch-v4").projectDir = file("Classes/Cboe/GapDetection.Pitch.v4")
+
+include("cboe-gapdetection-pitch-v5")
+project(":cboe-gapdetection-pitch-v5").projectDir = file("Classes/Cboe/GapDetection.Pitch.v5")
+
+include("cboe-gapdetection-pitch-v6")
+project(":cboe-gapdetection-pitch-v6").projectDir = file("Classes/Cboe/GapDetection.Pitch.v6")
 
 include("cboe-gaprequestproxy-pitch-v1")
 project(":cboe-gaprequestproxy-pitch-v1").projectDir = file("Classes/Cboe/GapRequestProxy.Pitch.v1")
 
+include("cboe-matchnow-gaprequestproxy-pitch-v1-0-13")
+project(":cboe-matchnow-gaprequestproxy-pitch-v1-0-13").projectDir = file("Classes/Cboe/MatchNow/GapRequestProxy.Pitch.v1.0.13")
+
+include("cboe-matchnow-gaprequestproxy-pitch-v1-0-14")
+project(":cboe-matchnow-gaprequestproxy-pitch-v1-0-14").projectDir = file("Classes/Cboe/MatchNow/GapRequestProxy.Pitch.v1.0.14")
+
+include("cboe-matchnow-multicasttrades-pitch-v1-0-13")
+project(":cboe-matchnow-multicasttrades-pitch-v1-0-13").projectDir = file("Classes/Cboe/MatchNow/MulticastTrades.Pitch.v1.0.13")
+
+include("cboe-matchnow-multicasttrades-pitch-v1-0-14")
+project(":cboe-matchnow-multicasttrades-pitch-v1-0-14").projectDir = file("Classes/Cboe/MatchNow/MulticastTrades.Pitch.v1.0.14")
+
+include("cboe-neoequities-crossingfacility-pitch-v1-0-13")
+project(":cboe-neoequities-crossingfacility-pitch-v1-0-13").projectDir = file("Classes/Cboe/NeoEquities/CrossingFacility.Pitch.v1.0.13")
+
+include("cboe-neoequities-crossingfacility-pitch-v1-0-14")
+project(":cboe-neoequities-crossingfacility-pitch-v1-0-14").projectDir = file("Classes/Cboe/NeoEquities/CrossingFacility.Pitch.v1.0.14")
+
+include("cboe-neoequities-gaprequestproxy-pitch-v1-0-13")
+project(":cboe-neoequities-gaprequestproxy-pitch-v1-0-13").projectDir = file("Classes/Cboe/NeoEquities/GapRequestProxy.Pitch.v1.0.13")
+
+include("cboe-neoequities-gaprequestproxy-pitch-v1-0-14")
+project(":cboe-neoequities-gaprequestproxy-pitch-v1-0-14").projectDir = file("Classes/Cboe/NeoEquities/GapRequestProxy.Pitch.v1.0.14")
+
+include("cboe-neoequities-multicastfulldepth-pitch-v1-0-13")
+project(":cboe-neoequities-multicastfulldepth-pitch-v1-0-13").projectDir = file("Classes/Cboe/NeoEquities/MulticastFullDepth.Pitch.v1.0.13")
+
+include("cboe-neoequities-multicastfulldepth-pitch-v1-0-14")
+project(":cboe-neoequities-multicastfulldepth-pitch-v1-0-14").projectDir = file("Classes/Cboe/NeoEquities/MulticastFullDepth.Pitch.v1.0.14")
+
+include("cboe-neoequities-multicastmarketbyprice-pitch-v1-0-13")
+project(":cboe-neoequities-multicastmarketbyprice-pitch-v1-0-13").projectDir = file("Classes/Cboe/NeoEquities/MulticastMarketByPrice.Pitch.v1.0.13")
+
+include("cboe-neoequities-multicastmarketbyprice-pitch-v1-0-14")
+project(":cboe-neoequities-multicastmarketbyprice-pitch-v1-0-14").projectDir = file("Classes/Cboe/NeoEquities/MulticastMarketByPrice.Pitch.v1.0.14")
+
+include("cboe-neoequities-multicasttrades-pitch-v1-0-13")
+project(":cboe-neoequities-multicasttrades-pitch-v1-0-13").projectDir = file("Classes/Cboe/NeoEquities/MulticastTrades.Pitch.v1.0.13")
+
+include("cboe-neoequities-multicasttrades-pitch-v1-0-14")
+project(":cboe-neoequities-multicasttrades-pitch-v1-0-14").projectDir = file("Classes/Cboe/NeoEquities/MulticastTrades.Pitch.v1.0.14")
+
+include("cboe-neoequities-orderentry-boe3-v1-0-19")
+project(":cboe-neoequities-orderentry-boe3-v1-0-19").projectDir = file("Classes/Cboe/NeoEquities/OrderEntry.Boe3.v1.0.19")
+
+include("cboe-neoequities-spinserver-pitch-v1-0-13")
+project(":cboe-neoequities-spinserver-pitch-v1-0-13").projectDir = file("Classes/Cboe/NeoEquities/SpinServer.Pitch.v1.0.13")
+
+include("cboe-neoequities-spinserver-pitch-v1-0-14")
+project(":cboe-neoequities-spinserver-pitch-v1-0-14").projectDir = file("Classes/Cboe/NeoEquities/SpinServer.Pitch.v1.0.14")
+
 include("cboe-titaniumconsolidated-indices-cgif-v1-4-13")
 project(":cboe-titaniumconsolidated-indices-cgif-v1-4-13").projectDir = file("Classes/Cboe/TitaniumConsolidated/Indices.Cgif.v1.4.13")
+
+include("cboe-titaniumconsolidated-oneoptions-pitch-v1-0-10")
+project(":cboe-titaniumconsolidated-oneoptions-pitch-v1-0-10").projectDir = file("Classes/Cboe/TitaniumConsolidated/OneOptions.Pitch.v1.0.10")
+
+include("cboe-titaniumconsolidated-oneoptions-pitch-v1-1-19")
+project(":cboe-titaniumconsolidated-oneoptions-pitch-v1-1-19").projectDir = file("Classes/Cboe/TitaniumConsolidated/OneOptions.Pitch.v1.1.19")
+
+include("cboe-titaniumconsolidated-oneoptions-spin-v1-0-10")
+project(":cboe-titaniumconsolidated-oneoptions-spin-v1-0-10").projectDir = file("Classes/Cboe/TitaniumConsolidated/OneOptions.Spin.v1.0.10")
+
+include("cixats-cixaspen-marketdatafeed-aspen-v1-4")
+project(":cixats-cixaspen-marketdatafeed-aspen-v1-4").projectDir = file("Classes/CixAts/CixAspen/MarketDataFeed.Aspen.v1.4")
+
+include("cme-brokertec-ustreasury-sbe-v10-1")
+project(":cme-brokertec-ustreasury-sbe-v10-1").projectDir = file("Classes/Cme/BrokerTec/UsTreasury.Sbe.v10.1")
+
+include("cme-brokertec-ilink3-sbe-v8-2")
+project(":cme-brokertec-ilink3-sbe-v8-2").projectDir = file("Classes/Cme/BrokerTec/iLink3.Sbe.v8.2")
+
+include("cme-brokertec-ilink3-sbe-v8-3")
+project(":cme-brokertec-ilink3-sbe-v8-3").projectDir = file("Classes/Cme/BrokerTec/iLink3.Sbe.v8.3")
+
+include("cme-brokertec-ilink3-sbe-v8-4")
+project(":cme-brokertec-ilink3-sbe-v8-4").projectDir = file("Classes/Cme/BrokerTec/iLink3.Sbe.v8.4")
+
+include("cme-brokertec-ilink3-sbe-v8-5")
+project(":cme-brokertec-ilink3-sbe-v8-5").projectDir = file("Classes/Cme/BrokerTec/iLink3.Sbe.v8.5")
+
+include("cme-brokertec-ilink3-sbe-v8-6")
+project(":cme-brokertec-ilink3-sbe-v8-6").projectDir = file("Classes/Cme/BrokerTec/iLink3.Sbe.v8.6")
+
+include("cme-brokertec-ilink3-sbe-v8-7")
+project(":cme-brokertec-ilink3-sbe-v8-7").projectDir = file("Classes/Cme/BrokerTec/iLink3.Sbe.v8.7")
+
+include("cme-brokertec-ilink3-sbe-v8-8")
+project(":cme-brokertec-ilink3-sbe-v8-8").projectDir = file("Classes/Cme/BrokerTec/iLink3.Sbe.v8.8")
+
+include("cme-brokertec-ilink3-sbe-v8-9")
+project(":cme-brokertec-ilink3-sbe-v8-9").projectDir = file("Classes/Cme/BrokerTec/iLink3.Sbe.v8.9")
+
+include("cme-ebs-spectrum-sbe-v12-0")
+project(":cme-ebs-spectrum-sbe-v12-0").projectDir = file("Classes/Cme/Ebs/Spectrum.Sbe.v12.0")
+
+include("cme-ebs-ilink3-sbe-v8-2")
+project(":cme-ebs-ilink3-sbe-v8-2").projectDir = file("Classes/Cme/Ebs/iLink3.Sbe.v8.2")
+
+include("cme-ebs-ilink3-sbe-v8-3")
+project(":cme-ebs-ilink3-sbe-v8-3").projectDir = file("Classes/Cme/Ebs/iLink3.Sbe.v8.3")
+
+include("cme-ebs-ilink3-sbe-v8-4")
+project(":cme-ebs-ilink3-sbe-v8-4").projectDir = file("Classes/Cme/Ebs/iLink3.Sbe.v8.4")
+
+include("cme-ebs-ilink3-sbe-v8-5")
+project(":cme-ebs-ilink3-sbe-v8-5").projectDir = file("Classes/Cme/Ebs/iLink3.Sbe.v8.5")
+
+include("cme-ebs-ilink3-sbe-v8-6")
+project(":cme-ebs-ilink3-sbe-v8-6").projectDir = file("Classes/Cme/Ebs/iLink3.Sbe.v8.6")
+
+include("cme-ebs-ilink3-sbe-v8-7")
+project(":cme-ebs-ilink3-sbe-v8-7").projectDir = file("Classes/Cme/Ebs/iLink3.Sbe.v8.7")
+
+include("cme-ebs-ilink3-sbe-v8-8")
+project(":cme-ebs-ilink3-sbe-v8-8").projectDir = file("Classes/Cme/Ebs/iLink3.Sbe.v8.8")
+
+include("cme-ebs-ilink3-sbe-v8-9")
+project(":cme-ebs-ilink3-sbe-v8-9").projectDir = file("Classes/Cme/Ebs/iLink3.Sbe.v8.9")
+
+include("cme-globex-derived-sbe-v12-0")
+project(":cme-globex-derived-sbe-v12-0").projectDir = file("Classes/Cme/Globex/Derived.Sbe.v12.0")
+
+include("cme-globex-mdp3-sbe-v1-10")
+project(":cme-globex-mdp3-sbe-v1-10").projectDir = file("Classes/Cme/Globex/Mdp3.Sbe.v1.10")
+
+include("cme-globex-mdp3-sbe-v1-11")
+project(":cme-globex-mdp3-sbe-v1-11").projectDir = file("Classes/Cme/Globex/Mdp3.Sbe.v1.11")
 
 include("cme-globex-mdp3-sbe-v1-12")
 project(":cme-globex-mdp3-sbe-v1-12").projectDir = file("Classes/Cme/Globex/Mdp3.Sbe.v1.12")
 
+include("cme-globex-mdp3-sbe-v1-13")
+project(":cme-globex-mdp3-sbe-v1-13").projectDir = file("Classes/Cme/Globex/Mdp3.Sbe.v1.13")
+
 include("cme-globex-mdp3-sbe-v1-5")
 project(":cme-globex-mdp3-sbe-v1-5").projectDir = file("Classes/Cme/Globex/Mdp3.Sbe.v1.5")
+
+include("cme-globex-mdp3-sbe-v1-6")
+project(":cme-globex-mdp3-sbe-v1-6").projectDir = file("Classes/Cme/Globex/Mdp3.Sbe.v1.6")
 
 include("cme-globex-mdp3-sbe-v1-8")
 project(":cme-globex-mdp3-sbe-v1-8").projectDir = file("Classes/Cme/Globex/Mdp3.Sbe.v1.8")
@@ -107,11 +1097,53 @@ project(":cme-globex-mdp3-sbe-v1-8").projectDir = file("Classes/Cme/Globex/Mdp3.
 include("cme-globex-mdp3-sbe-v1-9")
 project(":cme-globex-mdp3-sbe-v1-9").projectDir = file("Classes/Cme/Globex/Mdp3.Sbe.v1.9")
 
+include("cme-globex-sessionmgmt-sbe-v0-2")
+project(":cme-globex-sessionmgmt-sbe-v0-2").projectDir = file("Classes/Cme/Globex/SessionMgmt.Sbe.v0.2")
+
+include("cme-globex-settlements-sbe-v7-0")
+project(":cme-globex-settlements-sbe-v7-0").projectDir = file("Classes/Cme/Globex/Settlements.Sbe.v7.0")
+
+include("cme-globex-ilink3-sbe-v8-2")
+project(":cme-globex-ilink3-sbe-v8-2").projectDir = file("Classes/Cme/Globex/iLink3.Sbe.v8.2")
+
+include("cme-globex-ilink3-sbe-v8-3")
+project(":cme-globex-ilink3-sbe-v8-3").projectDir = file("Classes/Cme/Globex/iLink3.Sbe.v8.3")
+
+include("cme-globex-ilink3-sbe-v8-4")
+project(":cme-globex-ilink3-sbe-v8-4").projectDir = file("Classes/Cme/Globex/iLink3.Sbe.v8.4")
+
 include("cme-globex-ilink3-sbe-v8-5")
 project(":cme-globex-ilink3-sbe-v8-5").projectDir = file("Classes/Cme/Globex/iLink3.Sbe.v8.5")
 
+include("cme-globex-ilink3-sbe-v8-6")
+project(":cme-globex-ilink3-sbe-v8-6").projectDir = file("Classes/Cme/Globex/iLink3.Sbe.v8.6")
+
+include("cme-globex-ilink3-sbe-v8-7")
+project(":cme-globex-ilink3-sbe-v8-7").projectDir = file("Classes/Cme/Globex/iLink3.Sbe.v8.7")
+
+include("cme-globex-ilink3-sbe-v8-8")
+project(":cme-globex-ilink3-sbe-v8-8").projectDir = file("Classes/Cme/Globex/iLink3.Sbe.v8.8")
+
+include("cme-globex-ilink3-sbe-v8-9")
+project(":cme-globex-ilink3-sbe-v8-9").projectDir = file("Classes/Cme/Globex/iLink3.Sbe.v8.9")
+
+include("cnsx-cse2-multicast-mmd-v1-6")
+project(":cnsx-cse2-multicast-mmd-v1-6").projectDir = file("Classes/Cnsx/Cse2/Multicast.Mmd.v1.6")
+
+include("cnsx-cse2-retransmission-mmd-v1-6")
+project(":cnsx-cse2-retransmission-mmd-v1-6").projectDir = file("Classes/Cnsx/Cse2/Retransmission.Mmd.v1.6")
+
 include("coinbase-coinbasederivatives-marketdataapi-sbe-v1-2")
 project(":coinbase-coinbasederivatives-marketdataapi-sbe-v1-2").projectDir = file("Classes/Coinbase/CoinbaseDerivatives/MarketDataApi.Sbe.v1.2")
+
+include("coinbase-coinbasederivatives-marketdataapi-sbe-v1-3")
+project(":coinbase-coinbasederivatives-marketdataapi-sbe-v1-3").projectDir = file("Classes/Coinbase/CoinbaseDerivatives/MarketDataApi.Sbe.v1.3")
+
+include("coinbase-coinbasederivatives-marketdataapi-sbe-v1-7")
+project(":coinbase-coinbasederivatives-marketdataapi-sbe-v1-7").projectDir = file("Classes/Coinbase/CoinbaseDerivatives/MarketDataApi.Sbe.v1.7")
+
+include("coinbase-coinbasederivatives-marketdataapi-sbe-v1-9")
+project(":coinbase-coinbasederivatives-marketdataapi-sbe-v1-9").projectDir = file("Classes/Coinbase/CoinbaseDerivatives/MarketDataApi.Sbe.v1.9")
 
 include("coinbase-coinbasederivatives-ordersapi-sbe-v1-3")
 project(":coinbase-coinbasederivatives-ordersapi-sbe-v1-3").projectDir = file("Classes/Coinbase/CoinbaseDerivatives/OrdersApi.Sbe.v1.3")
@@ -119,14 +1151,47 @@ project(":coinbase-coinbasederivatives-ordersapi-sbe-v1-3").projectDir = file("C
 include("coinbase-coinbasederivatives-ordersapi-sbe-v1-4")
 project(":coinbase-coinbasederivatives-ordersapi-sbe-v1-4").projectDir = file("Classes/Coinbase/CoinbaseDerivatives/OrdersApi.Sbe.v1.4")
 
+include("coinbase-coinbasederivatives-ordersapi-sbe-v1-5")
+project(":coinbase-coinbasederivatives-ordersapi-sbe-v1-5").projectDir = file("Classes/Coinbase/CoinbaseDerivatives/OrdersApi.Sbe.v1.5")
+
+include("coinbase-coinbasederivatives-ordersapi-sbe-v1-6")
+project(":coinbase-coinbasederivatives-ordersapi-sbe-v1-6").projectDir = file("Classes/Coinbase/CoinbaseDerivatives/OrdersApi.Sbe.v1.6")
+
+include("coinbase-coinbasederivatives-ordersapi-sbe-v1-7")
+project(":coinbase-coinbasederivatives-ordersapi-sbe-v1-7").projectDir = file("Classes/Coinbase/CoinbaseDerivatives/OrdersApi.Sbe.v1.7")
+
 include("coinbase-coinbasederivatives-ordersapi-sbe-v1-8")
 project(":coinbase-coinbasederivatives-ordersapi-sbe-v1-8").projectDir = file("Classes/Coinbase/CoinbaseDerivatives/OrdersApi.Sbe.v1.8")
+
+include("coinbase-coinbasederivatives-session-tcp-v1-2")
+project(":coinbase-coinbasederivatives-session-tcp-v1-2").projectDir = file("Classes/Coinbase/CoinbaseDerivatives/Session.Tcp.v1.2")
 
 include("coinbase-deribit-marketdataapi-sbe-v0-1")
 project(":coinbase-deribit-marketdataapi-sbe-v0-1").projectDir = file("Classes/Coinbase/Deribit/MarketDataApi.Sbe.v0.1")
 
+include("coinbase-deribit-marketdataapi-sbe-v1-0")
+project(":coinbase-deribit-marketdataapi-sbe-v1-0").projectDir = file("Classes/Coinbase/Deribit/MarketDataApi.Sbe.v1.0")
+
 include("coinbase-deribit-ordersapi-sbe-v0-1")
 project(":coinbase-deribit-ordersapi-sbe-v0-1").projectDir = file("Classes/Coinbase/Deribit/OrdersApi.Sbe.v0.1")
+
+include("coinbase-deribit-ordersapi-sbe-v1-0")
+project(":coinbase-deribit-ordersapi-sbe-v1-0").projectDir = file("Classes/Coinbase/Deribit/OrdersApi.Sbe.v1.0")
+
+include("coinbase-deribit-ordersapi-sbe-v1-3")
+project(":coinbase-deribit-ordersapi-sbe-v1-3").projectDir = file("Classes/Coinbase/Deribit/OrdersApi.Sbe.v1.3")
+
+include("coinbase-deribit-ordersapi-sbe-v1-4")
+project(":coinbase-deribit-ordersapi-sbe-v1-4").projectDir = file("Classes/Coinbase/Deribit/OrdersApi.Sbe.v1.4")
+
+include("coinbase-deribit-ordersapi-sbe-v1-5")
+project(":coinbase-deribit-ordersapi-sbe-v1-5").projectDir = file("Classes/Coinbase/Deribit/OrdersApi.Sbe.v1.5")
+
+include("currenex-currenexforex-esp-cbp-v9")
+project(":currenex-currenexforex-esp-cbp-v9").projectDir = file("Classes/Currenex/CurrenexForex/Esp.Cbp.v9")
+
+include("currenex-currenexforex-now-cbp-v10")
+project(":currenex-currenexforex-now-cbp-v10").projectDir = file("Classes/Currenex/CurrenexForex/Now.Cbp.v10")
 
 include("databento-marketdata-normalized-dbn-v1")
 project(":databento-marketdata-normalized-dbn-v1").projectDir = file("Classes/Databento/MarketData/Normalized.Dbn.v1")
@@ -137,20 +1202,332 @@ project(":databento-marketdata-normalized-dbn-v2").projectDir = file("Classes/Da
 include("databento-marketdata-normalized-dbn-v3")
 project(":databento-marketdata-normalized-dbn-v3").projectDir = file("Classes/Databento/MarketData/Normalized.Dbn.v3")
 
+include("eurex-t7-edci-fbe-v13-0")
+project(":eurex-t7-edci-fbe-v13-0").projectDir = file("Classes/Eurex/T7/Edci.Fbe.v13.0")
+
+include("eurex-t7-edci-fbe-v13-1")
+project(":eurex-t7-edci-fbe-v13-1").projectDir = file("Classes/Eurex/T7/Edci.Fbe.v13.1")
+
+include("eurex-t7-edci-fbe-v14-0")
+project(":eurex-t7-edci-fbe-v14-0").projectDir = file("Classes/Eurex/T7/Edci.Fbe.v14.0")
+
+include("eurex-t7-edci-fbe-v14-1")
+project(":eurex-t7-edci-fbe-v14-1").projectDir = file("Classes/Eurex/T7/Edci.Fbe.v14.1")
+
+include("eurex-t7-edci-fbe-v15-0")
+project(":eurex-t7-edci-fbe-v15-0").projectDir = file("Classes/Eurex/T7/Edci.Fbe.v15.0")
+
+include("eurex-t7-eobi-fbe-v10-0")
+project(":eurex-t7-eobi-fbe-v10-0").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v10.0")
+
+include("eurex-t7-eobi-fbe-v10-1")
+project(":eurex-t7-eobi-fbe-v10-1").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v10.1")
+
+include("eurex-t7-eobi-fbe-v11-0")
+project(":eurex-t7-eobi-fbe-v11-0").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v11.0")
+
+include("eurex-t7-eobi-fbe-v11-1")
+project(":eurex-t7-eobi-fbe-v11-1").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v11.1")
+
+include("eurex-t7-eobi-fbe-v12-0")
+project(":eurex-t7-eobi-fbe-v12-0").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v12.0")
+
+include("eurex-t7-eobi-fbe-v12-1")
+project(":eurex-t7-eobi-fbe-v12-1").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v12.1")
+
 include("eurex-t7-eobi-fbe-v13-0")
 project(":eurex-t7-eobi-fbe-v13-0").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v13.0")
+
+include("eurex-t7-eobi-fbe-v13-1")
+project(":eurex-t7-eobi-fbe-v13-1").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v13.1")
+
+include("eurex-t7-eobi-fbe-v14-0")
+project(":eurex-t7-eobi-fbe-v14-0").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v14.0")
+
+include("eurex-t7-eobi-fbe-v14-1")
+project(":eurex-t7-eobi-fbe-v14-1").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v14.1")
+
+include("eurex-t7-eobi-fbe-v15-0")
+project(":eurex-t7-eobi-fbe-v15-0").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v15.0")
+
+include("eurex-t7-eobi-fbe-v2-5")
+project(":eurex-t7-eobi-fbe-v2-5").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v2.5")
 
 include("eurex-t7-eobi-fbe-v3-0")
 project(":eurex-t7-eobi-fbe-v3-0").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v3.0")
 
+include("eurex-t7-eobi-fbe-v4-0")
+project(":eurex-t7-eobi-fbe-v4-0").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v4.0")
+
+include("eurex-t7-eobi-fbe-v5-0")
+project(":eurex-t7-eobi-fbe-v5-0").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v5.0")
+
 include("eurex-t7-eobi-fbe-v6-0")
 project(":eurex-t7-eobi-fbe-v6-0").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v6.0")
+
+include("eurex-t7-eobi-fbe-v6-1")
+project(":eurex-t7-eobi-fbe-v6-1").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v6.1")
+
+include("eurex-t7-eobi-fbe-v7-0")
+project(":eurex-t7-eobi-fbe-v7-0").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v7.0")
+
+include("eurex-t7-eobi-fbe-v7-1")
+project(":eurex-t7-eobi-fbe-v7-1").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v7.1")
+
+include("eurex-t7-eobi-fbe-v8-0")
+project(":eurex-t7-eobi-fbe-v8-0").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v8.0")
+
+include("eurex-t7-eobi-fbe-v8-1")
+project(":eurex-t7-eobi-fbe-v8-1").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v8.1")
+
+include("eurex-t7-eobi-fbe-v9-0")
+project(":eurex-t7-eobi-fbe-v9-0").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v9.0")
+
+include("eurex-t7-eobi-fbe-v9-1")
+project(":eurex-t7-eobi-fbe-v9-1").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v9.1")
 
 include("eurex-t7-eti-fbe-v10-0")
 project(":eurex-t7-eti-fbe-v10-0").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v10.0")
 
+include("eurex-t7-eti-fbe-v10-1")
+project(":eurex-t7-eti-fbe-v10-1").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v10.1")
+
+include("eurex-t7-eti-fbe-v11-0")
+project(":eurex-t7-eti-fbe-v11-0").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v11.0")
+
+include("eurex-t7-eti-fbe-v11-1")
+project(":eurex-t7-eti-fbe-v11-1").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v11.1")
+
+include("eurex-t7-eti-fbe-v12-0")
+project(":eurex-t7-eti-fbe-v12-0").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v12.0")
+
+include("eurex-t7-eti-fbe-v12-1")
+project(":eurex-t7-eti-fbe-v12-1").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v12.1")
+
+include("eurex-t7-eti-fbe-v13-0")
+project(":eurex-t7-eti-fbe-v13-0").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v13.0")
+
+include("eurex-t7-eti-fbe-v13-1")
+project(":eurex-t7-eti-fbe-v13-1").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v13.1")
+
+include("eurex-t7-eti-fbe-v14-0")
+project(":eurex-t7-eti-fbe-v14-0").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v14.0")
+
+include("eurex-t7-eti-fbe-v14-1")
+project(":eurex-t7-eti-fbe-v14-1").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v14.1")
+
+include("eurex-t7-eti-fbe-v15-0")
+project(":eurex-t7-eti-fbe-v15-0").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v15.0")
+
+include("eurex-t7-eti-fbe-v2-5")
+project(":eurex-t7-eti-fbe-v2-5").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v2.5")
+
+include("eurex-t7-eti-fbe-v5-0")
+project(":eurex-t7-eti-fbe-v5-0").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v5.0")
+
+include("eurex-t7-eti-fbe-v6-0")
+project(":eurex-t7-eti-fbe-v6-0").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v6.0")
+
 include("eurex-t7-eti-fbe-v6-1")
 project(":eurex-t7-eti-fbe-v6-1").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v6.1")
+
+include("eurex-t7-eti-fbe-v7-0")
+project(":eurex-t7-eti-fbe-v7-0").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v7.0")
+
+include("eurex-t7-eti-fbe-v7-1")
+project(":eurex-t7-eti-fbe-v7-1").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v7.1")
+
+include("eurex-t7-eti-fbe-v8-0")
+project(":eurex-t7-eti-fbe-v8-0").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v8.0")
+
+include("eurex-t7-eti-fbe-v8-1")
+project(":eurex-t7-eti-fbe-v8-1").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v8.1")
+
+include("eurex-t7-eti-fbe-v9-0")
+project(":eurex-t7-eti-fbe-v9-0").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v9.0")
+
+include("eurex-t7-eti-fbe-v9-1")
+project(":eurex-t7-eti-fbe-v9-1").projectDir = file("Classes/Eurex/T7/Eti.Fbe.v9.1")
+
+include("eurex-t7-xti-fbe-v10-0")
+project(":eurex-t7-xti-fbe-v10-0").projectDir = file("Classes/Eurex/T7/Xti.Fbe.v10.0")
+
+include("eurex-t7-xti-fbe-v10-1")
+project(":eurex-t7-xti-fbe-v10-1").projectDir = file("Classes/Eurex/T7/Xti.Fbe.v10.1")
+
+include("eurex-t7-xti-fbe-v11-0")
+project(":eurex-t7-xti-fbe-v11-0").projectDir = file("Classes/Eurex/T7/Xti.Fbe.v11.0")
+
+include("eurex-t7-xti-fbe-v11-1")
+project(":eurex-t7-xti-fbe-v11-1").projectDir = file("Classes/Eurex/T7/Xti.Fbe.v11.1")
+
+include("eurex-t7-xti-fbe-v12-0")
+project(":eurex-t7-xti-fbe-v12-0").projectDir = file("Classes/Eurex/T7/Xti.Fbe.v12.0")
+
+include("eurex-t7-xti-fbe-v12-1")
+project(":eurex-t7-xti-fbe-v12-1").projectDir = file("Classes/Eurex/T7/Xti.Fbe.v12.1")
+
+include("eurex-t7-xti-fbe-v13-0")
+project(":eurex-t7-xti-fbe-v13-0").projectDir = file("Classes/Eurex/T7/Xti.Fbe.v13.0")
+
+include("eurex-t7-xti-fbe-v13-1")
+project(":eurex-t7-xti-fbe-v13-1").projectDir = file("Classes/Eurex/T7/Xti.Fbe.v13.1")
+
+include("eurex-t7-xti-fbe-v14-0")
+project(":eurex-t7-xti-fbe-v14-0").projectDir = file("Classes/Eurex/T7/Xti.Fbe.v14.0")
+
+include("eurex-t7-xti-fbe-v14-1")
+project(":eurex-t7-xti-fbe-v14-1").projectDir = file("Classes/Eurex/T7/Xti.Fbe.v14.1")
+
+include("eurex-t7-xti-fbe-v15-0")
+project(":eurex-t7-xti-fbe-v15-0").projectDir = file("Classes/Eurex/T7/Xti.Fbe.v15.0")
+
+include("eurex-t7-xti-fbe-v5-0")
+project(":eurex-t7-xti-fbe-v5-0").projectDir = file("Classes/Eurex/T7/Xti.Fbe.v5.0")
+
+include("eurex-t7-xti-fbe-v6-0")
+project(":eurex-t7-xti-fbe-v6-0").projectDir = file("Classes/Eurex/T7/Xti.Fbe.v6.0")
+
+include("eurex-t7-xti-fbe-v6-1")
+project(":eurex-t7-xti-fbe-v6-1").projectDir = file("Classes/Eurex/T7/Xti.Fbe.v6.1")
+
+include("eurex-t7-xti-fbe-v7-0")
+project(":eurex-t7-xti-fbe-v7-0").projectDir = file("Classes/Eurex/T7/Xti.Fbe.v7.0")
+
+include("eurex-t7-xti-fbe-v7-1")
+project(":eurex-t7-xti-fbe-v7-1").projectDir = file("Classes/Eurex/T7/Xti.Fbe.v7.1")
+
+include("eurex-t7-xti-fbe-v8-0")
+project(":eurex-t7-xti-fbe-v8-0").projectDir = file("Classes/Eurex/T7/Xti.Fbe.v8.0")
+
+include("eurex-t7-xti-fbe-v8-1")
+project(":eurex-t7-xti-fbe-v8-1").projectDir = file("Classes/Eurex/T7/Xti.Fbe.v8.1")
+
+include("eurex-t7-xti-fbe-v9-0")
+project(":eurex-t7-xti-fbe-v9-0").projectDir = file("Classes/Eurex/T7/Xti.Fbe.v9.0")
+
+include("eurex-t7-xti-fbe-v9-1")
+project(":eurex-t7-xti-fbe-v9-1").projectDir = file("Classes/Eurex/T7/Xti.Fbe.v9.1")
+
+include("euronext-optiq-dropcopygateway-sbe-v5-35")
+project(":euronext-optiq-dropcopygateway-sbe-v5-35").projectDir = file("Classes/Euronext/Optiq/DropCopyGateway.Sbe.v5.35")
+
+include("euronext-optiq-dropcopygateway-sbe-v5-36")
+project(":euronext-optiq-dropcopygateway-sbe-v5-36").projectDir = file("Classes/Euronext/Optiq/DropCopyGateway.Sbe.v5.36")
+
+include("euronext-optiq-dropcopygateway-sbe-v5-38")
+project(":euronext-optiq-dropcopygateway-sbe-v5-38").projectDir = file("Classes/Euronext/Optiq/DropCopyGateway.Sbe.v5.38")
+
+include("euronext-optiq-dropcopygateway-sbe-v5-56")
+project(":euronext-optiq-dropcopygateway-sbe-v5-56").projectDir = file("Classes/Euronext/Optiq/DropCopyGateway.Sbe.v5.56")
+
+include("euronext-optiq-dropcopygateway-sbe-v6-63")
+project(":euronext-optiq-dropcopygateway-sbe-v6-63").projectDir = file("Classes/Euronext/Optiq/DropCopyGateway.Sbe.v6.63")
+
+include("euronext-optiq-dropcopygateway-sbe-v6-64")
+project(":euronext-optiq-dropcopygateway-sbe-v6-64").projectDir = file("Classes/Euronext/Optiq/DropCopyGateway.Sbe.v6.64")
+
+include("euronext-optiq-dropcopygateway-sbe-v6-65")
+project(":euronext-optiq-dropcopygateway-sbe-v6-65").projectDir = file("Classes/Euronext/Optiq/DropCopyGateway.Sbe.v6.65")
+
+include("euronext-optiq-dropcopygateway-sbe-v6-67")
+project(":euronext-optiq-dropcopygateway-sbe-v6-67").projectDir = file("Classes/Euronext/Optiq/DropCopyGateway.Sbe.v6.67")
+
+include("euronext-optiq-dropcopygateway-sbe-v6-69")
+project(":euronext-optiq-dropcopygateway-sbe-v6-69").projectDir = file("Classes/Euronext/Optiq/DropCopyGateway.Sbe.v6.69")
+
+include("euronext-optiq-orderentrygateway-sbe-v1-3")
+project(":euronext-optiq-orderentrygateway-sbe-v1-3").projectDir = file("Classes/Euronext/Optiq/OrderEntryGateway.Sbe.v1.3")
+
+include("finra-finraorf-tdds-dfi-v2-1")
+project(":finra-finraorf-tdds-dfi-v2-1").projectDir = file("Classes/Finra/FinraOrf/Tdds.Dfi.v2.1")
+
+include("gpw-wse-streambbo-wats-v1-7-6-20")
+project(":gpw-wse-streambbo-wats-v1-7-6-20").projectDir = file("Classes/Gpw/Wse/StreamBbo.Wats.v1.7.6.20")
+
+include("gpw-wse-streamfulldepth-wats-v1-7-6-20")
+project(":gpw-wse-streamfulldepth-wats-v1-7-6-20").projectDir = file("Classes/Gpw/Wse/StreamFullDepth.Wats.v1.7.6.20")
+
+include("hkex-gapdetection-omd-v1")
+project(":hkex-gapdetection-omd-v1").projectDir = file("Classes/Hkex/GapDetection.Omd.v1")
+
+include("hkex-gapdetection-omd-v2")
+project(":hkex-gapdetection-omd-v2").projectDir = file("Classes/Hkex/GapDetection.Omd.v2")
+
+include("hkex-hkexsecurities-fulltick-omd-v1-44")
+project(":hkex-hkexsecurities-fulltick-omd-v1-44").projectDir = file("Classes/Hkex/HkexSecurities/FullTick.Omd.v1.44")
+
+include("hkex-hkexsecurities-fulltick-omd-v1-45")
+project(":hkex-hkexsecurities-fulltick-omd-v1-45").projectDir = file("Classes/Hkex/HkexSecurities/FullTick.Omd.v1.45")
+
+include("hkex-hkexsecurities-fulltick-omd-v1-46")
+project(":hkex-hkexsecurities-fulltick-omd-v1-46").projectDir = file("Classes/Hkex/HkexSecurities/FullTick.Omd.v1.46")
+
+include("hkex-hkexsecurities-fulltickrefresh-omd-v1-44")
+project(":hkex-hkexsecurities-fulltickrefresh-omd-v1-44").projectDir = file("Classes/Hkex/HkexSecurities/FullTickRefresh.Omd.v1.44")
+
+include("hkex-hkexsecurities-fulltickrefresh-omd-v1-45")
+project(":hkex-hkexsecurities-fulltickrefresh-omd-v1-45").projectDir = file("Classes/Hkex/HkexSecurities/FullTickRefresh.Omd.v1.45")
+
+include("hkex-hkexsecurities-fulltickrefresh-omd-v1-46")
+project(":hkex-hkexsecurities-fulltickrefresh-omd-v1-46").projectDir = file("Classes/Hkex/HkexSecurities/FullTickRefresh.Omd.v1.46")
+
+include("hkex-hkexsecurities-fulltickretrans-omd-v1-44")
+project(":hkex-hkexsecurities-fulltickretrans-omd-v1-44").projectDir = file("Classes/Hkex/HkexSecurities/FullTickRetrans.Omd.v1.44")
+
+include("hkex-hkexsecurities-fulltickretrans-omd-v1-45")
+project(":hkex-hkexsecurities-fulltickretrans-omd-v1-45").projectDir = file("Classes/Hkex/HkexSecurities/FullTickRetrans.Omd.v1.45")
+
+include("hkex-hkexsecurities-fulltickretrans-omd-v1-46")
+project(":hkex-hkexsecurities-fulltickretrans-omd-v1-46").projectDir = file("Classes/Hkex/HkexSecurities/FullTickRetrans.Omd.v1.46")
+
+include("hkex-hkexsecurities-index-omd-v1-44")
+project(":hkex-hkexsecurities-index-omd-v1-44").projectDir = file("Classes/Hkex/HkexSecurities/Index.Omd.v1.44")
+
+include("hkex-hkexsecurities-index-omd-v1-45")
+project(":hkex-hkexsecurities-index-omd-v1-45").projectDir = file("Classes/Hkex/HkexSecurities/Index.Omd.v1.45")
+
+include("hkex-hkexsecurities-index-omd-v1-46")
+project(":hkex-hkexsecurities-index-omd-v1-46").projectDir = file("Classes/Hkex/HkexSecurities/Index.Omd.v1.46")
+
+include("hkex-hkexsecurities-indexrefresh-omd-v1-44")
+project(":hkex-hkexsecurities-indexrefresh-omd-v1-44").projectDir = file("Classes/Hkex/HkexSecurities/IndexRefresh.Omd.v1.44")
+
+include("hkex-hkexsecurities-indexrefresh-omd-v1-45")
+project(":hkex-hkexsecurities-indexrefresh-omd-v1-45").projectDir = file("Classes/Hkex/HkexSecurities/IndexRefresh.Omd.v1.45")
+
+include("hkex-hkexsecurities-indexrefresh-omd-v1-46")
+project(":hkex-hkexsecurities-indexrefresh-omd-v1-46").projectDir = file("Classes/Hkex/HkexSecurities/IndexRefresh.Omd.v1.46")
+
+include("hkex-hkexsecurities-indexretrans-omd-v1-44")
+project(":hkex-hkexsecurities-indexretrans-omd-v1-44").projectDir = file("Classes/Hkex/HkexSecurities/IndexRetrans.Omd.v1.44")
+
+include("hkex-hkexsecurities-indexretrans-omd-v1-45")
+project(":hkex-hkexsecurities-indexretrans-omd-v1-45").projectDir = file("Classes/Hkex/HkexSecurities/IndexRetrans.Omd.v1.45")
+
+include("hkex-hkexsecurities-indexretrans-omd-v1-46")
+project(":hkex-hkexsecurities-indexretrans-omd-v1-46").projectDir = file("Classes/Hkex/HkexSecurities/IndexRetrans.Omd.v1.46")
+
+include("hkex-sse-chinaconnect-omd-v1-4")
+project(":hkex-sse-chinaconnect-omd-v1-4").projectDir = file("Classes/Hkex/Sse/ChinaConnect.Omd.v1.4")
+
+include("hkex-sse-chinaconnectrefresh-omd-v1-4")
+project(":hkex-sse-chinaconnectrefresh-omd-v1-4").projectDir = file("Classes/Hkex/Sse/ChinaConnectRefresh.Omd.v1.4")
+
+include("hkex-sse-chinaconnectretrans-omd-v1-4")
+project(":hkex-sse-chinaconnectretrans-omd-v1-4").projectDir = file("Classes/Hkex/Sse/ChinaConnectRetrans.Omd.v1.4")
+
+include("hkex-szse-chinaconnect-omd-v1-4")
+project(":hkex-szse-chinaconnect-omd-v1-4").projectDir = file("Classes/Hkex/Szse/ChinaConnect.Omd.v1.4")
+
+include("hkex-szse-chinaconnectrefresh-omd-v1-4")
+project(":hkex-szse-chinaconnectrefresh-omd-v1-4").projectDir = file("Classes/Hkex/Szse/ChinaConnectRefresh.Omd.v1.4")
+
+include("hkex-szse-chinaconnectretrans-omd-v1-4")
+project(":hkex-szse-chinaconnectretrans-omd-v1-4").projectDir = file("Classes/Hkex/Szse/ChinaConnectRetrans.Omd.v1.4")
+
+include("ice-icefutures-bgw-sbe-v7-0")
+project(":ice-icefutures-bgw-sbe-v7-0").projectDir = file("Classes/Ice/IceFutures/Bgw.Sbe.v7.0")
 
 include("ice-icefutures-mdf-impact-v1-1-24")
 project(":ice-icefutures-mdf-impact-v1-1-24").projectDir = file("Classes/Ice/IceFutures/Mdf.iMpact.v1.1.24")
@@ -158,17 +1535,32 @@ project(":ice-icefutures-mdf-impact-v1-1-24").projectDir = file("Classes/Ice/Ice
 include("ice-icefutures-mdf-impact-v1-1-33")
 project(":ice-icefutures-mdf-impact-v1-1-33").projectDir = file("Classes/Ice/IceFutures/Mdf.iMpact.v1.1.33")
 
+include("ice-icefutures-mdf-impact-v1-1-34")
+project(":ice-icefutures-mdf-impact-v1-1-34").projectDir = file("Classes/Ice/IceFutures/Mdf.iMpact.v1.1.34")
+
+include("ice-icefutures-mdf-impact-v1-1-43")
+project(":ice-icefutures-mdf-impact-v1-1-43").projectDir = file("Classes/Ice/IceFutures/Mdf.iMpact.v1.1.43")
+
+include("ice-icefutures-mdf-impact-v1-1-51")
+project(":ice-icefutures-mdf-impact-v1-1-51").projectDir = file("Classes/Ice/IceFutures/Mdf.iMpact.v1.1.51")
+
 include("iex-iexequities-deep-iextp-v1-06")
 project(":iex-iexequities-deep-iextp-v1-06").projectDir = file("Classes/Iex/IexEquities/Deep.IexTp.v1.06")
 
 include("iex-iexequities-deep-iextp-v1-08")
 project(":iex-iexequities-deep-iextp-v1-08").projectDir = file("Classes/Iex/IexEquities/Deep.IexTp.v1.08")
 
+include("iex-iexequities-deep-snap-v1-6")
+project(":iex-iexequities-deep-snap-v1-6").projectDir = file("Classes/Iex/IexEquities/Deep.Snap.v1.6")
+
 include("iex-iexequities-deepplus-iextp-v1-01")
 project(":iex-iexequities-deepplus-iextp-v1-01").projectDir = file("Classes/Iex/IexEquities/DeepPlus.IexTp.v1.01")
 
 include("iex-iexequities-deepplus-iextp-v1-05")
 project(":iex-iexequities-deepplus-iextp-v1-05").projectDir = file("Classes/Iex/IexEquities/DeepPlus.IexTp.v1.05")
+
+include("iex-iexequities-deepplus-snap-v1-06")
+project(":iex-iexequities-deepplus-snap-v1-06").projectDir = file("Classes/Iex/IexEquities/DeepPlus.Snap.v1.06")
 
 include("iex-iexequities-tops-iextp-v1-56")
 project(":iex-iexequities-tops-iextp-v1-56").projectDir = file("Classes/Iex/IexEquities/Tops.IexTp.v1.56")
@@ -179,8 +1571,32 @@ project(":iex-iexequities-tops-iextp-v1-64").projectDir = file("Classes/Iex/IexE
 include("iex-iexequities-tops-iextp-v1-66")
 project(":iex-iexequities-tops-iextp-v1-66").projectDir = file("Classes/Iex/IexEquities/Tops.IexTp.v1.66")
 
+include("iex-iexequities-tops-snap-v1-6")
+project(":iex-iexequities-tops-snap-v1-6").projectDir = file("Classes/Iex/IexEquities/Tops.Snap.v1.6")
+
+include("iex-iexoptions-binaryorderentry-sbe-v1-02")
+project(":iex-iexoptions-binaryorderentry-sbe-v1-02").projectDir = file("Classes/Iex/IexOptions/BinaryOrderEntry.Sbe.v1.02")
+
+include("iex-iexoptions-binaryorderentry-sbe-v1-03")
+project(":iex-iexoptions-binaryorderentry-sbe-v1-03").projectDir = file("Classes/Iex/IexOptions/BinaryOrderEntry.Sbe.v1.03")
+
+include("iex-iexoptions-session-sbe-v1-01")
+project(":iex-iexoptions-session-sbe-v1-01").projectDir = file("Classes/Iex/IexOptions/Session.Sbe.v1.01")
+
 include("imperative-intelligentcross-depthofbook-aspen-v1-11")
 project(":imperative-intelligentcross-depthofbook-aspen-v1-11").projectDir = file("Classes/Imperative/IntelligentCross/DepthOfBook.Aspen.v1.11")
+
+include("jnx-jnxbonds-pts-itch-v1-2")
+project(":jnx-jnxbonds-pts-itch-v1-2").projectDir = file("Classes/Jnx/JnxBonds/Pts.Itch.v1.2")
+
+include("jnx-jnxbonds-pts-itch-v2-02")
+project(":jnx-jnxbonds-pts-itch-v2-02").projectDir = file("Classes/Jnx/JnxBonds/Pts.Itch.v2.02")
+
+include("jnx-jnxbonds-pts-ouch-v1-4")
+project(":jnx-jnxbonds-pts-ouch-v1-4").projectDir = file("Classes/Jnx/JnxBonds/Pts.Ouch.v1.4")
+
+include("jnx-jnxbonds-pts-ouch-v2-01")
+project(":jnx-jnxbonds-pts-ouch-v2-01").projectDir = file("Classes/Jnx/JnxBonds/Pts.Ouch.v2.01")
 
 include("jnx-jnxequities-pts-glimpse-v1-3")
 project(":jnx-jnxequities-pts-glimpse-v1-3").projectDir = file("Classes/Jnx/JnxEquities/Pts.Glimpse.v1.3")
@@ -191,20 +1607,362 @@ project(":jnx-jnxequities-pts-itch-v1-6").projectDir = file("Classes/Jnx/JnxEqui
 include("jnx-jnxequities-pts-itch-v1-7")
 project(":jnx-jnxequities-pts-itch-v1-7").projectDir = file("Classes/Jnx/JnxEquities/Pts.Itch.v1.7")
 
+include("jnx-jnxequities-pts-itch-v2-0")
+project(":jnx-jnxequities-pts-itch-v2-0").projectDir = file("Classes/Jnx/JnxEquities/Pts.Itch.v2.0")
+
 include("jnx-jnxequities-pts-ouch-v1-11")
 project(":jnx-jnxequities-pts-ouch-v1-11").projectDir = file("Classes/Jnx/JnxEquities/Pts.Ouch.v1.11")
+
+include("jnx-jnxequities-pts-ouch-v2-01")
+project(":jnx-jnxequities-pts-ouch-v2-01").projectDir = file("Classes/Jnx/JnxEquities/Pts.Ouch.v2.01")
+
+include("jpx-fseequities-marketbyorder-flex-v1-1")
+project(":jpx-fseequities-marketbyorder-flex-v1-1").projectDir = file("Classes/Jpx/FseEquities/MarketByOrder.Flex.v1.1")
+
+include("jpx-fseequities-marketbyorder-flex-v1-3")
+project(":jpx-fseequities-marketbyorder-flex-v1-3").projectDir = file("Classes/Jpx/FseEquities/MarketByOrder.Flex.v1.3")
+
+include("jpx-fseequities-standard-flex-v19-5")
+project(":jpx-fseequities-standard-flex-v19-5").projectDir = file("Classes/Jpx/FseEquities/Standard.Flex.v19.5")
+
+include("jpx-nseequities-marketbyorder-flex-v1-1")
+project(":jpx-nseequities-marketbyorder-flex-v1-1").projectDir = file("Classes/Jpx/NseEquities/MarketByOrder.Flex.v1.1")
+
+include("jpx-nseequities-marketbyorder-flex-v1-3")
+project(":jpx-nseequities-marketbyorder-flex-v1-3").projectDir = file("Classes/Jpx/NseEquities/MarketByOrder.Flex.v1.3")
+
+include("jpx-nseequities-standard-flex-v19-5")
+project(":jpx-nseequities-standard-flex-v19-5").projectDir = file("Classes/Jpx/NseEquities/Standard.Flex.v19.5")
+
+include("jpx-osederivatives-geniuminet-glimpse-v2-2")
+project(":jpx-osederivatives-geniuminet-glimpse-v2-2").projectDir = file("Classes/Jpx/OseDerivatives/GeniumInet.Glimpse.v2.2")
 
 include("jpx-osederivatives-geniuminet-itch-v5-0-6")
 project(":jpx-osederivatives-geniuminet-itch-v5-0-6").projectDir = file("Classes/Jpx/OseDerivatives/GeniumInet.Itch.v5.0.6")
 
+include("jpx-osederivatives-geniuminet-ouch-v5-0")
+project(":jpx-osederivatives-geniuminet-ouch-v5-0").projectDir = file("Classes/Jpx/OseDerivatives/GeniumInet.Ouch.v5.0")
+
+include("jpx-sseequities-marketbyorder-flex-v1-1")
+project(":jpx-sseequities-marketbyorder-flex-v1-1").projectDir = file("Classes/Jpx/SseEquities/MarketByOrder.Flex.v1.1")
+
+include("jpx-sseequities-marketbyorder-flex-v1-3")
+project(":jpx-sseequities-marketbyorder-flex-v1-3").projectDir = file("Classes/Jpx/SseEquities/MarketByOrder.Flex.v1.3")
+
+include("jpx-sseequities-standard-flex-v19-5")
+project(":jpx-sseequities-standard-flex-v19-5").projectDir = file("Classes/Jpx/SseEquities/Standard.Flex.v19.5")
+
+include("jpx-tseequities-indexstatistics-flex-v19-5")
+project(":jpx-tseequities-indexstatistics-flex-v19-5").projectDir = file("Classes/Jpx/TseEquities/IndexStatistics.Flex.v19.5")
+
+include("jpx-tseequities-issuebasicinformation-flex-v19-5")
+project(":jpx-tseequities-issuebasicinformation-flex-v19-5").projectDir = file("Classes/Jpx/TseEquities/IssueBasicInformation.Flex.v19.5")
+
+include("jpx-tseequities-marketbyorder-flex-v1-1")
+project(":jpx-tseequities-marketbyorder-flex-v1-1").projectDir = file("Classes/Jpx/TseEquities/MarketByOrder.Flex.v1.1")
+
+include("jpx-tseequities-marketbyorder-flex-v1-3")
+project(":jpx-tseequities-marketbyorder-flex-v1-3").projectDir = file("Classes/Jpx/TseEquities/MarketByOrder.Flex.v1.3")
+
+include("jpx-tseequities-standard-flex-v19-5")
+project(":jpx-tseequities-standard-flex-v19-5").projectDir = file("Classes/Jpx/TseEquities/Standard.Flex.v19.5")
+
+include("jpx-tseequities-tostnet-flex-v19-5")
+project(":jpx-tseequities-tostnet-flex-v19-5").projectDir = file("Classes/Jpx/TseEquities/ToSTNeT.Flex.v19.5")
+
+include("jse-itac-enhancednativetrading-ntgi-v4-04")
+project(":jse-itac-enhancednativetrading-ntgi-v4-04").projectDir = file("Classes/Jse/Itac/EnhancedNativeTrading.Ntgi.v4.04")
+
+include("jse-itac-enhancednativetradingrecovery-ntgi-v4-04")
+project(":jse-itac-enhancednativetradingrecovery-ntgi-v4-04").projectDir = file("Classes/Jse/Itac/EnhancedNativeTradingRecovery.Ntgi.v4.04")
+
+include("koscom-mdcsrealtime-koscom-exture-v1-20")
+project(":koscom-mdcsrealtime-koscom-exture-v1-20").projectDir = file("Classes/Koscom/MdcsRealtime/Koscom.Exture.v1.20")
+
+include("lme-lmeselect-dailysummaries-lmesource-v4-18")
+project(":lme-lmeselect-dailysummaries-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/DailySummaries.LmeSource.v4.18")
+
+include("lme-lmeselect-dailysummariessnapshot-lmesource-v4-18")
+project(":lme-lmeselect-dailysummariessnapshot-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/DailySummariesSnapshot.LmeSource.v4.18")
+
+include("lme-lmeselect-drsignal-lmesource-v4-18")
+project(":lme-lmeselect-drsignal-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/DrSignal.LmeSource.v4.18")
+
+include("lme-lmeselect-level1-lmesource-v4-18")
+project(":lme-lmeselect-level1-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/Level1.LmeSource.v4.18")
+
+include("lme-lmeselect-level1snapshot-lmesource-v4-18")
+project(":lme-lmeselect-level1snapshot-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/Level1Snapshot.LmeSource.v4.18")
+
+include("lme-lmeselect-level2-lmesource-v4-18")
+project(":lme-lmeselect-level2-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/Level2.LmeSource.v4.18")
+
+include("lme-lmeselect-level2snapshot-lmesource-v4-18")
+project(":lme-lmeselect-level2snapshot-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/Level2Snapshot.LmeSource.v4.18")
+
+include("lme-lmeselect-level3-lmesource-v4-18")
+project(":lme-lmeselect-level3-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/Level3.LmeSource.v4.18")
+
+include("lme-lmeselect-level3snapshot-lmesource-v4-18")
+project(":lme-lmeselect-level3snapshot-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/Level3Snapshot.LmeSource.v4.18")
+
+include("lme-lmeselect-nonelectronicrefdata-lmesource-v4-18")
+project(":lme-lmeselect-nonelectronicrefdata-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/NonElectronicRefData.LmeSource.v4.18")
+
+include("lme-lmeselect-nonelectronicrefdatasnapshot-lmesource-v4-18")
+project(":lme-lmeselect-nonelectronicrefdatasnapshot-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/NonElectronicRefDataSnapshot.LmeSource.v4.18")
+
+include("lme-lmeselect-referencedata-lmesource-v4-18")
+project(":lme-lmeselect-referencedata-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/ReferenceData.LmeSource.v4.18")
+
+include("lme-lmeselect-referencedatasnapshot-lmesource-v4-18")
+project(":lme-lmeselect-referencedatasnapshot-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/ReferenceDataSnapshot.LmeSource.v4.18")
+
+include("lme-lmeselect-referenceprices-lmesource-v4-18")
+project(":lme-lmeselect-referenceprices-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/ReferencePrices.LmeSource.v4.18")
+
+include("lme-lmeselect-referencepricessnapshot-lmesource-v4-18")
+project(":lme-lmeselect-referencepricessnapshot-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/ReferencePricesSnapshot.LmeSource.v4.18")
+
+include("lme-lmeselect-ringdata-lmesource-v4-18")
+project(":lme-lmeselect-ringdata-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/RingData.LmeSource.v4.18")
+
+include("lme-lmeselect-ringdatasnapshot-lmesource-v4-18")
+project(":lme-lmeselect-ringdatasnapshot-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/RingDataSnapshot.LmeSource.v4.18")
+
+include("lme-lmeselect-tradereplaysnapshot-lmesource-v4-18")
+project(":lme-lmeselect-tradereplaysnapshot-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/TradeReplaySnapshot.LmeSource.v4.18")
+
+include("lme-lmeselect-tradestatistics-lmesource-v4-18")
+project(":lme-lmeselect-tradestatistics-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/TradeStatistics.LmeSource.v4.18")
+
+include("lme-lmeselect-tradestatisticssnapshot-lmesource-v4-18")
+project(":lme-lmeselect-tradestatisticssnapshot-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/TradeStatisticsSnapshot.LmeSource.v4.18")
+
+include("lme-lmeselect-warehousestock-lmesource-v4-18")
+project(":lme-lmeselect-warehousestock-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/WarehouseStock.LmeSource.v4.18")
+
+include("lme-lmeselect-warehousestocksnapshot-lmesource-v4-18")
+project(":lme-lmeselect-warehousestocksnapshot-lmesource-v4-18").projectDir = file("Classes/Lme/LmeSelect/WarehouseStockSnapshot.LmeSource.v4.18")
+
+include("lseg-gapdetection-mitch-v1")
+project(":lseg-gapdetection-mitch-v1").projectDir = file("Classes/Lseg/GapDetection.Mitch.v1")
+
+include("lseg-lse-analytics-gtp-v26-2")
+project(":lseg-lse-analytics-gtp-v26-2").projectDir = file("Classes/Lseg/Lse/Analytics.Gtp.v26.2")
+
+include("lseg-lse-analyticsreplay-gtp-v26-2")
+project(":lseg-lse-analyticsreplay-gtp-v26-2").projectDir = file("Classes/Lseg/Lse/AnalyticsReplay.Gtp.v26.2")
+
+include("lseg-lse-level1-gtp-v26-2")
+project(":lseg-lse-level1-gtp-v26-2").projectDir = file("Classes/Lseg/Lse/Level1.Gtp.v26.2")
+
+include("lseg-lse-level1recovery-gtp-v26-2")
+project(":lseg-lse-level1recovery-gtp-v26-2").projectDir = file("Classes/Lseg/Lse/Level1Recovery.Gtp.v26.2")
+
+include("lseg-lse-level1replay-gtp-v26-2")
+project(":lseg-lse-level1replay-gtp-v26-2").projectDir = file("Classes/Lseg/Lse/Level1Replay.Gtp.v26.2")
+
+include("lseg-lse-level2incremental-gtp-v26-2")
+project(":lseg-lse-level2incremental-gtp-v26-2").projectDir = file("Classes/Lseg/Lse/Level2Incremental.Gtp.v26.2")
+
+include("lseg-lse-level2incrementalrecovery-gtp-v26-2")
+project(":lseg-lse-level2incrementalrecovery-gtp-v26-2").projectDir = file("Classes/Lseg/Lse/Level2IncrementalRecovery.Gtp.v26.2")
+
+include("lseg-lse-level2incrementalreplay-gtp-v26-2")
+project(":lseg-lse-level2incrementalreplay-gtp-v26-2").projectDir = file("Classes/Lseg/Lse/Level2IncrementalReplay.Gtp.v26.2")
+
+include("lseg-lse-level2mbo-gtp-v26-2")
+project(":lseg-lse-level2mbo-gtp-v26-2").projectDir = file("Classes/Lseg/Lse/Level2Mbo.Gtp.v26.2")
+
+include("lseg-lse-level2mborecovery-gtp-v26-2")
+project(":lseg-lse-level2mborecovery-gtp-v26-2").projectDir = file("Classes/Lseg/Lse/Level2MboRecovery.Gtp.v26.2")
+
+include("lseg-lse-level2mboreplay-gtp-v26-2")
+project(":lseg-lse-level2mboreplay-gtp-v26-2").projectDir = file("Classes/Lseg/Lse/Level2MboReplay.Gtp.v26.2")
+
+include("lseg-lse-level2mbp-gtp-v26-2")
+project(":lseg-lse-level2mbp-gtp-v26-2").projectDir = file("Classes/Lseg/Lse/Level2Mbp.Gtp.v26.2")
+
+include("lseg-lse-level2mbprecovery-gtp-v26-2")
+project(":lseg-lse-level2mbprecovery-gtp-v26-2").projectDir = file("Classes/Lseg/Lse/Level2MbpRecovery.Gtp.v26.2")
+
+include("lseg-lse-level2mbpreplay-gtp-v26-2")
+project(":lseg-lse-level2mbpreplay-gtp-v26-2").projectDir = file("Classes/Lseg/Lse/Level2MbpReplay.Gtp.v26.2")
+
+include("lseg-lse-mifid2posttrade-gtp-v26-2")
+project(":lseg-lse-mifid2posttrade-gtp-v26-2").projectDir = file("Classes/Lseg/Lse/Mifid2PostTrade.Gtp.v26.2")
+
+include("lseg-lse-mifid2posttraderecovery-gtp-v26-2")
+project(":lseg-lse-mifid2posttraderecovery-gtp-v26-2").projectDir = file("Classes/Lseg/Lse/Mifid2PostTradeRecovery.Gtp.v26.2")
+
+include("lseg-lse-mifid2posttradereplay-gtp-v26-2")
+project(":lseg-lse-mifid2posttradereplay-gtp-v26-2").projectDir = file("Classes/Lseg/Lse/Mifid2PostTradeReplay.Gtp.v26.2")
+
+include("lseg-millennium-level2-mitch-v11-9")
+project(":lseg-millennium-level2-mitch-v11-9").projectDir = file("Classes/Lseg/Millennium/Level2.Mitch.v11.9")
+
+include("lseg-millennium-level2recovery-mitch-v11-9")
+project(":lseg-millennium-level2recovery-mitch-v11-9").projectDir = file("Classes/Lseg/Millennium/Level2Recovery.Mitch.v11.9")
+
+include("lseg-millennium-level2replay-mitch-v11-9")
+project(":lseg-millennium-level2replay-mitch-v11-9").projectDir = file("Classes/Lseg/Millennium/Level2Replay.Mitch.v11.9")
+
+include("lseg-millennium-nativetradinggateway-ntgi-v21-2")
+project(":lseg-millennium-nativetradinggateway-ntgi-v21-2").projectDir = file("Classes/Lseg/Millennium/NativeTradingGateway.Ntgi.v21.2")
+
+include("lseg-millennium-nativetradinggatewayrecovery-ntgi-v21-2")
+project(":lseg-millennium-nativetradinggatewayrecovery-ntgi-v21-2").projectDir = file("Classes/Lseg/Millennium/NativeTradingGatewayRecovery.Ntgi.v21.2")
+
+include("lseg-tradeecho-level2incremental-gtp-v24-4")
+project(":lseg-tradeecho-level2incremental-gtp-v24-4").projectDir = file("Classes/Lseg/TradeEcho/Level2Incremental.Gtp.v24.4")
+
+include("lseg-tradeecho-level2incremental-gtp-v26-1-2")
+project(":lseg-tradeecho-level2incremental-gtp-v26-1-2").projectDir = file("Classes/Lseg/TradeEcho/Level2Incremental.Gtp.v26.1.2")
+
+include("lseg-tradeecho-level2incrementalrecovery-gtp-v24-4")
+project(":lseg-tradeecho-level2incrementalrecovery-gtp-v24-4").projectDir = file("Classes/Lseg/TradeEcho/Level2IncrementalRecovery.Gtp.v24.4")
+
+include("lseg-tradeecho-level2incrementalrecovery-gtp-v26-1-2")
+project(":lseg-tradeecho-level2incrementalrecovery-gtp-v26-1-2").projectDir = file("Classes/Lseg/TradeEcho/Level2IncrementalRecovery.Gtp.v26.1.2")
+
+include("lseg-tradeecho-level2incrementalreplay-gtp-v24-4")
+project(":lseg-tradeecho-level2incrementalreplay-gtp-v24-4").projectDir = file("Classes/Lseg/TradeEcho/Level2IncrementalReplay.Gtp.v24.4")
+
+include("lseg-tradeecho-level2incrementalreplay-gtp-v26-1-2")
+project(":lseg-tradeecho-level2incrementalreplay-gtp-v26-1-2").projectDir = file("Classes/Lseg/TradeEcho/Level2IncrementalReplay.Gtp.v26.1.2")
+
+include("lseg-tradeecho-mifid2posttrade-gtp-v24-4")
+project(":lseg-tradeecho-mifid2posttrade-gtp-v24-4").projectDir = file("Classes/Lseg/TradeEcho/Mifid2PostTrade.Gtp.v24.4")
+
+include("lseg-tradeecho-mifid2posttrade-gtp-v27-2-2")
+project(":lseg-tradeecho-mifid2posttrade-gtp-v27-2-2").projectDir = file("Classes/Lseg/TradeEcho/Mifid2PostTrade.Gtp.v27.2.2")
+
+include("lseg-tradeecho-mifid2posttraderecovery-gtp-v24-4")
+project(":lseg-tradeecho-mifid2posttraderecovery-gtp-v24-4").projectDir = file("Classes/Lseg/TradeEcho/Mifid2PostTradeRecovery.Gtp.v24.4")
+
+include("lseg-tradeecho-mifid2posttraderecovery-gtp-v27-2-2")
+project(":lseg-tradeecho-mifid2posttraderecovery-gtp-v27-2-2").projectDir = file("Classes/Lseg/TradeEcho/Mifid2PostTradeRecovery.Gtp.v27.2.2")
+
+include("lseg-tradeecho-mifid2posttradereplay-gtp-v24-4")
+project(":lseg-tradeecho-mifid2posttradereplay-gtp-v24-4").projectDir = file("Classes/Lseg/TradeEcho/Mifid2PostTradeReplay.Gtp.v24.4")
+
+include("lseg-tradeecho-mifid2posttradereplay-gtp-v27-2-2")
+project(":lseg-tradeecho-mifid2posttradereplay-gtp-v27-2-2").projectDir = file("Classes/Lseg/TradeEcho/Mifid2PostTradeReplay.Gtp.v27.2.2")
+
+include("lseg-turquoise-analytics-gtp-v24-4")
+project(":lseg-turquoise-analytics-gtp-v24-4").projectDir = file("Classes/Lseg/Turquoise/Analytics.Gtp.v24.4")
+
+include("lseg-turquoise-analytics-gtp-v26-3")
+project(":lseg-turquoise-analytics-gtp-v26-3").projectDir = file("Classes/Lseg/Turquoise/Analytics.Gtp.v26.3")
+
+include("lseg-turquoise-level1-gtp-v24-4")
+project(":lseg-turquoise-level1-gtp-v24-4").projectDir = file("Classes/Lseg/Turquoise/Level1.Gtp.v24.4")
+
+include("lseg-turquoise-level1incremental-gtp-v26-3")
+project(":lseg-turquoise-level1incremental-gtp-v26-3").projectDir = file("Classes/Lseg/Turquoise/Level1Incremental.Gtp.v26.3")
+
+include("lseg-turquoise-level2incremental-gtp-v24-4")
+project(":lseg-turquoise-level2incremental-gtp-v24-4").projectDir = file("Classes/Lseg/Turquoise/Level2Incremental.Gtp.v24.4")
+
+include("lseg-turquoise-level2incremental-gtp-v26-3")
+project(":lseg-turquoise-level2incremental-gtp-v26-3").projectDir = file("Classes/Lseg/Turquoise/Level2Incremental.Gtp.v26.3")
+
+include("lseg-turquoise-mifid2posttrade-gtp-v24-4")
+project(":lseg-turquoise-mifid2posttrade-gtp-v24-4").projectDir = file("Classes/Lseg/Turquoise/Mifid2PostTrade.Gtp.v24.4")
+
+include("lseg-turquoise-mifid2posttrade-gtp-v26-3")
+project(":lseg-turquoise-mifid2posttrade-gtp-v26-3").projectDir = file("Classes/Lseg/Turquoise/Mifid2PostTrade.Gtp.v26.3")
+
+include("lseg-turquoise-mifid2pretrade-gtp-v26-3")
+project(":lseg-turquoise-mifid2pretrade-gtp-v26-3").projectDir = file("Classes/Lseg/Turquoise/Mifid2PreTrade.Gtp.v26.3")
+
+include("lseg-turquoise-recovery-gtp-v24-4")
+project(":lseg-turquoise-recovery-gtp-v24-4").projectDir = file("Classes/Lseg/Turquoise/Recovery.Gtp.v24.4")
+
+include("lseg-turquoise-recovery-gtp-v26-3")
+project(":lseg-turquoise-recovery-gtp-v26-3").projectDir = file("Classes/Lseg/Turquoise/Recovery.Gtp.v26.3")
+
+include("lseg-turquoise-replay-gtp-v24-4")
+project(":lseg-turquoise-replay-gtp-v24-4").projectDir = file("Classes/Lseg/Turquoise/Replay.Gtp.v24.4")
+
+include("lseg-turquoise-replay-gtp-v26-3")
+project(":lseg-turquoise-replay-gtp-v26-3").projectDir = file("Classes/Lseg/Turquoise/Replay.Gtp.v26.3")
+
+include("ltse-ltseequities-memoirdepthfeed-sbe-v1-3")
+project(":ltse-ltseequities-memoirdepthfeed-sbe-v1-3").projectDir = file("Classes/Ltse/LtseEquities/MemoirDepthFeed.Sbe.v1.3")
+
+include("ltse-ltseequities-memoirdepthfeed-sbe-v2-0")
+project(":ltse-ltseequities-memoirdepthfeed-sbe-v2-0").projectDir = file("Classes/Ltse/LtseEquities/MemoirDepthFeed.Sbe.v2.0")
+
+include("ltse-ltseequities-memoirlastsale-sbe-v1-3")
+project(":ltse-ltseequities-memoirlastsale-sbe-v1-3").projectDir = file("Classes/Ltse/LtseEquities/MemoirLastSale.Sbe.v1.3")
+
+include("ltse-ltseequities-memoirlastsale-sbe-v2-0")
+project(":ltse-ltseequities-memoirlastsale-sbe-v2-0").projectDir = file("Classes/Ltse/LtseEquities/MemoirLastSale.Sbe.v2.0")
+
+include("ltse-ltseequities-memoirtopofbook-sbe-v1-3")
+project(":ltse-ltseequities-memoirtopofbook-sbe-v1-3").projectDir = file("Classes/Ltse/LtseEquities/MemoirTopOfBook.Sbe.v1.3")
+
+include("ltse-ltseequities-memoirtopofbook-sbe-v2-0")
+project(":ltse-ltseequities-memoirtopofbook-sbe-v2-0").projectDir = file("Classes/Ltse/LtseEquities/MemoirTopOfBook.Sbe.v2.0")
+
+include("memx-memxequities-commonheader-tcp-v1-2")
+project(":memx-memxequities-commonheader-tcp-v1-2").projectDir = file("Classes/Memx/MemxEquities/CommonHeader.Tcp.v1.2")
+
+include("memx-memxequities-memoirdepthfeed-sbe-v1-1")
+project(":memx-memxequities-memoirdepthfeed-sbe-v1-1").projectDir = file("Classes/Memx/MemxEquities/MemoirDepthFeed.Sbe.v1.1")
+
 include("memx-memxequities-memoirdepthfeed-sbe-v1-3")
 project(":memx-memxequities-memoirdepthfeed-sbe-v1-3").projectDir = file("Classes/Memx/MemxEquities/MemoirDepthFeed.Sbe.v1.3")
+
+include("memx-memxequities-memoirlastsale-sbe-v1-1")
+project(":memx-memxequities-memoirlastsale-sbe-v1-1").projectDir = file("Classes/Memx/MemxEquities/MemoirLastSale.Sbe.v1.1")
+
+include("memx-memxequities-memoirlastsale-sbe-v1-3")
+project(":memx-memxequities-memoirlastsale-sbe-v1-3").projectDir = file("Classes/Memx/MemxEquities/MemoirLastSale.Sbe.v1.3")
+
+include("memx-memxequities-memoirtopofbook-sbe-v1-1")
+project(":memx-memxequities-memoirtopofbook-sbe-v1-1").projectDir = file("Classes/Memx/MemxEquities/MemoirTopOfBook.Sbe.v1.1")
+
+include("memx-memxequities-memoirtopofbook-sbe-v1-3")
+project(":memx-memxequities-memoirtopofbook-sbe-v1-3").projectDir = file("Classes/Memx/MemxEquities/MemoirTopOfBook.Sbe.v1.3")
+
+include("memx-memxoptions-memoirdepth-sbe-v1-3")
+project(":memx-memxoptions-memoirdepth-sbe-v1-3").projectDir = file("Classes/Memx/MemxOptions/MemoirDepth.Sbe.v1.3")
+
+include("memx-memxoptions-memoirdepth-sbe-v1-6-a")
+project(":memx-memxoptions-memoirdepth-sbe-v1-6-a").projectDir = file("Classes/Memx/MemxOptions/MemoirDepth.Sbe.v1.6.a")
+
+include("memx-memxoptions-memoirtop-sbe-v1-3")
+project(":memx-memxoptions-memoirtop-sbe-v1-3").projectDir = file("Classes/Memx/MemxOptions/MemoirTop.Sbe.v1.3")
+
+include("memx-memxoptions-memoirtop-sbe-v1-6-a")
+project(":memx-memxoptions-memoirtop-sbe-v1-6-a").projectDir = file("Classes/Memx/MemxOptions/MemoirTop.Sbe.v1.6.a")
 
 include("miax-miaxoptions-complextopofmarket-mach-v1-1")
 project(":miax-miaxoptions-complextopofmarket-mach-v1-1").projectDir = file("Classes/Miax/MiaxOptions/ComplexTopOfMarket.Mach.v1.1")
 
+include("miax-miaxoptions-complextopofmarket-mach-v1-3")
+project(":miax-miaxoptions-complextopofmarket-mach-v1-3").projectDir = file("Classes/Miax/MiaxOptions/ComplexTopOfMarket.Mach.v1.3")
+
+include("miax-onyxfutures-depthofmarket-mach-v1-0-b")
+project(":miax-onyxfutures-depthofmarket-mach-v1-0-b").projectDir = file("Classes/Miax/OnyxFutures/DepthOfMarket.Mach.v1.0.b")
+
+include("miax-onyxfutures-depthofmarket-mach-v1-3-a")
+project(":miax-onyxfutures-depthofmarket-mach-v1-3-a").projectDir = file("Classes/Miax/OnyxFutures/DepthOfMarket.Mach.v1.3.a")
+
+include("miax-onyxfutures-expressinterface-fei-v1-0-c")
+project(":miax-onyxfutures-expressinterface-fei-v1-0-c").projectDir = file("Classes/Miax/OnyxFutures/ExpressInterface.Fei.v1.0.c")
+
 include("miax-onyxfutures-topofmarket-mach-v1-0-b")
 project(":miax-onyxfutures-topofmarket-mach-v1-0-b").projectDir = file("Classes/Miax/OnyxFutures/TopOfMarket.Mach.v1.0.b")
+
+include("miax-onyxfutures-topofmarket-mach-v1-3-a")
+project(":miax-onyxfutures-topofmarket-mach-v1-3-a").projectDir = file("Classes/Miax/OnyxFutures/TopOfMarket.Mach.v1.3.a")
+
+include("miax-pearlequities-depthofmarket-mach-v1-3-a")
+project(":miax-pearlequities-depthofmarket-mach-v1-3-a").projectDir = file("Classes/Miax/PearlEquities/DepthOfMarket.Mach.v1.3.a")
 
 include("miax-pearlequities-depthofmarket-mach-v1-3-d")
 project(":miax-pearlequities-depthofmarket-mach-v1-3-d").projectDir = file("Classes/Miax/PearlEquities/DepthOfMarket.Mach.v1.3.d")
@@ -212,14 +1970,452 @@ project(":miax-pearlequities-depthofmarket-mach-v1-3-d").projectDir = file("Clas
 include("miax-pearlequities-expressorders-meo-v2-6")
 project(":miax-pearlequities-expressorders-meo-v2-6").projectDir = file("Classes/Miax/PearlEquities/ExpressOrders.Meo.v2.6")
 
+include("miax-pearlequities-expressorders-meo-v2-7")
+project(":miax-pearlequities-expressorders-meo-v2-7").projectDir = file("Classes/Miax/PearlEquities/ExpressOrders.Meo.v2.7")
+
+include("miax-pearlequities-expressorders-meo-v2-7-a")
+project(":miax-pearlequities-expressorders-meo-v2-7-a").projectDir = file("Classes/Miax/PearlEquities/ExpressOrders.Meo.v2.7.a")
+
+include("miax-pearlequities-expressorders-meo-v2-7-b")
+project(":miax-pearlequities-expressorders-meo-v2-7-b").projectDir = file("Classes/Miax/PearlEquities/ExpressOrders.Meo.v2.7.b")
+
+include("miax-pearlequities-headeronly-esesm-v1-0-a")
+project(":miax-pearlequities-headeronly-esesm-v1-0-a").projectDir = file("Classes/Miax/PearlEquities/HeaderOnly.ESesM.v1.0.a")
+
+include("miax-pearlequities-topofmarket-mach-v1-1-a")
+project(":miax-pearlequities-topofmarket-mach-v1-1-a").projectDir = file("Classes/Miax/PearlEquities/TopOfMarket.Mach.v1.1.a")
+
+include("miax-pearlequities-topofmarket-mach-v1-1-c")
+project(":miax-pearlequities-topofmarket-mach-v1-1-c").projectDir = file("Classes/Miax/PearlEquities/TopOfMarket.Mach.v1.1.c")
+
+include("miax-pearloptions-topofmarket-mach-v1-0")
+project(":miax-pearloptions-topofmarket-mach-v1-0").projectDir = file("Classes/Miax/PearlOptions/TopOfMarket.Mach.v1.0")
+
+include("miax-pearloptions-topofmarket-mach-v1-9")
+project(":miax-pearloptions-topofmarket-mach-v1-9").projectDir = file("Classes/Miax/PearlOptions/TopOfMarket.Mach.v1.9")
+
+include("miax-pearloptions-topofmarket-mach-v2-2")
+project(":miax-pearloptions-topofmarket-mach-v2-2").projectDir = file("Classes/Miax/PearlOptions/TopOfMarket.Mach.v2.2")
+
+include("miax-pearloptions-topofmarket-mach-v2-3")
+project(":miax-pearloptions-topofmarket-mach-v2-3").projectDir = file("Classes/Miax/PearlOptions/TopOfMarket.Mach.v2.3")
+
+include("moex-spectra-optinfoincremental-simba-v9-12-0")
+project(":moex-spectra-optinfoincremental-simba-v9-12-0").projectDir = file("Classes/Moex/Spectra/OptInfoIncremental.Simba.v9.12.0")
+
+include("moex-spectra-optinfoincremental-simba-v9-9-0")
+project(":moex-spectra-optinfoincremental-simba-v9-9-0").projectDir = file("Classes/Moex/Spectra/OptInfoIncremental.Simba.v9.9.0")
+
+include("moex-spectra-optinforeplay-simba-v9-12-0")
+project(":moex-spectra-optinforeplay-simba-v9-12-0").projectDir = file("Classes/Moex/Spectra/OptInfoReplay.Simba.v9.12.0")
+
+include("moex-spectra-optinforeplay-simba-v9-9-0")
+project(":moex-spectra-optinforeplay-simba-v9-9-0").projectDir = file("Classes/Moex/Spectra/OptInfoReplay.Simba.v9.9.0")
+
+include("moex-spectra-orderslogincremental-simba-v9-12-0")
+project(":moex-spectra-orderslogincremental-simba-v9-12-0").projectDir = file("Classes/Moex/Spectra/OrdersLogIncremental.Simba.v9.12.0")
+
+include("moex-spectra-orderslogincremental-simba-v9-9-0")
+project(":moex-spectra-orderslogincremental-simba-v9-9-0").projectDir = file("Classes/Moex/Spectra/OrdersLogIncremental.Simba.v9.9.0")
+
+include("moex-spectra-orderslogreplay-simba-v9-12-0")
+project(":moex-spectra-orderslogreplay-simba-v9-12-0").projectDir = file("Classes/Moex/Spectra/OrdersLogReplay.Simba.v9.12.0")
+
+include("moex-spectra-orderslogreplay-simba-v9-9-0")
+project(":moex-spectra-orderslogreplay-simba-v9-9-0").projectDir = file("Classes/Moex/Spectra/OrdersLogReplay.Simba.v9.9.0")
+
+include("moex-spectra-orderslogsnapshot-simba-v9-12-0")
+project(":moex-spectra-orderslogsnapshot-simba-v9-12-0").projectDir = file("Classes/Moex/Spectra/OrdersLogSnapshot.Simba.v9.12.0")
+
+include("moex-spectra-orderslogsnapshot-simba-v9-9-0")
+project(":moex-spectra-orderslogsnapshot-simba-v9-9-0").projectDir = file("Classes/Moex/Spectra/OrdersLogSnapshot.Simba.v9.9.0")
+
+include("nairobi-nairobiequities-realtime-mitch-v1-22")
+project(":nairobi-nairobiequities-realtime-mitch-v1-22").projectDir = file("Classes/Nairobi/NairobiEquities/RealTime.Mitch.v1.22")
+
+include("nairobi-nairobiequities-replay-mitch-v1-22")
+project(":nairobi-nairobiequities-replay-mitch-v1-22").projectDir = file("Classes/Nairobi/NairobiEquities/Replay.Mitch.v1.22")
+
+include("nairobi-nairobiequities-snapshot-mitch-v1-22")
+project(":nairobi-nairobiequities-snapshot-mitch-v1-22").projectDir = file("Classes/Nairobi/NairobiEquities/Snapshot.Mitch.v1.22")
+
+include("nasdaq-bxequities-drop-asciidrop-v2-2")
+project(":nasdaq-bxequities-drop-asciidrop-v2-2").projectDir = file("Classes/Nasdaq/BxEquities/Drop.AsciiDrop.v2.2")
+
+include("nasdaq-common-soupbin-tcp-v3-0")
+project(":nasdaq-common-soupbin-tcp-v3-0").projectDir = file("Classes/Nasdaq/Common/SoupBin.Tcp.v3.0")
+
+include("nasdaq-common-soupbin-tcp-v3-1")
+project(":nasdaq-common-soupbin-tcp-v3-1").projectDir = file("Classes/Nasdaq/Common/SoupBin.Tcp.v3.1")
+
+include("nasdaq-gapdetection-itch-v11")
+project(":nasdaq-gapdetection-itch-v11").projectDir = file("Classes/Nasdaq/GapDetection.Itch.v11")
+
+include("nasdaq-gapdetection-itch-v3")
+project(":nasdaq-gapdetection-itch-v3").projectDir = file("Classes/Nasdaq/GapDetection.Itch.v3")
+
+include("nasdaq-gapdetection-itch-v7")
+project(":nasdaq-gapdetection-itch-v7").projectDir = file("Classes/Nasdaq/GapDetection.Itch.v7")
+
+include("nasdaq-gapdetection-itch-v8")
+project(":nasdaq-gapdetection-itch-v8").projectDir = file("Classes/Nasdaq/GapDetection.Itch.v8")
+
+include("nasdaq-gapdetection-utp-v2")
+project(":nasdaq-gapdetection-utp-v2").projectDir = file("Classes/Nasdaq/GapDetection.Utp.v2")
+
+include("nasdaq-gemxoptions-cti-itch-v3-0")
+project(":nasdaq-gemxoptions-cti-itch-v3-0").projectDir = file("Classes/Nasdaq/GemxOptions/Cti.Itch.v3.0")
+
+include("nasdaq-gemxoptions-depthofmarket-glimpse-v2-1")
+project(":nasdaq-gemxoptions-depthofmarket-glimpse-v2-1").projectDir = file("Classes/Nasdaq/GemxOptions/DepthOfMarket.Glimpse.v2.1")
+
+include("nasdaq-gemxoptions-depthofmarket-itch-v2-1")
+project(":nasdaq-gemxoptions-depthofmarket-itch-v2-1").projectDir = file("Classes/Nasdaq/GemxOptions/DepthOfMarket.Itch.v2.1")
+
+include("nasdaq-gemxoptions-depthofmarket-itch-v2-1-2026")
+project(":nasdaq-gemxoptions-depthofmarket-itch-v2-1-2026").projectDir = file("Classes/Nasdaq/GemxOptions/DepthOfMarket.Itch.v2.1.2026")
+
+include("nasdaq-gemxoptions-orderfeed-itch-v2-1")
+project(":nasdaq-gemxoptions-orderfeed-itch-v2-1").projectDir = file("Classes/Nasdaq/GemxOptions/OrderFeed.Itch.v2.1")
+
+include("nasdaq-gemxoptions-otto-ouch-v3-0-0")
+project(":nasdaq-gemxoptions-otto-ouch-v3-0-0").projectDir = file("Classes/Nasdaq/GemxOptions/Otto.Ouch.v3.0.0")
+
+include("nasdaq-gemxoptions-topofmarket-glimpse-v2-1")
+project(":nasdaq-gemxoptions-topofmarket-glimpse-v2-1").projectDir = file("Classes/Nasdaq/GemxOptions/TopOfMarket.Glimpse.v2.1")
+
+include("nasdaq-gemxoptions-topofmarket-itch-v2-1")
+project(":nasdaq-gemxoptions-topofmarket-itch-v2-1").projectDir = file("Classes/Nasdaq/GemxOptions/TopOfMarket.Itch.v2.1")
+
+include("nasdaq-gemxoptions-tradefeed-itch-v2-1")
+project(":nasdaq-gemxoptions-tradefeed-itch-v2-1").projectDir = file("Classes/Nasdaq/GemxOptions/TradeFeed.Itch.v2.1")
+
+include("nasdaq-iseoptions-cti-itch-v3-0")
+project(":nasdaq-iseoptions-cti-itch-v3-0").projectDir = file("Classes/Nasdaq/IseOptions/Cti.Itch.v3.0")
+
+include("nasdaq-iseoptions-depthofmarket-glimpse-v2-1")
+project(":nasdaq-iseoptions-depthofmarket-glimpse-v2-1").projectDir = file("Classes/Nasdaq/IseOptions/DepthOfMarket.Glimpse.v2.1")
+
+include("nasdaq-iseoptions-depthofmarket-itch-v2-1")
+project(":nasdaq-iseoptions-depthofmarket-itch-v2-1").projectDir = file("Classes/Nasdaq/IseOptions/DepthOfMarket.Itch.v2.1")
+
+include("nasdaq-iseoptions-depthofmarket-itch-v2-1-2026")
+project(":nasdaq-iseoptions-depthofmarket-itch-v2-1-2026").projectDir = file("Classes/Nasdaq/IseOptions/DepthOfMarket.Itch.v2.1.2026")
+
 include("nasdaq-iseoptions-ordercombofeed-itch-v1-1")
 project(":nasdaq-iseoptions-ordercombofeed-itch-v1-1").projectDir = file("Classes/Nasdaq/IseOptions/OrderComboFeed.Itch.v1.1")
+
+include("nasdaq-iseoptions-orderfeed-itch-v1-1")
+project(":nasdaq-iseoptions-orderfeed-itch-v1-1").projectDir = file("Classes/Nasdaq/IseOptions/OrderFeed.Itch.v1.1")
+
+include("nasdaq-iseoptions-orderfeed-itch-v2-1")
+project(":nasdaq-iseoptions-orderfeed-itch-v2-1").projectDir = file("Classes/Nasdaq/IseOptions/OrderFeed.Itch.v2.1")
+
+include("nasdaq-iseoptions-otto-ouch-v3-0-0")
+project(":nasdaq-iseoptions-otto-ouch-v3-0-0").projectDir = file("Classes/Nasdaq/IseOptions/Otto.Ouch.v3.0.0")
+
+include("nasdaq-iseoptions-spreaddepthofmarket-glimpse-v2-02")
+project(":nasdaq-iseoptions-spreaddepthofmarket-glimpse-v2-02").projectDir = file("Classes/Nasdaq/IseOptions/SpreadDepthOfMarket.Glimpse.v2.02")
+
+include("nasdaq-iseoptions-spreaddepthofmarket-glimpse-v2-1")
+project(":nasdaq-iseoptions-spreaddepthofmarket-glimpse-v2-1").projectDir = file("Classes/Nasdaq/IseOptions/SpreadDepthOfMarket.Glimpse.v2.1")
+
+include("nasdaq-iseoptions-spreaddepthofmarket-itch-v2-1")
+project(":nasdaq-iseoptions-spreaddepthofmarket-itch-v2-1").projectDir = file("Classes/Nasdaq/IseOptions/SpreadDepthOfMarket.Itch.v2.1")
+
+include("nasdaq-iseoptions-spreadorders-itch-v2-1")
+project(":nasdaq-iseoptions-spreadorders-itch-v2-1").projectDir = file("Classes/Nasdaq/IseOptions/SpreadOrders.Itch.v2.1")
+
+include("nasdaq-iseoptions-spreadtopofmarket-glimpse-v2-02")
+project(":nasdaq-iseoptions-spreadtopofmarket-glimpse-v2-02").projectDir = file("Classes/Nasdaq/IseOptions/SpreadTopOfMarket.Glimpse.v2.02")
+
+include("nasdaq-iseoptions-spreadtopofmarket-glimpse-v2-1")
+project(":nasdaq-iseoptions-spreadtopofmarket-glimpse-v2-1").projectDir = file("Classes/Nasdaq/IseOptions/SpreadTopOfMarket.Glimpse.v2.1")
+
+include("nasdaq-iseoptions-spreadtopofmarket-itch-v2-1")
+project(":nasdaq-iseoptions-spreadtopofmarket-itch-v2-1").projectDir = file("Classes/Nasdaq/IseOptions/SpreadTopOfMarket.Itch.v2.1")
+
+include("nasdaq-iseoptions-spreadtradefeed-itch-v2-1")
+project(":nasdaq-iseoptions-spreadtradefeed-itch-v2-1").projectDir = file("Classes/Nasdaq/IseOptions/SpreadTradeFeed.Itch.v2.1")
 
 include("nasdaq-iseoptions-topcomboquotefeed-itch-v1-0")
 project(":nasdaq-iseoptions-topcomboquotefeed-itch-v1-0").projectDir = file("Classes/Nasdaq/IseOptions/TopComboQuoteFeed.Itch.v1.0")
 
+include("nasdaq-iseoptions-topofmarket-glimpse-v2-1")
+project(":nasdaq-iseoptions-topofmarket-glimpse-v2-1").projectDir = file("Classes/Nasdaq/IseOptions/TopOfMarket.Glimpse.v2.1")
+
+include("nasdaq-iseoptions-topofmarket-itch-v2-1")
+project(":nasdaq-iseoptions-topofmarket-itch-v2-1").projectDir = file("Classes/Nasdaq/IseOptions/TopOfMarket.Itch.v2.1")
+
+include("nasdaq-iseoptions-tradefeed-itch-v2-1")
+project(":nasdaq-iseoptions-tradefeed-itch-v2-1").projectDir = file("Classes/Nasdaq/IseOptions/TradeFeed.Itch.v2.1")
+
+include("nasdaq-mrxoptions-cti-itch-v3-0")
+project(":nasdaq-mrxoptions-cti-itch-v3-0").projectDir = file("Classes/Nasdaq/MrxOptions/Cti.Itch.v3.0")
+
+include("nasdaq-mrxoptions-depthofmarket-glimpse-v2-1")
+project(":nasdaq-mrxoptions-depthofmarket-glimpse-v2-1").projectDir = file("Classes/Nasdaq/MrxOptions/DepthOfMarket.Glimpse.v2.1")
+
+include("nasdaq-mrxoptions-depthofmarket-itch-v2-1")
+project(":nasdaq-mrxoptions-depthofmarket-itch-v2-1").projectDir = file("Classes/Nasdaq/MrxOptions/DepthOfMarket.Itch.v2.1")
+
+include("nasdaq-mrxoptions-depthofmarket-itch-v2-1-2026")
+project(":nasdaq-mrxoptions-depthofmarket-itch-v2-1-2026").projectDir = file("Classes/Nasdaq/MrxOptions/DepthOfMarket.Itch.v2.1.2026")
+
+include("nasdaq-mrxoptions-orderfeed-itch-v2-1")
+project(":nasdaq-mrxoptions-orderfeed-itch-v2-1").projectDir = file("Classes/Nasdaq/MrxOptions/OrderFeed.Itch.v2.1")
+
+include("nasdaq-mrxoptions-otto-ouch-v3-0-0")
+project(":nasdaq-mrxoptions-otto-ouch-v3-0-0").projectDir = file("Classes/Nasdaq/MrxOptions/Otto.Ouch.v3.0.0")
+
+include("nasdaq-mrxoptions-spreaddepthofmarket-glimpse-v2-02")
+project(":nasdaq-mrxoptions-spreaddepthofmarket-glimpse-v2-02").projectDir = file("Classes/Nasdaq/MrxOptions/SpreadDepthOfMarket.Glimpse.v2.02")
+
+include("nasdaq-mrxoptions-spreaddepthofmarket-glimpse-v2-1")
+project(":nasdaq-mrxoptions-spreaddepthofmarket-glimpse-v2-1").projectDir = file("Classes/Nasdaq/MrxOptions/SpreadDepthOfMarket.Glimpse.v2.1")
+
+include("nasdaq-mrxoptions-spreaddepthofmarket-itch-v2-1")
+project(":nasdaq-mrxoptions-spreaddepthofmarket-itch-v2-1").projectDir = file("Classes/Nasdaq/MrxOptions/SpreadDepthOfMarket.Itch.v2.1")
+
+include("nasdaq-mrxoptions-spreadorders-itch-v2-1")
+project(":nasdaq-mrxoptions-spreadorders-itch-v2-1").projectDir = file("Classes/Nasdaq/MrxOptions/SpreadOrders.Itch.v2.1")
+
+include("nasdaq-mrxoptions-spreadtopofmarket-glimpse-v2-02")
+project(":nasdaq-mrxoptions-spreadtopofmarket-glimpse-v2-02").projectDir = file("Classes/Nasdaq/MrxOptions/SpreadTopOfMarket.Glimpse.v2.02")
+
+include("nasdaq-mrxoptions-spreadtopofmarket-glimpse-v2-1")
+project(":nasdaq-mrxoptions-spreadtopofmarket-glimpse-v2-1").projectDir = file("Classes/Nasdaq/MrxOptions/SpreadTopOfMarket.Glimpse.v2.1")
+
+include("nasdaq-mrxoptions-spreadtopofmarket-itch-v2-1")
+project(":nasdaq-mrxoptions-spreadtopofmarket-itch-v2-1").projectDir = file("Classes/Nasdaq/MrxOptions/SpreadTopOfMarket.Itch.v2.1")
+
+include("nasdaq-mrxoptions-spreadtradefeed-itch-v2-1")
+project(":nasdaq-mrxoptions-spreadtradefeed-itch-v2-1").projectDir = file("Classes/Nasdaq/MrxOptions/SpreadTradeFeed.Itch.v2.1")
+
+include("nasdaq-mrxoptions-topofmarket-glimpse-v2-1")
+project(":nasdaq-mrxoptions-topofmarket-glimpse-v2-1").projectDir = file("Classes/Nasdaq/MrxOptions/TopOfMarket.Glimpse.v2.1")
+
+include("nasdaq-mrxoptions-topofmarket-itch-v2-1")
+project(":nasdaq-mrxoptions-topofmarket-itch-v2-1").projectDir = file("Classes/Nasdaq/MrxOptions/TopOfMarket.Itch.v2.1")
+
+include("nasdaq-mrxoptions-tradefeed-itch-v2-1")
+project(":nasdaq-mrxoptions-tradefeed-itch-v2-1").projectDir = file("Classes/Nasdaq/MrxOptions/TradeFeed.Itch.v2.1")
+
+include("nasdaq-nasdaqcanada-chixmd-asciiitch-v3-4-1-23")
+project(":nasdaq-nasdaqcanada-chixmd-asciiitch-v3-4-1-23").projectDir = file("Classes/Nasdaq/NasdaqCanada/Chixmd.AsciiItch.v3.4.1.23")
+
+include("nasdaq-nasdaqcanada-chixmmd-asciiitch-v1-1-3-5")
+project(":nasdaq-nasdaqcanada-chixmmd-asciiitch-v1-1-3-5").projectDir = file("Classes/Nasdaq/NasdaqCanada/Chixmmd.AsciiItch.v1.1.3.5")
+
+include("nasdaq-nasdaqcanada-chixmmd-glimpse-v1-0")
+project(":nasdaq-nasdaqcanada-chixmmd-glimpse-v1-0").projectDir = file("Classes/Nasdaq/NasdaqCanada/Chixmmd.Glimpse.v1.0")
+
+include("nasdaq-nasdaqcanada-orderentry-ouch-v5-0-1-4")
+project(":nasdaq-nasdaqcanada-orderentry-ouch-v5-0-1-4").projectDir = file("Classes/Nasdaq/NasdaqCanada/OrderEntry.Ouch.v5.0.1.4")
+
+include("nasdaq-nfxfutures-marketdata-geniumamd-v2-30-7")
+project(":nasdaq-nfxfutures-marketdata-geniumamd-v2-30-7").projectDir = file("Classes/Nasdaq/NfxFutures/MarketData.GeniumAmd.v2.30.7")
+
+include("nasdaq-nomoptions-bono-itch-v3-2")
+project(":nasdaq-nomoptions-bono-itch-v3-2").projectDir = file("Classes/Nasdaq/NomOptions/Bono.Itch.v3.2")
+
+include("nasdaq-nomoptions-bono-itch-v3-3")
+project(":nasdaq-nomoptions-bono-itch-v3-3").projectDir = file("Classes/Nasdaq/NomOptions/Bono.Itch.v3.3")
+
+include("nasdaq-nomoptions-cti-itch-v3-0")
+project(":nasdaq-nomoptions-cti-itch-v3-0").projectDir = file("Classes/Nasdaq/NomOptions/Cti.Itch.v3.0")
+
+include("nasdaq-nomoptions-itto-itch-v4-0")
+project(":nasdaq-nomoptions-itto-itch-v4-0").projectDir = file("Classes/Nasdaq/NomOptions/Itto.Itch.v4.0")
+
+include("nasdaq-nomoptions-itto-itch-v4-0-2025")
+project(":nasdaq-nomoptions-itto-itch-v4-0-2025").projectDir = file("Classes/Nasdaq/NomOptions/Itto.Itch.v4.0.2025")
+
+include("nasdaq-nomoptions-otto-ouch-v3-0-0")
+project(":nasdaq-nomoptions-otto-ouch-v3-0-0").projectDir = file("Classes/Nasdaq/NomOptions/Otto.Ouch.v3.0.0")
+
+include("nasdaq-nordicderivatives-depthofbook-glimpse-v2-22-4")
+project(":nasdaq-nordicderivatives-depthofbook-glimpse-v2-22-4").projectDir = file("Classes/Nasdaq/NordicDerivatives/DepthOfBook.Glimpse.v2.22.4")
+
+include("nasdaq-nordicderivatives-marketdata-geniumamd-v2-28-7")
+project(":nasdaq-nordicderivatives-marketdata-geniumamd-v2-28-7").projectDir = file("Classes/Nasdaq/NordicDerivatives/MarketData.GeniumAmd.v2.28.7")
+
+include("nasdaq-nordicequities-lastsale-itch-v1-2-11")
+project(":nasdaq-nordicequities-lastsale-itch-v1-2-11").projectDir = file("Classes/Nasdaq/NordicEquities/LastSale.Itch.v1.2.11")
+
+include("nasdaq-nordicequities-lastsale-itch-v1-2-9")
+project(":nasdaq-nordicequities-lastsale-itch-v1-2-9").projectDir = file("Classes/Nasdaq/NordicEquities/LastSale.Itch.v1.2.9")
+
+include("nasdaq-nordicequities-orderentry-ouch-v5-01-14")
+project(":nasdaq-nordicequities-orderentry-ouch-v5-01-14").projectDir = file("Classes/Nasdaq/NordicEquities/OrderEntry.Ouch.v5.01.14")
+
+include("nasdaq-nordicequities-orderentry-ouch-v5-02-11")
+project(":nasdaq-nordicequities-orderentry-ouch-v5-02-11").projectDir = file("Classes/Nasdaq/NordicEquities/OrderEntry.Ouch.v5.02.11")
+
+include("nasdaq-nordicequities-orderentry-ouch-v5-02-6")
+project(":nasdaq-nordicequities-orderentry-ouch-v5-02-6").projectDir = file("Classes/Nasdaq/NordicEquities/OrderEntry.Ouch.v5.02.6")
+
+include("nasdaq-nordicequities-riskcontrol-prm-v1-00-1")
+project(":nasdaq-nordicequities-riskcontrol-prm-v1-00-1").projectDir = file("Classes/Nasdaq/NordicEquities/RiskControl.Prm.v1.00.1")
+
+include("nasdaq-nordicequities-totalview-itch-v3-04-5")
+project(":nasdaq-nordicequities-totalview-itch-v3-04-5").projectDir = file("Classes/Nasdaq/NordicEquities/TotalView.Itch.v3.04.5")
+
+include("nasdaq-nordicequities-totalview-itch-v3-04-6")
+project(":nasdaq-nordicequities-totalview-itch-v3-04-6").projectDir = file("Classes/Nasdaq/NordicEquities/TotalView.Itch.v3.04.6")
+
+include("nasdaq-nordicequities-totalview-itch-v3-04-x")
+project(":nasdaq-nordicequities-totalview-itch-v3-04-x").projectDir = file("Classes/Nasdaq/NordicEquities/TotalView.Itch.v3.04.X")
+
+include("nasdaq-nsmequities-aggregated-itch-v2-0")
+project(":nasdaq-nsmequities-aggregated-itch-v2-0").projectDir = file("Classes/Nasdaq/NsmEquities/Aggregated.Itch.v2.0")
+
+include("nasdaq-nsmequities-aggregated-itch-v2-0-2026")
+project(":nasdaq-nsmequities-aggregated-itch-v2-0-2026").projectDir = file("Classes/Nasdaq/NsmEquities/Aggregated.Itch.v2.0.2026")
+
+include("nasdaq-nsmequities-basicplus-itch-v1-0")
+project(":nasdaq-nsmequities-basicplus-itch-v1-0").projectDir = file("Classes/Nasdaq/NsmEquities/BasicPlus.Itch.v1.0")
+
+include("nasdaq-nsmequities-drop-asciidrop-v2-2")
+project(":nasdaq-nsmequities-drop-asciidrop-v2-2").projectDir = file("Classes/Nasdaq/NsmEquities/Drop.AsciiDrop.v2.2")
+
+include("nasdaq-nsmequities-drop-asciidrop-v2-3")
+project(":nasdaq-nsmequities-drop-asciidrop-v2-3").projectDir = file("Classes/Nasdaq/NsmEquities/Drop.AsciiDrop.v2.3")
+
+include("nasdaq-nsmequities-lastsale-asciiitch-v1-0-2010")
+project(":nasdaq-nsmequities-lastsale-asciiitch-v1-0-2010").projectDir = file("Classes/Nasdaq/NsmEquities/LastSale.AsciiItch.v1.0.2010")
+
+include("nasdaq-nsmequities-lastsale-asciiitch-v1-2-2013")
+project(":nasdaq-nsmequities-lastsale-asciiitch-v1-2-2013").projectDir = file("Classes/Nasdaq/NsmEquities/LastSale.AsciiItch.v1.2.2013")
+
+include("nasdaq-nsmequities-lastsale-asciiitch-v2-0-2013")
+project(":nasdaq-nsmequities-lastsale-asciiitch-v2-0-2013").projectDir = file("Classes/Nasdaq/NsmEquities/LastSale.AsciiItch.v2.0.2013")
+
+include("nasdaq-nsmequities-lastsale-itch-v2-1-2015")
+project(":nasdaq-nsmequities-lastsale-itch-v2-1-2015").projectDir = file("Classes/Nasdaq/NsmEquities/LastSale.Itch.v2.1.2015")
+
+include("nasdaq-nsmequities-lastsale-itch-v3-0-2025")
+project(":nasdaq-nsmequities-lastsale-itch-v3-0-2025").projectDir = file("Classes/Nasdaq/NsmEquities/LastSale.Itch.v3.0.2025")
+
+include("nasdaq-nsmequities-lastsale-itch-v4-0-2026")
+project(":nasdaq-nsmequities-lastsale-itch-v4-0-2026").projectDir = file("Classes/Nasdaq/NsmEquities/LastSale.Itch.v4.0.2026")
+
+include("nasdaq-nsmequities-lastsaletradesfilterview-asciiitch-v1-0-2010")
+project(":nasdaq-nsmequities-lastsaletradesfilterview-asciiitch-v1-0-2010").projectDir = file("Classes/Nasdaq/NsmEquities/LastSaleTradesFilterView.AsciiItch.v1.0.2010")
+
+include("nasdaq-nsmequities-lastsaletradesfilterview-asciiitch-v1-2-2013")
+project(":nasdaq-nsmequities-lastsaletradesfilterview-asciiitch-v1-2-2013").projectDir = file("Classes/Nasdaq/NsmEquities/LastSaleTradesFilterView.AsciiItch.v1.2.2013")
+
+include("nasdaq-nsmequities-lastsaletradesfilterview-asciiitch-v2-0-2013")
+project(":nasdaq-nsmequities-lastsaletradesfilterview-asciiitch-v2-0-2013").projectDir = file("Classes/Nasdaq/NsmEquities/LastSaleTradesFilterView.AsciiItch.v2.0.2013")
+
+include("nasdaq-nsmequities-lastsaletradesfilterview-itch-v2-1-2025")
+project(":nasdaq-nsmequities-lastsaletradesfilterview-itch-v2-1-2025").projectDir = file("Classes/Nasdaq/NsmEquities/LastSaleTradesFilterView.Itch.v2.1.2025")
+
+include("nasdaq-nsmequities-lastsaletradesfilterview-itch-v4-0-2026")
+project(":nasdaq-nsmequities-lastsaletradesfilterview-itch-v4-0-2026").projectDir = file("Classes/Nasdaq/NsmEquities/LastSaleTradesFilterView.Itch.v4.0.2026")
+
+include("nasdaq-nsmequities-lastsaletrftradesfilterview-asciiitch-v1-0-2010")
+project(":nasdaq-nsmequities-lastsaletrftradesfilterview-asciiitch-v1-0-2010").projectDir = file("Classes/Nasdaq/NsmEquities/LastSaleTrfTradesFilterView.AsciiItch.v1.0.2010")
+
+include("nasdaq-nsmequities-lastsaletrftradesfilterview-asciiitch-v2-0-2013")
+project(":nasdaq-nsmequities-lastsaletrftradesfilterview-asciiitch-v2-0-2013").projectDir = file("Classes/Nasdaq/NsmEquities/LastSaleTrfTradesFilterView.AsciiItch.v2.0.2013")
+
+include("nasdaq-nsmequities-lastsaletrftradesfilterview-itch-v3-0-2024")
+project(":nasdaq-nsmequities-lastsaletrftradesfilterview-itch-v3-0-2024").projectDir = file("Classes/Nasdaq/NsmEquities/LastSaleTrfTradesFilterView.Itch.v3.0.2024")
+
+include("nasdaq-nsmequities-lastsaletrftradesfilterview-itch-v4-0-2026")
+project(":nasdaq-nsmequities-lastsaletrftradesfilterview-itch-v4-0-2026").projectDir = file("Classes/Nasdaq/NsmEquities/LastSaleTrfTradesFilterView.Itch.v4.0.2026")
+
+include("nasdaq-nsmequities-level2-itch-v2-0")
+project(":nasdaq-nsmequities-level2-itch-v2-0").projectDir = file("Classes/Nasdaq/NsmEquities/Level2.Itch.v2.0")
+
+include("nasdaq-nsmequities-level2-itch-v2-0-2026")
+project(":nasdaq-nsmequities-level2-itch-v2-0-2026").projectDir = file("Classes/Nasdaq/NsmEquities/Level2.Itch.v2.0.2026")
+
+include("nasdaq-nsmequities-matchview-asciiitch-v1-0")
+project(":nasdaq-nsmequities-matchview-asciiitch-v1-0").projectDir = file("Classes/Nasdaq/NsmEquities/MatchView.AsciiItch.v1.0")
+
+include("nasdaq-nsmequities-matchview-asciiitch-v1-1")
+project(":nasdaq-nsmequities-matchview-asciiitch-v1-1").projectDir = file("Classes/Nasdaq/NsmEquities/MatchView.AsciiItch.v1.1")
+
 include("nasdaq-nsmequities-nlsplus-itch-v3-0")
 project(":nasdaq-nsmequities-nlsplus-itch-v3-0").projectDir = file("Classes/Nasdaq/NsmEquities/NlsPlus.Itch.v3.0")
+
+include("nasdaq-nsmequities-nlsplus-itch-v4-0")
+project(":nasdaq-nsmequities-nlsplus-itch-v4-0").projectDir = file("Classes/Nasdaq/NsmEquities/NlsPlus.Itch.v4.0")
+
+include("nasdaq-nsmequities-nlsplus-itch-v4-0-2026")
+project(":nasdaq-nsmequities-nlsplus-itch-v4-0-2026").projectDir = file("Classes/Nasdaq/NsmEquities/NlsPlus.Itch.v4.0.2026")
+
+include("nasdaq-nsmequities-nlsplus-itch-v5-0")
+project(":nasdaq-nsmequities-nlsplus-itch-v5-0").projectDir = file("Classes/Nasdaq/NsmEquities/NlsPlus.Itch.v5.0")
+
+include("nasdaq-nsmequities-noiview-asciiitch-v2-0-2007")
+project(":nasdaq-nsmequities-noiview-asciiitch-v2-0-2007").projectDir = file("Classes/Nasdaq/NsmEquities/NoiView.AsciiItch.v2.0.2007")
+
+include("nasdaq-nsmequities-noiview-asciiitch-v2-0-2010-1")
+project(":nasdaq-nsmequities-noiview-asciiitch-v2-0-2010-1").projectDir = file("Classes/Nasdaq/NsmEquities/NoiView.AsciiItch.v2.0.2010.1")
+
+include("nasdaq-nsmequities-noiview-asciiitch-v2-0-2010-2")
+project(":nasdaq-nsmequities-noiview-asciiitch-v2-0-2010-2").projectDir = file("Classes/Nasdaq/NsmEquities/NoiView.AsciiItch.v2.0.2010.2")
+
+include("nasdaq-nsmequities-noiview-asciiitch-v2-1-2010")
+project(":nasdaq-nsmequities-noiview-asciiitch-v2-1-2010").projectDir = file("Classes/Nasdaq/NsmEquities/NoiView.AsciiItch.v2.1.2010")
+
+include("nasdaq-nsmequities-noiview-asciiitch-v2-1-2011-1")
+project(":nasdaq-nsmequities-noiview-asciiitch-v2-1-2011-1").projectDir = file("Classes/Nasdaq/NsmEquities/NoiView.AsciiItch.v2.1.2011.1")
+
+include("nasdaq-nsmequities-noiview-asciiitch-v2-1-2011-2")
+project(":nasdaq-nsmequities-noiview-asciiitch-v2-1-2011-2").projectDir = file("Classes/Nasdaq/NsmEquities/NoiView.AsciiItch.v2.1.2011.2")
+
+include("nasdaq-nsmequities-noiview-asciiitch-v2-1-2012")
+project(":nasdaq-nsmequities-noiview-asciiitch-v2-1-2012").projectDir = file("Classes/Nasdaq/NsmEquities/NoiView.AsciiItch.v2.1.2012")
+
+include("nasdaq-nsmequities-noiview-asciiitch-v2-1-2013-1")
+project(":nasdaq-nsmequities-noiview-asciiitch-v2-1-2013-1").projectDir = file("Classes/Nasdaq/NsmEquities/NoiView.AsciiItch.v2.1.2013.1")
+
+include("nasdaq-nsmequities-noiview-asciiitch-v2-1-2013-2")
+project(":nasdaq-nsmequities-noiview-asciiitch-v2-1-2013-2").projectDir = file("Classes/Nasdaq/NsmEquities/NoiView.AsciiItch.v2.1.2013.2")
+
+include("nasdaq-nsmequities-noiview-asciiitch-v3-0-2013")
+project(":nasdaq-nsmequities-noiview-asciiitch-v3-0-2013").projectDir = file("Classes/Nasdaq/NsmEquities/NoiView.AsciiItch.v3.0.2013")
+
+include("nasdaq-nsmequities-noiview-itch-v3-0-2014")
+project(":nasdaq-nsmequities-noiview-itch-v3-0-2014").projectDir = file("Classes/Nasdaq/NsmEquities/NoiView.Itch.v3.0.2014")
+
+include("nasdaq-nsmequities-noiview-itch-v3-0-2015")
+project(":nasdaq-nsmequities-noiview-itch-v3-0-2015").projectDir = file("Classes/Nasdaq/NsmEquities/NoiView.Itch.v3.0.2015")
+
+include("nasdaq-nsmequities-noiview-itch-v3-0-2017")
+project(":nasdaq-nsmequities-noiview-itch-v3-0-2017").projectDir = file("Classes/Nasdaq/NsmEquities/NoiView.Itch.v3.0.2017")
+
+include("nasdaq-nsmequities-noiview-itch-v3-0-2022")
+project(":nasdaq-nsmequities-noiview-itch-v3-0-2022").projectDir = file("Classes/Nasdaq/NsmEquities/NoiView.Itch.v3.0.2022")
+
+include("nasdaq-nsmequities-noiview-itch-v3-0-2023")
+project(":nasdaq-nsmequities-noiview-itch-v3-0-2023").projectDir = file("Classes/Nasdaq/NsmEquities/NoiView.Itch.v3.0.2023")
+
+include("nasdaq-nsmequities-noiview-itch-v3-0-2026")
+project(":nasdaq-nsmequities-noiview-itch-v3-0-2026").projectDir = file("Classes/Nasdaq/NsmEquities/NoiView.Itch.v3.0.2026")
+
+include("nasdaq-nsmequities-noiview-itch-v3-0-2026-2")
+project(":nasdaq-nsmequities-noiview-itch-v3-0-2026-2").projectDir = file("Classes/Nasdaq/NsmEquities/NoiView.Itch.v3.0.2026.2")
+
+include("nasdaq-nsmequities-nois-itch-v2-2")
+project(":nasdaq-nsmequities-nois-itch-v2-2").projectDir = file("Classes/Nasdaq/NsmEquities/Nois.Itch.v2.2")
+
+include("nasdaq-nsmequities-nois-itch-v2-2-2022")
+project(":nasdaq-nsmequities-nois-itch-v2-2-2022").projectDir = file("Classes/Nasdaq/NsmEquities/Nois.Itch.v2.2.2022")
+
+include("nasdaq-nsmequities-nois-itch-v2-2-2026")
+project(":nasdaq-nsmequities-nois-itch-v2-2-2026").projectDir = file("Classes/Nasdaq/NsmEquities/Nois.Itch.v2.2.2026")
+
+include("nasdaq-nsmequities-orders-ouch-v4-2-2018")
+project(":nasdaq-nsmequities-orders-ouch-v4-2-2018").projectDir = file("Classes/Nasdaq/NsmEquities/Orders.Ouch.v4.2.2018")
+
+include("nasdaq-nsmequities-orders-ouch-v4-2-2025")
+project(":nasdaq-nsmequities-orders-ouch-v4-2-2025").projectDir = file("Classes/Nasdaq/NsmEquities/Orders.Ouch.v4.2.2025")
 
 include("nasdaq-nsmequities-orders-ouch-v5-0")
 project(":nasdaq-nsmequities-orders-ouch-v5-0").projectDir = file("Classes/Nasdaq/NsmEquities/Orders.Ouch.v5.0")
@@ -227,17 +2423,62 @@ project(":nasdaq-nsmequities-orders-ouch-v5-0").projectDir = file("Classes/Nasda
 include("nasdaq-nsmequities-qbbo-itch-v2-1")
 project(":nasdaq-nsmequities-qbbo-itch-v2-1").projectDir = file("Classes/Nasdaq/NsmEquities/Qbbo.Itch.v2.1")
 
+include("nasdaq-nsmequities-qbbo-itch-v2-1-2026")
+project(":nasdaq-nsmequities-qbbo-itch-v2-1-2026").projectDir = file("Classes/Nasdaq/NsmEquities/Qbbo.Itch.v2.1.2026")
+
+include("nasdaq-nsmequities-rash-asciirash-v1-0-2016")
+project(":nasdaq-nsmequities-rash-asciirash-v1-0-2016").projectDir = file("Classes/Nasdaq/NsmEquities/Rash.AsciiRash.v1.0.2016")
+
+include("nasdaq-nsmequities-rash-asciirash-v1-1")
+project(":nasdaq-nsmequities-rash-asciirash-v1-1").projectDir = file("Classes/Nasdaq/NsmEquities/Rash.AsciiRash.v1.1")
+
+include("nasdaq-nsmequities-rash-asciirash-v1-1-2016")
+project(":nasdaq-nsmequities-rash-asciirash-v1-1-2016").projectDir = file("Classes/Nasdaq/NsmEquities/Rash.AsciiRash.v1.1.2016")
+
+include("nasdaq-nsmequities-totalview-asciiitch-v1-0")
+project(":nasdaq-nsmequities-totalview-asciiitch-v1-0").projectDir = file("Classes/Nasdaq/NsmEquities/TotalView.AsciiItch.v1.0")
+
 include("nasdaq-nsmequities-totalview-asciiitch-v2-0")
 project(":nasdaq-nsmequities-totalview-asciiitch-v2-0").projectDir = file("Classes/Nasdaq/NsmEquities/TotalView.AsciiItch.v2.0")
+
+include("nasdaq-nsmequities-totalview-asciiitch-v2-0-a")
+project(":nasdaq-nsmequities-totalview-asciiitch-v2-0-a").projectDir = file("Classes/Nasdaq/NsmEquities/TotalView.AsciiItch.v2.0.a")
 
 include("nasdaq-nsmequities-totalview-asciiitch-v3-0")
 project(":nasdaq-nsmequities-totalview-asciiitch-v3-0").projectDir = file("Classes/Nasdaq/NsmEquities/TotalView.AsciiItch.v3.0")
 
+include("nasdaq-nsmequities-totalview-asciiitch-v3-1")
+project(":nasdaq-nsmequities-totalview-asciiitch-v3-1").projectDir = file("Classes/Nasdaq/NsmEquities/TotalView.AsciiItch.v3.1")
+
+include("nasdaq-nsmequities-totalview-asciiitch-v3-1-f")
+project(":nasdaq-nsmequities-totalview-asciiitch-v3-1-f").projectDir = file("Classes/Nasdaq/NsmEquities/TotalView.AsciiItch.v3.1.f")
+
+include("nasdaq-nsmequities-totalview-asciiitch-v3-2")
+project(":nasdaq-nsmequities-totalview-asciiitch-v3-2").projectDir = file("Classes/Nasdaq/NsmEquities/TotalView.AsciiItch.v3.2")
+
+include("nasdaq-nsmequities-totalview-glimpse-v5-0")
+project(":nasdaq-nsmequities-totalview-glimpse-v5-0").projectDir = file("Classes/Nasdaq/NsmEquities/TotalView.Glimpse.v5.0")
+
+include("nasdaq-nsmequities-totalview-glimpse-v5-0-2026")
+project(":nasdaq-nsmequities-totalview-glimpse-v5-0-2026").projectDir = file("Classes/Nasdaq/NsmEquities/TotalView.Glimpse.v5.0.2026")
+
 include("nasdaq-nsmequities-totalview-itch-v4-0")
 project(":nasdaq-nsmequities-totalview-itch-v4-0").projectDir = file("Classes/Nasdaq/NsmEquities/TotalView.Itch.v4.0")
 
+include("nasdaq-nsmequities-totalview-itch-v4-0-f")
+project(":nasdaq-nsmequities-totalview-itch-v4-0-f").projectDir = file("Classes/Nasdaq/NsmEquities/TotalView.Itch.v4.0.f")
+
+include("nasdaq-nsmequities-totalview-itch-v4-1")
+project(":nasdaq-nsmequities-totalview-itch-v4-1").projectDir = file("Classes/Nasdaq/NsmEquities/TotalView.Itch.v4.1")
+
 include("nasdaq-nsmequities-totalview-itch-v5-0-2017")
 project(":nasdaq-nsmequities-totalview-itch-v5-0-2017").projectDir = file("Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2017")
+
+include("nasdaq-nsmequities-totalview-itch-v5-0-2018")
+project(":nasdaq-nsmequities-totalview-itch-v5-0-2018").projectDir = file("Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2018")
+
+include("nasdaq-nsmequities-totalview-itch-v5-0-2022")
+project(":nasdaq-nsmequities-totalview-itch-v5-0-2022").projectDir = file("Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2022")
 
 include("nasdaq-nsmequities-totalview-itch-v5-0-2023")
 project(":nasdaq-nsmequities-totalview-itch-v5-0-2023").projectDir = file("Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2023")
@@ -245,17 +2486,395 @@ project(":nasdaq-nsmequities-totalview-itch-v5-0-2023").projectDir = file("Class
 include("nasdaq-nsmequities-totalview-itch-v5-0-2026")
 project(":nasdaq-nsmequities-totalview-itch-v5-0-2026").projectDir = file("Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.0.2026")
 
+include("nasdaq-nsmequities-totalview-itch-v5-2")
+project(":nasdaq-nsmequities-totalview-itch-v5-2").projectDir = file("Classes/Nasdaq/NsmEquities/TotalView.Itch.v5.2")
+
+include("nasdaq-nsmequities-totalviewplus-itch-v1-0")
+project(":nasdaq-nsmequities-totalviewplus-itch-v1-0").projectDir = file("Classes/Nasdaq/NsmEquities/TotalViewPlus.Itch.v1.0")
+
+include("nasdaq-ntxequities-bbo-itch-v2-1")
+project(":nasdaq-ntxequities-bbo-itch-v2-1").projectDir = file("Classes/Nasdaq/NtxEquities/Bbo.Itch.v2.1")
+
+include("nasdaq-ntxequities-bbo-itch-v2-1-2026")
+project(":nasdaq-ntxequities-bbo-itch-v2-1-2026").projectDir = file("Classes/Nasdaq/NtxEquities/Bbo.Itch.v2.1.2026")
+
+include("nasdaq-ntxequities-drop-asciidrop-v2-3")
+project(":nasdaq-ntxequities-drop-asciidrop-v2-3").projectDir = file("Classes/Nasdaq/NtxEquities/Drop.AsciiDrop.v2.3")
+
+include("nasdaq-ntxequities-lastsale-itch-v4-0-2026")
+project(":nasdaq-ntxequities-lastsale-itch-v4-0-2026").projectDir = file("Classes/Nasdaq/NtxEquities/LastSale.Itch.v4.0.2026")
+
+include("nasdaq-ntxequities-matchview-asciiitch-v1-1")
+project(":nasdaq-ntxequities-matchview-asciiitch-v1-1").projectDir = file("Classes/Nasdaq/NtxEquities/MatchView.AsciiItch.v1.1")
+
+include("nasdaq-ntxequities-orders-ouch-v4-2")
+project(":nasdaq-ntxequities-orders-ouch-v4-2").projectDir = file("Classes/Nasdaq/NtxEquities/Orders.Ouch.v4.2")
+
+include("nasdaq-ntxequities-rash-asciirash-v1-1")
+project(":nasdaq-ntxequities-rash-asciirash-v1-1").projectDir = file("Classes/Nasdaq/NtxEquities/Rash.AsciiRash.v1.1")
+
+include("nasdaq-ntxequities-totalview-glimpse-v5-0")
+project(":nasdaq-ntxequities-totalview-glimpse-v5-0").projectDir = file("Classes/Nasdaq/NtxEquities/TotalView.Glimpse.v5.0")
+
+include("nasdaq-ntxequities-totalview-glimpse-v5-0-2026")
+project(":nasdaq-ntxequities-totalview-glimpse-v5-0-2026").projectDir = file("Classes/Nasdaq/NtxEquities/TotalView.Glimpse.v5.0.2026")
+
 include("nasdaq-ntxequities-totalview-itch-v5-0")
 project(":nasdaq-ntxequities-totalview-itch-v5-0").projectDir = file("Classes/Nasdaq/NtxEquities/TotalView.Itch.v5.0")
+
+include("nasdaq-ntxoptions-cti-itch-v1-3")
+project(":nasdaq-ntxoptions-cti-itch-v1-3").projectDir = file("Classes/Nasdaq/NtxOptions/Cti.Itch.v1.3")
+
+include("nasdaq-ntxoptions-cti-itch-v2-1")
+project(":nasdaq-ntxoptions-cti-itch-v2-1").projectDir = file("Classes/Nasdaq/NtxOptions/Cti.Itch.v2.1")
+
+include("nasdaq-ntxoptions-cti-itch-v3-0")
+project(":nasdaq-ntxoptions-cti-itch-v3-0").projectDir = file("Classes/Nasdaq/NtxOptions/Cti.Itch.v3.0")
+
+include("nasdaq-ntxoptions-depthofmarket-glimpse-v2-1")
+project(":nasdaq-ntxoptions-depthofmarket-glimpse-v2-1").projectDir = file("Classes/Nasdaq/NtxOptions/DepthOfMarket.Glimpse.v2.1")
+
+include("nasdaq-ntxoptions-depthofmarket-itch-v1-3")
+project(":nasdaq-ntxoptions-depthofmarket-itch-v1-3").projectDir = file("Classes/Nasdaq/NtxOptions/DepthOfMarket.Itch.v1.3")
+
+include("nasdaq-ntxoptions-depthofmarket-itch-v2-2")
+project(":nasdaq-ntxoptions-depthofmarket-itch-v2-2").projectDir = file("Classes/Nasdaq/NtxOptions/DepthOfMarket.Itch.v2.2")
+
+include("nasdaq-ntxoptions-topofmarket-glimpse-v1-1")
+project(":nasdaq-ntxoptions-topofmarket-glimpse-v1-1").projectDir = file("Classes/Nasdaq/NtxOptions/TopOfMarket.Glimpse.v1.1")
+
+include("nasdaq-ntxoptions-topofmarket-itch-v1-2")
+project(":nasdaq-ntxoptions-topofmarket-itch-v1-2").projectDir = file("Classes/Nasdaq/NtxOptions/TopOfMarket.Itch.v1.2")
+
+include("nasdaq-ntxoptions-topofmarket-itch-v2-2")
+project(":nasdaq-ntxoptions-topofmarket-itch-v2-2").projectDir = file("Classes/Nasdaq/NtxOptions/TopOfMarket.Itch.v2.2")
+
+include("nasdaq-ntxoptions-tradefeed-itch-v2-1")
+project(":nasdaq-ntxoptions-tradefeed-itch-v2-1").projectDir = file("Classes/Nasdaq/NtxOptions/TradeFeed.Itch.v2.1")
+
+include("nasdaq-phlxoptions-cti-itch-v3-0")
+project(":nasdaq-phlxoptions-cti-itch-v3-0").projectDir = file("Classes/Nasdaq/PhlxOptions/Cti.Itch.v3.0")
+
+include("nasdaq-phlxoptions-depthofmarket-glimpse-v2-1")
+project(":nasdaq-phlxoptions-depthofmarket-glimpse-v2-1").projectDir = file("Classes/Nasdaq/PhlxOptions/DepthOfMarket.Glimpse.v2.1")
+
+include("nasdaq-phlxoptions-depthofmarket-itch-v1-5")
+project(":nasdaq-phlxoptions-depthofmarket-itch-v1-5").projectDir = file("Classes/Nasdaq/PhlxOptions/DepthOfMarket.Itch.v1.5")
+
+include("nasdaq-phlxoptions-depthofmarket-itch-v1-6")
+project(":nasdaq-phlxoptions-depthofmarket-itch-v1-6").projectDir = file("Classes/Nasdaq/PhlxOptions/DepthOfMarket.Itch.v1.6")
+
+include("nasdaq-phlxoptions-depthofmarket-itch-v1-7")
+project(":nasdaq-phlxoptions-depthofmarket-itch-v1-7").projectDir = file("Classes/Nasdaq/PhlxOptions/DepthOfMarket.Itch.v1.7")
+
+include("nasdaq-phlxoptions-depthofmarket-itch-v2-1")
+project(":nasdaq-phlxoptions-depthofmarket-itch-v2-1").projectDir = file("Classes/Nasdaq/PhlxOptions/DepthOfMarket.Itch.v2.1")
+
+include("nasdaq-phlxoptions-depthofmarket-itch-v2-1-2026")
+project(":nasdaq-phlxoptions-depthofmarket-itch-v2-1-2026").projectDir = file("Classes/Nasdaq/PhlxOptions/DepthOfMarket.Itch.v2.1.2026")
+
+include("nasdaq-phlxoptions-orders-itch-v1-9")
+project(":nasdaq-phlxoptions-orders-itch-v1-9").projectDir = file("Classes/Nasdaq/PhlxOptions/Orders.Itch.v1.9")
+
+include("nasdaq-phlxoptions-orders-itch-v1-91")
+project(":nasdaq-phlxoptions-orders-itch-v1-91").projectDir = file("Classes/Nasdaq/PhlxOptions/Orders.Itch.v1.91")
+
+include("nasdaq-phlxoptions-orders-itch-v1-92")
+project(":nasdaq-phlxoptions-orders-itch-v1-92").projectDir = file("Classes/Nasdaq/PhlxOptions/Orders.Itch.v1.92")
+
+include("nasdaq-phlxoptions-orders-itch-v2-1")
+project(":nasdaq-phlxoptions-orders-itch-v2-1").projectDir = file("Classes/Nasdaq/PhlxOptions/Orders.Itch.v2.1")
+
+include("nasdaq-phlxoptions-otto-ouch-v3-0-0")
+project(":nasdaq-phlxoptions-otto-ouch-v3-0-0").projectDir = file("Classes/Nasdaq/PhlxOptions/Otto.Ouch.v3.0.0")
+
+include("nasdaq-phlxoptions-spreaddepthofmarket-glimpse-v2-1")
+project(":nasdaq-phlxoptions-spreaddepthofmarket-glimpse-v2-1").projectDir = file("Classes/Nasdaq/PhlxOptions/SpreadDepthOfMarket.Glimpse.v2.1")
+
+include("nasdaq-phlxoptions-spreaddepthofmarket-itch-v2-1")
+project(":nasdaq-phlxoptions-spreaddepthofmarket-itch-v2-1").projectDir = file("Classes/Nasdaq/PhlxOptions/SpreadDepthOfMarket.Itch.v2.1")
+
+include("nasdaq-phlxoptions-spreadorders-itch-v2-1")
+project(":nasdaq-phlxoptions-spreadorders-itch-v2-1").projectDir = file("Classes/Nasdaq/PhlxOptions/SpreadOrders.Itch.v2.1")
+
+include("nasdaq-phlxoptions-spreadtopofmarket-glimpse-v2-1")
+project(":nasdaq-phlxoptions-spreadtopofmarket-glimpse-v2-1").projectDir = file("Classes/Nasdaq/PhlxOptions/SpreadTopOfMarket.Glimpse.v2.1")
+
+include("nasdaq-phlxoptions-spreadtopofmarket-itch-v2-1")
+project(":nasdaq-phlxoptions-spreadtopofmarket-itch-v2-1").projectDir = file("Classes/Nasdaq/PhlxOptions/SpreadTopOfMarket.Itch.v2.1")
+
+include("nasdaq-phlxoptions-spreadtradefeed-itch-v2-1")
+project(":nasdaq-phlxoptions-spreadtradefeed-itch-v2-1").projectDir = file("Classes/Nasdaq/PhlxOptions/SpreadTradeFeed.Itch.v2.1")
+
+include("nasdaq-phlxoptions-topofmarket-glimpse-v2-1")
+project(":nasdaq-phlxoptions-topofmarket-glimpse-v2-1").projectDir = file("Classes/Nasdaq/PhlxOptions/TopOfMarket.Glimpse.v2.1")
+
+include("nasdaq-phlxoptions-topofmarket-itch-v2-1")
+project(":nasdaq-phlxoptions-topofmarket-itch-v2-1").projectDir = file("Classes/Nasdaq/PhlxOptions/TopOfMarket.Itch.v2.1")
+
+include("nasdaq-phlxoptions-topofmarket-itch-v3-3")
+project(":nasdaq-phlxoptions-topofmarket-itch-v3-3").projectDir = file("Classes/Nasdaq/PhlxOptions/TopOfMarket.Itch.v3.3")
+
+include("nasdaq-phlxoptions-topofmarket-itch-v3-4")
+project(":nasdaq-phlxoptions-topofmarket-itch-v3-4").projectDir = file("Classes/Nasdaq/PhlxOptions/TopOfMarket.Itch.v3.4")
+
+include("nasdaq-phlxoptions-tradefeed-itch-v2-1")
+project(":nasdaq-phlxoptions-tradefeed-itch-v2-1").projectDir = file("Classes/Nasdaq/PhlxOptions/TradeFeed.Itch.v2.1")
+
+include("nasdaq-psxequities-bbo-asciiitch-v1-1-2013-2")
+project(":nasdaq-psxequities-bbo-asciiitch-v1-1-2013-2").projectDir = file("Classes/Nasdaq/PsxEquities/Bbo.AsciiItch.v1.1.2013.2")
+
+include("nasdaq-psxequities-bbo-asciiitch-v2-0-2013-1")
+project(":nasdaq-psxequities-bbo-asciiitch-v2-0-2013-1").projectDir = file("Classes/Nasdaq/PsxEquities/Bbo.AsciiItch.v2.0.2013.1")
+
+include("nasdaq-psxequities-bbo-itch-v2-0-2014")
+project(":nasdaq-psxequities-bbo-itch-v2-0-2014").projectDir = file("Classes/Nasdaq/PsxEquities/Bbo.Itch.v2.0.2014")
+
+include("nasdaq-psxequities-bbo-itch-v2-1")
+project(":nasdaq-psxequities-bbo-itch-v2-1").projectDir = file("Classes/Nasdaq/PsxEquities/Bbo.Itch.v2.1")
+
+include("nasdaq-psxequities-bbo-itch-v2-1-2017")
+project(":nasdaq-psxequities-bbo-itch-v2-1-2017").projectDir = file("Classes/Nasdaq/PsxEquities/Bbo.Itch.v2.1.2017")
+
+include("nasdaq-psxequities-bbo-itch-v2-1-2018")
+project(":nasdaq-psxequities-bbo-itch-v2-1-2018").projectDir = file("Classes/Nasdaq/PsxEquities/Bbo.Itch.v2.1.2018")
+
+include("nasdaq-psxequities-bbo-itch-v2-1-2026")
+project(":nasdaq-psxequities-bbo-itch-v2-1-2026").projectDir = file("Classes/Nasdaq/PsxEquities/Bbo.Itch.v2.1.2026")
+
+include("nasdaq-psxequities-drop-asciidrop-v2-1")
+project(":nasdaq-psxequities-drop-asciidrop-v2-1").projectDir = file("Classes/Nasdaq/PsxEquities/Drop.AsciiDrop.v2.1")
+
+include("nasdaq-psxequities-drop-asciidrop-v2-2")
+project(":nasdaq-psxequities-drop-asciidrop-v2-2").projectDir = file("Classes/Nasdaq/PsxEquities/Drop.AsciiDrop.v2.2")
+
+include("nasdaq-psxequities-lastsale-itch-v2-1-2018")
+project(":nasdaq-psxequities-lastsale-itch-v2-1-2018").projectDir = file("Classes/Nasdaq/PsxEquities/LastSale.Itch.v2.1.2018")
+
+include("nasdaq-psxequities-lastsale-itch-v2-1-2026")
+project(":nasdaq-psxequities-lastsale-itch-v2-1-2026").projectDir = file("Classes/Nasdaq/PsxEquities/LastSale.Itch.v2.1.2026")
+
+include("nasdaq-psxequities-lastsale-itch-v4-0-2026")
+project(":nasdaq-psxequities-lastsale-itch-v4-0-2026").projectDir = file("Classes/Nasdaq/PsxEquities/LastSale.Itch.v4.0.2026")
+
+include("nasdaq-psxequities-matchview-asciiitch-v1-1")
+project(":nasdaq-psxequities-matchview-asciiitch-v1-1").projectDir = file("Classes/Nasdaq/PsxEquities/MatchView.AsciiItch.v1.1")
+
+include("nasdaq-psxequities-orders-ouch-v4-2")
+project(":nasdaq-psxequities-orders-ouch-v4-2").projectDir = file("Classes/Nasdaq/PsxEquities/Orders.Ouch.v4.2")
+
+include("nasdaq-psxequities-rash-asciirash-v1-0")
+project(":nasdaq-psxequities-rash-asciirash-v1-0").projectDir = file("Classes/Nasdaq/PsxEquities/Rash.AsciiRash.v1.0")
+
+include("nasdaq-psxequities-rash-asciirash-v1-1")
+project(":nasdaq-psxequities-rash-asciirash-v1-1").projectDir = file("Classes/Nasdaq/PsxEquities/Rash.AsciiRash.v1.1")
+
+include("nasdaq-psxequities-totalview-glimpse-v3-2")
+project(":nasdaq-psxequities-totalview-glimpse-v3-2").projectDir = file("Classes/Nasdaq/PsxEquities/TotalView.Glimpse.v3.2")
+
+include("nasdaq-psxequities-totalview-glimpse-v4-1")
+project(":nasdaq-psxequities-totalview-glimpse-v4-1").projectDir = file("Classes/Nasdaq/PsxEquities/TotalView.Glimpse.v4.1")
+
+include("nasdaq-psxequities-totalview-glimpse-v5-0")
+project(":nasdaq-psxequities-totalview-glimpse-v5-0").projectDir = file("Classes/Nasdaq/PsxEquities/TotalView.Glimpse.v5.0")
+
+include("nasdaq-psxequities-totalview-glimpse-v5-0-2022")
+project(":nasdaq-psxequities-totalview-glimpse-v5-0-2022").projectDir = file("Classes/Nasdaq/PsxEquities/TotalView.Glimpse.v5.0.2022")
 
 include("nasdaq-psxequities-totalview-itch-v5-0")
 project(":nasdaq-psxequities-totalview-itch-v5-0").projectDir = file("Classes/Nasdaq/PsxEquities/TotalView.Itch.v5.0")
 
+include("nasdaq-psxequities-totalview-itch-v5-0-2018")
+project(":nasdaq-psxequities-totalview-itch-v5-0-2018").projectDir = file("Classes/Nasdaq/PsxEquities/TotalView.Itch.v5.0.2018")
+
 include("nasdaq-uqdf-output-utp-v1-5")
 project(":nasdaq-uqdf-output-utp-v1-5").projectDir = file("Classes/Nasdaq/Uqdf/Output.Utp.v1.5")
 
+include("nasdaq-utdf-output-utp-v1-5")
+project(":nasdaq-utdf-output-utp-v1-5").projectDir = file("Classes/Nasdaq/Utdf/Output.Utp.v1.5")
+
+include("nasdaq-utdf-output-utp-v3-0-c")
+project(":nasdaq-utdf-output-utp-v3-0-c").projectDir = file("Classes/Nasdaq/Utdf/Output.Utp.v3.0.c")
+
+include("nse-nsecd-dropcopy-nnfdirect-v1-7")
+project(":nse-nsecd-dropcopy-nnfdirect-v1-7").projectDir = file("Classes/Nse/NseCd/DropCopy.NnfDirect.v1.7")
+
+include("nse-nsecd-orderentry-nnf-v6-3")
+project(":nse-nsecd-orderentry-nnf-v6-3").projectDir = file("Classes/Nse/NseCd/OrderEntry.Nnf.v6.3")
+
+include("nse-nsecd-recovery-tbt-v6-8")
+project(":nse-nsecd-recovery-tbt-v6-8").projectDir = file("Classes/Nse/NseCd/Recovery.Tbt.v6.8")
+
+include("nse-nsecd-recovery-tbt-v6-9")
+project(":nse-nsecd-recovery-tbt-v6-9").projectDir = file("Classes/Nse/NseCd/Recovery.Tbt.v6.9")
+
+include("nse-nsecd-recovery-tbt-v7-0")
+project(":nse-nsecd-recovery-tbt-v7-0").projectDir = file("Classes/Nse/NseCd/Recovery.Tbt.v7.0")
+
+include("nse-nsecd-recovery-tbt-v7-1")
+project(":nse-nsecd-recovery-tbt-v7-1").projectDir = file("Classes/Nse/NseCd/Recovery.Tbt.v7.1")
+
+include("nse-nsecd-snapshot-tbt-v6-8")
+project(":nse-nsecd-snapshot-tbt-v6-8").projectDir = file("Classes/Nse/NseCd/Snapshot.Tbt.v6.8")
+
+include("nse-nsecd-snapshot-tbt-v6-9")
+project(":nse-nsecd-snapshot-tbt-v6-9").projectDir = file("Classes/Nse/NseCd/Snapshot.Tbt.v6.9")
+
+include("nse-nsecd-snapshot-tbt-v7-0")
+project(":nse-nsecd-snapshot-tbt-v7-0").projectDir = file("Classes/Nse/NseCd/Snapshot.Tbt.v7.0")
+
+include("nse-nsecd-snapshot-tbt-v7-1")
+project(":nse-nsecd-snapshot-tbt-v7-1").projectDir = file("Classes/Nse/NseCd/Snapshot.Tbt.v7.1")
+
+include("nse-nsecm-recovery-tbt-v6-8")
+project(":nse-nsecm-recovery-tbt-v6-8").projectDir = file("Classes/Nse/NseCm/Recovery.Tbt.v6.8")
+
+include("nse-nsecm-recovery-tbt-v6-9")
+project(":nse-nsecm-recovery-tbt-v6-9").projectDir = file("Classes/Nse/NseCm/Recovery.Tbt.v6.9")
+
+include("nse-nsecm-recovery-tbt-v7-0")
+project(":nse-nsecm-recovery-tbt-v7-0").projectDir = file("Classes/Nse/NseCm/Recovery.Tbt.v7.0")
+
+include("nse-nsecm-recovery-tbt-v7-1")
+project(":nse-nsecm-recovery-tbt-v7-1").projectDir = file("Classes/Nse/NseCm/Recovery.Tbt.v7.1")
+
+include("nse-nsecm-snapshot-tbt-v6-8")
+project(":nse-nsecm-snapshot-tbt-v6-8").projectDir = file("Classes/Nse/NseCm/Snapshot.Tbt.v6.8")
+
+include("nse-nsecm-snapshot-tbt-v6-9")
+project(":nse-nsecm-snapshot-tbt-v6-9").projectDir = file("Classes/Nse/NseCm/Snapshot.Tbt.v6.9")
+
+include("nse-nsecm-snapshot-tbt-v7-0")
+project(":nse-nsecm-snapshot-tbt-v7-0").projectDir = file("Classes/Nse/NseCm/Snapshot.Tbt.v7.0")
+
+include("nse-nsecm-snapshot-tbt-v7-1")
+project(":nse-nsecm-snapshot-tbt-v7-1").projectDir = file("Classes/Nse/NseCm/Snapshot.Tbt.v7.1")
+
+include("nse-nsecom-dropcopy-nnfdirect-v1-5")
+project(":nse-nsecom-dropcopy-nnfdirect-v1-5").projectDir = file("Classes/Nse/NseCom/DropCopy.NnfDirect.v1.5")
+
+include("nse-nsecom-orderentry-nnf-v3-5")
+project(":nse-nsecom-orderentry-nnf-v3-5").projectDir = file("Classes/Nse/NseCom/OrderEntry.Nnf.v3.5")
+
+include("nse-nsecom-recovery-tbt-v6-8")
+project(":nse-nsecom-recovery-tbt-v6-8").projectDir = file("Classes/Nse/NseCom/Recovery.Tbt.v6.8")
+
+include("nse-nsecom-recovery-tbt-v6-9")
+project(":nse-nsecom-recovery-tbt-v6-9").projectDir = file("Classes/Nse/NseCom/Recovery.Tbt.v6.9")
+
+include("nse-nsecom-recovery-tbt-v7-0")
+project(":nse-nsecom-recovery-tbt-v7-0").projectDir = file("Classes/Nse/NseCom/Recovery.Tbt.v7.0")
+
+include("nse-nsecom-recovery-tbt-v7-1")
+project(":nse-nsecom-recovery-tbt-v7-1").projectDir = file("Classes/Nse/NseCom/Recovery.Tbt.v7.1")
+
+include("nse-nsecom-snapshot-tbt-v6-8")
+project(":nse-nsecom-snapshot-tbt-v6-8").projectDir = file("Classes/Nse/NseCom/Snapshot.Tbt.v6.8")
+
+include("nse-nsecom-snapshot-tbt-v6-9")
+project(":nse-nsecom-snapshot-tbt-v6-9").projectDir = file("Classes/Nse/NseCom/Snapshot.Tbt.v6.9")
+
+include("nse-nsecom-snapshot-tbt-v7-0")
+project(":nse-nsecom-snapshot-tbt-v7-0").projectDir = file("Classes/Nse/NseCom/Snapshot.Tbt.v7.0")
+
+include("nse-nsecom-snapshot-tbt-v7-1")
+project(":nse-nsecom-snapshot-tbt-v7-1").projectDir = file("Classes/Nse/NseCom/Snapshot.Tbt.v7.1")
+
+include("nse-nsefo-recovery-tbt-v6-8")
+project(":nse-nsefo-recovery-tbt-v6-8").projectDir = file("Classes/Nse/NseFo/Recovery.Tbt.v6.8")
+
+include("nse-nsefo-recovery-tbt-v6-9")
+project(":nse-nsefo-recovery-tbt-v6-9").projectDir = file("Classes/Nse/NseFo/Recovery.Tbt.v6.9")
+
+include("nse-nsefo-recovery-tbt-v7-0")
+project(":nse-nsefo-recovery-tbt-v7-0").projectDir = file("Classes/Nse/NseFo/Recovery.Tbt.v7.0")
+
+include("nse-nsefo-recovery-tbt-v7-1")
+project(":nse-nsefo-recovery-tbt-v7-1").projectDir = file("Classes/Nse/NseFo/Recovery.Tbt.v7.1")
+
+include("nse-nsefo-snapshot-tbt-v6-8")
+project(":nse-nsefo-snapshot-tbt-v6-8").projectDir = file("Classes/Nse/NseFo/Snapshot.Tbt.v6.8")
+
+include("nse-nsefo-snapshot-tbt-v6-9")
+project(":nse-nsefo-snapshot-tbt-v6-9").projectDir = file("Classes/Nse/NseFo/Snapshot.Tbt.v6.9")
+
+include("nse-nsefo-snapshot-tbt-v7-0")
+project(":nse-nsefo-snapshot-tbt-v7-0").projectDir = file("Classes/Nse/NseFo/Snapshot.Tbt.v7.0")
+
+include("nse-nsefo-snapshot-tbt-v7-1")
+project(":nse-nsefo-snapshot-tbt-v7-1").projectDir = file("Classes/Nse/NseFo/Snapshot.Tbt.v7.1")
+
+include("nsxaustralia-nets-marketdatafeed-itch-v4-2-55")
+project(":nsxaustralia-nets-marketdatafeed-itch-v4-2-55").projectDir = file("Classes/NsxAustralia/Nets/MarketDataFeed.Itch.v4.2.55")
+
+include("nyse-amexequities-bbo-pillar-v2-5-d")
+project(":nyse-amexequities-bbo-pillar-v2-5-d").projectDir = file("Classes/Nyse/AmexEquities/Bbo.Pillar.v2.5.d")
+
+include("nyse-amexequities-binarygateway-pillarstream-v5-17")
+project(":nyse-amexequities-binarygateway-pillarstream-v5-17").projectDir = file("Classes/Nyse/AmexEquities/BinaryGateway.PillarStream.v5.17")
+
+include("nyse-amexequities-binarygateway-pillarstream-v6-0")
+project(":nyse-amexequities-binarygateway-pillarstream-v6-0").projectDir = file("Classes/Nyse/AmexEquities/BinaryGateway.PillarStream.v6.0")
+
+include("nyse-amexequities-binarygateway-pillarstream-v6-1")
+project(":nyse-amexequities-binarygateway-pillarstream-v6-1").projectDir = file("Classes/Nyse/AmexEquities/BinaryGateway.PillarStream.v6.1")
+
+include("nyse-amexequities-bqt-xdp-v2-4-a")
+project(":nyse-amexequities-bqt-xdp-v2-4-a").projectDir = file("Classes/Nyse/AmexEquities/Bqt.Xdp.v2.4.a")
+
+include("nyse-amexequities-bqt-xdp-v2-4-b")
+project(":nyse-amexequities-bqt-xdp-v2-4-b").projectDir = file("Classes/Nyse/AmexEquities/Bqt.Xdp.v2.4.b")
+
+include("nyse-amexequities-bqt-xdp-v2-4-c")
+project(":nyse-amexequities-bqt-xdp-v2-4-c").projectDir = file("Classes/Nyse/AmexEquities/Bqt.Xdp.v2.4.c")
+
+include("nyse-amexequities-depthfeed-pillar-v1-1")
+project(":nyse-amexequities-depthfeed-pillar-v1-1").projectDir = file("Classes/Nyse/AmexEquities/DepthFeed.Pillar.v1.1")
+
+include("nyse-amexequities-depthfeed-pillar-v1-6")
+project(":nyse-amexequities-depthfeed-pillar-v1-6").projectDir = file("Classes/Nyse/AmexEquities/DepthFeed.Pillar.v1.6")
+
+include("nyse-amexequities-depthfeed-pillar-v1-7")
+project(":nyse-amexequities-depthfeed-pillar-v1-7").projectDir = file("Classes/Nyse/AmexEquities/DepthFeed.Pillar.v1.7")
+
+include("nyse-amexequities-depthfeedrefresh-pillar-v1-1")
+project(":nyse-amexequities-depthfeedrefresh-pillar-v1-1").projectDir = file("Classes/Nyse/AmexEquities/DepthFeedRefresh.Pillar.v1.1")
+
+include("nyse-amexequities-depthfeedrefresh-pillar-v1-6")
+project(":nyse-amexequities-depthfeedrefresh-pillar-v1-6").projectDir = file("Classes/Nyse/AmexEquities/DepthFeedRefresh.Pillar.v1.6")
+
+include("nyse-amexequities-depthfeedrefresh-pillar-v1-7")
+project(":nyse-amexequities-depthfeedrefresh-pillar-v1-7").projectDir = file("Classes/Nyse/AmexEquities/DepthFeedRefresh.Pillar.v1.7")
+
+include("nyse-amexequities-depthfeedrequest-pillar-v1-1")
+project(":nyse-amexequities-depthfeedrequest-pillar-v1-1").projectDir = file("Classes/Nyse/AmexEquities/DepthFeedRequest.Pillar.v1.1")
+
+include("nyse-amexequities-depthfeedrequest-pillar-v1-6")
+project(":nyse-amexequities-depthfeedrequest-pillar-v1-6").projectDir = file("Classes/Nyse/AmexEquities/DepthFeedRequest.Pillar.v1.6")
+
+include("nyse-amexequities-depthfeedrequest-pillar-v1-7")
+project(":nyse-amexequities-depthfeedrequest-pillar-v1-7").projectDir = file("Classes/Nyse/AmexEquities/DepthFeedRequest.Pillar.v1.7")
+
+include("nyse-amexequities-depthfeedretransmission-pillar-v1-1")
+project(":nyse-amexequities-depthfeedretransmission-pillar-v1-1").projectDir = file("Classes/Nyse/AmexEquities/DepthFeedRetransmission.Pillar.v1.1")
+
+include("nyse-amexequities-depthfeedretransmission-pillar-v1-6")
+project(":nyse-amexequities-depthfeedretransmission-pillar-v1-6").projectDir = file("Classes/Nyse/AmexEquities/DepthFeedRetransmission.Pillar.v1.6")
+
+include("nyse-amexequities-depthfeedretransmission-pillar-v1-7")
+project(":nyse-amexequities-depthfeedretransmission-pillar-v1-7").projectDir = file("Classes/Nyse/AmexEquities/DepthFeedRetransmission.Pillar.v1.7")
+
+include("nyse-amexequities-imbalancesfeed-pillar-v2-2-n")
+project(":nyse-amexequities-imbalancesfeed-pillar-v2-2-n").projectDir = file("Classes/Nyse/AmexEquities/ImbalancesFeed.Pillar.v2.2.n")
+
+include("nyse-amexequities-imbalancesfeed-pillar-v2-2-o")
+project(":nyse-amexequities-imbalancesfeed-pillar-v2-2-o").projectDir = file("Classes/Nyse/AmexEquities/ImbalancesFeed.Pillar.v2.2.o")
+
 include("nyse-amexequities-integratedfeed-pillar-v2-5-g")
 project(":nyse-amexequities-integratedfeed-pillar-v2-5-g").projectDir = file("Classes/Nyse/AmexEquities/IntegratedFeed.Pillar.v2.5.g")
+
+include("nyse-amexequities-integratedfeed-pillar-v2-5-h")
+project(":nyse-amexequities-integratedfeed-pillar-v2-5-h").projectDir = file("Classes/Nyse/AmexEquities/IntegratedFeed.Pillar.v2.5.h")
 
 include("nyse-amexequities-integratedfeed-xdp-v2-1-g")
 project(":nyse-amexequities-integratedfeed-xdp-v2-1-g").projectDir = file("Classes/Nyse/AmexEquities/IntegratedFeed.Xdp.v2.1.g")
@@ -263,14 +2882,53 @@ project(":nyse-amexequities-integratedfeed-xdp-v2-1-g").projectDir = file("Class
 include("nyse-amexequities-integratedfeedrefresh-pillar-v2-5-g")
 project(":nyse-amexequities-integratedfeedrefresh-pillar-v2-5-g").projectDir = file("Classes/Nyse/AmexEquities/IntegratedFeedRefresh.Pillar.v2.5.g")
 
+include("nyse-amexequities-integratedfeedrefresh-pillar-v2-5-h")
+project(":nyse-amexequities-integratedfeedrefresh-pillar-v2-5-h").projectDir = file("Classes/Nyse/AmexEquities/IntegratedFeedRefresh.Pillar.v2.5.h")
+
+include("nyse-amexequities-integratedfeedrequest-pillar-v2-5-g")
+project(":nyse-amexequities-integratedfeedrequest-pillar-v2-5-g").projectDir = file("Classes/Nyse/AmexEquities/IntegratedFeedRequest.Pillar.v2.5.g")
+
+include("nyse-amexequities-integratedfeedrequest-pillar-v2-5-h")
+project(":nyse-amexequities-integratedfeedrequest-pillar-v2-5-h").projectDir = file("Classes/Nyse/AmexEquities/IntegratedFeedRequest.Pillar.v2.5.h")
+
+include("nyse-amexequities-integratedfeedretransmission-pillar-v2-5-g")
+project(":nyse-amexequities-integratedfeedretransmission-pillar-v2-5-g").projectDir = file("Classes/Nyse/AmexEquities/IntegratedFeedRetransmission.Pillar.v2.5.g")
+
+include("nyse-amexequities-integratedfeedretransmission-pillar-v2-5-h")
+project(":nyse-amexequities-integratedfeedretransmission-pillar-v2-5-h").projectDir = file("Classes/Nyse/AmexEquities/IntegratedFeedRetransmission.Pillar.v2.5.h")
+
+include("nyse-amexequities-integratedfeedstocksummary-pillar-v2-5-g")
+project(":nyse-amexequities-integratedfeedstocksummary-pillar-v2-5-g").projectDir = file("Classes/Nyse/AmexEquities/IntegratedFeedStockSummary.Pillar.v2.5.g")
+
+include("nyse-amexequities-integratedfeedstocksummary-pillar-v2-5-h")
+project(":nyse-amexequities-integratedfeedstocksummary-pillar-v2-5-h").projectDir = file("Classes/Nyse/AmexEquities/IntegratedFeedStockSummary.Pillar.v2.5.h")
+
 include("nyse-amexequities-openbook-aggregated-xdp-v2-1-d")
 project(":nyse-amexequities-openbook-aggregated-xdp-v2-1-d").projectDir = file("Classes/Nyse/AmexEquities/OpenBook.Aggregated.Xdp.v2.1.d")
 
 include("nyse-amexequities-openbook-ultra-v2-1-b")
 project(":nyse-amexequities-openbook-ultra-v2-1-b").projectDir = file("Classes/Nyse/AmexEquities/OpenBook.Ultra.v2.1.b")
 
+include("nyse-amexequities-openbook-ultra-v2-1-k")
+project(":nyse-amexequities-openbook-ultra-v2-1-k").projectDir = file("Classes/Nyse/AmexEquities/OpenBook.Ultra.v2.1.k")
+
+include("nyse-amexequities-openbook-xdp-v1-9-a")
+project(":nyse-amexequities-openbook-xdp-v1-9-a").projectDir = file("Classes/Nyse/AmexEquities/OpenBook.Xdp.v1.9.a")
+
+include("nyse-amexequities-trades-pillar-v2-6")
+project(":nyse-amexequities-trades-pillar-v2-6").projectDir = file("Classes/Nyse/AmexEquities/Trades.Pillar.v2.6")
+
+include("nyse-amexequities-trades-pillar-v2-6-a")
+project(":nyse-amexequities-trades-pillar-v2-6-a").projectDir = file("Classes/Nyse/AmexEquities/Trades.Pillar.v2.6.a")
+
+include("nyse-amexoptions-complexfeed-pillar-v1-0-h")
+project(":nyse-amexoptions-complexfeed-pillar-v1-0-h").projectDir = file("Classes/Nyse/AmexOptions/ComplexFeed.Pillar.v1.0.h")
+
 include("nyse-amexoptions-complexfeed-xdp-v1-3-a")
 project(":nyse-amexoptions-complexfeed-xdp-v1-3-a").projectDir = file("Classes/Nyse/AmexOptions/ComplexFeed.Xdp.v1.3.a")
+
+include("nyse-amexoptions-deepfeed-pillar-v1-2-l")
+project(":nyse-amexoptions-deepfeed-pillar-v1-2-l").projectDir = file("Classes/Nyse/AmexOptions/DeepFeed.Pillar.v1.2.l")
 
 include("nyse-amexoptions-deepfeed-pillar-v1-2-m")
 project(":nyse-amexoptions-deepfeed-pillar-v1-2-m").projectDir = file("Classes/Nyse/AmexOptions/DeepFeed.Pillar.v1.2.m")
@@ -278,53 +2936,281 @@ project(":nyse-amexoptions-deepfeed-pillar-v1-2-m").projectDir = file("Classes/N
 include("nyse-amexoptions-deepfeed-xdp-v1-3-a")
 project(":nyse-amexoptions-deepfeed-xdp-v1-3-a").projectDir = file("Classes/Nyse/AmexOptions/DeepFeed.Xdp.v1.3.a")
 
+include("nyse-amexoptions-topfeed-pillar-v1-2-j")
+project(":nyse-amexoptions-topfeed-pillar-v1-2-j").projectDir = file("Classes/Nyse/AmexOptions/TopFeed.Pillar.v1.2.j")
+
 include("nyse-amexoptions-topfeed-pillar-v1-2-k")
 project(":nyse-amexoptions-topfeed-pillar-v1-2-k").projectDir = file("Classes/Nyse/AmexOptions/TopFeed.Pillar.v1.2.k")
 
 include("nyse-amexoptions-topfeed-xdp-v1-3-a")
 project(":nyse-amexoptions-topfeed-xdp-v1-3-a").projectDir = file("Classes/Nyse/AmexOptions/TopFeed.Xdp.v1.3.a")
 
+include("nyse-arcaequities-arcabook-pillar-v2-1")
+project(":nyse-arcaequities-arcabook-pillar-v2-1").projectDir = file("Classes/Nyse/ArcaEquities/ArcaBook.Pillar.v2.1")
+
+include("nyse-arcaequities-arcabook-pillar-v2-2")
+project(":nyse-arcaequities-arcabook-pillar-v2-2").projectDir = file("Classes/Nyse/ArcaEquities/ArcaBook.Pillar.v2.2")
+
 include("nyse-arcaequities-arcabook-xdp-v1-9-a")
 project(":nyse-arcaequities-arcabook-xdp-v1-9-a").projectDir = file("Classes/Nyse/ArcaEquities/ArcaBook.Xdp.v1.9.a")
+
+include("nyse-arcaequities-bbo-pillar-v2-5-d")
+project(":nyse-arcaequities-bbo-pillar-v2-5-d").projectDir = file("Classes/Nyse/ArcaEquities/Bbo.Pillar.v2.5.d")
 
 include("nyse-arcaequities-bbo-xdp-v2-4-c")
 project(":nyse-arcaequities-bbo-xdp-v2-4-c").projectDir = file("Classes/Nyse/ArcaEquities/Bbo.Xdp.v2.4.c")
 
+include("nyse-arcaequities-binarygateway-pillarstream-v5-17")
+project(":nyse-arcaequities-binarygateway-pillarstream-v5-17").projectDir = file("Classes/Nyse/ArcaEquities/BinaryGateway.PillarStream.v5.17")
+
+include("nyse-arcaequities-binarygateway-pillarstream-v6-0")
+project(":nyse-arcaequities-binarygateway-pillarstream-v6-0").projectDir = file("Classes/Nyse/ArcaEquities/BinaryGateway.PillarStream.v6.0")
+
+include("nyse-arcaequities-binarygateway-pillarstream-v6-1")
+project(":nyse-arcaequities-binarygateway-pillarstream-v6-1").projectDir = file("Classes/Nyse/ArcaEquities/BinaryGateway.PillarStream.v6.1")
+
+include("nyse-arcaequities-bqt-xdp-v2-4-a")
+project(":nyse-arcaequities-bqt-xdp-v2-4-a").projectDir = file("Classes/Nyse/ArcaEquities/Bqt.Xdp.v2.4.a")
+
+include("nyse-arcaequities-bqt-xdp-v2-4-b")
+project(":nyse-arcaequities-bqt-xdp-v2-4-b").projectDir = file("Classes/Nyse/ArcaEquities/Bqt.Xdp.v2.4.b")
+
+include("nyse-arcaequities-bqt-xdp-v2-4-c")
+project(":nyse-arcaequities-bqt-xdp-v2-4-c").projectDir = file("Classes/Nyse/ArcaEquities/Bqt.Xdp.v2.4.c")
+
+include("nyse-arcaequities-depthfeed-pillar-v1-1")
+project(":nyse-arcaequities-depthfeed-pillar-v1-1").projectDir = file("Classes/Nyse/ArcaEquities/DepthFeed.Pillar.v1.1")
+
+include("nyse-arcaequities-depthfeed-pillar-v1-6")
+project(":nyse-arcaequities-depthfeed-pillar-v1-6").projectDir = file("Classes/Nyse/ArcaEquities/DepthFeed.Pillar.v1.6")
+
+include("nyse-arcaequities-depthfeed-pillar-v1-7")
+project(":nyse-arcaequities-depthfeed-pillar-v1-7").projectDir = file("Classes/Nyse/ArcaEquities/DepthFeed.Pillar.v1.7")
+
+include("nyse-arcaequities-depthfeedrefresh-pillar-v1-1")
+project(":nyse-arcaequities-depthfeedrefresh-pillar-v1-1").projectDir = file("Classes/Nyse/ArcaEquities/DepthFeedRefresh.Pillar.v1.1")
+
+include("nyse-arcaequities-depthfeedrefresh-pillar-v1-6")
+project(":nyse-arcaequities-depthfeedrefresh-pillar-v1-6").projectDir = file("Classes/Nyse/ArcaEquities/DepthFeedRefresh.Pillar.v1.6")
+
+include("nyse-arcaequities-depthfeedrefresh-pillar-v1-7")
+project(":nyse-arcaequities-depthfeedrefresh-pillar-v1-7").projectDir = file("Classes/Nyse/ArcaEquities/DepthFeedRefresh.Pillar.v1.7")
+
+include("nyse-arcaequities-depthfeedrequest-pillar-v1-1")
+project(":nyse-arcaequities-depthfeedrequest-pillar-v1-1").projectDir = file("Classes/Nyse/ArcaEquities/DepthFeedRequest.Pillar.v1.1")
+
+include("nyse-arcaequities-depthfeedrequest-pillar-v1-6")
+project(":nyse-arcaequities-depthfeedrequest-pillar-v1-6").projectDir = file("Classes/Nyse/ArcaEquities/DepthFeedRequest.Pillar.v1.6")
+
+include("nyse-arcaequities-depthfeedrequest-pillar-v1-7")
+project(":nyse-arcaequities-depthfeedrequest-pillar-v1-7").projectDir = file("Classes/Nyse/ArcaEquities/DepthFeedRequest.Pillar.v1.7")
+
+include("nyse-arcaequities-depthfeedretransmission-pillar-v1-1")
+project(":nyse-arcaequities-depthfeedretransmission-pillar-v1-1").projectDir = file("Classes/Nyse/ArcaEquities/DepthFeedRetransmission.Pillar.v1.1")
+
+include("nyse-arcaequities-depthfeedretransmission-pillar-v1-6")
+project(":nyse-arcaequities-depthfeedretransmission-pillar-v1-6").projectDir = file("Classes/Nyse/ArcaEquities/DepthFeedRetransmission.Pillar.v1.6")
+
+include("nyse-arcaequities-depthfeedretransmission-pillar-v1-7")
+project(":nyse-arcaequities-depthfeedretransmission-pillar-v1-7").projectDir = file("Classes/Nyse/ArcaEquities/DepthFeedRetransmission.Pillar.v1.7")
+
+include("nyse-arcaequities-imbalancesfeed-pillar-v2-2-n")
+project(":nyse-arcaequities-imbalancesfeed-pillar-v2-2-n").projectDir = file("Classes/Nyse/ArcaEquities/ImbalancesFeed.Pillar.v2.2.n")
+
+include("nyse-arcaequities-imbalancesfeed-pillar-v2-2-o")
+project(":nyse-arcaequities-imbalancesfeed-pillar-v2-2-o").projectDir = file("Classes/Nyse/ArcaEquities/ImbalancesFeed.Pillar.v2.2.o")
+
 include("nyse-arcaequities-integratedfeed-pillar-v2-5-g")
 project(":nyse-arcaequities-integratedfeed-pillar-v2-5-g").projectDir = file("Classes/Nyse/ArcaEquities/IntegratedFeed.Pillar.v2.5.g")
+
+include("nyse-arcaequities-integratedfeed-pillar-v2-5-h")
+project(":nyse-arcaequities-integratedfeed-pillar-v2-5-h").projectDir = file("Classes/Nyse/ArcaEquities/IntegratedFeed.Pillar.v2.5.h")
 
 include("nyse-arcaequities-integratedfeedrefresh-pillar-v2-5-g")
 project(":nyse-arcaequities-integratedfeedrefresh-pillar-v2-5-g").projectDir = file("Classes/Nyse/ArcaEquities/IntegratedFeedRefresh.Pillar.v2.5.g")
 
+include("nyse-arcaequities-integratedfeedrefresh-pillar-v2-5-h")
+project(":nyse-arcaequities-integratedfeedrefresh-pillar-v2-5-h").projectDir = file("Classes/Nyse/ArcaEquities/IntegratedFeedRefresh.Pillar.v2.5.h")
+
+include("nyse-arcaequities-integratedfeedrequest-pillar-v2-5-g")
+project(":nyse-arcaequities-integratedfeedrequest-pillar-v2-5-g").projectDir = file("Classes/Nyse/ArcaEquities/IntegratedFeedRequest.Pillar.v2.5.g")
+
+include("nyse-arcaequities-integratedfeedrequest-pillar-v2-5-h")
+project(":nyse-arcaequities-integratedfeedrequest-pillar-v2-5-h").projectDir = file("Classes/Nyse/ArcaEquities/IntegratedFeedRequest.Pillar.v2.5.h")
+
+include("nyse-arcaequities-integratedfeedretransmission-pillar-v2-5-g")
+project(":nyse-arcaequities-integratedfeedretransmission-pillar-v2-5-g").projectDir = file("Classes/Nyse/ArcaEquities/IntegratedFeedRetransmission.Pillar.v2.5.g")
+
+include("nyse-arcaequities-integratedfeedretransmission-pillar-v2-5-h")
+project(":nyse-arcaequities-integratedfeedretransmission-pillar-v2-5-h").projectDir = file("Classes/Nyse/ArcaEquities/IntegratedFeedRetransmission.Pillar.v2.5.h")
+
+include("nyse-arcaequities-integratedfeedstocksummary-pillar-v2-5-g")
+project(":nyse-arcaequities-integratedfeedstocksummary-pillar-v2-5-g").projectDir = file("Classes/Nyse/ArcaEquities/IntegratedFeedStockSummary.Pillar.v2.5.g")
+
+include("nyse-arcaequities-integratedfeedstocksummary-pillar-v2-5-h")
+project(":nyse-arcaequities-integratedfeedstocksummary-pillar-v2-5-h").projectDir = file("Classes/Nyse/ArcaEquities/IntegratedFeedStockSummary.Pillar.v2.5.h")
+
+include("nyse-arcaequities-trades-pillar-v2-6")
+project(":nyse-arcaequities-trades-pillar-v2-6").projectDir = file("Classes/Nyse/ArcaEquities/Trades.Pillar.v2.6")
+
+include("nyse-arcaequities-trades-pillar-v2-6-a")
+project(":nyse-arcaequities-trades-pillar-v2-6-a").projectDir = file("Classes/Nyse/ArcaEquities/Trades.Pillar.v2.6.a")
+
+include("nyse-arcaoptions-complexfeed-pillar-v1-0-d")
+project(":nyse-arcaoptions-complexfeed-pillar-v1-0-d").projectDir = file("Classes/Nyse/ArcaOptions/ComplexFeed.Pillar.v1.0.d")
+
 include("nyse-arcaoptions-complexfeed-pillar-v1-0-h")
 project(":nyse-arcaoptions-complexfeed-pillar-v1-0-h").projectDir = file("Classes/Nyse/ArcaOptions/ComplexFeed.Pillar.v1.0.h")
+
+include("nyse-arcaoptions-complexfeed-xdp-v1-3-a")
+project(":nyse-arcaoptions-complexfeed-xdp-v1-3-a").projectDir = file("Classes/Nyse/ArcaOptions/ComplexFeed.Xdp.v1.3.a")
+
+include("nyse-arcaoptions-deepfeed-pillar-v1-2-f")
+project(":nyse-arcaoptions-deepfeed-pillar-v1-2-f").projectDir = file("Classes/Nyse/ArcaOptions/DeepFeed.Pillar.v1.2.f")
+
+include("nyse-arcaoptions-deepfeed-pillar-v1-2-l")
+project(":nyse-arcaoptions-deepfeed-pillar-v1-2-l").projectDir = file("Classes/Nyse/ArcaOptions/DeepFeed.Pillar.v1.2.l")
 
 include("nyse-arcaoptions-deepfeed-pillar-v1-2-m")
 project(":nyse-arcaoptions-deepfeed-pillar-v1-2-m").projectDir = file("Classes/Nyse/ArcaOptions/DeepFeed.Pillar.v1.2.m")
 
+include("nyse-arcaoptions-deepfeed-xdp-v1-3-a")
+project(":nyse-arcaoptions-deepfeed-xdp-v1-3-a").projectDir = file("Classes/Nyse/ArcaOptions/DeepFeed.Xdp.v1.3.a")
+
 include("nyse-arcaoptions-topfeed-pillar-v1-2-c")
 project(":nyse-arcaoptions-topfeed-pillar-v1-2-c").projectDir = file("Classes/Nyse/ArcaOptions/TopFeed.Pillar.v1.2.c")
+
+include("nyse-arcaoptions-topfeed-pillar-v1-2-j")
+project(":nyse-arcaoptions-topfeed-pillar-v1-2-j").projectDir = file("Classes/Nyse/ArcaOptions/TopFeed.Pillar.v1.2.j")
+
+include("nyse-arcaoptions-topfeed-pillar-v1-2-k")
+project(":nyse-arcaoptions-topfeed-pillar-v1-2-k").projectDir = file("Classes/Nyse/ArcaOptions/TopFeed.Pillar.v1.2.k")
+
+include("nyse-arcaoptions-topfeed-xdp-v1-3-a")
+project(":nyse-arcaoptions-topfeed-xdp-v1-3-a").projectDir = file("Classes/Nyse/ArcaOptions/TopFeed.Xdp.v1.3.a")
 
 include("nyse-nationalequities-bbo-pillar-v2-5-d")
 project(":nyse-nationalequities-bbo-pillar-v2-5-d").projectDir = file("Classes/Nyse/NationalEquities/Bbo.Pillar.v2.5.d")
 
+include("nyse-nationalequities-binarygateway-pillarstream-v5-17")
+project(":nyse-nationalequities-binarygateway-pillarstream-v5-17").projectDir = file("Classes/Nyse/NationalEquities/BinaryGateway.PillarStream.v5.17")
+
+include("nyse-nationalequities-binarygateway-pillarstream-v6-0")
+project(":nyse-nationalequities-binarygateway-pillarstream-v6-0").projectDir = file("Classes/Nyse/NationalEquities/BinaryGateway.PillarStream.v6.0")
+
+include("nyse-nationalequities-binarygateway-pillarstream-v6-1")
+project(":nyse-nationalequities-binarygateway-pillarstream-v6-1").projectDir = file("Classes/Nyse/NationalEquities/BinaryGateway.PillarStream.v6.1")
+
+include("nyse-nationalequities-bqt-xdp-v2-4-a")
+project(":nyse-nationalequities-bqt-xdp-v2-4-a").projectDir = file("Classes/Nyse/NationalEquities/Bqt.Xdp.v2.4.a")
+
+include("nyse-nationalequities-bqt-xdp-v2-4-b")
+project(":nyse-nationalequities-bqt-xdp-v2-4-b").projectDir = file("Classes/Nyse/NationalEquities/Bqt.Xdp.v2.4.b")
+
+include("nyse-nationalequities-bqt-xdp-v2-4-c")
+project(":nyse-nationalequities-bqt-xdp-v2-4-c").projectDir = file("Classes/Nyse/NationalEquities/Bqt.Xdp.v2.4.c")
+
+include("nyse-nationalequities-depthfeed-pillar-v1-1")
+project(":nyse-nationalequities-depthfeed-pillar-v1-1").projectDir = file("Classes/Nyse/NationalEquities/DepthFeed.Pillar.v1.1")
+
+include("nyse-nationalequities-depthfeed-pillar-v1-6")
+project(":nyse-nationalequities-depthfeed-pillar-v1-6").projectDir = file("Classes/Nyse/NationalEquities/DepthFeed.Pillar.v1.6")
+
+include("nyse-nationalequities-depthfeed-pillar-v1-7")
+project(":nyse-nationalequities-depthfeed-pillar-v1-7").projectDir = file("Classes/Nyse/NationalEquities/DepthFeed.Pillar.v1.7")
+
+include("nyse-nationalequities-depthfeedrefresh-pillar-v1-1")
+project(":nyse-nationalequities-depthfeedrefresh-pillar-v1-1").projectDir = file("Classes/Nyse/NationalEquities/DepthFeedRefresh.Pillar.v1.1")
+
+include("nyse-nationalequities-depthfeedrefresh-pillar-v1-6")
+project(":nyse-nationalequities-depthfeedrefresh-pillar-v1-6").projectDir = file("Classes/Nyse/NationalEquities/DepthFeedRefresh.Pillar.v1.6")
+
+include("nyse-nationalequities-depthfeedrefresh-pillar-v1-7")
+project(":nyse-nationalequities-depthfeedrefresh-pillar-v1-7").projectDir = file("Classes/Nyse/NationalEquities/DepthFeedRefresh.Pillar.v1.7")
+
+include("nyse-nationalequities-depthfeedrequest-pillar-v1-1")
+project(":nyse-nationalequities-depthfeedrequest-pillar-v1-1").projectDir = file("Classes/Nyse/NationalEquities/DepthFeedRequest.Pillar.v1.1")
+
+include("nyse-nationalequities-depthfeedrequest-pillar-v1-6")
+project(":nyse-nationalequities-depthfeedrequest-pillar-v1-6").projectDir = file("Classes/Nyse/NationalEquities/DepthFeedRequest.Pillar.v1.6")
+
+include("nyse-nationalequities-depthfeedrequest-pillar-v1-7")
+project(":nyse-nationalequities-depthfeedrequest-pillar-v1-7").projectDir = file("Classes/Nyse/NationalEquities/DepthFeedRequest.Pillar.v1.7")
+
+include("nyse-nationalequities-depthfeedretransmission-pillar-v1-1")
+project(":nyse-nationalequities-depthfeedretransmission-pillar-v1-1").projectDir = file("Classes/Nyse/NationalEquities/DepthFeedRetransmission.Pillar.v1.1")
+
+include("nyse-nationalequities-depthfeedretransmission-pillar-v1-6")
+project(":nyse-nationalequities-depthfeedretransmission-pillar-v1-6").projectDir = file("Classes/Nyse/NationalEquities/DepthFeedRetransmission.Pillar.v1.6")
+
+include("nyse-nationalequities-depthfeedretransmission-pillar-v1-7")
+project(":nyse-nationalequities-depthfeedretransmission-pillar-v1-7").projectDir = file("Classes/Nyse/NationalEquities/DepthFeedRetransmission.Pillar.v1.7")
+
 include("nyse-nationalequities-integratedfeed-pillar-v2-5-g")
 project(":nyse-nationalequities-integratedfeed-pillar-v2-5-g").projectDir = file("Classes/Nyse/NationalEquities/IntegratedFeed.Pillar.v2.5.g")
+
+include("nyse-nationalequities-integratedfeed-pillar-v2-5-h")
+project(":nyse-nationalequities-integratedfeed-pillar-v2-5-h").projectDir = file("Classes/Nyse/NationalEquities/IntegratedFeed.Pillar.v2.5.h")
+
+include("nyse-nationalequities-integratedfeedrefresh-pillar-v2-5-g")
+project(":nyse-nationalequities-integratedfeedrefresh-pillar-v2-5-g").projectDir = file("Classes/Nyse/NationalEquities/IntegratedFeedRefresh.Pillar.v2.5.g")
+
+include("nyse-nationalequities-integratedfeedrefresh-pillar-v2-5-h")
+project(":nyse-nationalequities-integratedfeedrefresh-pillar-v2-5-h").projectDir = file("Classes/Nyse/NationalEquities/IntegratedFeedRefresh.Pillar.v2.5.h")
+
+include("nyse-nationalequities-integratedfeedrequest-pillar-v2-5-g")
+project(":nyse-nationalequities-integratedfeedrequest-pillar-v2-5-g").projectDir = file("Classes/Nyse/NationalEquities/IntegratedFeedRequest.Pillar.v2.5.g")
+
+include("nyse-nationalequities-integratedfeedrequest-pillar-v2-5-h")
+project(":nyse-nationalequities-integratedfeedrequest-pillar-v2-5-h").projectDir = file("Classes/Nyse/NationalEquities/IntegratedFeedRequest.Pillar.v2.5.h")
+
+include("nyse-nationalequities-integratedfeedretransmission-pillar-v2-5-g")
+project(":nyse-nationalequities-integratedfeedretransmission-pillar-v2-5-g").projectDir = file("Classes/Nyse/NationalEquities/IntegratedFeedRetransmission.Pillar.v2.5.g")
+
+include("nyse-nationalequities-integratedfeedretransmission-pillar-v2-5-h")
+project(":nyse-nationalequities-integratedfeedretransmission-pillar-v2-5-h").projectDir = file("Classes/Nyse/NationalEquities/IntegratedFeedRetransmission.Pillar.v2.5.h")
 
 include("nyse-nationalequities-integratedfeedstocksummary-pillar-v2-5-g")
 project(":nyse-nationalequities-integratedfeedstocksummary-pillar-v2-5-g").projectDir = file("Classes/Nyse/NationalEquities/IntegratedFeedStockSummary.Pillar.v2.5.g")
 
+include("nyse-nationalequities-integratedfeedstocksummary-pillar-v2-5-h")
+project(":nyse-nationalequities-integratedfeedstocksummary-pillar-v2-5-h").projectDir = file("Classes/Nyse/NationalEquities/IntegratedFeedStockSummary.Pillar.v2.5.h")
+
 include("nyse-nationalequities-trades-pillar-v2-6")
 project(":nyse-nationalequities-trades-pillar-v2-6").projectDir = file("Classes/Nyse/NationalEquities/Trades.Pillar.v2.6")
+
+include("nyse-nationalequities-trades-pillar-v2-6-a")
+project(":nyse-nationalequities-trades-pillar-v2-6-a").projectDir = file("Classes/Nyse/NationalEquities/Trades.Pillar.v2.6.a")
 
 include("nyse-nysebonds-depthofbook-abp-v4-01-b")
 project(":nyse-nysebonds-depthofbook-abp-v4-01-b").projectDir = file("Classes/Nyse/NyseBonds/DepthOfBook.Abp.v4.01.b")
 
+include("nyse-nysebonds-quote-pdp-v1-2-a")
+project(":nyse-nysebonds-quote-pdp-v1-2-a").projectDir = file("Classes/Nyse/NyseBonds/Quote.Pdp.v1.2.a")
+
+include("nyse-nysebonds-trades-abp-v1-07-a")
+project(":nyse-nysebonds-trades-abp-v1-07-a").projectDir = file("Classes/Nyse/NyseBonds/Trades.Abp.v1.07.a")
+
+include("nyse-nyseconsolidated-bqt-xdp-v2-4-a")
+project(":nyse-nyseconsolidated-bqt-xdp-v2-4-a").projectDir = file("Classes/Nyse/NyseConsolidated/Bqt.Xdp.v2.4.a")
+
+include("nyse-nyseconsolidated-bqt-xdp-v2-4-b")
+project(":nyse-nyseconsolidated-bqt-xdp-v2-4-b").projectDir = file("Classes/Nyse/NyseConsolidated/Bqt.Xdp.v2.4.b")
+
+include("nyse-nyseconsolidated-bqt-xdp-v2-4-c")
+project(":nyse-nyseconsolidated-bqt-xdp-v2-4-c").projectDir = file("Classes/Nyse/NyseConsolidated/Bqt.Xdp.v2.4.c")
+
 include("nyse-nyseequities-bbo-pillar-v2-5-b")
 project(":nyse-nyseequities-bbo-pillar-v2-5-b").projectDir = file("Classes/Nyse/NyseEquities/Bbo.Pillar.v2.5.b")
 
+include("nyse-nyseequities-bbo-pillar-v2-5-d")
+project(":nyse-nyseequities-bbo-pillar-v2-5-d").projectDir = file("Classes/Nyse/NyseEquities/Bbo.Pillar.v2.5.d")
+
 include("nyse-nyseequities-bbo-xdp-v2-4-g")
 project(":nyse-nyseequities-bbo-xdp-v2-4-g").projectDir = file("Classes/Nyse/NyseEquities/Bbo.Xdp.v2.4.g")
+
+include("nyse-nyseequities-binarygateway-pillarstream-v5-10")
+project(":nyse-nyseequities-binarygateway-pillarstream-v5-10").projectDir = file("Classes/Nyse/NyseEquities/BinaryGateway.PillarStream.v5.10")
 
 include("nyse-nyseequities-binarygateway-pillarstream-v5-17")
 project(":nyse-nyseequities-binarygateway-pillarstream-v5-17").projectDir = file("Classes/Nyse/NyseEquities/BinaryGateway.PillarStream.v5.17")
@@ -332,11 +3218,68 @@ project(":nyse-nyseequities-binarygateway-pillarstream-v5-17").projectDir = file
 include("nyse-nyseequities-binarygateway-pillarstream-v6-0")
 project(":nyse-nyseequities-binarygateway-pillarstream-v6-0").projectDir = file("Classes/Nyse/NyseEquities/BinaryGateway.PillarStream.v6.0")
 
+include("nyse-nyseequities-binarygateway-pillarstream-v6-1")
+project(":nyse-nyseequities-binarygateway-pillarstream-v6-1").projectDir = file("Classes/Nyse/NyseEquities/BinaryGateway.PillarStream.v6.1")
+
+include("nyse-nyseequities-bqt-xdp-v1-7-a")
+project(":nyse-nyseequities-bqt-xdp-v1-7-a").projectDir = file("Classes/Nyse/NyseEquities/Bqt.Xdp.v1.7.a")
+
 include("nyse-nyseequities-bqt-xdp-v2-1-a")
 project(":nyse-nyseequities-bqt-xdp-v2-1-a").projectDir = file("Classes/Nyse/NyseEquities/Bqt.Xdp.v2.1.a")
 
+include("nyse-nyseequities-bqt-xdp-v2-4-a")
+project(":nyse-nyseequities-bqt-xdp-v2-4-a").projectDir = file("Classes/Nyse/NyseEquities/Bqt.Xdp.v2.4.a")
+
+include("nyse-nyseequities-bqt-xdp-v2-4-b")
+project(":nyse-nyseequities-bqt-xdp-v2-4-b").projectDir = file("Classes/Nyse/NyseEquities/Bqt.Xdp.v2.4.b")
+
+include("nyse-nyseequities-bqt-xdp-v2-4-c")
+project(":nyse-nyseequities-bqt-xdp-v2-4-c").projectDir = file("Classes/Nyse/NyseEquities/Bqt.Xdp.v2.4.c")
+
 include("nyse-nyseequities-depthfeed-pillar-v1-1")
 project(":nyse-nyseequities-depthfeed-pillar-v1-1").projectDir = file("Classes/Nyse/NyseEquities/DepthFeed.Pillar.v1.1")
+
+include("nyse-nyseequities-depthfeed-pillar-v1-6")
+project(":nyse-nyseequities-depthfeed-pillar-v1-6").projectDir = file("Classes/Nyse/NyseEquities/DepthFeed.Pillar.v1.6")
+
+include("nyse-nyseequities-depthfeed-pillar-v1-7")
+project(":nyse-nyseequities-depthfeed-pillar-v1-7").projectDir = file("Classes/Nyse/NyseEquities/DepthFeed.Pillar.v1.7")
+
+include("nyse-nyseequities-depthfeedrefresh-pillar-v1-1")
+project(":nyse-nyseequities-depthfeedrefresh-pillar-v1-1").projectDir = file("Classes/Nyse/NyseEquities/DepthFeedRefresh.Pillar.v1.1")
+
+include("nyse-nyseequities-depthfeedrefresh-pillar-v1-6")
+project(":nyse-nyseequities-depthfeedrefresh-pillar-v1-6").projectDir = file("Classes/Nyse/NyseEquities/DepthFeedRefresh.Pillar.v1.6")
+
+include("nyse-nyseequities-depthfeedrefresh-pillar-v1-7")
+project(":nyse-nyseequities-depthfeedrefresh-pillar-v1-7").projectDir = file("Classes/Nyse/NyseEquities/DepthFeedRefresh.Pillar.v1.7")
+
+include("nyse-nyseequities-depthfeedrequest-pillar-v1-1")
+project(":nyse-nyseequities-depthfeedrequest-pillar-v1-1").projectDir = file("Classes/Nyse/NyseEquities/DepthFeedRequest.Pillar.v1.1")
+
+include("nyse-nyseequities-depthfeedrequest-pillar-v1-6")
+project(":nyse-nyseequities-depthfeedrequest-pillar-v1-6").projectDir = file("Classes/Nyse/NyseEquities/DepthFeedRequest.Pillar.v1.6")
+
+include("nyse-nyseequities-depthfeedrequest-pillar-v1-7")
+project(":nyse-nyseequities-depthfeedrequest-pillar-v1-7").projectDir = file("Classes/Nyse/NyseEquities/DepthFeedRequest.Pillar.v1.7")
+
+include("nyse-nyseequities-depthfeedretransmission-pillar-v1-1")
+project(":nyse-nyseequities-depthfeedretransmission-pillar-v1-1").projectDir = file("Classes/Nyse/NyseEquities/DepthFeedRetransmission.Pillar.v1.1")
+
+include("nyse-nyseequities-depthfeedretransmission-pillar-v1-6")
+project(":nyse-nyseequities-depthfeedretransmission-pillar-v1-6").projectDir = file("Classes/Nyse/NyseEquities/DepthFeedRetransmission.Pillar.v1.6")
+
+include("nyse-nyseequities-depthfeedretransmission-pillar-v1-7")
+project(":nyse-nyseequities-depthfeedretransmission-pillar-v1-7").projectDir = file("Classes/Nyse/NyseEquities/DepthFeedRetransmission.Pillar.v1.7")
+
+include("nyse-nyseequities-imbalancesfeed-pillar-v2-2-h")
+project(":nyse-nyseequities-imbalancesfeed-pillar-v2-2-h").projectDir = file("Classes/Nyse/NyseEquities/ImbalancesFeed.Pillar.v2.2.h")
+
+include("nyse-nyseequities-imbalancesfeed-pillar-v2-2-n")
+project(":nyse-nyseequities-imbalancesfeed-pillar-v2-2-n").projectDir = file("Classes/Nyse/NyseEquities/ImbalancesFeed.Pillar.v2.2.n")
+
+include("nyse-nyseequities-imbalancesfeed-pillar-v2-2-o")
+project(":nyse-nyseequities-imbalancesfeed-pillar-v2-2-o").projectDir = file("Classes/Nyse/NyseEquities/ImbalancesFeed.Pillar.v2.2.o")
 
 include("nyse-nyseequities-imbalancesfeed-xdp-v2-1-f")
 project(":nyse-nyseequities-imbalancesfeed-xdp-v2-1-f").projectDir = file("Classes/Nyse/NyseEquities/ImbalancesFeed.Xdp.v2.1.f")
@@ -344,8 +3287,14 @@ project(":nyse-nyseequities-imbalancesfeed-xdp-v2-1-f").projectDir = file("Class
 include("nyse-nyseequities-imbalancesfeed-xdp-v2-2-a")
 project(":nyse-nyseequities-imbalancesfeed-xdp-v2-2-a").projectDir = file("Classes/Nyse/NyseEquities/ImbalancesFeed.Xdp.v2.2.a")
 
+include("nyse-nyseequities-integratedfeed-pillar-v2-5-a")
+project(":nyse-nyseequities-integratedfeed-pillar-v2-5-a").projectDir = file("Classes/Nyse/NyseEquities/IntegratedFeed.Pillar.v2.5.a")
+
 include("nyse-nyseequities-integratedfeed-pillar-v2-5-g")
 project(":nyse-nyseequities-integratedfeed-pillar-v2-5-g").projectDir = file("Classes/Nyse/NyseEquities/IntegratedFeed.Pillar.v2.5.g")
+
+include("nyse-nyseequities-integratedfeed-pillar-v2-5-h")
+project(":nyse-nyseequities-integratedfeed-pillar-v2-5-h").projectDir = file("Classes/Nyse/NyseEquities/IntegratedFeed.Pillar.v2.5.h")
 
 include("nyse-nyseequities-integratedfeed-xdp-v2-1-g")
 project(":nyse-nyseequities-integratedfeed-xdp-v2-1-g").projectDir = file("Classes/Nyse/NyseEquities/IntegratedFeed.Xdp.v2.1.g")
@@ -356,8 +3305,26 @@ project(":nyse-nyseequities-integratedfeed-xdp-v2-3-a").projectDir = file("Class
 include("nyse-nyseequities-integratedfeedrefresh-pillar-v2-5-g")
 project(":nyse-nyseequities-integratedfeedrefresh-pillar-v2-5-g").projectDir = file("Classes/Nyse/NyseEquities/IntegratedFeedRefresh.Pillar.v2.5.g")
 
+include("nyse-nyseequities-integratedfeedrefresh-pillar-v2-5-h")
+project(":nyse-nyseequities-integratedfeedrefresh-pillar-v2-5-h").projectDir = file("Classes/Nyse/NyseEquities/IntegratedFeedRefresh.Pillar.v2.5.h")
+
+include("nyse-nyseequities-integratedfeedrequest-pillar-v2-5-g")
+project(":nyse-nyseequities-integratedfeedrequest-pillar-v2-5-g").projectDir = file("Classes/Nyse/NyseEquities/IntegratedFeedRequest.Pillar.v2.5.g")
+
+include("nyse-nyseequities-integratedfeedrequest-pillar-v2-5-h")
+project(":nyse-nyseequities-integratedfeedrequest-pillar-v2-5-h").projectDir = file("Classes/Nyse/NyseEquities/IntegratedFeedRequest.Pillar.v2.5.h")
+
 include("nyse-nyseequities-integratedfeedretransmission-pillar-v2-5-g")
 project(":nyse-nyseequities-integratedfeedretransmission-pillar-v2-5-g").projectDir = file("Classes/Nyse/NyseEquities/IntegratedFeedRetransmission.Pillar.v2.5.g")
+
+include("nyse-nyseequities-integratedfeedretransmission-pillar-v2-5-h")
+project(":nyse-nyseequities-integratedfeedretransmission-pillar-v2-5-h").projectDir = file("Classes/Nyse/NyseEquities/IntegratedFeedRetransmission.Pillar.v2.5.h")
+
+include("nyse-nyseequities-integratedfeedstocksummary-pillar-v2-5-g")
+project(":nyse-nyseequities-integratedfeedstocksummary-pillar-v2-5-g").projectDir = file("Classes/Nyse/NyseEquities/IntegratedFeedStockSummary.Pillar.v2.5.g")
+
+include("nyse-nyseequities-integratedfeedstocksummary-pillar-v2-5-h")
+project(":nyse-nyseequities-integratedfeedstocksummary-pillar-v2-5-h").projectDir = file("Classes/Nyse/NyseEquities/IntegratedFeedStockSummary.Pillar.v2.5.h")
 
 include("nyse-nyseequities-openbook-aggregated-xdp-v2-1-d")
 project(":nyse-nyseequities-openbook-aggregated-xdp-v2-1-d").projectDir = file("Classes/Nyse/NyseEquities/OpenBook.Aggregated.Xdp.v2.1.d")
@@ -365,20 +3332,248 @@ project(":nyse-nyseequities-openbook-aggregated-xdp-v2-1-d").projectDir = file("
 include("nyse-nyseequities-openbook-ultra-v2-1-b")
 project(":nyse-nyseequities-openbook-ultra-v2-1-b").projectDir = file("Classes/Nyse/NyseEquities/OpenBook.Ultra.v2.1.b")
 
+include("nyse-nyseequities-openbook-ultra-v2-1-k")
+project(":nyse-nyseequities-openbook-ultra-v2-1-k").projectDir = file("Classes/Nyse/NyseEquities/OpenBook.Ultra.v2.1.k")
+
+include("nyse-nyseequities-openbook-xdp-v1-9-a")
+project(":nyse-nyseequities-openbook-xdp-v1-9-a").projectDir = file("Classes/Nyse/NyseEquities/OpenBook.Xdp.v1.9.a")
+
+include("nyse-nyseequities-trades-pillar-v2-6")
+project(":nyse-nyseequities-trades-pillar-v2-6").projectDir = file("Classes/Nyse/NyseEquities/Trades.Pillar.v2.6")
+
+include("nyse-nyseequities-trades-pillar-v2-6-a")
+project(":nyse-nyseequities-trades-pillar-v2-6-a").projectDir = file("Classes/Nyse/NyseEquities/Trades.Pillar.v2.6.a")
+
+include("nyse-options-deepfeed-xdp-v1-3-a")
+project(":nyse-options-deepfeed-xdp-v1-3-a").projectDir = file("Classes/Nyse/Options/DeepFeed.Xdp.v1.3.a")
+
+include("nyse-options-streamprotocol-pillarstream-v1-1-6")
+project(":nyse-options-streamprotocol-pillarstream-v1-1-6").projectDir = file("Classes/Nyse/Options/StreamProtocol.PillarStream.v1.1.6")
+
+include("nyse-options-streamprotocol-pillarstream-v1-1-7")
+project(":nyse-options-streamprotocol-pillarstream-v1-1-7").projectDir = file("Classes/Nyse/Options/StreamProtocol.PillarStream.v1.1.7")
+
+include("nyse-options-topfeed-xdp-v1-3-a")
+project(":nyse-options-topfeed-xdp-v1-3-a").projectDir = file("Classes/Nyse/Options/TopFeed.Xdp.v1.3.a")
+
+include("nyse-texasequities-bbo-pillar-v2-5-d")
+project(":nyse-texasequities-bbo-pillar-v2-5-d").projectDir = file("Classes/Nyse/TexasEquities/Bbo.Pillar.v2.5.d")
+
+include("nyse-texasequities-binarygateway-pillarstream-v5-17")
+project(":nyse-texasequities-binarygateway-pillarstream-v5-17").projectDir = file("Classes/Nyse/TexasEquities/BinaryGateway.PillarStream.v5.17")
+
+include("nyse-texasequities-binarygateway-pillarstream-v6-0")
+project(":nyse-texasequities-binarygateway-pillarstream-v6-0").projectDir = file("Classes/Nyse/TexasEquities/BinaryGateway.PillarStream.v6.0")
+
+include("nyse-texasequities-binarygateway-pillarstream-v6-1")
+project(":nyse-texasequities-binarygateway-pillarstream-v6-1").projectDir = file("Classes/Nyse/TexasEquities/BinaryGateway.PillarStream.v6.1")
+
+include("nyse-texasequities-bqt-xdp-v2-4-a")
+project(":nyse-texasequities-bqt-xdp-v2-4-a").projectDir = file("Classes/Nyse/TexasEquities/Bqt.Xdp.v2.4.a")
+
+include("nyse-texasequities-bqt-xdp-v2-4-b")
+project(":nyse-texasequities-bqt-xdp-v2-4-b").projectDir = file("Classes/Nyse/TexasEquities/Bqt.Xdp.v2.4.b")
+
+include("nyse-texasequities-bqt-xdp-v2-4-c")
+project(":nyse-texasequities-bqt-xdp-v2-4-c").projectDir = file("Classes/Nyse/TexasEquities/Bqt.Xdp.v2.4.c")
+
+include("nyse-texasequities-depthfeed-pillar-v1-1")
+project(":nyse-texasequities-depthfeed-pillar-v1-1").projectDir = file("Classes/Nyse/TexasEquities/DepthFeed.Pillar.v1.1")
+
+include("nyse-texasequities-depthfeed-pillar-v1-6")
+project(":nyse-texasequities-depthfeed-pillar-v1-6").projectDir = file("Classes/Nyse/TexasEquities/DepthFeed.Pillar.v1.6")
+
+include("nyse-texasequities-depthfeed-pillar-v1-7")
+project(":nyse-texasequities-depthfeed-pillar-v1-7").projectDir = file("Classes/Nyse/TexasEquities/DepthFeed.Pillar.v1.7")
+
+include("nyse-texasequities-depthfeedrefresh-pillar-v1-1")
+project(":nyse-texasequities-depthfeedrefresh-pillar-v1-1").projectDir = file("Classes/Nyse/TexasEquities/DepthFeedRefresh.Pillar.v1.1")
+
+include("nyse-texasequities-depthfeedrefresh-pillar-v1-6")
+project(":nyse-texasequities-depthfeedrefresh-pillar-v1-6").projectDir = file("Classes/Nyse/TexasEquities/DepthFeedRefresh.Pillar.v1.6")
+
+include("nyse-texasequities-depthfeedrefresh-pillar-v1-7")
+project(":nyse-texasequities-depthfeedrefresh-pillar-v1-7").projectDir = file("Classes/Nyse/TexasEquities/DepthFeedRefresh.Pillar.v1.7")
+
+include("nyse-texasequities-depthfeedrequest-pillar-v1-1")
+project(":nyse-texasequities-depthfeedrequest-pillar-v1-1").projectDir = file("Classes/Nyse/TexasEquities/DepthFeedRequest.Pillar.v1.1")
+
+include("nyse-texasequities-depthfeedrequest-pillar-v1-6")
+project(":nyse-texasequities-depthfeedrequest-pillar-v1-6").projectDir = file("Classes/Nyse/TexasEquities/DepthFeedRequest.Pillar.v1.6")
+
+include("nyse-texasequities-depthfeedrequest-pillar-v1-7")
+project(":nyse-texasequities-depthfeedrequest-pillar-v1-7").projectDir = file("Classes/Nyse/TexasEquities/DepthFeedRequest.Pillar.v1.7")
+
+include("nyse-texasequities-depthfeedretransmission-pillar-v1-1")
+project(":nyse-texasequities-depthfeedretransmission-pillar-v1-1").projectDir = file("Classes/Nyse/TexasEquities/DepthFeedRetransmission.Pillar.v1.1")
+
+include("nyse-texasequities-depthfeedretransmission-pillar-v1-6")
+project(":nyse-texasequities-depthfeedretransmission-pillar-v1-6").projectDir = file("Classes/Nyse/TexasEquities/DepthFeedRetransmission.Pillar.v1.6")
+
+include("nyse-texasequities-depthfeedretransmission-pillar-v1-7")
+project(":nyse-texasequities-depthfeedretransmission-pillar-v1-7").projectDir = file("Classes/Nyse/TexasEquities/DepthFeedRetransmission.Pillar.v1.7")
+
+include("nyse-texasequities-imbalancesfeed-pillar-v2-2-n")
+project(":nyse-texasequities-imbalancesfeed-pillar-v2-2-n").projectDir = file("Classes/Nyse/TexasEquities/ImbalancesFeed.Pillar.v2.2.n")
+
+include("nyse-texasequities-imbalancesfeed-pillar-v2-2-o")
+project(":nyse-texasequities-imbalancesfeed-pillar-v2-2-o").projectDir = file("Classes/Nyse/TexasEquities/ImbalancesFeed.Pillar.v2.2.o")
+
 include("nyse-texasequities-integratedfeed-pillar-v2-5-g")
 project(":nyse-texasequities-integratedfeed-pillar-v2-5-g").projectDir = file("Classes/Nyse/TexasEquities/IntegratedFeed.Pillar.v2.5.g")
+
+include("nyse-texasequities-integratedfeed-pillar-v2-5-h")
+project(":nyse-texasequities-integratedfeed-pillar-v2-5-h").projectDir = file("Classes/Nyse/TexasEquities/IntegratedFeed.Pillar.v2.5.h")
 
 include("nyse-texasequities-integratedfeedrefresh-pillar-v2-5-g")
 project(":nyse-texasequities-integratedfeedrefresh-pillar-v2-5-g").projectDir = file("Classes/Nyse/TexasEquities/IntegratedFeedRefresh.Pillar.v2.5.g")
 
+include("nyse-texasequities-integratedfeedrefresh-pillar-v2-5-h")
+project(":nyse-texasequities-integratedfeedrefresh-pillar-v2-5-h").projectDir = file("Classes/Nyse/TexasEquities/IntegratedFeedRefresh.Pillar.v2.5.h")
+
+include("nyse-texasequities-integratedfeedrequest-pillar-v2-5-g")
+project(":nyse-texasequities-integratedfeedrequest-pillar-v2-5-g").projectDir = file("Classes/Nyse/TexasEquities/IntegratedFeedRequest.Pillar.v2.5.g")
+
+include("nyse-texasequities-integratedfeedrequest-pillar-v2-5-h")
+project(":nyse-texasequities-integratedfeedrequest-pillar-v2-5-h").projectDir = file("Classes/Nyse/TexasEquities/IntegratedFeedRequest.Pillar.v2.5.h")
+
+include("nyse-texasequities-integratedfeedretransmission-pillar-v2-5-g")
+project(":nyse-texasequities-integratedfeedretransmission-pillar-v2-5-g").projectDir = file("Classes/Nyse/TexasEquities/IntegratedFeedRetransmission.Pillar.v2.5.g")
+
+include("nyse-texasequities-integratedfeedretransmission-pillar-v2-5-h")
+project(":nyse-texasequities-integratedfeedretransmission-pillar-v2-5-h").projectDir = file("Classes/Nyse/TexasEquities/IntegratedFeedRetransmission.Pillar.v2.5.h")
+
+include("nyse-texasequities-integratedfeedstocksummary-pillar-v2-5-g")
+project(":nyse-texasequities-integratedfeedstocksummary-pillar-v2-5-g").projectDir = file("Classes/Nyse/TexasEquities/IntegratedFeedStockSummary.Pillar.v2.5.g")
+
+include("nyse-texasequities-integratedfeedstocksummary-pillar-v2-5-h")
+project(":nyse-texasequities-integratedfeedstocksummary-pillar-v2-5-h").projectDir = file("Classes/Nyse/TexasEquities/IntegratedFeedStockSummary.Pillar.v2.5.h")
+
+include("nyse-texasequities-trades-pillar-v2-6")
+project(":nyse-texasequities-trades-pillar-v2-6").projectDir = file("Classes/Nyse/TexasEquities/Trades.Pillar.v2.6")
+
+include("nyse-texasequities-trades-pillar-v2-6-a")
+project(":nyse-texasequities-trades-pillar-v2-6-a").projectDir = file("Classes/Nyse/TexasEquities/Trades.Pillar.v2.6.a")
+
+include("odx-odxequities-pts-glimpse-v1-0")
+project(":odx-odxequities-pts-glimpse-v1-0").projectDir = file("Classes/Odx/OdxEquities/Pts.Glimpse.v1.0")
+
+include("odx-odxequities-pts-glimpse-v2-0")
+project(":odx-odxequities-pts-glimpse-v2-0").projectDir = file("Classes/Odx/OdxEquities/Pts.Glimpse.v2.0")
+
+include("odx-odxequities-pts-itch-v1-0")
+project(":odx-odxequities-pts-itch-v1-0").projectDir = file("Classes/Odx/OdxEquities/Pts.Itch.v1.0")
+
+include("odx-odxequities-pts-itch-v2-2")
+project(":odx-odxequities-pts-itch-v2-2").projectDir = file("Classes/Odx/OdxEquities/Pts.Itch.v2.2")
+
+include("odx-odxequities-pts-ouch-v1-0")
+project(":odx-odxequities-pts-ouch-v1-0").projectDir = file("Classes/Odx/OdxEquities/Pts.Ouch.v1.0")
+
+include("odx-odxequities-pts-ouch-v2-0")
+project(":odx-odxequities-pts-ouch-v2-0").projectDir = file("Classes/Odx/OdxEquities/Pts.Ouch.v2.0")
+
+include("odx-odxsecuritytoken-pts-itch-v1-0")
+project(":odx-odxsecuritytoken-pts-itch-v1-0").projectDir = file("Classes/Odx/OdxSecurityToken/Pts.Itch.v1.0")
+
+include("odx-odxsecuritytoken-pts-itch-v1-2")
+project(":odx-odxsecuritytoken-pts-itch-v1-2").projectDir = file("Classes/Odx/OdxSecurityToken/Pts.Itch.v1.2")
+
+include("omi-sbe-example-sbe-v2")
+project(":omi-sbe-example-sbe-v2").projectDir = file("Classes/Omi/Sbe/Example.Sbe.v2")
+
+include("otcmarkets-linkats-extendedtrade-link-v4-10-4")
+project(":otcmarkets-linkats-extendedtrade-link-v4-10-4").projectDir = file("Classes/OtcMarkets/LinkAts/ExtendedTrade.Link.v4.10.4")
+
+include("otcmarkets-linkats-multicast-link-v4-10-4")
+project(":otcmarkets-linkats-multicast-link-v4-10-4").projectDir = file("Classes/OtcMarkets/LinkAts/Multicast.Link.v4.10.4")
+
 include("otcmarkets-linkats-multicast-link-v4-3")
 project(":otcmarkets-linkats-multicast-link-v4-3").projectDir = file("Classes/OtcMarkets/LinkAts/Multicast.Link.v4.3")
+
+include("otcmarkets-linkats-multicast-link-v4-5")
+project(":otcmarkets-linkats-multicast-link-v4-5").projectDir = file("Classes/OtcMarkets/LinkAts/Multicast.Link.v4.5")
+
+include("otcmarkets-linkats-quotebook-link-v4-10-4")
+project(":otcmarkets-linkats-quotebook-link-v4-10-4").projectDir = file("Classes/OtcMarkets/LinkAts/QuoteBook.Link.v4.10.4")
+
+include("otcmarkets-linkats-quotebookglobalotc-link-v4-10-4")
+project(":otcmarkets-linkats-quotebookglobalotc-link-v4-10-4").projectDir = file("Classes/OtcMarkets/LinkAts/QuoteBookGlobalOtc.Link.v4.10.4")
+
+include("otcmarkets-linkats-quoteinside-link-v4-10-4")
+project(":otcmarkets-linkats-quoteinside-link-v4-10-4").projectDir = file("Classes/OtcMarkets/LinkAts/QuoteInside.Link.v4.10.4")
+
+include("otcmarkets-linkats-quoteinsideglobalotc-link-v4-10-4")
+project(":otcmarkets-linkats-quoteinsideglobalotc-link-v4-10-4").projectDir = file("Classes/OtcMarkets/LinkAts/QuoteInsideGlobalOtc.Link.v4.10.4")
+
+include("otcmarkets-linkats-quotereferenceprice-link-v4-10-4")
+project(":otcmarkets-linkats-quotereferenceprice-link-v4-10-4").projectDir = file("Classes/OtcMarkets/LinkAts/QuoteReferencePrice.Link.v4.10.4")
+
+include("otcmarkets-linkats-referencedata-link-v4-10-4")
+project(":otcmarkets-linkats-referencedata-link-v4-10-4").projectDir = file("Classes/OtcMarkets/LinkAts/ReferenceData.Link.v4.10.4")
+
+include("otcmarkets-linkats-referencedatanocusip-link-v4-10-4")
+project(":otcmarkets-linkats-referencedatanocusip-link-v4-10-4").projectDir = file("Classes/OtcMarkets/LinkAts/ReferenceDataNoCusip.Link.v4.10.4")
+
+include("otcmarkets-linkats-trade-link-v4-10-4")
+project(":otcmarkets-linkats-trade-link-v4-10-4").projectDir = file("Classes/OtcMarkets/LinkAts/Trade.Link.v4.10.4")
+
+include("otcmarkets-linknqb-depthofbook-link-v1-18")
+project(":otcmarkets-linknqb-depthofbook-link-v1-18").projectDir = file("Classes/OtcMarkets/LinkNqb/DepthOfBook.Link.v1.18")
+
+include("otcmarkets-linknqb-retransmission-link-v1-18")
+project(":otcmarkets-linknqb-retransmission-link-v1-18").projectDir = file("Classes/OtcMarkets/LinkNqb/Retransmission.Link.v1.18")
+
+include("otcmarkets-linknqb-topofbook-link-v1-18")
+project(":otcmarkets-linknqb-topofbook-link-v1-18").projectDir = file("Classes/OtcMarkets/LinkNqb/TopOfBook.Link.v1.18")
+
+include("otcmarkets-moonats-depthofbook-link-v1-3")
+project(":otcmarkets-moonats-depthofbook-link-v1-3").projectDir = file("Classes/OtcMarkets/MoonAts/DepthOfBook.Link.v1.3")
+
+include("otcmarkets-moonats-retransmission-link-v1-3")
+project(":otcmarkets-moonats-retransmission-link-v1-3").projectDir = file("Classes/OtcMarkets/MoonAts/Retransmission.Link.v1.3")
+
+include("otcmarkets-moonats-topofbook-link-v1-3")
+project(":otcmarkets-moonats-topofbook-link-v1-3").projectDir = file("Classes/OtcMarkets/MoonAts/TopOfBook.Link.v1.3")
+
+include("otcmarkets-overnight-depthofbook-link-v1-0")
+project(":otcmarkets-overnight-depthofbook-link-v1-0").projectDir = file("Classes/OtcMarkets/Overnight/DepthOfBook.Link.v1.0")
+
+include("otcmarkets-overnight-retransmission-link-v1-0")
+project(":otcmarkets-overnight-retransmission-link-v1-0").projectDir = file("Classes/OtcMarkets/Overnight/Retransmission.Link.v1.0")
+
+include("otcmarkets-overnight-topofbook-link-v1-0")
+project(":otcmarkets-overnight-topofbook-link-v1-0").projectDir = file("Classes/OtcMarkets/Overnight/TopOfBook.Link.v1.0")
+
+include("pse-pseequities-basicwithlastsale-itch-v2-3")
+project(":pse-pseequities-basicwithlastsale-itch-v2-3").projectDir = file("Classes/Pse/PseEquities/BasicWithLastSale.Itch.v2.3")
+
+include("pse-pseequities-index-itch-v2-3")
+project(":pse-pseequities-index-itch-v2-3").projectDir = file("Classes/Pse/PseEquities/Index.Itch.v2.3")
+
+include("pse-pseequities-totalview-itch-v2-3")
+project(":pse-pseequities-totalview-itch-v2-3").projectDir = file("Classes/Pse/PseEquities/TotalView.Itch.v2.3")
+
+include("sgx-titandt-depthofbook-glimpse-v1-4")
+project(":sgx-titandt-depthofbook-glimpse-v1-4").projectDir = file("Classes/Sgx/TitanDt/DepthOfBook.Glimpse.v1.4")
+
+include("sgx-titandt-depthofbook-itch-v1-4")
+project(":sgx-titandt-depthofbook-itch-v1-4").projectDir = file("Classes/Sgx/TitanDt/DepthOfBook.Itch.v1.4")
 
 include("siac-cqs-output-cta-v1-91")
 project(":siac-cqs-output-cta-v1-91").projectDir = file("Classes/Siac/Cqs/Output.Cta.v1.91")
 
 include("siac-cqs-output-cta-v2-10-a")
 project(":siac-cqs-output-cta-v2-10-a").projectDir = file("Classes/Siac/Cqs/Output.Cta.v2.10.a")
+
+include("siac-cqs-output-cta-v2-9")
+project(":siac-cqs-output-cta-v2-9").projectDir = file("Classes/Siac/Cqs/Output.Cta.v2.9")
+
+include("siac-cqs-snapshot-cta-v1-0")
+project(":siac-cqs-snapshot-cta-v1-0").projectDir = file("Classes/Siac/Cqs/Snapshot.Cta.v1.0")
+
+include("siac-cqs-snapshot-cta-v2-1")
+project(":siac-cqs-snapshot-cta-v2-1").projectDir = file("Classes/Siac/Cqs/Snapshot.Cta.v2.1")
 
 include("siac-cts-output-cta-v1-91")
 project(":siac-cts-output-cta-v1-91").projectDir = file("Classes/Siac/Cts/Output.Cta.v1.91")
@@ -392,11 +3587,98 @@ project(":siac-cts-output-cta-v2-11-b").projectDir = file("Classes/Siac/Cts/Outp
 include("siac-cts-output-cta-v2-9")
 project(":siac-cts-output-cta-v2-9").projectDir = file("Classes/Siac/Cts/Output.Cta.v2.9")
 
+include("siac-gapdetection-obi-v1")
+project(":siac-gapdetection-obi-v1").projectDir = file("Classes/Siac/GapDetection.Obi.v1")
+
+include("siac-opra-input-obi-v5-0-i")
+project(":siac-opra-input-obi-v5-0-i").projectDir = file("Classes/Siac/Opra/Input.Obi.v5.0.i")
+
+include("siac-opra-output-obi-v4-0")
+project(":siac-opra-output-obi-v4-0").projectDir = file("Classes/Siac/Opra/Output.Obi.v4.0")
+
+include("siac-opra-output-obi-v6-1")
+project(":siac-opra-output-obi-v6-1").projectDir = file("Classes/Siac/Opra/Output.Obi.v6.1")
+
 include("siac-opra-output-obi-v6-2")
 project(":siac-opra-output-obi-v6-2").projectDir = file("Classes/Siac/Opra/Output.Obi.v6.2")
 
+include("siac-opra-output-obi-v6-3-a")
+project(":siac-opra-output-obi-v6-3-a").projectDir = file("Classes/Siac/Opra/Output.Obi.v6.3.a")
+
+include("smallx-smallfutures-orderbookfeed-sbe-v2-2")
+project(":smallx-smallfutures-orderbookfeed-sbe-v2-2").projectDir = file("Classes/SmallX/SmallFutures/OrderBookFeed.Sbe.v2.2")
+
+include("tadawul-saudiexchange-basic-itch-v1-9")
+project(":tadawul-saudiexchange-basic-itch-v1-9").projectDir = file("Classes/Tadawul/SaudiExchange/Basic.Itch.v1.9")
+
+include("tadawul-saudiexchange-lv3-mwz-v4-0")
+project(":tadawul-saudiexchange-lv3-mwz-v4-0").projectDir = file("Classes/Tadawul/SaudiExchange/Lv3.Mwz.v4.0")
+
+include("tadawul-saudiexchange-orderentry-ouch-v0-7")
+project(":tadawul-saudiexchange-orderentry-ouch-v0-7").projectDir = file("Classes/Tadawul/SaudiExchange/OrderEntry.Ouch.v0.7")
+
+include("tadawul-saudiexchange-totalview-itch-v1-9")
+project(":tadawul-saudiexchange-totalview-itch-v1-9").projectDir = file("Classes/Tadawul/SaudiExchange/TotalView.Itch.v1.9")
+
+include("tmx-mx-solamulticast-hsvf-v1-11")
+project(":tmx-mx-solamulticast-hsvf-v1-11").projectDir = file("Classes/Tmx/Mx/SolaMulticast.Hsvf.v1.11")
+
+include("tmx-mx-solamulticast-hsvf-v1-12-2")
+project(":tmx-mx-solamulticast-hsvf-v1-12-2").projectDir = file("Classes/Tmx/Mx/SolaMulticast.Hsvf.v1.12.2")
+
+include("tmx-mx-solamulticast-hsvf-v1-13-3")
+project(":tmx-mx-solamulticast-hsvf-v1-13-3").projectDir = file("Classes/Tmx/Mx/SolaMulticast.Hsvf.v1.13.3")
+
 include("tmx-mx-solamulticast-hsvf-v1-14-1")
 project(":tmx-mx-solamulticast-hsvf-v1-14-1").projectDir = file("Classes/Tmx/Mx/SolaMulticast.Hsvf.v1.14.1")
+
+include("tmx-mx-solatcpretransmission-hsvf-v1-11")
+project(":tmx-mx-solatcpretransmission-hsvf-v1-11").projectDir = file("Classes/Tmx/Mx/SolaTcpRetransmission.Hsvf.v1.11")
+
+include("tmx-mx-solatcpretransmission-hsvf-v1-12-2")
+project(":tmx-mx-solatcpretransmission-hsvf-v1-12-2").projectDir = file("Classes/Tmx/Mx/SolaTcpRetransmission.Hsvf.v1.12.2")
+
+include("tmx-mx-solatcpretransmission-hsvf-v1-13-3")
+project(":tmx-mx-solatcpretransmission-hsvf-v1-13-3").projectDir = file("Classes/Tmx/Mx/SolaTcpRetransmission.Hsvf.v1.13.3")
+
+include("tmx-mx-solatcpretransmission-hsvf-v1-14-1")
+project(":tmx-mx-solatcpretransmission-hsvf-v1-14-1").projectDir = file("Classes/Tmx/Mx/SolaTcpRetransmission.Hsvf.v1.14.1")
+
+include("tmx-tsx-globalfx-gfx-v1-0")
+project(":tmx-tsx-globalfx-gfx-v1-0").projectDir = file("Classes/Tmx/Tsx/GlobalFx.Gfx.v1.0")
+
+include("tmx-tsx-indexfeed-qrtmd-v1-19")
+project(":tmx-tsx-indexfeed-qrtmd-v1-19").projectDir = file("Classes/Tmx/Tsx/IndexFeed.Qrtmd.v1.19")
+
+include("tmx-tsx-level1-qrtmd-v2-8")
+project(":tmx-tsx-level1-qrtmd-v2-8").projectDir = file("Classes/Tmx/Tsx/Level1.Qrtmd.v2.8")
+
+include("tmx-tsxalpha-level1-qrtmd-v2-1")
+project(":tmx-tsxalpha-level1-qrtmd-v2-1").projectDir = file("Classes/Tmx/TsxAlpha/Level1.Qrtmd.v2.1")
+
+include("tradelogiq-lynxats-snapshotrecovery-itch-v1-09")
+project(":tradelogiq-lynxats-snapshotrecovery-itch-v1-09").projectDir = file("Classes/Tradelogiq/LynxAts/SnapshotRecovery.Itch.v1.09")
+
+include("tradelogiq-lynxats-tcplevel1-itch-v1-01")
+project(":tradelogiq-lynxats-tcplevel1-itch-v1-01").projectDir = file("Classes/Tradelogiq/LynxAts/TcpLevel1.Itch.v1.01")
+
+include("tradelogiq-lynxats-tcplevel2-itch-v2-01")
+project(":tradelogiq-lynxats-tcplevel2-itch-v2-01").projectDir = file("Classes/Tradelogiq/LynxAts/TcpLevel2.Itch.v2.01")
+
+include("tradelogiq-omegaats-snapshotrecovery-itch-v1-09")
+project(":tradelogiq-omegaats-snapshotrecovery-itch-v1-09").projectDir = file("Classes/Tradelogiq/OmegaAts/SnapshotRecovery.Itch.v1.09")
+
+include("tradelogiq-omegaats-tcplevel1-itch-v1-01")
+project(":tradelogiq-omegaats-tcplevel1-itch-v1-01").projectDir = file("Classes/Tradelogiq/OmegaAts/TcpLevel1.Itch.v1.01")
+
+include("tradelogiq-omegaats-tcplevel2-itch-v2-01")
+project(":tradelogiq-omegaats-tcplevel2-itch-v2-01").projectDir = file("Classes/Tradelogiq/OmegaAts/TcpLevel2.Itch.v2.01")
+
+include("txse-txseequities-bale-rake-v1-0")
+project(":txse-txseequities-bale-rake-v1-0").projectDir = file("Classes/Txse/TxseEquities/Bale.Rake.v1.0")
+
+include("txse-txseequities-feed-rake-v1-0")
+project(":txse-txseequities-feed-rake-v1-0").projectDir = file("Classes/Txse/TxseEquities/Feed.Rake.v1.0")
 
 include("txse-txseequities-seed-rake-v1-0")
 project(":txse-txseequities-seed-rake-v1-0").projectDir = file("Classes/Txse/TxseEquities/Seed.Rake.v1.0")

@@ -17,6 +17,9 @@ public enum FieldKind {
     /** A fixed-length ASCII field carrying text. */
     STRING,
 
+    /** A fixed-length field carrying text in two-byte UTF-16 code units. */
+    UTF16_STRING,
+
     /** A single ASCII byte carrying one character. */
     CHAR,
 

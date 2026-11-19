@@ -1,0 +1,62 @@
+package omi.nsxaustralia.nets.marketdatafeed.itch.v4_2_55.enums;
+
+import java.util.Optional;
+
+/**
+ * Current trading state code for orderbook.
+ *
+ * <p>Each value corresponds to the ASCII character used as the wire discriminator.</p>
+ */
+public enum TradingState {
+
+    /**
+     * Normal Trading
+     */
+    NORMAL_TRADING('T', "Normal Trading"),
+
+    /**
+     * Suspended
+     */
+    SUSPENDED('V', "Suspended");
+
+    private final char wire;
+
+    private final String description;
+
+    TradingState(char wire, String description) {
+        this.wire = wire;
+        this.description = description;
+    }
+
+    /**
+     * Returns this value's encoding on the wire.
+     *
+     * @return the wire value
+     */
+    public char wire() {
+        return wire;
+    }
+
+    /**
+     * Returns the description the protocol specification gives this value.
+     *
+     * @return the description
+     */
+    public String description() {
+        return description;
+    }
+
+    /**
+     * Returns the value with the given wire encoding.
+     *
+     * @param wire the encoding read from the wire
+     * @return the matching value, or empty when the protocol declares no value for it
+     */
+    public static Optional<TradingState> fromWire(char wire) {
+        return switch (wire) {
+            case 'T' -> Optional.of(NORMAL_TRADING);
+            case 'V' -> Optional.of(SUSPENDED);
+            default -> Optional.empty();
+        };
+    }
+}

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.ExponentField;
-import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.MantissaOptionalField;
+import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.MantissaField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.types.Field;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.types.GroupEntry;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.types.PrintOptions;
@@ -31,7 +31,7 @@ public final class ShowQty implements GroupEntry {
     /**
      * mantissa
      */
-    private final MantissaOptionalField mantissaOptional = new MantissaOptionalField();
+    private final MantissaField mantissa = new MantissaField();
 
     /**
      * exponent
@@ -41,7 +41,7 @@ public final class ShowQty implements GroupEntry {
     /**
      * This entry's fields, in wire order.
      */
-    private final List<Field> fields = List.of(mantissaOptional, exponent);
+    private final List<Field> fields = List.of(mantissa, exponent);
 
     private byte[] buffer;
 
@@ -50,10 +50,10 @@ public final class ShowQty implements GroupEntry {
     /**
      * mantissa
      *
-     * @return the MantissaOptional field
+     * @return the Mantissa field
      */
-    public MantissaOptionalField mantissaOptional() {
-        return mantissaOptional;
+    public MantissaField mantissa() {
+        return mantissa;
     }
 
     /**
@@ -102,10 +102,10 @@ public final class ShowQty implements GroupEntry {
         }
 
         int cursor = offset;
-        if (!mantissaOptional.parse(data, cursor)) {
+        if (!mantissa.parse(data, cursor)) {
             return false;
         }
-        cursor += MantissaOptionalField.BYTE_LENGTH;
+        cursor += MantissaField.BYTE_LENGTH;
         return exponent.parse(data, cursor);
     }
 
@@ -113,7 +113,7 @@ public final class ShowQty implements GroupEntry {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        cursor = mantissaOptional.encode(data, cursor);
+        cursor = mantissa.encode(data, cursor);
         cursor = exponent.encode(data, cursor);
         return cursor;
     }
@@ -195,7 +195,7 @@ public final class ShowQty implements GroupEntry {
     @Override
     public Optional<Field> field(String name) {
         return switch (name) {
-            case "MantissaOptional" -> Optional.of(mantissaOptional);
+            case "Mantissa" -> Optional.of(mantissa);
             case "Exponent" -> Optional.of(exponent);
             default -> Optional.empty();
         };

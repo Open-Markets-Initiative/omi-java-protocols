@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Optional;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.ImbalanceConditionField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MatchEventIndicatorField;
-import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntrySizeOptionalField;
+import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntrySizeQuantityOptionalField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntryTimestampField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdUpdateActionField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.RptSeqField;
@@ -57,7 +57,7 @@ public final class AuctionImbalance19Message implements Message {
     /**
      * mDEntrySize
      */
-    private final MdEntrySizeOptionalField mdEntrySizeOptional = new MdEntrySizeOptionalField();
+    private final MdEntrySizeQuantityOptionalField mdEntrySizeQuantityOptional = new MdEntrySizeQuantityOptionalField();
 
     /**
      * mDEntryTimestamp
@@ -72,7 +72,7 @@ public final class AuctionImbalance19Message implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(securityId, matchEventIndicator, mdUpdateAction, imbalanceCondition, mdEntrySizeOptional, mdEntryTimestamp, rptSeq);
+    private final List<Field> fields = List.of(securityId, matchEventIndicator, mdUpdateAction, imbalanceCondition, mdEntrySizeQuantityOptional, mdEntryTimestamp, rptSeq);
 
     private byte[] buffer;
 
@@ -117,10 +117,10 @@ public final class AuctionImbalance19Message implements Message {
     /**
      * mDEntrySize
      *
-     * @return the MdEntrySizeOptional field
+     * @return the MdEntrySizeQuantityOptional field
      */
-    public MdEntrySizeOptionalField mdEntrySizeOptional() {
-        return mdEntrySizeOptional;
+    public MdEntrySizeQuantityOptionalField mdEntrySizeQuantityOptional() {
+        return mdEntrySizeQuantityOptional;
     }
 
     /**
@@ -204,10 +204,10 @@ public final class AuctionImbalance19Message implements Message {
             return false;
         }
         cursor += ImbalanceConditionField.BYTE_LENGTH;
-        if (!mdEntrySizeOptional.parse(data, cursor)) {
+        if (!mdEntrySizeQuantityOptional.parse(data, cursor)) {
             return false;
         }
-        cursor += MdEntrySizeOptionalField.BYTE_LENGTH;
+        cursor += MdEntrySizeQuantityOptionalField.BYTE_LENGTH;
         if (!mdEntryTimestamp.parse(data, cursor)) {
             return false;
         }
@@ -223,7 +223,7 @@ public final class AuctionImbalance19Message implements Message {
         cursor = matchEventIndicator.encode(data, cursor);
         cursor = mdUpdateAction.encode(data, cursor);
         cursor = imbalanceCondition.encode(data, cursor);
-        cursor = mdEntrySizeOptional.encode(data, cursor);
+        cursor = mdEntrySizeQuantityOptional.encode(data, cursor);
         cursor = mdEntryTimestamp.encode(data, cursor);
         cursor = rptSeq.encode(data, cursor);
         return cursor;
@@ -310,7 +310,7 @@ public final class AuctionImbalance19Message implements Message {
             case "MatchEventIndicator" -> Optional.of(matchEventIndicator);
             case "MdUpdateAction" -> Optional.of(mdUpdateAction);
             case "ImbalanceCondition" -> Optional.of(imbalanceCondition);
-            case "MdEntrySizeOptional" -> Optional.of(mdEntrySizeOptional);
+            case "MdEntrySizeQuantityOptional" -> Optional.of(mdEntrySizeQuantityOptional);
             case "MdEntryTimestamp" -> Optional.of(mdEntryTimestamp);
             case "RptSeq" -> Optional.of(rptSeq);
             default -> Optional.empty();

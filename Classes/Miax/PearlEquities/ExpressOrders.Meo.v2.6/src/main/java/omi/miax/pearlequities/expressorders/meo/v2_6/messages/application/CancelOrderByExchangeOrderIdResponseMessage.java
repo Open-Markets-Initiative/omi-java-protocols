@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import omi.miax.pearlequities.expressorders.meo.v2_6.fields.CancelByExchangeOrderIdStatusField;
+import omi.miax.pearlequities.expressorders.meo.v2_6.fields.CancelStatusField;
 import omi.miax.pearlequities.expressorders.meo.v2_6.fields.ClientOrderIdField;
 import omi.miax.pearlequities.expressorders.meo.v2_6.fields.LeavesQtyField;
 import omi.miax.pearlequities.expressorders.meo.v2_6.fields.MatchingEngineTimeField;
@@ -72,14 +72,14 @@ public final class CancelOrderByExchangeOrderIdResponseMessage implements Messag
     private final LeavesQtyField leavesQty = new LeavesQtyField();
 
     /**
-     * Cancel By Exchange Order ID Status
+     * Cancel Status
      */
-    private final CancelByExchangeOrderIdStatusField cancelByExchangeOrderIdStatus = new CancelByExchangeOrderIdStatusField();
+    private final CancelStatusField cancelStatus = new CancelStatusField();
 
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(matchingEngineTime, mpid, clientOrderId, symbolId, orderId, leavesQty, cancelByExchangeOrderIdStatus);
+    private final List<Field> fields = List.of(matchingEngineTime, mpid, clientOrderId, symbolId, orderId, leavesQty, cancelStatus);
 
     private byte[] buffer;
 
@@ -140,12 +140,12 @@ public final class CancelOrderByExchangeOrderIdResponseMessage implements Messag
     }
 
     /**
-     * Cancel By Exchange Order ID Status
+     * Cancel Status
      *
-     * @return the CancelByExchangeOrderIdStatus field
+     * @return the CancelStatus field
      */
-    public CancelByExchangeOrderIdStatusField cancelByExchangeOrderIdStatus() {
-        return cancelByExchangeOrderIdStatus;
+    public CancelStatusField cancelStatus() {
+        return cancelStatus;
     }
 
     @Override
@@ -219,10 +219,10 @@ public final class CancelOrderByExchangeOrderIdResponseMessage implements Messag
             return false;
         }
         cursor += LeavesQtyField.BYTE_LENGTH;
-        if (!cancelByExchangeOrderIdStatus.parse(data, cursor)) {
+        if (!cancelStatus.parse(data, cursor)) {
             return false;
         }
-        cursor += CancelByExchangeOrderIdStatusField.BYTE_LENGTH;
+        cursor += CancelStatusField.BYTE_LENGTH;
 
         return true;
     }
@@ -237,7 +237,7 @@ public final class CancelOrderByExchangeOrderIdResponseMessage implements Messag
         cursor = symbolId.encode(data, cursor);
         cursor = orderId.encode(data, cursor);
         cursor = leavesQty.encode(data, cursor);
-        cursor = cancelByExchangeOrderIdStatus.encode(data, cursor);
+        cursor = cancelStatus.encode(data, cursor);
         if (buffer != null && buffer.length >= 59) {
             System.arraycopy(buffer, 49, data, cursor, 10); // padding
         } else {
@@ -330,7 +330,7 @@ public final class CancelOrderByExchangeOrderIdResponseMessage implements Messag
             case "SymbolId" -> Optional.of(symbolId);
             case "OrderId" -> Optional.of(orderId);
             case "LeavesQty" -> Optional.of(leavesQty);
-            case "CancelByExchangeOrderIdStatus" -> Optional.of(cancelByExchangeOrderIdStatus);
+            case "CancelStatus" -> Optional.of(cancelStatus);
             default -> Optional.empty();
         };
     }

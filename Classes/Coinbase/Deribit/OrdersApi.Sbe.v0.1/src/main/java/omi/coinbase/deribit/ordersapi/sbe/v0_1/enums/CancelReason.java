@@ -82,12 +82,7 @@ public enum CancelReason {
     /**
      * MMP_GROUP_DELETED
      */
-    MMP_GROUP_DELETED((byte) 14, "MMP_GROUP_DELETED"),
-
-    /**
-     * Cancel reason null sentinel (SBE int8 INT8_MIN)
-     */
-    NO_VALUE((byte) -128, "Cancel reason null sentinel (SBE int8 INT8_MIN)");
+    MMP_GROUP_DELETED((byte) 14, "MMP_GROUP_DELETED");
 
     private final byte wire;
 
@@ -139,7 +134,6 @@ public enum CancelReason {
             case 12 -> Optional.of(BY_REQUEST);
             case 13 -> Optional.of(RISK_CHECK_TIMED_OUT);
             case 14 -> Optional.of(MMP_GROUP_DELETED);
-            case -128 -> Optional.of(NO_VALUE);
             default -> Optional.empty();
         };
     }

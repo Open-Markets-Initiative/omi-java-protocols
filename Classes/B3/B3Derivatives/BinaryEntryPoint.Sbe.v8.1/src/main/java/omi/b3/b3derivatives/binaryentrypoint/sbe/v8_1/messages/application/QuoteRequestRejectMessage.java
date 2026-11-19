@@ -11,7 +11,7 @@ import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.ContraBrokerField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.DaysToSettlementOptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.EnteringTraderField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.ExecutingTraderField;
-import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.FixedRateOptionalField;
+import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.FixedRatePercentage8OptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.OrderQtyOptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.Price8OptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.QuoteIdOptionalField;
@@ -116,7 +116,7 @@ public final class QuoteRequestRejectMessage implements Message {
     /**
      * fixedRate
      */
-    private final FixedRateOptionalField fixedRateOptional = new FixedRateOptionalField();
+    private final FixedRatePercentage8OptionalField fixedRatePercentage8Optional = new FixedRatePercentage8OptionalField();
 
     /**
      * daysToSettlement
@@ -151,7 +151,7 @@ public final class QuoteRequestRejectMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(bidirectionalBusinessHeader.fields(), List.<Field>of(quoteRequestRejectReason), List.<Field>of(securityId), List.<Field>of(quoteReqId), List.<Field>of(quoteIdOptional), List.<Field>of(tradeIdOptional), List.<Field>of(contraBroker), List.<Field>of(transactTime), List.<Field>of(enteringTrader), List.<Field>of(settlTypeOptional), List.<Field>of(price8Optional), List.<Field>of(orderQtyOptional), List.<Field>of(senderLocation), List.<Field>of(executingTrader), List.<Field>of(fixedRateOptional), List.<Field>of(daysToSettlementOptional), deskId.fields(), memo.fields(), text.fields()).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(bidirectionalBusinessHeader.fields(), List.<Field>of(quoteRequestRejectReason), List.<Field>of(securityId), List.<Field>of(quoteReqId), List.<Field>of(quoteIdOptional), List.<Field>of(tradeIdOptional), List.<Field>of(contraBroker), List.<Field>of(transactTime), List.<Field>of(enteringTrader), List.<Field>of(settlTypeOptional), List.<Field>of(price8Optional), List.<Field>of(orderQtyOptional), List.<Field>of(senderLocation), List.<Field>of(executingTrader), List.<Field>of(fixedRatePercentage8Optional), List.<Field>of(daysToSettlementOptional), deskId.fields(), memo.fields(), text.fields()).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -277,10 +277,10 @@ public final class QuoteRequestRejectMessage implements Message {
     /**
      * fixedRate
      *
-     * @return the FixedRateOptional field
+     * @return the FixedRatePercentage8Optional field
      */
-    public FixedRateOptionalField fixedRateOptional() {
-        return fixedRateOptional;
+    public FixedRatePercentage8OptionalField fixedRatePercentage8Optional() {
+        return fixedRatePercentage8Optional;
     }
 
     /**
@@ -440,10 +440,10 @@ public final class QuoteRequestRejectMessage implements Message {
             return false;
         }
         cursor += ExecutingTraderField.BYTE_LENGTH;
-        if (!fixedRateOptional.parse(data, cursor)) {
+        if (!fixedRatePercentage8Optional.parse(data, cursor)) {
             return false;
         }
-        cursor += FixedRateOptionalField.BYTE_LENGTH;
+        cursor += FixedRatePercentage8OptionalField.BYTE_LENGTH;
         if (!daysToSettlementOptional.parse(data, cursor)) {
             return false;
         }
@@ -495,7 +495,7 @@ public final class QuoteRequestRejectMessage implements Message {
         cursor = orderQtyOptional.encode(data, cursor);
         cursor = senderLocation.encode(data, cursor);
         cursor = executingTrader.encode(data, cursor);
-        cursor = fixedRateOptional.encode(data, cursor);
+        cursor = fixedRatePercentage8Optional.encode(data, cursor);
         cursor = daysToSettlementOptional.encode(data, cursor);
         cursor = sidesGroups.encode(data, cursor);
         cursor = deskId.encode(data, cursor);
@@ -621,8 +621,8 @@ public final class QuoteRequestRejectMessage implements Message {
         if (!executingTrader.isDecoded()) {
             return Optional.of(executingTrader);
         }
-        if (!fixedRateOptional.isDecoded()) {
-            return Optional.of(fixedRateOptional);
+        if (!fixedRatePercentage8Optional.isDecoded()) {
+            return Optional.of(fixedRatePercentage8Optional);
         }
         if (!daysToSettlementOptional.isDecoded()) {
             return Optional.of(daysToSettlementOptional);
@@ -663,7 +663,7 @@ public final class QuoteRequestRejectMessage implements Message {
             case "OrderQtyOptional" -> Optional.of(orderQtyOptional);
             case "SenderLocation" -> Optional.of(senderLocation);
             case "ExecutingTrader" -> Optional.of(executingTrader);
-            case "FixedRateOptional" -> Optional.of(fixedRateOptional);
+            case "FixedRatePercentage8Optional" -> Optional.of(fixedRatePercentage8Optional);
             case "DaysToSettlementOptional" -> Optional.of(daysToSettlementOptional);
             default -> Optional.empty();
         };

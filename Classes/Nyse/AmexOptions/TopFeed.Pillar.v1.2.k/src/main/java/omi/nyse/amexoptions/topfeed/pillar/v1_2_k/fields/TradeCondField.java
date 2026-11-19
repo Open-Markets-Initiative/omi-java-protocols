@@ -1,7 +1,7 @@
 package omi.nyse.amexoptions.topfeed.pillar.v1_2_k.fields;
 
 import java.util.Objects;
-import omi.nyse.amexoptions.topfeed.pillar.v1_2_k.enums.TradeCond;
+import omi.nyse.amexoptions.topfeed.pillar.v1_2_k.enums.TradeCond1;
 import omi.nyse.amexoptions.topfeed.pillar.v1_2_k.types.ByteOps;
 import omi.nyse.amexoptions.topfeed.pillar.v1_2_k.types.Field;
 import omi.nyse.amexoptions.topfeed.pillar.v1_2_k.types.FieldKind;
@@ -22,7 +22,7 @@ public final class TradeCondField extends Field {
      */
     public static final String NAME = "TradeCond";
 
-    private TradeCond value;
+    private TradeCond1 value;
 
     /**
      * The undecoded wire value, retained so the field re-encodes exactly as it arrived.
@@ -34,7 +34,7 @@ public final class TradeCondField extends Field {
      *
      * @return the decoded value, or null when the field has not decoded or holds an undeclared value
      */
-    public TradeCond value() {
+    public TradeCond1 value() {
         return value;
     }
 
@@ -43,7 +43,7 @@ public final class TradeCondField extends Field {
      *
      * @param value the value to encode, or null to clear the field
      */
-    public void value(TradeCond value) {
+    public void value(TradeCond1 value) {
         this.value = value;
         this.rawValue = value == null ? '\0' : value.wire();
         markSet(value != null);
@@ -80,7 +80,7 @@ public final class TradeCondField extends Field {
         }
 
         this.rawValue = (char) ByteOps.unsigned(data, offset, BYTE_LENGTH, false);
-        this.value = TradeCond.fromWire(rawValue).orElse(null);
+        this.value = TradeCond1.fromWire(rawValue).orElse(null);
         markDecoded(data, offset);
         return true;
     }

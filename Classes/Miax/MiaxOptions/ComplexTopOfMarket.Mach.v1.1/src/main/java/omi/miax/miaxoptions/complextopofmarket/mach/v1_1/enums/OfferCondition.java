@@ -30,9 +30,9 @@ public enum OfferCondition {
     SIMPLE_AUCTION('S', "Simple Market Auction Or Timer In Progress"),
 
     /**
-     * Complex Auction in Progress
+     * Complex Auction In Progress
      */
-    COMPLEX_AUCTION('C', "Complex Auction in Progress"),
+    COMPLEX_AUCTION('C', "Complex Auction In Progress"),
 
     /**
      * Simple Market Protections Strategy Match Blocked

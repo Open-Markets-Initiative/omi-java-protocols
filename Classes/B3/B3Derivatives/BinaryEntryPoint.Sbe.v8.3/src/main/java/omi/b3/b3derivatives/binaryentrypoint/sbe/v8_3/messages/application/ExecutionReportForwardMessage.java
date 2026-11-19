@@ -10,13 +10,13 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.AccountField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.AggressorIndicatorField;
-import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.ClOrdIdOptionalField;
+import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.ClordidOptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.ContraBrokerField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.CumQtyField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.DaysToSettlementOptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.ExecIdField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.ExecRefIdField;
-import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.FixedRateOptionalField;
+import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.FixedRatePercentage8OptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.LastPxField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.LastQtyField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.LeavesQtyField;
@@ -72,7 +72,7 @@ public final class ExecutionReportForwardMessage implements Message {
     /**
      * clOrdID
      */
-    private final ClOrdIdOptionalField clOrdIdOptional = new ClOrdIdOptionalField();
+    private final ClordidOptionalField clordidOptional = new ClordidOptionalField();
 
     /**
      * secondaryOrderID
@@ -167,7 +167,7 @@ public final class ExecutionReportForwardMessage implements Message {
     /**
      * fixedRate
      */
-    private final FixedRateOptionalField fixedRateOptional = new FixedRateOptionalField();
+    private final FixedRatePercentage8OptionalField fixedRatePercentage8Optional = new FixedRatePercentage8OptionalField();
 
     /**
      * orderQty
@@ -212,7 +212,7 @@ public final class ExecutionReportForwardMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(outboundBusinessHeader.fields(), List.<Field>of(side), List.<Field>of(ordStatus), List.<Field>of(clOrdIdOptional), List.<Field>of(secondaryOrderId), List.<Field>of(securityId), List.<Field>of(account), List.<Field>of(lastQty), List.<Field>of(lastPx), List.<Field>of(execId), List.<Field>of(transactTime), List.<Field>of(leavesQty), List.<Field>of(cumQty), List.<Field>of(tradeId), List.<Field>of(contraBroker), List.<Field>of(orderId), List.<Field>of(aggressorIndicator), List.<Field>of(settlTypeOptional), List.<Field>of(tradeDate), List.<Field>of(daysToSettlementOptional), List.<Field>of(secondaryExecId), List.<Field>of(execRefId), List.<Field>of(fixedRateOptional), List.<Field>of(orderQty), List.<Field>of(tradingSessionId), List.<Field>of(tradingSessionSubId), List.<Field>of(securityTradingStatus), List.<Field>of(tradingSubAccount), deskId.fields(), memo.fields()).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(outboundBusinessHeader.fields(), List.<Field>of(side), List.<Field>of(ordStatus), List.<Field>of(clordidOptional), List.<Field>of(secondaryOrderId), List.<Field>of(securityId), List.<Field>of(account), List.<Field>of(lastQty), List.<Field>of(lastPx), List.<Field>of(execId), List.<Field>of(transactTime), List.<Field>of(leavesQty), List.<Field>of(cumQty), List.<Field>of(tradeId), List.<Field>of(contraBroker), List.<Field>of(orderId), List.<Field>of(aggressorIndicator), List.<Field>of(settlTypeOptional), List.<Field>of(tradeDate), List.<Field>of(daysToSettlementOptional), List.<Field>of(secondaryExecId), List.<Field>of(execRefId), List.<Field>of(fixedRatePercentage8Optional), List.<Field>of(orderQty), List.<Field>of(tradingSessionId), List.<Field>of(tradingSessionSubId), List.<Field>of(securityTradingStatus), List.<Field>of(tradingSubAccount), deskId.fields(), memo.fields()).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -239,10 +239,10 @@ public final class ExecutionReportForwardMessage implements Message {
     /**
      * clOrdID
      *
-     * @return the ClOrdIdOptional field
+     * @return the ClordidOptional field
      */
-    public ClOrdIdOptionalField clOrdIdOptional() {
-        return clOrdIdOptional;
+    public ClordidOptionalField clordidOptional() {
+        return clordidOptional;
     }
 
     /**
@@ -410,10 +410,10 @@ public final class ExecutionReportForwardMessage implements Message {
     /**
      * fixedRate
      *
-     * @return the FixedRateOptional field
+     * @return the FixedRatePercentage8Optional field
      */
-    public FixedRateOptionalField fixedRateOptional() {
-        return fixedRateOptional;
+    public FixedRatePercentage8OptionalField fixedRatePercentage8Optional() {
+        return fixedRatePercentage8Optional;
     }
 
     /**
@@ -596,10 +596,10 @@ public final class ExecutionReportForwardMessage implements Message {
             return false;
         }
         cursor += OrdStatusField.BYTE_LENGTH;
-        if (!clOrdIdOptional.parse(data, cursor)) {
+        if (!clordidOptional.parse(data, cursor)) {
             return false;
         }
-        cursor += ClOrdIdOptionalField.BYTE_LENGTH;
+        cursor += ClordidOptionalField.BYTE_LENGTH;
         if (!secondaryOrderId.parse(data, cursor)) {
             return false;
         }
@@ -673,10 +673,10 @@ public final class ExecutionReportForwardMessage implements Message {
             return false;
         }
         cursor += ExecRefIdField.BYTE_LENGTH;
-        if (!fixedRateOptional.parse(data, cursor)) {
+        if (!fixedRatePercentage8Optional.parse(data, cursor)) {
             return false;
         }
-        cursor += FixedRateOptionalField.BYTE_LENGTH;
+        cursor += FixedRatePercentage8OptionalField.BYTE_LENGTH;
         if (!orderQty.parse(data, cursor)) {
             return false;
         }
@@ -719,7 +719,7 @@ public final class ExecutionReportForwardMessage implements Message {
         cursor = outboundBusinessHeader.encode(data, cursor);
         cursor = side.encode(data, cursor);
         cursor = ordStatus.encode(data, cursor);
-        cursor = clOrdIdOptional.encode(data, cursor);
+        cursor = clordidOptional.encode(data, cursor);
         cursor = secondaryOrderId.encode(data, cursor);
         cursor = securityId.encode(data, cursor);
         cursor = account.encode(data, cursor);
@@ -744,7 +744,7 @@ public final class ExecutionReportForwardMessage implements Message {
         cursor += 2;
         cursor = secondaryExecId.encode(data, cursor);
         cursor = execRefId.encode(data, cursor);
-        cursor = fixedRateOptional.encode(data, cursor);
+        cursor = fixedRatePercentage8Optional.encode(data, cursor);
         cursor = orderQty.encode(data, cursor);
         cursor = tradingSessionId.encode(data, cursor);
         cursor = tradingSessionSubId.encode(data, cursor);
@@ -837,7 +837,7 @@ public final class ExecutionReportForwardMessage implements Message {
         return switch (name) {
             case "Side" -> Optional.of(side);
             case "OrdStatus" -> Optional.of(ordStatus);
-            case "ClOrdIdOptional" -> Optional.of(clOrdIdOptional);
+            case "ClordidOptional" -> Optional.of(clordidOptional);
             case "SecondaryOrderId" -> Optional.of(secondaryOrderId);
             case "SecurityId" -> Optional.of(securityId);
             case "Account" -> Optional.of(account);
@@ -856,7 +856,7 @@ public final class ExecutionReportForwardMessage implements Message {
             case "DaysToSettlementOptional" -> Optional.of(daysToSettlementOptional);
             case "SecondaryExecId" -> Optional.of(secondaryExecId);
             case "ExecRefId" -> Optional.of(execRefId);
-            case "FixedRateOptional" -> Optional.of(fixedRateOptional);
+            case "FixedRatePercentage8Optional" -> Optional.of(fixedRatePercentage8Optional);
             case "OrderQty" -> Optional.of(orderQty);
             case "TradingSessionId" -> Optional.of(tradingSessionId);
             case "TradingSessionSubId" -> Optional.of(tradingSessionSubId);

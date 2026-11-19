@@ -7,7 +7,9 @@ A division of [Texas Stock Exchange](..).
 
 | [Protocol][Omi.Txse.Protocol.Definitions] | [Encoding][Omi.Encoding.Definitions] | Version | Date | Size | [Deployment][Omi.Glossary.Deployment] | [Testing][Omi.Glossary.Testing] | [Documentation][Omi.Txse.Specifications] |
 | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| [Seed][Txse.TxseEquities.Seed] | [Rake][Omi.Encoding.Rake] | [1.0][Txse.TxseEquities.Seed.Rake.v1.0.Parser] | 6/12/2026 | 48,801 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Txse.TxseEquities.Seed.Rake.v1.0.Url] - [pdf][Txse.TxseEquities.Seed.Rake.v1.0.Pdf] |
+| [Bale][Txse.TxseEquities.Bale] | [Rake][Omi.Encoding.Rake] | [1.0][Txse.TxseEquities.Bale.Rake.v1.0.Parser] | 6/12/2026 | 11,329 | [Active][Omi.Glossary.Deployment.Active] | [Untested][Omi.Glossary.Testing.Untested] | [url][Txse.TxseEquities.Bale.Rake.v1.0.Url] - [pdf][Txse.TxseEquities.Bale.Rake.v1.0.Pdf] |
+| [Feed][Txse.TxseEquities.Feed] | [Rake][Omi.Encoding.Rake] | [1.0][Txse.TxseEquities.Feed.Rake.v1.0.Parser] | 6/12/2026 | 13,540 | [Active][Omi.Glossary.Deployment.Active] | [Untested][Omi.Glossary.Testing.Untested] | [url][Txse.TxseEquities.Feed.Rake.v1.0.Url] - [pdf][Txse.TxseEquities.Feed.Rake.v1.0.Pdf] |
+| [Seed][Txse.TxseEquities.Seed] | [Rake][Omi.Encoding.Rake] | [1.0][Txse.TxseEquities.Seed.Rake.v1.0.Parser] | 6/12/2026 | 48,804 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Txse.TxseEquities.Seed.Rake.v1.0.Url] - [pdf][Txse.TxseEquities.Seed.Rake.v1.0.Pdf] |
 
 
 <p align="center"><a href="https://www.txse.com" title="Texas Stock Exchange Website"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Website.png" alt="Website" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://www.linkedin.com/company/txse" title="Texas Stock Exchange on LinkedIn"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/LinkedIn.png" alt="LinkedIn" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://en.wikipedia.org/wiki/Texas_Stock_Exchange" title="Texas Stock Exchange on Wikipedia"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Wikipedia.png" alt="Wikipedia" width="32" height="32"></a></p>
@@ -31,8 +33,16 @@ A division of [Texas Stock Exchange](..).
 [Omi.Txse.Specifications]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/tree/main/Organizations/Txse/Specifications "Txse Specifications Directory"
 [Omi.Encoding.Rake]: https://github.com/Open-Markets-Initiative/Directory/blob/main/Protocols/Rake.md "Rake Encoding"
 [TxseEquities.Exchange]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Txse/TxseEquities "Txse Equities"
+[Txse.TxseEquities.Bale]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Txse/Protocols/TxseEquities/Bale.md "BALE Top-of-Book Market Data Feed"
+[Txse.TxseEquities.Feed]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Txse/Protocols/TxseEquities/Feed.md "FEED Full-Depth Market Data"
 [Txse.TxseEquities.Seed]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Txse/Protocols/TxseEquities/Seed.md "Session Enabled Entry Daemon"
 
+[Txse.TxseEquities.Bale.Rake.v1.0.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Txse/TxseEquities/Bale.Rake.v1.0 "Txse TxseEquities Bale Rake v1.0 Java Parser"
+[Txse.TxseEquities.Bale.Rake.v1.0.Url]: https://www.txse.com "Texas Stock Exchange 1.0 Url"
+[Txse.TxseEquities.Bale.Rake.v1.0.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Txse/Specifications/Bale/Txse.TxseEquities.MarketData.Bale.v1.0.pdf "Texas Stock Exchange 1.0 Pdf"
+[Txse.TxseEquities.Feed.Rake.v1.0.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Txse/TxseEquities/Feed.Rake.v1.0 "Txse TxseEquities Feed Rake v1.0 Java Parser"
+[Txse.TxseEquities.Feed.Rake.v1.0.Url]: https://www.txse.com "Texas Stock Exchange 1.0 Url"
+[Txse.TxseEquities.Feed.Rake.v1.0.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Txse/Specifications/Feed/Txse.TxseEquities.MarketData.Feed.v1.0.pdf "Texas Stock Exchange 1.0 Pdf"
 [Txse.TxseEquities.Seed.Rake.v1.0.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Txse/TxseEquities/Seed.Rake.v1.0 "Txse TxseEquities Seed Rake v1.0 Java Parser"
 [Txse.TxseEquities.Seed.Rake.v1.0.Url]: https://www.txse.com "Texas Stock Exchange 1.0 Url"
 [Txse.TxseEquities.Seed.Rake.v1.0.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Txse/Specifications/Seed/Txse.TxseEquities.OrderEntry.Seed.v1.0.pdf "Texas Stock Exchange 1.0 Pdf"

@@ -21,7 +21,7 @@ public final class AdminLogout implements Message {
     /**
      * This message's fixed width on the wire.
      */
-    public static final int BYTE_LENGTH = 180;
+    public static final int BYTE_LENGTH = 100;
 
     /**
      * This message's declared name.
@@ -29,7 +29,7 @@ public final class AdminLogout implements Message {
     public static final String NAME = "Admin Logout";
 
     /**
-     * Free format text string. May include logout confirmation or reason for logout
+     * Reject reason details
      */
     private final TextField text = new TextField();
 
@@ -43,7 +43,7 @@ public final class AdminLogout implements Message {
     private boolean decoded;
 
     /**
-     * Free format text string. May include logout confirmation or reason for logout
+     * Reject reason details
      *
      * @return the Text field
      */

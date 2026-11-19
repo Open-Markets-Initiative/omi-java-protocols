@@ -1,0 +1,116 @@
+package omi.biva.bivaequities.totalview.glimpse.v1_12.enums;
+
+import java.util.Optional;
+
+/**
+ * Value identifying sequenced message type
+ *
+ * <p>Each value corresponds to the ASCII character used as the wire discriminator.</p>
+ */
+public enum SequencedMessageType {
+
+    /**
+     * Itch timestamp, number of seconds since midnight of the system start
+     */
+    TIME_STAMP_SECONDS_MESSAGE('T', "Itch timestamp, number of seconds since midnight of the system start"),
+
+    /**
+     * System event message
+     */
+    SYSTEM_EVENT_MESSAGE('S', "System event message"),
+
+    /**
+     * Orderbook price tick table
+     */
+    PRICE_TICK_SIZE_MESSAGE('L', "Orderbook price tick table"),
+
+    /**
+     * Orderbook quantity tick table
+     */
+    QUANTITY_TICK_SIZE_MESSAGE('M', "Orderbook quantity tick table"),
+
+    /**
+     * Orderbook directory
+     */
+    ORDERBOOK_DIRECTORY_MESSAGE('R', "Orderbook directory"),
+
+    /**
+     * Participant directory
+     */
+    PARTICIPANT_DIRECTORY_MESSAGE('F', "Participant directory"),
+
+    /**
+     * Trading action message
+     */
+    ORDERBOOK_TRADING_ACTION_MESSAGE('H', "Trading action message"),
+
+    /**
+     * Orderbook reference price message
+     */
+    ORDERBOOK_REFERENCE_PRICE_MESSAGE('X', "Orderbook reference price message"),
+
+    /**
+     * Add order message
+     */
+    ADD_ORDER_MESSAGE('A', "Add order message"),
+
+    /**
+     * Indicative price quantity message
+     */
+    INDICATIVE_PRICE_QUANTITY_MESSAGE('I', "Indicative price quantity message"),
+
+    /**
+     * Glimpse snapshot message
+     */
+    GLIMPSE_SNAPSHOT_MESSAGE('G', "Glimpse snapshot message");
+
+    private final char wire;
+
+    private final String description;
+
+    SequencedMessageType(char wire, String description) {
+        this.wire = wire;
+        this.description = description;
+    }
+
+    /**
+     * Returns this value's encoding on the wire.
+     *
+     * @return the wire value
+     */
+    public char wire() {
+        return wire;
+    }
+
+    /**
+     * Returns the description the protocol specification gives this value.
+     *
+     * @return the description
+     */
+    public String description() {
+        return description;
+    }
+
+    /**
+     * Returns the value with the given wire encoding.
+     *
+     * @param wire the encoding read from the wire
+     * @return the matching value, or empty when the protocol declares no value for it
+     */
+    public static Optional<SequencedMessageType> fromWire(char wire) {
+        return switch (wire) {
+            case 'T' -> Optional.of(TIME_STAMP_SECONDS_MESSAGE);
+            case 'S' -> Optional.of(SYSTEM_EVENT_MESSAGE);
+            case 'L' -> Optional.of(PRICE_TICK_SIZE_MESSAGE);
+            case 'M' -> Optional.of(QUANTITY_TICK_SIZE_MESSAGE);
+            case 'R' -> Optional.of(ORDERBOOK_DIRECTORY_MESSAGE);
+            case 'F' -> Optional.of(PARTICIPANT_DIRECTORY_MESSAGE);
+            case 'H' -> Optional.of(ORDERBOOK_TRADING_ACTION_MESSAGE);
+            case 'X' -> Optional.of(ORDERBOOK_REFERENCE_PRICE_MESSAGE);
+            case 'A' -> Optional.of(ADD_ORDER_MESSAGE);
+            case 'I' -> Optional.of(INDICATIVE_PRICE_QUANTITY_MESSAGE);
+            case 'G' -> Optional.of(GLIMPSE_SNAPSHOT_MESSAGE);
+            default -> Optional.empty();
+        };
+    }
+}

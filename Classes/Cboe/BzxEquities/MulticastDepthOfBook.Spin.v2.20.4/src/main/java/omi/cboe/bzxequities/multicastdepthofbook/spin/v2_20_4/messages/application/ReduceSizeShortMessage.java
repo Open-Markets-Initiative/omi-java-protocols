@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.fields.CanceledQuantityShortField;
+import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.fields.CanceledQuantityBinaryField2;
 import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.fields.OrderIdField;
 import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.fields.TimeOffsetField;
 import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.types.Field;
@@ -43,12 +43,12 @@ public final class ReduceSizeShortMessage implements Message {
     /**
      * Number of shares/contracts
      */
-    private final CanceledQuantityShortField canceledQuantityShort = new CanceledQuantityShortField();
+    private final CanceledQuantityBinaryField2 canceledQuantityBinary = new CanceledQuantityBinaryField2();
 
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(timeOffset, orderId, canceledQuantityShort);
+    private final List<Field> fields = List.of(timeOffset, orderId, canceledQuantityBinary);
 
     private byte[] buffer;
 
@@ -75,10 +75,10 @@ public final class ReduceSizeShortMessage implements Message {
     /**
      * Number of shares/contracts
      *
-     * @return the CanceledQuantityShort field
+     * @return the CanceledQuantityBinary field
      */
-    public CanceledQuantityShortField canceledQuantityShort() {
-        return canceledQuantityShort;
+    public CanceledQuantityBinaryField2 canceledQuantityBinary() {
+        return canceledQuantityBinary;
     }
 
     @Override
@@ -136,7 +136,7 @@ public final class ReduceSizeShortMessage implements Message {
             return false;
         }
         cursor += OrderIdField.BYTE_LENGTH;
-        return canceledQuantityShort.parse(data, cursor);
+        return canceledQuantityBinary.parse(data, cursor);
     }
 
     @Override
@@ -145,7 +145,7 @@ public final class ReduceSizeShortMessage implements Message {
         int cursor = offset;
         cursor = timeOffset.encode(data, cursor);
         cursor = orderId.encode(data, cursor);
-        cursor = canceledQuantityShort.encode(data, cursor);
+        cursor = canceledQuantityBinary.encode(data, cursor);
         return cursor;
     }
 
@@ -228,7 +228,7 @@ public final class ReduceSizeShortMessage implements Message {
         return switch (name) {
             case "TimeOffset" -> Optional.of(timeOffset);
             case "OrderId" -> Optional.of(orderId);
-            case "CanceledQuantityShort" -> Optional.of(canceledQuantityShort);
+            case "CanceledQuantityBinary" -> Optional.of(canceledQuantityBinary);
             default -> Optional.empty();
         };
     }

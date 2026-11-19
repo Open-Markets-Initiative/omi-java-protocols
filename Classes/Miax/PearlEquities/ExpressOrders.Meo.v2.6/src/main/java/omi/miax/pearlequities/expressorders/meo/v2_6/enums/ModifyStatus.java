@@ -165,9 +165,9 @@ public enum ModifyStatus {
     INVALID_MAX_FLOOR_QTY('t', "Invalid Max Floor Qty"),
 
     /**
-     * Pac Orders Are Not Allowed Routing To Primary Listing Market Disabled
+     * Pac Orders Are Not Allowed Routing To Primary
      */
-    PAC_ORDERS_ARE_NOT_ALLOWED_ROUTING_TO_PRIMARY_LISTING_MARKET_DISABLED('y', "Pac Orders Are Not Allowed Routing To Primary Listing Market Disabled"),
+    PAC_ORDERS_ARE_NOT_ALLOWED_ROUTING_TO_PRIMARY('y', "Pac Orders Are Not Allowed Routing To Primary"),
 
     /**
      * Short Sale Exempt Orders Not Allowed
@@ -175,9 +175,9 @@ public enum ModifyStatus {
     SHORT_SALE_EXEMPT_ORDERS_NOT_ALLOWED('z', "Short Sale Exempt Orders Not Allowed"),
 
     /**
-     * Limit Price More Aggressive Than Market Impact Collar
+     * Limit Price More Aggressive Than Market Impact
      */
-    LIMIT_PRICE_MORE_AGGRESSIVE_THAN_MARKET_IMPACT_COLLAR('0', "Limit Price More Aggressive Than Market Impact Collar"),
+    LIMIT_PRICE_MORE_AGGRESSIVE_THAN_MARKET_IMPACT('0', "Limit Price More Aggressive Than Market Impact"),
 
     /**
      * Market Orders Not Allowed
@@ -285,9 +285,9 @@ public enum ModifyStatus {
             case 'c' -> Optional.of(MODIFICATION_REQUEST_IS_SENT_TO_ANOTHER_MARKET_AND_PENDING_COMPLETION);
             case 'd' -> Optional.of(NOT_ALLOWED_ORDER_IS_ALREADY_PENDING_MODIFICATION);
             case 't' -> Optional.of(INVALID_MAX_FLOOR_QTY);
-            case 'y' -> Optional.of(PAC_ORDERS_ARE_NOT_ALLOWED_ROUTING_TO_PRIMARY_LISTING_MARKET_DISABLED);
+            case 'y' -> Optional.of(PAC_ORDERS_ARE_NOT_ALLOWED_ROUTING_TO_PRIMARY);
             case 'z' -> Optional.of(SHORT_SALE_EXEMPT_ORDERS_NOT_ALLOWED);
-            case '0' -> Optional.of(LIMIT_PRICE_MORE_AGGRESSIVE_THAN_MARKET_IMPACT_COLLAR);
+            case '0' -> Optional.of(LIMIT_PRICE_MORE_AGGRESSIVE_THAN_MARKET_IMPACT);
             case '1' -> Optional.of(MARKET_ORDERS_NOT_ALLOWED);
             case '2' -> Optional.of(RESTRICTED_SECURITY_NOT_ALLOWED);
             case '3' -> Optional.of(BLOCKED_BY_ORDER_RATE_METRICS);

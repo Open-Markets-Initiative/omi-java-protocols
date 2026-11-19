@@ -30,9 +30,9 @@ public enum CancelReason {
     AUTO_CANCEL_ON_DISCONNECT_ACOD('D', "Auto Cancel On Disconnect Acod"),
 
     /**
-     * Post Only Order Is Lockingcrossing Miax Pearl Equities Bbo
+     * Post Only Order Is Lockingcrossing Miax
      */
-    POST_ONLY_ORDER_IS_LOCKINGCROSSING_MIAX_PEARL_EQUITIES_BBO('E', "Post Only Order Is Lockingcrossing Miax Pearl Equities Bbo"),
+    POST_ONLY_ORDER_IS_LOCKINGCROSSING_MIAX('E', "Post Only Order Is Lockingcrossing Miax"),
 
     /**
      * Auto Cancel On System Failure Acosf
@@ -45,9 +45,9 @@ public enum CancelReason {
     CANCELLED_DUE_TO_PRICE_SLIDING_INSTRUCTION('G', "Cancelled Due To Price Sliding Instruction"),
 
     /**
-     * Cancelled By Helpdesk Or Over Miax Member Firm Portal
+     * Cancelled By Helpdesk Or Over Miax Member
      */
-    CANCELLED_BY_HELPDESK_OR_OVER_MIAX_MEMBER_FIRM_PORTAL('H', "Cancelled By Helpdesk Or Over Miax Member Firm Portal"),
+    CANCELLED_BY_HELPDESK_OR_OVER_MIAX_MEMBER('H', "Cancelled By Helpdesk Or Over Miax Member"),
 
     /**
      * Order Expired
@@ -55,9 +55,9 @@ public enum CancelReason {
     ORDER_EXPIRED('I', "Order Expired"),
 
     /**
-     * Symbol Trading Status Makes Pac Market Order Non Tradeable
+     * Symbol Trading Status Makes Pac Market
      */
-    SYMBOL_TRADING_STATUS_MAKES_PAC_MARKET_ORDER_NON_TRADEABLE('J', "Symbol Trading Status Makes Pac Market Order Non Tradeable"),
+    SYMBOL_TRADING_STATUS_MAKES_PAC_MARKET('J', "Symbol Trading Status Makes Pac Market"),
 
     /**
      * Trading Collar Protection
@@ -65,9 +65,9 @@ public enum CancelReason {
     TRADING_COLLAR_PROTECTION('K', "Trading Collar Protection"),
 
     /**
-     * Sell Short Iso When Short Sale Price Test Is In Effect
+     * Sell Short Iso When Short Sale Price Test Is
      */
-    SELL_SHORT_ISO_WHEN_SHORT_SALE_PRICE_TEST_IS_IN_EFFECT('L', "Sell Short Iso When Short Sale Price Test Is In Effect"),
+    SELL_SHORT_ISO_WHEN_SHORT_SALE_PRICE_TEST_IS('L', "Sell Short Iso When Short Sale Price Test Is"),
 
     /**
      * Symbol Is Not Trading
@@ -95,14 +95,14 @@ public enum CancelReason {
     UNEXPECTED_CANCEL_BY_PRIMARY_LISTING_MARKET('Q', "Unexpected Cancel By Primary Listing Market"),
 
     /**
-     * Cancelled Due To Failed Price Improvement Route
+     * Cancelled Due To Failed Price Improvement
      */
-    CANCELLED_DUE_TO_FAILED_PRICE_IMPROVEMENT_ROUTE('R', "Cancelled Due To Failed Price Improvement Route"),
+    CANCELLED_DUE_TO_FAILED_PRICE_IMPROVEMENT('R', "Cancelled Due To Failed Price Improvement"),
 
     /**
-     * Cancelled Due To Primary Auction Route Timeout
+     * Cancelled Due To Primary Auction Route
      */
-    CANCELLED_DUE_TO_PRIMARY_AUCTION_ROUTE_TIMEOUT('S', "Cancelled Due To Primary Auction Route Timeout"),
+    CANCELLED_DUE_TO_PRIMARY_AUCTION_ROUTE('S', "Cancelled Due To Primary Auction Route"),
 
     /**
      * Cancelled Due To Order Rate Protection
@@ -120,19 +120,19 @@ public enum CancelReason {
     INVALID_PEGGED_ORDER_PRICE('V', "Invalid Pegged Order Price"),
 
     /**
-     * Pac Order Cancelled As Security Is Halted And Closing Auction At Primary Listing Market Will Not Be Conducted
+     * Pac Order Cancelled As Security Is Halted
      */
-    PAC_ORDER_CANCELLED_AS_SECURITY_IS_HALTED_AND_CLOSING_AUCTION_AT_PRIMARY_LISTING_MARKET_WILL_NOT_BE_CONDUCTED('W', "Pac Order Cancelled As Security Is Halted And Closing Auction At Primary Listing Market Will Not Be Conducted"),
+    PAC_ORDER_CANCELLED_AS_SECURITY_IS_HALTED('W', "Pac Order Cancelled As Security Is Halted"),
 
     /**
-     * Not Applicable Used When Pending Cancel Status Is X
+     * Not Applicable Used When Pending Cancel
      */
-    NOT_APPLICABLE_USED_WHEN_PENDING_CANCEL_STATUS_IS_X('X', "Not Applicable Used When Pending Cancel Status Is X"),
+    NOT_APPLICABLE_USED_WHEN_PENDING_CANCEL('X', "Not Applicable Used When Pending Cancel"),
 
     /**
-     * Primary Auction Order Is Cancelled Due To A Modification Reject From Primary Listing Market
+     * Primary Auction Order Is Cancelled Due To A
      */
-    PRIMARY_AUCTION_ORDER_IS_CANCELLED_DUE_TO_A_MODIFICATION_REJECT_FROM_PRIMARY_LISTING_MARKET('Y', "Primary Auction Order Is Cancelled Due To A Modification Reject From Primary Listing Market"),
+    PRIMARY_AUCTION_ORDER_IS_CANCELLED_DUE_TO_A('Y', "Primary Auction Order Is Cancelled Due To A"),
 
     /**
      * Cancelled Due To Market Impact Collar
@@ -175,9 +175,9 @@ public enum CancelReason {
     CANCELLED_AS_ORDER_DID_NOT_SET_NBBO('7', "Cancelled As Order Did Not Set Nbbo"),
 
     /**
-     * Cancelled By User Through A Session Other Than The Order Entry Session
+     * Cancelled By User Through A Session Other
      */
-    CANCELLED_BY_USER_THROUGH_A_SESSION_OTHER_THAN_THE_ORDER_ENTRY_SESSION('8', "Cancelled By User Through A Session Other Than The Order Entry Session"),
+    CANCELLED_BY_USER_THROUGH_A_SESSION_OTHER('8', "Cancelled By User Through A Session Other"),
 
     /**
      * Undefined Reason
@@ -228,27 +228,27 @@ public enum CancelReason {
             case 'B' -> Optional.of(RESERVED_FOR_FUTURE_USE);
             case 'C' -> Optional.of(TIME_IN_FORCE_CANCELLED);
             case 'D' -> Optional.of(AUTO_CANCEL_ON_DISCONNECT_ACOD);
-            case 'E' -> Optional.of(POST_ONLY_ORDER_IS_LOCKINGCROSSING_MIAX_PEARL_EQUITIES_BBO);
+            case 'E' -> Optional.of(POST_ONLY_ORDER_IS_LOCKINGCROSSING_MIAX);
             case 'F' -> Optional.of(AUTO_CANCEL_ON_SYSTEM_FAILURE_ACOSF);
             case 'G' -> Optional.of(CANCELLED_DUE_TO_PRICE_SLIDING_INSTRUCTION);
-            case 'H' -> Optional.of(CANCELLED_BY_HELPDESK_OR_OVER_MIAX_MEMBER_FIRM_PORTAL);
+            case 'H' -> Optional.of(CANCELLED_BY_HELPDESK_OR_OVER_MIAX_MEMBER);
             case 'I' -> Optional.of(ORDER_EXPIRED);
-            case 'J' -> Optional.of(SYMBOL_TRADING_STATUS_MAKES_PAC_MARKET_ORDER_NON_TRADEABLE);
+            case 'J' -> Optional.of(SYMBOL_TRADING_STATUS_MAKES_PAC_MARKET);
             case 'K' -> Optional.of(TRADING_COLLAR_PROTECTION);
-            case 'L' -> Optional.of(SELL_SHORT_ISO_WHEN_SHORT_SALE_PRICE_TEST_IS_IN_EFFECT);
+            case 'L' -> Optional.of(SELL_SHORT_ISO_WHEN_SHORT_SALE_PRICE_TEST_IS);
             case 'M' -> Optional.of(SYMBOL_IS_NOT_TRADING);
             case 'N' -> Optional.of(LIMIT_ORDER_PRICE_PROTECTION);
             case 'O' -> Optional.of(ROUTE_TO_PRIMARY_LISTING_MARKET_REJECTED);
             case 'P' -> Optional.of(CANCELLED_BY_A_MASS_CANCEL_REQUEST_OVER_A_PRIORITY_PURGE_PORT);
             case 'Q' -> Optional.of(UNEXPECTED_CANCEL_BY_PRIMARY_LISTING_MARKET);
-            case 'R' -> Optional.of(CANCELLED_DUE_TO_FAILED_PRICE_IMPROVEMENT_ROUTE);
-            case 'S' -> Optional.of(CANCELLED_DUE_TO_PRIMARY_AUCTION_ROUTE_TIMEOUT);
+            case 'R' -> Optional.of(CANCELLED_DUE_TO_FAILED_PRICE_IMPROVEMENT);
+            case 'S' -> Optional.of(CANCELLED_DUE_TO_PRIMARY_AUCTION_ROUTE);
             case 'T' -> Optional.of(CANCELLED_DUE_TO_ORDER_RATE_PROTECTION);
             case 'U' -> Optional.of(CANCELLED_BY_USER_THROUGH_ORDER_ENTRY_SESSION);
             case 'V' -> Optional.of(INVALID_PEGGED_ORDER_PRICE);
-            case 'W' -> Optional.of(PAC_ORDER_CANCELLED_AS_SECURITY_IS_HALTED_AND_CLOSING_AUCTION_AT_PRIMARY_LISTING_MARKET_WILL_NOT_BE_CONDUCTED);
-            case 'X' -> Optional.of(NOT_APPLICABLE_USED_WHEN_PENDING_CANCEL_STATUS_IS_X);
-            case 'Y' -> Optional.of(PRIMARY_AUCTION_ORDER_IS_CANCELLED_DUE_TO_A_MODIFICATION_REJECT_FROM_PRIMARY_LISTING_MARKET);
+            case 'W' -> Optional.of(PAC_ORDER_CANCELLED_AS_SECURITY_IS_HALTED);
+            case 'X' -> Optional.of(NOT_APPLICABLE_USED_WHEN_PENDING_CANCEL);
+            case 'Y' -> Optional.of(PRIMARY_AUCTION_ORDER_IS_CANCELLED_DUE_TO_A);
             case '0' -> Optional.of(CANCELLED_DUE_TO_MARKET_IMPACT_COLLAR);
             case '1' -> Optional.of(CANCEL_NEWEST_INSTRUCTION);
             case '2' -> Optional.of(CANCEL_OLDEST_INSTRUCTION);
@@ -257,7 +257,7 @@ public enum CancelReason {
             case '5' -> Optional.of(CANCELLED_DUE_TO_DROP_COPY_ACOD_EVENT);
             case '6' -> Optional.of(CANCELLED_DUE_TO_DROP_COPY_ACOSF_EVENT);
             case '7' -> Optional.of(CANCELLED_AS_ORDER_DID_NOT_SET_NBBO);
-            case '8' -> Optional.of(CANCELLED_BY_USER_THROUGH_A_SESSION_OTHER_THAN_THE_ORDER_ENTRY_SESSION);
+            case '8' -> Optional.of(CANCELLED_BY_USER_THROUGH_A_SESSION_OTHER);
             case 'Z' -> Optional.of(UNDEFINED_REASON);
             case '*' -> Optional.of(DOWNGRADED_FROM_OLDER_VERSION);
             default -> Optional.empty();

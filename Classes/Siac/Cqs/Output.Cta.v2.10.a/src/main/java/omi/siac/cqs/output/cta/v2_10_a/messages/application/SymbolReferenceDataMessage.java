@@ -20,10 +20,14 @@ import omi.siac.cqs.output.cta.v2_10_a.fields.ParticipantReferenceNumberField;
 import omi.siac.cqs.output.cta.v2_10_a.fields.PrimaryListingMarketParticipantIdField;
 import omi.siac.cqs.output.cta.v2_10_a.fields.PrimaryListingMarketPreviousClosingPriceField;
 import omi.siac.cqs.output.cta.v2_10_a.fields.PriorSecuritySymbolField;
+import omi.siac.cqs.output.cta.v2_10_a.fields.Reserved128Field;
+import omi.siac.cqs.output.cta.v2_10_a.fields.ReservedField2;
 import omi.siac.cqs.output.cta.v2_10_a.fields.RoundLotSizeField;
+import omi.siac.cqs.output.cta.v2_10_a.fields.SecondReservedField;
 import omi.siac.cqs.output.cta.v2_10_a.fields.SecuritySymbolField;
 import omi.siac.cqs.output.cta.v2_10_a.fields.ShortSaleRestrictionIndicatorField;
 import omi.siac.cqs.output.cta.v2_10_a.fields.TestField;
+import omi.siac.cqs.output.cta.v2_10_a.fields.ThirdReservedField;
 import omi.siac.cqs.output.cta.v2_10_a.fields.TransactionIdField;
 import omi.siac.cqs.output.cta.v2_10_a.structs.Timestamp;
 import omi.siac.cqs.output.cta.v2_10_a.types.Field;
@@ -51,13 +55,6 @@ public final class SymbolReferenceDataMessage implements Message {
      * This message's declared name.
      */
     public static final String NAME = "Symbol Reference Data Message";
-
-    /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = { 63, 1, 75, 1, 76, 1, 77, 128 };
 
     /**
      * Identifies the Participant or Processor that generated the message
@@ -110,6 +107,11 @@ public final class SymbolReferenceDataMessage implements Message {
     private final RoundLotSizeField roundLotSize = new RoundLotSizeField();
 
     /**
+     * Space-filled. Field is reserved for future use
+     */
+    private final ReservedField2 reserved = new ReservedField2();
+
+    /**
      * Identifies the Limit Up Limit Down tier of the security symbol
      */
     private final LuldTierField luldTier = new LuldTierField();
@@ -150,6 +152,21 @@ public final class SymbolReferenceDataMessage implements Message {
     private final InstrumentTypeField instrumentType = new InstrumentTypeField();
 
     /**
+     * Space-filled. Field is reserved for future use
+     */
+    private final SecondReservedField secondReserved = new SecondReservedField();
+
+    /**
+     * Space-filled. Field is reserved for future use
+     */
+    private final ThirdReservedField thirdReserved = new ThirdReservedField();
+
+    /**
+     * Space-filled. Field is reserved for future use
+     */
+    private final Reserved128Field reserved128 = new Reserved128Field();
+
+    /**
      * Timestamp 1
      */
     private final Timestamp timestampField = new Timestamp();
@@ -157,7 +174,7 @@ public final class SymbolReferenceDataMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(List.<Field>of(participantId), timestampField.fields(), List.<Field>of(messageId), List.<Field>of(transactionId), List.<Field>of(participantReferenceNumber), List.<Field>of(securitySymbol), List.<Field>of(priorSecuritySymbol), List.<Field>of(primaryListingMarketParticipantId), List.<Field>of(primaryListingMarketPreviousClosingPrice), List.<Field>of(consolidatedClosingPrice), List.<Field>of(roundLotSize), List.<Field>of(luldTier), List.<Field>of(luldLeverageRatio), List.<Field>of(test), List.<Field>of(ipo), List.<Field>of(financialStatusIndicator), List.<Field>of(shortSaleRestrictionIndicator), List.<Field>of(haltReason), List.<Field>of(instrumentType)).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(List.<Field>of(participantId), timestampField.fields(), List.<Field>of(messageId), List.<Field>of(transactionId), List.<Field>of(participantReferenceNumber), List.<Field>of(securitySymbol), List.<Field>of(priorSecuritySymbol), List.<Field>of(primaryListingMarketParticipantId), List.<Field>of(primaryListingMarketPreviousClosingPrice), List.<Field>of(consolidatedClosingPrice), List.<Field>of(roundLotSize), List.<Field>of(reserved), List.<Field>of(luldTier), List.<Field>of(luldLeverageRatio), List.<Field>of(test), List.<Field>of(ipo), List.<Field>of(financialStatusIndicator), List.<Field>of(shortSaleRestrictionIndicator), List.<Field>of(haltReason), List.<Field>of(instrumentType), List.<Field>of(secondReserved), List.<Field>of(thirdReserved), List.<Field>of(reserved128)).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -254,6 +271,15 @@ public final class SymbolReferenceDataMessage implements Message {
     }
 
     /**
+     * Space-filled. Field is reserved for future use
+     *
+     * @return the Reserved field
+     */
+    public ReservedField2 reserved() {
+        return reserved;
+    }
+
+    /**
      * Identifies the Limit Up Limit Down tier of the security symbol
      *
      * @return the LuldTier field
@@ -326,6 +352,33 @@ public final class SymbolReferenceDataMessage implements Message {
     }
 
     /**
+     * Space-filled. Field is reserved for future use
+     *
+     * @return the SecondReserved field
+     */
+    public SecondReservedField secondReserved() {
+        return secondReserved;
+    }
+
+    /**
+     * Space-filled. Field is reserved for future use
+     *
+     * @return the ThirdReserved field
+     */
+    public ThirdReservedField thirdReserved() {
+        return thirdReserved;
+    }
+
+    /**
+     * Space-filled. Field is reserved for future use
+     *
+     * @return the Reserved128 field
+     */
+    public Reserved128Field reserved128() {
+        return reserved128;
+    }
+
+    /**
      * Timestamp 1
      *
      * @return the Timestamp record
@@ -352,7 +405,7 @@ public final class SymbolReferenceDataMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -425,7 +478,10 @@ public final class SymbolReferenceDataMessage implements Message {
             return false;
         }
         cursor += RoundLotSizeField.BYTE_LENGTH;
-        cursor += 1; // padding
+        if (!reserved.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ReservedField2.BYTE_LENGTH;
         if (!luldTier.parse(data, cursor)) {
             return false;
         }
@@ -458,8 +514,15 @@ public final class SymbolReferenceDataMessage implements Message {
             return false;
         }
         cursor += InstrumentTypeField.BYTE_LENGTH;
-
-        return true;
+        if (!secondReserved.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SecondReservedField.BYTE_LENGTH;
+        if (!thirdReserved.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ThirdReservedField.BYTE_LENGTH;
+        return reserved128.parse(data, cursor);
     }
 
     @Override
@@ -477,12 +540,7 @@ public final class SymbolReferenceDataMessage implements Message {
         cursor = primaryListingMarketPreviousClosingPrice.encode(data, cursor);
         cursor = consolidatedClosingPrice.encode(data, cursor);
         cursor = roundLotSize.encode(data, cursor);
-        if (buffer != null && buffer.length >= 64) {
-            System.arraycopy(buffer, 63, data, cursor, 1); // padding
-        } else {
-            Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
-        }
-        cursor += 1;
+        cursor = reserved.encode(data, cursor);
         cursor = luldTier.encode(data, cursor);
         cursor = luldLeverageRatio.encode(data, cursor);
         cursor = test.encode(data, cursor);
@@ -491,12 +549,9 @@ public final class SymbolReferenceDataMessage implements Message {
         cursor = shortSaleRestrictionIndicator.encode(data, cursor);
         cursor = haltReason.encode(data, cursor);
         cursor = instrumentType.encode(data, cursor);
-        if (buffer != null && buffer.length >= 205) {
-            System.arraycopy(buffer, 75, data, cursor, 130); // padding
-        } else {
-            Arrays.fill(data, cursor, cursor + 130, (byte) 0); // padding
-        }
-        cursor += 130;
+        cursor = secondReserved.encode(data, cursor);
+        cursor = thirdReserved.encode(data, cursor);
+        cursor = reserved128.encode(data, cursor);
         return cursor;
     }
 
@@ -588,6 +643,7 @@ public final class SymbolReferenceDataMessage implements Message {
             case "PrimaryListingMarketPreviousClosingPrice" -> Optional.of(primaryListingMarketPreviousClosingPrice);
             case "ConsolidatedClosingPrice" -> Optional.of(consolidatedClosingPrice);
             case "RoundLotSize" -> Optional.of(roundLotSize);
+            case "Reserved" -> Optional.of(reserved);
             case "LuldTier" -> Optional.of(luldTier);
             case "LuldLeverageRatio" -> Optional.of(luldLeverageRatio);
             case "Test" -> Optional.of(test);
@@ -596,6 +652,9 @@ public final class SymbolReferenceDataMessage implements Message {
             case "ShortSaleRestrictionIndicator" -> Optional.of(shortSaleRestrictionIndicator);
             case "HaltReason" -> Optional.of(haltReason);
             case "InstrumentType" -> Optional.of(instrumentType);
+            case "SecondReserved" -> Optional.of(secondReserved);
+            case "ThirdReserved" -> Optional.of(thirdReserved);
+            case "Reserved128" -> Optional.of(reserved128);
             default -> Optional.empty();
         };
     }

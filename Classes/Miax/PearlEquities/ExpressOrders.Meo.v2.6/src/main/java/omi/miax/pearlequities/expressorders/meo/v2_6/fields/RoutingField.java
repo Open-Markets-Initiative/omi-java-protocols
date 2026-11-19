@@ -56,10 +56,19 @@ public final class RoutingField extends Field {
     /**
      * Routing Strategy
      *
-     * @return bits 3 through 7 of the container
+     * @return bits 3 through 5 of the container
      */
     public int routingStrategy() {
-        return (int) ((value >>> 3) & 0x1FL);
+        return (int) ((value >>> 3) & 0x7L);
+    }
+
+    /**
+     * Reserved for future use
+     *
+     * @return bits 6 through 7 of the container
+     */
+    public int unused() {
+        return (int) ((value >>> 6) & 0x3L);
     }
 
     @Override

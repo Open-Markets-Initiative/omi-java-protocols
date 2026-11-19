@@ -7,7 +7,14 @@ A division of [TMX Group](..).
 
 | [Protocol][Omi.Tmx.Protocol.Definitions] | [Encoding][Omi.Encoding.Definitions] | Version | Date | Size | [Deployment][Omi.Glossary.Deployment] | [Testing][Omi.Glossary.Testing] | [Documentation][Omi.Tmx.Specifications] |
 | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| [SolaMulticast][Tmx.Mx.SolaMulticast] | [Hsvf][Omi.Encoding.Hsvf] | [1.14.1][Tmx.Mx.SolaMulticast.Hsvf.v1.14.1.Parser] | 2/5/2024 | 205,515 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Tmx.Mx.SolaMulticast.Hsvf.v1.14.1.Url] |
+| [SolaMulticast][Tmx.Mx.SolaMulticast] | [Hsvf][Omi.Encoding.Hsvf] | [1.11][Tmx.Mx.SolaMulticast.Hsvf.v1.11.Parser] | 1/23/2019 | 195,955 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Untested][Omi.Glossary.Testing.Untested] | [url][Tmx.Mx.SolaMulticast.Hsvf.v1.11.Url] |
+| [SolaMulticast][Tmx.Mx.SolaMulticast] | [Hsvf][Omi.Encoding.Hsvf] | [1.12.2][Tmx.Mx.SolaMulticast.Hsvf.v1.12.2.Parser] | 6/18/2020 | 132,610 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Untested][Omi.Glossary.Testing.Untested] | [url][Tmx.Mx.SolaMulticast.Hsvf.v1.12.2.Url] |
+| [SolaMulticast][Tmx.Mx.SolaMulticast] | [Hsvf][Omi.Encoding.Hsvf] | [1.13.3][Tmx.Mx.SolaMulticast.Hsvf.v1.13.3.Parser] | 10/5/2022 | 197,162 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Untested][Omi.Glossary.Testing.Untested] | [url][Tmx.Mx.SolaMulticast.Hsvf.v1.13.3.Url] |
+| [SolaMulticast][Tmx.Mx.SolaMulticast] | [Hsvf][Omi.Encoding.Hsvf] | [1.14.1][Tmx.Mx.SolaMulticast.Hsvf.v1.14.1.Parser] | 2/5/2024 | 205,518 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Tmx.Mx.SolaMulticast.Hsvf.v1.14.1.Url] |
+| [SolaTcpRetransmission][Tmx.Mx.SolaTcpRetransmission] | [Hsvf][Omi.Encoding.Hsvf] | [1.11][Tmx.Mx.SolaTcpRetransmission.Hsvf.v1.11.Parser] | 1/23/2019 | 200,362 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Untested][Omi.Glossary.Testing.Untested] | [url][Tmx.Mx.SolaTcpRetransmission.Hsvf.v1.11.Url] |
+| [SolaTcpRetransmission][Tmx.Mx.SolaTcpRetransmission] | [Hsvf][Omi.Encoding.Hsvf] | [1.12.2][Tmx.Mx.SolaTcpRetransmission.Hsvf.v1.12.2.Parser] | 6/18/2020 | 137,017 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Untested][Omi.Glossary.Testing.Untested] | [url][Tmx.Mx.SolaTcpRetransmission.Hsvf.v1.12.2.Url] |
+| [SolaTcpRetransmission][Tmx.Mx.SolaTcpRetransmission] | [Hsvf][Omi.Encoding.Hsvf] | [1.13.3][Tmx.Mx.SolaTcpRetransmission.Hsvf.v1.13.3.Parser] | 10/5/2022 | 201,569 | [Deprecated][Omi.Glossary.Deployment.Deprecated] | [Untested][Omi.Glossary.Testing.Untested] | [url][Tmx.Mx.SolaTcpRetransmission.Hsvf.v1.13.3.Url] |
+| [SolaTcpRetransmission][Tmx.Mx.SolaTcpRetransmission] | [Hsvf][Omi.Encoding.Hsvf] | [1.14.1][Tmx.Mx.SolaTcpRetransmission.Hsvf.v1.14.1.Parser] | 2/5/2024 | 209,925 | [Active][Omi.Glossary.Deployment.Active] | [Untested][Omi.Glossary.Testing.Untested] | [url][Tmx.Mx.SolaTcpRetransmission.Hsvf.v1.14.1.Url] |
 
 
 <p align="center"><a href="https://www.tmx.com/" title="TMX Group Website"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Website.png" alt="Website" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://www.linkedin.com/company/tmx-group" title="TMX Group on LinkedIn"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/LinkedIn.png" alt="LinkedIn" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://en.wikipedia.org/wiki/TMX_Group" title="TMX Group on Wikipedia"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Wikipedia.png" alt="Wikipedia" width="32" height="32"></a></p>
@@ -32,6 +39,21 @@ A division of [TMX Group](..).
 [Omi.Encoding.Hsvf]: https://github.com/Open-Markets-Initiative/Directory/blob/main/Protocols/Hsvf.md "Hsvf Encoding"
 [Mx.Exchange]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Tmx/Mx "Montreal Exchange"
 [Tmx.Mx.SolaMulticast]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Tmx/Protocols/Mx/SolaMulticast.md "Sola Multicast"
+[Tmx.Mx.SolaTcpRetransmission]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Tmx/Protocols/Mx/SolaTcpRetransmission.md "Sola Tcp Retransmission"
 
+[Tmx.Mx.SolaMulticast.Hsvf.v1.11.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Tmx/Mx/SolaMulticast.Hsvf.v1.11 "Tmx Mx SolaMulticast Hsvf v1.11 Java Parser"
+[Tmx.Mx.SolaMulticast.Hsvf.v1.11.Url]: https://www.tmxwebstore.com/products/mx-market-data "TMX Group 1.11 Url"
+[Tmx.Mx.SolaMulticast.Hsvf.v1.12.2.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Tmx/Mx/SolaMulticast.Hsvf.v1.12.2 "Tmx Mx SolaMulticast Hsvf v1.12.2 Java Parser"
+[Tmx.Mx.SolaMulticast.Hsvf.v1.12.2.Url]: https://www.tmxwebstore.com/products/mx-market-data "TMX Group 1.12.2 Url"
+[Tmx.Mx.SolaMulticast.Hsvf.v1.13.3.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Tmx/Mx/SolaMulticast.Hsvf.v1.13.3 "Tmx Mx SolaMulticast Hsvf v1.13.3 Java Parser"
+[Tmx.Mx.SolaMulticast.Hsvf.v1.13.3.Url]: https://www.tmxwebstore.com/products/mx-market-data "TMX Group 1.13.3 Url"
 [Tmx.Mx.SolaMulticast.Hsvf.v1.14.1.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Tmx/Mx/SolaMulticast.Hsvf.v1.14.1 "Tmx Mx SolaMulticast Hsvf v1.14.1 Java Parser"
 [Tmx.Mx.SolaMulticast.Hsvf.v1.14.1.Url]: https://www.tmxwebstore.com/products/mx-market-data "TMX Group 1.14.1 Url"
+[Tmx.Mx.SolaTcpRetransmission.Hsvf.v1.11.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Tmx/Mx/SolaTcpRetransmission.Hsvf.v1.11 "Tmx Mx SolaTcpRetransmission Hsvf v1.11 Java Parser"
+[Tmx.Mx.SolaTcpRetransmission.Hsvf.v1.11.Url]: https://www.tmxwebstore.com/products/mx-market-data "TMX Group 1.11 Url"
+[Tmx.Mx.SolaTcpRetransmission.Hsvf.v1.12.2.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Tmx/Mx/SolaTcpRetransmission.Hsvf.v1.12.2 "Tmx Mx SolaTcpRetransmission Hsvf v1.12.2 Java Parser"
+[Tmx.Mx.SolaTcpRetransmission.Hsvf.v1.12.2.Url]: https://www.tmxwebstore.com/products/mx-market-data "TMX Group 1.12.2 Url"
+[Tmx.Mx.SolaTcpRetransmission.Hsvf.v1.13.3.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Tmx/Mx/SolaTcpRetransmission.Hsvf.v1.13.3 "Tmx Mx SolaTcpRetransmission Hsvf v1.13.3 Java Parser"
+[Tmx.Mx.SolaTcpRetransmission.Hsvf.v1.13.3.Url]: https://www.tmxwebstore.com/products/mx-market-data "TMX Group 1.13.3 Url"
+[Tmx.Mx.SolaTcpRetransmission.Hsvf.v1.14.1.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Tmx/Mx/SolaTcpRetransmission.Hsvf.v1.14.1 "Tmx Mx SolaTcpRetransmission Hsvf v1.14.1 Java Parser"
+[Tmx.Mx.SolaTcpRetransmission.Hsvf.v1.14.1.Url]: https://www.tmxwebstore.com/products/mx-market-data "TMX Group 1.14.1 Url"

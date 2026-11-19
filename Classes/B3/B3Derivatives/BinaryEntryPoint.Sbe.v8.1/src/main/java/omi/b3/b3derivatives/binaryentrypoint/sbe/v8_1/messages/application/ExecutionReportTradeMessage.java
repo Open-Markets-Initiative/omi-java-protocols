@@ -10,12 +10,12 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.AccountField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.AggressorIndicatorField;
-import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.ClOrdIdOptionalField;
+import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.ClordidOptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.ContraBrokerField;
-import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.CrossIdOptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.CrossPrioritizationField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.CrossTypeField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.CrossedIndicatorField;
+import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.CrossidOptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.CumQtyField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.ExecIdField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.ExecRefIdField;
@@ -77,7 +77,7 @@ public final class ExecutionReportTradeMessage implements Message {
     /**
      * clOrdID
      */
-    private final ClOrdIdOptionalField clOrdIdOptional = new ClOrdIdOptionalField();
+    private final ClordidOptionalField clordidOptional = new ClordidOptionalField();
 
     /**
      * secondaryOrderID
@@ -182,7 +182,7 @@ public final class ExecutionReportTradeMessage implements Message {
     /**
      * crossID
      */
-    private final CrossIdOptionalField crossIdOptional = new CrossIdOptionalField();
+    private final CrossidOptionalField crossidOptional = new CrossidOptionalField();
 
     /**
      * crossedIndicator
@@ -242,7 +242,7 @@ public final class ExecutionReportTradeMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(outboundBusinessHeader.fields(), List.<Field>of(side), List.<Field>of(ordStatus), List.<Field>of(clOrdIdOptional), List.<Field>of(secondaryOrderId), List.<Field>of(securityId), List.<Field>of(account), List.<Field>of(lastQty), List.<Field>of(lastPx), List.<Field>of(execId), List.<Field>of(transactTime), List.<Field>of(leavesQty), List.<Field>of(cumQty), List.<Field>of(aggressorIndicator), List.<Field>of(execType), List.<Field>of(orderCategory), List.<Field>of(multiLegReportingType), List.<Field>of(tradeId), List.<Field>of(contraBroker), List.<Field>of(orderId), List.<Field>of(tradeDate), List.<Field>of(totNoRelatedSym), List.<Field>of(secondaryExecId), List.<Field>of(execRefId), List.<Field>of(crossIdOptional), List.<Field>of(crossedIndicator), List.<Field>of(orderQty), List.<Field>of(tradingSessionId), List.<Field>of(tradingSessionSubId), List.<Field>of(securityTradingStatus), List.<Field>of(crossType), List.<Field>of(crossPrioritization), List.<Field>of(strategyId), deskId.fields(), memo.fields()).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(outboundBusinessHeader.fields(), List.<Field>of(side), List.<Field>of(ordStatus), List.<Field>of(clordidOptional), List.<Field>of(secondaryOrderId), List.<Field>of(securityId), List.<Field>of(account), List.<Field>of(lastQty), List.<Field>of(lastPx), List.<Field>of(execId), List.<Field>of(transactTime), List.<Field>of(leavesQty), List.<Field>of(cumQty), List.<Field>of(aggressorIndicator), List.<Field>of(execType), List.<Field>of(orderCategory), List.<Field>of(multiLegReportingType), List.<Field>of(tradeId), List.<Field>of(contraBroker), List.<Field>of(orderId), List.<Field>of(tradeDate), List.<Field>of(totNoRelatedSym), List.<Field>of(secondaryExecId), List.<Field>of(execRefId), List.<Field>of(crossidOptional), List.<Field>of(crossedIndicator), List.<Field>of(orderQty), List.<Field>of(tradingSessionId), List.<Field>of(tradingSessionSubId), List.<Field>of(securityTradingStatus), List.<Field>of(crossType), List.<Field>of(crossPrioritization), List.<Field>of(strategyId), deskId.fields(), memo.fields()).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -269,10 +269,10 @@ public final class ExecutionReportTradeMessage implements Message {
     /**
      * clOrdID
      *
-     * @return the ClOrdIdOptional field
+     * @return the ClordidOptional field
      */
-    public ClOrdIdOptionalField clOrdIdOptional() {
-        return clOrdIdOptional;
+    public ClordidOptionalField clordidOptional() {
+        return clordidOptional;
     }
 
     /**
@@ -458,10 +458,10 @@ public final class ExecutionReportTradeMessage implements Message {
     /**
      * crossID
      *
-     * @return the CrossIdOptional field
+     * @return the CrossidOptional field
      */
-    public CrossIdOptionalField crossIdOptional() {
-        return crossIdOptional;
+    public CrossidOptionalField crossidOptional() {
+        return crossidOptional;
     }
 
     /**
@@ -678,10 +678,10 @@ public final class ExecutionReportTradeMessage implements Message {
             return false;
         }
         cursor += OrdStatusField.BYTE_LENGTH;
-        if (!clOrdIdOptional.parse(data, cursor)) {
+        if (!clordidOptional.parse(data, cursor)) {
             return false;
         }
-        cursor += ClOrdIdOptionalField.BYTE_LENGTH;
+        cursor += ClordidOptionalField.BYTE_LENGTH;
         if (!secondaryOrderId.parse(data, cursor)) {
             return false;
         }
@@ -763,10 +763,10 @@ public final class ExecutionReportTradeMessage implements Message {
             return false;
         }
         cursor += ExecRefIdField.BYTE_LENGTH;
-        if (!crossIdOptional.parse(data, cursor)) {
+        if (!crossidOptional.parse(data, cursor)) {
             return false;
         }
-        cursor += CrossIdOptionalField.BYTE_LENGTH;
+        cursor += CrossidOptionalField.BYTE_LENGTH;
         if (!crossedIndicator.parse(data, cursor)) {
             return false;
         }
@@ -822,7 +822,7 @@ public final class ExecutionReportTradeMessage implements Message {
         cursor = outboundBusinessHeader.encode(data, cursor);
         cursor = side.encode(data, cursor);
         cursor = ordStatus.encode(data, cursor);
-        cursor = clOrdIdOptional.encode(data, cursor);
+        cursor = clordidOptional.encode(data, cursor);
         cursor = secondaryOrderId.encode(data, cursor);
         cursor = securityId.encode(data, cursor);
         cursor = account.encode(data, cursor);
@@ -849,7 +849,7 @@ public final class ExecutionReportTradeMessage implements Message {
         cursor += 1;
         cursor = secondaryExecId.encode(data, cursor);
         cursor = execRefId.encode(data, cursor);
-        cursor = crossIdOptional.encode(data, cursor);
+        cursor = crossidOptional.encode(data, cursor);
         cursor = crossedIndicator.encode(data, cursor);
         cursor = orderQty.encode(data, cursor);
         cursor = tradingSessionId.encode(data, cursor);
@@ -951,7 +951,7 @@ public final class ExecutionReportTradeMessage implements Message {
         return switch (name) {
             case "Side" -> Optional.of(side);
             case "OrdStatus" -> Optional.of(ordStatus);
-            case "ClOrdIdOptional" -> Optional.of(clOrdIdOptional);
+            case "ClordidOptional" -> Optional.of(clordidOptional);
             case "SecondaryOrderId" -> Optional.of(secondaryOrderId);
             case "SecurityId" -> Optional.of(securityId);
             case "Account" -> Optional.of(account);
@@ -972,7 +972,7 @@ public final class ExecutionReportTradeMessage implements Message {
             case "TotNoRelatedSym" -> Optional.of(totNoRelatedSym);
             case "SecondaryExecId" -> Optional.of(secondaryExecId);
             case "ExecRefId" -> Optional.of(execRefId);
-            case "CrossIdOptional" -> Optional.of(crossIdOptional);
+            case "CrossidOptional" -> Optional.of(crossidOptional);
             case "CrossedIndicator" -> Optional.of(crossedIndicator);
             case "OrderQty" -> Optional.of(orderQty);
             case "TradingSessionId" -> Optional.of(tradingSessionId);

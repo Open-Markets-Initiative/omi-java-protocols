@@ -1,7 +1,6 @@
 package omi.coinbase.coinbasederivatives.marketdataapi.sbe.v1_2.fields;
 
 import java.util.Objects;
-import omi.coinbase.coinbasederivatives.marketdataapi.sbe.v1_2.enums.InstrumentSide;
 import omi.coinbase.coinbasederivatives.marketdataapi.sbe.v1_2.types.ByteOps;
 import omi.coinbase.coinbasederivatives.marketdataapi.sbe.v1_2.types.Field;
 import omi.coinbase.coinbasederivatives.marketdataapi.sbe.v1_2.types.FieldKind;
@@ -22,40 +21,25 @@ public final class InstrumentSideField extends Field {
      */
     public static final String NAME = "InstrumentSide";
 
-    private InstrumentSide value;
+    private byte value;
 
     /**
-     * The undecoded wire value, retained so the field re-encodes exactly as it arrived.
-     */
-    private byte rawValue;
-
-    /**
-     * Returns the declared value this field decoded to.
+     * Returns the decoded value.
      *
-     * @return the decoded value, or null when the field has not decoded or holds an undeclared value
+     * @return the decoded value, zero when the field has not decoded
      */
-    public InstrumentSide value() {
+    public byte value() {
         return value;
     }
 
     /**
-     * Sets the value, deriving the wire encoding from it.
+     * Sets the value to encode.
      *
-     * @param value the value to encode, or null to clear the field
+     * @param value the value to encode
      */
-    public void value(InstrumentSide value) {
+    public void value(byte value) {
         this.value = value;
-        this.rawValue = value == null ? (byte) 0 : value.wire();
-        markSet(value != null);
-    }
-
-    /**
-     * Returns the undecoded wire value.
-     *
-     * @return the value exactly as it appeared on the wire
-     */
-    public byte rawValue() {
-        return rawValue;
+        markSet(true);
     }
 
     @Override
@@ -65,7 +49,7 @@ public final class InstrumentSideField extends Field {
 
     @Override
     public FieldKind kind() {
-        return FieldKind.ENUM;
+        return FieldKind.SIGNED_INTEGER;
     }
 
     @Override
@@ -79,8 +63,7 @@ public final class InstrumentSideField extends Field {
             return false;
         }
 
-        this.rawValue = (byte) ByteOps.signed(data, offset, BYTE_LENGTH, false);
-        this.value = InstrumentSide.fromWire(rawValue).orElse(null);
+        this.value = (byte) ByteOps.signed(data, offset, BYTE_LENGTH, false);
         markDecoded(data, offset);
         return true;
     }
@@ -88,27 +71,14 @@ public final class InstrumentSideField extends Field {
     @Override
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
-        ByteOps.put(data, offset, BYTE_LENGTH, rawValue, false);
+        ByteOps.put(data, offset, BYTE_LENGTH, value, false);
         return offset + BYTE_LENGTH;
     }
 
     @Override
     public void reset() {
         super.reset();
-        this.value = null;
-        this.rawValue = (byte) 0;
-    }
-
-    /**
-     * Returns whether the decoded wire value is one the protocol declares.
-     *
-     * <p>An undeclared value still decodes: the wire encoding is available from {@link #rawValue()} and re-encodes unchanged.</p>
-     *
-     * @return true when the value is a declared one
-     */
-    @Override
-    public boolean isRecognized() {
-        return hasValue() && value != null;
+        this.value = (byte) 0;
     }
 
     @Override
@@ -119,11 +89,7 @@ public final class InstrumentSideField extends Field {
             return;
         }
 
-        if (value == null) {
-            builder.append("<undeclared ").append(rawValue).append('>');
-        } else {
-            builder.append(value.name());
-        }
+        builder.append(value);
     }
 
     @Override
@@ -134,11 +100,11 @@ public final class InstrumentSideField extends Field {
         if (!(other instanceof InstrumentSideField field)) {
             return false;
         }
-        return hasValue() == field.hasValue() && rawValue == field.rawValue;
+        return hasValue() == field.hasValue() && value == field.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hasValue(), rawValue);
+        return Objects.hash(hasValue(), value);
     }
 }

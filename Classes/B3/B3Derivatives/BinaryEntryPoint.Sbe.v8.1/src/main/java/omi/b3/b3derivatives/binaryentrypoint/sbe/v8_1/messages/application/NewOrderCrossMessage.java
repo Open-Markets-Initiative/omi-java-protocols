@@ -8,10 +8,10 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.CrossIdField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.CrossPrioritizationField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.CrossTypeField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.CrossedIndicatorField;
+import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.CrossidField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.EnteringTraderField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.ExecutingTraderOptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.MaxSweepQtyField;
@@ -47,7 +47,7 @@ public final class NewOrderCrossMessage implements Message {
     /**
      * crossID
      */
-    private final CrossIdField crossId = new CrossIdField();
+    private final CrossidField crossid = new CrossidField();
 
     /**
      * senderLocation
@@ -122,7 +122,7 @@ public final class NewOrderCrossMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(inboundBusinessHeader.fields(), List.<Field>of(crossId), List.<Field>of(senderLocation), List.<Field>of(enteringTrader), List.<Field>of(executingTraderOptional), List.<Field>of(securityId), List.<Field>of(orderQty), List.<Field>of(price), List.<Field>of(crossedIndicator), List.<Field>of(crossType), List.<Field>of(crossPrioritization), List.<Field>of(maxSweepQty), deskId.fields(), memo.fields()).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(inboundBusinessHeader.fields(), List.<Field>of(crossid), List.<Field>of(senderLocation), List.<Field>of(enteringTrader), List.<Field>of(executingTraderOptional), List.<Field>of(securityId), List.<Field>of(orderQty), List.<Field>of(price), List.<Field>of(crossedIndicator), List.<Field>of(crossType), List.<Field>of(crossPrioritization), List.<Field>of(maxSweepQty), deskId.fields(), memo.fields()).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -131,10 +131,10 @@ public final class NewOrderCrossMessage implements Message {
     /**
      * crossID
      *
-     * @return the CrossId field
+     * @return the Crossid field
      */
-    public CrossIdField crossId() {
-        return crossId;
+    public CrossidField crossid() {
+        return crossid;
     }
 
     /**
@@ -349,10 +349,10 @@ public final class NewOrderCrossMessage implements Message {
         }
         cursor += inboundBusinessHeader.byteLength();
         cursor += 2; // padding
-        if (!crossId.parse(data, cursor)) {
+        if (!crossid.parse(data, cursor)) {
             return false;
         }
-        cursor += CrossIdField.BYTE_LENGTH;
+        cursor += CrossidField.BYTE_LENGTH;
         if (!senderLocation.parse(data, cursor)) {
             return false;
         }
@@ -426,7 +426,7 @@ public final class NewOrderCrossMessage implements Message {
             Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
         }
         cursor += 2;
-        cursor = crossId.encode(data, cursor);
+        cursor = crossid.encode(data, cursor);
         cursor = senderLocation.encode(data, cursor);
         cursor = enteringTrader.encode(data, cursor);
         cursor = executingTraderOptional.encode(data, cursor);
@@ -520,8 +520,8 @@ public final class NewOrderCrossMessage implements Message {
         if (!inboundBusinessHeader.isDecoded()) {
             return inboundBusinessHeader.failedAt();
         }
-        if (!crossId.isDecoded()) {
-            return Optional.of(crossId);
+        if (!crossid.isDecoded()) {
+            return Optional.of(crossid);
         }
         if (!senderLocation.isDecoded()) {
             return Optional.of(senderLocation);
@@ -573,7 +573,7 @@ public final class NewOrderCrossMessage implements Message {
     @Override
     public Optional<Field> field(String name) {
         return switch (name) {
-            case "CrossId" -> Optional.of(crossId);
+            case "Crossid" -> Optional.of(crossid);
             case "SenderLocation" -> Optional.of(senderLocation);
             case "EnteringTrader" -> Optional.of(enteringTrader);
             case "ExecutingTraderOptional" -> Optional.of(executingTraderOptional);

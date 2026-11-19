@@ -1,0 +1,80 @@
+package omi.cboe.cxeequities.binaryorderentry.boe.v2_0_49.enums;
+
+import java.util.Optional;
+
+/**
+ * Defines the CentralCounterparty values.
+ *
+ * <p>Each value corresponds to the ASCII character used as the wire discriminator.</p>
+ */
+public enum CentralCounterparty {
+
+    /**
+     * European Multilateral Clearing Facility
+     */
+    EUROPEAN_MULTILATERAL_CLEARING_FACILITY('E', "European Multilateral Clearing Facility"),
+
+    /**
+     * LCH.Clearnet
+     */
+    LCH_CLEARNET('L', "LCH.Clearnet"),
+
+    /**
+     * SIX x-clear
+     */
+    SIX_X_CLEAR('X', "SIX x-clear"),
+
+    /**
+     * EuroCCP
+     */
+    EURO_CCP('C', "EuroCCP"),
+
+    /**
+     * None - Clearing Suppressed for self match.
+     */
+    NONE_CLEARING_SUPPRESSED_FOR_SELF_MATCH('N', "None - Clearing Suppressed for self match.");
+
+    private final char wire;
+
+    private final String description;
+
+    CentralCounterparty(char wire, String description) {
+        this.wire = wire;
+        this.description = description;
+    }
+
+    /**
+     * Returns this value's encoding on the wire.
+     *
+     * @return the wire value
+     */
+    public char wire() {
+        return wire;
+    }
+
+    /**
+     * Returns the description the protocol specification gives this value.
+     *
+     * @return the description
+     */
+    public String description() {
+        return description;
+    }
+
+    /**
+     * Returns the value with the given wire encoding.
+     *
+     * @param wire the encoding read from the wire
+     * @return the matching value, or empty when the protocol declares no value for it
+     */
+    public static Optional<CentralCounterparty> fromWire(char wire) {
+        return switch (wire) {
+            case 'E' -> Optional.of(EUROPEAN_MULTILATERAL_CLEARING_FACILITY);
+            case 'L' -> Optional.of(LCH_CLEARNET);
+            case 'X' -> Optional.of(SIX_X_CLEAR);
+            case 'C' -> Optional.of(EURO_CCP);
+            case 'N' -> Optional.of(NONE_CLEARING_SUPPRESSED_FOR_SELF_MATCH);
+            default -> Optional.empty();
+        };
+    }
+}

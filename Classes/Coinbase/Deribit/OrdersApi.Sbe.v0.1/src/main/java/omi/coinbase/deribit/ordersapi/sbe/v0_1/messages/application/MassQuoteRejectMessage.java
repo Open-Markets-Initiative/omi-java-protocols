@@ -9,9 +9,9 @@ import java.util.Optional;
 import java.util.stream.Stream;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.CorrelationIdField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.ExecIdField;
-import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.MassQuoteRejectReasonField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.MmpGroupIdField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.QuoteIdField;
+import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.ReasonMassQuoteRejectReasonField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.TimestampField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.structs.Details;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.types.Field;
@@ -63,7 +63,7 @@ public final class MassQuoteRejectMessage implements Message {
     /**
      * reason
      */
-    private final MassQuoteRejectReasonField massQuoteRejectReason = new MassQuoteRejectReasonField();
+    private final ReasonMassQuoteRejectReasonField reasonMassQuoteRejectReason = new ReasonMassQuoteRejectReasonField();
 
     /**
      * details data struct
@@ -73,7 +73,7 @@ public final class MassQuoteRejectMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(List.<Field>of(timestampField), List.<Field>of(execId), List.<Field>of(quoteId), List.<Field>of(correlationId), List.<Field>of(mmpGroupId), List.<Field>of(massQuoteRejectReason), details.fields()).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(List.<Field>of(timestampField), List.<Field>of(execId), List.<Field>of(quoteId), List.<Field>of(correlationId), List.<Field>of(mmpGroupId), List.<Field>of(reasonMassQuoteRejectReason), details.fields()).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -127,10 +127,10 @@ public final class MassQuoteRejectMessage implements Message {
     /**
      * reason
      *
-     * @return the MassQuoteRejectReason field
+     * @return the ReasonMassQuoteRejectReason field
      */
-    public MassQuoteRejectReasonField massQuoteRejectReason() {
-        return massQuoteRejectReason;
+    public ReasonMassQuoteRejectReasonField reasonMassQuoteRejectReason() {
+        return reasonMassQuoteRejectReason;
     }
 
     /**
@@ -209,10 +209,10 @@ public final class MassQuoteRejectMessage implements Message {
             return false;
         }
         cursor += MmpGroupIdField.BYTE_LENGTH;
-        if (!massQuoteRejectReason.parse(data, cursor)) {
+        if (!reasonMassQuoteRejectReason.parse(data, cursor)) {
             return false;
         }
-        cursor += MassQuoteRejectReasonField.BYTE_LENGTH;
+        cursor += ReasonMassQuoteRejectReasonField.BYTE_LENGTH;
         if (!details.parseFrom(data, cursor, end)) {
             return false;
         }
@@ -230,7 +230,7 @@ public final class MassQuoteRejectMessage implements Message {
         cursor = quoteId.encode(data, cursor);
         cursor = correlationId.encode(data, cursor);
         cursor = mmpGroupId.encode(data, cursor);
-        cursor = massQuoteRejectReason.encode(data, cursor);
+        cursor = reasonMassQuoteRejectReason.encode(data, cursor);
         cursor = details.encode(data, cursor);
         return cursor;
     }
@@ -318,7 +318,7 @@ public final class MassQuoteRejectMessage implements Message {
             case "QuoteId" -> Optional.of(quoteId);
             case "CorrelationId" -> Optional.of(correlationId);
             case "MmpGroupId" -> Optional.of(mmpGroupId);
-            case "MassQuoteRejectReason" -> Optional.of(massQuoteRejectReason);
+            case "ReasonMassQuoteRejectReason" -> Optional.of(reasonMassQuoteRejectReason);
             default -> Optional.empty();
         };
     }

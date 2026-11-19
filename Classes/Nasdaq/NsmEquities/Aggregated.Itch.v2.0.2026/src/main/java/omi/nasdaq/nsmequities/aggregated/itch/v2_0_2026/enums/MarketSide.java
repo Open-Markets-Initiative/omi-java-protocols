@@ -1,0 +1,62 @@
+package omi.nasdaq.nsmequities.aggregated.itch.v2_0_2026.enums;
+
+import java.util.Optional;
+
+/**
+ * Denotes the side of the market associated with the price level update
+ *
+ * <p>Each value corresponds to the ASCII character used as the wire discriminator.</p>
+ */
+public enum MarketSide {
+
+    /**
+     * Buy Order
+     */
+    BUY_ORDER('B', "Buy Order"),
+
+    /**
+     * Sell Order
+     */
+    SELL_ORDER('S', "Sell Order");
+
+    private final char wire;
+
+    private final String description;
+
+    MarketSide(char wire, String description) {
+        this.wire = wire;
+        this.description = description;
+    }
+
+    /**
+     * Returns this value's encoding on the wire.
+     *
+     * @return the wire value
+     */
+    public char wire() {
+        return wire;
+    }
+
+    /**
+     * Returns the description the protocol specification gives this value.
+     *
+     * @return the description
+     */
+    public String description() {
+        return description;
+    }
+
+    /**
+     * Returns the value with the given wire encoding.
+     *
+     * @param wire the encoding read from the wire
+     * @return the matching value, or empty when the protocol declares no value for it
+     */
+    public static Optional<MarketSide> fromWire(char wire) {
+        return switch (wire) {
+            case 'B' -> Optional.of(BUY_ORDER);
+            case 'S' -> Optional.of(SELL_ORDER);
+            default -> Optional.empty();
+        };
+    }
+}

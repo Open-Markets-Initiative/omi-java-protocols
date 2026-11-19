@@ -9,9 +9,9 @@ import java.util.Optional;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.MatchNumberField;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.OrderReferenceNumberField;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.PriceField;
-import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.SharesField;
+import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.SharesNumericField;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.SideField;
-import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.StockField;
+import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.StockAlphanumericField;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.Field;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.Message;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.PrintOptions;
@@ -51,12 +51,12 @@ public final class TradeMessage implements Message {
     /**
      * The total number of shares associated with the order being added to the book.
      */
-    private final SharesField shares = new SharesField();
+    private final SharesNumericField sharesNumeric = new SharesNumericField();
 
     /**
      * Stock symbol right padded with spaces.
      */
-    private final StockField stock = new StockField();
+    private final StockAlphanumericField stockAlphanumeric = new StockAlphanumericField();
 
     /**
      * The display price of the new order. Refer to Data Types for field processing notes.
@@ -71,7 +71,7 @@ public final class TradeMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(orderReferenceNumber, side, shares, stock, price, matchNumber);
+    private final List<Field> fields = List.of(orderReferenceNumber, side, sharesNumeric, stockAlphanumeric, price, matchNumber);
 
     private byte[] buffer;
 
@@ -98,19 +98,19 @@ public final class TradeMessage implements Message {
     /**
      * The total number of shares associated with the order being added to the book.
      *
-     * @return the Shares field
+     * @return the SharesNumeric field
      */
-    public SharesField shares() {
-        return shares;
+    public SharesNumericField sharesNumeric() {
+        return sharesNumeric;
     }
 
     /**
      * Stock symbol right padded with spaces.
      *
-     * @return the Stock field
+     * @return the StockAlphanumeric field
      */
-    public StockField stock() {
-        return stock;
+    public StockAlphanumericField stockAlphanumeric() {
+        return stockAlphanumeric;
     }
 
     /**
@@ -186,14 +186,14 @@ public final class TradeMessage implements Message {
             return false;
         }
         cursor += SideField.BYTE_LENGTH;
-        if (!shares.parse(data, cursor)) {
+        if (!sharesNumeric.parse(data, cursor)) {
             return false;
         }
-        cursor += SharesField.BYTE_LENGTH;
-        if (!stock.parse(data, cursor)) {
+        cursor += SharesNumericField.BYTE_LENGTH;
+        if (!stockAlphanumeric.parse(data, cursor)) {
             return false;
         }
-        cursor += StockField.BYTE_LENGTH;
+        cursor += StockAlphanumericField.BYTE_LENGTH;
         if (!price.parse(data, cursor)) {
             return false;
         }
@@ -207,8 +207,8 @@ public final class TradeMessage implements Message {
         int cursor = offset;
         cursor = orderReferenceNumber.encode(data, cursor);
         cursor = side.encode(data, cursor);
-        cursor = shares.encode(data, cursor);
-        cursor = stock.encode(data, cursor);
+        cursor = sharesNumeric.encode(data, cursor);
+        cursor = stockAlphanumeric.encode(data, cursor);
         cursor = price.encode(data, cursor);
         cursor = matchNumber.encode(data, cursor);
         return cursor;
@@ -293,8 +293,8 @@ public final class TradeMessage implements Message {
         return switch (name) {
             case "OrderReferenceNumber" -> Optional.of(orderReferenceNumber);
             case "Side" -> Optional.of(side);
-            case "Shares" -> Optional.of(shares);
-            case "Stock" -> Optional.of(stock);
+            case "SharesNumeric" -> Optional.of(sharesNumeric);
+            case "StockAlphanumeric" -> Optional.of(stockAlphanumeric);
             case "Price" -> Optional.of(price);
             case "MatchNumber" -> Optional.of(matchNumber);
             default -> Optional.empty();

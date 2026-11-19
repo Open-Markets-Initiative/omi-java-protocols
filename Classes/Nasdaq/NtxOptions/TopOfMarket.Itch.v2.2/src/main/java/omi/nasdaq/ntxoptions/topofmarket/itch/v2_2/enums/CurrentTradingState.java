@@ -1,0 +1,98 @@
+package omi.nasdaq.ntxoptions.topofmarket.itch.v2_2.enums;
+
+import java.util.Optional;
+
+/**
+ * Reflects the current trading state for the options security in the options market.
+ *
+ * <p>Each value corresponds to the ASCII character used as the wire discriminator.</p>
+ */
+public enum CurrentTradingState {
+
+    /**
+     * Halt in effect
+     */
+    HALT_IN_EFFECT('H', "Halt in effect"),
+
+    /**
+     * Buy Side Trading Suspended
+     */
+    BUY_SIDE_TRADING_SUSPENDED('B', "Buy Side Trading Suspended"),
+
+    /**
+     * Sell Side Trading Suspended
+     */
+    SELL_SIDE_TRADING_SUSPENDED('S', "Sell Side Trading Suspended"),
+
+    /**
+     * Pre Open
+     */
+    PRE_OPEN('I', "Pre Open"),
+
+    /**
+     * Opening Auction
+     */
+    OPENING_AUCTION('O', "Opening Auction"),
+
+    /**
+     * Re-Opening
+     */
+    RE_OPENING('R', "Re-Opening"),
+
+    /**
+     * Continuous Trading
+     */
+    CONTINUOUS_TRADING('T', "Continuous Trading"),
+
+    /**
+     * Closed
+     */
+    CLOSED('X', "Closed");
+
+    private final char wire;
+
+    private final String description;
+
+    CurrentTradingState(char wire, String description) {
+        this.wire = wire;
+        this.description = description;
+    }
+
+    /**
+     * Returns this value's encoding on the wire.
+     *
+     * @return the wire value
+     */
+    public char wire() {
+        return wire;
+    }
+
+    /**
+     * Returns the description the protocol specification gives this value.
+     *
+     * @return the description
+     */
+    public String description() {
+        return description;
+    }
+
+    /**
+     * Returns the value with the given wire encoding.
+     *
+     * @param wire the encoding read from the wire
+     * @return the matching value, or empty when the protocol declares no value for it
+     */
+    public static Optional<CurrentTradingState> fromWire(char wire) {
+        return switch (wire) {
+            case 'H' -> Optional.of(HALT_IN_EFFECT);
+            case 'B' -> Optional.of(BUY_SIDE_TRADING_SUSPENDED);
+            case 'S' -> Optional.of(SELL_SIDE_TRADING_SUSPENDED);
+            case 'I' -> Optional.of(PRE_OPEN);
+            case 'O' -> Optional.of(OPENING_AUCTION);
+            case 'R' -> Optional.of(RE_OPENING);
+            case 'T' -> Optional.of(CONTINUOUS_TRADING);
+            case 'X' -> Optional.of(CLOSED);
+            default -> Optional.empty();
+        };
+    }
+}

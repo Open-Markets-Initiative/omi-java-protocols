@@ -90,12 +90,21 @@ public final class SettlPriceTypeField extends Field {
     }
 
     /**
-     * 2 unused bits
+     * Unused SettlPriceType 5
      *
-     * @return bits 5 through 6 of the container
+     * @return bit 5 of the container
      */
-    public int unusedBits5To() {
-        return (int) ((value >>> 5) & 0x3L);
+    public boolean unusedSettlPriceType5() {
+        return ((value >>> 5) & 1L) != 0L;
+    }
+
+    /**
+     * Unused SettlPriceType 6
+     *
+     * @return bit 6 of the container
+     */
+    public boolean unusedSettlPriceType6() {
+        return ((value >>> 6) & 1L) != 0L;
     }
 
     /**

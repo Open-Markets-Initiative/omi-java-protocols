@@ -7,7 +7,9 @@ A division of [Japan Exchange Group](..).
 
 | [Protocol][Omi.Jpx.Protocol.Definitions] | [Encoding][Omi.Encoding.Definitions] | Version | Date | Size | [Deployment][Omi.Glossary.Deployment] | [Testing][Omi.Glossary.Testing] | [Documentation][Omi.Jpx.Specifications] |
 | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| [GeniumInet][Jpx.OseDerivatives.GeniumInet] | [Itch][Omi.Encoding.Itch] | [5.0.6][Jpx.OseDerivatives.GeniumInet.Itch.v5.0.6.Parser] | 5/8/2024 | 14,226 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Jpx.OseDerivatives.GeniumInet.Itch.v5.0.6.Pdf] |
+| [GeniumInet][Jpx.OseDerivatives.GeniumInet] | [Glimpse][Omi.Encoding.Glimpse] | [2.2][Jpx.OseDerivatives.GeniumInet.Glimpse.v2.2.Parser] | 10/31/2025 | 17,802 | [Active][Omi.Glossary.Deployment.Active] | [Untested][Omi.Glossary.Testing.Untested] | [url][Jpx.OseDerivatives.GeniumInet.Glimpse.v2.2.Pdf] |
+| [GeniumInet][Jpx.OseDerivatives.GeniumInet] | [Itch][Omi.Encoding.Itch] | [5.0.6][Jpx.OseDerivatives.GeniumInet.Itch.v5.0.6.Parser] | 5/8/2024 | 14,229 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Jpx.OseDerivatives.GeniumInet.Itch.v5.0.6.Pdf] |
+| [GeniumInet][Jpx.OseDerivatives.GeniumInet] | [Ouch][Omi.Encoding.Ouch] | [5.0][Jpx.OseDerivatives.GeniumInet.Ouch.v5.0.Parser] | 9/16/2020 | 17,254 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Jpx.OseDerivatives.GeniumInet.Ouch.v5.0.Pdf] |
 
 
 <p align="center"><a href="https://www.jpx.co.jp/english" title="Japan Exchange Group Website"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Website.png" alt="Website" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://www.linkedin.com/company/japan-exchange-group" title="Japan Exchange Group on LinkedIn"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/LinkedIn.png" alt="LinkedIn" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://en.wikipedia.org/wiki/Japan_Exchange_Group" title="Japan Exchange Group on Wikipedia"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Wikipedia.png" alt="Wikipedia" width="32" height="32"></a></p>
@@ -29,9 +31,15 @@ A division of [Japan Exchange Group](..).
 [Omi.Encoding.Definitions]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Protocols/ReadMe.md "Encoding Directory"
 [Omi.Jpx.Protocol.Definitions]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/tree/main/Organizations/Jpx/Protocols "Jpx Protocol Directory"
 [Omi.Jpx.Specifications]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/tree/main/Organizations/Jpx/Specifications "Jpx Specifications Directory"
+[Omi.Encoding.Glimpse]: https://github.com/Open-Markets-Initiative/Directory/blob/main/Protocols/Glimpse.md "Glimpse Encoding"
 [Omi.Encoding.Itch]: https://github.com/Open-Markets-Initiative/Directory/blob/main/Protocols/Itch.md "Itch Encoding"
+[Omi.Encoding.Ouch]: https://github.com/Open-Markets-Initiative/Directory/blob/main/Protocols/Ouch.md "Ouch Encoding"
 [OseDerivatives.Exchange]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Jpx/OseDerivatives "Osaka Securities Exchange"
 [Jpx.OseDerivatives.GeniumInet]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Jpx/Protocols/OseDerivatives/GeniumInet.md "Genium Inet"
 
+[Jpx.OseDerivatives.GeniumInet.Glimpse.v2.2.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Jpx/OseDerivatives/GeniumInet.Glimpse.v2.2 "Jpx OseDerivatives GeniumInet Glimpse v2.2 Java Parser"
+[Jpx.OseDerivatives.GeniumInet.Glimpse.v2.2.Pdf]: https://faqsd.jpx.co.jp/category/show/526?site_domain=en_system_documents "Japan Exchange Group 2.2 Pdf"
 [Jpx.OseDerivatives.GeniumInet.Itch.v5.0.6.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Jpx/OseDerivatives/GeniumInet.Itch.v5.0.6 "Jpx OseDerivatives GeniumInet Itch v5.0.6 Java Parser"
 [Jpx.OseDerivatives.GeniumInet.Itch.v5.0.6.Pdf]: https://faqsd.jpx.co.jp/category/show/526?site_domain=en_system_documents "Japan Exchange Group 5.0.6 Pdf"
+[Jpx.OseDerivatives.GeniumInet.Ouch.v5.0.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Jpx/OseDerivatives/GeniumInet.Ouch.v5.0 "Jpx OseDerivatives GeniumInet Ouch v5.0 Java Parser"
+[Jpx.OseDerivatives.GeniumInet.Ouch.v5.0.Pdf]: https://faqsd.jpx.co.jp/category/show/526?site_domain=en_system_documents "Japan Exchange Group 5.0 Pdf"

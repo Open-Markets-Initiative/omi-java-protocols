@@ -7,7 +7,8 @@ A division of [Borsa İstanbul A.Ş.](..).
 
 | [Protocol][Omi.Bist.Protocol.Definitions] | [Encoding][Omi.Encoding.Definitions] | Version | Date | Size | [Deployment][Omi.Glossary.Deployment] | [Testing][Omi.Glossary.Testing] | [Documentation][Omi.Bist.Specifications] |
 | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| [GeniumInet][Bist.BorsaIstanbul.GeniumInet] | [Itch][Omi.Encoding.Itch] | [21.12][Bist.BorsaIstanbul.GeniumInet.Itch.v21.12.Parser] | 2/28/2025 | 15,379 | [Active][Omi.Glossary.Deployment.Active] | [Untested][Omi.Glossary.Testing.Untested] | [url][Bist.BorsaIstanbul.GeniumInet.Itch.v21.12.Url] - [pdf][Bist.BorsaIstanbul.GeniumInet.Itch.v21.12.Pdf] |
+| [GeniumInet][Bist.BorsaIstanbul.GeniumInet] | [Glimpse][Omi.Encoding.Glimpse] | [2.7][Bist.BorsaIstanbul.GeniumInet.Glimpse.v2.7.Parser] | 1/17/2025 | 16,294 | [Active][Omi.Glossary.Deployment.Active] | [Untested][Omi.Glossary.Testing.Untested] | [url][Bist.BorsaIstanbul.GeniumInet.Glimpse.v2.7.Url] - [pdf][Bist.BorsaIstanbul.GeniumInet.Glimpse.v2.7.Pdf] |
+| [GeniumInet][Bist.BorsaIstanbul.GeniumInet] | [Itch][Omi.Encoding.Itch] | [21.12][Bist.BorsaIstanbul.GeniumInet.Itch.v21.12.Parser] | 2/28/2025 | 15,382 | [Active][Omi.Glossary.Deployment.Active] | [Untested][Omi.Glossary.Testing.Untested] | [url][Bist.BorsaIstanbul.GeniumInet.Itch.v21.12.Url] - [pdf][Bist.BorsaIstanbul.GeniumInet.Itch.v21.12.Pdf] |
 
 
 <p align="center"><a href="https://www.borsaistanbul.com/en" title="Borsa İstanbul A.Ş. Website"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Website.png" alt="Website" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://www.linkedin.com/company/borsaistanbul" title="Borsa İstanbul A.Ş. on LinkedIn"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/LinkedIn.png" alt="LinkedIn" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://en.wikipedia.org/wiki/Borsa_Istanbul" title="Borsa İstanbul A.Ş. on Wikipedia"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Wikipedia.png" alt="Wikipedia" width="32" height="32"></a></p>
@@ -29,10 +30,14 @@ A division of [Borsa İstanbul A.Ş.](..).
 [Omi.Encoding.Definitions]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Protocols/ReadMe.md "Encoding Directory"
 [Omi.Bist.Protocol.Definitions]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/tree/main/Organizations/Bist/Protocols "Bist Protocol Directory"
 [Omi.Bist.Specifications]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/tree/main/Organizations/Bist/Specifications "Bist Specifications Directory"
+[Omi.Encoding.Glimpse]: https://github.com/Open-Markets-Initiative/Directory/blob/main/Protocols/Glimpse.md "Glimpse Encoding"
 [Omi.Encoding.Itch]: https://github.com/Open-Markets-Initiative/Directory/blob/main/Protocols/Itch.md "Itch Encoding"
 [BorsaIstanbul.Exchange]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Bist/BorsaIstanbul "Borsa Istanbul"
 [Bist.BorsaIstanbul.GeniumInet]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Bist/Protocols/BorsaIstanbul/GeniumInet.md "Genium Inet"
 
+[Bist.BorsaIstanbul.GeniumInet.Glimpse.v2.7.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Bist/BorsaIstanbul/GeniumInet.Glimpse.v2.7 "Bist BorsaIstanbul GeniumInet Glimpse v2.7 Java Parser"
+[Bist.BorsaIstanbul.GeniumInet.Glimpse.v2.7.Url]: https://www.borsaistanbul.com/en/technical-resources/technical-documents "Borsa İstanbul A.Ş. 2.7 Url"
+[Bist.BorsaIstanbul.GeniumInet.Glimpse.v2.7.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Bist/Specifications/Glimpse/Bist.BorsaIstanbul.GeniumInet.Glimpse.v2.7.pdf "Borsa İstanbul A.Ş. 2.7 Pdf"
 [Bist.BorsaIstanbul.GeniumInet.Itch.v21.12.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Bist/BorsaIstanbul/GeniumInet.Itch.v21.12 "Bist BorsaIstanbul GeniumInet Itch v21.12 Java Parser"
 [Bist.BorsaIstanbul.GeniumInet.Itch.v21.12.Url]: https://www.borsaistanbul.com/en/technical-resources/technical-documents "Borsa İstanbul A.Ş. 21.12 Url"
 [Bist.BorsaIstanbul.GeniumInet.Itch.v21.12.Pdf]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Bist/Specifications/Itch/Bist.BorsaIstanbul.GeniumInet.Itch.v21.12.pdf "Borsa İstanbul A.Ş. 21.12 Pdf"

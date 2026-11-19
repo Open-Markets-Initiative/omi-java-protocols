@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import omi.cme.globex.mdp3.sbe.v1_12.fields.LotTypeField;
-import omi.cme.globex.mdp3.sbe.v1_12.fields.MinLotSizeField;
+import omi.cme.globex.mdp3.sbe.v1_12.fields.MinLotSizeDecimalQtyField;
 import omi.cme.globex.mdp3.sbe.v1_12.types.Field;
 import omi.cme.globex.mdp3.sbe.v1_12.types.GroupEntry;
 import omi.cme.globex.mdp3.sbe.v1_12.types.PrintOptions;
@@ -41,12 +41,12 @@ public final class LotTypeRulesGroupEntry implements GroupEntry {
     /**
      * Minimum quantity accepted for order entry. If tag 1093-LotType=4, this value is the minimum quantity for order entry expressed in the applicable units, specified in tag 996-UnitOfMeasure, e.g. megawatts
      */
-    private final MinLotSizeField minLotSize = new MinLotSizeField();
+    private final MinLotSizeDecimalQtyField minLotSizeDecimalQty = new MinLotSizeDecimalQtyField();
 
     /**
      * This entry's fields, in wire order.
      */
-    private final List<Field> fields = List.of(lotType, minLotSize);
+    private final List<Field> fields = List.of(lotType, minLotSizeDecimalQty);
 
     private byte[] buffer;
 
@@ -64,10 +64,10 @@ public final class LotTypeRulesGroupEntry implements GroupEntry {
     /**
      * Minimum quantity accepted for order entry. If tag 1093-LotType=4, this value is the minimum quantity for order entry expressed in the applicable units, specified in tag 996-UnitOfMeasure, e.g. megawatts
      *
-     * @return the MinLotSize field
+     * @return the MinLotSizeDecimalQty field
      */
-    public MinLotSizeField minLotSize() {
-        return minLotSize;
+    public MinLotSizeDecimalQtyField minLotSizeDecimalQty() {
+        return minLotSizeDecimalQty;
     }
 
     private int wireBlock = ROOT_BYTE_LENGTH;
@@ -166,10 +166,10 @@ public final class LotTypeRulesGroupEntry implements GroupEntry {
             cursor += LotTypeField.BYTE_LENGTH;
         }
         if (known >= 5) {
-            if (!minLotSize.parse(data, cursor)) {
+            if (!minLotSizeDecimalQty.parse(data, cursor)) {
                 return false;
             }
-            cursor += MinLotSizeField.BYTE_LENGTH;
+            cursor += MinLotSizeDecimalQtyField.BYTE_LENGTH;
         }
         if (wireBlock > known) {
             this.blockTrailer = Arrays.copyOfRange(data, offset + known, offset + wireBlock);
@@ -188,7 +188,7 @@ public final class LotTypeRulesGroupEntry implements GroupEntry {
             cursor = lotType.encode(data, cursor);
         }
         if (known >= 5) {
-            cursor = minLotSize.encode(data, cursor);
+            cursor = minLotSizeDecimalQty.encode(data, cursor);
         }
         int kept = Math.min(blockTrailer.length, wireBlock - known);
         System.arraycopy(blockTrailer, 0, data, offset + known, kept);
@@ -276,7 +276,7 @@ public final class LotTypeRulesGroupEntry implements GroupEntry {
     public Optional<Field> field(String name) {
         return switch (name) {
             case "LotType" -> Optional.of(lotType);
-            case "MinLotSize" -> Optional.of(minLotSize);
+            case "MinLotSizeDecimalQty" -> Optional.of(minLotSizeDecimalQty);
             default -> Optional.empty();
         };
     }

@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Optional;
 import omi.nasdaq.nsmequities.totalview.itch.v4_0.fields.NanosecondsField;
 import omi.nasdaq.nsmequities.totalview.itch.v4_0.fields.ReasonField;
+import omi.nasdaq.nsmequities.totalview.itch.v4_0.fields.ReservedField;
 import omi.nasdaq.nsmequities.totalview.itch.v4_0.fields.StockField;
 import omi.nasdaq.nsmequities.totalview.itch.v4_0.fields.TradingStateField;
 import omi.nasdaq.nsmequities.totalview.itch.v4_0.types.Field;
@@ -37,13 +38,6 @@ public final class StockTradingActionMessage implements Message {
     public static final String NAME = "Stock Trading Action Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = { 11, 1 };
-
-    /**
      * Nanoseconds portion of the timestamp.
      */
     private final NanosecondsField nanoseconds = new NanosecondsField();
@@ -59,6 +53,11 @@ public final class StockTradingActionMessage implements Message {
     private final TradingStateField tradingState = new TradingStateField();
 
     /**
+     * Reserved.
+     */
+    private final ReservedField reserved = new ReservedField();
+
+    /**
      * Trading Action reason.
      */
     private final ReasonField reason = new ReasonField();
@@ -66,7 +65,7 @@ public final class StockTradingActionMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(nanoseconds, stock, tradingState, reason);
+    private final List<Field> fields = List.of(nanoseconds, stock, tradingState, reserved, reason);
 
     private byte[] buffer;
 
@@ -100,6 +99,15 @@ public final class StockTradingActionMessage implements Message {
     }
 
     /**
+     * Reserved.
+     *
+     * @return the Reserved field
+     */
+    public ReservedField reserved() {
+        return reserved;
+    }
+
+    /**
      * Trading Action reason.
      *
      * @return the Reason field
@@ -126,7 +134,7 @@ public final class StockTradingActionMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -167,7 +175,10 @@ public final class StockTradingActionMessage implements Message {
             return false;
         }
         cursor += TradingStateField.BYTE_LENGTH;
-        cursor += 1; // padding
+        if (!reserved.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ReservedField.BYTE_LENGTH;
         return reason.parse(data, cursor);
     }
 
@@ -178,12 +189,7 @@ public final class StockTradingActionMessage implements Message {
         cursor = nanoseconds.encode(data, cursor);
         cursor = stock.encode(data, cursor);
         cursor = tradingState.encode(data, cursor);
-        if (buffer != null && buffer.length >= 12) {
-            System.arraycopy(buffer, 11, data, cursor, 1); // padding
-        } else {
-            Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
-        }
-        cursor += 1;
+        cursor = reserved.encode(data, cursor);
         cursor = reason.encode(data, cursor);
         return cursor;
     }
@@ -268,6 +274,7 @@ public final class StockTradingActionMessage implements Message {
             case "Nanoseconds" -> Optional.of(nanoseconds);
             case "Stock" -> Optional.of(stock);
             case "TradingState" -> Optional.of(tradingState);
+            case "Reserved" -> Optional.of(reserved);
             case "Reason" -> Optional.of(reason);
             default -> Optional.empty();
         };

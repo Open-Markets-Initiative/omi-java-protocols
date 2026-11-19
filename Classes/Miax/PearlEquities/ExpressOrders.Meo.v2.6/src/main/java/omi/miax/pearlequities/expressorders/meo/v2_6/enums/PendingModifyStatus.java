@@ -10,14 +10,14 @@ import java.util.Optional;
 public enum PendingModifyStatus {
 
     /**
-     * Pending Modification Is Completed Or Pending State Is Not Applicable
+     * Pending Modification Is Completed Or
      */
-    PENDING_MODIFICATION_IS_COMPLETED_OR_PENDING_STATE_IS_NOT_APPLICABLE(' ', "Pending Modification Is Completed Or Pending State Is Not Applicable"),
+    PENDING_MODIFICATION_IS_COMPLETED_OR(' ', "Pending Modification Is Completed Or"),
 
     /**
-     * Modification Request Is Sent To Another Market And Is Pending Completion
+     * Modification Request Is Sent To Another
      */
-    MODIFICATION_REQUEST_IS_SENT_TO_ANOTHER_MARKET_AND_IS_PENDING_COMPLETION('P', "Modification Request Is Sent To Another Market And Is Pending Completion"),
+    MODIFICATION_REQUEST_IS_SENT_TO_ANOTHER('P', "Modification Request Is Sent To Another"),
 
     /**
      * Pending Modification Request Is Rejected
@@ -59,8 +59,8 @@ public enum PendingModifyStatus {
      */
     public static Optional<PendingModifyStatus> fromWire(char wire) {
         return switch (wire) {
-            case ' ' -> Optional.of(PENDING_MODIFICATION_IS_COMPLETED_OR_PENDING_STATE_IS_NOT_APPLICABLE);
-            case 'P' -> Optional.of(MODIFICATION_REQUEST_IS_SENT_TO_ANOTHER_MARKET_AND_IS_PENDING_COMPLETION);
+            case ' ' -> Optional.of(PENDING_MODIFICATION_IS_COMPLETED_OR);
+            case 'P' -> Optional.of(MODIFICATION_REQUEST_IS_SENT_TO_ANOTHER);
             case 'X' -> Optional.of(PENDING_MODIFICATION_REQUEST_IS_REJECTED);
             default -> Optional.empty();
         };

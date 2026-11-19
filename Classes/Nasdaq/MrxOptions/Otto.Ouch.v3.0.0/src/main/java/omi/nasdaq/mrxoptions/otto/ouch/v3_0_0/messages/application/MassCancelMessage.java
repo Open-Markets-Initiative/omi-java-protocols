@@ -1,0 +1,402 @@
+package omi.nasdaq.mrxoptions.otto.ouch.v3_0_0.messages.application;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import omi.nasdaq.mrxoptions.otto.ouch.v3_0_0.fields.ClRequestIdField;
+import omi.nasdaq.mrxoptions.otto.ouch.v3_0_0.fields.FirmIdField;
+import omi.nasdaq.mrxoptions.otto.ouch.v3_0_0.fields.InstrumentIdField;
+import omi.nasdaq.mrxoptions.otto.ouch.v3_0_0.fields.InstrumentTypeField;
+import omi.nasdaq.mrxoptions.otto.ouch.v3_0_0.fields.ProductIdField;
+import omi.nasdaq.mrxoptions.otto.ouch.v3_0_0.fields.ScopeField;
+import omi.nasdaq.mrxoptions.otto.ouch.v3_0_0.fields.UnderlyingSymbolField;
+import omi.nasdaq.mrxoptions.otto.ouch.v3_0_0.types.Field;
+import omi.nasdaq.mrxoptions.otto.ouch.v3_0_0.types.Message;
+import omi.nasdaq.mrxoptions.otto.ouch.v3_0_0.types.PrintOptions;
+
+/**
+ * Represents the MassCancelMessage message from the Otto protocol.
+ *
+ * <p>This message is used to mass-delete multiple open orders based on the specified Scope. The sequence of Order Canceled messages is terminated with a single Mass Cancel Response.</p>
+ */
+public final class MassCancelMessage implements Message {
+
+    /**
+     * The character identifying this message on the wire.
+     */
+    public static final char MESSAGE_TYPE = 'U';
+
+    /**
+     * This message's fixed width on the wire.
+     */
+    public static final int BYTE_LENGTH = 41;
+
+    /**
+     * This message's declared name.
+     */
+    public static final String NAME = "Mass Cancel Message";
+
+    /**
+     * Firm ID (e.g. ABCD, 123A)
+     */
+    private final FirmIdField firmId = new FirmIdField();
+
+    /**
+     * Client identifier of the request. It is echoed back with either Mass Cancel Response or Reject
+     */
+    private final ClRequestIdField clRequestId = new ClRequestIdField();
+
+    /**
+     * A=All, O=Simple Instrument, C=Standard Combination, S=Stock Combination
+     */
+    private final InstrumentTypeField instrumentType = new InstrumentTypeField();
+
+    /**
+     * Scope of the deletion request: P=Product (requires ProductID, InstrumentID must be 0), I=Instrument (requires InstrumentID, ProductID must be 0), F=Firm (ProductId and InstrumentId must be set to zero)
+     */
+    private final ScopeField scope = new ScopeField();
+
+    /**
+     * Product (Underlying) ID, as specified by Option Directory notifications. Must be populated if Scope=P and UnderlyingSymbol not populated.
+     */
+    private final ProductIdField productId = new ProductIdField();
+
+    /**
+     * Instrument ID, as specified by Option Directory notifications
+     */
+    private final InstrumentIdField instrumentId = new InstrumentIdField();
+
+    /**
+     * Denotes the unique underlying stock symbol for the option symbol. Must be populated if Scope = P and ProductID not populated.
+     */
+    private final UnderlyingSymbolField underlyingSymbol = new UnderlyingSymbolField();
+
+    /**
+     * This message's fields, in wire order.
+     */
+    private final List<Field> fields = List.of(firmId, clRequestId, instrumentType, scope, productId, instrumentId, underlyingSymbol);
+
+    private byte[] buffer;
+
+    private boolean decoded;
+
+    /**
+     * Firm ID (e.g. ABCD, 123A)
+     *
+     * @return the FirmId field
+     */
+    public FirmIdField firmId() {
+        return firmId;
+    }
+
+    /**
+     * Client identifier of the request. It is echoed back with either Mass Cancel Response or Reject
+     *
+     * @return the ClRequestId field
+     */
+    public ClRequestIdField clRequestId() {
+        return clRequestId;
+    }
+
+    /**
+     * A=All, O=Simple Instrument, C=Standard Combination, S=Stock Combination
+     *
+     * @return the InstrumentType field
+     */
+    public InstrumentTypeField instrumentType() {
+        return instrumentType;
+    }
+
+    /**
+     * Scope of the deletion request: P=Product (requires ProductID, InstrumentID must be 0), I=Instrument (requires InstrumentID, ProductID must be 0), F=Firm (ProductId and InstrumentId must be set to zero)
+     *
+     * @return the Scope field
+     */
+    public ScopeField scope() {
+        return scope;
+    }
+
+    /**
+     * Product (Underlying) ID, as specified by Option Directory notifications. Must be populated if Scope=P and UnderlyingSymbol not populated.
+     *
+     * @return the ProductId field
+     */
+    public ProductIdField productId() {
+        return productId;
+    }
+
+    /**
+     * Instrument ID, as specified by Option Directory notifications
+     *
+     * @return the InstrumentId field
+     */
+    public InstrumentIdField instrumentId() {
+        return instrumentId;
+    }
+
+    /**
+     * Denotes the unique underlying stock symbol for the option symbol. Must be populated if Scope = P and ProductID not populated.
+     *
+     * @return the UnderlyingSymbol field
+     */
+    public UnderlyingSymbolField underlyingSymbol() {
+        return underlyingSymbol;
+    }
+
+    @Override
+    public Optional<Character> type() {
+        return Optional.of(MESSAGE_TYPE);
+    }
+
+    @Override
+    public int byteLength() {
+        return BYTE_LENGTH;
+    }
+
+    /**
+     * Returns this message's declared padding runs, as consecutive offset and length pairs relative to the start of the message.
+     *
+     * <p>Padding carries no value: decode advances over it, and encode writes back what decode received, or zero for a message assembled from values. Use this to check a received message's padding where the specification constrains it, or to render a byte map of the layout.</p>
+     *
+     * @return the padding runs, empty when the layout has none
+     */
+    public static int[] padding() {
+        return new int[0];
+    }
+
+    @Override
+    public Optional<Instant> timestamp() {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset) {
+        return parseFrom(data, offset, data.length);
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset, int end) {
+        clear();
+        this.decoded = read(data, offset, end);
+
+        int stop = Math.max(0, Math.min(data.length, offset + BYTE_LENGTH));
+        this.buffer = Arrays.copyOfRange(data, Math.min(Math.max(offset, 0), stop), stop);
+        return decoded;
+    }
+
+    private boolean read(byte[] data, int offset, int end) {
+        if (offset < 0 || end > data.length || end - offset < BYTE_LENGTH) {
+            return false;
+        }
+
+        int cursor = offset;
+        if (!firmId.parse(data, cursor)) {
+            return false;
+        }
+        cursor += FirmIdField.BYTE_LENGTH;
+        if (!clRequestId.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ClRequestIdField.BYTE_LENGTH;
+        if (!instrumentType.parse(data, cursor)) {
+            return false;
+        }
+        cursor += InstrumentTypeField.BYTE_LENGTH;
+        if (!scope.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ScopeField.BYTE_LENGTH;
+        if (!productId.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ProductIdField.BYTE_LENGTH;
+        if (!instrumentId.parse(data, cursor)) {
+            return false;
+        }
+        cursor += InstrumentIdField.BYTE_LENGTH;
+        return underlyingSymbol.parse(data, cursor);
+    }
+
+    @Override
+    public int encode(byte[] data, int offset) {
+        Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
+        int cursor = offset;
+        cursor = firmId.encode(data, cursor);
+        cursor = clRequestId.encode(data, cursor);
+        cursor = instrumentType.encode(data, cursor);
+        cursor = scope.encode(data, cursor);
+        cursor = productId.encode(data, cursor);
+        cursor = instrumentId.encode(data, cursor);
+        cursor = underlyingSymbol.encode(data, cursor);
+        return cursor;
+    }
+
+    @Override
+    public byte[] toBytes() {
+        byte[] data = new byte[BYTE_LENGTH];
+        encode(data, 0);
+        return data;
+    }
+
+    @Override
+    public void clear() {
+        for (Field field : fields) {
+            field.reset();
+        }
+        this.buffer = null;
+        this.decoded = false;
+    }
+
+    @Override
+    public boolean isDecoded() {
+        return decoded;
+    }
+
+    @Override
+    public boolean isRecognized() {
+        for (Field field : fields) {
+            if (!field.isRecognized()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isValid() {
+        for (Field field : fields) {
+            if (!field.isValid()) {
+                return false;
+            }
+        }
+        return isRecognized();
+    }
+
+    /**
+     * Returns a copy of the bytes this message was decoded from.
+     *
+     * <p>A failed decode leaves behind the partial range that was available, which is what a diagnostic needs to see.</p>
+     *
+     * @return the message bytes, or empty when no decode has been attempted
+     */
+    @Override
+    public Optional<byte[]> raw() {
+        if (buffer == null) {
+            return Optional.empty();
+        }
+        return Optional.of(buffer.clone());
+    }
+
+    @Override
+    public Optional<Field> failedAt() {
+        if (buffer == null || decoded) {
+            return Optional.empty();
+        }
+        for (Field field : fields) {
+            if (!field.isDecoded()) {
+                return Optional.of(field);
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Field> fields() {
+        return fields;
+    }
+
+    @Override
+    public Optional<Field> field(String name) {
+        return switch (name) {
+            case "FirmId" -> Optional.of(firmId);
+            case "ClRequestId" -> Optional.of(clRequestId);
+            case "InstrumentType" -> Optional.of(instrumentType);
+            case "Scope" -> Optional.of(scope);
+            case "ProductId" -> Optional.of(productId);
+            case "InstrumentId" -> Optional.of(instrumentId);
+            case "UnderlyingSymbol" -> Optional.of(underlyingSymbol);
+            default -> Optional.empty();
+        };
+    }
+
+    @Override
+    public List<Field> diffFields(Message other) {
+        if (!(other instanceof MassCancelMessage message)) {
+            return List.of();
+        }
+        List<Field> changed = new ArrayList<>();
+        for (int index = 0; index < fields.size(); index++) {
+            if (!fields.get(index).equals(message.fields.get(index))) {
+                changed.add(fields.get(index));
+            }
+        }
+        return changed;
+    }
+
+    @Override
+    public String toFormattedString(PrintOptions options) {
+        StringBuilder builder = new StringBuilder();
+        toFormattedString(builder, options);
+        return builder.toString();
+    }
+
+    /**
+     * Appends this message's formatted representation.
+     *
+     * <p>The identifier form renders the message name alone, which is what a debugger label or a log line tracking message flow needs. The compact form adds every field on the same line, and the default form indents one field per line.</p>
+     *
+     * @param builder the destination
+     * @param options the display options
+     */
+    @Override
+    public void toFormattedString(StringBuilder builder, PrintOptions options) {
+        if (options.identifier()) {
+            builder.append(NAME);
+            return;
+        }
+
+        if (options.compact()) {
+            builder.append(NAME).append(" { ");
+            for (int index = 0; index < fields.size(); index++) {
+                if (index > 0) {
+                    builder.append(", ");
+                }
+                fields.get(index).toFormattedString(builder, options);
+            }
+            builder.append(" }");
+            return;
+        }
+
+        builder.append(options.prefix()).append(NAME).append(System.lineSeparator());
+        PrintOptions nested = options.nested();
+        for (Field field : fields) {
+            builder.append(nested.prefix());
+            field.toFormattedString(builder, nested);
+            builder.append(System.lineSeparator());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return toFormattedString(PrintOptions.DEFAULT);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof MassCancelMessage message)) {
+            return false;
+        }
+        return fields.equals(message.fields);
+    }
+
+    @Override
+    public int hashCode() {
+        return fields.hashCode();
+    }
+}

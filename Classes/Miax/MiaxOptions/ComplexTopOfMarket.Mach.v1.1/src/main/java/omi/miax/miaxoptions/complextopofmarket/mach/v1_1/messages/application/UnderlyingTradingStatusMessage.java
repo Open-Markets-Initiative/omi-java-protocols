@@ -8,8 +8,8 @@ import java.util.Objects;
 import java.util.Optional;
 import omi.miax.miaxoptions.complextopofmarket.mach.v1_1.fields.EventReasonField;
 import omi.miax.miaxoptions.complextopofmarket.mach.v1_1.fields.ExpectedEventTimeNanoSecondsPartField;
-import omi.miax.miaxoptions.complextopofmarket.mach.v1_1.fields.ExpectedEventTimeSecondsPartField;
 import omi.miax.miaxoptions.complextopofmarket.mach.v1_1.fields.NanosecondsField;
+import omi.miax.miaxoptions.complextopofmarket.mach.v1_1.fields.SecondsPartField;
 import omi.miax.miaxoptions.complextopofmarket.mach.v1_1.fields.TradingStatusField;
 import omi.miax.miaxoptions.complextopofmarket.mach.v1_1.fields.UnderlyingSymbolField;
 import omi.miax.miaxoptions.complextopofmarket.mach.v1_1.types.Field;
@@ -61,7 +61,7 @@ public final class UnderlyingTradingStatusMessage implements Message {
     /**
      * Seconds portion of the expected time of the event. Always use in conjunction with the Nano-seconds part field.
      */
-    private final ExpectedEventTimeSecondsPartField expectedEventTimeSecondsPart = new ExpectedEventTimeSecondsPartField();
+    private final SecondsPartField secondsPart = new SecondsPartField();
 
     /**
      * Nano-seconds portion of the expected time of the event. Specifies number of nano-seconds since the seconds specified in “Expected Event Time Seconds” field.
@@ -71,7 +71,7 @@ public final class UnderlyingTradingStatusMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(nanoseconds, underlyingSymbol, tradingStatus, eventReason, expectedEventTimeSecondsPart, expectedEventTimeNanoSecondsPart);
+    private final List<Field> fields = List.of(nanoseconds, underlyingSymbol, tradingStatus, eventReason, secondsPart, expectedEventTimeNanoSecondsPart);
 
     private byte[] buffer;
 
@@ -116,10 +116,10 @@ public final class UnderlyingTradingStatusMessage implements Message {
     /**
      * Seconds portion of the expected time of the event. Always use in conjunction with the Nano-seconds part field.
      *
-     * @return the ExpectedEventTimeSecondsPart field
+     * @return the SecondsPart field
      */
-    public ExpectedEventTimeSecondsPartField expectedEventTimeSecondsPart() {
-        return expectedEventTimeSecondsPart;
+    public SecondsPartField secondsPart() {
+        return secondsPart;
     }
 
     /**
@@ -194,10 +194,10 @@ public final class UnderlyingTradingStatusMessage implements Message {
             return false;
         }
         cursor += EventReasonField.BYTE_LENGTH;
-        if (!expectedEventTimeSecondsPart.parse(data, cursor)) {
+        if (!secondsPart.parse(data, cursor)) {
             return false;
         }
-        cursor += ExpectedEventTimeSecondsPartField.BYTE_LENGTH;
+        cursor += SecondsPartField.BYTE_LENGTH;
         return expectedEventTimeNanoSecondsPart.parse(data, cursor);
     }
 
@@ -209,7 +209,7 @@ public final class UnderlyingTradingStatusMessage implements Message {
         cursor = underlyingSymbol.encode(data, cursor);
         cursor = tradingStatus.encode(data, cursor);
         cursor = eventReason.encode(data, cursor);
-        cursor = expectedEventTimeSecondsPart.encode(data, cursor);
+        cursor = secondsPart.encode(data, cursor);
         cursor = expectedEventTimeNanoSecondsPart.encode(data, cursor);
         return cursor;
     }
@@ -295,7 +295,7 @@ public final class UnderlyingTradingStatusMessage implements Message {
             case "UnderlyingSymbol" -> Optional.of(underlyingSymbol);
             case "TradingStatus" -> Optional.of(tradingStatus);
             case "EventReason" -> Optional.of(eventReason);
-            case "ExpectedEventTimeSecondsPart" -> Optional.of(expectedEventTimeSecondsPart);
+            case "SecondsPart" -> Optional.of(secondsPart);
             case "ExpectedEventTimeNanoSecondsPart" -> Optional.of(expectedEventTimeNanoSecondsPart);
             default -> Optional.empty();
         };

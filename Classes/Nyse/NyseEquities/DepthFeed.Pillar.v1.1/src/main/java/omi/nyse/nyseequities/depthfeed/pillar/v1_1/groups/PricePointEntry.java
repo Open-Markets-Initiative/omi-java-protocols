@@ -98,20 +98,9 @@ public final class PricePointEntry implements GroupEntry {
         return participant;
     }
 
-    /**
-     * Returns whether the fields before the Participant put it on the wire.
-     *
-     * <p>Decode reads the Participant where this holds, and encode writes it where this holds, refusing a field holding a value this leaves off the wire, or none this puts on it.</p>
-     *
-     * @return true when the Participant is on the wire
-     */
-    public boolean participantPresent() {
-        return participants.value() > 0L;
-    }
-
     @Override
     public int byteLength() {
-        return MINIMUM_BYTE_LENGTH + (participantPresent() ? participant.byteLength() : 0);
+        return MINIMUM_BYTE_LENGTH + participant.byteLength();
     }
 
     /**
@@ -213,7 +202,7 @@ public final class PricePointEntry implements GroupEntry {
                 return false;
             }
         }
-        return !participantPresent() || participant.isRecognized();
+        return participant.isRecognized();
     }
 
     @Override
@@ -226,7 +215,7 @@ public final class PricePointEntry implements GroupEntry {
                 return false;
             }
         }
-        if (participantPresent() && !participant.isValid()) {
+        if (!participant.isValid()) {
             return false;
         }
         return isRecognized();
@@ -327,10 +316,8 @@ public final class PricePointEntry implements GroupEntry {
                 }
                 fields.get(index).toFormattedString(builder, options);
             }
-            if (participantPresent()) {
-                builder.append(", ");
-                participant.toFormattedString(builder, options);
-            }
+            builder.append(", ");
+            participant.toFormattedString(builder, options);
             builder.append(" }");
             return;
         }
@@ -342,9 +329,7 @@ public final class PricePointEntry implements GroupEntry {
             field.toFormattedString(builder, nested);
             builder.append(System.lineSeparator());
         }
-        if (participantPresent()) {
-            participant.toFormattedString(builder, nested);
-        }
+        participant.toFormattedString(builder, nested);
     }
 
     @Override

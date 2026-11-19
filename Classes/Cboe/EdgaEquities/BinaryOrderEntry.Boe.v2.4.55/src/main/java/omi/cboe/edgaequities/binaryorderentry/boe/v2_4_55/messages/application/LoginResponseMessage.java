@@ -1,0 +1,376 @@
+package omi.cboe.edgaequities.binaryorderentry.boe.v2_4_55.messages.application;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import omi.cboe.edgaequities.binaryorderentry.boe.v2_4_55.fields.LastReceivedSequenceNumberField;
+import omi.cboe.edgaequities.binaryorderentry.boe.v2_4_55.fields.LoginResponseStatusField;
+import omi.cboe.edgaequities.binaryorderentry.boe.v2_4_55.fields.LoginResponseTextField;
+import omi.cboe.edgaequities.binaryorderentry.boe.v2_4_55.fields.NoUnspecifiedUnitReplayField;
+import omi.cboe.edgaequities.binaryorderentry.boe.v2_4_55.fields.NumberOfParamGroupsField;
+import omi.cboe.edgaequities.binaryorderentry.boe.v2_4_55.fields.NumberOfUnitsField;
+import omi.cboe.edgaequities.binaryorderentry.boe.v2_4_55.types.Field;
+import omi.cboe.edgaequities.binaryorderentry.boe.v2_4_55.types.Message;
+import omi.cboe.edgaequities.binaryorderentry.boe.v2_4_55.types.PrintOptions;
+
+/**
+ * Represents the LoginResponseMessage message from the BinaryOrderEntry protocol.
+ *
+ * <p>A Login Response message is sent in response to a Login Request message. On a successful login, the LoginResponseStatus will be set to A. On a failed login, LoginResponseStatus will be set to a value other than A, and LoginResponseText will be set to an appropriate failure description.</p>
+ */
+public final class LoginResponseMessage implements Message {
+
+    /**
+     * This message's fixed width on the wire.
+     */
+    public static final int BYTE_LENGTH = 68;
+
+    /**
+     * This message's declared name.
+     */
+    public static final String NAME = "Login Response Message";
+
+    /**
+     * Accepted, or the reason for the rejection.
+     */
+    private final LoginResponseStatusField loginResponseStatus = new LoginResponseStatusField();
+
+    /**
+     * Human-readable text with additional information about the reason for rejection.
+     */
+    private final LoginResponseTextField loginResponseText = new LoginResponseTextField();
+
+    /**
+     * Echoed back from the original Login Request message.
+     */
+    private final NoUnspecifiedUnitReplayField noUnspecifiedUnitReplay = new NoUnspecifiedUnitReplayField();
+
+    /**
+     * Last inbound (Member to Cboe) message sequence number processed by Cboe.
+     */
+    private final LastReceivedSequenceNumberField lastReceivedSequenceNumber = new LastReceivedSequenceNumberField();
+
+    /**
+     * A number, n, of unit/sequence pairs to follow, one per unit. A pair for every unit will be sent, even if no messages have been sent to this port today. For unsuccessful logins, this will be 0.
+     */
+    private final NumberOfUnitsField numberOfUnits = new NumberOfUnitsField();
+
+    /**
+     * A number, n (possibly 0), of parameter groups to follow.
+     */
+    private final NumberOfParamGroupsField numberOfParamGroups = new NumberOfParamGroupsField();
+
+    /**
+     * This message's fields, in wire order.
+     */
+    private final List<Field> fields = List.of(loginResponseStatus, loginResponseText, noUnspecifiedUnitReplay, lastReceivedSequenceNumber, numberOfUnits, numberOfParamGroups);
+
+    private byte[] buffer;
+
+    private boolean decoded;
+
+    /**
+     * Accepted, or the reason for the rejection.
+     *
+     * @return the LoginResponseStatus field
+     */
+    public LoginResponseStatusField loginResponseStatus() {
+        return loginResponseStatus;
+    }
+
+    /**
+     * Human-readable text with additional information about the reason for rejection.
+     *
+     * @return the LoginResponseText field
+     */
+    public LoginResponseTextField loginResponseText() {
+        return loginResponseText;
+    }
+
+    /**
+     * Echoed back from the original Login Request message.
+     *
+     * @return the NoUnspecifiedUnitReplay field
+     */
+    public NoUnspecifiedUnitReplayField noUnspecifiedUnitReplay() {
+        return noUnspecifiedUnitReplay;
+    }
+
+    /**
+     * Last inbound (Member to Cboe) message sequence number processed by Cboe.
+     *
+     * @return the LastReceivedSequenceNumber field
+     */
+    public LastReceivedSequenceNumberField lastReceivedSequenceNumber() {
+        return lastReceivedSequenceNumber;
+    }
+
+    /**
+     * A number, n, of unit/sequence pairs to follow, one per unit. A pair for every unit will be sent, even if no messages have been sent to this port today. For unsuccessful logins, this will be 0.
+     *
+     * @return the NumberOfUnits field
+     */
+    public NumberOfUnitsField numberOfUnits() {
+        return numberOfUnits;
+    }
+
+    /**
+     * A number, n (possibly 0), of parameter groups to follow.
+     *
+     * @return the NumberOfParamGroups field
+     */
+    public NumberOfParamGroupsField numberOfParamGroups() {
+        return numberOfParamGroups;
+    }
+
+    @Override
+    public Optional<Character> type() {
+        return Optional.empty();
+    }
+
+    @Override
+    public int byteLength() {
+        return BYTE_LENGTH;
+    }
+
+    /**
+     * Returns this message's declared padding runs, as consecutive offset and length pairs relative to the start of the message.
+     *
+     * <p>Padding carries no value: decode advances over it, and encode writes back what decode received, or zero for a message assembled from values. Use this to check a received message's padding where the specification constrains it, or to render a byte map of the layout.</p>
+     *
+     * @return the padding runs, empty when the layout has none
+     */
+    public static int[] padding() {
+        return new int[0];
+    }
+
+    @Override
+    public Optional<Instant> timestamp() {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset) {
+        return parseFrom(data, offset, data.length);
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset, int end) {
+        clear();
+        this.decoded = read(data, offset, end);
+
+        int stop = Math.max(0, Math.min(data.length, offset + BYTE_LENGTH));
+        this.buffer = Arrays.copyOfRange(data, Math.min(Math.max(offset, 0), stop), stop);
+        return decoded;
+    }
+
+    private boolean read(byte[] data, int offset, int end) {
+        if (offset < 0 || end > data.length || end - offset < BYTE_LENGTH) {
+            return false;
+        }
+
+        int cursor = offset;
+        if (!loginResponseStatus.parse(data, cursor)) {
+            return false;
+        }
+        cursor += LoginResponseStatusField.BYTE_LENGTH;
+        if (!loginResponseText.parse(data, cursor)) {
+            return false;
+        }
+        cursor += LoginResponseTextField.BYTE_LENGTH;
+        if (!noUnspecifiedUnitReplay.parse(data, cursor)) {
+            return false;
+        }
+        cursor += NoUnspecifiedUnitReplayField.BYTE_LENGTH;
+        if (!lastReceivedSequenceNumber.parse(data, cursor)) {
+            return false;
+        }
+        cursor += LastReceivedSequenceNumberField.BYTE_LENGTH;
+        if (!numberOfUnits.parse(data, cursor)) {
+            return false;
+        }
+        cursor += NumberOfUnitsField.BYTE_LENGTH;
+        return numberOfParamGroups.parse(data, cursor);
+    }
+
+    @Override
+    public int encode(byte[] data, int offset) {
+        Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
+        int cursor = offset;
+        cursor = loginResponseStatus.encode(data, cursor);
+        cursor = loginResponseText.encode(data, cursor);
+        cursor = noUnspecifiedUnitReplay.encode(data, cursor);
+        cursor = lastReceivedSequenceNumber.encode(data, cursor);
+        cursor = numberOfUnits.encode(data, cursor);
+        cursor = numberOfParamGroups.encode(data, cursor);
+        return cursor;
+    }
+
+    @Override
+    public byte[] toBytes() {
+        byte[] data = new byte[BYTE_LENGTH];
+        encode(data, 0);
+        return data;
+    }
+
+    @Override
+    public void clear() {
+        for (Field field : fields) {
+            field.reset();
+        }
+        this.buffer = null;
+        this.decoded = false;
+    }
+
+    @Override
+    public boolean isDecoded() {
+        return decoded;
+    }
+
+    @Override
+    public boolean isRecognized() {
+        for (Field field : fields) {
+            if (!field.isRecognized()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isValid() {
+        for (Field field : fields) {
+            if (!field.isValid()) {
+                return false;
+            }
+        }
+        return isRecognized();
+    }
+
+    /**
+     * Returns a copy of the bytes this message was decoded from.
+     *
+     * <p>A failed decode leaves behind the partial range that was available, which is what a diagnostic needs to see.</p>
+     *
+     * @return the message bytes, or empty when no decode has been attempted
+     */
+    @Override
+    public Optional<byte[]> raw() {
+        if (buffer == null) {
+            return Optional.empty();
+        }
+        return Optional.of(buffer.clone());
+    }
+
+    @Override
+    public Optional<Field> failedAt() {
+        if (buffer == null || decoded) {
+            return Optional.empty();
+        }
+        for (Field field : fields) {
+            if (!field.isDecoded()) {
+                return Optional.of(field);
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Field> fields() {
+        return fields;
+    }
+
+    @Override
+    public Optional<Field> field(String name) {
+        return switch (name) {
+            case "LoginResponseStatus" -> Optional.of(loginResponseStatus);
+            case "LoginResponseText" -> Optional.of(loginResponseText);
+            case "NoUnspecifiedUnitReplay" -> Optional.of(noUnspecifiedUnitReplay);
+            case "LastReceivedSequenceNumber" -> Optional.of(lastReceivedSequenceNumber);
+            case "NumberOfUnits" -> Optional.of(numberOfUnits);
+            case "NumberOfParamGroups" -> Optional.of(numberOfParamGroups);
+            default -> Optional.empty();
+        };
+    }
+
+    @Override
+    public List<Field> diffFields(Message other) {
+        if (!(other instanceof LoginResponseMessage message)) {
+            return List.of();
+        }
+        List<Field> changed = new ArrayList<>();
+        for (int index = 0; index < fields.size(); index++) {
+            if (!fields.get(index).equals(message.fields.get(index))) {
+                changed.add(fields.get(index));
+            }
+        }
+        return changed;
+    }
+
+    @Override
+    public String toFormattedString(PrintOptions options) {
+        StringBuilder builder = new StringBuilder();
+        toFormattedString(builder, options);
+        return builder.toString();
+    }
+
+    /**
+     * Appends this message's formatted representation.
+     *
+     * <p>The identifier form renders the message name alone, which is what a debugger label or a log line tracking message flow needs. The compact form adds every field on the same line, and the default form indents one field per line.</p>
+     *
+     * @param builder the destination
+     * @param options the display options
+     */
+    @Override
+    public void toFormattedString(StringBuilder builder, PrintOptions options) {
+        if (options.identifier()) {
+            builder.append(NAME);
+            return;
+        }
+
+        if (options.compact()) {
+            builder.append(NAME).append(" { ");
+            for (int index = 0; index < fields.size(); index++) {
+                if (index > 0) {
+                    builder.append(", ");
+                }
+                fields.get(index).toFormattedString(builder, options);
+            }
+            builder.append(" }");
+            return;
+        }
+
+        builder.append(options.prefix()).append(NAME).append(System.lineSeparator());
+        PrintOptions nested = options.nested();
+        for (Field field : fields) {
+            builder.append(nested.prefix());
+            field.toFormattedString(builder, nested);
+            builder.append(System.lineSeparator());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return toFormattedString(PrintOptions.DEFAULT);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof LoginResponseMessage message)) {
+            return false;
+        }
+        return fields.equals(message.fields);
+    }
+
+    @Override
+    public int hashCode() {
+        return fields.hashCode();
+    }
+}

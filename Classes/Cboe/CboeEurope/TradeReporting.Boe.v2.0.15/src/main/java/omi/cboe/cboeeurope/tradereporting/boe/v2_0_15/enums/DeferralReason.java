@@ -1,0 +1,74 @@
+package omi.cboe.cboeeurope.tradereporting.boe.v2_0_15.enums;
+
+import java.util.Optional;
+
+/**
+ * Defines the DeferralReason values.
+ *
+ * <p>Each value corresponds to the ASCII character used as the wire discriminator.</p>
+ */
+public enum DeferralReason {
+
+    /**
+     * No Deferral Reason
+     */
+    NO_DEFERRAL_REASON('-', "No Deferral Reason"),
+
+    /**
+     * Deferral for Large In Scale (LRGS) (Bats to Participant only)
+     */
+    DEFERRAL_FOR_LARGE_IN_SCALE('6', "Deferral for Large In Scale (LRGS) (Bats to Participant only)"),
+
+    /**
+     * Deferral for Illiquid Instrument (for RTS2 only) (ILQD)
+     */
+    DEFERRAL_FOR_ILLIQUID_INSTRUMENT('7', "Deferral for Illiquid Instrument (for RTS2 only) (ILQD)"),
+
+    /**
+     * Deferral for Size Specific (for RTS2 only) (SIZE)
+     */
+    DEFERRAL_FOR_SIZE_SPECIFIC('8', "Deferral for Size Specific (for RTS2 only) (SIZE)");
+
+    private final char wire;
+
+    private final String description;
+
+    DeferralReason(char wire, String description) {
+        this.wire = wire;
+        this.description = description;
+    }
+
+    /**
+     * Returns this value's encoding on the wire.
+     *
+     * @return the wire value
+     */
+    public char wire() {
+        return wire;
+    }
+
+    /**
+     * Returns the description the protocol specification gives this value.
+     *
+     * @return the description
+     */
+    public String description() {
+        return description;
+    }
+
+    /**
+     * Returns the value with the given wire encoding.
+     *
+     * @param wire the encoding read from the wire
+     * @return the matching value, or empty when the protocol declares no value for it
+     */
+    public static Optional<DeferralReason> fromWire(char wire) {
+        return switch (wire) {
+            case '-' -> Optional.of(NO_DEFERRAL_REASON);
+            case '6' -> Optional.of(DEFERRAL_FOR_LARGE_IN_SCALE);
+            case '7' -> Optional.of(DEFERRAL_FOR_ILLIQUID_INSTRUMENT);
+            case '8' -> Optional.of(DEFERRAL_FOR_SIZE_SPECIFIC);
+            default -> Optional.empty();
+        };
+    }
+}

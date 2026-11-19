@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.AuctionTypeField;
-import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.PriceLongField;
+import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.PriceBinaryField;
 import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.SharesField;
 import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.StockSymbolField;
 import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.TimeOffsetField;
@@ -48,9 +48,9 @@ public final class AuctionSummaryMessage implements Message {
     private final AuctionTypeField auctionType = new AuctionTypeField();
 
     /**
-     * The limit order price
+     * Auction price
      */
-    private final PriceLongField priceLong = new PriceLongField();
+    private final PriceBinaryField priceBinary = new PriceBinaryField();
 
     /**
      * Cumulative number of shares executed
@@ -60,7 +60,7 @@ public final class AuctionSummaryMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(timeOffset, stockSymbol, auctionType, priceLong, shares);
+    private final List<Field> fields = List.of(timeOffset, stockSymbol, auctionType, priceBinary, shares);
 
     private byte[] buffer;
 
@@ -94,12 +94,12 @@ public final class AuctionSummaryMessage implements Message {
     }
 
     /**
-     * The limit order price
+     * Auction price
      *
-     * @return the PriceLong field
+     * @return the PriceBinary field
      */
-    public PriceLongField priceLong() {
-        return priceLong;
+    public PriceBinaryField priceBinary() {
+        return priceBinary;
     }
 
     /**
@@ -170,10 +170,10 @@ public final class AuctionSummaryMessage implements Message {
             return false;
         }
         cursor += AuctionTypeField.BYTE_LENGTH;
-        if (!priceLong.parse(data, cursor)) {
+        if (!priceBinary.parse(data, cursor)) {
             return false;
         }
-        cursor += PriceLongField.BYTE_LENGTH;
+        cursor += PriceBinaryField.BYTE_LENGTH;
         return shares.parse(data, cursor);
     }
 
@@ -184,7 +184,7 @@ public final class AuctionSummaryMessage implements Message {
         cursor = timeOffset.encode(data, cursor);
         cursor = stockSymbol.encode(data, cursor);
         cursor = auctionType.encode(data, cursor);
-        cursor = priceLong.encode(data, cursor);
+        cursor = priceBinary.encode(data, cursor);
         cursor = shares.encode(data, cursor);
         return cursor;
     }
@@ -269,7 +269,7 @@ public final class AuctionSummaryMessage implements Message {
             case "TimeOffset" -> Optional.of(timeOffset);
             case "StockSymbol" -> Optional.of(stockSymbol);
             case "AuctionType" -> Optional.of(auctionType);
-            case "PriceLong" -> Optional.of(priceLong);
+            case "PriceBinary" -> Optional.of(priceBinary);
             case "Shares" -> Optional.of(shares);
             default -> Optional.empty();
         };

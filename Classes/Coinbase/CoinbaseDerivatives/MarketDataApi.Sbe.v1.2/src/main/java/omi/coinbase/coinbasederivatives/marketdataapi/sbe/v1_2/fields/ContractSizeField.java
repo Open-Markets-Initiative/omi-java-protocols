@@ -1,7 +1,5 @@
 package omi.coinbase.coinbasederivatives.marketdataapi.sbe.v1_2.fields;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Objects;
 import omi.coinbase.coinbasederivatives.marketdataapi.sbe.v1_2.types.ByteOps;
 import omi.coinbase.coinbasederivatives.marketdataapi.sbe.v1_2.types.Field;
@@ -10,8 +8,6 @@ import omi.coinbase.coinbasederivatives.marketdataapi.sbe.v1_2.types.PrintOption
 
 /**
  * contractSize
- *
- * <p>Fixed-point decimal: a raw 4-byte little-endian signed integer scaled by 10^-8.</p>
  */
 public final class ContractSizeField extends Field {
 
@@ -30,46 +26,25 @@ public final class ContractSizeField extends Field {
      */
     public static final boolean LITTLE_ENDIAN = true;
 
-    /**
-     * The number of implied decimal places the wire integer is scaled by.
-     */
-    public static final int SCALE = 8;
-
-    private BigDecimal value;
+    private int value;
 
     /**
-     * The undecoded wire value, retained so the field re-encodes exactly as it arrived.
-     */
-    private long rawValue;
-
-    /**
-     * Returns the decoded value, scaled by the implied decimal places.
+     * Returns the decoded value.
      *
-     * @return the decoded value, or null when the field has not decoded
+     * @return the decoded value, zero when the field has not decoded
      */
-    public BigDecimal value() {
+    public int value() {
         return value;
     }
 
     /**
-     * Sets the value, deriving the wire integer from it.
+     * Sets the value to encode.
      *
      * @param value the value to encode
-     * @throws ArithmeticException when the value has more decimal places than the field's scale, or does not fit the field's width
      */
-    public void value(BigDecimal value) {
+    public void value(int value) {
         this.value = value;
-        this.rawValue = value == null ? 0L : value.setScale(SCALE, RoundingMode.UNNECESSARY).unscaledValue().longValueExact();
-        markSet(value != null);
-    }
-
-    /**
-     * Returns the undecoded wire value.
-     *
-     * @return the value exactly as it appeared on the wire
-     */
-    public long rawValue() {
-        return rawValue;
+        markSet(true);
     }
 
     @Override
@@ -79,7 +54,7 @@ public final class ContractSizeField extends Field {
 
     @Override
     public FieldKind kind() {
-        return FieldKind.DECIMAL;
+        return FieldKind.SIGNED_INTEGER;
     }
 
     @Override
@@ -93,8 +68,7 @@ public final class ContractSizeField extends Field {
             return false;
         }
 
-        this.rawValue = ByteOps.signed(data, offset, BYTE_LENGTH, LITTLE_ENDIAN);
-        this.value = BigDecimal.valueOf(rawValue, SCALE);
+        this.value = (int) ByteOps.signed(data, offset, BYTE_LENGTH, LITTLE_ENDIAN);
         markDecoded(data, offset);
         return true;
     }
@@ -102,15 +76,14 @@ public final class ContractSizeField extends Field {
     @Override
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
-        ByteOps.put(data, offset, BYTE_LENGTH, rawValue, LITTLE_ENDIAN);
+        ByteOps.put(data, offset, BYTE_LENGTH, value, LITTLE_ENDIAN);
         return offset + BYTE_LENGTH;
     }
 
     @Override
     public void reset() {
         super.reset();
-        this.value = null;
-        this.rawValue = 0L;
+        this.value = 0;
     }
 
     @Override
@@ -132,11 +105,11 @@ public final class ContractSizeField extends Field {
         if (!(other instanceof ContractSizeField field)) {
             return false;
         }
-        return hasValue() == field.hasValue() && rawValue == field.rawValue;
+        return hasValue() == field.hasValue() && value == field.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hasValue(), rawValue);
+        return Objects.hash(hasValue(), value);
     }
 }

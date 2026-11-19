@@ -22,7 +22,7 @@ public enum MessageCategory {
     /**
      * Index Category Index Messages Are Used To Provide Index Value Information Of A Security
      */
-    INDICES('I', "Index Category Index Messages Are Used To Provide Index Value Information Of A Security"),
+    INDEX('I', "Index Category Index Messages Are Used To Provide Index Value Information Of A Security"),
 
     /**
      * Market Status Category Market Status Messages Are Used To Provide Market Data Information
@@ -81,7 +81,7 @@ public enum MessageCategory {
         return switch (wire) {
             case 'A' -> Optional.of(ADMINISTRATIVE);
             case 'C' -> Optional.of(CONTROL);
-            case 'I' -> Optional.of(INDICES);
+            case 'I' -> Optional.of(INDEX);
             case 'M' -> Optional.of(MARKET_STATUS);
             case 'P' -> Optional.of(PRIOR_DAY);
             case 'S' -> Optional.of(SUMMARY);

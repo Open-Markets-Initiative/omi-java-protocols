@@ -1,6 +1,7 @@
 package omi.cme.globex.mdp3.sbe.v1_9.dispatch;
 
 import java.util.Optional;
+import omi.cme.globex.mdp3.sbe.v1_9.messages.application.AdminHeartbeat;
 import omi.cme.globex.mdp3.sbe.v1_9.messages.application.AdminLogin;
 import omi.cme.globex.mdp3.sbe.v1_9.messages.application.AdminLogout;
 import omi.cme.globex.mdp3.sbe.v1_9.messages.application.ChannelReset;
@@ -29,7 +30,6 @@ import omi.cme.globex.mdp3.sbe.v1_9.messages.application.SnapshotFullRefresh;
 import omi.cme.globex.mdp3.sbe.v1_9.messages.application.SnapshotFullRefreshLegacy;
 import omi.cme.globex.mdp3.sbe.v1_9.messages.application.SnapshotFullRefreshOrderBook;
 import omi.cme.globex.mdp3.sbe.v1_9.messages.application.SnapshotFullRefreshOrderBookLegacy;
-import omi.cme.globex.mdp3.sbe.v1_9.messages.session.AdminHeartbeat;
 import omi.cme.globex.mdp3.sbe.v1_9.types.Message;
 
 /**

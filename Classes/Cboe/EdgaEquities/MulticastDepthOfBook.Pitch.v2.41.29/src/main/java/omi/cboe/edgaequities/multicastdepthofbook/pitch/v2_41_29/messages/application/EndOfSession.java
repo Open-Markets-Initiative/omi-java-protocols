@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import omi.cboe.edgaequities.multicastdepthofbook.pitch.v2_41_29.fields.TimeOffsetField;
+import omi.cboe.edgaequities.multicastdepthofbook.pitch.v2_41_29.fields.LastTimestampField;
 import omi.cboe.edgaequities.multicastdepthofbook.pitch.v2_41_29.types.Field;
 import omi.cboe.edgaequities.multicastdepthofbook.pitch.v2_41_29.types.Message;
 import omi.cboe.edgaequities.multicastdepthofbook.pitch.v2_41_29.types.PrintOptions;
@@ -31,12 +31,12 @@ public final class EndOfSession implements Message {
     /**
      * Nanosecond offset from last unit timestamp
      */
-    private final TimeOffsetField timeOffset = new TimeOffsetField();
+    private final LastTimestampField lastTimestamp = new LastTimestampField();
 
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(timeOffset);
+    private final List<Field> fields = List.of(lastTimestamp);
 
     private byte[] buffer;
 
@@ -45,10 +45,10 @@ public final class EndOfSession implements Message {
     /**
      * Nanosecond offset from last unit timestamp
      *
-     * @return the TimeOffset field
+     * @return the LastTimestamp field
      */
-    public TimeOffsetField timeOffset() {
-        return timeOffset;
+    public LastTimestampField lastTimestamp() {
+        return lastTimestamp;
     }
 
     @Override
@@ -98,14 +98,14 @@ public final class EndOfSession implements Message {
         }
 
         int cursor = offset;
-        return timeOffset.parse(data, cursor);
+        return lastTimestamp.parse(data, cursor);
     }
 
     @Override
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        cursor = timeOffset.encode(data, cursor);
+        cursor = lastTimestamp.encode(data, cursor);
         return cursor;
     }
 
@@ -185,7 +185,7 @@ public final class EndOfSession implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return "TimeOffset".equals(name) ? Optional.of(timeOffset) : Optional.empty();
+        return "LastTimestamp".equals(name) ? Optional.of(lastTimestamp) : Optional.empty();
     }
 
     @Override

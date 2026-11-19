@@ -204,7 +204,7 @@ public final class RoundTrip {
         random(wire, random, 4);
         random(wire, random, 10);
         random(wire, random, 1);
-        count(wire, count, 1, false);
+        count(wire, count, 1, true);
         for (int entry0 = 0; entry0 < entries; entry0++) {
             random(wire, random, 1);
             random(wire, random, 4);
@@ -217,7 +217,7 @@ public final class RoundTrip {
         random(wire, random, 1);
         random(wire, random, 60);
         random(wire, random, 4);
-        count(wire, count, 1, false);
+        count(wire, count, 1, true);
         for (int entry0 = 0; entry0 < entries; entry0++) {
             random(wire, random, 1);
             random(wire, random, 4);
@@ -231,7 +231,7 @@ public final class RoundTrip {
         random(wire, random, 20);
         random(wire, random, 8);
         random(wire, random, 4);
-        count(wire, count, 1, false);
+        count(wire, count, 1, true);
         for (int entry0 = 0; entry0 < entries; entry0++) {
             random(wire, random, 8);
             random(wire, random, 4);
@@ -244,7 +244,7 @@ public final class RoundTrip {
         ByteArrayOutputStream wire = new ByteArrayOutputStream();
         random(wire, random, 20);
         random(wire, random, 4);
-        count(wire, count, 1, false);
+        count(wire, count, 1, true);
         for (int entry0 = 0; entry0 < entries; entry0++) {
             random(wire, random, 8);
             random(wire, random, 4);
@@ -280,7 +280,7 @@ public final class RoundTrip {
         random(wire, random, 6);
         random(wire, random, 1);
         random(wire, random, 2);
-        count(wire, count, 1, false);
+        count(wire, count, 1, true);
         for (int entry0 = 0; entry0 < entries; entry0++) {
             random(wire, random, 1);
         }
@@ -320,7 +320,7 @@ public final class RoundTrip {
         random(wire, random, 1);
         random(wire, random, 2);
         random(wire, random, 8);
-        count(wire, count, 1, false);
+        count(wire, count, 1, true);
         for (int entry0 = 0; entry0 < entries; entry0++) {
             random(wire, random, 1);
         }
@@ -340,7 +340,7 @@ public final class RoundTrip {
         random(wire, random, 1);
         random(wire, random, 18);
         random(wire, random, 1);
-        count(wire, count, 1, false);
+        count(wire, count, 1, true);
         for (int entry0 = 0; entry0 < entries; entry0++) {
             random(wire, random, 6);
             random(wire, random, 1);
@@ -356,7 +356,7 @@ public final class RoundTrip {
         random(wire, random, 8);
         random(wire, random, 16);
         random(wire, random, 8);
-        count(wire, count, 1, false);
+        count(wire, count, 1, true);
         for (int entry0 = 0; entry0 < entries; entry0++) {
             random(wire, random, 8);
             random(wire, random, 1);
@@ -378,7 +378,7 @@ public final class RoundTrip {
         random(wire, random, 1);
         random(wire, random, 18);
         random(wire, random, 1);
-        count(wire, count, 1, false);
+        count(wire, count, 1, true);
         for (int entry0 = 0; entry0 < entries; entry0++) {
             random(wire, random, 6);
             random(wire, random, 1);

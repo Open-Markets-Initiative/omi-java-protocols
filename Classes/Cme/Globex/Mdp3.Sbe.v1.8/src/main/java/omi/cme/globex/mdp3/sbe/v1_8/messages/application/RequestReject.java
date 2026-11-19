@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Optional;
 import omi.cme.globex.mdp3.sbe.v1_8.fields.MdReqIdOptionalField;
 import omi.cme.globex.mdp3.sbe.v1_8.fields.MdReqRejReasonField;
-import omi.cme.globex.mdp3.sbe.v1_8.fields.SessionTextField;
+import omi.cme.globex.mdp3.sbe.v1_8.fields.TextField;
 import omi.cme.globex.mdp3.sbe.v1_8.types.Field;
 import omi.cme.globex.mdp3.sbe.v1_8.types.Message;
 import omi.cme.globex.mdp3.sbe.v1_8.types.PrintOptions;
@@ -43,12 +43,12 @@ public final class RequestReject implements Message {
     /**
      * Reject reason details
      */
-    private final SessionTextField sessionText = new SessionTextField();
+    private final TextField text = new TextField();
 
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(mdReqIdOptional, mdReqRejReason, sessionText);
+    private final List<Field> fields = List.of(mdReqIdOptional, mdReqRejReason, text);
 
     private byte[] buffer;
 
@@ -75,10 +75,10 @@ public final class RequestReject implements Message {
     /**
      * Reject reason details
      *
-     * @return the SessionText field
+     * @return the Text field
      */
-    public SessionTextField sessionText() {
-        return sessionText;
+    public TextField text() {
+        return text;
     }
 
     @Override
@@ -136,7 +136,7 @@ public final class RequestReject implements Message {
             return false;
         }
         cursor += MdReqRejReasonField.BYTE_LENGTH;
-        return sessionText.parse(data, cursor);
+        return text.parse(data, cursor);
     }
 
     @Override
@@ -145,7 +145,7 @@ public final class RequestReject implements Message {
         int cursor = offset;
         cursor = mdReqIdOptional.encode(data, cursor);
         cursor = mdReqRejReason.encode(data, cursor);
-        cursor = sessionText.encode(data, cursor);
+        cursor = text.encode(data, cursor);
         return cursor;
     }
 
@@ -228,7 +228,7 @@ public final class RequestReject implements Message {
         return switch (name) {
             case "MdReqIdOptional" -> Optional.of(mdReqIdOptional);
             case "MdReqRejReason" -> Optional.of(mdReqRejReason);
-            case "SessionText" -> Optional.of(sessionText);
+            case "Text" -> Optional.of(text);
             default -> Optional.empty();
         };
     }

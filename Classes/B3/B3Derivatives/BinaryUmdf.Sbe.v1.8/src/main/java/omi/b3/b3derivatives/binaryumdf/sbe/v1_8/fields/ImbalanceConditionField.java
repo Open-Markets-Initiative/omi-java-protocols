@@ -52,12 +52,75 @@ public final class ImbalanceConditionField extends Field {
     }
 
     /**
-     * 8 unused bits
+     * Unused ImbalanceCondition 0
      *
-     * @return bits 0 through 7 of the container
+     * @return bit 0 of the container
      */
-    public int unusedBits0To() {
-        return (int) (value & 0xFFL);
+    public boolean unusedImbalanceCondition0() {
+        return (value & 1L) != 0L;
+    }
+
+    /**
+     * Unused ImbalanceCondition 1
+     *
+     * @return bit 1 of the container
+     */
+    public boolean unusedImbalanceCondition1() {
+        return ((value >>> 1) & 1L) != 0L;
+    }
+
+    /**
+     * Unused ImbalanceCondition 2
+     *
+     * @return bit 2 of the container
+     */
+    public boolean unusedImbalanceCondition2() {
+        return ((value >>> 2) & 1L) != 0L;
+    }
+
+    /**
+     * Unused ImbalanceCondition 3
+     *
+     * @return bit 3 of the container
+     */
+    public boolean unusedImbalanceCondition3() {
+        return ((value >>> 3) & 1L) != 0L;
+    }
+
+    /**
+     * Unused ImbalanceCondition 4
+     *
+     * @return bit 4 of the container
+     */
+    public boolean unusedImbalanceCondition4() {
+        return ((value >>> 4) & 1L) != 0L;
+    }
+
+    /**
+     * Unused ImbalanceCondition 5
+     *
+     * @return bit 5 of the container
+     */
+    public boolean unusedImbalanceCondition5() {
+        return ((value >>> 5) & 1L) != 0L;
+    }
+
+    /**
+     * Unused ImbalanceCondition 6
+     *
+     * @return bit 6 of the container
+     */
+    public boolean unusedImbalanceCondition6() {
+        return ((value >>> 6) & 1L) != 0L;
+    }
+
+    /**
+     * Unused ImbalanceCondition 7
+     *
+     * @return bit 7 of the container
+     */
+    public boolean unusedImbalanceCondition7() {
+        return ((value >>> 7) & 1L) != 0L;
     }
 
     /**

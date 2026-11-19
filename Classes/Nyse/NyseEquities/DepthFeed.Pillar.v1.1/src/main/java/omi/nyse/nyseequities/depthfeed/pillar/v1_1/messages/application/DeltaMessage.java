@@ -129,17 +129,6 @@ public final class DeltaMessage implements Message {
         return pricePoint;
     }
 
-    /**
-     * Returns whether the fields before the PricePoint put it on the wire.
-     *
-     * <p>Decode reads the PricePoint where this holds, and encode writes it where this holds, refusing a field holding a value this leaves off the wire, or none this puts on it.</p>
-     *
-     * @return true when the PricePoint is on the wire
-     */
-    public boolean pricePointPresent() {
-        return updateCount.value() > 0L;
-    }
-
     @Override
     public Optional<Character> type() {
         return Optional.empty();
@@ -147,7 +136,7 @@ public final class DeltaMessage implements Message {
 
     @Override
     public int byteLength() {
-        return MINIMUM_BYTE_LENGTH + (pricePointPresent() ? pricePoint.byteLength() : 0);
+        return MINIMUM_BYTE_LENGTH + pricePoint.byteLength();
     }
 
     /**
@@ -264,7 +253,7 @@ public final class DeltaMessage implements Message {
                 return false;
             }
         }
-        return !pricePointPresent() || pricePoint.isRecognized();
+        return pricePoint.isRecognized();
     }
 
     @Override
@@ -277,7 +266,7 @@ public final class DeltaMessage implements Message {
                 return false;
             }
         }
-        if (pricePointPresent() && !pricePoint.isValid()) {
+        if (!pricePoint.isValid()) {
             return false;
         }
         return isRecognized();
@@ -386,10 +375,8 @@ public final class DeltaMessage implements Message {
                 }
                 fields.get(index).toFormattedString(builder, options);
             }
-            if (pricePointPresent()) {
-                builder.append(", ");
-                pricePoint.toFormattedString(builder, options);
-            }
+            builder.append(", ");
+            pricePoint.toFormattedString(builder, options);
             builder.append(" }");
             return;
         }
@@ -401,9 +388,7 @@ public final class DeltaMessage implements Message {
             field.toFormattedString(builder, nested);
             builder.append(System.lineSeparator());
         }
-        if (pricePointPresent()) {
-            pricePoint.toFormattedString(builder, nested);
-        }
+        pricePoint.toFormattedString(builder, nested);
     }
 
     @Override

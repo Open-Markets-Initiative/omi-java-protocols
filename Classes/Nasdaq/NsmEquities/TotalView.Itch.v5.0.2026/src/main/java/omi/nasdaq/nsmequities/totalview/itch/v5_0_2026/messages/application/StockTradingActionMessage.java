@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import omi.nasdaq.nsmequities.totalview.itch.v5_0_2026.fields.ReasonCodeField;
+import omi.nasdaq.nsmequities.totalview.itch.v5_0_2026.fields.ReservedField;
 import omi.nasdaq.nsmequities.totalview.itch.v5_0_2026.fields.StockField;
 import omi.nasdaq.nsmequities.totalview.itch.v5_0_2026.fields.StockLocateField;
 import omi.nasdaq.nsmequities.totalview.itch.v5_0_2026.fields.TimestampField;
@@ -39,13 +40,6 @@ public final class StockTradingActionMessage implements Message {
     public static final String NAME = "Stock Trading Action Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = { 19, 1 };
-
-    /**
      * Locate Code uniquely assigned to the security symbol for the day
      */
     private final StockLocateField stockLocate = new StockLocateField();
@@ -71,6 +65,11 @@ public final class StockTradingActionMessage implements Message {
     private final TradingStateField tradingState = new TradingStateField();
 
     /**
+     * Reserved
+     */
+    private final ReservedField reserved = new ReservedField();
+
+    /**
      * Trading Action reason
      */
     private final ReasonCodeField reasonCode = new ReasonCodeField();
@@ -78,7 +77,7 @@ public final class StockTradingActionMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(stockLocate, trackingNumber, timestampField, stock, tradingState, reasonCode);
+    private final List<Field> fields = List.of(stockLocate, trackingNumber, timestampField, stock, tradingState, reserved, reasonCode);
 
     private byte[] buffer;
 
@@ -130,6 +129,15 @@ public final class StockTradingActionMessage implements Message {
     }
 
     /**
+     * Reserved
+     *
+     * @return the Reserved field
+     */
+    public ReservedField reserved() {
+        return reserved;
+    }
+
+    /**
      * Trading Action reason
      *
      * @return the ReasonCode field
@@ -156,7 +164,7 @@ public final class StockTradingActionMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -205,7 +213,10 @@ public final class StockTradingActionMessage implements Message {
             return false;
         }
         cursor += TradingStateField.BYTE_LENGTH;
-        cursor += 1; // padding
+        if (!reserved.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ReservedField.BYTE_LENGTH;
         return reasonCode.parse(data, cursor);
     }
 
@@ -218,12 +229,7 @@ public final class StockTradingActionMessage implements Message {
         cursor = timestampField.encode(data, cursor);
         cursor = stock.encode(data, cursor);
         cursor = tradingState.encode(data, cursor);
-        if (buffer != null && buffer.length >= 20) {
-            System.arraycopy(buffer, 19, data, cursor, 1); // padding
-        } else {
-            Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
-        }
-        cursor += 1;
+        cursor = reserved.encode(data, cursor);
         cursor = reasonCode.encode(data, cursor);
         return cursor;
     }
@@ -310,6 +316,7 @@ public final class StockTradingActionMessage implements Message {
             case "Timestamp" -> Optional.of(timestampField);
             case "Stock" -> Optional.of(stock);
             case "TradingState" -> Optional.of(tradingState);
+            case "Reserved" -> Optional.of(reserved);
             case "ReasonCode" -> Optional.of(reasonCode);
             default -> Optional.empty();
         };

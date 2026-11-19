@@ -1,0 +1,184 @@
+package omi.cboe.c1options.binaryorderentry.boe.v2_11_115.fields;
+
+import java.util.Objects;
+import omi.cboe.c1options.binaryorderentry.boe.v2_11_115.types.ByteOps;
+import omi.cboe.c1options.binaryorderentry.boe.v2_11_115.types.Field;
+import omi.cboe.c1options.binaryorderentry.boe.v2_11_115.types.FieldKind;
+import omi.cboe.c1options.binaryorderentry.boe.v2_11_115.types.PrintOptions;
+
+/**
+ * BitSet NewComplexInstrument byte 1.
+ *
+ * <p>A 1-byte packed bitfield; each accessor masks its own bit range out of the container.</p>
+ */
+public final class NewComplexInstrumentBitfieldField extends Field {
+
+    /**
+     * This field's fixed width on the wire.
+     */
+    public static final int BYTE_LENGTH = 1;
+
+    /**
+     * This field's declared name.
+     */
+    public static final String NAME = "NewComplexInstrumentBitfield";
+
+    private byte value;
+
+    /**
+     * Returns the whole bitfield container. Prefer the named accessors below.
+     *
+     * @return the decoded value, zero when the field has not decoded
+     */
+    public byte value() {
+        return value;
+    }
+
+    /**
+     * Sets the value to encode.
+     *
+     * @param value the value to encode
+     */
+    public void value(byte value) {
+        this.value = value;
+        markSet(true);
+    }
+
+    /**
+     * New Complex Instrument Bitfield 1 Leg Cfi Code
+     *
+     * @return bit 0 of the container
+     */
+    public boolean newComplexInstrumentBitfield1LegCfiCode() {
+        return (value & 1L) != 0L;
+    }
+
+    /**
+     * New Complex Instrument Bitfield 1 Leg Maturity Date
+     *
+     * @return bit 1 of the container
+     */
+    public boolean newComplexInstrumentBitfield1LegMaturityDate() {
+        return ((value >>> 1) & 1L) != 0L;
+    }
+
+    /**
+     * New Complex Instrument Bitfield 1 Leg Strike Price
+     *
+     * @return bit 2 of the container
+     */
+    public boolean newComplexInstrumentBitfield1LegStrikePrice() {
+        return ((value >>> 2) & 1L) != 0L;
+    }
+
+    /**
+     * New Complex Instrument Bitfield 1 Clearing Firm
+     *
+     * @return bit 3 of the container
+     */
+    public boolean newComplexInstrumentBitfield1ClearingFirm() {
+        return ((value >>> 3) & 1L) != 0L;
+    }
+
+    /**
+     * New Complex Instrument Bitfield 1 Reserved 16
+     *
+     * @return bit 4 of the container
+     */
+    public boolean newComplexInstrumentBitfield1Reserved16() {
+        return ((value >>> 4) & 1L) != 0L;
+    }
+
+    /**
+     * New Complex Instrument Bitfield 1 Reserved 32
+     *
+     * @return bit 5 of the container
+     */
+    public boolean newComplexInstrumentBitfield1Reserved32() {
+        return ((value >>> 5) & 1L) != 0L;
+    }
+
+    /**
+     * New Complex Instrument Bitfield 1 Reserved 64
+     *
+     * @return bit 6 of the container
+     */
+    public boolean newComplexInstrumentBitfield1Reserved64() {
+        return ((value >>> 6) & 1L) != 0L;
+    }
+
+    /**
+     * New Complex Instrument Bitfield 1 Reserved 128
+     *
+     * @return bit 7 of the container
+     */
+    public boolean newComplexInstrumentBitfield1Reserved128() {
+        return ((value >>> 7) & 1L) != 0L;
+    }
+
+    @Override
+    public String name() {
+        return NAME;
+    }
+
+    @Override
+    public FieldKind kind() {
+        return FieldKind.BITFIELD;
+    }
+
+    @Override
+    public int byteLength() {
+        return BYTE_LENGTH;
+    }
+
+    @Override
+    public boolean parse(byte[] data, int offset) {
+        if (offset < 0 || offset + BYTE_LENGTH > data.length) {
+            return false;
+        }
+
+        this.value = (byte) ByteOps.unsigned(data, offset, BYTE_LENGTH, false);
+        markDecoded(data, offset);
+        return true;
+    }
+
+    @Override
+    public int encode(byte[] data, int offset) {
+        Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
+        ByteOps.put(data, offset, BYTE_LENGTH, value, false);
+        return offset + BYTE_LENGTH;
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        this.value = (byte) 0;
+    }
+
+    @Override
+    public void toFormattedString(StringBuilder builder, PrintOptions options) {
+        builder.append(NAME).append(": ");
+        if (!hasValue()) {
+            builder.append("<unset>");
+            return;
+        }
+
+        builder.append("0x").append(Integer.toHexString(value & 0xFF));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof NewComplexInstrumentBitfieldField field)) {
+            return false;
+        }
+        return hasValue() == field.hasValue() && value == field.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(hasValue(), value);
+    }
+}

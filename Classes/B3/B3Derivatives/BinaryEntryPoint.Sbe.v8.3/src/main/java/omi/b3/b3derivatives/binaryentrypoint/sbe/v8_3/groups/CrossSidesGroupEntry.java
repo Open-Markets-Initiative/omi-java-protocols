@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.AccountField;
-import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.ClOrdIdField;
+import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.ClordidField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.EnteringFirmOptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.SideField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_3.fields.TradingSubAccountField;
@@ -61,7 +61,7 @@ public final class CrossSidesGroupEntry implements GroupEntry {
     /**
      * clOrdID
      */
-    private final ClOrdIdField clOrdId = new ClOrdIdField();
+    private final ClordidField clordid = new ClordidField();
 
     /**
      * tradingSubAccount
@@ -71,7 +71,7 @@ public final class CrossSidesGroupEntry implements GroupEntry {
     /**
      * This entry's fields, in wire order.
      */
-    private final List<Field> fields = List.of(side, account, enteringFirmOptional, clOrdId, tradingSubAccount);
+    private final List<Field> fields = List.of(side, account, enteringFirmOptional, clordid, tradingSubAccount);
 
     private byte[] buffer;
 
@@ -107,10 +107,10 @@ public final class CrossSidesGroupEntry implements GroupEntry {
     /**
      * clOrdID
      *
-     * @return the ClOrdId field
+     * @return the Clordid field
      */
-    public ClOrdIdField clOrdId() {
-        return clOrdId;
+    public ClordidField clordid() {
+        return clordid;
     }
 
     /**
@@ -245,10 +245,10 @@ public final class CrossSidesGroupEntry implements GroupEntry {
             cursor += EnteringFirmOptionalField.BYTE_LENGTH;
         }
         if (known >= 18) {
-            if (!clOrdId.parse(data, cursor)) {
+            if (!clordid.parse(data, cursor)) {
                 return false;
             }
-            cursor += ClOrdIdField.BYTE_LENGTH;
+            cursor += ClordidField.BYTE_LENGTH;
         }
         if (known >= 22) {
             if (!tradingSubAccount.parse(data, cursor)) {
@@ -287,7 +287,7 @@ public final class CrossSidesGroupEntry implements GroupEntry {
             cursor = enteringFirmOptional.encode(data, cursor);
         }
         if (known >= 18) {
-            cursor = clOrdId.encode(data, cursor);
+            cursor = clordid.encode(data, cursor);
         }
         if (known >= 22) {
             cursor = tradingSubAccount.encode(data, cursor);
@@ -380,7 +380,7 @@ public final class CrossSidesGroupEntry implements GroupEntry {
             case "Side" -> Optional.of(side);
             case "Account" -> Optional.of(account);
             case "EnteringFirmOptional" -> Optional.of(enteringFirmOptional);
-            case "ClOrdId" -> Optional.of(clOrdId);
+            case "Clordid" -> Optional.of(clordid);
             case "TradingSubAccount" -> Optional.of(tradingSubAccount);
             default -> Optional.empty();
         };

@@ -9,8 +9,8 @@ import omi.cme.globex.mdp3.sbe.v1_5.messages.application.RequestAck;
 import omi.cme.globex.mdp3.sbe.v1_5.messages.application.RequestReject;
 import omi.cme.globex.mdp3.sbe.v1_5.messages.application.SecurityListRequest;
 import omi.cme.globex.mdp3.sbe.v1_5.messages.application.SecurityStatusRequest;
+import omi.cme.globex.mdp3.sbe.v1_5.messages.application.SubscriberHeartbeat;
 import omi.cme.globex.mdp3.sbe.v1_5.messages.application.Terminate;
-import omi.cme.globex.mdp3.sbe.v1_5.messages.session.SubscriberHeartbeat;
 import omi.cme.globex.mdp3.sbe.v1_5.types.Message;
 
 /**

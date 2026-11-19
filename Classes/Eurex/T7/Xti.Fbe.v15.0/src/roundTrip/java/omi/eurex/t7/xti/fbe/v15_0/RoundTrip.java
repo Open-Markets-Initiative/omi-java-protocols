@@ -1,0 +1,2046 @@
+package omi.eurex.t7.xti.fbe.v15_0;
+
+import java.io.ByteArrayOutputStream;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.function.Supplier;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.ApproveTesTradeRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.BroadcastErrorNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.CrossRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.CrossRequestResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.DeleteAllOrderBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.DeleteAllOrderNrResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.DeleteAllOrderQuoteEventBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.DeleteAllOrderRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.DeleteAllOrderResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.DeleteAllQuoteBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.DeleteAllQuoteRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.DeleteAllQuoteResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.DeleteOrderBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.DeleteOrderNrResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.DeleteOrderResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.DeleteOrderSingleRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.DeleteTesTradeRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.EnterTesTradeRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.ExtendedDeletionReport;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.ForcedLogoutNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.ForcedUserLogoutNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.Heartbeat;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.HeartbeatNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.InquireEnrichmentRuleIdListRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.InquireEnrichmentRuleIdListResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.InquireOverallRiskLimitsRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.InquirePreTradeRiskLimitsRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.InquireSessionListRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.InquireSessionListResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.InquireUserRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.InquireUserResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.IssuerNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.IssuerSecurityStateChangeRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.IssuerSecurityStateChangeResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.LegalNotificationBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.LogonRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.LogonRequestEncrypted;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.LogonResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.LogoutRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.LogoutResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.MassQuoteRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.MassQuoteResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.ModifyOrderNrResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.ModifyOrderRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.ModifyOrderResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.ModifyOrderShortRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.ModifyTesTradeRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.NewOrderNrResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.NewOrderRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.NewOrderResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.NewOrderShortRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.NewsBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.OrderExecNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.OrderExecReportBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.OrderExecResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.OtcResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.OtcUploadBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.OtcUploadRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.OverallRiskLimitsDefinitionRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.OverallRiskLimitsDefinitionResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.OverallRiskLimitsReport;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.PartyActionReport;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.PartyEntitlementsUpdateReport;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.PingRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.PingResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.PreTradeRiskLimitResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.PreTradeRiskLimitsDefinitionRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.QuoteActivationNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.QuoteActivationRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.QuoteActivationResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.QuoteExecutionReport;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.Reject;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.RetransmitMeMessageRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.RetransmitMeMessageResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.RetransmitRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.RetransmitResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.ReverseTesTradeRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.RfqBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.RfqRejectNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.RfqRejectRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.RfqReplyNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.RfqReplyRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.RfqReplyResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.RfqRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.RfqResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.RfqSpecialistIssuerBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.RiskNotificationBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.ServiceAvailabilityBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.ServiceAvailabilityMarketBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.SingleQuoteRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.SpecialistDeleteAllOrderBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.SpecialistInstrumentEventNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.SpecialistOrderBookNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.SpecialistSecurityStateChangeRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.SpecialistSecurityStateChangeResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.StatusBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.SubscribeRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.SubscribeResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.TesApproveBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.TesBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.TesDeleteBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.TesExecutionBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.TesResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.TesReversalBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.TesTradeBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.TesTradingSessionStatusBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.ThrottleUpdateNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.TmTradingSessionStatusBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.TradeBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.TradingActionRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.TradingActionResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.TradingSessionStatusBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.TrailingStopUpdateNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.UnsubscribeRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.UnsubscribeResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.UserLoginRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.UserLoginRequestEncrypted;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.UserLoginResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.UserLogoutRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.UserLogoutResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightCreateDealNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightDealResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightDealStatusNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightDeleteAllQuoteNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightDeleteAllQuoteRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightEnterQuoteRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightHitQuoteRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightNegotiationNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightNegotiationRequesterNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightNegotiationStatusNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightOpenNegotiationNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightOpenNegotiationRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightOpenNegotiationRequesterNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightQuoteNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightQuoteRequesterNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightQuoteResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightQuoteSnapshotNotification;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightQuoteSnapshotRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightQuotingStatusRequest;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightResponse;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightStatusBroadcast;
+import omi.eurex.t7.xti.fbe.v15_0.messages.application.XetraEnLightUpdateNegotiationRequest;
+import omi.eurex.t7.xti.fbe.v15_0.types.Message;
+
+// Decodes deterministic bytes into every message at a non-zero offset and requires each to
+// encode back to them, to compare equal to a second decode, and to clear. Needs no capture.
+public final class RoundTrip {
+
+    private static int failures;
+
+    private RoundTrip() {
+    }
+
+    public static void main(String[] args) {
+        check(ApproveTesTradeRequest::new);
+        checkGrouped(BroadcastErrorNotification::new, RoundTrip::wire0, true, true, true, 1, 0);
+        check(CrossRequest::new);
+        check(CrossRequestResponse::new);
+        checkGrouped(DeleteAllOrderBroadcast::new, RoundTrip::wire1, true, true, true, 1, 0);
+        check(DeleteAllOrderNrResponse::new);
+        check(DeleteAllOrderQuoteEventBroadcast::new);
+        check(DeleteAllOrderRequest::new);
+        checkGrouped(DeleteAllOrderResponse::new, RoundTrip::wire2, true, true, true, 1, 0);
+        checkGrouped(DeleteAllQuoteBroadcast::new, RoundTrip::wire3, true, true, true, 1, 0);
+        check(DeleteAllQuoteRequest::new);
+        checkGrouped(DeleteAllQuoteResponse::new, RoundTrip::wire4, true, true, true, 1, 0);
+        check(DeleteOrderBroadcast::new);
+        check(DeleteOrderNrResponse::new);
+        check(DeleteOrderResponse::new);
+        check(DeleteOrderSingleRequest::new);
+        check(DeleteTesTradeRequest::new);
+        checkGrouped(EnterTesTradeRequest::new, RoundTrip::wire5, true, true, true, 1, 0);
+        check(ExtendedDeletionReport::new);
+        checkGrouped(ForcedLogoutNotification::new, RoundTrip::wire6, true, true, true, 1, 0);
+        checkGrouped(ForcedUserLogoutNotification::new, RoundTrip::wire7, true, true, true, 1, 0);
+        check(Heartbeat::new);
+        check(HeartbeatNotification::new);
+        check(InquireEnrichmentRuleIdListRequest::new);
+        checkGrouped(InquireEnrichmentRuleIdListResponse::new, RoundTrip::wire8, true, true, true, 1, 0);
+        check(InquireOverallRiskLimitsRequest::new);
+        check(InquirePreTradeRiskLimitsRequest::new);
+        check(InquireSessionListRequest::new);
+        checkGrouped(InquireSessionListResponse::new, RoundTrip::wire9, true, true, true, 1, 0);
+        check(InquireUserRequest::new);
+        checkGrouped(InquireUserResponse::new, RoundTrip::wire10, true, true, true, 1, 0);
+        check(IssuerNotification::new);
+        checkGrouped(IssuerSecurityStateChangeRequest::new, RoundTrip::wire11, true, true, true, 1, 0);
+        check(IssuerSecurityStateChangeResponse::new);
+        checkGrouped(LegalNotificationBroadcast::new, RoundTrip::wire12, true, true, true, 1, 0);
+        check(LogonRequest::new);
+        check(LogonRequestEncrypted::new);
+        checkGrouped(LogonResponse::new, RoundTrip::wire13, true, true, true, 1, 0);
+        check(LogoutRequest::new);
+        check(LogoutResponse::new);
+        checkGrouped(MassQuoteRequest::new, RoundTrip::wire14, true, true, true, 1, 0);
+        checkGrouped(MassQuoteResponse::new, RoundTrip::wire15, true, true, true, 1, 0);
+        checkGrouped(ModifyOrderNrResponse::new, RoundTrip::wire16, true, true, true, 1, 0);
+        check(ModifyOrderRequest::new);
+        checkGrouped(ModifyOrderResponse::new, RoundTrip::wire17, true, true, true, 1, 0);
+        check(ModifyOrderShortRequest::new);
+        checkGrouped(ModifyTesTradeRequest::new, RoundTrip::wire18, true, true, true, 1, 0);
+        checkGrouped(NewOrderNrResponse::new, RoundTrip::wire19, true, true, true, 1, 0);
+        check(NewOrderRequest::new);
+        checkGrouped(NewOrderResponse::new, RoundTrip::wire20, true, true, true, 1, 0);
+        check(NewOrderShortRequest::new);
+        checkGrouped(NewsBroadcast::new, RoundTrip::wire21, true, true, true, 1, 0);
+        checkGrouped(OrderExecNotification::new, RoundTrip::wire22, true, true, true, 1, 0);
+        checkGrouped(OrderExecReportBroadcast::new, RoundTrip::wire23, true, true, true, 1, 0);
+        checkGrouped(OrderExecResponse::new, RoundTrip::wire24, true, true, true, 1, 0);
+        check(OtcResponse::new);
+        checkGrouped(OtcUploadBroadcast::new, RoundTrip::wire25, true, true, true, 1, 0);
+        checkGrouped(OtcUploadRequest::new, RoundTrip::wire26, true, true, true, 1, 0);
+        checkGrouped(OverallRiskLimitsDefinitionRequest::new, RoundTrip::wire27, true, true, true, 1, 0);
+        check(OverallRiskLimitsDefinitionResponse::new);
+        checkGrouped(OverallRiskLimitsReport::new, RoundTrip::wire28, true, true, true, 1, 0);
+        check(PartyActionReport::new);
+        check(PartyEntitlementsUpdateReport::new);
+        check(PingRequest::new);
+        check(PingResponse::new);
+        checkGrouped(PreTradeRiskLimitResponse::new, RoundTrip::wire29, true, true, true, 1, 0);
+        checkGrouped(PreTradeRiskLimitsDefinitionRequest::new, RoundTrip::wire30, true, true, true, 1, 0);
+        checkGrouped(QuoteActivationNotification::new, RoundTrip::wire31, true, true, true, 1, 0);
+        check(QuoteActivationRequest::new);
+        checkGrouped(QuoteActivationResponse::new, RoundTrip::wire32, true, true, true, 1, 0);
+        checkGrouped(QuoteExecutionReport::new, RoundTrip::wire33, true, true, true, 1, 0);
+        checkGrouped(Reject::new, RoundTrip::wire34, true, true, true, 1, 0);
+        check(RetransmitMeMessageRequest::new);
+        check(RetransmitMeMessageResponse::new);
+        check(RetransmitRequest::new);
+        check(RetransmitResponse::new);
+        check(ReverseTesTradeRequest::new);
+        check(RfqBroadcast::new);
+        check(RfqRejectNotification::new);
+        check(RfqRejectRequest::new);
+        check(RfqReplyNotification::new);
+        check(RfqReplyRequest::new);
+        check(RfqReplyResponse::new);
+        check(RfqRequest::new);
+        check(RfqResponse::new);
+        check(RfqSpecialistIssuerBroadcast::new);
+        check(RiskNotificationBroadcast::new);
+        check(ServiceAvailabilityBroadcast::new);
+        check(ServiceAvailabilityMarketBroadcast::new);
+        check(SingleQuoteRequest::new);
+        checkGrouped(SpecialistDeleteAllOrderBroadcast::new, RoundTrip::wire35, true, true, true, 1, 0);
+        check(SpecialistInstrumentEventNotification::new);
+        checkGrouped(SpecialistOrderBookNotification::new, RoundTrip::wire36, true, true, true, 1, 0);
+        check(SpecialistSecurityStateChangeRequest::new);
+        check(SpecialistSecurityStateChangeResponse::new);
+        check(StatusBroadcast::new);
+        check(SubscribeRequest::new);
+        check(SubscribeResponse::new);
+        checkGrouped(TesApproveBroadcast::new, RoundTrip::wire37, true, true, true, 1, 0);
+        checkGrouped(TesBroadcast::new, RoundTrip::wire38, true, true, true, 1, 0);
+        check(TesDeleteBroadcast::new);
+        check(TesExecutionBroadcast::new);
+        check(TesResponse::new);
+        check(TesReversalBroadcast::new);
+        check(TesTradeBroadcast::new);
+        check(TesTradingSessionStatusBroadcast::new);
+        check(ThrottleUpdateNotification::new);
+        check(TmTradingSessionStatusBroadcast::new);
+        check(TradeBroadcast::new);
+        check(TradingActionRequest::new);
+        checkGrouped(TradingActionResponse::new, RoundTrip::wire39, true, true, true, 1, 0);
+        check(TradingSessionStatusBroadcast::new);
+        check(TrailingStopUpdateNotification::new);
+        check(UnsubscribeRequest::new);
+        check(UnsubscribeResponse::new);
+        check(UserLoginRequest::new);
+        check(UserLoginRequestEncrypted::new);
+        check(UserLoginResponse::new);
+        check(UserLogoutRequest::new);
+        check(UserLogoutResponse::new);
+        checkGrouped(XetraEnLightCreateDealNotification::new, RoundTrip::wire40, true, true, true, 1, 0);
+        check(XetraEnLightDealResponse::new);
+        check(XetraEnLightDealStatusNotification::new);
+        check(XetraEnLightDeleteAllQuoteNotification::new);
+        check(XetraEnLightDeleteAllQuoteRequest::new);
+        check(XetraEnLightEnterQuoteRequest::new);
+        check(XetraEnLightHitQuoteRequest::new);
+        check(XetraEnLightNegotiationNotification::new);
+        checkGrouped(XetraEnLightNegotiationRequesterNotification::new, RoundTrip::wire41, true, true, true, 1, 0);
+        check(XetraEnLightNegotiationStatusNotification::new);
+        check(XetraEnLightOpenNegotiationNotification::new);
+        checkGrouped(XetraEnLightOpenNegotiationRequest::new, RoundTrip::wire42, true, true, true, 1, 0);
+        checkGrouped(XetraEnLightOpenNegotiationRequesterNotification::new, RoundTrip::wire43, true, true, true, 1, 0);
+        check(XetraEnLightQuoteNotification::new);
+        checkGrouped(XetraEnLightQuoteRequesterNotification::new, RoundTrip::wire44, true, true, true, 1, 0);
+        check(XetraEnLightQuoteResponse::new);
+        checkGrouped(XetraEnLightQuoteSnapshotNotification::new, RoundTrip::wire45, true, true, true, 1, 0);
+        check(XetraEnLightQuoteSnapshotRequest::new);
+        check(XetraEnLightQuotingStatusRequest::new);
+        check(XetraEnLightResponse::new);
+        check(XetraEnLightStatusBroadcast::new);
+        checkGrouped(XetraEnLightUpdateNegotiationRequest::new, RoundTrip::wire46, true, true, true, 1, 0);
+
+        if (failures > 0) {
+            System.out.println(failures + " FAILED");
+            System.exit(1);
+        }
+        System.out.println("PASS");
+    }
+
+    private static void check(Supplier<Message> create) {
+        Message message = create.get();
+        String name = message.getClass().getSimpleName();
+        int length = message.byteLength();
+        Random random = new Random(name.hashCode());
+        int offset = 1 + random.nextInt(7);
+        byte[] wire = new byte[offset + length + 3];
+        random.nextBytes(wire);
+        byte[] bytes = Arrays.copyOfRange(wire, offset, offset + length);
+
+        expect(name + " decodes", message.parseFrom(wire, offset) && message.isDecoded());
+        expect(name + " keeps its bytes", message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
+        expect(name + " encodes to its bytes", Arrays.equals(message.toBytes(), bytes));
+        Arrays.fill(wire, (byte) 0x5A);
+        expect(name + " keeps its bytes when the buffer is reused", Arrays.equals(message.toBytes(), bytes) && message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
+
+        Message again = create.get();
+        again.parseFrom(bytes, 0);
+        expect(name + " equals a second decode", message.equals(again) && message.hashCode() == again.hashCode());
+
+        message.clear();
+        expect(name + " clears", !message.isDecoded() && message.raw().isEmpty());
+        expect(name + " refuses a short buffer", length == 0 || !message.parseFrom(bytes, 1));
+    }
+
+    private static int blockDelta;
+
+    private static int delta(int root) {
+        return blockDelta < 0 ? -Math.min(-blockDelta, root - 1) : blockDelta;
+    }
+
+    private interface Wire {
+        byte[] build(Random random, int entries, long count);
+    }
+
+    private static void checkGrouped(Supplier<Message> create, Wire wire, boolean variable, boolean bounded, boolean counted, int builds, int leaves) {
+        Message message = create.get();
+        String name = message.getClass().getSimpleName();
+        Random random = new Random(name.hashCode());
+
+        for (int delta : new int[] { 0, 3, -1 }) {
+            blockDelta = delta;
+            for (int entries : new int[] { 0, 1, 3 }) {
+                String label = name + " with " + entries + " entries, block " + blockDelta;
+                byte[] bytes = wire.build(random, entries, entries);
+                int offset = 1 + random.nextInt(7);
+                byte[] shifted = new byte[offset + bytes.length + leaves + 3];
+                random.nextBytes(shifted);
+                System.arraycopy(bytes, 0, shifted, offset, bytes.length);
+
+                expect(label + " decodes", message.parseFrom(shifted, offset, offset + bytes.length + leaves) && message.isDecoded());
+                expect(label + " has its length", message.byteLength() == bytes.length);
+                expect(label + " keeps its bytes", message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
+                expect(label + " encodes to its bytes", Arrays.equals(message.toBytes(), bytes));
+                Arrays.fill(shifted, (byte) 0x5A);
+                expect(label + " keeps its bytes when the buffer is reused", Arrays.equals(message.toBytes(), bytes) && message.raw().map(raw -> Arrays.equals(raw, bytes)).orElse(false));
+
+                Message again = create.get();
+                again.parseFrom(Arrays.copyOf(bytes, bytes.length + leaves), 0);
+                expect(label + " equals a second decode", message.equals(again) && message.hashCode() == again.hashCode());
+
+                expect(label + " refuses a short buffer", !bounded || bytes.length == 0 || !message.parseFrom(bytes, 0, bytes.length - 1));
+                message.clear();
+                expect(label + " clears", !message.isDecoded() && message.raw().isEmpty());
+            }
+        }
+        blockDelta = 0;
+
+        for (int build = 0; build < builds; build++) {
+            if (counted && variable && bounded) {
+                expect(name + " refuses a count beyond its entries", !message.parseFrom(wire.build(random, 1, 2), 0));
+            }
+            if (counted && bounded) {
+                expect(name + " refuses an absurd count", !message.parseFrom(wire.build(random, 1, Long.MAX_VALUE), 0));
+            }
+        }
+    }
+
+    private static void random(ByteArrayOutputStream wire, Random random, int length) {
+        byte[] bytes = new byte[length];
+        random.nextBytes(bytes);
+        wire.writeBytes(bytes);
+    }
+
+    private static void count(ByteArrayOutputStream wire, long count, int width, boolean littleEndian) {
+        for (int index = 0; index < width; index++) {
+            wire.write((int) (count >>> (8 * (littleEndian ? index : width - 1 - index))));
+        }
+    }
+
+    private static byte[] wire0(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        count(wire, count, 2, true);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, entries);
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire1(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 16);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 7);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        count(wire, count, 2, true);
+        count(wire, count, 2, true);
+        count(wire, count, 2, true);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 6);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+        }
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+        }
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 4);
+            random(wire, random, 4);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire2(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 16);
+        random(wire, random, 1);
+        random(wire, random, 8);
+        count(wire, count, 2, true);
+        count(wire, count, 2, true);
+        count(wire, count, 2, true);
+        random(wire, random, 2);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+        }
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+        }
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 4);
+            random(wire, random, 4);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire3(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 16);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 7);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        count(wire, count, 2, true);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 3);
+        random(wire, random, 1);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire4(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 1);
+        random(wire, random, 3);
+        random(wire, random, 8);
+        count(wire, count, 2, true);
+        random(wire, random, 6);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire5(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 8);
+        random(wire, random, 2);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        count(wire, count, 1, false);
+        random(wire, random, 20);
+        random(wire, random, 20);
+        random(wire, random, 3);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 4);
+            random(wire, random, 4);
+            random(wire, random, 1);
+            random(wire, random, 5);
+            random(wire, random, 6);
+            random(wire, random, 4);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire6(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        count(wire, count, 2, true);
+        random(wire, random, entries);
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire7(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        count(wire, count, 2, true);
+        random(wire, random, 1);
+        random(wire, random, entries);
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire8(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 16);
+        count(wire, count, 2, true);
+        random(wire, random, 6);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 4);
+            random(wire, random, 2);
+            random(wire, random, 30);
+            random(wire, random, 12);
+            random(wire, random, 12);
+            random(wire, random, 16);
+            random(wire, random, 4);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire9(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        count(wire, count, 2, true);
+        random(wire, random, 6);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 4);
+            random(wire, random, 4);
+            random(wire, random, 1);
+            random(wire, random, 1);
+            random(wire, random, 30);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire10(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 16);
+        count(wire, count, 2, true);
+        random(wire, random, 6);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 4);
+            random(wire, random, 4);
+            random(wire, random, 6);
+            random(wire, random, 1);
+            random(wire, random, 1);
+            random(wire, random, 3);
+            random(wire, random, 30);
+            random(wire, random, 7);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire11(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 8);
+        random(wire, random, 2);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        count(wire, count, 1, false);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 4);
+            random(wire, random, 1);
+            random(wire, random, 3);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire12(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 7);
+        random(wire, random, 8);
+        count(wire, count, 2, true);
+        random(wire, random, 1);
+        random(wire, random, entries);
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire13(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        count(wire, count, 2, true);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 30);
+        random(wire, random, 5);
+        random(wire, random, 2);
+        random(wire, random, entries);
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire14(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 8);
+        random(wire, random, 2);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        count(wire, count, 1, false);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 3);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 8);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire15(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 1);
+        random(wire, random, 3);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        count(wire, count, 1, false);
+        random(wire, random, 3);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 4);
+            random(wire, random, 1);
+            random(wire, random, 1);
+            random(wire, random, 2);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire16(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 1);
+        random(wire, random, 3);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        count(wire, count, 1, false);
+        random(wire, random, 3);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 4);
+            random(wire, random, 1);
+            random(wire, random, 3);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire17(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 16);
+        random(wire, random, 1);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        count(wire, count, 1, false);
+        random(wire, random, 3);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 4);
+            random(wire, random, 1);
+            random(wire, random, 3);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire18(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 8);
+        random(wire, random, 2);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        count(wire, count, 1, false);
+        random(wire, random, 20);
+        random(wire, random, 20);
+        random(wire, random, 3);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 4);
+            random(wire, random, 4);
+            random(wire, random, 1);
+            random(wire, random, 5);
+            random(wire, random, 6);
+            random(wire, random, 4);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire19(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 1);
+        random(wire, random, 3);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        count(wire, count, 1, false);
+        random(wire, random, 3);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 4);
+            random(wire, random, 1);
+            random(wire, random, 3);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire20(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 16);
+        random(wire, random, 1);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        count(wire, count, 1, false);
+        random(wire, random, 3);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 4);
+            random(wire, random, 1);
+            random(wire, random, 3);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire21(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 7);
+        random(wire, random, 8);
+        count(wire, count, 2, true);
+        random(wire, random, 256);
+        random(wire, random, entries);
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire22(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 16);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 7);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 20);
+        count(wire, count, 1, false);
+        count(wire, count, 1, false);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 4);
+            random(wire, random, 4);
+            random(wire, random, 1);
+            random(wire, random, 7);
+        }
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 4);
+            random(wire, random, 1);
+            random(wire, random, 3);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire23(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 16);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 7);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 5);
+        random(wire, random, 6);
+        random(wire, random, 5);
+        random(wire, random, 6);
+        random(wire, random, 12);
+        random(wire, random, 12);
+        random(wire, random, 16);
+        random(wire, random, 20);
+        count(wire, count, 1, false);
+        count(wire, count, 1, false);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 5);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 4);
+            random(wire, random, 4);
+            random(wire, random, 1);
+            random(wire, random, 7);
+        }
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 4);
+            random(wire, random, 1);
+            random(wire, random, 3);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire24(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 16);
+        random(wire, random, 1);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        count(wire, count, 1, false);
+        count(wire, count, 1, false);
+        random(wire, random, 4);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 4);
+            random(wire, random, 4);
+            random(wire, random, 1);
+            random(wire, random, 7);
+        }
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 4);
+            random(wire, random, 1);
+            random(wire, random, 3);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire25(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 7);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        count(wire, count, 1, false);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 3);
+        random(wire, random, 20);
+        random(wire, random, 52);
+        random(wire, random, 5);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 1);
+            random(wire, random, 1);
+            random(wire, random, 5);
+            random(wire, random, 6);
+            random(wire, random, 12);
+            random(wire, random, 12);
+            random(wire, random, 16);
+            random(wire, random, 3);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire26(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 8);
+        random(wire, random, 2);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 1);
+        count(wire, count, 1, false);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 3);
+        random(wire, random, 20);
+        random(wire, random, 52);
+        random(wire, random, 1);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 1);
+            random(wire, random, 1);
+            random(wire, random, 5);
+            random(wire, random, 6);
+            random(wire, random, 12);
+            random(wire, random, 12);
+            random(wire, random, 16);
+            random(wire, random, 3);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire27(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 8);
+        random(wire, random, 2);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 8);
+        count(wire, count, 1, false);
+        random(wire, random, 7);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 1);
+            random(wire, random, 1);
+            random(wire, random, 6);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire28(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        count(wire, count, 1, false);
+        random(wire, random, 3);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 1);
+            random(wire, random, 1);
+            random(wire, random, 6);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire29(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 1);
+        random(wire, random, 3);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        count(wire, count, 1, false);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 5);
+        random(wire, random, 4);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 4);
+            random(wire, random, 1);
+            random(wire, random, 1);
+            random(wire, random, 1);
+            random(wire, random, 1);
+            random(wire, random, 3);
+            random(wire, random, 5);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire30(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 8);
+        random(wire, random, 2);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 1);
+        count(wire, count, 1, false);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 3);
+        random(wire, random, 5);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 1);
+            random(wire, random, 7);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire31(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 16);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 7);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        count(wire, count, 2, true);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 3);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire32(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 1);
+        random(wire, random, 3);
+        random(wire, random, 8);
+        count(wire, count, 2, true);
+        random(wire, random, 6);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire33(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 16);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 7);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        count(wire, count, 1, false);
+        random(wire, random, 3);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 4);
+            random(wire, random, 4);
+            random(wire, random, 1);
+            random(wire, random, 1);
+            random(wire, random, 1);
+            random(wire, random, 1);
+            random(wire, random, 1);
+            random(wire, random, 3);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire34(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 1);
+        random(wire, random, 3);
+        random(wire, random, 4);
+        count(wire, count, 2, true);
+        random(wire, random, 1);
+        random(wire, random, entries);
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire35(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 16);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 7);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        count(wire, count, 2, true);
+        count(wire, count, 2, true);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 2);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+        }
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire36(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 16);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 7);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        count(wire, count, 1, false);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 5);
+        random(wire, random, 6);
+        random(wire, random, 5);
+        random(wire, random, 6);
+        random(wire, random, 20);
+        random(wire, random, 1);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 4);
+            random(wire, random, 4);
+            random(wire, random, 1);
+            random(wire, random, 7);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire37(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 7);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        count(wire, count, 2, true);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 20);
+        random(wire, random, 5);
+        random(wire, random, 6);
+        random(wire, random, 1);
+        random(wire, random, 6);
+        random(wire, random, 5);
+        random(wire, random, 6);
+        random(wire, random, 12);
+        random(wire, random, 12);
+        random(wire, random, 16);
+        random(wire, random, entries);
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire38(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 7);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        count(wire, count, 2, true);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        count(wire, count, 1, false);
+        random(wire, random, 1);
+        random(wire, random, 20);
+        random(wire, random, 20);
+        random(wire, random, 5);
+        random(wire, random, 6);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 4);
+            random(wire, random, 4);
+            random(wire, random, 5);
+            random(wire, random, 6);
+            random(wire, random, 1);
+            random(wire, random, 1);
+            random(wire, random, 3);
+        }
+        random(wire, random, entries);
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire39(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        count(wire, count, 1, false);
+        random(wire, random, 7);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 2);
+            random(wire, random, 1);
+            random(wire, random, 5);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire40(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 7);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        count(wire, count, 1, false);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 5);
+        random(wire, random, 6);
+        random(wire, random, 6);
+        random(wire, random, 5);
+        random(wire, random, 6);
+        random(wire, random, 6);
+        random(wire, random, 20);
+        random(wire, random, 20);
+        random(wire, random, 12);
+        random(wire, random, 12);
+        random(wire, random, 16);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 1);
+            random(wire, random, 1);
+            random(wire, random, 6);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire41(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 7);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        count(wire, count, 1, false);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 5);
+        random(wire, random, 6);
+        random(wire, random, 6);
+        random(wire, random, 20);
+        random(wire, random, 12);
+        random(wire, random, 12);
+        random(wire, random, 16);
+        random(wire, random, 132);
+        random(wire, random, 132);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 4);
+            random(wire, random, 5);
+            random(wire, random, 6);
+            random(wire, random, 1);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire42(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 8);
+        random(wire, random, 2);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        count(wire, count, 1, false);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 5);
+        random(wire, random, 6);
+        random(wire, random, 132);
+        random(wire, random, 20);
+        random(wire, random, 12);
+        random(wire, random, 12);
+        random(wire, random, 16);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 4);
+            random(wire, random, 5);
+            random(wire, random, 6);
+            random(wire, random, 1);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire43(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 7);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        count(wire, count, 1, false);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 5);
+        random(wire, random, 6);
+        random(wire, random, 6);
+        random(wire, random, 20);
+        random(wire, random, 12);
+        random(wire, random, 12);
+        random(wire, random, 16);
+        random(wire, random, 132);
+        random(wire, random, 5);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 4);
+            random(wire, random, 5);
+            random(wire, random, 6);
+            random(wire, random, 1);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire44(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 7);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 20);
+        count(wire, count, 1, false);
+        random(wire, random, 3);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 4);
+            random(wire, random, 4);
+            random(wire, random, 1);
+            random(wire, random, 1);
+            random(wire, random, 20);
+            random(wire, random, 5);
+            random(wire, random, 6);
+            random(wire, random, 6);
+            random(wire, random, 1);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire45(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 2);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 2);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 7);
+        count(wire, count, 1, false);
+        random(wire, random, 1);
+        random(wire, random, 6);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 8);
+            random(wire, random, 4);
+            random(wire, random, 4);
+            random(wire, random, 1);
+            random(wire, random, 1);
+            random(wire, random, 20);
+            random(wire, random, 5);
+            random(wire, random, 6);
+            random(wire, random, 6);
+            random(wire, random, 1);
+        }
+        return wire.toByteArray();
+    }
+
+    private static byte[] wire46(Random random, int entries, long count) {
+        ByteArrayOutputStream wire = new ByteArrayOutputStream();
+        random(wire, random, 8);
+        random(wire, random, 2);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 8);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        random(wire, random, 4);
+        count(wire, count, 1, false);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 1);
+        random(wire, random, 5);
+        random(wire, random, 6);
+        random(wire, random, 12);
+        random(wire, random, 12);
+        random(wire, random, 16);
+        random(wire, random, 132);
+        random(wire, random, 3);
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 4);
+            random(wire, random, 5);
+            random(wire, random, 6);
+            random(wire, random, 1);
+        }
+        return wire.toByteArray();
+    }
+
+    private static void expect(String check, boolean passed) {
+        if (!passed) {
+            failures++;
+            System.out.println("FAIL " + check);
+        }
+    }
+}

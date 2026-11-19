@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.CorrelationIdField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.ExecIdField;
-import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.MassCancelRejectReasonField;
+import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.ReasonMassCancelRejectReasonField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.fields.TimestampField;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.structs.Details;
 import omi.coinbase.deribit.ordersapi.sbe.v0_1.types.Field;
@@ -51,7 +51,7 @@ public final class MassCancelRejectMessage implements Message {
     /**
      * reason
      */
-    private final MassCancelRejectReasonField massCancelRejectReason = new MassCancelRejectReasonField();
+    private final ReasonMassCancelRejectReasonField reasonMassCancelRejectReason = new ReasonMassCancelRejectReasonField();
 
     /**
      * details data struct
@@ -61,7 +61,7 @@ public final class MassCancelRejectMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(List.<Field>of(timestampField), List.<Field>of(execId), List.<Field>of(correlationId), List.<Field>of(massCancelRejectReason), details.fields()).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(List.<Field>of(timestampField), List.<Field>of(execId), List.<Field>of(correlationId), List.<Field>of(reasonMassCancelRejectReason), details.fields()).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -97,10 +97,10 @@ public final class MassCancelRejectMessage implements Message {
     /**
      * reason
      *
-     * @return the MassCancelRejectReason field
+     * @return the ReasonMassCancelRejectReason field
      */
-    public MassCancelRejectReasonField massCancelRejectReason() {
-        return massCancelRejectReason;
+    public ReasonMassCancelRejectReasonField reasonMassCancelRejectReason() {
+        return reasonMassCancelRejectReason;
     }
 
     /**
@@ -171,10 +171,10 @@ public final class MassCancelRejectMessage implements Message {
             return false;
         }
         cursor += CorrelationIdField.BYTE_LENGTH;
-        if (!massCancelRejectReason.parse(data, cursor)) {
+        if (!reasonMassCancelRejectReason.parse(data, cursor)) {
             return false;
         }
-        cursor += MassCancelRejectReasonField.BYTE_LENGTH;
+        cursor += ReasonMassCancelRejectReasonField.BYTE_LENGTH;
         if (!details.parseFrom(data, cursor, end)) {
             return false;
         }
@@ -190,7 +190,7 @@ public final class MassCancelRejectMessage implements Message {
         cursor = timestampField.encode(data, cursor);
         cursor = execId.encode(data, cursor);
         cursor = correlationId.encode(data, cursor);
-        cursor = massCancelRejectReason.encode(data, cursor);
+        cursor = reasonMassCancelRejectReason.encode(data, cursor);
         cursor = details.encode(data, cursor);
         return cursor;
     }
@@ -276,7 +276,7 @@ public final class MassCancelRejectMessage implements Message {
             case "Timestamp" -> Optional.of(timestampField);
             case "ExecId" -> Optional.of(execId);
             case "CorrelationId" -> Optional.of(correlationId);
-            case "MassCancelRejectReason" -> Optional.of(massCancelRejectReason);
+            case "ReasonMassCancelRejectReason" -> Optional.of(reasonMassCancelRejectReason);
             default -> Optional.empty();
         };
     }

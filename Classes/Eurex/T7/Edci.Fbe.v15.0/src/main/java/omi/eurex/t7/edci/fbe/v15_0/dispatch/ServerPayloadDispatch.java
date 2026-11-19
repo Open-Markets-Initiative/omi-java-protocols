@@ -1,0 +1,104 @@
+package omi.eurex.t7.edci.fbe.v15_0.dispatch;
+
+import java.util.Optional;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.CrossRequestNotification;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.DeleteOrderBroadcast;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.EnterClipRequestNotification;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.ForcedLogoutNotification;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.HeartbeatNotification;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.LegalNotificationBroadcast;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.LogonResponse;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.LogoutResponse;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.OrderExecReportBroadcast;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.OrderRejectNotification;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.PartitionListNotification;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.PartyActionReport;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.PartyEntitlementsUpdateReport;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.Reject;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.RetransmitResponse;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.RfqNotification;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.RiskNotificationBroadcast;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.ServiceAvailabilityMarketBroadcast;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.SessionListNotification;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.SessionStatusBroadcast;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.StatusBroadcast;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.TradingActionResponse;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.UserLoginResponse;
+import omi.eurex.t7.edci.fbe.v15_0.messages.application.UserLogoutResponse;
+import omi.eurex.t7.edci.fbe.v15_0.types.Message;
+
+/**
+ * Selects the message a Server Payload branch holds by its Template Id.
+ */
+public final class ServerPayloadDispatch {
+
+    private ServerPayloadDispatch() {
+    }
+
+    /**
+     * Decodes the message a Template Id selects.
+     *
+     * @param templateId the value read ahead of the message
+     * @param data the bytes holding the message
+     * @param offset where the message starts
+     * @param end the index just past the last byte the message may read
+     * @return the selected message, decoded where its bytes allow, or empty when the value selects no message this library decodes
+     */
+    public static Optional<Message> decode(long templateId, byte[] data, int offset, int end) {
+        Message message;
+        if (templateId == 10907L) {
+            message = new CrossRequestNotification();
+        } else if (templateId == 10902L) {
+            message = new DeleteOrderBroadcast();
+        } else if (templateId == 10906L) {
+            message = new EnterClipRequestNotification();
+        } else if (templateId == 10012L) {
+            message = new ForcedLogoutNotification();
+        } else if (templateId == 10023L) {
+            message = new HeartbeatNotification();
+        } else if (templateId == 10035L) {
+            message = new LegalNotificationBroadcast();
+        } else if (templateId == 10001L) {
+            message = new LogonResponse();
+        } else if (templateId == 10003L) {
+            message = new LogoutResponse();
+        } else if (templateId == 10901L) {
+            message = new OrderExecReportBroadcast();
+        } else if (templateId == 10014L) {
+            message = new OrderRejectNotification();
+        } else if (templateId == 10037L) {
+            message = new PartitionListNotification();
+        } else if (templateId == 10038L) {
+            message = new PartyActionReport();
+        } else if (templateId == 10034L) {
+            message = new PartyEntitlementsUpdateReport();
+        } else if (templateId == 10010L) {
+            message = new Reject();
+        } else if (templateId == 10009L) {
+            message = new RetransmitResponse();
+        } else if (templateId == 10905L) {
+            message = new RfqNotification();
+        } else if (templateId == 10033L) {
+            message = new RiskNotificationBroadcast();
+        } else if (templateId == 10044L) {
+            message = new ServiceAvailabilityMarketBroadcast();
+        } else if (templateId == 10036L) {
+            message = new SessionListNotification();
+        } else if (templateId == 10903L) {
+            message = new SessionStatusBroadcast();
+        } else if (templateId == 10045L) {
+            message = new StatusBroadcast();
+        } else if (templateId == 10909L) {
+            message = new TradingActionResponse();
+        } else if (templateId == 10019L) {
+            message = new UserLoginResponse();
+        } else if (templateId == 10024L) {
+            message = new UserLogoutResponse();
+        } else {
+            return Optional.empty();
+        }
+
+        message.parseFrom(data, offset, end);
+        return Optional.of(message);
+    }
+}

@@ -1,0 +1,486 @@
+package omi.nasdaq.psxequities.lastsale.itch.v2_1_2018.messages.application;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import omi.nasdaq.psxequities.lastsale.itch.v2_1_2018.fields.MarketCenterIdentifierField;
+import omi.nasdaq.psxequities.lastsale.itch.v2_1_2018.fields.NavPremiumDiscountAmountField;
+import omi.nasdaq.psxequities.lastsale.itch.v2_1_2018.fields.NextSharesSymbolField;
+import omi.nasdaq.psxequities.lastsale.itch.v2_1_2018.fields.ProxyPriceField;
+import omi.nasdaq.psxequities.lastsale.itch.v2_1_2018.fields.SaleConditionModifierLevel1Field;
+import omi.nasdaq.psxequities.lastsale.itch.v2_1_2018.fields.SaleConditionModifierLevel2Field;
+import omi.nasdaq.psxequities.lastsale.itch.v2_1_2018.fields.SaleConditionModifierLevel3Field;
+import omi.nasdaq.psxequities.lastsale.itch.v2_1_2018.fields.SaleConditionModifierLevel4Field;
+import omi.nasdaq.psxequities.lastsale.itch.v2_1_2018.fields.SecurityClassField;
+import omi.nasdaq.psxequities.lastsale.itch.v2_1_2018.fields.TradeControlNumberField;
+import omi.nasdaq.psxequities.lastsale.itch.v2_1_2018.fields.TradeSizeField;
+import omi.nasdaq.psxequities.lastsale.itch.v2_1_2018.types.Field;
+import omi.nasdaq.psxequities.lastsale.itch.v2_1_2018.types.Message;
+import omi.nasdaq.psxequities.lastsale.itch.v2_1_2018.types.PrintOptions;
+
+/**
+ * Represents the NextSharesTradeReportMessage message from the LastSale protocol.
+ *
+ * <p>The following message is used to relay PSX execution system and TRF trade transactions for Exchange Traded Managed Funds (NextShares) that are reported for the current business day.</p>
+ */
+public final class NextSharesTradeReportMessage implements Message {
+
+    /**
+     * The character identifying this message on the wire.
+     */
+    public static final char MESSAGE_TYPE = 'M';
+
+    /**
+     * This message's fixed width on the wire.
+     */
+    public static final int BYTE_LENGTH = 36;
+
+    /**
+     * This message's declared name.
+     */
+    public static final String NAME = "Next Shares Trade Report Message";
+
+    /**
+     * Denotes the PSX market system that generated the trade report message.
+     */
+    private final MarketCenterIdentifierField marketCenterIdentifier = new MarketCenterIdentifierField();
+
+    /**
+     * Denotes the symbol of the NextShares for which the trade report is being generated.
+     */
+    private final NextSharesSymbolField nextSharesSymbol = new NextSharesSymbolField();
+
+    /**
+     * Indicates the primary listing market for the issue.
+     */
+    private final SecurityClassField securityClass = new SecurityClassField();
+
+    /**
+     * Indicates the PSX system internal control number associated with the given trade transaction.
+     */
+    private final TradeControlNumberField tradeControlNumber = new TradeControlNumberField();
+
+    /**
+     * Denotes the proxy price on the NextShares trade transaction
+     */
+    private final ProxyPriceField proxyPrice = new ProxyPriceField();
+
+    /**
+     * Indicates the reported number of shares on the trade transaction.
+     */
+    private final TradeSizeField tradeSize = new TradeSizeField();
+
+    /**
+     * The NAV premium or discount that should be applied to the Proxy Price.
+     */
+    private final NavPremiumDiscountAmountField navPremiumDiscountAmount = new NavPremiumDiscountAmountField();
+
+    /**
+     * Sale Condition Modifier Level 1 value
+     */
+    private final SaleConditionModifierLevel1Field saleConditionModifierLevel1 = new SaleConditionModifierLevel1Field();
+
+    /**
+     * Sale Condition Modifier Level 2 value
+     */
+    private final SaleConditionModifierLevel2Field saleConditionModifierLevel2 = new SaleConditionModifierLevel2Field();
+
+    /**
+     * Sale Condition Modifier Level 3 value
+     */
+    private final SaleConditionModifierLevel3Field saleConditionModifierLevel3 = new SaleConditionModifierLevel3Field();
+
+    /**
+     * Sale Condition Modifier Level 4 value
+     */
+    private final SaleConditionModifierLevel4Field saleConditionModifierLevel4 = new SaleConditionModifierLevel4Field();
+
+    /**
+     * This message's fields, in wire order.
+     */
+    private final List<Field> fields = List.of(marketCenterIdentifier, nextSharesSymbol, securityClass, tradeControlNumber, proxyPrice, tradeSize, navPremiumDiscountAmount, saleConditionModifierLevel1, saleConditionModifierLevel2, saleConditionModifierLevel3, saleConditionModifierLevel4);
+
+    private byte[] buffer;
+
+    private boolean decoded;
+
+    /**
+     * Denotes the PSX market system that generated the trade report message.
+     *
+     * @return the MarketCenterIdentifier field
+     */
+    public MarketCenterIdentifierField marketCenterIdentifier() {
+        return marketCenterIdentifier;
+    }
+
+    /**
+     * Denotes the symbol of the NextShares for which the trade report is being generated.
+     *
+     * @return the NextSharesSymbol field
+     */
+    public NextSharesSymbolField nextSharesSymbol() {
+        return nextSharesSymbol;
+    }
+
+    /**
+     * Indicates the primary listing market for the issue.
+     *
+     * @return the SecurityClass field
+     */
+    public SecurityClassField securityClass() {
+        return securityClass;
+    }
+
+    /**
+     * Indicates the PSX system internal control number associated with the given trade transaction.
+     *
+     * @return the TradeControlNumber field
+     */
+    public TradeControlNumberField tradeControlNumber() {
+        return tradeControlNumber;
+    }
+
+    /**
+     * Denotes the proxy price on the NextShares trade transaction
+     *
+     * @return the ProxyPrice field
+     */
+    public ProxyPriceField proxyPrice() {
+        return proxyPrice;
+    }
+
+    /**
+     * Indicates the reported number of shares on the trade transaction.
+     *
+     * @return the TradeSize field
+     */
+    public TradeSizeField tradeSize() {
+        return tradeSize;
+    }
+
+    /**
+     * The NAV premium or discount that should be applied to the Proxy Price.
+     *
+     * @return the NavPremiumDiscountAmount field
+     */
+    public NavPremiumDiscountAmountField navPremiumDiscountAmount() {
+        return navPremiumDiscountAmount;
+    }
+
+    /**
+     * Sale Condition Modifier Level 1 value
+     *
+     * @return the SaleConditionModifierLevel1 field
+     */
+    public SaleConditionModifierLevel1Field saleConditionModifierLevel1() {
+        return saleConditionModifierLevel1;
+    }
+
+    /**
+     * Sale Condition Modifier Level 2 value
+     *
+     * @return the SaleConditionModifierLevel2 field
+     */
+    public SaleConditionModifierLevel2Field saleConditionModifierLevel2() {
+        return saleConditionModifierLevel2;
+    }
+
+    /**
+     * Sale Condition Modifier Level 3 value
+     *
+     * @return the SaleConditionModifierLevel3 field
+     */
+    public SaleConditionModifierLevel3Field saleConditionModifierLevel3() {
+        return saleConditionModifierLevel3;
+    }
+
+    /**
+     * Sale Condition Modifier Level 4 value
+     *
+     * @return the SaleConditionModifierLevel4 field
+     */
+    public SaleConditionModifierLevel4Field saleConditionModifierLevel4() {
+        return saleConditionModifierLevel4;
+    }
+
+    @Override
+    public Optional<Character> type() {
+        return Optional.of(MESSAGE_TYPE);
+    }
+
+    @Override
+    public int byteLength() {
+        return BYTE_LENGTH;
+    }
+
+    /**
+     * Returns this message's declared padding runs, as consecutive offset and length pairs relative to the start of the message.
+     *
+     * <p>Padding carries no value: decode advances over it, and encode writes back what decode received, or zero for a message assembled from values. Use this to check a received message's padding where the specification constrains it, or to render a byte map of the layout.</p>
+     *
+     * @return the padding runs, empty when the layout has none
+     */
+    public static int[] padding() {
+        return new int[0];
+    }
+
+    @Override
+    public Optional<Instant> timestamp() {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset) {
+        return parseFrom(data, offset, data.length);
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset, int end) {
+        clear();
+        this.decoded = read(data, offset, end);
+
+        int stop = Math.max(0, Math.min(data.length, offset + BYTE_LENGTH));
+        this.buffer = Arrays.copyOfRange(data, Math.min(Math.max(offset, 0), stop), stop);
+        return decoded;
+    }
+
+    private boolean read(byte[] data, int offset, int end) {
+        if (offset < 0 || end > data.length || end - offset < BYTE_LENGTH) {
+            return false;
+        }
+
+        int cursor = offset;
+        if (!marketCenterIdentifier.parse(data, cursor)) {
+            return false;
+        }
+        cursor += MarketCenterIdentifierField.BYTE_LENGTH;
+        if (!nextSharesSymbol.parse(data, cursor)) {
+            return false;
+        }
+        cursor += NextSharesSymbolField.BYTE_LENGTH;
+        if (!securityClass.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SecurityClassField.BYTE_LENGTH;
+        if (!tradeControlNumber.parse(data, cursor)) {
+            return false;
+        }
+        cursor += TradeControlNumberField.BYTE_LENGTH;
+        if (!proxyPrice.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ProxyPriceField.BYTE_LENGTH;
+        if (!tradeSize.parse(data, cursor)) {
+            return false;
+        }
+        cursor += TradeSizeField.BYTE_LENGTH;
+        if (!navPremiumDiscountAmount.parse(data, cursor)) {
+            return false;
+        }
+        cursor += NavPremiumDiscountAmountField.BYTE_LENGTH;
+        if (!saleConditionModifierLevel1.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SaleConditionModifierLevel1Field.BYTE_LENGTH;
+        if (!saleConditionModifierLevel2.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SaleConditionModifierLevel2Field.BYTE_LENGTH;
+        if (!saleConditionModifierLevel3.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SaleConditionModifierLevel3Field.BYTE_LENGTH;
+        return saleConditionModifierLevel4.parse(data, cursor);
+    }
+
+    @Override
+    public int encode(byte[] data, int offset) {
+        Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
+        int cursor = offset;
+        cursor = marketCenterIdentifier.encode(data, cursor);
+        cursor = nextSharesSymbol.encode(data, cursor);
+        cursor = securityClass.encode(data, cursor);
+        cursor = tradeControlNumber.encode(data, cursor);
+        cursor = proxyPrice.encode(data, cursor);
+        cursor = tradeSize.encode(data, cursor);
+        cursor = navPremiumDiscountAmount.encode(data, cursor);
+        cursor = saleConditionModifierLevel1.encode(data, cursor);
+        cursor = saleConditionModifierLevel2.encode(data, cursor);
+        cursor = saleConditionModifierLevel3.encode(data, cursor);
+        cursor = saleConditionModifierLevel4.encode(data, cursor);
+        return cursor;
+    }
+
+    @Override
+    public byte[] toBytes() {
+        byte[] data = new byte[BYTE_LENGTH];
+        encode(data, 0);
+        return data;
+    }
+
+    @Override
+    public void clear() {
+        for (Field field : fields) {
+            field.reset();
+        }
+        this.buffer = null;
+        this.decoded = false;
+    }
+
+    @Override
+    public boolean isDecoded() {
+        return decoded;
+    }
+
+    @Override
+    public boolean isRecognized() {
+        for (Field field : fields) {
+            if (!field.isRecognized()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isValid() {
+        for (Field field : fields) {
+            if (!field.isValid()) {
+                return false;
+            }
+        }
+        return isRecognized();
+    }
+
+    /**
+     * Returns a copy of the bytes this message was decoded from.
+     *
+     * <p>A failed decode leaves behind the partial range that was available, which is what a diagnostic needs to see.</p>
+     *
+     * @return the message bytes, or empty when no decode has been attempted
+     */
+    @Override
+    public Optional<byte[]> raw() {
+        if (buffer == null) {
+            return Optional.empty();
+        }
+        return Optional.of(buffer.clone());
+    }
+
+    @Override
+    public Optional<Field> failedAt() {
+        if (buffer == null || decoded) {
+            return Optional.empty();
+        }
+        for (Field field : fields) {
+            if (!field.isDecoded()) {
+                return Optional.of(field);
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Field> fields() {
+        return fields;
+    }
+
+    @Override
+    public Optional<Field> field(String name) {
+        return switch (name) {
+            case "MarketCenterIdentifier" -> Optional.of(marketCenterIdentifier);
+            case "NextSharesSymbol" -> Optional.of(nextSharesSymbol);
+            case "SecurityClass" -> Optional.of(securityClass);
+            case "TradeControlNumber" -> Optional.of(tradeControlNumber);
+            case "ProxyPrice" -> Optional.of(proxyPrice);
+            case "TradeSize" -> Optional.of(tradeSize);
+            case "NavPremiumDiscountAmount" -> Optional.of(navPremiumDiscountAmount);
+            case "SaleConditionModifierLevel1" -> Optional.of(saleConditionModifierLevel1);
+            case "SaleConditionModifierLevel2" -> Optional.of(saleConditionModifierLevel2);
+            case "SaleConditionModifierLevel3" -> Optional.of(saleConditionModifierLevel3);
+            case "SaleConditionModifierLevel4" -> Optional.of(saleConditionModifierLevel4);
+            default -> Optional.empty();
+        };
+    }
+
+    @Override
+    public List<Field> diffFields(Message other) {
+        if (!(other instanceof NextSharesTradeReportMessage message)) {
+            return List.of();
+        }
+        List<Field> changed = new ArrayList<>();
+        for (int index = 0; index < fields.size(); index++) {
+            if (!fields.get(index).equals(message.fields.get(index))) {
+                changed.add(fields.get(index));
+            }
+        }
+        return changed;
+    }
+
+    @Override
+    public String toFormattedString(PrintOptions options) {
+        StringBuilder builder = new StringBuilder();
+        toFormattedString(builder, options);
+        return builder.toString();
+    }
+
+    /**
+     * Appends this message's formatted representation.
+     *
+     * <p>The identifier form renders the message name alone, which is what a debugger label or a log line tracking message flow needs. The compact form adds every field on the same line, and the default form indents one field per line.</p>
+     *
+     * @param builder the destination
+     * @param options the display options
+     */
+    @Override
+    public void toFormattedString(StringBuilder builder, PrintOptions options) {
+        if (options.identifier()) {
+            builder.append(NAME);
+            return;
+        }
+
+        if (options.compact()) {
+            builder.append(NAME).append(" { ");
+            for (int index = 0; index < fields.size(); index++) {
+                if (index > 0) {
+                    builder.append(", ");
+                }
+                fields.get(index).toFormattedString(builder, options);
+            }
+            builder.append(" }");
+            return;
+        }
+
+        builder.append(options.prefix()).append(NAME).append(System.lineSeparator());
+        PrintOptions nested = options.nested();
+        for (Field field : fields) {
+            builder.append(nested.prefix());
+            field.toFormattedString(builder, nested);
+            builder.append(System.lineSeparator());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return toFormattedString(PrintOptions.DEFAULT);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof NextSharesTradeReportMessage message)) {
+            return false;
+        }
+        return fields.equals(message.fields);
+    }
+
+    @Override
+    public int hashCode() {
+        return fields.hashCode();
+    }
+}

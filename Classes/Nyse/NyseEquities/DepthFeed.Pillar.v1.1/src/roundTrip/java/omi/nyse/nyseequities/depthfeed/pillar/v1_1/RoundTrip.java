@@ -133,18 +133,14 @@ public final class RoundTrip {
         random(wire, random, 4);
         random(wire, random, 4);
         count(wire, count, 1, false);
-        if (entries > 0) {
-            for (int entry0 = 0; entry0 < entries; entry0++) {
+        for (int entry0 = 0; entry0 < entries; entry0++) {
+            random(wire, random, 4);
+            random(wire, random, 1);
+            count(wire, count, 1, false);
+            for (int entry1 = 0; entry1 < entries; entry1++) {
+                random(wire, random, 2);
+                random(wire, random, 2);
                 random(wire, random, 4);
-                random(wire, random, 1);
-                count(wire, count, 1, false);
-                if (entries > 0) {
-                    for (int entry1 = 0; entry1 < entries; entry1++) {
-                        random(wire, random, 2);
-                        random(wire, random, 2);
-                        random(wire, random, 4);
-                    }
-                }
             }
         }
         return wire.toByteArray();

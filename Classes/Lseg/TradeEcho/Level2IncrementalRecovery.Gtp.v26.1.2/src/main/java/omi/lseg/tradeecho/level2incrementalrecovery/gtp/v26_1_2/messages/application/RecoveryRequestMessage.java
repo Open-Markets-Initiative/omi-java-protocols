@@ -1,0 +1,418 @@
+package omi.lseg.tradeecho.level2incrementalrecovery.gtp.v26_1_2.messages.application;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import omi.lseg.tradeecho.level2incrementalrecovery.gtp.v26_1_2.fields.GroupIdField;
+import omi.lseg.tradeecho.level2incrementalrecovery.gtp.v26_1_2.fields.InstrumentField;
+import omi.lseg.tradeecho.level2incrementalrecovery.gtp.v26_1_2.fields.OrderBookTypeField;
+import omi.lseg.tradeecho.level2incrementalrecovery.gtp.v26_1_2.fields.RecoveryTypeField;
+import omi.lseg.tradeecho.level2incrementalrecovery.gtp.v26_1_2.fields.RequestIdField;
+import omi.lseg.tradeecho.level2incrementalrecovery.gtp.v26_1_2.fields.RequestLevelField;
+import omi.lseg.tradeecho.level2incrementalrecovery.gtp.v26_1_2.fields.SequenceNumberField;
+import omi.lseg.tradeecho.level2incrementalrecovery.gtp.v26_1_2.fields.SourceVenueField;
+import omi.lseg.tradeecho.level2incrementalrecovery.gtp.v26_1_2.types.Field;
+import omi.lseg.tradeecho.level2incrementalrecovery.gtp.v26_1_2.types.Message;
+import omi.lseg.tradeecho.level2incrementalrecovery.gtp.v26_1_2.types.PrintOptions;
+
+/**
+ * Represents the RecoveryRequestMessage message from the Level2IncrementalRecovery protocol.
+ *
+ * <p>Used by the client to request data on the recovery channel</p>
+ */
+public final class RecoveryRequestMessage implements Message {
+
+    /**
+     * This message's fixed width on the wire.
+     */
+    public static final int BYTE_LENGTH = 27;
+
+    /**
+     * This message's declared name.
+     */
+    public static final String NAME = "Recovery Request Message";
+
+    /**
+     * Defines the level of the request.
+     */
+    private final RequestLevelField requestLevel = new RequestLevelField();
+
+    /**
+     * GTP Instrument identifier if Request Level is 0. Blank if not.
+     */
+    private final InstrumentField instrument = new InstrumentField();
+
+    /**
+     * Group or Segment ID if Request Level is 1. Blank if not.
+     */
+    private final GroupIdField groupId = new GroupIdField();
+
+    /**
+     * Only considered if the Request Level is 0. If specified, only data related to the specified order book type is provided. If not specified, data for all available book types for the instrument are provided.
+     */
+    private final OrderBookTypeField orderBookType = new OrderBookTypeField();
+
+    /**
+     * Venue from which market data is received for the instrument.
+     */
+    private final SourceVenueField sourceVenue = new SourceVenueField();
+
+    /**
+     * The type of messages to be replayed.
+     */
+    private final RecoveryTypeField recoveryType = new RecoveryTypeField();
+
+    /**
+     * Not applicable to SI Quote.
+     */
+    private final SequenceNumberField sequenceNumber = new SequenceNumberField();
+
+    /**
+     * The value set in this will be echoed back in the corresponding Recovery Response and Recovery Complete. The system will not validate uniqueness of the set value.
+     */
+    private final RequestIdField requestId = new RequestIdField();
+
+    /**
+     * This message's fields, in wire order.
+     */
+    private final List<Field> fields = List.of(requestLevel, instrument, groupId, orderBookType, sourceVenue, recoveryType, sequenceNumber, requestId);
+
+    private byte[] buffer;
+
+    private boolean decoded;
+
+    /**
+     * Defines the level of the request.
+     *
+     * @return the RequestLevel field
+     */
+    public RequestLevelField requestLevel() {
+        return requestLevel;
+    }
+
+    /**
+     * GTP Instrument identifier if Request Level is 0. Blank if not.
+     *
+     * @return the Instrument field
+     */
+    public InstrumentField instrument() {
+        return instrument;
+    }
+
+    /**
+     * Group or Segment ID if Request Level is 1. Blank if not.
+     *
+     * @return the GroupId field
+     */
+    public GroupIdField groupId() {
+        return groupId;
+    }
+
+    /**
+     * Only considered if the Request Level is 0. If specified, only data related to the specified order book type is provided. If not specified, data for all available book types for the instrument are provided.
+     *
+     * @return the OrderBookType field
+     */
+    public OrderBookTypeField orderBookType() {
+        return orderBookType;
+    }
+
+    /**
+     * Venue from which market data is received for the instrument.
+     *
+     * @return the SourceVenue field
+     */
+    public SourceVenueField sourceVenue() {
+        return sourceVenue;
+    }
+
+    /**
+     * The type of messages to be replayed.
+     *
+     * @return the RecoveryType field
+     */
+    public RecoveryTypeField recoveryType() {
+        return recoveryType;
+    }
+
+    /**
+     * Not applicable to SI Quote.
+     *
+     * @return the SequenceNumber field
+     */
+    public SequenceNumberField sequenceNumber() {
+        return sequenceNumber;
+    }
+
+    /**
+     * The value set in this will be echoed back in the corresponding Recovery Response and Recovery Complete. The system will not validate uniqueness of the set value.
+     *
+     * @return the RequestId field
+     */
+    public RequestIdField requestId() {
+        return requestId;
+    }
+
+    @Override
+    public Optional<Character> type() {
+        return Optional.empty();
+    }
+
+    @Override
+    public int byteLength() {
+        return BYTE_LENGTH;
+    }
+
+    /**
+     * Returns this message's declared padding runs, as consecutive offset and length pairs relative to the start of the message.
+     *
+     * <p>Padding carries no value: decode advances over it, and encode writes back what decode received, or zero for a message assembled from values. Use this to check a received message's padding where the specification constrains it, or to render a byte map of the layout.</p>
+     *
+     * @return the padding runs, empty when the layout has none
+     */
+    public static int[] padding() {
+        return new int[0];
+    }
+
+    @Override
+    public Optional<Instant> timestamp() {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset) {
+        return parseFrom(data, offset, data.length);
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset, int end) {
+        clear();
+        this.decoded = read(data, offset, end);
+
+        int stop = Math.max(0, Math.min(data.length, offset + BYTE_LENGTH));
+        this.buffer = Arrays.copyOfRange(data, Math.min(Math.max(offset, 0), stop), stop);
+        return decoded;
+    }
+
+    private boolean read(byte[] data, int offset, int end) {
+        if (offset < 0 || end > data.length || end - offset < BYTE_LENGTH) {
+            return false;
+        }
+
+        int cursor = offset;
+        if (!requestLevel.parse(data, cursor)) {
+            return false;
+        }
+        cursor += RequestLevelField.BYTE_LENGTH;
+        if (!instrument.parse(data, cursor)) {
+            return false;
+        }
+        cursor += InstrumentField.BYTE_LENGTH;
+        if (!groupId.parse(data, cursor)) {
+            return false;
+        }
+        cursor += GroupIdField.BYTE_LENGTH;
+        if (!orderBookType.parse(data, cursor)) {
+            return false;
+        }
+        cursor += OrderBookTypeField.BYTE_LENGTH;
+        if (!sourceVenue.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SourceVenueField.BYTE_LENGTH;
+        if (!recoveryType.parse(data, cursor)) {
+            return false;
+        }
+        cursor += RecoveryTypeField.BYTE_LENGTH;
+        if (!sequenceNumber.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SequenceNumberField.BYTE_LENGTH;
+        return requestId.parse(data, cursor);
+    }
+
+    @Override
+    public int encode(byte[] data, int offset) {
+        Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
+        int cursor = offset;
+        cursor = requestLevel.encode(data, cursor);
+        cursor = instrument.encode(data, cursor);
+        cursor = groupId.encode(data, cursor);
+        cursor = orderBookType.encode(data, cursor);
+        cursor = sourceVenue.encode(data, cursor);
+        cursor = recoveryType.encode(data, cursor);
+        cursor = sequenceNumber.encode(data, cursor);
+        cursor = requestId.encode(data, cursor);
+        return cursor;
+    }
+
+    @Override
+    public byte[] toBytes() {
+        byte[] data = new byte[BYTE_LENGTH];
+        encode(data, 0);
+        return data;
+    }
+
+    @Override
+    public void clear() {
+        for (Field field : fields) {
+            field.reset();
+        }
+        this.buffer = null;
+        this.decoded = false;
+    }
+
+    @Override
+    public boolean isDecoded() {
+        return decoded;
+    }
+
+    @Override
+    public boolean isRecognized() {
+        for (Field field : fields) {
+            if (!field.isRecognized()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isValid() {
+        for (Field field : fields) {
+            if (!field.isValid()) {
+                return false;
+            }
+        }
+        return isRecognized();
+    }
+
+    /**
+     * Returns a copy of the bytes this message was decoded from.
+     *
+     * <p>A failed decode leaves behind the partial range that was available, which is what a diagnostic needs to see.</p>
+     *
+     * @return the message bytes, or empty when no decode has been attempted
+     */
+    @Override
+    public Optional<byte[]> raw() {
+        if (buffer == null) {
+            return Optional.empty();
+        }
+        return Optional.of(buffer.clone());
+    }
+
+    @Override
+    public Optional<Field> failedAt() {
+        if (buffer == null || decoded) {
+            return Optional.empty();
+        }
+        for (Field field : fields) {
+            if (!field.isDecoded()) {
+                return Optional.of(field);
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Field> fields() {
+        return fields;
+    }
+
+    @Override
+    public Optional<Field> field(String name) {
+        return switch (name) {
+            case "RequestLevel" -> Optional.of(requestLevel);
+            case "Instrument" -> Optional.of(instrument);
+            case "GroupId" -> Optional.of(groupId);
+            case "OrderBookType" -> Optional.of(orderBookType);
+            case "SourceVenue" -> Optional.of(sourceVenue);
+            case "RecoveryType" -> Optional.of(recoveryType);
+            case "SequenceNumber" -> Optional.of(sequenceNumber);
+            case "RequestId" -> Optional.of(requestId);
+            default -> Optional.empty();
+        };
+    }
+
+    @Override
+    public List<Field> diffFields(Message other) {
+        if (!(other instanceof RecoveryRequestMessage message)) {
+            return List.of();
+        }
+        List<Field> changed = new ArrayList<>();
+        for (int index = 0; index < fields.size(); index++) {
+            if (!fields.get(index).equals(message.fields.get(index))) {
+                changed.add(fields.get(index));
+            }
+        }
+        return changed;
+    }
+
+    @Override
+    public String toFormattedString(PrintOptions options) {
+        StringBuilder builder = new StringBuilder();
+        toFormattedString(builder, options);
+        return builder.toString();
+    }
+
+    /**
+     * Appends this message's formatted representation.
+     *
+     * <p>The identifier form renders the message name alone, which is what a debugger label or a log line tracking message flow needs. The compact form adds every field on the same line, and the default form indents one field per line.</p>
+     *
+     * @param builder the destination
+     * @param options the display options
+     */
+    @Override
+    public void toFormattedString(StringBuilder builder, PrintOptions options) {
+        if (options.identifier()) {
+            builder.append(NAME);
+            return;
+        }
+
+        if (options.compact()) {
+            builder.append(NAME).append(" { ");
+            for (int index = 0; index < fields.size(); index++) {
+                if (index > 0) {
+                    builder.append(", ");
+                }
+                fields.get(index).toFormattedString(builder, options);
+            }
+            builder.append(" }");
+            return;
+        }
+
+        builder.append(options.prefix()).append(NAME).append(System.lineSeparator());
+        PrintOptions nested = options.nested();
+        for (Field field : fields) {
+            builder.append(nested.prefix());
+            field.toFormattedString(builder, nested);
+            builder.append(System.lineSeparator());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return toFormattedString(PrintOptions.DEFAULT);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof RecoveryRequestMessage message)) {
+            return false;
+        }
+        return fields.equals(message.fields);
+    }
+
+    @Override
+    public int hashCode() {
+        return fields.hashCode();
+    }
+}

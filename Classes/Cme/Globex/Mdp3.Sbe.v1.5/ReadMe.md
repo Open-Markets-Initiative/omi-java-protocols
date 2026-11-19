@@ -59,7 +59,7 @@ Each message class carries its wire length as `BYTE_LENGTH`, and its type as `ME
 | Message | Package | Type | Bytes |
 | --- | --- | --- | ---: |
 | `AdminLogin` | `messages.application` |  | 1 |
-| `AdminLogout` | `messages.application` |  | 180 |
+| `AdminLogout` | `messages.application` |  | 100 |
 | `ChannelReset` | `messages.application` |  | 12 |
 | `MarketDataRequest` | `messages.application` |  | 11 |
 | `MdIncrementalRefreshBook` | `messages.application` |  | 14 |
@@ -83,8 +83,8 @@ Each message class carries its wire length as `BYTE_LENGTH`, and its type as `ME
 | `SecurityStatusRequest` | `messages.application` |  | 11 |
 | `SnapshotFullRefresh` | `messages.application` |  | 62 |
 | `Terminate` | `messages.application` |  | 70 |
-| `AdminHeartbeat` | `messages.session` |  | 0 |
-| `SubscriberHeartbeat` | `messages.session` |  | 0 |
+| `AdminHeartbeat` | `messages.application` |  | 0 |
+| `SubscriberHeartbeat` | `messages.application` |  | 0 |
 
 ## Verification
 

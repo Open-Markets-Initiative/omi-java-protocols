@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import omi.cme.globex.mdp3.sbe.v1_12.fields.FxMinLotSizeField;
 import omi.cme.globex.mdp3.sbe.v1_12.fields.LotTypeField;
+import omi.cme.globex.mdp3.sbe.v1_12.fields.MinLotSizeUIntField;
 import omi.cme.globex.mdp3.sbe.v1_12.types.Field;
 import omi.cme.globex.mdp3.sbe.v1_12.types.GroupEntry;
 import omi.cme.globex.mdp3.sbe.v1_12.types.PrintOptions;
@@ -41,12 +41,12 @@ public final class FxLotTypeRulesGroupEntry implements GroupEntry {
     /**
      * For FX instruments in the repeating group with Tag 1093-LotType=2, Tag 1231-MinLotSize provides a Regular Amount - a default order size on the Workstation screen. With tag 1093-LotType= 5, Tag 1231-MinLotSize value represents standard min order qty increment
      */
-    private final FxMinLotSizeField fxMinLotSize = new FxMinLotSizeField();
+    private final MinLotSizeUIntField minLotSizeUInt = new MinLotSizeUIntField();
 
     /**
      * This entry's fields, in wire order.
      */
-    private final List<Field> fields = List.of(lotType, fxMinLotSize);
+    private final List<Field> fields = List.of(lotType, minLotSizeUInt);
 
     private byte[] buffer;
 
@@ -64,10 +64,10 @@ public final class FxLotTypeRulesGroupEntry implements GroupEntry {
     /**
      * For FX instruments in the repeating group with Tag 1093-LotType=2, Tag 1231-MinLotSize provides a Regular Amount - a default order size on the Workstation screen. With tag 1093-LotType= 5, Tag 1231-MinLotSize value represents standard min order qty increment
      *
-     * @return the FxMinLotSize field
+     * @return the MinLotSizeUInt field
      */
-    public FxMinLotSizeField fxMinLotSize() {
-        return fxMinLotSize;
+    public MinLotSizeUIntField minLotSizeUInt() {
+        return minLotSizeUInt;
     }
 
     private int wireBlock = ROOT_BYTE_LENGTH;
@@ -166,10 +166,10 @@ public final class FxLotTypeRulesGroupEntry implements GroupEntry {
             cursor += LotTypeField.BYTE_LENGTH;
         }
         if (known >= 9) {
-            if (!fxMinLotSize.parse(data, cursor)) {
+            if (!minLotSizeUInt.parse(data, cursor)) {
                 return false;
             }
-            cursor += FxMinLotSizeField.BYTE_LENGTH;
+            cursor += MinLotSizeUIntField.BYTE_LENGTH;
         }
         if (wireBlock > known) {
             this.blockTrailer = Arrays.copyOfRange(data, offset + known, offset + wireBlock);
@@ -188,7 +188,7 @@ public final class FxLotTypeRulesGroupEntry implements GroupEntry {
             cursor = lotType.encode(data, cursor);
         }
         if (known >= 9) {
-            cursor = fxMinLotSize.encode(data, cursor);
+            cursor = minLotSizeUInt.encode(data, cursor);
         }
         int kept = Math.min(blockTrailer.length, wireBlock - known);
         System.arraycopy(blockTrailer, 0, data, offset + known, kept);
@@ -276,7 +276,7 @@ public final class FxLotTypeRulesGroupEntry implements GroupEntry {
     public Optional<Field> field(String name) {
         return switch (name) {
             case "LotType" -> Optional.of(lotType);
-            case "FxMinLotSize" -> Optional.of(fxMinLotSize);
+            case "MinLotSizeUInt" -> Optional.of(minLotSizeUInt);
             default -> Optional.empty();
         };
     }

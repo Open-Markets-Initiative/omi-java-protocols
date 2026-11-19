@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.fields.LogoutReasonField;
+import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.fields.ReasonStringField;
 import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.types.Field;
 import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.types.Message;
 import omi.coinbase.coinbasederivatives.ordersapi.sbe.v1_8.types.PrintOptions;
@@ -31,12 +31,12 @@ public final class LogoutMessage implements Message {
     /**
      * reason
      */
-    private final LogoutReasonField logoutReason = new LogoutReasonField();
+    private final ReasonStringField reasonString = new ReasonStringField();
 
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(logoutReason);
+    private final List<Field> fields = List.of(reasonString);
 
     private byte[] buffer;
 
@@ -45,10 +45,10 @@ public final class LogoutMessage implements Message {
     /**
      * reason
      *
-     * @return the LogoutReason field
+     * @return the ReasonString field
      */
-    public LogoutReasonField logoutReason() {
-        return logoutReason;
+    public ReasonStringField reasonString() {
+        return reasonString;
     }
 
     @Override
@@ -98,14 +98,14 @@ public final class LogoutMessage implements Message {
         }
 
         int cursor = offset;
-        return logoutReason.parse(data, cursor);
+        return reasonString.parse(data, cursor);
     }
 
     @Override
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        cursor = logoutReason.encode(data, cursor);
+        cursor = reasonString.encode(data, cursor);
         return cursor;
     }
 
@@ -185,7 +185,7 @@ public final class LogoutMessage implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return "LogoutReason".equals(name) ? Optional.of(logoutReason) : Optional.empty();
+        return "ReasonString".equals(name) ? Optional.of(reasonString) : Optional.empty();
     }
 
     @Override

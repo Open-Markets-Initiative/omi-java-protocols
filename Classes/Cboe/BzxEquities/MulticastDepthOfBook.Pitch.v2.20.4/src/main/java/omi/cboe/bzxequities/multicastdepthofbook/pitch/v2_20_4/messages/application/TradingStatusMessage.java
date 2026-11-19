@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.RegShoActionField;
+import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.ReservedField;
+import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.SecondReservedField;
 import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.SymbolLongField;
 import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.TimeOffsetField;
 import omi.cboe.bzxequities.multicastdepthofbook.pitch.v2_20_4.fields.TradingStatusField;
@@ -32,13 +34,6 @@ public final class TradingStatusMessage implements Message {
     public static final String NAME = "Trading Status Message";
 
     /**
-     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
-     *
-     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
-     */
-    private static final int[] PADDING = { 14, 1, 15, 1 };
-
-    /**
      * Nanosecond offset from last
      */
     private final TimeOffsetField timeOffset = new TimeOffsetField();
@@ -59,9 +54,19 @@ public final class TradingStatusMessage implements Message {
     private final RegShoActionField regShoAction = new RegShoActionField();
 
     /**
+     * Reserved
+     */
+    private final ReservedField reserved = new ReservedField();
+
+    /**
+     * Reserved
+     */
+    private final SecondReservedField secondReserved = new SecondReservedField();
+
+    /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(timeOffset, symbolLong, tradingStatus, regShoAction);
+    private final List<Field> fields = List.of(timeOffset, symbolLong, tradingStatus, regShoAction, reserved, secondReserved);
 
     private byte[] buffer;
 
@@ -103,6 +108,24 @@ public final class TradingStatusMessage implements Message {
         return regShoAction;
     }
 
+    /**
+     * Reserved
+     *
+     * @return the Reserved field
+     */
+    public ReservedField reserved() {
+        return reserved;
+    }
+
+    /**
+     * Reserved
+     *
+     * @return the SecondReserved field
+     */
+    public SecondReservedField secondReserved() {
+        return secondReserved;
+    }
+
     @Override
     public Optional<Character> type() {
         return Optional.empty();
@@ -121,7 +144,7 @@ public final class TradingStatusMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return PADDING.clone();
+        return new int[0];
     }
 
     @Override
@@ -166,8 +189,11 @@ public final class TradingStatusMessage implements Message {
             return false;
         }
         cursor += RegShoActionField.BYTE_LENGTH;
-
-        return true;
+        if (!reserved.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ReservedField.BYTE_LENGTH;
+        return secondReserved.parse(data, cursor);
     }
 
     @Override
@@ -178,12 +204,8 @@ public final class TradingStatusMessage implements Message {
         cursor = symbolLong.encode(data, cursor);
         cursor = tradingStatus.encode(data, cursor);
         cursor = regShoAction.encode(data, cursor);
-        if (buffer != null && buffer.length >= 16) {
-            System.arraycopy(buffer, 14, data, cursor, 2); // padding
-        } else {
-            Arrays.fill(data, cursor, cursor + 2, (byte) 0); // padding
-        }
-        cursor += 2;
+        cursor = reserved.encode(data, cursor);
+        cursor = secondReserved.encode(data, cursor);
         return cursor;
     }
 
@@ -268,6 +290,8 @@ public final class TradingStatusMessage implements Message {
             case "SymbolLong" -> Optional.of(symbolLong);
             case "TradingStatus" -> Optional.of(tradingStatus);
             case "RegShoAction" -> Optional.of(regShoAction);
+            case "Reserved" -> Optional.of(reserved);
+            case "SecondReserved" -> Optional.of(secondReserved);
             default -> Optional.empty();
         };
     }

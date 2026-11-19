@@ -5,8 +5,9 @@
 
 | Division | [Protocol][Omi.BlueOceanAts.Protocol.Definitions] | [Encoding][Omi.Encoding.Definitions] | Version | Date | Size | [Deployment][Omi.Glossary.Deployment] | [Testing][Omi.Glossary.Testing] | [Documentation][Omi.BlueOceanAts.Specifications] |
 | --- | --- | --- | --- | ---: | ---: | --- | --- | --- |
-| [BlueEquities][BlueEquities.Ats] | [MemoirDepthFeed][BlueOceanAts.BlueEquities.MemoirDepthFeed] | [Sbe][Omi.Encoding.Sbe] | [1.3][BlueOceanAts.BlueEquities.MemoirDepthFeed.Sbe.v1.3.Parser] | 9/1/2025 | 9,477 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][BlueOceanAts.BlueEquities.MemoirDepthFeed.Sbe.v1.3.Url] - [url][BlueOceanAts.BlueEquities.MemoirDepthFeed.Sbe.v1.3.Pdf] |
-| [BlueEquities][BlueEquities.Ats] | [MemoirLastSale][BlueOceanAts.BlueEquities.MemoirLastSale] | [Sbe][Omi.Encoding.Sbe] | [1.3][BlueOceanAts.BlueEquities.MemoirLastSale.Sbe.v1.3.Parser] | 1/1/2024 | 9,782 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][BlueOceanAts.BlueEquities.MemoirLastSale.Sbe.v1.3.Url] - [url][BlueOceanAts.BlueEquities.MemoirLastSale.Sbe.v1.3.Pdf] |
+| [BlueEquities][BlueEquities.Ats] | [MemoirDepthFeed][BlueOceanAts.BlueEquities.MemoirDepthFeed] | [Sbe][Omi.Encoding.Sbe] | [1.3][BlueOceanAts.BlueEquities.MemoirDepthFeed.Sbe.v1.3.Parser] | 9/1/2025 | 9,462 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][BlueOceanAts.BlueEquities.MemoirDepthFeed.Sbe.v1.3.Url] - [url][BlueOceanAts.BlueEquities.MemoirDepthFeed.Sbe.v1.3.Pdf] |
+| [BlueEquities][BlueEquities.Ats] | [MemoirLastSale][BlueOceanAts.BlueEquities.MemoirLastSale] | [Sbe][Omi.Encoding.Sbe] | [1.3][BlueOceanAts.BlueEquities.MemoirLastSale.Sbe.v1.3.Parser] | 1/1/2024 | 9,767 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][BlueOceanAts.BlueEquities.MemoirLastSale.Sbe.v1.3.Url] - [url][BlueOceanAts.BlueEquities.MemoirLastSale.Sbe.v1.3.Pdf] |
+| [BlueEquities][BlueEquities.Ats] | [MemoirTopOfBook][BlueOceanAts.BlueEquities.MemoirTopOfBook] | [Sbe][Omi.Encoding.Sbe] | [1.3][BlueOceanAts.BlueEquities.MemoirTopOfBook.Sbe.v1.3.Parser] | 1/1/2024 | 8,320 | [Active][Omi.Glossary.Deployment.Active] | [Untested][Omi.Glossary.Testing.Untested] | [url][BlueOceanAts.BlueEquities.MemoirTopOfBook.Sbe.v1.3.Url] - [url][BlueOceanAts.BlueEquities.MemoirTopOfBook.Sbe.v1.3.Pdf] |
 
 
 <p align="center"><a href="https://blueocean-tech.io/" title="Blue Ocean Technologies Website"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/Website.png" alt="Website" width="32" height="32"></a>&nbsp;&nbsp;<a href="https://www.linkedin.com/company/blue-ocean-technologies-llc-an-overnight-trading-company" title="Blue Ocean Technologies on LinkedIn"><img src="https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/raw/main/About/Icons/LinkedIn.png" alt="LinkedIn" width="32" height="32"></a></p>
@@ -32,6 +33,7 @@
 [BlueEquities.Ats]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/BlueOceanAts/BlueEquities "Blue Equities"
 [BlueOceanAts.BlueEquities.MemoirDepthFeed]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/BlueOceanAts/Protocols/BlueEquities/MemoirDepthFeed.md "Member Order Information Record Depth Feed"
 [BlueOceanAts.BlueEquities.MemoirLastSale]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/BlueOceanAts/Protocols/BlueEquities/MemoirLastSale.md "Member Order Information Record Last Sale"
+[BlueOceanAts.BlueEquities.MemoirTopOfBook]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/BlueOceanAts/Protocols/BlueEquities/MemoirTopOfBook.md "Member Order Information Record Top Of Book"
 
 [BlueOceanAts.BlueEquities.MemoirDepthFeed.Sbe.v1.3.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/BlueOceanAts/BlueEquities/MemoirDepthFeed.Sbe.v1.3 "BlueOceanAts MemoirDepthFeed Sbe v1.3 Java Parser"
 [BlueOceanAts.BlueEquities.MemoirDepthFeed.Sbe.v1.3.Url]: https://blueocean-tech.io/trading-updates "Blue Ocean Technologies 1.3 Url"
@@ -39,3 +41,6 @@
 [BlueOceanAts.BlueEquities.MemoirLastSale.Sbe.v1.3.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/BlueOceanAts/BlueEquities/MemoirLastSale.Sbe.v1.3 "BlueOceanAts MemoirLastSale Sbe v1.3 Java Parser"
 [BlueOceanAts.BlueEquities.MemoirLastSale.Sbe.v1.3.Url]: https://blueocean-tech.io/trading-updates "Blue Ocean Technologies 1.3 Url"
 [BlueOceanAts.BlueEquities.MemoirLastSale.Sbe.v1.3.Pdf]: https://hubs.ly/Q02xwhM50 "Blue Ocean Technologies 1.3 Pdf"
+[BlueOceanAts.BlueEquities.MemoirTopOfBook.Sbe.v1.3.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/BlueOceanAts/BlueEquities/MemoirTopOfBook.Sbe.v1.3 "BlueOceanAts MemoirTopOfBook Sbe v1.3 Java Parser"
+[BlueOceanAts.BlueEquities.MemoirTopOfBook.Sbe.v1.3.Url]: https://blueocean-tech.io/trading-updates "Blue Ocean Technologies 1.3 Url"
+[BlueOceanAts.BlueEquities.MemoirTopOfBook.Sbe.v1.3.Pdf]: https://hubs.ly/Q034Yq9k0 "Blue Ocean Technologies 1.3 Pdf"
