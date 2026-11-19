@@ -17,7 +17,7 @@ import omi.siac.cts.output.cta.v1_91.messages.application.EndOfDayMessage;
 import omi.siac.cts.output.cta.v1_91.messages.application.EndOfEndOfDaySummaryMessage;
 import omi.siac.cts.output.cta.v1_91.messages.application.EndOfStartOfDaySummaryMessage;
 import omi.siac.cts.output.cta.v1_91.messages.application.EndOfTestCycleMessage;
-import omi.siac.cts.output.cta.v1_91.messages.application.Index;
+import omi.siac.cts.output.cta.v1_91.messages.application.IndexMessage;
 import omi.siac.cts.output.cta.v1_91.messages.application.LineIntegrityMessage;
 import omi.siac.cts.output.cta.v1_91.messages.application.LongTradeMessage;
 import omi.siac.cts.output.cta.v1_91.messages.application.MarketWideCircuitBreakerDeclineLevelStatusMessage;
@@ -61,7 +61,7 @@ public final class RoundTrip {
         check(EndOfEndOfDaySummaryMessage::new);
         check(EndOfStartOfDaySummaryMessage::new);
         check(EndOfTestCycleMessage::new);
-        check(Index::new);
+        check(IndexMessage::new);
         check(LineIntegrityMessage::new);
         check(LongTradeMessage::new);
         check(MarketWideCircuitBreakerDeclineLevelStatusMessage::new);

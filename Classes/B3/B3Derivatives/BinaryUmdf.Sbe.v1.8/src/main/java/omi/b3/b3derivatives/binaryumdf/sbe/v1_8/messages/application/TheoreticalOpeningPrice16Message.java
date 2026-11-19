@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Optional;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MatchEventIndicatorField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdCorporateOffsetPriceOptionalField;
-import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntrySizeQuantityOptionalField;
+import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntrySizeOptionalField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdEntryTimestampField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.MdUpdateActionField;
 import omi.b3.b3derivatives.binaryumdf.sbe.v1_8.fields.RptSeqField;
@@ -63,7 +63,7 @@ public final class TheoreticalOpeningPrice16Message implements Message {
     /**
      * mDEntrySize
      */
-    private final MdEntrySizeQuantityOptionalField mdEntrySizeQuantityOptional = new MdEntrySizeQuantityOptionalField();
+    private final MdEntrySizeOptionalField mdEntrySizeOptional = new MdEntrySizeOptionalField();
 
     /**
      * mDEntryTimestamp
@@ -78,7 +78,7 @@ public final class TheoreticalOpeningPrice16Message implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(securityId, matchEventIndicator, mdUpdateAction, tradeDate, mdCorporateOffsetPriceOptional, mdEntrySizeQuantityOptional, mdEntryTimestamp, rptSeq);
+    private final List<Field> fields = List.of(securityId, matchEventIndicator, mdUpdateAction, tradeDate, mdCorporateOffsetPriceOptional, mdEntrySizeOptional, mdEntryTimestamp, rptSeq);
 
     private byte[] buffer;
 
@@ -132,10 +132,10 @@ public final class TheoreticalOpeningPrice16Message implements Message {
     /**
      * mDEntrySize
      *
-     * @return the MdEntrySizeQuantityOptional field
+     * @return the MdEntrySizeOptional field
      */
-    public MdEntrySizeQuantityOptionalField mdEntrySizeQuantityOptional() {
-        return mdEntrySizeQuantityOptional;
+    public MdEntrySizeOptionalField mdEntrySizeOptional() {
+        return mdEntrySizeOptional;
     }
 
     /**
@@ -223,10 +223,10 @@ public final class TheoreticalOpeningPrice16Message implements Message {
             return false;
         }
         cursor += MdCorporateOffsetPriceOptionalField.BYTE_LENGTH;
-        if (!mdEntrySizeQuantityOptional.parse(data, cursor)) {
+        if (!mdEntrySizeOptional.parse(data, cursor)) {
             return false;
         }
-        cursor += MdEntrySizeQuantityOptionalField.BYTE_LENGTH;
+        cursor += MdEntrySizeOptionalField.BYTE_LENGTH;
         if (!mdEntryTimestamp.parse(data, cursor)) {
             return false;
         }
@@ -243,7 +243,7 @@ public final class TheoreticalOpeningPrice16Message implements Message {
         cursor = mdUpdateAction.encode(data, cursor);
         cursor = tradeDate.encode(data, cursor);
         cursor = mdCorporateOffsetPriceOptional.encode(data, cursor);
-        cursor = mdEntrySizeQuantityOptional.encode(data, cursor);
+        cursor = mdEntrySizeOptional.encode(data, cursor);
         cursor = mdEntryTimestamp.encode(data, cursor);
         cursor = rptSeq.encode(data, cursor);
         return cursor;
@@ -331,7 +331,7 @@ public final class TheoreticalOpeningPrice16Message implements Message {
             case "MdUpdateAction" -> Optional.of(mdUpdateAction);
             case "TradeDate" -> Optional.of(tradeDate);
             case "MdCorporateOffsetPriceOptional" -> Optional.of(mdCorporateOffsetPriceOptional);
-            case "MdEntrySizeQuantityOptional" -> Optional.of(mdEntrySizeQuantityOptional);
+            case "MdEntrySizeOptional" -> Optional.of(mdEntrySizeOptional);
             case "MdEntryTimestamp" -> Optional.of(mdEntryTimestamp);
             case "RptSeq" -> Optional.of(rptSeq);
             default -> Optional.empty();

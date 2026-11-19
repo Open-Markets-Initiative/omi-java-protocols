@@ -11,7 +11,6 @@ import omi.siac.cqs.output.cta.v2_10_a.fields.MarketWideCircuitBreakerLevelIndic
 import omi.siac.cqs.output.cta.v2_10_a.fields.MessageIdField;
 import omi.siac.cqs.output.cta.v2_10_a.fields.ParticipantIdField;
 import omi.siac.cqs.output.cta.v2_10_a.fields.ParticipantReferenceNumberField;
-import omi.siac.cqs.output.cta.v2_10_a.fields.ReservedField2;
 import omi.siac.cqs.output.cta.v2_10_a.fields.TransactionIdField;
 import omi.siac.cqs.output.cta.v2_10_a.structs.Timestamp;
 import omi.siac.cqs.output.cta.v2_10_a.types.Field;
@@ -41,6 +40,13 @@ public final class MarketWideCircuitBreakerStatusMessage implements Message {
     public static final String NAME = "Market Wide Circuit Breaker Status Message";
 
     /**
+     * This message's declared padding runs, as {@code offset, length} pairs relative to the start of the message.
+     *
+     * <p>Only runs the specification declares as padding appear here. A gap between fields that is not listed is a layout defect, not padding.</p>
+     */
+    private static final int[] PADDING = { 23, 1 };
+
+    /**
      * Identifies the Participant or Processor that generated the message
      */
     private final ParticipantIdField participantId = new ParticipantIdField();
@@ -66,11 +72,6 @@ public final class MarketWideCircuitBreakerStatusMessage implements Message {
     private final MarketWideCircuitBreakerLevelIndicatorField marketWideCircuitBreakerLevelIndicator = new MarketWideCircuitBreakerLevelIndicatorField();
 
     /**
-     * Space-filled. Field is reserved for future use
-     */
-    private final ReservedField2 reserved = new ReservedField2();
-
-    /**
      * Timestamp 1
      */
     private final Timestamp timestampField = new Timestamp();
@@ -78,7 +79,7 @@ public final class MarketWideCircuitBreakerStatusMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(List.<Field>of(participantId), timestampField.fields(), List.<Field>of(messageId), List.<Field>of(transactionId), List.<Field>of(participantReferenceNumber), List.<Field>of(marketWideCircuitBreakerLevelIndicator), List.<Field>of(reserved)).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(List.<Field>of(participantId), timestampField.fields(), List.<Field>of(messageId), List.<Field>of(transactionId), List.<Field>of(participantReferenceNumber), List.<Field>of(marketWideCircuitBreakerLevelIndicator)).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -130,15 +131,6 @@ public final class MarketWideCircuitBreakerStatusMessage implements Message {
     }
 
     /**
-     * Space-filled. Field is reserved for future use
-     *
-     * @return the Reserved field
-     */
-    public ReservedField2 reserved() {
-        return reserved;
-    }
-
-    /**
      * Timestamp 1
      *
      * @return the Timestamp record
@@ -165,7 +157,7 @@ public final class MarketWideCircuitBreakerStatusMessage implements Message {
      * @return the padding runs, empty when the layout has none
      */
     public static int[] padding() {
-        return new int[0];
+        return PADDING.clone();
     }
 
     @Override
@@ -218,7 +210,8 @@ public final class MarketWideCircuitBreakerStatusMessage implements Message {
             return false;
         }
         cursor += MarketWideCircuitBreakerLevelIndicatorField.BYTE_LENGTH;
-        return reserved.parse(data, cursor);
+
+        return true;
     }
 
     @Override
@@ -231,7 +224,12 @@ public final class MarketWideCircuitBreakerStatusMessage implements Message {
         cursor = transactionId.encode(data, cursor);
         cursor = participantReferenceNumber.encode(data, cursor);
         cursor = marketWideCircuitBreakerLevelIndicator.encode(data, cursor);
-        cursor = reserved.encode(data, cursor);
+        if (buffer != null && buffer.length >= 24) {
+            System.arraycopy(buffer, 23, data, cursor, 1); // padding
+        } else {
+            Arrays.fill(data, cursor, cursor + 1, (byte) 0); // padding
+        }
+        cursor += 1;
         return cursor;
     }
 
@@ -318,7 +316,6 @@ public final class MarketWideCircuitBreakerStatusMessage implements Message {
             case "TransactionId" -> Optional.of(transactionId);
             case "ParticipantReferenceNumber" -> Optional.of(participantReferenceNumber);
             case "MarketWideCircuitBreakerLevelIndicator" -> Optional.of(marketWideCircuitBreakerLevelIndicator);
-            case "Reserved" -> Optional.of(reserved);
             default -> Optional.empty();
         };
     }

@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.fields.TimestampField;
+import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.fields.TimeOffsetField;
 import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.types.Field;
 import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.types.Message;
 import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.types.PrintOptions;
@@ -31,12 +31,12 @@ public final class EndOfSessionMessage implements Message {
     /**
      * Nanosecond offset from last
      */
-    private final TimestampField timestampField = new TimestampField();
+    private final TimeOffsetField timeOffset = new TimeOffsetField();
 
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(timestampField);
+    private final List<Field> fields = List.of(timeOffset);
 
     private byte[] buffer;
 
@@ -45,10 +45,10 @@ public final class EndOfSessionMessage implements Message {
     /**
      * Nanosecond offset from last
      *
-     * @return the Timestamp field
+     * @return the TimeOffset field
      */
-    public TimestampField timestampField() {
-        return timestampField;
+    public TimeOffsetField timeOffset() {
+        return timeOffset;
     }
 
     @Override
@@ -98,14 +98,14 @@ public final class EndOfSessionMessage implements Message {
         }
 
         int cursor = offset;
-        return timestampField.parse(data, cursor);
+        return timeOffset.parse(data, cursor);
     }
 
     @Override
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        cursor = timestampField.encode(data, cursor);
+        cursor = timeOffset.encode(data, cursor);
         return cursor;
     }
 
@@ -185,7 +185,7 @@ public final class EndOfSessionMessage implements Message {
 
     @Override
     public Optional<Field> field(String name) {
-        return "Timestamp".equals(name) ? Optional.of(timestampField) : Optional.empty();
+        return "TimeOffset".equals(name) ? Optional.of(timeOffset) : Optional.empty();
     }
 
     @Override

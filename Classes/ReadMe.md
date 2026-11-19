@@ -38,7 +38,7 @@ Each organization directory lists its protocols. Each protocol directory is a Gr
 
 Every build runs each protocol's round trip, which decodes every message from deterministic bytes at a non-zero offset and requires it to encode back to the same bytes, decode again to an equal message, clear, and refuse a buffer too short to hold it.
 
-A protocol with a `PacketDecoder` or a TCP stream also has a capture test, which walks every UDP datagram of a pcap or pcap-ng capture, or of each capture in a directory, and the records of every TCP connection, and requires every message to encode back to its own bytes. The build workflow runs it on 49 protocols, each against its captures from [omi-data-packets](https://github.com/Open-Markets-Initiative/omi-data-packets). The same run, locally, from the repository root:
+A protocol with a `PacketDecoder` or a TCP stream also has a capture test, which walks every UDP datagram of a pcap or pcap-ng capture, or of each capture in a directory, and the records of every TCP connection, and requires every message to encode back to its own bytes. The build workflow runs it on 62 protocols, each against its captures from [omi-data-packets](https://github.com/Open-Markets-Initiative/omi-data-packets). The same run, locally, from the repository root:
 
 ```
 git clone --depth=1 https://github.com/Open-Markets-Initiative/omi-data-packets.git
@@ -47,11 +47,11 @@ gradle :b3-b3derivatives-binaryentrypoint-sbe-v8-0:captureTest -Pcapture=omi-dat
 
 ## Organizations
 
-> [Asx][Asx.Directory] · [B3][B3.Directory] · [BlueOceanAts][BlueOceanAts.Directory] · [Box][Box.Directory] · [Cboe][Cboe.Directory] · [Cme][Cme.Directory] · [Coinbase][Coinbase.Directory] · [Eurex][Eurex.Directory] · [Ice][Ice.Directory] · [Iex][Iex.Directory] · [Imperative][Imperative.Directory] · [Jnx][Jnx.Directory] · [Jpx][Jpx.Directory] · [Memx][Memx.Directory] · [Miax][Miax.Directory] · [Nasdaq][Nasdaq.Directory] · [Nyse][Nyse.Directory] · [OtcMarkets][OtcMarkets.Directory] · [Siac][Siac.Directory] · [Tmx][Tmx.Directory] · [Txse][Txse.Directory]
+> [Asx][Asx.Directory] · [B3][B3.Directory] · [Bist][Bist.Directory] · [BlueOceanAts][BlueOceanAts.Directory] · [Box][Box.Directory] · [Cboe][Cboe.Directory] · [Cme][Cme.Directory] · [Coinbase][Coinbase.Directory] · [Databento][Databento.Directory] · [Eurex][Eurex.Directory] · [Ice][Ice.Directory] · [Iex][Iex.Directory] · [Imperative][Imperative.Directory] · [Jnx][Jnx.Directory] · [Jpx][Jpx.Directory] · [Memx][Memx.Directory] · [Miax][Miax.Directory] · [Nasdaq][Nasdaq.Directory] · [Nyse][Nyse.Directory] · [OtcMarkets][OtcMarkets.Directory] · [Siac][Siac.Directory] · [Tmx][Tmx.Directory] · [Txse][Txse.Directory]
 
 ## Exchanges
 
-> [AmexEquities][AmexEquities.Exchange] · [AmexOptions][AmexOptions.Exchange] · [ArcaEquities][ArcaEquities.Exchange] · [ArcaOptions][ArcaOptions.Exchange] · [AsxDerivatives][AsxDerivatives.Exchange] · [B3Derivatives][B3Derivatives.Exchange] · [BlueEquities][BlueEquities.Ats] · [BoxOptions][BoxOptions.Exchange] · [ByxEquities][ByxEquities.Exchange] · [BzxEquities][BzxEquities.Exchange] · [BzxOptions][BzxOptions.Exchange] · [C1Options][C1Options.Exchange] · [CfeFutures][CfeFutures.Exchange] · [CoinbaseDerivatives][CoinbaseDerivatives.Exchange] · [Deribit][Deribit.Exchange] · [EdgaEquities][EdgaEquities.Exchange] · [EdgxEquities][EdgxEquities.Exchange] · [IceFutures][IceFutures.Exchange] · [IexEquities][IexEquities.Exchange] · [IntelligentCross][IntelligentCross.Ats] · [IseOptions][IseOptions.Exchange] · [JnxEquities][JnxEquities.Exchange] · [LinkAts][LinkAts.Ats] · [MemxEquities][MemxEquities.Exchange] · [MiaxOptions][MiaxOptions.Exchange] · [Mx][Mx.Exchange] · [NationalEquities][NationalEquities.Exchange] · [NsmEquities][NsmEquities.Exchange] · [NtxEquities][NtxEquities.Exchange] · [NyseBonds][NyseBonds.Exchange] · [NyseEquities][NyseEquities.Exchange] · [OnyxFutures][OnyxFutures.Exchange] · [OseDerivatives][OseDerivatives.Exchange] · [PearlEquities][PearlEquities.Exchange] · [PsxEquities][PsxEquities.Exchange] · [TexasEquities][TexasEquities.Exchange] · [TxseEquities][TxseEquities.Exchange]
+> [AmexEquities][AmexEquities.Exchange] · [AmexOptions][AmexOptions.Exchange] · [ArcaEquities][ArcaEquities.Exchange] · [ArcaOptions][ArcaOptions.Exchange] · [AsxDerivatives][AsxDerivatives.Exchange] · [B3Derivatives][B3Derivatives.Exchange] · [BlueEquities][BlueEquities.Ats] · [BorsaIstanbul][BorsaIstanbul.Exchange] · [BoxOptions][BoxOptions.Exchange] · [ByxEquities][ByxEquities.Exchange] · [BzxEquities][BzxEquities.Exchange] · [BzxOptions][BzxOptions.Exchange] · [C1Options][C1Options.Exchange] · [CfeFutures][CfeFutures.Exchange] · [CoinbaseDerivatives][CoinbaseDerivatives.Exchange] · [Deribit][Deribit.Exchange] · [EdgaEquities][EdgaEquities.Exchange] · [EdgxEquities][EdgxEquities.Exchange] · [IceFutures][IceFutures.Exchange] · [IexEquities][IexEquities.Exchange] · [IntelligentCross][IntelligentCross.Ats] · [IseOptions][IseOptions.Exchange] · [JnxEquities][JnxEquities.Exchange] · [LinkAts][LinkAts.Ats] · [MemxEquities][MemxEquities.Exchange] · [MiaxOptions][MiaxOptions.Exchange] · [Mx][Mx.Exchange] · [NationalEquities][NationalEquities.Exchange] · [NsmEquities][NsmEquities.Exchange] · [NtxEquities][NtxEquities.Exchange] · [NyseBonds][NyseBonds.Exchange] · [NyseEquities][NyseEquities.Exchange] · [OnyxFutures][OnyxFutures.Exchange] · [OseDerivatives][OseDerivatives.Exchange] · [PearlEquities][PearlEquities.Exchange] · [PsxEquities][PsxEquities.Exchange] · [TexasEquities][TexasEquities.Exchange] · [TxseEquities][TxseEquities.Exchange]
 
 ## Platforms
 
@@ -61,13 +61,19 @@ gradle :b3-b3derivatives-binaryentrypoint-sbe-v8-0:captureTest -Pcapture=omi-dat
 
 > [Cqs][Cqs.Consolidator] · [Cts][Cts.Consolidator] · [Opra][Opra.Consolidator] · [TitaniumConsolidated][TitaniumConsolidated.Consolidator] · [Uqdf][Uqdf.Consolidator]
 
+## Redistributors
+
+> [MarketData][MarketData.Redistributor]
+
 [Asx.Directory]: Asx "Australian Securities Exchange"
 [B3.Directory]: B3 "Brasil, Bolsa, Balcão"
+[Bist.Directory]: Bist "Borsa İstanbul A.Ş."
 [BlueOceanAts.Directory]: BlueOceanAts "Blue Ocean Technologies"
 [Box.Directory]: Box "Box Options Market"
 [Cboe.Directory]: Cboe "Chicago Board Options Exchange"
 [Cme.Directory]: Cme "CME Group"
 [Coinbase.Directory]: Coinbase "Coinbase"
+[Databento.Directory]: Databento "Databento"
 [Eurex.Directory]: Eurex "Eurex Exchange"
 [Ice.Directory]: Ice "Intercontinental Exchange"
 [Iex.Directory]: Iex "Investors Exchange"
@@ -85,6 +91,7 @@ gradle :b3-b3derivatives-binaryentrypoint-sbe-v8-0:captureTest -Pcapture=omi-dat
 
 [AsxDerivatives.Exchange]: Asx/AsxDerivatives "Asx Derivatives"
 [B3Derivatives.Exchange]: B3/B3Derivatives "B3 Derivatives"
+[BorsaIstanbul.Exchange]: Bist/BorsaIstanbul "Borsa Istanbul"
 [BlueEquities.Ats]: BlueOceanAts/BlueEquities "Blue Equities"
 [BoxOptions.Exchange]: Box/BoxOptions "BOX Options Exchange"
 [ByxEquities.Exchange]: Cboe/ByxEquities "Cboe Byx Equities"
@@ -98,6 +105,7 @@ gradle :b3-b3derivatives-binaryentrypoint-sbe-v8-0:captureTest -Pcapture=omi-dat
 [Globex.Platform]: Cme/Globex "CME Globex"
 [CoinbaseDerivatives.Exchange]: Coinbase/CoinbaseDerivatives "Coinbase Derivatives"
 [Deribit.Exchange]: Coinbase/Deribit "Deribit"
+[MarketData.Redistributor]: Databento/MarketData "Databento Market Data"
 [T7.Platform]: Eurex/T7 "T7"
 [IceFutures.Exchange]: Ice/IceFutures "Intercontinental Exchange Futures"
 [IexEquities.Exchange]: Iex/IexEquities "IEX Equities"

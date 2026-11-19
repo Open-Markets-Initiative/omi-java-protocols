@@ -45,9 +45,9 @@ public enum MatchingEngineStatus {
     MATCHING_ENGINE_NOT_AVAILABLE('C', "Matching Engine Not Available"),
 
     /**
-     * State Of The Request For This Matching Engine
+     * State Of The Request For This Matching Engine Is Unknown
      */
-    STATE_OF_THE_REQUEST_FOR_THIS_MATCHING_ENGINE('U', "State Of The Request For This Matching Engine"),
+    STATE_OF_THE_REQUEST_FOR_THIS_MATCHING_ENGINE_IS_UNKNOWN('U', "State Of The Request For This Matching Engine Is Unknown"),
 
     /**
      * Invalid Client Order Id
@@ -111,7 +111,7 @@ public enum MatchingEngineStatus {
             case 'R' -> Optional.of(INVALID_SCOPE);
             case 'A' -> Optional.of(INVALID_ACTION);
             case 'C' -> Optional.of(MATCHING_ENGINE_NOT_AVAILABLE);
-            case 'U' -> Optional.of(STATE_OF_THE_REQUEST_FOR_THIS_MATCHING_ENGINE);
+            case 'U' -> Optional.of(STATE_OF_THE_REQUEST_FOR_THIS_MATCHING_ENGINE_IS_UNKNOWN);
             case 'O' -> Optional.of(INVALID_CLIENT_ORDER_ID);
             case 'Z' -> Optional.of(UNDEFINED_REASON);
             case '6' -> Optional.of(INVALID_PURGE_GROUP_SPECIFIED);

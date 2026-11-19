@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.AccountField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.AggressorIndicatorField;
-import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.ClordidOptionalField;
+import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.ClOrdIdOptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.ContraBrokerField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.CumQtyField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.DaysToSettlementOptionalField;
@@ -68,7 +68,7 @@ public final class ExecutionReportForwardMessage implements Message {
     /**
      * clOrdID
      */
-    private final ClordidOptionalField clordidOptional = new ClordidOptionalField();
+    private final ClOrdIdOptionalField clOrdIdOptional = new ClOrdIdOptionalField();
 
     /**
      * secondaryOrderID
@@ -188,7 +188,7 @@ public final class ExecutionReportForwardMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(outboundBusinessHeader.fields(), List.<Field>of(side), List.<Field>of(ordStatus), List.<Field>of(clordidOptional), List.<Field>of(secondaryOrderId), List.<Field>of(securityId), List.<Field>of(account), List.<Field>of(lastQty), List.<Field>of(lastPx), List.<Field>of(execId), List.<Field>of(transactTime), List.<Field>of(leavesQty), List.<Field>of(cumQty), List.<Field>of(tradeId), List.<Field>of(contraBroker), List.<Field>of(orderId), List.<Field>of(aggressorIndicator), List.<Field>of(settlTypeOptional), List.<Field>of(tradeDate), List.<Field>of(daysToSettlementOptional), List.<Field>of(secondaryExecId), List.<Field>of(execRefId), List.<Field>of(fixedRateOptional), List.<Field>of(orderQty), deskId.fields(), memo.fields()).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(outboundBusinessHeader.fields(), List.<Field>of(side), List.<Field>of(ordStatus), List.<Field>of(clOrdIdOptional), List.<Field>of(secondaryOrderId), List.<Field>of(securityId), List.<Field>of(account), List.<Field>of(lastQty), List.<Field>of(lastPx), List.<Field>of(execId), List.<Field>of(transactTime), List.<Field>of(leavesQty), List.<Field>of(cumQty), List.<Field>of(tradeId), List.<Field>of(contraBroker), List.<Field>of(orderId), List.<Field>of(aggressorIndicator), List.<Field>of(settlTypeOptional), List.<Field>of(tradeDate), List.<Field>of(daysToSettlementOptional), List.<Field>of(secondaryExecId), List.<Field>of(execRefId), List.<Field>of(fixedRateOptional), List.<Field>of(orderQty), deskId.fields(), memo.fields()).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -215,10 +215,10 @@ public final class ExecutionReportForwardMessage implements Message {
     /**
      * clOrdID
      *
-     * @return the ClordidOptional field
+     * @return the ClOrdIdOptional field
      */
-    public ClordidOptionalField clordidOptional() {
-        return clordidOptional;
+    public ClOrdIdOptionalField clOrdIdOptional() {
+        return clOrdIdOptional;
     }
 
     /**
@@ -532,10 +532,10 @@ public final class ExecutionReportForwardMessage implements Message {
             return false;
         }
         cursor += OrdStatusField.BYTE_LENGTH;
-        if (!clordidOptional.parse(data, cursor)) {
+        if (!clOrdIdOptional.parse(data, cursor)) {
             return false;
         }
-        cursor += ClordidOptionalField.BYTE_LENGTH;
+        cursor += ClOrdIdOptionalField.BYTE_LENGTH;
         if (!secondaryOrderId.parse(data, cursor)) {
             return false;
         }
@@ -639,7 +639,7 @@ public final class ExecutionReportForwardMessage implements Message {
         cursor = outboundBusinessHeader.encode(data, cursor);
         cursor = side.encode(data, cursor);
         cursor = ordStatus.encode(data, cursor);
-        cursor = clordidOptional.encode(data, cursor);
+        cursor = clOrdIdOptional.encode(data, cursor);
         cursor = secondaryOrderId.encode(data, cursor);
         cursor = securityId.encode(data, cursor);
         cursor = account.encode(data, cursor);
@@ -753,7 +753,7 @@ public final class ExecutionReportForwardMessage implements Message {
         return switch (name) {
             case "Side" -> Optional.of(side);
             case "OrdStatus" -> Optional.of(ordStatus);
-            case "ClordidOptional" -> Optional.of(clordidOptional);
+            case "ClOrdIdOptional" -> Optional.of(clOrdIdOptional);
             case "SecondaryOrderId" -> Optional.of(secondaryOrderId);
             case "SecurityId" -> Optional.of(securityId);
             case "Account" -> Optional.of(account);

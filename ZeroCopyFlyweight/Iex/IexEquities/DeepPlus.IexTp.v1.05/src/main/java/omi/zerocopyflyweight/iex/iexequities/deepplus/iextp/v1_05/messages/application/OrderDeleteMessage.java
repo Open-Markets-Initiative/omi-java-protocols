@@ -28,11 +28,6 @@ public final class OrderDeleteMessage extends Flyweight implements Message {
     public static final int BYTE_LENGTH = 25;
 
     /**
-     * Where {@link #reserved()} starts, from the message's start.
-     */
-    public static final int RESERVED_OFFSET = 0;
-
-    /**
      * Where {@link #timestamp()} starts, from the message's start.
      */
     public static final int TIMESTAMP_OFFSET = 1;
@@ -63,15 +58,6 @@ public final class OrderDeleteMessage extends Flyweight implements Message {
     @Override
     public int byteLength() {
         return BYTE_LENGTH;
-    }
-
-    /**
-     * Reserved for future use
-     *
-     * @return the character
-     */
-    public char reserved() {
-        return (char) (buffer[offset + RESERVED_OFFSET] & 0xFF);
     }
 
     /**
@@ -106,8 +92,7 @@ public final class OrderDeleteMessage extends Flyweight implements Message {
     @Override
     public StringBuilder dump(StringBuilder builder) {
         builder.append(NAME).append('{');
-        builder.append("reserved=").append(reserved());
-        builder.append(", timestamp=").append(timestamp());
+        builder.append("timestamp=").append(timestamp());
         builder.append(", symbol=").append(symbol());
         builder.append(", orderIdReference=").append(Long.toUnsignedString(orderIdReference()));
         return builder.append('}');

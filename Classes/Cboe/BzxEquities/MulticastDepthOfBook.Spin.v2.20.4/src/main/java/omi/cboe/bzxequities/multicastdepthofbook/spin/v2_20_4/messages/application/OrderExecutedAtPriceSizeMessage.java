@@ -9,7 +9,7 @@ import java.util.Optional;
 import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.fields.ExecutedQuantityField;
 import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.fields.ExecutionIdField;
 import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.fields.OrderIdField;
-import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.fields.PriceBinaryLongPriceField;
+import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.fields.PriceLongField;
 import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.fields.RemainingQuantityField;
 import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.fields.TimeOffsetField;
 import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.types.Field;
@@ -61,12 +61,12 @@ public final class OrderExecutedAtPriceSizeMessage implements Message {
     /**
      * The limit order price
      */
-    private final PriceBinaryLongPriceField priceBinaryLongPrice = new PriceBinaryLongPriceField();
+    private final PriceLongField priceLong = new PriceLongField();
 
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(timeOffset, orderId, executedQuantity, remainingQuantity, executionId, priceBinaryLongPrice);
+    private final List<Field> fields = List.of(timeOffset, orderId, executedQuantity, remainingQuantity, executionId, priceLong);
 
     private byte[] buffer;
 
@@ -120,10 +120,10 @@ public final class OrderExecutedAtPriceSizeMessage implements Message {
     /**
      * The limit order price
      *
-     * @return the PriceBinaryLongPrice field
+     * @return the PriceLong field
      */
-    public PriceBinaryLongPriceField priceBinaryLongPrice() {
-        return priceBinaryLongPrice;
+    public PriceLongField priceLong() {
+        return priceLong;
     }
 
     @Override
@@ -193,7 +193,7 @@ public final class OrderExecutedAtPriceSizeMessage implements Message {
             return false;
         }
         cursor += ExecutionIdField.BYTE_LENGTH;
-        return priceBinaryLongPrice.parse(data, cursor);
+        return priceLong.parse(data, cursor);
     }
 
     @Override
@@ -205,7 +205,7 @@ public final class OrderExecutedAtPriceSizeMessage implements Message {
         cursor = executedQuantity.encode(data, cursor);
         cursor = remainingQuantity.encode(data, cursor);
         cursor = executionId.encode(data, cursor);
-        cursor = priceBinaryLongPrice.encode(data, cursor);
+        cursor = priceLong.encode(data, cursor);
         return cursor;
     }
 
@@ -291,7 +291,7 @@ public final class OrderExecutedAtPriceSizeMessage implements Message {
             case "ExecutedQuantity" -> Optional.of(executedQuantity);
             case "RemainingQuantity" -> Optional.of(remainingQuantity);
             case "ExecutionId" -> Optional.of(executionId);
-            case "PriceBinaryLongPrice" -> Optional.of(priceBinaryLongPrice);
+            case "PriceLong" -> Optional.of(priceLong);
             default -> Optional.empty();
         };
     }

@@ -10,10 +10,10 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.AccountField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.AggressorIndicatorField;
-import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.ClordidOptionalField;
+import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.ClOrdIdOptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.ContraBrokerField;
+import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.CrossIdOptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.CrossedIndicatorField;
-import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.CrossidOptionalField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.CumQtyField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.ExecIdField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_0.fields.ExecRefIdField;
@@ -71,7 +71,7 @@ public final class ExecutionReportTradeMessage implements Message {
     /**
      * clOrdID
      */
-    private final ClordidOptionalField clordidOptional = new ClordidOptionalField();
+    private final ClOrdIdOptionalField clOrdIdOptional = new ClOrdIdOptionalField();
 
     /**
      * secondaryOrderID
@@ -176,7 +176,7 @@ public final class ExecutionReportTradeMessage implements Message {
     /**
      * crossID
      */
-    private final CrossidOptionalField crossidOptional = new CrossidOptionalField();
+    private final CrossIdOptionalField crossIdOptional = new CrossIdOptionalField();
 
     /**
      * crossedIndicator
@@ -206,7 +206,7 @@ public final class ExecutionReportTradeMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(outboundBusinessHeader.fields(), List.<Field>of(side), List.<Field>of(ordStatus), List.<Field>of(clordidOptional), List.<Field>of(secondaryOrderId), List.<Field>of(securityId), List.<Field>of(account), List.<Field>of(lastQty), List.<Field>of(lastPx), List.<Field>of(execId), List.<Field>of(transactTime), List.<Field>of(leavesQty), List.<Field>of(cumQty), List.<Field>of(aggressorIndicator), List.<Field>of(execType), List.<Field>of(orderCategory), List.<Field>of(multiLegReportingType), List.<Field>of(tradeId), List.<Field>of(contraBroker), List.<Field>of(orderId), List.<Field>of(tradeDate), List.<Field>of(totNoRelatedSym), List.<Field>of(secondaryExecId), List.<Field>of(execRefId), List.<Field>of(crossidOptional), List.<Field>of(crossedIndicator), List.<Field>of(orderQty), deskId.fields(), memo.fields()).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(outboundBusinessHeader.fields(), List.<Field>of(side), List.<Field>of(ordStatus), List.<Field>of(clOrdIdOptional), List.<Field>of(secondaryOrderId), List.<Field>of(securityId), List.<Field>of(account), List.<Field>of(lastQty), List.<Field>of(lastPx), List.<Field>of(execId), List.<Field>of(transactTime), List.<Field>of(leavesQty), List.<Field>of(cumQty), List.<Field>of(aggressorIndicator), List.<Field>of(execType), List.<Field>of(orderCategory), List.<Field>of(multiLegReportingType), List.<Field>of(tradeId), List.<Field>of(contraBroker), List.<Field>of(orderId), List.<Field>of(tradeDate), List.<Field>of(totNoRelatedSym), List.<Field>of(secondaryExecId), List.<Field>of(execRefId), List.<Field>of(crossIdOptional), List.<Field>of(crossedIndicator), List.<Field>of(orderQty), deskId.fields(), memo.fields()).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -233,10 +233,10 @@ public final class ExecutionReportTradeMessage implements Message {
     /**
      * clOrdID
      *
-     * @return the ClordidOptional field
+     * @return the ClOrdIdOptional field
      */
-    public ClordidOptionalField clordidOptional() {
-        return clordidOptional;
+    public ClOrdIdOptionalField clOrdIdOptional() {
+        return clOrdIdOptional;
     }
 
     /**
@@ -422,10 +422,10 @@ public final class ExecutionReportTradeMessage implements Message {
     /**
      * crossID
      *
-     * @return the CrossidOptional field
+     * @return the CrossIdOptional field
      */
-    public CrossidOptionalField crossidOptional() {
-        return crossidOptional;
+    public CrossIdOptionalField crossIdOptional() {
+        return crossIdOptional;
     }
 
     /**
@@ -580,10 +580,10 @@ public final class ExecutionReportTradeMessage implements Message {
             return false;
         }
         cursor += OrdStatusField.BYTE_LENGTH;
-        if (!clordidOptional.parse(data, cursor)) {
+        if (!clOrdIdOptional.parse(data, cursor)) {
             return false;
         }
-        cursor += ClordidOptionalField.BYTE_LENGTH;
+        cursor += ClOrdIdOptionalField.BYTE_LENGTH;
         if (!secondaryOrderId.parse(data, cursor)) {
             return false;
         }
@@ -665,10 +665,10 @@ public final class ExecutionReportTradeMessage implements Message {
             return false;
         }
         cursor += ExecRefIdField.BYTE_LENGTH;
-        if (!crossidOptional.parse(data, cursor)) {
+        if (!crossIdOptional.parse(data, cursor)) {
             return false;
         }
-        cursor += CrossidOptionalField.BYTE_LENGTH;
+        cursor += CrossIdOptionalField.BYTE_LENGTH;
         if (!crossedIndicator.parse(data, cursor)) {
             return false;
         }
@@ -699,7 +699,7 @@ public final class ExecutionReportTradeMessage implements Message {
         cursor = outboundBusinessHeader.encode(data, cursor);
         cursor = side.encode(data, cursor);
         cursor = ordStatus.encode(data, cursor);
-        cursor = clordidOptional.encode(data, cursor);
+        cursor = clOrdIdOptional.encode(data, cursor);
         cursor = secondaryOrderId.encode(data, cursor);
         cursor = securityId.encode(data, cursor);
         cursor = account.encode(data, cursor);
@@ -726,7 +726,7 @@ public final class ExecutionReportTradeMessage implements Message {
         cursor += 1;
         cursor = secondaryExecId.encode(data, cursor);
         cursor = execRefId.encode(data, cursor);
-        cursor = crossidOptional.encode(data, cursor);
+        cursor = crossIdOptional.encode(data, cursor);
         cursor = crossedIndicator.encode(data, cursor);
         cursor = orderQty.encode(data, cursor);
         cursor = deskId.encode(data, cursor);
@@ -816,7 +816,7 @@ public final class ExecutionReportTradeMessage implements Message {
         return switch (name) {
             case "Side" -> Optional.of(side);
             case "OrdStatus" -> Optional.of(ordStatus);
-            case "ClordidOptional" -> Optional.of(clordidOptional);
+            case "ClOrdIdOptional" -> Optional.of(clOrdIdOptional);
             case "SecondaryOrderId" -> Optional.of(secondaryOrderId);
             case "SecurityId" -> Optional.of(securityId);
             case "Account" -> Optional.of(account);
@@ -837,7 +837,7 @@ public final class ExecutionReportTradeMessage implements Message {
             case "TotNoRelatedSym" -> Optional.of(totNoRelatedSym);
             case "SecondaryExecId" -> Optional.of(secondaryExecId);
             case "ExecRefId" -> Optional.of(execRefId);
-            case "CrossidOptional" -> Optional.of(crossidOptional);
+            case "CrossIdOptional" -> Optional.of(crossIdOptional);
             case "CrossedIndicator" -> Optional.of(crossedIndicator);
             case "OrderQty" -> Optional.of(orderQty);
             default -> Optional.empty();

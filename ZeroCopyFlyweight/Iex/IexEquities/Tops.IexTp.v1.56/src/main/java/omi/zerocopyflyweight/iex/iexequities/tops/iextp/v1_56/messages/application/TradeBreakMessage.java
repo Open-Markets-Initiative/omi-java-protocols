@@ -62,11 +62,6 @@ public final class TradeBreakMessage extends Flyweight implements Message {
      */
     public static final int TRADE_ID_OFFSET = 29;
 
-    /**
-     * Where {@link #reserved()} starts, from the message's start.
-     */
-    public static final int RESERVED_OFFSET = 37;
-
     private final TextView symbolView = new TextView(8, (byte) ' ', false, true);
 
     /**
@@ -186,15 +181,6 @@ public final class TradeBreakMessage extends Flyweight implements Message {
         return Codec.getLongLE(buffer, offset + TRADE_ID_OFFSET);
     }
 
-    /**
-     * Reserved bytes
-     *
-     * @return the value
-     */
-    public long reserved() {
-        return Codec.getIntLE(buffer, offset + RESERVED_OFFSET) & 0xFFFFFFFFL;
-    }
-
     @Override
     public StringBuilder dump(StringBuilder builder) {
         builder.append(NAME).append('{');
@@ -204,7 +190,6 @@ public final class TradeBreakMessage extends Flyweight implements Message {
         builder.append(", size=").append(size());
         builder.append(", price=").append(price());
         builder.append(", tradeId=").append(Long.toUnsignedString(tradeId()));
-        builder.append(", reserved=").append(reserved());
         return builder.append('}');
     }
 

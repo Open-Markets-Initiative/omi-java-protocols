@@ -10,7 +10,7 @@ import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.FinancialStatusInd
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.MarketCategoryField;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.RoundLotSizeField;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.RoundLotsOnlyField;
-import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.StockAlphabeticField;
+import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.StockField;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.Field;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.Message;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.PrintOptions;
@@ -38,9 +38,9 @@ public final class StockDirectoryMessage implements Message {
     public static final String NAME = "Stock Directory Message";
 
     /**
-     * Denotes the security symbol for the issue in NASDAQ Single Book.
+     * Stock symbol right padded with spaces.
      */
-    private final StockAlphabeticField stockAlphabetic = new StockAlphabeticField();
+    private final StockField stock = new StockField();
 
     /**
      * Indicates listing market center or listing market tier for the issue.
@@ -65,19 +65,19 @@ public final class StockDirectoryMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(stockAlphabetic, marketCategory, financialStatusIndicator, roundLotSize, roundLotsOnly);
+    private final List<Field> fields = List.of(stock, marketCategory, financialStatusIndicator, roundLotSize, roundLotsOnly);
 
     private byte[] buffer;
 
     private boolean decoded;
 
     /**
-     * Denotes the security symbol for the issue in NASDAQ Single Book.
+     * Stock symbol right padded with spaces.
      *
-     * @return the StockAlphabetic field
+     * @return the Stock field
      */
-    public StockAlphabeticField stockAlphabetic() {
-        return stockAlphabetic;
+    public StockField stock() {
+        return stock;
     }
 
     /**
@@ -163,10 +163,10 @@ public final class StockDirectoryMessage implements Message {
         }
 
         int cursor = offset;
-        if (!stockAlphabetic.parse(data, cursor)) {
+        if (!stock.parse(data, cursor)) {
             return false;
         }
-        cursor += StockAlphabeticField.BYTE_LENGTH;
+        cursor += StockField.BYTE_LENGTH;
         if (!marketCategory.parse(data, cursor)) {
             return false;
         }
@@ -186,7 +186,7 @@ public final class StockDirectoryMessage implements Message {
     public int encode(byte[] data, int offset) {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
-        cursor = stockAlphabetic.encode(data, cursor);
+        cursor = stock.encode(data, cursor);
         cursor = marketCategory.encode(data, cursor);
         cursor = financialStatusIndicator.encode(data, cursor);
         cursor = roundLotSize.encode(data, cursor);
@@ -271,7 +271,7 @@ public final class StockDirectoryMessage implements Message {
     @Override
     public Optional<Field> field(String name) {
         return switch (name) {
-            case "StockAlphabetic" -> Optional.of(stockAlphabetic);
+            case "Stock" -> Optional.of(stock);
             case "MarketCategory" -> Optional.of(marketCategory);
             case "FinancialStatusIndicator" -> Optional.of(financialStatusIndicator);
             case "RoundLotSize" -> Optional.of(roundLotSize);

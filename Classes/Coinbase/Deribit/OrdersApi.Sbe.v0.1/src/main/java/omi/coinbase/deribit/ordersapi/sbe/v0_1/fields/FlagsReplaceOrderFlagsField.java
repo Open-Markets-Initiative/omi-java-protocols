@@ -52,11 +52,11 @@ public final class FlagsReplaceOrderFlagsField extends Field {
     }
 
     /**
-     * Unused ReplaceOrderFlags 0
+     * 1 unused bit
      *
      * @return bit 0 of the container
      */
-    public boolean unusedReplaceOrderFlags() {
+    public boolean unusedBit() {
         return (value & 1L) != 0L;
     }
 

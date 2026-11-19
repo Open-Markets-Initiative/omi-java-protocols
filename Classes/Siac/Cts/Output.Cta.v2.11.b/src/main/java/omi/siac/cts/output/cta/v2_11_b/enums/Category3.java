@@ -20,11 +20,6 @@ public enum Category3 {
     SOLD_LAST_LATE_REPORTING('L', "Sold Last Late Reporting"),
 
     /**
-     * Market Center Opening Trade
-     */
-    MARKET_CENTER_OPENING_TRADE('O', "Market Center Opening Trade"),
-
-    /**
      * Extended Hours Trade
      */
     EXTENDED_HOURS_TRADE('T', "Extended Hours Trade"),
@@ -76,7 +71,6 @@ public enum Category3 {
         return switch (wire) {
             case ' ' -> Optional.of(NOT_EXTENDED_HOURS_OR_SOLD_OUT_OF_SEQUENCE);
             case 'L' -> Optional.of(SOLD_LAST_LATE_REPORTING);
-            case 'O' -> Optional.of(MARKET_CENTER_OPENING_TRADE);
             case 'T' -> Optional.of(EXTENDED_HOURS_TRADE);
             case 'U' -> Optional.of(EXTENDED_HOURS_SOLD_OUT_OF_SEQUENCE);
             case 'Z' -> Optional.of(SOLD_OUT_OF_SEQUENCE);

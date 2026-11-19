@@ -10,7 +10,7 @@ import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.MarketMakerModeFie
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.MarketParticipantStateField;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.MpidField;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.PrimaryMarketMakerField;
-import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.StockAlphanumericField;
+import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.fields.StockField;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.Field;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.Message;
 import omi.nasdaq.nsmequities.totalview.asciiitch.v3_0.types.PrintOptions;
@@ -45,7 +45,7 @@ public final class MarketParticipantPositionMessage implements Message {
     /**
      * Stock symbol right padded with spaces.
      */
-    private final StockAlphanumericField stockAlphanumeric = new StockAlphanumericField();
+    private final StockField stock = new StockField();
 
     /**
      * Indicates if the market participant firm qualifies as a Primary Market Maker in accordance with NASDAQ marketplace rules.
@@ -65,7 +65,7 @@ public final class MarketParticipantPositionMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(mpid, stockAlphanumeric, primaryMarketMaker, marketMakerMode, marketParticipantState);
+    private final List<Field> fields = List.of(mpid, stock, primaryMarketMaker, marketMakerMode, marketParticipantState);
 
     private byte[] buffer;
 
@@ -83,10 +83,10 @@ public final class MarketParticipantPositionMessage implements Message {
     /**
      * Stock symbol right padded with spaces.
      *
-     * @return the StockAlphanumeric field
+     * @return the Stock field
      */
-    public StockAlphanumericField stockAlphanumeric() {
-        return stockAlphanumeric;
+    public StockField stock() {
+        return stock;
     }
 
     /**
@@ -167,10 +167,10 @@ public final class MarketParticipantPositionMessage implements Message {
             return false;
         }
         cursor += MpidField.BYTE_LENGTH;
-        if (!stockAlphanumeric.parse(data, cursor)) {
+        if (!stock.parse(data, cursor)) {
             return false;
         }
-        cursor += StockAlphanumericField.BYTE_LENGTH;
+        cursor += StockField.BYTE_LENGTH;
         if (!primaryMarketMaker.parse(data, cursor)) {
             return false;
         }
@@ -187,7 +187,7 @@ public final class MarketParticipantPositionMessage implements Message {
         Objects.checkFromIndexSize(offset, BYTE_LENGTH, data.length);
         int cursor = offset;
         cursor = mpid.encode(data, cursor);
-        cursor = stockAlphanumeric.encode(data, cursor);
+        cursor = stock.encode(data, cursor);
         cursor = primaryMarketMaker.encode(data, cursor);
         cursor = marketMakerMode.encode(data, cursor);
         cursor = marketParticipantState.encode(data, cursor);
@@ -272,7 +272,7 @@ public final class MarketParticipantPositionMessage implements Message {
     public Optional<Field> field(String name) {
         return switch (name) {
             case "Mpid" -> Optional.of(mpid);
-            case "StockAlphanumeric" -> Optional.of(stockAlphanumeric);
+            case "Stock" -> Optional.of(stock);
             case "PrimaryMarketMaker" -> Optional.of(primaryMarketMaker);
             case "MarketMakerMode" -> Optional.of(marketMakerMode);
             case "MarketParticipantState" -> Optional.of(marketParticipantState);

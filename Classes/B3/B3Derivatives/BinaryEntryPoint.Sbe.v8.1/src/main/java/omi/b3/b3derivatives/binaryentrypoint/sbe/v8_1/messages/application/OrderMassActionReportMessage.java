@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.AssetField;
-import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.ClordidField;
+import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.ClOrdIdField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.MassActionRejectReasonField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.MassActionReportIdField;
 import omi.b3.b3derivatives.binaryentrypoint.sbe.v8_1.fields.MassActionResponseField;
@@ -57,7 +57,7 @@ public final class OrderMassActionReportMessage implements Message {
     /**
      * clOrdID
      */
-    private final ClordidField clordid = new ClordidField();
+    private final ClOrdIdField clOrdId = new ClOrdIdField();
 
     /**
      * massActionReportID
@@ -122,7 +122,7 @@ public final class OrderMassActionReportMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = Stream.of(outboundBusinessHeader.fields(), List.<Field>of(massActionType), List.<Field>of(massActionScope), List.<Field>of(clordid), List.<Field>of(massActionReportId), List.<Field>of(transactTime), List.<Field>of(massActionResponse), List.<Field>of(massActionRejectReason), List.<Field>of(massCancelRestatementReason), List.<Field>of(ordtagid), List.<Field>of(sideOptional), List.<Field>of(asset), List.<Field>of(securityIdOptional), investorId.fields(), text.fields()).flatMap(List::stream).toList();
+    private final List<Field> fields = Stream.of(outboundBusinessHeader.fields(), List.<Field>of(massActionType), List.<Field>of(massActionScope), List.<Field>of(clOrdId), List.<Field>of(massActionReportId), List.<Field>of(transactTime), List.<Field>of(massActionResponse), List.<Field>of(massActionRejectReason), List.<Field>of(massCancelRestatementReason), List.<Field>of(ordtagid), List.<Field>of(sideOptional), List.<Field>of(asset), List.<Field>of(securityIdOptional), investorId.fields(), text.fields()).flatMap(List::stream).toList();
 
     private byte[] buffer;
 
@@ -149,10 +149,10 @@ public final class OrderMassActionReportMessage implements Message {
     /**
      * clOrdID
      *
-     * @return the Clordid field
+     * @return the ClOrdId field
      */
-    public ClordidField clordid() {
-        return clordid;
+    public ClOrdIdField clOrdId() {
+        return clOrdId;
     }
 
     /**
@@ -359,10 +359,10 @@ public final class OrderMassActionReportMessage implements Message {
             return false;
         }
         cursor += MassActionScopeField.BYTE_LENGTH;
-        if (!clordid.parse(data, cursor)) {
+        if (!clOrdId.parse(data, cursor)) {
             return false;
         }
-        cursor += ClordidField.BYTE_LENGTH;
+        cursor += ClOrdIdField.BYTE_LENGTH;
         if (!massActionReportId.parse(data, cursor)) {
             return false;
         }
@@ -419,7 +419,7 @@ public final class OrderMassActionReportMessage implements Message {
         cursor = outboundBusinessHeader.encode(data, cursor);
         cursor = massActionType.encode(data, cursor);
         cursor = massActionScope.encode(data, cursor);
-        cursor = clordid.encode(data, cursor);
+        cursor = clOrdId.encode(data, cursor);
         cursor = massActionReportId.encode(data, cursor);
         cursor = transactTime.encode(data, cursor);
         cursor = massActionResponse.encode(data, cursor);
@@ -522,7 +522,7 @@ public final class OrderMassActionReportMessage implements Message {
         return switch (name) {
             case "MassActionType" -> Optional.of(massActionType);
             case "MassActionScope" -> Optional.of(massActionScope);
-            case "Clordid" -> Optional.of(clordid);
+            case "ClOrdId" -> Optional.of(clOrdId);
             case "MassActionReportId" -> Optional.of(massActionReportId);
             case "TransactTime" -> Optional.of(transactTime);
             case "MassActionResponse" -> Optional.of(massActionResponse);

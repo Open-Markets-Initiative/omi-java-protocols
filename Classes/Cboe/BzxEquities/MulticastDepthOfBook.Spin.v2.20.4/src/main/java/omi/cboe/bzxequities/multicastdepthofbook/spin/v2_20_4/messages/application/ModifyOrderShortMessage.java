@@ -8,8 +8,8 @@ import java.util.Objects;
 import java.util.Optional;
 import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.fields.ModifyFlagsField;
 import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.fields.OrderIdField;
-import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.fields.PriceBinaryShortPriceField;
-import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.fields.QuantityBinaryField2;
+import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.fields.PriceShortField;
+import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.fields.QuantityShortField;
 import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.fields.TimeOffsetField;
 import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.types.Field;
 import omi.cboe.bzxequities.multicastdepthofbook.spin.v2_20_4.types.Message;
@@ -45,12 +45,12 @@ public final class ModifyOrderShortMessage implements Message {
     /**
      * Number of shares/contracts being added to the book (may be less than the number entered)
      */
-    private final QuantityBinaryField2 quantityBinary = new QuantityBinaryField2();
+    private final QuantityShortField quantityShort = new QuantityShortField();
 
     /**
      * The limit order price
      */
-    private final PriceBinaryShortPriceField priceBinaryShortPrice = new PriceBinaryShortPriceField();
+    private final PriceShortField priceShort = new PriceShortField();
 
     /**
      * Modify Flags
@@ -60,7 +60,7 @@ public final class ModifyOrderShortMessage implements Message {
     /**
      * This message's fields, in wire order.
      */
-    private final List<Field> fields = List.of(timeOffset, orderId, quantityBinary, priceBinaryShortPrice, modifyFlags);
+    private final List<Field> fields = List.of(timeOffset, orderId, quantityShort, priceShort, modifyFlags);
 
     private byte[] buffer;
 
@@ -87,19 +87,19 @@ public final class ModifyOrderShortMessage implements Message {
     /**
      * Number of shares/contracts being added to the book (may be less than the number entered)
      *
-     * @return the QuantityBinary field
+     * @return the QuantityShort field
      */
-    public QuantityBinaryField2 quantityBinary() {
-        return quantityBinary;
+    public QuantityShortField quantityShort() {
+        return quantityShort;
     }
 
     /**
      * The limit order price
      *
-     * @return the PriceBinaryShortPrice field
+     * @return the PriceShort field
      */
-    public PriceBinaryShortPriceField priceBinaryShortPrice() {
-        return priceBinaryShortPrice;
+    public PriceShortField priceShort() {
+        return priceShort;
     }
 
     /**
@@ -166,14 +166,14 @@ public final class ModifyOrderShortMessage implements Message {
             return false;
         }
         cursor += OrderIdField.BYTE_LENGTH;
-        if (!quantityBinary.parse(data, cursor)) {
+        if (!quantityShort.parse(data, cursor)) {
             return false;
         }
-        cursor += QuantityBinaryField2.BYTE_LENGTH;
-        if (!priceBinaryShortPrice.parse(data, cursor)) {
+        cursor += QuantityShortField.BYTE_LENGTH;
+        if (!priceShort.parse(data, cursor)) {
             return false;
         }
-        cursor += PriceBinaryShortPriceField.BYTE_LENGTH;
+        cursor += PriceShortField.BYTE_LENGTH;
         return modifyFlags.parse(data, cursor);
     }
 
@@ -183,8 +183,8 @@ public final class ModifyOrderShortMessage implements Message {
         int cursor = offset;
         cursor = timeOffset.encode(data, cursor);
         cursor = orderId.encode(data, cursor);
-        cursor = quantityBinary.encode(data, cursor);
-        cursor = priceBinaryShortPrice.encode(data, cursor);
+        cursor = quantityShort.encode(data, cursor);
+        cursor = priceShort.encode(data, cursor);
         cursor = modifyFlags.encode(data, cursor);
         return cursor;
     }
@@ -268,8 +268,8 @@ public final class ModifyOrderShortMessage implements Message {
         return switch (name) {
             case "TimeOffset" -> Optional.of(timeOffset);
             case "OrderId" -> Optional.of(orderId);
-            case "QuantityBinary" -> Optional.of(quantityBinary);
-            case "PriceBinaryShortPrice" -> Optional.of(priceBinaryShortPrice);
+            case "QuantityShort" -> Optional.of(quantityShort);
+            case "PriceShort" -> Optional.of(priceShort);
             case "ModifyFlags" -> Optional.of(modifyFlags);
             default -> Optional.empty();
         };
