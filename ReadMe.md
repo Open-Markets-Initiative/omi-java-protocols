@@ -9,6 +9,8 @@ Each top-level directory holds one kind of parser, with a directory for each org
 | Parser | Description | Protocols | Generated Lines |
 | --- | --- | ---: | ---: |
 | [Classes](Classes) | Messages are plain classes that you can decode, inspect, modify, and encode back to their bytes. | 114 | 3,477,265 |
+| [Flyweight](Flyweight) | Messages are reused flyweights holding copies of their fields: decoding allocates nothing, and the bytes may be reused once it returns. | 8 | 26,889 |
+| [ZeroCopy](ZeroCopy) | Messages are immutable views read where their bytes lie: decoding copies nothing, and a view stays valid while its bytes are unchanged. | 8 | 25,220 |
 | [ZeroCopyFlyweight](ZeroCopyFlyweight) | Messages are flyweights read where their bytes lie: decoding copies nothing and allocates nothing. | 8 | 25,482 |
 
 ## Usage
@@ -23,6 +25,8 @@ A single one builds by its project name: its identifier in lower case with each 
 
 ```
 gradle :iex-iexequities-deep-iextp-v1-06:build
+gradle :flyweight-iex-iexequities-deep-iextp-v1-06:build
+gradle :zerocopy-iex-iexequities-deep-iextp-v1-06:build
 gradle :zerocopyflyweight-iex-iexequities-deep-iextp-v1-06:build
 ```
 
