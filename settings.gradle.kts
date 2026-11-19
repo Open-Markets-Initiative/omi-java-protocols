@@ -20,6 +20,9 @@ project(":b3-b3derivatives-binaryentrypoint-sbe-v8-3").projectDir = file("Classe
 include("b3-b3derivatives-binaryumdf-sbe-v1-8")
 project(":b3-b3derivatives-binaryumdf-sbe-v1-8").projectDir = file("Classes/B3/B3Derivatives/BinaryUmdf.Sbe.v1.8")
 
+include("bist-borsaistanbul-geniuminet-itch-v21-12")
+project(":bist-borsaistanbul-geniuminet-itch-v21-12").projectDir = file("Classes/Bist/BorsaIstanbul/GeniumInet.Itch.v21.12")
+
 include("blueoceanats-blueequities-memoirdepthfeed-sbe-v1-3")
 project(":blueoceanats-blueequities-memoirdepthfeed-sbe-v1-3").projectDir = file("Classes/BlueOceanAts/BlueEquities/MemoirDepthFeed.Sbe.v1.3")
 
@@ -77,6 +80,9 @@ project(":cboe-cfefutures-multicastdepthofbook-pitch-v1-1-12").projectDir = file
 include("cboe-cfefutures-multicastdepthofbook-pitch-v1-1-6")
 project(":cboe-cfefutures-multicastdepthofbook-pitch-v1-1-6").projectDir = file("Classes/Cboe/CfeFutures/MulticastDepthOfBook.Pitch.v1.1.6")
 
+include("cboe-cfefutures-multicasttop-pitch-v1-2-22")
+project(":cboe-cfefutures-multicasttop-pitch-v1-2-22").projectDir = file("Classes/Cboe/CfeFutures/MulticastTop.Pitch.v1.2.22")
+
 include("cboe-edgaequities-multicastdepthofbook-pitch-v2-41-29")
 project(":cboe-edgaequities-multicastdepthofbook-pitch-v2-41-29").projectDir = file("Classes/Cboe/EdgaEquities/MulticastDepthOfBook.Pitch.v2.41.29")
 
@@ -121,6 +127,15 @@ project(":coinbase-deribit-marketdataapi-sbe-v0-1").projectDir = file("Classes/C
 
 include("coinbase-deribit-ordersapi-sbe-v0-1")
 project(":coinbase-deribit-ordersapi-sbe-v0-1").projectDir = file("Classes/Coinbase/Deribit/OrdersApi.Sbe.v0.1")
+
+include("databento-marketdata-normalized-dbn-v1")
+project(":databento-marketdata-normalized-dbn-v1").projectDir = file("Classes/Databento/MarketData/Normalized.Dbn.v1")
+
+include("databento-marketdata-normalized-dbn-v2")
+project(":databento-marketdata-normalized-dbn-v2").projectDir = file("Classes/Databento/MarketData/Normalized.Dbn.v2")
+
+include("databento-marketdata-normalized-dbn-v3")
+project(":databento-marketdata-normalized-dbn-v3").projectDir = file("Classes/Databento/MarketData/Normalized.Dbn.v3")
 
 include("eurex-t7-eobi-fbe-v13-0")
 project(":eurex-t7-eobi-fbe-v13-0").projectDir = file("Classes/Eurex/T7/Eobi.Fbe.v13.0")
@@ -248,11 +263,29 @@ project(":nyse-amexequities-integratedfeed-xdp-v2-1-g").projectDir = file("Class
 include("nyse-amexequities-integratedfeedrefresh-pillar-v2-5-g")
 project(":nyse-amexequities-integratedfeedrefresh-pillar-v2-5-g").projectDir = file("Classes/Nyse/AmexEquities/IntegratedFeedRefresh.Pillar.v2.5.g")
 
+include("nyse-amexequities-openbook-aggregated-xdp-v2-1-d")
+project(":nyse-amexequities-openbook-aggregated-xdp-v2-1-d").projectDir = file("Classes/Nyse/AmexEquities/OpenBook.Aggregated.Xdp.v2.1.d")
+
+include("nyse-amexequities-openbook-ultra-v2-1-b")
+project(":nyse-amexequities-openbook-ultra-v2-1-b").projectDir = file("Classes/Nyse/AmexEquities/OpenBook.Ultra.v2.1.b")
+
 include("nyse-amexoptions-complexfeed-xdp-v1-3-a")
 project(":nyse-amexoptions-complexfeed-xdp-v1-3-a").projectDir = file("Classes/Nyse/AmexOptions/ComplexFeed.Xdp.v1.3.a")
 
+include("nyse-amexoptions-deepfeed-pillar-v1-2-m")
+project(":nyse-amexoptions-deepfeed-pillar-v1-2-m").projectDir = file("Classes/Nyse/AmexOptions/DeepFeed.Pillar.v1.2.m")
+
 include("nyse-amexoptions-deepfeed-xdp-v1-3-a")
 project(":nyse-amexoptions-deepfeed-xdp-v1-3-a").projectDir = file("Classes/Nyse/AmexOptions/DeepFeed.Xdp.v1.3.a")
+
+include("nyse-amexoptions-topfeed-pillar-v1-2-k")
+project(":nyse-amexoptions-topfeed-pillar-v1-2-k").projectDir = file("Classes/Nyse/AmexOptions/TopFeed.Pillar.v1.2.k")
+
+include("nyse-amexoptions-topfeed-xdp-v1-3-a")
+project(":nyse-amexoptions-topfeed-xdp-v1-3-a").projectDir = file("Classes/Nyse/AmexOptions/TopFeed.Xdp.v1.3.a")
+
+include("nyse-arcaequities-arcabook-xdp-v1-9-a")
+project(":nyse-arcaequities-arcabook-xdp-v1-9-a").projectDir = file("Classes/Nyse/ArcaEquities/ArcaBook.Xdp.v1.9.a")
 
 include("nyse-arcaequities-bbo-xdp-v2-4-c")
 project(":nyse-arcaequities-bbo-xdp-v2-4-c").projectDir = file("Classes/Nyse/ArcaEquities/Bbo.Xdp.v2.4.c")
@@ -263,11 +296,23 @@ project(":nyse-arcaequities-integratedfeed-pillar-v2-5-g").projectDir = file("Cl
 include("nyse-arcaequities-integratedfeedrefresh-pillar-v2-5-g")
 project(":nyse-arcaequities-integratedfeedrefresh-pillar-v2-5-g").projectDir = file("Classes/Nyse/ArcaEquities/IntegratedFeedRefresh.Pillar.v2.5.g")
 
+include("nyse-arcaoptions-complexfeed-pillar-v1-0-h")
+project(":nyse-arcaoptions-complexfeed-pillar-v1-0-h").projectDir = file("Classes/Nyse/ArcaOptions/ComplexFeed.Pillar.v1.0.h")
+
+include("nyse-arcaoptions-deepfeed-pillar-v1-2-m")
+project(":nyse-arcaoptions-deepfeed-pillar-v1-2-m").projectDir = file("Classes/Nyse/ArcaOptions/DeepFeed.Pillar.v1.2.m")
+
 include("nyse-arcaoptions-topfeed-pillar-v1-2-c")
 project(":nyse-arcaoptions-topfeed-pillar-v1-2-c").projectDir = file("Classes/Nyse/ArcaOptions/TopFeed.Pillar.v1.2.c")
 
 include("nyse-nationalequities-bbo-pillar-v2-5-d")
 project(":nyse-nationalequities-bbo-pillar-v2-5-d").projectDir = file("Classes/Nyse/NationalEquities/Bbo.Pillar.v2.5.d")
+
+include("nyse-nationalequities-integratedfeed-pillar-v2-5-g")
+project(":nyse-nationalequities-integratedfeed-pillar-v2-5-g").projectDir = file("Classes/Nyse/NationalEquities/IntegratedFeed.Pillar.v2.5.g")
+
+include("nyse-nationalequities-integratedfeedstocksummary-pillar-v2-5-g")
+project(":nyse-nationalequities-integratedfeedstocksummary-pillar-v2-5-g").projectDir = file("Classes/Nyse/NationalEquities/IntegratedFeedStockSummary.Pillar.v2.5.g")
 
 include("nyse-nationalequities-trades-pillar-v2-6")
 project(":nyse-nationalequities-trades-pillar-v2-6").projectDir = file("Classes/Nyse/NationalEquities/Trades.Pillar.v2.6")
@@ -286,6 +331,12 @@ project(":nyse-nyseequities-binarygateway-pillarstream-v5-17").projectDir = file
 
 include("nyse-nyseequities-binarygateway-pillarstream-v6-0")
 project(":nyse-nyseequities-binarygateway-pillarstream-v6-0").projectDir = file("Classes/Nyse/NyseEquities/BinaryGateway.PillarStream.v6.0")
+
+include("nyse-nyseequities-bqt-xdp-v2-1-a")
+project(":nyse-nyseequities-bqt-xdp-v2-1-a").projectDir = file("Classes/Nyse/NyseEquities/Bqt.Xdp.v2.1.a")
+
+include("nyse-nyseequities-depthfeed-pillar-v1-1")
+project(":nyse-nyseequities-depthfeed-pillar-v1-1").projectDir = file("Classes/Nyse/NyseEquities/DepthFeed.Pillar.v1.1")
 
 include("nyse-nyseequities-imbalancesfeed-xdp-v2-1-f")
 project(":nyse-nyseequities-imbalancesfeed-xdp-v2-1-f").projectDir = file("Classes/Nyse/NyseEquities/ImbalancesFeed.Xdp.v2.1.f")
@@ -307,6 +358,9 @@ project(":nyse-nyseequities-integratedfeedrefresh-pillar-v2-5-g").projectDir = f
 
 include("nyse-nyseequities-integratedfeedretransmission-pillar-v2-5-g")
 project(":nyse-nyseequities-integratedfeedretransmission-pillar-v2-5-g").projectDir = file("Classes/Nyse/NyseEquities/IntegratedFeedRetransmission.Pillar.v2.5.g")
+
+include("nyse-nyseequities-openbook-aggregated-xdp-v2-1-d")
+project(":nyse-nyseequities-openbook-aggregated-xdp-v2-1-d").projectDir = file("Classes/Nyse/NyseEquities/OpenBook.Aggregated.Xdp.v2.1.d")
 
 include("nyse-nyseequities-openbook-ultra-v2-1-b")
 project(":nyse-nyseequities-openbook-ultra-v2-1-b").projectDir = file("Classes/Nyse/NyseEquities/OpenBook.Ultra.v2.1.b")

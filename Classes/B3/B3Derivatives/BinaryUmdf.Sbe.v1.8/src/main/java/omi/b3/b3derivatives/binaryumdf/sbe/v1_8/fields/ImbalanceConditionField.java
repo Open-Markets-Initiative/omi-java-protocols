@@ -56,7 +56,7 @@ public final class ImbalanceConditionField extends Field {
      *
      * @return bits 0 through 7 of the container
      */
-    public int unused() {
+    public int unusedBits0To() {
         return (int) (value & 0xFFL);
     }
 

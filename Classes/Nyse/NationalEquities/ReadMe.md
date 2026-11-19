@@ -8,6 +8,8 @@ A division of [New York Stock Exchange](..).
 | [Protocol][Omi.Nyse.Protocol.Definitions] | [Encoding][Omi.Encoding.Definitions] | Version | Date | Size | [Deployment][Omi.Glossary.Deployment] | [Testing][Omi.Glossary.Testing] | [Documentation][Omi.Nyse.Specifications] |
 | --- | --- | --- | ---: | ---: | --- | --- | --- |
 | [Bbo][Nyse.NationalEquities.Bbo] | [Pillar][Omi.Encoding.Pillar] | [2.5.d][Nyse.NationalEquities.Bbo.Pillar.v2.5.d.Parser] | 3/28/2025 | 14,196 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Nyse.NationalEquities.Bbo.Pillar.v2.5.d.Url] - [pdf][Nyse.NationalEquities.Bbo.Pillar.v2.5.d.Pdf] |
+| [IntegratedFeed][Nyse.NationalEquities.IntegratedFeed] | [Pillar][Omi.Encoding.Pillar] | [2.5.g][Nyse.NationalEquities.IntegratedFeed.Pillar.v2.5.g.Parser] | 10/23/2025 | 19,332 | [Active][Omi.Glossary.Deployment.Active] | [Untested][Omi.Glossary.Testing.Untested] | [url][Nyse.NationalEquities.IntegratedFeed.Pillar.v2.5.g.Url] - [pdf][Nyse.NationalEquities.IntegratedFeed.Pillar.v2.5.g.Pdf] |
+| [IntegratedFeedStockSummary][Nyse.NationalEquities.IntegratedFeedStockSummary] | [Pillar][Omi.Encoding.Pillar] | [2.5.g][Nyse.NationalEquities.IntegratedFeedStockSummary.Pillar.v2.5.g.Parser] | 10/23/2025 | 9,719 | [Active][Omi.Glossary.Deployment.Active] | [Untested][Omi.Glossary.Testing.Untested] | [url][Nyse.NationalEquities.IntegratedFeedStockSummary.Pillar.v2.5.g.Url] - [pdf][Nyse.NationalEquities.IntegratedFeedStockSummary.Pillar.v2.5.g.Pdf] |
 | [Trades][Nyse.NationalEquities.Trades] | [Pillar][Omi.Encoding.Pillar] | [2.6][Nyse.NationalEquities.Trades.Pillar.v2.6.Parser] | 8/20/2025 | 19,846 | [Active][Omi.Glossary.Deployment.Active] | [Verified][Omi.Glossary.Testing.Verified] | [url][Nyse.NationalEquities.Trades.Pillar.v2.6.Url] - [pdf][Nyse.NationalEquities.Trades.Pillar.v2.6.Pdf] |
 
 
@@ -33,11 +35,19 @@ A division of [New York Stock Exchange](..).
 [Omi.Encoding.Pillar]: https://github.com/Open-Markets-Initiative/Directory/blob/main/Protocols/Pillar.md "Pillar Encoding"
 [NationalEquities.Exchange]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Nyse/NationalEquities "Nyse National Equities"
 [Nyse.NationalEquities.Bbo]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Nyse/Protocols/NationalEquities/Bbo.md "Best Bid And Offer"
+[Nyse.NationalEquities.IntegratedFeed]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Nyse/Protocols/NationalEquities/IntegratedFeed.md "Integrated Feed"
+[Nyse.NationalEquities.IntegratedFeedStockSummary]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Nyse/Protocols/NationalEquities/IntegratedFeedStockSummary.md "Integrated Feed Stock Summary"
 [Nyse.NationalEquities.Trades]: https://github.com/Open-Markets-Initiative/Open-Markets-Initiative/blob/main/Organizations/Nyse/Protocols/NationalEquities/Trades.md "Trades"
 
 [Nyse.NationalEquities.Bbo.Pillar.v2.5.d.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Nyse/NationalEquities/Bbo.Pillar.v2.5.d "Nyse NationalEquities Bbo Pillar v2.5.d Java Parser"
 [Nyse.NationalEquities.Bbo.Pillar.v2.5.d.Url]: https://www.nyse.com/publicdocs/nyse/data/NYSE_Pillar_BBO_Client_Specification.pdf "New York Stock Exchange 2.5.d Url"
 [Nyse.NationalEquities.Bbo.Pillar.v2.5.d.Pdf]: https://www.nyse.com/publicdocs/nyse/data/NYSE_Pillar_BBO_Client_Specification.pdf "New York Stock Exchange 2.5.d Pdf"
+[Nyse.NationalEquities.IntegratedFeed.Pillar.v2.5.g.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Nyse/NationalEquities/IntegratedFeed.Pillar.v2.5.g "Nyse NationalEquities IntegratedFeed Pillar v2.5.g Java Parser"
+[Nyse.NationalEquities.IntegratedFeed.Pillar.v2.5.g.Url]: https://www.nyse.com/publicdocs/nyse/data/NYSE_Pillar_Integrated_Feed_Client_Specification.pdf "New York Stock Exchange 2.5.g Url"
+[Nyse.NationalEquities.IntegratedFeed.Pillar.v2.5.g.Pdf]: https://www.nyse.com/publicdocs/nyse/data/NYSE_Pillar_Integrated_Feed_Client_Specification.pdf "New York Stock Exchange 2.5.g Pdf"
+[Nyse.NationalEquities.IntegratedFeedStockSummary.Pillar.v2.5.g.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Nyse/NationalEquities/IntegratedFeedStockSummary.Pillar.v2.5.g "Nyse NationalEquities IntegratedFeedStockSummary Pillar v2.5.g Java Parser"
+[Nyse.NationalEquities.IntegratedFeedStockSummary.Pillar.v2.5.g.Url]: https://www.nyse.com/publicdocs/nyse/data/NYSE_Pillar_Integrated_Feed_Client_Specification.pdf "New York Stock Exchange 2.5.g Url"
+[Nyse.NationalEquities.IntegratedFeedStockSummary.Pillar.v2.5.g.Pdf]: https://www.nyse.com/publicdocs/nyse/data/NYSE_Pillar_Integrated_Feed_Client_Specification.pdf "New York Stock Exchange 2.5.g Pdf"
 [Nyse.NationalEquities.Trades.Pillar.v2.6.Parser]: https://github.com/Open-Markets-Initiative/omi-java-protocols/tree/main/Classes/Nyse/NationalEquities/Trades.Pillar.v2.6 "Nyse NationalEquities Trades Pillar v2.6 Java Parser"
 [Nyse.NationalEquities.Trades.Pillar.v2.6.Url]: https://www.nyse.com/publicdocs/nyse/data/NYSE_Pillar_Trades_Client_Specification.pdf "New York Stock Exchange 2.6 Url"
 [Nyse.NationalEquities.Trades.Pillar.v2.6.Pdf]: https://www.nyse.com/publicdocs/nyse/data/NYSE_Pillar_Trades_Client_Specification.pdf "New York Stock Exchange 2.6 Pdf"

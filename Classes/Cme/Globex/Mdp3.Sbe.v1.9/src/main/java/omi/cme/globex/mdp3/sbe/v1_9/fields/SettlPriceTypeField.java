@@ -94,7 +94,7 @@ public final class SettlPriceTypeField extends Field {
      *
      * @return bits 5 through 6 of the container
      */
-    public int unused() {
+    public int unusedBits5To() {
         return (int) ((value >>> 5) & 0x3L);
     }
 

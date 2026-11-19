@@ -59,6 +59,9 @@ jobs:
       - name: Test Classes/Cboe/CfeFutures/BinaryOrderEntry.Boe3.v1.1.20
         run: gradle --quiet :cboe-cfefutures-binaryorderentry-boe3-v1-1-20:captureTest -Pcapture=omi-data-packets/Cboe/CfeFutures.BinaryOrderEntry.Boe3.v1.1.20 -Pstrict
 
+      - name: Test Classes/Cboe/CfeFutures/MulticastTop.Pitch.v1.2.22
+        run: gradle --quiet :cboe-cfefutures-multicasttop-pitch-v1-2-22:captureTest -Pcapture=omi-data-packets/Cboe/CfeFutures.MulticastTop.Pitch.v1.2.22 -Pstrict
+
       - name: Test Classes/Cboe/GapRequestProxy.Pitch.v1
         run: gradle --quiet :cboe-gaprequestproxy-pitch-v1:captureTest -Pcapture=omi-data-packets/Cboe/GapRequestProxy.Pitch.v1 -Pstrict
 
@@ -140,6 +143,33 @@ jobs:
       - name: Test Classes/Nasdaq/Uqdf/Output.Utp.v1.5
         run: gradle --quiet :nasdaq-uqdf-output-utp-v1-5:captureTest -Pcapture=omi-data-packets/Nasdaq/Uqdf.Output.Utp.v1.5 -Pstrict
 
+      - name: Test Classes/Nyse/AmexEquities/OpenBook.Aggregated.Xdp.v2.1.d
+        run: gradle --quiet :nyse-amexequities-openbook-aggregated-xdp-v2-1-d:captureTest -Pcapture=omi-data-packets/Nyse/AmexEquities.OpenBook.Aggregated.Xdp.v2.1.d -Pstrict
+
+      - name: Test Classes/Nyse/AmexEquities/OpenBook.Ultra.v2.1.b
+        run: gradle --quiet :nyse-amexequities-openbook-ultra-v2-1-b:captureTest -Pcapture=omi-data-packets/Nyse/AmexEquities.OpenBook.Ultra.v2.1.b -Pstrict
+
+      - name: Test Classes/Nyse/AmexOptions/DeepFeed.Pillar.v1.2.m
+        run: gradle --quiet :nyse-amexoptions-deepfeed-pillar-v1-2-m:captureTest -Pcapture=omi-data-packets/Nyse/AmexOptions.DeepFeed.Pillar.v1.2.m -Pstrict
+
+      - name: Test Classes/Nyse/AmexOptions/TopFeed.Pillar.v1.2.k
+        run: gradle --quiet :nyse-amexoptions-topfeed-pillar-v1-2-k:captureTest -Pcapture=omi-data-packets/Nyse/AmexOptions.TopFeed.Pillar.v1.2.k -Pstrict
+
+      - name: Test Classes/Nyse/AmexOptions/TopFeed.Xdp.v1.3.a
+        run: gradle --quiet :nyse-amexoptions-topfeed-xdp-v1-3-a:captureTest -Pcapture=omi-data-packets/Nyse/AmexOptions.TopFeed.Xdp.v1.3.a -Pstrict
+
+      - name: Test Classes/Nyse/ArcaOptions/ComplexFeed.Pillar.v1.0.h
+        run: gradle --quiet :nyse-arcaoptions-complexfeed-pillar-v1-0-h:captureTest -Pcapture=omi-data-packets/Nyse/ArcaOptions.ComplexFeed.Pillar.v1.0.h -Pstrict
+
+      - name: Test Classes/Nyse/ArcaOptions/DeepFeed.Pillar.v1.2.m
+        run: gradle --quiet :nyse-arcaoptions-deepfeed-pillar-v1-2-m:captureTest -Pcapture=omi-data-packets/Nyse/ArcaOptions.DeepFeed.Pillar.v1.2.m -Pstrict
+
+      - name: Test Classes/Nyse/NationalEquities/IntegratedFeed.Pillar.v2.5.g
+        run: gradle --quiet :nyse-nationalequities-integratedfeed-pillar-v2-5-g:captureTest -Pcapture=omi-data-packets/Nyse/NationalEquities.IntegratedFeed.Pillar.v2.5.g -Pstrict
+
+      - name: Test Classes/Nyse/NationalEquities/IntegratedFeedStockSummary.Pillar.v2.5.g
+        run: gradle --quiet :nyse-nationalequities-integratedfeedstocksummary-pillar-v2-5-g:captureTest -Pcapture=omi-data-packets/Nyse/NationalEquities.IntegratedFeedStockSummary.Pillar.v2.5.g -Pstrict
+
       - name: Test Classes/Nyse/NyseBonds/DepthOfBook.Abp.v4.01.b
         run: gradle --quiet :nyse-nysebonds-depthofbook-abp-v4-01-b:captureTest -Pcapture=omi-data-packets/Nyse/NyseBonds.DepthOfBook.Abp.v4.01.b -Pstrict
 
@@ -148,6 +178,15 @@ jobs:
 
       - name: Test Classes/Nyse/NyseEquities/BinaryGateway.PillarStream.v6.0
         run: gradle --quiet :nyse-nyseequities-binarygateway-pillarstream-v6-0:captureTest -Pcapture=omi-data-packets/Nyse/NyseEquities.BinaryGateway.PillarStream.v6.0 -Pstrict
+
+      - name: Test Classes/Nyse/NyseEquities/Bqt.Xdp.v2.1.a
+        run: gradle --quiet :nyse-nyseequities-bqt-xdp-v2-1-a:captureTest -Pcapture=omi-data-packets/Nyse/NyseEquities.Bqt.Xdp.v2.1.a -Pstrict
+
+      - name: Test Classes/Nyse/NyseEquities/DepthFeed.Pillar.v1.1
+        run: gradle --quiet :nyse-nyseequities-depthfeed-pillar-v1-1:captureTest -Pcapture=omi-data-packets/Nyse/NyseEquities.DepthFeed.Pillar.v1.1 -Pstrict
+
+      - name: Test Classes/Nyse/NyseEquities/OpenBook.Aggregated.Xdp.v2.1.d
+        run: gradle --quiet :nyse-nyseequities-openbook-aggregated-xdp-v2-1-d:captureTest -Pcapture=omi-data-packets/Nyse/NyseEquities.OpenBook.Aggregated.Xdp.v2.1.d -Pstrict
 
       - name: Test Classes/Siac/Cqs/Output.Cta.v1.91
         run: gradle --quiet :siac-cqs-output-cta-v1-91:captureTest -Pcapture=omi-data-packets/Siac/Cqs.Output.Cta.v1.91 -Pstrict

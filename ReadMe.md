@@ -8,7 +8,7 @@ Each top-level directory holds one kind of parser, with a directory for each org
 
 | Parser | Description | Protocols | Generated Lines |
 | --- | --- | ---: | ---: |
-| [Classes](Classes) | Messages are plain classes that you can decode, inspect, modify, and encode back to their bytes. | 114 | 3,473,257 |
+| [Classes](Classes) | Messages are plain classes that you can decode, inspect, modify, and encode back to their bytes. | 132 | 3,837,847 |
 | [Flyweight](Flyweight) | Messages are reused flyweights holding copies of their fields: decoding allocates nothing, and the bytes may be reused once it returns. | 8 | 26,781 |
 | [ZeroCopy](ZeroCopy) | Messages are immutable views read where their bytes lie: decoding copies nothing, and a view stays valid while its bytes are unchanged. | 8 | 25,130 |
 | [ZeroCopyFlyweight](ZeroCopyFlyweight) | Messages are flyweights read where their bytes lie: decoding copies nothing and allocates nothing. | 8 | 25,392 |
@@ -38,7 +38,7 @@ Updates are greatly appreciated; however, this entire repository is source gener
 
 [![Build](https://github.com/Open-Markets-Initiative/omi-java-protocols/actions/workflows/build.yml/badge.svg)](https://github.com/Open-Markets-Initiative/omi-java-protocols/actions/workflows/build.yml)
 
-Every build runs each Classes protocol's round trip, and capture tests on 49 protocols against [omi-data-packets](https://github.com/Open-Markets-Initiative/omi-data-packets); see [Classes](Classes/ReadMe.md#testing).
+Every build runs each Classes protocol's round trip, and capture tests on 62 protocols against [omi-data-packets](https://github.com/Open-Markets-Initiative/omi-data-packets); see [Classes](Classes/ReadMe.md#testing).
 
 Please report any parsing errors as an [issue](https://github.com/Open-Markets-Initiative/omi-java-protocols/issues "Omi Java Protocols Issues").  Include a small note on the protocol and version, and a minimal capture demonstrating the problem. Also consider including a link or pdf specification documenting the correct behavior.
 

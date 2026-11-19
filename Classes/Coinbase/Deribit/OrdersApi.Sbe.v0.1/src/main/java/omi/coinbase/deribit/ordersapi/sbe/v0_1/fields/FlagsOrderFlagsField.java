@@ -56,7 +56,7 @@ public final class FlagsOrderFlagsField extends Field {
      *
      * @return bit 0 of the container
      */
-    public boolean unused() {
+    public boolean unusedBit() {
         return (value & 1L) != 0L;
     }
 

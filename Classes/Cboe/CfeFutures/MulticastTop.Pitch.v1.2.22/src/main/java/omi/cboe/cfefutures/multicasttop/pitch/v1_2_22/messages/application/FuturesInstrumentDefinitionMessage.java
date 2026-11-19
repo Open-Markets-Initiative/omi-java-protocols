@@ -1,0 +1,606 @@
+package omi.cboe.cfefutures.multicasttop.pitch.v1_2_22.messages.application;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import omi.cboe.cfefutures.multicasttop.pitch.v1_2_22.fields.ContractDateField;
+import omi.cboe.cfefutures.multicasttop.pitch.v1_2_22.fields.ContractSizeField;
+import omi.cboe.cfefutures.multicasttop.pitch.v1_2_22.fields.ExpirationDateField;
+import omi.cboe.cfefutures.multicasttop.pitch.v1_2_22.fields.FuturesFlagsField;
+import omi.cboe.cfefutures.multicasttop.pitch.v1_2_22.fields.LegCountField;
+import omi.cboe.cfefutures.multicasttop.pitch.v1_2_22.fields.LegOffsetField;
+import omi.cboe.cfefutures.multicasttop.pitch.v1_2_22.fields.ListingStateField;
+import omi.cboe.cfefutures.multicasttop.pitch.v1_2_22.fields.PriceIncrementField;
+import omi.cboe.cfefutures.multicasttop.pitch.v1_2_22.fields.ReportSymbolField;
+import omi.cboe.cfefutures.multicasttop.pitch.v1_2_22.fields.ReservedField2;
+import omi.cboe.cfefutures.multicasttop.pitch.v1_2_22.fields.SymbolField;
+import omi.cboe.cfefutures.multicasttop.pitch.v1_2_22.fields.TimeOffsetField;
+import omi.cboe.cfefutures.multicasttop.pitch.v1_2_22.fields.UnitTimestampField;
+import omi.cboe.cfefutures.multicasttop.pitch.v1_2_22.groups.FutureLegEntry;
+import omi.cboe.cfefutures.multicasttop.pitch.v1_2_22.groups.FutureLegList;
+import omi.cboe.cfefutures.multicasttop.pitch.v1_2_22.types.Field;
+import omi.cboe.cfefutures.multicasttop.pitch.v1_2_22.types.Message;
+import omi.cboe.cfefutures.multicasttop.pitch.v1_2_22.types.PrintOptions;
+
+/**
+ * Represents the FuturesInstrumentDefinitionMessage message from the MulticastTop protocol.
+ *
+ * <p>The Futures Instrument Definition message can be sent as a sequenced message or an un-sequenced message. It is sent as a sequenced message when the system starts up at the beginning of a trading session or if an instrument is created or modified during a trading day.</p>
+ */
+public final class FuturesInstrumentDefinitionMessage implements Message {
+
+    /**
+     * This message's width on the wire with every counted repeating group empty.
+     */
+    public static final int MINIMUM_BYTE_LENGTH = 43;
+
+    /**
+     * This message's declared name.
+     */
+    public static final String NAME = "Futures Instrument Definition Message";
+
+    /**
+     * Nanosecond offset from last unit timestamp.
+     */
+    private final TimeOffsetField timeOffset = new TimeOffsetField();
+
+    /**
+     * Six character, base 62 symbol.
+     */
+    private final SymbolField symbol = new SymbolField();
+
+    /**
+     * Unit timestamp expressed as number of whole seconds since the Epoch (Midnight, January 1, 1970 UTC).
+     */
+    private final UnitTimestampField unitTimestamp = new UnitTimestampField();
+
+    /**
+     * Symbol for product or underlying security.
+     */
+    private final ReportSymbolField reportSymbol = new ReportSymbolField();
+
+    /**
+     * Futures Flags bitfields
+     */
+    private final FuturesFlagsField futuresFlags = new FuturesFlagsField();
+
+    /**
+     * Expiration Date of Instrument.
+     */
+    private final ExpirationDateField expirationDate = new ExpirationDateField();
+
+    /**
+     * Contract size of Instrument. Contract sizes less than 1 are represented with a 0 value; refer to the product specification for the contract size.
+     */
+    private final ContractSizeField contractSize = new ContractSizeField();
+
+    /**
+     * Listing State Values
+     */
+    private final ListingStateField listingState = new ListingStateField();
+
+    /**
+     * Minimum Price Increment.
+     */
+    private final PriceIncrementField priceIncrement = new PriceIncrementField();
+
+    /**
+     * Values greater than 0 indicate this is a spread instrument.
+     */
+    private final LegCountField legCount = new LegCountField();
+
+    /**
+     * Leg definitions, if any, begin at this offset from the beginning of the message. Possible values are 0 (no legs present) or 45 (spread instrument).
+     */
+    private final LegOffsetField legOffset = new LegOffsetField();
+
+    /**
+     * Reserved.Value will always be zero.
+     */
+    private final ReservedField2 reserved = new ReservedField2();
+
+    /**
+     * Populated for single leg instruments only. Zero-filled for spread instruments. The date that should be used in describing the future's third party symbol and the measurement period of the contract.
+     */
+    private final ContractDateField contractDate = new ContractDateField();
+
+    /**
+     * Future Leg
+     */
+    private final FutureLegList futureLeg = new FutureLegList();
+
+    /**
+     * This message's fields, in wire order.
+     */
+    private final List<Field> fields = List.of(timeOffset, symbol, unitTimestamp, reportSymbol, futuresFlags, expirationDate, contractSize, listingState, priceIncrement, legCount, legOffset, reserved, contractDate);
+
+    private byte[] buffer;
+
+    private boolean decoded;
+
+    /**
+     * Nanosecond offset from last unit timestamp.
+     *
+     * @return the TimeOffset field
+     */
+    public TimeOffsetField timeOffset() {
+        return timeOffset;
+    }
+
+    /**
+     * Six character, base 62 symbol.
+     *
+     * @return the Symbol field
+     */
+    public SymbolField symbol() {
+        return symbol;
+    }
+
+    /**
+     * Unit timestamp expressed as number of whole seconds since the Epoch (Midnight, January 1, 1970 UTC).
+     *
+     * @return the UnitTimestamp field
+     */
+    public UnitTimestampField unitTimestamp() {
+        return unitTimestamp;
+    }
+
+    /**
+     * Symbol for product or underlying security.
+     *
+     * @return the ReportSymbol field
+     */
+    public ReportSymbolField reportSymbol() {
+        return reportSymbol;
+    }
+
+    /**
+     * Futures Flags bitfields
+     *
+     * @return the FuturesFlags field
+     */
+    public FuturesFlagsField futuresFlags() {
+        return futuresFlags;
+    }
+
+    /**
+     * Expiration Date of Instrument.
+     *
+     * @return the ExpirationDate field
+     */
+    public ExpirationDateField expirationDate() {
+        return expirationDate;
+    }
+
+    /**
+     * Contract size of Instrument. Contract sizes less than 1 are represented with a 0 value; refer to the product specification for the contract size.
+     *
+     * @return the ContractSize field
+     */
+    public ContractSizeField contractSize() {
+        return contractSize;
+    }
+
+    /**
+     * Listing State Values
+     *
+     * @return the ListingState field
+     */
+    public ListingStateField listingState() {
+        return listingState;
+    }
+
+    /**
+     * Minimum Price Increment.
+     *
+     * @return the PriceIncrement field
+     */
+    public PriceIncrementField priceIncrement() {
+        return priceIncrement;
+    }
+
+    /**
+     * Values greater than 0 indicate this is a spread instrument.
+     *
+     * @return the LegCount field
+     */
+    public LegCountField legCount() {
+        return legCount;
+    }
+
+    /**
+     * Leg definitions, if any, begin at this offset from the beginning of the message. Possible values are 0 (no legs present) or 45 (spread instrument).
+     *
+     * @return the LegOffset field
+     */
+    public LegOffsetField legOffset() {
+        return legOffset;
+    }
+
+    /**
+     * Reserved.Value will always be zero.
+     *
+     * @return the Reserved field
+     */
+    public ReservedField2 reserved() {
+        return reserved;
+    }
+
+    /**
+     * Populated for single leg instruments only. Zero-filled for spread instruments. The date that should be used in describing the future's third party symbol and the measurement period of the contract.
+     *
+     * @return the ContractDate field
+     */
+    public ContractDateField contractDate() {
+        return contractDate;
+    }
+
+    /**
+     * Future Leg
+     *
+     * <p>Encode writes this list's size to the LegCount field.</p>
+     *
+     * @return the FutureLeg entries
+     */
+    public FutureLegList futureLeg() {
+        return futureLeg;
+    }
+
+    @Override
+    public Optional<Character> type() {
+        return Optional.empty();
+    }
+
+    @Override
+    public int byteLength() {
+        return MINIMUM_BYTE_LENGTH + futureLeg.byteLength();
+    }
+
+    /**
+     * Returns this message's declared padding runs, as consecutive offset and length pairs relative to the start of the message, for the entries it holds now.
+     *
+     * <p>Padding carries no value: decode advances over it, and encode writes back what decode received, or zero for a message assembled from values. Use this to check a received message's padding where the specification constrains it, or to render a byte map of the layout.</p>
+     *
+     * @return the padding runs, empty when the layout has none
+     */
+    public int[] padding() {
+        return new int[0];
+    }
+
+    @Override
+    public Optional<Instant> timestamp() {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset) {
+        return parseFrom(data, offset, data.length);
+    }
+
+    @Override
+    public boolean parseFrom(byte[] data, int offset, int end) {
+        clear();
+        this.decoded = read(data, offset, end);
+
+        int stop = Math.max(0, Math.min(data.length, offset + byteLength()));
+        this.buffer = Arrays.copyOfRange(data, Math.min(Math.max(offset, 0), stop), stop);
+        return decoded;
+    }
+
+    private boolean read(byte[] data, int offset, int end) {
+        if (offset < 0 || end > data.length || end - offset < MINIMUM_BYTE_LENGTH) {
+            return false;
+        }
+
+        int cursor = offset;
+        if (!timeOffset.parse(data, cursor)) {
+            return false;
+        }
+        cursor += TimeOffsetField.BYTE_LENGTH;
+        if (!symbol.parse(data, cursor)) {
+            return false;
+        }
+        cursor += SymbolField.BYTE_LENGTH;
+        if (!unitTimestamp.parse(data, cursor)) {
+            return false;
+        }
+        cursor += UnitTimestampField.BYTE_LENGTH;
+        if (!reportSymbol.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ReportSymbolField.BYTE_LENGTH;
+        if (!futuresFlags.parse(data, cursor)) {
+            return false;
+        }
+        cursor += FuturesFlagsField.BYTE_LENGTH;
+        if (!expirationDate.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ExpirationDateField.BYTE_LENGTH;
+        if (!contractSize.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ContractSizeField.BYTE_LENGTH;
+        if (!listingState.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ListingStateField.BYTE_LENGTH;
+        if (!priceIncrement.parse(data, cursor)) {
+            return false;
+        }
+        cursor += PriceIncrementField.BYTE_LENGTH;
+        if (!legCount.parse(data, cursor)) {
+            return false;
+        }
+        cursor += LegCountField.BYTE_LENGTH;
+        if (!legOffset.parse(data, cursor)) {
+            return false;
+        }
+        cursor += LegOffsetField.BYTE_LENGTH;
+        if (!reserved.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ReservedField2.BYTE_LENGTH;
+        if (!contractDate.parse(data, cursor)) {
+            return false;
+        }
+        cursor += ContractDateField.BYTE_LENGTH;
+        if (!futureLeg.parse(data, cursor, end, legCount.value())) {
+            return false;
+        }
+        cursor += futureLeg.byteLength();
+
+        return cursor <= end;
+    }
+
+    @Override
+    public int encode(byte[] data, int offset) {
+        Objects.checkFromIndexSize(offset, byteLength(), data.length);
+        if (futureLeg.size() > 255) {
+            throw new IllegalStateException("futureLeg holds " + futureLeg.size() + " entries, more than its count field can state");
+        }
+        legCount.value((short) futureLeg.size());
+        int cursor = offset;
+        cursor = timeOffset.encode(data, cursor);
+        cursor = symbol.encode(data, cursor);
+        cursor = unitTimestamp.encode(data, cursor);
+        cursor = reportSymbol.encode(data, cursor);
+        cursor = futuresFlags.encode(data, cursor);
+        cursor = expirationDate.encode(data, cursor);
+        cursor = contractSize.encode(data, cursor);
+        cursor = listingState.encode(data, cursor);
+        cursor = priceIncrement.encode(data, cursor);
+        cursor = legCount.encode(data, cursor);
+        cursor = legOffset.encode(data, cursor);
+        cursor = reserved.encode(data, cursor);
+        cursor = contractDate.encode(data, cursor);
+        cursor = futureLeg.encode(data, cursor);
+        return cursor;
+    }
+
+    @Override
+    public byte[] toBytes() {
+        byte[] data = new byte[byteLength()];
+        encode(data, 0);
+        return data;
+    }
+
+    @Override
+    public void clear() {
+        for (Field field : fields) {
+            field.reset();
+        }
+        futureLeg.clear();
+        this.buffer = null;
+        this.decoded = false;
+    }
+
+    @Override
+    public boolean isDecoded() {
+        return decoded;
+    }
+
+    @Override
+    public boolean isRecognized() {
+        if (buffer != null && !decoded) {
+            return false;
+        }
+        for (Field field : fields) {
+            if (field != legCount && !field.isRecognized()) {
+                return false;
+            }
+        }
+        return futureLeg.isRecognized();
+    }
+
+    @Override
+    public boolean isValid() {
+        if (buffer != null && !decoded) {
+            return false;
+        }
+        for (Field field : fields) {
+            if (field != legCount && !field.isValid()) {
+                return false;
+            }
+        }
+        if (!futureLeg.isValid()) {
+            return false;
+        }
+        return isRecognized();
+    }
+
+    /**
+     * Returns a copy of the bytes this message was decoded from.
+     *
+     * <p>A failed decode leaves behind the partial range that was available, which is what a diagnostic needs to see.</p>
+     *
+     * @return the message bytes, or empty when no decode has been attempted
+     */
+    @Override
+    public Optional<byte[]> raw() {
+        if (buffer == null) {
+            return Optional.empty();
+        }
+        return Optional.of(buffer.clone());
+    }
+
+    @Override
+    public Optional<Field> failedAt() {
+        if (buffer == null || decoded) {
+            return Optional.empty();
+        }
+        if (!timeOffset.isDecoded()) {
+            return Optional.of(timeOffset);
+        }
+        if (!symbol.isDecoded()) {
+            return Optional.of(symbol);
+        }
+        if (!unitTimestamp.isDecoded()) {
+            return Optional.of(unitTimestamp);
+        }
+        if (!reportSymbol.isDecoded()) {
+            return Optional.of(reportSymbol);
+        }
+        if (!futuresFlags.isDecoded()) {
+            return Optional.of(futuresFlags);
+        }
+        if (!expirationDate.isDecoded()) {
+            return Optional.of(expirationDate);
+        }
+        if (!contractSize.isDecoded()) {
+            return Optional.of(contractSize);
+        }
+        if (!listingState.isDecoded()) {
+            return Optional.of(listingState);
+        }
+        if (!priceIncrement.isDecoded()) {
+            return Optional.of(priceIncrement);
+        }
+        if (!legCount.isDecoded()) {
+            return Optional.of(legCount);
+        }
+        if (!legOffset.isDecoded()) {
+            return Optional.of(legOffset);
+        }
+        if (!reserved.isDecoded()) {
+            return Optional.of(reserved);
+        }
+        if (!contractDate.isDecoded()) {
+            return Optional.of(contractDate);
+        }
+        if (!futureLeg.isDecoded()) {
+            return Optional.of(futureLeg.failedEntry().flatMap(FutureLegEntry::failedAt).orElse(legCount));
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Field> fields() {
+        return fields;
+    }
+
+    @Override
+    public Optional<Field> field(String name) {
+        return switch (name) {
+            case "TimeOffset" -> Optional.of(timeOffset);
+            case "Symbol" -> Optional.of(symbol);
+            case "UnitTimestamp" -> Optional.of(unitTimestamp);
+            case "ReportSymbol" -> Optional.of(reportSymbol);
+            case "FuturesFlags" -> Optional.of(futuresFlags);
+            case "ExpirationDate" -> Optional.of(expirationDate);
+            case "ContractSize" -> Optional.of(contractSize);
+            case "ListingState" -> Optional.of(listingState);
+            case "PriceIncrement" -> Optional.of(priceIncrement);
+            case "LegCount" -> Optional.of(legCount);
+            case "LegOffset" -> Optional.of(legOffset);
+            case "Reserved" -> Optional.of(reserved);
+            case "ContractDate" -> Optional.of(contractDate);
+            default -> Optional.empty();
+        };
+    }
+
+    @Override
+    public List<Field> diffFields(Message other) {
+        if (!(other instanceof FuturesInstrumentDefinitionMessage message)) {
+            return List.of();
+        }
+        List<Field> changed = new ArrayList<>();
+        for (int index = 0; index < fields.size(); index++) {
+            if (!fields.get(index).equals(message.fields.get(index))) {
+                changed.add(fields.get(index));
+            }
+        }
+        changed.addAll(futureLeg.diffFields(message.futureLeg));
+        return changed;
+    }
+
+    @Override
+    public String toFormattedString(PrintOptions options) {
+        StringBuilder builder = new StringBuilder();
+        toFormattedString(builder, options);
+        return builder.toString();
+    }
+
+    /**
+     * Appends this message's formatted representation.
+     *
+     * <p>The identifier form renders the message name alone, which is what a debugger label or a log line tracking message flow needs. The compact form adds every field on the same line, and the default form indents one field per line. Repeating groups follow the fields.</p>
+     *
+     * @param builder the destination
+     * @param options the display options
+     */
+    @Override
+    public void toFormattedString(StringBuilder builder, PrintOptions options) {
+        if (options.identifier()) {
+            builder.append(NAME);
+            return;
+        }
+
+        if (options.compact()) {
+            builder.append(NAME).append(" { ");
+            for (int index = 0; index < fields.size(); index++) {
+                if (index > 0) {
+                    builder.append(", ");
+                }
+                fields.get(index).toFormattedString(builder, options);
+            }
+            builder.append(", ");
+            futureLeg.toFormattedString(builder, options);
+            builder.append(" }");
+            return;
+        }
+
+        builder.append(options.prefix()).append(NAME).append(System.lineSeparator());
+        PrintOptions nested = options.nested();
+        for (Field field : fields) {
+            builder.append(nested.prefix());
+            field.toFormattedString(builder, nested);
+            builder.append(System.lineSeparator());
+        }
+        futureLeg.toFormattedString(builder, nested);
+    }
+
+    @Override
+    public String toString() {
+        return toFormattedString(PrintOptions.DEFAULT);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof FuturesInstrumentDefinitionMessage message)) {
+            return false;
+        }
+        return fields.equals(message.fields) && futureLeg.equals(message.futureLeg);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fields, futureLeg);
+    }
+}

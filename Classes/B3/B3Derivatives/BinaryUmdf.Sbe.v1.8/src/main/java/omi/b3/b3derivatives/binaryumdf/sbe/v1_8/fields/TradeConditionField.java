@@ -92,7 +92,7 @@ public final class TradeConditionField extends Field {
      *
      * @return bits 4 through 5 of the container
      */
-    public int unused2() {
+    public int unusedBits4To() {
         return (int) ((value >>> 4) & 0x3L);
     }
 
@@ -110,7 +110,7 @@ public final class TradeConditionField extends Field {
      *
      * @return bits 7 through 12 of the container
      */
-    public int unused6() {
+    public int unusedBits7To() {
         return (int) ((value >>> 7) & 0x3FL);
     }
 
@@ -137,7 +137,7 @@ public final class TradeConditionField extends Field {
      *
      * @return bit 15 of the container
      */
-    public boolean unused1() {
+    public boolean unusedBit() {
         return ((value >>> 15) & 1L) != 0L;
     }
 
